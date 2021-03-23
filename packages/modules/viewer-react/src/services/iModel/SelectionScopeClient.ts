@@ -43,7 +43,7 @@ export class SelectionScopeClient {
     }
   }
 
-  public static async initializeSelectionScope(): void {
+  public static async initializeSelectionScope(): Promise<void> {
     const context = await AuthorizedFrontendRequestContext.create();
     const selectionScope = await IModelApp.settings.getUserSetting(
       context,
