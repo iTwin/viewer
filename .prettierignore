@@ -1,0 +1,4 @@
+**/node_modules/*
+**/CHANGELOG.md
+**/CHANGELOG.json
+common/config/**

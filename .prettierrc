@@ -1,0 +1,20 @@
+# This file should reside at the root of your project
+# It's helpful to install the "Prettier - Code formatter" extension in VSCode
+# or a formatter such as "vim-prettier" or "Neoformat" if you're using Vim (see https: //prettier.io/docs/en/vim.html)
+# In VSCode, it's also helpful to enable the "Editor: Format On Save" and "Editor: Format On Paste" settings.
+#
+# In VSCode, set this file type to YAML to get better syntax highlighting
+#
+# In order to use Prettier, add "prettier" to your package.json file `yarn add prettier --dev --exact`
+
+# This enables trailing commas in cases that are compatible with es5.  If we use 'all' then we need to transpile everything.
+trailingComma: "es5"
+# This sets the tab width to 2 spaces.  This is the default value, but better to be explicit so it's obvious.
+tabWidth: 2
+# This ensures that all tabs use spaces.  This is the default, but again, better to be explicit.
+semi: true
+# This ensures that all arrow function arguments get parentheses.  By default, a single argument does not need parens, but that
+# introduces an inconsistency and is incompatible with some linter rules.
+arrowParens: "always"
+# Enforce Linux style line endings.
+endOfLine: "lf"
