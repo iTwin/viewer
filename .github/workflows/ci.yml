@@ -33,7 +33,7 @@ jobs:
           node common/scripts/install-run-rush.js rebuild
 
           echo 'Verifying Changes...'
-          node common/scripts/install-run-rush.js change --verify
+          node common/scripts/install-run-rush.js change --verify -b origin/main
 
           echo 'Testing...'
           node common/scripts/install-run-rush.js test --verbose
