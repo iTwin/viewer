@@ -1,0 +1,392 @@
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
+.itwin-toast-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  top: 0;
+  right: 0;
+  pointer-events: none;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1070;
+}
+@media screen and (max-width: 400px) {
+  .itwin-toast-wrapper {
+    width: calc(100vw - 36px);
+    margin-top: 16px;
+  }
+}
+@media screen and (min-width: 401px) {
+  .itwin-toast-wrapper {
+    min-width: 400px;
+    max-width: 640px;
+    margin-top: 24px;
+  }
+}
+
+@keyframes openAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(-120%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes closeAnimation {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
+
+.itwin-toast-wrapper .itwin-toast-all {
+  transition: all 240ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.itwin-toast-wrapper .itwin-toast-entering,
+.itwin-toast-wrapper .itwin-toast-entered {
+  animation: openAnimation 240ms cubic-bezier(0.175, 0.885, 0.32, 1.175) both;
+}
+
+.itwin-toast-wrapper .itwin-toast-exiting {
+  animation: closeAnimation 120ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+.itwin-toast-wrapper .itwin-toast-success {
+  flex-direction: row;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  pointer-events: all;
+  margin: 0 16px 16px 16px;
+  min-height: 42px;
+  max-height: 100%;
+  background-color: #fff;
+  border-radius: 3px;
+  border: 1px solid #56aa1c;
+  box-shadow: 0 0 0 1pt RGBA(255, 255, 255, 0.5),
+    0 7px 40px 0 RGBA(0, 0, 0, 0.12);
+}
+@media screen and (max-width: 400px) {
+  .itwin-toast-wrapper .itwin-toast-success {
+    width: calc(100vw - 36px);
+  }
+}
+@media screen and (min-width: 401px) {
+  .itwin-toast-wrapper .itwin-toast-success {
+    min-width: 400px;
+    max-width: 640px;
+  }
+}
+
+.itwin-toast-wrapper .itwin-toast-success .status-icon-container {
+  order: 1;
+  align-self: stretch;
+  min-height: 40px;
+}
+
+.itwin-toast-wrapper
+  .itwin-toast-success
+  .status-icon-container
+  .status-icon-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #56aa1c;
+  height: 100%;
+  width: 48px;
+}
+
+.itwin-toast-wrapper
+  .itwin-toast-success
+  .status-icon-container
+  .status-icon-background
+  .status-icon {
+  height: 16px;
+  width: 16px;
+}
+
+.itwin-toast-wrapper
+  .itwin-toast-success
+  .status-icon-container
+  .status-icon-background
+  .status-icon
+  path {
+  fill: #fff !important;
+}
+
+.itwin-toast-wrapper .itwin-toast-success .message {
+  order: 2;
+  flex-grow: 1;
+  color: #2a2f34;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  margin-right: 24px;
+  margin-left: 16px;
+  line-height: 22px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.itwin-toast-wrapper .itwin-toast-success .link {
+  order: 3;
+  color: #008be1;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  margin-right: 24px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.itwin-toast-wrapper .itwin-toast-success .close-icon-container {
+  order: 4;
+  align-self: flex-start;
+  margin-top: 12px;
+  margin-right: 16px;
+  height: 16px;
+  width: 16px;
+  display: flex;
+}
+
+.itwin-toast-wrapper .itwin-toast-success .close-icon-container .close-icon {
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  fill: #677480;
+}
+
+.itwin-toast-wrapper .itwin-toast-informational {
+  flex-direction: row;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  pointer-events: all;
+  margin: 0 16px 16px 16px;
+  min-height: 42px;
+  max-height: 100%;
+  background-color: #fff;
+  border-radius: 3px;
+  border: 1px solid #008be1;
+  box-shadow: 0 0 0 1pt RGBA(255, 255, 255, 0.5),
+    0 7px 40px 0 RGBA(0, 0, 0, 0.12);
+}
+@media screen and (max-width: 400px) {
+  .itwin-toast-wrapper .itwin-toast-informational {
+    width: calc(100vw - 36px);
+  }
+}
+@media screen and (min-width: 401px) {
+  .itwin-toast-wrapper .itwin-toast-informational {
+    min-width: 400px;
+    max-width: 640px;
+  }
+}
+
+.itwin-toast-wrapper .itwin-toast-informational .status-icon-container {
+  order: 1;
+  align-self: stretch;
+  min-height: 40px;
+}
+
+.itwin-toast-wrapper
+  .itwin-toast-informational
+  .status-icon-container
+  .status-icon-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #008be1;
+  height: 100%;
+  width: 48px;
+}
+
+.itwin-toast-wrapper
+  .itwin-toast-informational
+  .status-icon-container
+  .status-icon-background
+  .status-icon {
+  height: 16px;
+  width: 16px;
+}
+
+.itwin-toast-wrapper
+  .itwin-toast-informational
+  .status-icon-container
+  .status-icon-background
+  .status-icon
+  path {
+  fill: #fff !important;
+}
+
+.itwin-toast-wrapper .itwin-toast-informational .message {
+  order: 2;
+  flex-grow: 1;
+  color: #2a2f34;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  margin-right: 24px;
+  margin-left: 16px;
+  line-height: 22px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.itwin-toast-wrapper .itwin-toast-informational .link {
+  order: 3;
+  color: #008be1;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  margin-right: 24px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.itwin-toast-wrapper .itwin-toast-informational .close-icon-container {
+  order: 4;
+  align-self: flex-start;
+  margin-top: 12px;
+  margin-right: 16px;
+  height: 16px;
+  width: 16px;
+  display: flex;
+}
+
+.itwin-toast-wrapper
+  .itwin-toast-informational
+  .close-icon-container
+  .close-icon {
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  fill: #677480;
+}
+
+.itwin-toast-wrapper .itwin-toast-error {
+  flex-direction: row;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  pointer-events: all;
+  margin: 0 16px 16px 16px;
+  min-height: 42px;
+  max-height: 100%;
+  background-color: #fff;
+  border-radius: 3px;
+  border: 1px solid #c00;
+  box-shadow: 0 0 0 1pt RGBA(255, 255, 255, 0.5),
+    0 7px 40px 0 RGBA(0, 0, 0, 0.12);
+}
+@media screen and (max-width: 400px) {
+  .itwin-toast-wrapper .itwin-toast-error {
+    width: calc(100vw - 36px);
+  }
+}
+@media screen and (min-width: 401px) {
+  .itwin-toast-wrapper .itwin-toast-error {
+    min-width: 400px;
+    max-width: 640px;
+  }
+}
+
+.itwin-toast-wrapper .itwin-toast-error .status-icon-container {
+  order: 1;
+  align-self: stretch;
+  min-height: 40px;
+}
+
+.itwin-toast-wrapper
+  .itwin-toast-error
+  .status-icon-container
+  .status-icon-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c00;
+  height: 100%;
+  width: 48px;
+}
+
+.itwin-toast-wrapper
+  .itwin-toast-error
+  .status-icon-container
+  .status-icon-background
+  .status-icon {
+  height: 16px;
+  width: 16px;
+}
+
+.itwin-toast-wrapper
+  .itwin-toast-error
+  .status-icon-container
+  .status-icon-background
+  .status-icon
+  path {
+  fill: #fff !important;
+}
+
+.itwin-toast-wrapper .itwin-toast-error .message {
+  order: 2;
+  flex-grow: 1;
+  color: #2a2f34;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  margin-right: 24px;
+  margin-left: 16px;
+  line-height: 22px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.itwin-toast-wrapper .itwin-toast-error .link {
+  order: 3;
+  color: #008be1;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  margin-right: 24px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.itwin-toast-wrapper .itwin-toast-error .close-icon-container {
+  order: 4;
+  align-self: flex-start;
+  margin-top: 12px;
+  margin-right: 16px;
+  height: 16px;
+  width: 16px;
+  display: flex;
+}
+
+.itwin-toast-wrapper .itwin-toast-error .close-icon-container .close-icon {
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  fill: #677480;
+}

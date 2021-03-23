@@ -13,6 +13,24 @@
       "packageName": "@itwin/viewer-scripts",
       "projectFolder": "common/scripts",
       "shouldPublish": false
+    },
+    {
+      "packageName": "@itwin/viewer-react",
+      "projectFolder": "packages/modules/viewer-react",
+      "versionPolicyName": "independentModule",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@itwin/error-handling-react",
+      "projectFolder": "packages/modules/error-handling-react",
+      "versionPolicyName": "independentModule",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@itwin/cra-template-web-viewer",
+      "projectFolder": "packages/modules/cra-template-web-viewer",
+      "versionPolicyName": "independentModule",
+      "shouldPublish": true
     }
   ]
 }

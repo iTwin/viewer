@@ -1,0 +1,7 @@
+# Description
+
+Error handling package to have a uniform way of handling errors within iTwin applications.
+
+# Development
+
+When making changes to the src, run `npm start` in the dev folder to enable source watching and rebuild, so the dev-server will have access to updated code on succesful code compilation.

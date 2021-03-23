@@ -1,0 +1,26 @@
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
+@import "./BaseToastStyling.scss";
+
+.itwin-toast-wrapper .itwin-toast-success {
+  margin: 0;
+}
+
+.itwin-toast-wrapper .itwin-toast-error {
+  margin: 0;
+}
+
+.itwin-toast-wrapper .itwin-toast-informational {
+  margin: 0;
+}
+
+.itwin-toast-wrapper .link a:link {
+  color: #008be1;
+}
+
+.itwin-toast-wrapper {
+  width: 100%;
+}

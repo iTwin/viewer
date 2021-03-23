@@ -1,0 +1,27 @@
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+@import "~@bentley/ui-core/lib/ui-core/style/themecolors.scss";
+
+.imodelbusy__centered {
+  color: var(--buic-foreground-body-rgb, 000, 000, 000);
+  text-align: center;
+
+  .imodelbusy__loadingTitle {
+    font-weight: bold;
+  }
+
+  .imodelbusy__loadingText {
+    height: 50px;
+    margin-top: 12px;
+  }
+
+  .imodelbusy__contents {
+    display: inline-block;
+    width: 400px;
+    .ls-message-top {
+      color: $buic-foreground-body !important; // TODO remove this once this is properly styled in ui-core
+    }
+  }
+}
