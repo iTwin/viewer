@@ -38,4 +38,4 @@ jobs:
         node common/scripts/install-run-rush.js version --bump --target-branch main
         node common/scripts/install-run-rush.js publish --include-all --set-access-level public --apply --publish --npm-auth-token $NPM_TOKEN --target-branch main --prerelease-name alpha
       env:
-        NPM_TOKEN: ${{ secrets.NPMJS_PUBLISH_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPMJS_PUBLISH_ITWIN }}
