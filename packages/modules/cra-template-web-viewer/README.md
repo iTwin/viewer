@@ -17,5 +17,5 @@ yarn create react-app my-app-name --template @itwin/web-viewer --scripts-version
 For more information, please refer to:
 
 - [Getting Started](https://create-react-app.dev/docs/getting-started) – How to create a new app.
-- [User Guide](https://create-react-app.dev) – How to develop apps bootstrapped with Create React App.
+- [User Guide](https://create-react-app.dev) – How to develop apps that are bootstrapped with Create React App.
 - [iTwin Viewer](https://github.com/itwin/viewer/tree/main/packages/modules/web-viewer-react) - iTwin Viewer
