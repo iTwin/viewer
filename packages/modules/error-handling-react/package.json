@@ -30,7 +30,6 @@
     "build-svgs": "svgr -d src/images/components src/images/svgs --typescript",
     "prepare": "npm run build",
     "test": "",
-    "securityscan": "tslint --config tslint-securityscan.json --force -o securityscan.log -p tsconfig.json \"src/*.ts*\"",
     "clean:build": "rimraf lib build",
     "rebuild": "npm run clean:build && npm run build"
   },
