@@ -1,0 +1,45 @@
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+@import "../../index.scss";
+
+:global .itwin-toast-wrapper .itwin-toast-all {
+  .itwin-toast-success,
+  .itwin-toast-error,
+  .itwin-toast-informational {
+    background-color: $buic-background-1;
+
+    .message {
+      color: $buic-foreground-body;
+    }
+  }
+
+  .close-icon-container .close-icon.close-icon {
+    fill: $buic-text-color-muted;
+  }
+
+  .itwin-toast-error {
+    border: 1px solid $buic-foreground-alert;
+
+    .status-icon-background.status-icon-background {
+      background-color: #cc0000;
+    }
+  }
+
+  .itwin-toast-success {
+    border: 1px solid $buic-foreground-success;
+
+    .status-icon-background.status-icon-background {
+      background-color: #56aa1c;
+    }
+  }
+
+  .itwin-toast-informational {
+    border: 1px solid $buic-foreground-primary;
+
+    .status-icon-background.status-icon-background {
+      background-color: $buic-accessory-primary;
+    }
+  }
+}

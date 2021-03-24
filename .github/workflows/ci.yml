@@ -5,7 +5,7 @@ name: iTwin Viewer monorepo CI
 
 on:
   pull_request:
-    branches: [master]
+    branches: [main]
 
 jobs:
   build:
@@ -31,9 +31,6 @@ jobs:
              
           echo 'Building...'
           node common/scripts/install-run-rush.js rebuild
-
-          echo 'Verifying Changes...'
-          node common/scripts/install-run-rush.js change --verify
 
           echo 'Testing...'
           node common/scripts/install-run-rush.js test --verbose

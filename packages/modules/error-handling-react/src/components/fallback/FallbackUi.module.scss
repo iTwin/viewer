@@ -1,0 +1,30 @@
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+@import "../../index.scss";
+
+.container {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  background-color: $buic-background-1;
+  color: $buic-foreground-body;
+}
+
+.content {
+  display: grid;
+  justify-items: center;
+  max-width: 500px;
+}
+
+.title {
+  padding-top: 40px;
+  font-size: 2.571rem;
+  text-align: center;
+}
+
+.message {
+  padding-top: 40px;
+  text-align: center;
+}

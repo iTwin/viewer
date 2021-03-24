@@ -1,0 +1,66 @@
+{
+  "package": {
+    "dependencies": {
+      "@bentley/bentleyjs-core": "^2.13.0",
+      "@bentley/electron-manager": "^2.13.0",
+      "@bentley/extension-client": "^2.13.0",
+      "@bentley/frontend-application-insights-client": "^2.13.0",
+      "@bentley/frontend-authorization-client": "^2.13.0",
+      "@bentley/geometry-core": "^2.13.0",
+      "@bentley/icons-generic": "^1.0.13",
+      "@bentley/imodelhub-client": "^2.13.0",
+      "@bentley/imodeljs-common": "^2.13.0",
+      "@bentley/imodeljs-frontend": "^2.13.0",
+      "@bentley/imodeljs-i18n": "^2.13.0",
+      "@bentley/imodeljs-markup": "^2.13.0",
+      "@bentley/imodeljs-quantity": "^2.13.0",
+      "@bentley/itwin-client": "^2.13.0",
+      "@bentley/orbitgt-core": "^2.13.0",
+      "@bentley/presentation-common": "^2.13.0",
+      "@bentley/presentation-frontend": "^2.13.0",
+      "@bentley/product-settings-client": "^2.13.0",
+      "@bentley/rbac-client": "^2.13.0",
+      "@bentley/react-scripts": "^3.4.1",
+      "@bentley/telemetry-client": "^2.13.0",
+      "@bentley/ui-abstract": "^2.13.0",
+      "@bentley/ui-components": "^2.13.0",
+      "@bentley/ui-core": "^2.13.0",
+      "@bentley/ui-framework": "^2.13.0",
+      "@bentley/ui-ninezone": "^2.13.0",
+      "@bentley/webgl-compatibility": "^2.13.0",
+      "@itwin/web-viewer-react": "^0.1.0",
+      "history": "^4.10.1",
+      "oidc-client": "^1.10.1",
+      "react": "16.13.1",
+      "react-dom": "16.13.1",
+      "@svgr/webpack": "4.3.3",
+      "@testing-library/jest-dom": "^4.2.4",
+      "@testing-library/react": "^10.4.4",
+      "@testing-library/user-event": "^7.1.2",
+      "@types/history": "^4.7.6",
+      "@types/jest": "^26.0.4",
+      "@types/node": "^14.0.19",
+      "@types/react": "^16.9.0",
+      "@types/react-dom": "^16.9.0",
+      "typescript": "^3.7.2"
+    },
+    "eslintConfig": {
+      "extends": ["react-app", "react-app/jest"]
+    },
+    "scripts": {
+      "start": "react-scripts --max_old_space_size=4096 start",
+      "build": "react-scripts --max_old_space_size=4096 build",
+      "test": "react-scripts --max_old_space_size=4096 test"
+    },
+    "browserslist": [
+      "last 4 chrome version",
+      "last 4 firefox version",
+      "last 4 safari version",
+      "last 4 ios version",
+      "last 4 ChromeAndroid version",
+      "last 4 edge version",
+      "not dead",
+      "not <0.2%"
+    ]
+  }
+}
