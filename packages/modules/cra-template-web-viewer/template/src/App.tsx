@@ -2,9 +2,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import "./App.scss";
 
-import { Viewer } from "@bentley/itwin-viewer-react";
+import { Viewer } from "@twin/viewer-react";
 import React, { useEffect, useState } from "react";
 
 import AuthorizationClient from "./AuthorizationClient";
