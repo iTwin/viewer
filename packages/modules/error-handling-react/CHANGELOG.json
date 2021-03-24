@@ -1,0 +1,17 @@
+{
+  "name": "@itwin/error-handling-react",
+  "entries": [
+    {
+      "version": "0.1.1",
+      "tag": "@itwin/error-handling-react_v0.1.1",
+      "date": "Wed, 24 Mar 2021 21:03:22 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Initial add"
+          }
+        ]
+      }
+    }
+  ]
+}
