@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { ClientRequestContext } from "@bentley/bentleyjs-core";
 import { BentleyCloudRpcParams } from "@bentley/imodeljs-common";
 import {
@@ -88,7 +89,9 @@ export const initializeViewer = async (options?: WebViewerProps) => {
       },
     };
     await WebViewerApp.startup(webViewerOptions);
+
     if (!IModelApp.authorizationClient && options?.authConfig.oidcClient) {
+      // Consumer provided a full client instead of just configuration
       IModelApp.authorizationClient = options?.authConfig.oidcClient;
     }
   }

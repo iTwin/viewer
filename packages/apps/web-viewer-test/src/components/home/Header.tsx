@@ -13,9 +13,14 @@ import styles from "./Header.module.scss";
 interface HeaderProps {
   handleLoginToggle: () => void;
   loggedIn: boolean;
+  switchModel?: () => void;
 }
 
-export const Header = ({ handleLoginToggle, loggedIn }: HeaderProps) => {
+export const Header = ({
+  handleLoginToggle,
+  loggedIn,
+  switchModel,
+}: HeaderProps) => {
   return (
     <header className={styles.header}>
       <Link className={styles.homeLink} to={"/"}>
@@ -29,6 +34,15 @@ export const Header = ({ handleLoginToggle, loggedIn }: HeaderProps) => {
         >
           {loggedIn ? "Sign Out" : "Sign In"}
         </Button>
+        {switchModel && (
+          <Button
+            className={styles.button}
+            onClick={switchModel}
+            buttonType={ButtonType.Blue}
+          >
+            {"Switch Model"}
+          </Button>
+        )}
       </div>
     </header>
   );

@@ -23,6 +23,10 @@ export const AuthConfigHome: React.FC = () => {
       false
   );
 
+  const [iModelId, setIModelId] = useState(
+    process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string
+  );
+
   const authConfig: BrowserAuthorizationClientConfiguration = {
     scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
     clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
@@ -58,13 +62,25 @@ export const AuthConfigHome: React.FC = () => {
     });
   };
 
+  const switchModel = () => {
+    if (iModelId === (process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string)) {
+      setIModelId(process.env.IMJS_AUTH_CLIENT_IMODEL_ID2 as string);
+    } else {
+      setIModelId(process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string);
+    }
+  };
+
   return (
     <div className={styles.home}>
-      <Header handleLoginToggle={toggleLogin} loggedIn={loggedIn} />
+      <Header
+        handleLoginToggle={toggleLogin}
+        loggedIn={loggedIn}
+        switchModel={switchModel}
+      />
       <Viewer
         authConfig={{ config: authConfig }}
         contextId={process.env.IMJS_AUTH_CLIENT_CONTEXT_ID as string}
-        iModelId={process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string}
+        iModelId={iModelId}
         appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
         theme={ColorTheme.Dark}
         onIModelAppInit={onIModelAppInit}
