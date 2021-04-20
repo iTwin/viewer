@@ -5,36 +5,28 @@
 
 import "./App.scss";
 
-import { Viewer } from "@twin/viewer-react";
+import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
+import { IModelApp } from "@bentley/imodeljs-frontend";
+import { Viewer } from "@twin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 
-import AuthorizationClient from "./AuthorizationClient";
 import { Header } from "./Header";
 
 const App: React.FC = () => {
   const [isAuthorized, setIsAuthorized] = useState(
-    AuthorizationClient.oidcClient
-      ? AuthorizationClient.oidcClient.isAuthorized
-      : false
+    (IModelApp.authorizationClient?.hasSignedIn &&
+      IModelApp.authorizationClient?.isAuthorized) ||
+      false
   );
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
-  useEffect(() => {
-    const initOidc = async () => {
-      if (!AuthorizationClient.oidcClient) {
-        await AuthorizationClient.initializeOidc();
-      }
-
-      try {
-        // attempt silent signin
-        await AuthorizationClient.signInSilent();
-        setIsAuthorized(AuthorizationClient.oidcClient.isAuthorized);
-      } catch (error) {
-        // swallow the error. User can click the button to sign in
-      }
-    };
-    initOidc().catch((error) => console.error(error));
-  }, []);
+  const authConfig: BrowserAuthorizationClientConfiguration = {
+    scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
+    clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
+    redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
+    postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
+    responseType: "code",
+  };
 
   useEffect(() => {
     if (!process.env.IMJS_CONTEXT_ID) {
@@ -57,12 +49,12 @@ const App: React.FC = () => {
 
   const onLoginClick = async () => {
     setIsLoggingIn(true);
-    await AuthorizationClient.signIn();
+    await IModelApp.authorizationClient?.signIn();
   };
 
   const onLogoutClick = async () => {
     setIsLoggingIn(false);
-    await AuthorizationClient.signOut();
+    await IModelApp.authorizationClient?.signOut();
     setIsAuthorized(false);
   };
 
@@ -76,13 +68,11 @@ const App: React.FC = () => {
       {isLoggingIn ? (
         <span>"Logging in...."</span>
       ) : (
-        isAuthorized && (
-          <Viewer
-            contextId={process.env.IMJS_CONTEXT_ID ?? ""}
-            iModelId={process.env.IMJS_IMODEL_ID ?? ""}
-            authConfig={{ oidcClient: AuthorizationClient.oidcClient }}
-          />
-        )
+        <Viewer
+          contextId={process.env.IMJS_CONTEXT_ID ?? ""}
+          iModelId={process.env.IMJS_IMODEL_ID ?? ""}
+          authConfig={{ config: authConfig }}
+        />
       )}
     </div>
   );

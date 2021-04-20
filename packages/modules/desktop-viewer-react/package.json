@@ -1,0 +1,153 @@
+{
+  "name": "@itwin/desktop-viewer-react",
+  "version": "0.1.0",
+  "description": "Configurable iModel.js viewer for desktop applications",
+  "main": "lib/index.js",
+  "module": "build/index.js",
+  "types": "lib/index.d.ts",
+  "author": {
+    "name": "Bentley Systems, Inc.",
+    "url": "http://www.bentley.com"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/itwin/viewer/tree/main/packages/modules/desktop-viewer-react",
+  "scripts": {
+    "start": "concurrently npm:watch-build npm:watch-scss npm:watch-images",
+    "watch-build": "concurrently \"npm:dev-build -- -w\" \"npm:prod-build -- -w\"",
+    "watch-scss": "nodemon -e scss --watch src --exec \"npm run dev-build-scss\"",
+    "watch-images": "nodemon -e * --watch src/images --exec \"npm run dev-copy-images\"",
+    "build": "npm run dual-build && npm run build-scss && npm run copy-images && npm run copy-public",
+    "dual-build": "concurrently npm:dev-build npm:prod-build",
+    "dev-build": "tsc -p development.tsconfig.json",
+    "prod-build": "tsc -b",
+    "build-scss": "concurrently npm:dev-build-scss npm:prod-build-scss",
+    "dev-build-scss": "copyfiles -u1 \"./src/**/*.scss\" ./build",
+    "prod-build-scss": "copyfiles -u1 \"./src/**/*.scss\" ./lib",
+    "copy-images": "concurrently npm:dev-copy-images npm:prod-copy-images",
+    "dev-copy-images": "copyfiles -u1 \"./src/images/**\" ./build",
+    "prod-copy-images": "copyfiles -u1 \"./src/images/**\" ./lib",
+    "copy-public": "concurrently npm:dev-copy-public npm:prod-copy-public",
+    "dev-copy-public": "copyfiles -u1 \"./public/**/*\" ./build/public",
+    "prod-copy-public": "copyfiles -u1 \"./public/**/*\" ./lib/public",
+    "prepare": "npm run build",
+    "test": "jest",
+    "test-watch": "jest --watch",
+    "clean:build": "rimraf lib build",
+    "rebuild": "npm run clean:build && npm run build"
+  },
+  "files": [
+    "lib/**/*",
+    "build/**/*"
+  ],
+  "devDependencies": {
+    "@bentley/bentleyjs-core": "^2.14.0",
+    "@bentley/electron-manager": "^2.14.0",
+    "@bentley/extension-client": "^2.14.0",
+    "@bentley/frontend-application-insights-client": "^2.14.0",
+    "@bentley/frontend-authorization-client": "^2.14.0",
+    "@bentley/geometry-core": "^2.14.0",
+    "@bentley/imodelhub-client": "^2.14.0",
+    "@bentley/imodeljs-common": "^2.14.0",
+    "@bentley/imodeljs-frontend": "^2.14.0",
+    "@bentley/imodeljs-i18n": "^2.14.0",
+    "@bentley/imodeljs-markup": "^2.14.0",
+    "@bentley/imodeljs-quantity": "^2.14.0",
+    "@bentley/itwin-client": "^2.14.0",
+    "@bentley/orbitgt-core": "^2.14.0",
+    "@bentley/presentation-common": "^2.14.0",
+    "@bentley/presentation-components": "^2.14.0",
+    "@bentley/presentation-frontend": "^2.14.0",
+    "@bentley/product-settings-client": "^2.14.0",
+    "@bentley/rbac-client": "^2.14.0",
+    "@bentley/telemetry-client": "^2.14.0",
+    "@bentley/ui-abstract": "^2.14.0",
+    "@bentley/ui-components": "^2.14.0",
+    "@bentley/ui-core": "^2.14.0",
+    "@bentley/ui-framework": "^2.14.0",
+    "@bentley/ui-ninezone": "^2.14.0",
+    "@bentley/webgl-compatibility": "^2.14.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^10.4.4",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^26.0.4",
+    "@types/node": "^14.0.19",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.9",
+    "concurrently": "^5.2.0",
+    "copyfiles": "^2.1.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.1.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "ts-jest": "^26.1.1",
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {
+    "@itwin/viewer-react": "^0.1.3"
+  },
+  "peerDependencies": {
+    "@bentley/bentleyjs-core": "^2.14.0",
+    "@bentley/electron-manager": "^2.14.0",
+    "@bentley/extension-client": "^2.14.0",
+    "@bentley/frontend-application-insights-client": "^2.14.0",
+    "@bentley/frontend-authorization-client": "^2.14.0",
+    "@bentley/geometry-core": "^2.14.0",
+    "@bentley/imodelhub-client": "^2.14.0",
+    "@bentley/imodeljs-backend": "^2.14.0",
+    "@bentley/imodeljs-common": "^2.14.0",
+    "@bentley/imodeljs-frontend": "^2.14.0",
+    "@bentley/imodeljs-i18n": "^2.14.0",
+    "@bentley/imodeljs-markup": "^2.14.0",
+    "@bentley/imodeljs-quantity": "^2.14.0",
+    "@bentley/itwin-client": "^2.14.0",
+    "@bentley/orbitgt-core": "^2.14.0",
+    "@bentley/presentation-common": "^2.14.0",
+    "@bentley/presentation-components": "^2.14.0",
+    "@bentley/presentation-frontend": "^2.14.0",
+    "@bentley/product-settings-client": "^2.14.0",
+    "@bentley/rbac-client": "^2.14.0",
+    "@bentley/telemetry-client": "^2.14.0",
+    "@bentley/ui-abstract": "^2.14.0",
+    "@bentley/ui-components": "^2.14.0",
+    "@bentley/ui-core": "^2.14.0",
+    "@bentley/ui-framework": "^2.14.0",
+    "@bentley/ui-ninezone": "^2.14.0",
+    "@bentley/webgl-compatibility": "^2.14.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\](?!@bentley/ui).+\\.(js|jsx|ts|tsx)$",
+      "^.+\\.module\\.(css|sass|scss)$"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|svg?.+)$": "<rootDir>/src/tests/mocks/fileMock.ts",
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    },
+    "verbose": true,
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "test",
+      ".d.ts"
+    ],
+    "collectCoverageFrom": [
+      "<rootDir>/src/**"
+    ]
+  },
+  "keywords": [
+    "Bentley",
+    "iModel",
+    "iModelJs",
+    "iTwin"
+  ]
+}

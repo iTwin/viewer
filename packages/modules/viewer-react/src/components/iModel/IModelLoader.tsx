@@ -32,13 +32,13 @@ import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
 import { useExtensions, useTheme, useUiProviders } from "../../hooks";
+import { BaseInitializer } from "../../services/BaseInitializer";
 import {
   getDefaultViewIds,
   openRemoteImodel,
 } from "../../services/iModel/IModelService";
 import { SelectionScopeClient } from "../../services/iModel/SelectionScopeClient";
 import { ViewCreator } from "../../services/iModel/ViewCreator";
-import Initializer from "../../services/Initializer";
 import { ai } from "../../services/telemetry/TelemetryService";
 import {
   BlankConnectionViewState,
@@ -183,7 +183,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           if (viewIds.length === 0 && contextId && iModelId) {
             // no valid view data in the model. Direct the user to the synchronization portal
             const msgDiv = document.createElement("div");
-            const msg = await Initializer.getIModelDataErrorMessage(
+            const msg = await BaseInitializer.getIModelDataErrorMessage(
               contextId,
               iModelId,
               IModelApp.i18n.translateWithNamespace(

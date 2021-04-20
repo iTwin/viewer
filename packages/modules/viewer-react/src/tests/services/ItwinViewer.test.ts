@@ -20,20 +20,18 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import IModelLoader from "../../components/iModel/IModelLoader";
-import AuthorizationClient from "../../services/auth/AuthorizationClient";
-import Initializer from "../../services/Initializer";
+import { BaseInitializer } from "../../services/BaseInitializer";
 import { ItwinViewer } from "../../services/ItwinViewer";
 import { ai } from "../../services/telemetry/TelemetryService";
 import {
+  AuthorizationOptions,
   IModelBackend,
   IModelBackendHost,
   IModelBackendOptions,
 } from "../../types";
 import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
-import MockOidcClient from "../mocks/MockOidcClient";
 
 jest.mock("@bentley/imodeljs-i18n");
-jest.mock("../../services/auth/AuthorizationClient");
 jest.mock("@microsoft/applicationinsights-react-js", () => ({
   ReactPlugin: jest.fn(),
   withAITracking: (
@@ -92,7 +90,13 @@ jest.mock("@bentley/property-grid-react");
 const elementId = "viewerRoot";
 const mockProjectId = "mockProjectId";
 const mockiModelId = "mockImodelId";
-
+const authConfig: AuthorizationOptions = {
+  config: {
+    clientId: "test-client",
+    redirectUri: "http://localhost:3000",
+    scope: "test-scope",
+  },
+};
 describe("iTwinViewer", () => {
   beforeAll(() => {
     const viewerRoot = document.createElement("div");
@@ -108,7 +112,7 @@ describe("iTwinViewer", () => {
   it("throws and error when an either an oidc client or user manager is not provided", () => {
     let errorMessage;
     try {
-      new ItwinViewer({ elementId, authConfig: {} });
+      new ItwinViewer({ elementId, authConfig });
     } catch (error) {
       errorMessage = error.message;
     }
@@ -118,31 +122,18 @@ describe("iTwinViewer", () => {
   });
 
   it("initializes iModel.js with the passed in oidc client", async () => {
-    jest.spyOn(Initializer, "initialize");
+    jest.spyOn(BaseInitializer, "initialize");
     new ItwinViewer({
       elementId,
-      authConfig: {
-        oidcClient: MockAuthorizationClient.oidcClient,
-      },
+      authConfig,
     });
-    await Initializer.initialized;
-    expect(Initializer.initialize).toHaveBeenCalledWith(
+    await BaseInitializer.initialized;
+    expect(BaseInitializer.initialize).toHaveBeenCalledWith(
       {
         authorizationClient: MockAuthorizationClient.oidcClient,
       },
       { appInsightsKey: undefined, backend: undefined, productId: undefined }
     );
-  });
-
-  it("creates a new AuthorizationClient using the passed oidc user manager", () => {
-    const oidcClient = new MockOidcClient();
-    new ItwinViewer({
-      elementId,
-      authConfig: {
-        getUserManagerFunction: oidcClient.getUserManager,
-      },
-    });
-    expect(AuthorizationClient).toHaveBeenCalledWith(oidcClient.getUserManager);
   });
 
   it("renders the viewer for the proper contextId and iModelId on the element whose id is passed to the constructor", async () => {
@@ -151,9 +142,7 @@ describe("iTwinViewer", () => {
 
     const viewer = new ItwinViewer({
       elementId,
-      authConfig: {
-        oidcClient: MockAuthorizationClient.oidcClient,
-      },
+      authConfig,
     });
     await viewer.load({ contextId: mockProjectId, iModelId: mockiModelId });
     expect(React.createElement).toHaveBeenCalledWith(IModelLoader, {
@@ -178,13 +167,11 @@ describe("iTwinViewer", () => {
 
     new ItwinViewer({
       elementId,
-      authConfig: {
-        oidcClient: MockAuthorizationClient.oidcClient,
-      },
+      authConfig,
       backend: backendConfig,
     });
 
-    expect(Initializer.initialize).toHaveBeenCalledWith(
+    expect(BaseInitializer.initialize).toHaveBeenCalledWith(
       {
         authorizationClient: MockAuthorizationClient.oidcClient,
       },
@@ -201,9 +188,7 @@ describe("iTwinViewer", () => {
 
     const viewer = new ItwinViewer({
       elementId,
-      authConfig: {
-        oidcClient: MockAuthorizationClient.oidcClient,
-      },
+      authConfig,
     });
 
     await viewer.load({
@@ -222,9 +207,7 @@ describe("iTwinViewer", () => {
   it("loads the extension with the passed in version and args", async () => {
     const viewer = new ItwinViewer({
       elementId,
-      authConfig: {
-        oidcClient: MockAuthorizationClient.oidcClient,
-      },
+      authConfig,
     });
 
     await viewer.addExtension(
@@ -234,7 +217,7 @@ describe("iTwinViewer", () => {
       ["one", "two"]
     );
 
-    await Initializer.initialized;
+    await BaseInitializer.initialized;
 
     expect(
       IModelApp.extensionAdmin.addExtensionLoaderFront
@@ -252,13 +235,11 @@ describe("iTwinViewer", () => {
 
     new ItwinViewer({
       elementId,
-      authConfig: {
-        oidcClient: MockAuthorizationClient.oidcClient,
-      },
+      authConfig,
       appInsightsKey,
     });
 
-    await Initializer.initialized;
+    await BaseInitializer.initialized;
 
     expect(ai.initialize).toHaveBeenCalledWith(appInsightsKey);
   });
@@ -266,12 +247,10 @@ describe("iTwinViewer", () => {
   it("does not instantiate an instance of the Telemetry Service when an app insights key is not provided", async () => {
     new ItwinViewer({
       elementId,
-      authConfig: {
-        oidcClient: MockAuthorizationClient.oidcClient,
-      },
+      authConfig,
     });
 
-    await Initializer.initialized;
+    await BaseInitializer.initialized;
 
     expect(ai.initialize).not.toHaveBeenCalledWith();
   });
@@ -282,13 +261,11 @@ describe("iTwinViewer", () => {
 
     new ItwinViewer({
       elementId,
-      authConfig: {
-        oidcClient: MockAuthorizationClient.oidcClient,
-      },
+      authConfig,
       appInsightsKey,
       imjsAppInsightsKey,
     });
-    await Initializer.initialized;
+    await BaseInitializer.initialized;
 
     expect(IModelApp.telemetry.addClient).toHaveBeenCalledTimes(2);
   });
@@ -298,12 +275,10 @@ describe("iTwinViewer", () => {
 
     new ItwinViewer({
       elementId,
-      authConfig: {
-        oidcClient: MockAuthorizationClient.oidcClient,
-      },
+      authConfig,
       appInsightsKey,
     });
-    await Initializer.initialized;
+    await BaseInitializer.initialized;
 
     expect(IModelApp.telemetry.addClient).toHaveBeenCalledTimes(1);
   });
@@ -313,13 +288,11 @@ describe("iTwinViewer", () => {
 
     new ItwinViewer({
       elementId,
-      authConfig: {
-        oidcClient: MockAuthorizationClient.oidcClient,
-      },
+      authConfig,
       i18nUrlTemplate,
     });
 
-    await Initializer.initialized;
+    await BaseInitializer.initialized;
 
     expect(I18N).toHaveBeenCalledWith("iModelJs", {
       urlTemplate: i18nUrlTemplate,
@@ -329,9 +302,7 @@ describe("iTwinViewer", () => {
   it("ensures that either a contextId/iModelId combination or a local snapshot is provided", async () => {
     const viewer = new ItwinViewer({
       elementId,
-      authConfig: {
-        oidcClient: MockAuthorizationClient.oidcClient,
-      },
+      authConfig,
     });
 
     let error;
@@ -355,9 +326,7 @@ describe("iTwinViewer", () => {
 
     const viewer = new ItwinViewer({
       elementId,
-      authConfig: {
-        oidcClient: MockAuthorizationClient.oidcClient,
-      },
+      authConfig,
     });
 
     await viewer.load({ snapshotPath });
@@ -375,13 +344,11 @@ describe("iTwinViewer", () => {
 
     new ItwinViewer({
       elementId,
-      authConfig: {
-        oidcClient: MockAuthorizationClient.oidcClient,
-      },
+      authConfig,
       onIModelAppInit: callbacks.onIModelAppInit,
     });
 
-    await Initializer.initialized;
+    await BaseInitializer.initialized;
 
     expect(callbacks.onIModelAppInit).toHaveBeenCalled();
   });
@@ -389,13 +356,11 @@ describe("iTwinViewer", () => {
   it("registers additional i18n namespaces", async () => {
     new ItwinViewer({
       elementId,
-      authConfig: {
-        oidcClient: MockAuthorizationClient.oidcClient,
-      },
+      authConfig,
       additionalI18nNamespaces: ["test1", "test2"],
     });
 
-    await Initializer.initialized;
+    await BaseInitializer.initialized;
 
     expect(IModelApp.i18n.registerNamespace).toHaveBeenCalledWith("test1");
     expect(IModelApp.i18n.registerNamespace).toHaveBeenCalledWith("test2");
@@ -404,13 +369,11 @@ describe("iTwinViewer", () => {
   it("registers additional rpc interfaces", async () => {
     new ItwinViewer({
       elementId,
-      authConfig: {
-        oidcClient: MockAuthorizationClient.oidcClient,
-      },
+      authConfig,
       additionalRpcInterfaces: [IModelWriteRpcInterface],
     });
 
-    await Initializer.initialized;
+    await BaseInitializer.initialized;
 
     expect(WebViewerApp.startup).toHaveBeenCalledWith({
       webViewerApp: {

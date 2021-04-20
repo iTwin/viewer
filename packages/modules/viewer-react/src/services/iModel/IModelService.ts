@@ -13,7 +13,7 @@ import {
 } from "@bentley/imodeljs-frontend";
 import { AuthorizedClientRequestContext } from "@bentley/itwin-client";
 
-import Initializer from "../Initializer";
+import { BaseInitializer } from "../BaseInitializer";
 
 /** determine the proper version of the iModel to open
  * 1. If named versions exist, get the named version that contains the latest changeset
@@ -71,7 +71,7 @@ export const openRemoteImodel = async (
       "iTwinViewer",
       "iModels.connectionError"
     );
-    const msg = await Initializer.getIModelDataErrorMessage(
+    const msg = await BaseInitializer.getIModelDataErrorMessage(
       contextId,
       imodelId,
       connectionError

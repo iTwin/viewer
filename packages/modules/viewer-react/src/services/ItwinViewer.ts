@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { FrontendAuthorizationClient } from "@bentley/frontend-authorization-client";
 import {
   BriefcaseConnection,
   CheckpointConnection,
@@ -21,29 +20,13 @@ import { ErrorBoundary } from "@itwin/error-handling-react";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { AuthorizationOptions, ViewerFrontstage } from "..";
+import { ViewerFrontstage } from "..";
 import IModelLoader, {
   ModelLoaderProps,
 } from "../components/iModel/IModelLoader";
 import { ItwinViewerParams, ItwinViewerUi, ViewerExtension } from "../types";
-import AuthorizationClient from "./auth/AuthorizationClient";
-import Initializer from "./Initializer";
+import { BaseInitializer } from "./BaseInitializer";
 import { trackEvent } from "./telemetry/TelemetryService";
-
-export const getAuthClient = (
-  authOptions: AuthorizationOptions
-): FrontendAuthorizationClient => {
-  if (authOptions.oidcClient) {
-    return authOptions.oidcClient;
-  }
-  if (authOptions.getUserManagerFunction) {
-    return new AuthorizationClient(authOptions.getUserManagerFunction);
-  }
-  //TODO localize
-  throw new Error(
-    "Please supply an OIDC client or a function to get your client's user manager"
-  );
-};
 
 export interface LoadParameters {
   contextId?: string;
@@ -83,20 +66,16 @@ export class ItwinViewer {
     this.uiProviders = options.uiProviders;
     this.extensions = options.extensions;
 
-    const authClient = getAuthClient(options.authConfig);
-    Initializer.initialize(
-      { authorizationClient: authClient },
-      {
-        appInsightsKey: options.appInsightsKey,
-        backend: options.backend,
-        productId: options.productId,
-        imjsAppInsightsKey: options.imjsAppInsightsKey,
-        i18nUrlTemplate: options.i18nUrlTemplate,
-        onIModelAppInit: options.onIModelAppInit,
-        additionalI18nNamespaces: options.additionalI18nNamespaces,
-        additionalRpcInterfaces: options.additionalRpcInterfaces,
-      }
-    ).catch((error) => {
+    BaseInitializer.initialize({
+      appInsightsKey: options.appInsightsKey,
+      backend: options.backend,
+      productId: options.productId,
+      imjsAppInsightsKey: options.imjsAppInsightsKey,
+      i18nUrlTemplate: options.i18nUrlTemplate,
+      onIModelAppInit: options.onIModelAppInit,
+      additionalI18nNamespaces: options.additionalI18nNamespaces,
+      additionalRpcInterfaces: options.additionalRpcInterfaces,
+    }).catch((error) => {
       throw error;
     });
   }
@@ -113,7 +92,7 @@ export class ItwinViewer {
       trackEvent("iTwinViewer.Viewer.Load");
     }
     // ensure iModel.js initialization completes
-    await Initializer.initialized;
+    await BaseInitializer.initialized;
 
     // render the viewer for the given iModel on the given element
     ReactDOM.render(

@@ -3,18 +3,22 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { FrontendAuthorizationClient } from "@bentley/frontend-authorization-client";
+import {
+  BrowserAuthorizationClient,
+  BrowserAuthorizationClientConfiguration,
+} from "@bentley/frontend-authorization-client";
 import { Vector3d, XAndY, XYAndZ } from "@bentley/geometry-core";
 import {
   BentleyCloudRpcParams,
   ColorDef,
+  NativeAppAuthorizationConfiguration,
   RenderMode,
   RpcInterface,
   RpcInterfaceDefinition,
 } from "@bentley/imodeljs-common";
 import {
-  DesktopAuthorizationClient,
   IModelConnection,
+  NativeAppAuthorization,
   ViewChangeOptions,
 } from "@bentley/imodeljs-frontend";
 import { BackstageItem, UiItemsProvider } from "@bentley/ui-abstract";
@@ -24,7 +28,6 @@ import {
   FrontstageProvider,
   IModelViewportControlOptions,
 } from "@bentley/ui-framework";
-import { UserManager } from "oidc-client";
 
 /**
  * List of possible hosted backends that the iTwin Viewer can use
@@ -65,9 +68,11 @@ export interface CustomBackendConfig {
  */
 export interface AuthorizationOptions {
   /** provide an existing iModel.js authorization client */
-  oidcClient?: FrontendAuthorizationClient | DesktopAuthorizationClient;
-  /** reference to a function that returns a pre-configured oidc UserManager */
-  getUserManagerFunction?: () => UserManager;
+  oidcClient?: BrowserAuthorizationClient | NativeAppAuthorization;
+  /** provide configuration for an oidc client to be managed within the Viewer */
+  config?:
+    | BrowserAuthorizationClientConfiguration
+    | NativeAppAuthorizationConfiguration;
 }
 
 /**
@@ -125,8 +130,7 @@ export interface IModelLoaderParams {
 export interface ItwinViewerCommonParams
   extends ItwinViewerInitializerParams,
     IModelLoaderParams {
-  /** authorization configuration */
-  authConfig: AuthorizationOptions;
+  authConfig: AuthorizationOptions; //TODO required since native app can provide in the backend?
 }
 
 export interface ItwinViewerInitializerParams {

@@ -24,7 +24,7 @@ import {
 } from "@bentley/imodeljs-frontend";
 
 import { BlankConnectionViewState } from "../../types";
-import Initializer from "../Initializer";
+import { BaseInitializer } from "../BaseInitializer";
 
 /** Options for ViewCreator to override certain state */
 export interface ViewCreatorOptions {
@@ -266,7 +266,7 @@ export class ViewCreator {
         "iModels.viewStateError"
       );
       if (iModelConnection.contextId && iModelConnection.iModelId) {
-        const msg = await Initializer.getIModelDataErrorMessage(
+        const msg = await BaseInitializer.getIModelDataErrorMessage(
           iModelConnection.contextId,
           iModelConnection.iModelId,
           viewStateError
@@ -301,7 +301,7 @@ export class ViewCreator {
 
     viewState.setAllow3dManipulations(allow3dManipulations);
 
-    const viewStateLookAt = viewStateOptions?.lookAt || {
+    const viewStateLookAt = viewStateOptions?.lookAt ?? {
       eyePoint: new Point3d(15, 15, 15),
       targetPoint: new Point3d(0, 0, 0),
       upVector: new Vector3d(0, 0, 1),

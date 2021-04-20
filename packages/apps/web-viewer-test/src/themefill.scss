@@ -1,0 +1,20 @@
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
+@import "~@bentley/ui-core/lib/ui-core/style/themecolors.scss";
+
+$buic-foreground-body-rgb: var(--buic-foreground-body-rgb, 000, 000, 000);
+$buic-foreground-primary-rgb: var(--buic-foreground-primary-rgb, 000, 139, 225);
+$buic-foreground-success-rgb: var(--buic-foreground-success-rgb, 000, 139, 225);
+
+$buic-icon-color-rgb: var(--buic-foreground-body-rgb, 000, 000, 000);
+
+$buic-background-1-rgb: var(--buic-background-1-rgb, 255, 255, 255);
+$buic-background-2-rgb: var(--buic-background-2-rgb, 248, 249, 251);
+$buic-background-3-rgb: var(--buic-background-3-rgb, 238, 240, 243);
+$buic-background-4-rgb: var(--buic-background-4-rgb, 220, 224, 227);
+$buic-background-5-rgb: var(--buic-background-5-rgb, 199, 204, 209);
+
+$tooltip-background: #000000;
