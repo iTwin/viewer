@@ -129,9 +129,7 @@ export interface IModelLoaderParams {
 
 export interface ItwinViewerCommonParams
   extends ItwinViewerInitializerParams,
-    IModelLoaderParams {
-  authConfig: AuthorizationOptions; //TODO required since native app can provide in the backend?
-}
+    IModelLoaderParams {}
 
 export interface ItwinViewerInitializerParams {
   /** optional Azure Application Insights key for telemetry */

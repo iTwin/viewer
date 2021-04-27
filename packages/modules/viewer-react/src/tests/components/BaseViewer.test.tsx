@@ -5,19 +5,8 @@
 
 import "@testing-library/jest-dom/extend-expect";
 
-import {
-  IModelReadRpcInterface,
-  IModelTileRpcInterface,
-  IModelWriteRpcInterface,
-  SnapshotIModelRpcInterface,
-} from "@bentley/imodeljs-common";
-import {
-  IModelApp,
-  SnapshotConnection,
-  WebViewerApp,
-} from "@bentley/imodeljs-frontend";
-import { I18N } from "@bentley/imodeljs-i18n";
-import { PresentationRpcInterface } from "@bentley/presentation-common";
+import { IModelApp, SnapshotConnection } from "@bentley/imodeljs-frontend";
+import { UiCore } from "@bentley/ui-core";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
@@ -26,17 +15,15 @@ import { BaseInitializer } from "../../services/BaseInitializer";
 import * as IModelService from "../../services/iModel/IModelService";
 import { ai } from "../../services/telemetry/TelemetryService";
 import {
-  AuthorizationOptions,
   IModelBackend,
   IModelBackendHost,
   IModelBackendOptions,
 } from "../../types";
 
-jest.mock("@bentley/imodeljs-i18n");
-jest.mock("../../services/auth/AuthorizationClient");
 jest.mock("../../services/iModel/IModelService");
 jest.mock("@bentley/ui-framework");
 jest.mock("@bentley/presentation-frontend");
+jest.mock("react-i18next");
 
 jest.mock("@microsoft/applicationinsights-react-js", () => ({
   ReactPlugin: jest.fn(),
@@ -64,9 +51,17 @@ jest.mock("@bentley/imodeljs-frontend", () => {
           readFinished: jest.fn().mockResolvedValue(true),
         }),
         languageList: jest.fn().mockReturnValue(["en-US"]),
+        unregisterNamespace: jest.fn(),
       },
       uiAdmin: {
         updateFeatureFlags: jest.fn(),
+      },
+      authorizationClient: {
+        hasSignedIn: true,
+        isAuthorized: true,
+        onUserStateChanged: {
+          addListener: jest.fn(),
+        },
       },
     },
     SnapMode: {},
@@ -86,9 +81,6 @@ jest.mock("@bentley/imodeljs-frontend", () => {
     RotationMode: {},
     AccuDraw: class {},
     ToolAdmin: class {},
-    WebViewerApp: {
-      startup: jest.fn().mockResolvedValue(true),
-    },
   };
 });
 
@@ -97,67 +89,23 @@ jest.mock("@bentley/property-grid-react");
 
 const mockProjectId = "123";
 const mockIModelId = "456";
-const authConfig: AuthorizationOptions = {
-  config: {
-    clientId: "test-client",
-    redirectUri: "http://localhost:3000",
-    scope: "test-scope",
-  },
-};
 
 describe("BaseViewer", () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    if (UiCore.initialized) {
+      UiCore.terminate();
+    }
   });
 
   it("loads the model loader for the specified contextId and iModelId", async () => {
     const { getByTestId } = render(
-      <BaseViewer
-        contextId={mockProjectId}
-        iModelId={mockIModelId}
-        authConfig={authConfig}
-      />
+      <BaseViewer contextId={mockProjectId} iModelId={mockIModelId} />
     );
 
     const viewerContainer = await waitFor(() => getByTestId("loader-wrapper"));
 
     expect(viewerContainer).toBeInTheDocument();
-  });
-
-  it("initializes the BaseViewer with the provided backend configuration", async () => {
-    jest.spyOn(BaseInitializer, "initialize");
-
-    const backendConfig: IModelBackendOptions = {
-      hostedBackend: {
-        title: IModelBackend.GeneralPurpose,
-        version: "v2.0",
-        hostType: IModelBackendHost.K8S,
-      },
-    };
-
-    const { getByTestId } = render(
-      <BaseViewer
-        contextId={mockProjectId}
-        iModelId={mockIModelId}
-        authConfig={authConfig}
-        backend={backendConfig}
-        productId={"0000"}
-      />
-    );
-
-    const viewerContainer = await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(viewerContainer).toBeInTheDocument();
-
-    expect(BaseInitializer.initialize).toHaveBeenCalledWith(
-      { authorizationClient: {} },
-      {
-        appInsightsKey: undefined,
-        backend: backendConfig,
-        imjsAppInsightsKey: undefined,
-        productId: "0000",
-      }
-    );
   });
 
   it("queries the iModel with the provided changeSetId", async () => {
@@ -165,7 +113,6 @@ describe("BaseViewer", () => {
       <BaseViewer
         contextId={mockProjectId}
         iModelId={mockIModelId}
-        authConfig={authConfig}
         productId={"0000"}
         changeSetId={"123"}
       />
@@ -180,13 +127,76 @@ describe("BaseViewer", () => {
     );
   });
 
+  it("ensures that either a contextId/iModelId combination or a local snapshot is provided", async () => {
+    const events = {
+      onError: (event: ErrorEvent) => {
+        event.preventDefault();
+      },
+    };
+
+    jest.spyOn(events, "onError");
+
+    window.addEventListener("error", events.onError);
+
+    const { getByTestId } = render(<BaseViewer />);
+
+    const loader = await waitFor(() => getByTestId("loader-wrapper"));
+
+    expect(loader).not.toBeInTheDocument();
+    expect(events.onError).toHaveBeenCalled();
+
+    window.removeEventListener("error", events.onError);
+  });
+
+  it("renders and establishes a SnapshotConnection if a local snapshot is provided", async () => {
+    const snapshotPath = "/path/to/snapshot";
+
+    const { getByTestId } = render(<BaseViewer snapshotPath={snapshotPath} />);
+
+    const loader = await waitFor(() => getByTestId("loader-wrapper"));
+
+    expect(loader).toBeInTheDocument();
+    expect(SnapshotConnection.openFile).toHaveBeenCalledWith(snapshotPath);
+  });
+
+  it("initializes the Viewer with the provided backend configuration", async () => {
+    jest.spyOn(BaseInitializer, "initialize");
+
+    const backendConfig: IModelBackendOptions = {
+      hostedBackend: {
+        title: IModelBackend.GeneralPurpose,
+        version: "v2.0",
+        hostType: IModelBackendHost.K8S,
+      },
+    };
+
+    const { getByTestId } = render(
+      <BaseViewer
+        contextId={mockProjectId}
+        iModelId={mockIModelId}
+        backend={backendConfig}
+        productId={"0000"}
+      />
+    );
+
+    const viewerContainer = await waitFor(() => getByTestId("loader-wrapper"));
+
+    expect(viewerContainer).toBeInTheDocument();
+
+    expect(BaseInitializer.initialize).toHaveBeenCalledWith({
+      appInsightsKey: undefined,
+      backend: backendConfig,
+      imjsAppInsightsKey: undefined,
+      productId: "0000",
+    });
+  });
+
   it("instantiates an instance of the Telemetry Service when an app insights key is provided", async () => {
     const appInsightsKey = "123";
     const { getByTestId } = render(
       <BaseViewer
         contextId={mockProjectId}
         iModelId={mockIModelId}
-        authConfig={authConfig}
         appInsightsKey={appInsightsKey}
       />
     );
@@ -198,11 +208,7 @@ describe("BaseViewer", () => {
 
   it("does not instantiate an instance of the Telemetry Service when an app insights key is not provided", async () => {
     const { getByTestId } = render(
-      <BaseViewer
-        contextId={mockProjectId}
-        iModelId={mockIModelId}
-        authConfig={authConfig}
-      />
+      <BaseViewer contextId={mockProjectId} iModelId={mockIModelId} />
     );
 
     await waitFor(() => getByTestId("loader-wrapper"));
@@ -217,7 +223,6 @@ describe("BaseViewer", () => {
       <BaseViewer
         contextId={mockProjectId}
         iModelId={mockIModelId}
-        authConfig={authConfig}
         appInsightsKey={appInsightsKey}
         imjsAppInsightsKey={imjsAppInsightsKey}
       />
@@ -234,7 +239,6 @@ describe("BaseViewer", () => {
       <BaseViewer
         contextId={mockProjectId}
         iModelId={mockIModelId}
-        authConfig={authConfig}
         appInsightsKey={appInsightsKey}
       />
     );
@@ -244,68 +248,14 @@ describe("BaseViewer", () => {
     expect(IModelApp.telemetry.addClient).toHaveBeenCalledTimes(1);
   });
 
-  it("overrides the i18n url template", async () => {
-    const i18nUrlTemplate = "host/route";
-
-    const { getByTestId } = render(
-      <BaseViewer
-        contextId={mockProjectId}
-        iModelId={mockIModelId}
-        authConfig={authConfig}
-        i18nUrlTemplate={i18nUrlTemplate}
-      />
-    );
-
-    await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(I18N).toHaveBeenCalledWith("iModelJs", {
-      urlTemplate: i18nUrlTemplate,
-    });
-  });
-
-  it("ensures that either a contextId/iModelId combination or a local snapshot is provided", async () => {
-    const events = {
-      onError: (event: ErrorEvent) => {
-        event.preventDefault();
-      },
-    };
-
-    jest.spyOn(events, "onError");
-
-    window.addEventListener("error", events.onError);
-
-    const { getByTestId } = render(<BaseViewer authConfig={authConfig} />);
-
-    const loader = await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(loader).not.toBeInTheDocument();
-    expect(events.onError).toHaveBeenCalled();
-
-    window.removeEventListener("error", events.onError);
-  });
-
-  it("renders and establishes a SnapshotConnection if a local snapshot is provided", async () => {
-    const snapshotPath = "/path/to/snapshot";
-
-    const { getByTestId } = render(
-      <BaseViewer snapshotPath={snapshotPath} authConfig={authConfig} />
-    );
-
-    const loader = await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(loader).toBeInTheDocument();
-    expect(SnapshotConnection.openFile).toHaveBeenCalledWith(snapshotPath);
-  });
-
   it("executes a callback after IModelApp is initialized", async () => {
-    const snapshotPath = "/path/to/snapshot";
     const callbacks = {
       onIModelAppInit: jest.fn(),
     };
     const { getByTestId } = render(
       <BaseViewer
-        snapshotPath={snapshotPath}
-        authConfig={authConfig}
+        contextId={mockProjectId}
+        iModelId={mockIModelId}
         onIModelAppInit={callbacks.onIModelAppInit}
       />
     );
@@ -321,7 +271,6 @@ describe("BaseViewer", () => {
       <BaseViewer
         contextId={mockProjectId}
         iModelId={mockIModelId}
-        authConfig={authConfig}
         additionalI18nNamespaces={["test1", "test2"]}
       />
     );
@@ -330,44 +279,5 @@ describe("BaseViewer", () => {
 
     expect(IModelApp.i18n.registerNamespace).toHaveBeenCalledWith("test1");
     expect(IModelApp.i18n.registerNamespace).toHaveBeenCalledWith("test2");
-  });
-
-  it("registers additional rpc interfaces", async () => {
-    const { getByTestId } = render(
-      <BaseViewer
-        contextId={mockProjectId}
-        iModelId={mockIModelId}
-        authConfig={authConfig}
-        additionalRpcInterfaces={[IModelWriteRpcInterface]}
-      />
-    );
-
-    await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(WebViewerApp.startup).toHaveBeenCalledWith({
-      webViewerApp: {
-        rpcParams: {
-          info: {
-            title: "general-purpose-imodeljs-backend",
-            version: "v2.0",
-          },
-          uriPrefix: "https://api.bentley.com/imodeljs",
-        },
-      },
-      iModelApp: {
-        applicationId: "3098",
-        authorizationClient: expect.anything(),
-        i18n: expect.anything(),
-        notifications: expect.anything(),
-        rpcInterfaces: [
-          IModelReadRpcInterface,
-          IModelTileRpcInterface,
-          PresentationRpcInterface,
-          SnapshotIModelRpcInterface,
-          IModelWriteRpcInterface,
-        ],
-        uiAdmin: expect.anything(),
-      },
-    });
   });
 });

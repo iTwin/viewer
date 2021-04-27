@@ -11,11 +11,7 @@ import {
   WebViewerAppOpts,
 } from "@bentley/imodeljs-frontend";
 import { UrlDiscoveryClient } from "@bentley/itwin-client";
-import {
-  BaseInitializer,
-  getIModelAppOptions,
-  IModelBackendOptions,
-} from "@itwin/viewer-react";
+import { getIModelAppOptions, IModelBackendOptions } from "@itwin/viewer-react";
 
 import { WebViewerProps } from "../types";
 
@@ -75,27 +71,64 @@ const initializeRpcParams = async (
   }
 };
 
-/** initialize WebViewerApp and the BaseViewer */
-export const initializeViewer = async (options?: WebViewerProps) => {
-  if (!IModelApp.initialized) {
-    // do not initialize more than once
-    const rpcParams = await initializeRpcParams(options?.backend);
-    const webViewerOptions: WebViewerAppOpts = {
-      iModelApp: getIModelAppOptions(options),
-      webViewerApp: {
-        rpcParams: rpcParams,
-        authConfig: options?.authConfig.config,
-        routing: options?.rpcRoutingToken,
-      },
-    };
-    await WebViewerApp.startup(webViewerOptions);
+export class WebInitializer {
+  private static _initialized: Promise<void>;
+  private static _initializing = false;
+  private static _reject: (() => void) | undefined;
 
-    if (!IModelApp.authorizationClient && options?.authConfig.oidcClient) {
-      // Consumer provided a full client instead of just configuration
-      IModelApp.authorizationClient = options?.authConfig.oidcClient;
+  /** expose initialized promise */
+  public static get initialized(): Promise<void> {
+    return this._initialized;
+  }
+
+  /** expose initialized cancel method */
+  public static cancel: () => void = () => {
+    if (WebInitializer._initializing) {
+      if (WebInitializer._reject) {
+        WebInitializer._reject();
+      }
+      WebViewerApp.shutdown().catch(() => {
+        // Do nothing, its possible that we never started.
+      });
+    }
+  };
+
+  /** Web viewer startup */
+  public static async startWebViewer(options?: WebViewerProps) {
+    if (!IModelApp.initialized && !this._initializing) {
+      console.log("starting web viewer");
+      this._initializing = true;
+      this._initialized = new Promise(async (resolve, reject) => {
+        try {
+          this._reject = () => reject("Web Startup Cancelled");
+          const rpcParams = await initializeRpcParams(options?.backend);
+          const webViewerOptions: WebViewerAppOpts = {
+            iModelApp: getIModelAppOptions(options),
+            webViewerApp: {
+              rpcParams: rpcParams,
+              authConfig: options?.authConfig.config,
+              routing: options?.rpcRoutingToken,
+            },
+          };
+          await WebViewerApp.startup(webViewerOptions);
+
+          if (
+            !IModelApp.authorizationClient &&
+            options?.authConfig.oidcClient
+          ) {
+            // Consumer provided a full client instead of just configuration
+            IModelApp.authorizationClient = options?.authConfig.oidcClient;
+          }
+          console.log("web viewer started");
+          resolve();
+        } catch (error) {
+          console.error(error);
+          reject(error);
+        } finally {
+          this._initializing = false;
+          this._reject = undefined;
+        }
+      });
     }
   }
-  return BaseInitializer.initialize(options).then(() => {
-    return BaseInitializer.initialized;
-  });
-};
+}

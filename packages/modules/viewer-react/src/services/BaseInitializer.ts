@@ -40,6 +40,7 @@ export class BaseInitializer {
   private static _initializing = false;
   private static _iModelDataErrorMessage: string | undefined;
   private static _synchronizerRootUrl: string | undefined;
+  private static _reject: (() => void) | undefined;
 
   public static async getSynchronizerUrl(
     contextId: string,
@@ -67,6 +68,56 @@ export class BaseInitializer {
   public static get initialized(): Promise<void> {
     return this._initialized;
   }
+
+  /** expose initialized cancel method */
+  public static cancel: () => void = () => {
+    if (BaseInitializer._initializing) {
+      if (BaseInitializer._reject) {
+        BaseInitializer._reject();
+      }
+      try {
+        Presentation.presentation.dispose();
+      } catch (err) {
+        // Do nothing, its possible that we never started.
+      }
+      try {
+        Presentation.terminate();
+      } catch (err) {
+        // Do nothing, its possible that we never started.
+      }
+      try {
+        if (UiFramework.initialized) {
+          UiFramework.terminate();
+        }
+      } catch (err) {
+        // Do nothing.
+      }
+      try {
+        if (UiComponents.initialized) {
+          UiComponents.terminate();
+        }
+      } catch (err) {
+        // Do nothing.
+      }
+      try {
+        if (UiCore.initialized) {
+          UiCore.terminate();
+        }
+      } catch (err) {
+        // Do nothing
+      }
+      try {
+        IModelApp.i18n
+          .languageList()
+          .forEach((ns) => IModelApp.i18n.unregisterNamespace(ns));
+      } catch (err) {
+        // Do nothing
+      }
+      IModelApp.shutdown().catch(() => {
+        // Do nothing, its possible that we never started.
+      });
+    }
+  };
 
   /** Message to display when there are iModel data-related errors */
   public static async getIModelDataErrorMessage(
@@ -109,7 +160,9 @@ export class BaseInitializer {
   public static async initialize(
     viewerOptions?: ItwinViewerInitializerParams
   ): Promise<void> {
-    if (this._initializing) {
+    if (UiCore.initialized && !this._initializing) {
+      return Promise.resolve();
+    } else if (this._initializing) {
       // in the process of initializing, so return
       return;
     } else {
@@ -119,11 +172,7 @@ export class BaseInitializer {
 
     this._initialized = new Promise(async (resolve, reject) => {
       try {
-        if (UiCore.initialized) {
-          // intializations have begun. do not attempt again
-          resolve();
-          return;
-        }
+        this._reject = () => reject("Cancelled");
         // Initialize state manager for extensions to have access to extending the redux store
         // This will setup a singleton store inside the StoreManager class.
         new StateManager({
@@ -198,11 +247,13 @@ export class BaseInitializer {
 
         console.log("iModel.js initialized");
 
-        this._initializing = false;
         resolve();
       } catch (error) {
         console.error(error);
         reject(error);
+      } finally {
+        this._initializing = false;
+        this._reject = undefined;
       }
     });
   }

@@ -2,12 +2,17 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import {
   BrowserAuthorizationClient,
   BrowserAuthorizationClientConfiguration,
 } from "@bentley/frontend-authorization-client";
 import { RpcRoutingToken } from "@bentley/imodeljs-common";
-import { BlankViewerProps, ViewerProps } from "@itwin/viewer-react";
+import {
+  BlankViewerProps,
+  ItwinViewerParams,
+  ViewerProps,
+} from "@itwin/viewer-react";
 /**
  * Authorization options. Must provide one.
  */
@@ -18,11 +23,18 @@ export interface WebAuthorizationOptions {
   config?: BrowserAuthorizationClientConfiguration;
 }
 
-export interface WebViewerProps extends ViewerProps {
+export interface WebViewerPropsFull extends ViewerProps {
   rpcRoutingToken?: RpcRoutingToken;
   authConfig: WebAuthorizationOptions;
 }
 
+export type WebViewerProps = Omit<WebViewerPropsFull, "snapshotPath">;
+
 export interface WebBlankViewerProps extends BlankViewerProps {
+  authConfig: WebAuthorizationOptions;
+}
+
+export interface WebItwinViewerParams extends ItwinViewerParams {
+  rpcRoutingToken?: RpcRoutingToken;
   authConfig: WebAuthorizationOptions;
 }

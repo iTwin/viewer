@@ -29,7 +29,6 @@
       "@bentley/webgl-compatibility": "^2.14.0",
       "@itwin/web-viewer-react": "^0.1.0",
       "history": "^4.10.1",
-      "oidc-client": "^1.10.1",
       "react": "16.13.1",
       "react-dom": "16.13.1",
       "@svgr/webpack": "4.3.3",

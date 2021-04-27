@@ -7,6 +7,7 @@ import { IModelApp } from "@bentley/imodeljs-frontend";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
+import { BaseInitializer } from "../services/BaseInitializer";
 import { ItwinViewerCommonParams } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
@@ -22,18 +23,26 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   iModelId,
   contextId,
   appInsightsKey,
+  backend,
   theme,
   changeSetId,
   defaultUiConfig,
   onIModelConnected,
+  productId,
   snapshotPath,
   frontstages,
   backstageItems,
   uiFrameworkVersion,
   viewportOptions,
   uiProviders,
+  imjsAppInsightsKey,
+  i18nUrlTemplate,
+  onIModelAppInit,
+  additionalI18nNamespaces,
+  additionalRpcInterfaces,
 }: ViewerProps) => {
   const [authorized, setAuthorized] = useState(false);
+  const [iModelJsInitialized, setIModelJsInitialized] = useState(false);
 
   useEffect(() => {
     setAuthorized(
@@ -43,18 +52,54 @@ export const BaseViewer: React.FC<ViewerProps> = ({
     );
     IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
       setAuthorized(
-        (IModelApp.authorizationClient &&
-          IModelApp.authorizationClient.hasSignedIn &&
-          IModelApp.authorizationClient.isAuthorized) ||
+        (IModelApp.authorizationClient?.hasSignedIn &&
+          IModelApp.authorizationClient?.isAuthorized) ||
           false
       );
     });
   }, []);
 
-  // TODO not signed in message
+  useEffect(() => {
+    if (!iModelJsInitialized) {
+      BaseInitializer.initialize({
+        appInsightsKey,
+        backend,
+        productId,
+        imjsAppInsightsKey,
+        i18nUrlTemplate,
+        onIModelAppInit,
+        additionalI18nNamespaces,
+        additionalRpcInterfaces,
+      })
+        .then(() => {
+          BaseInitializer.initialized
+            .then(() => setIModelJsInitialized(true))
+            .catch((error) => {
+              throw error;
+            });
+        })
+        .catch((error) => {
+          throw error;
+        });
+    }
+    return () => {
+      BaseInitializer.cancel();
+    };
+  }, [
+    appInsightsKey,
+    backend,
+    productId,
+    imjsAppInsightsKey,
+    i18nUrlTemplate,
+    onIModelAppInit,
+    additionalI18nNamespaces,
+    additionalRpcInterfaces,
+  ]);
+
+  // TODO not signed in message / loader
   return (
     <ErrorBoundary>
-      {authorized && (
+      {authorized && iModelJsInitialized && (
         <IModelLoader
           contextId={contextId}
           iModelId={iModelId}

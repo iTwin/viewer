@@ -6,7 +6,7 @@
 import { BaseBlankViewer } from "@itwin/viewer-react";
 import React, { useEffect, useMemo, useState } from "react";
 
-import { initializeViewer } from "../services/Initializer";
+import { WebInitializer } from "../services/Initializer";
 import { WebBlankViewerProps } from "../types";
 
 export const BlankViewer = (props: WebBlankViewerProps) => {
@@ -16,9 +16,12 @@ export const BlankViewer = (props: WebBlankViewerProps) => {
   }, [props]);
 
   useEffect(() => {
-    void initializeViewer(memoizedProps).then(() => {
-      setInitialized(true);
+    void WebInitializer.startWebViewer(memoizedProps).then(() => {
+      void WebInitializer.initialized.then(() => {
+        setInitialized(true);
+      });
     });
+    return WebInitializer.cancel;
   }, [memoizedProps]);
 
   return initialized ? <BaseBlankViewer {...props} /> : null; //TODO loader?
