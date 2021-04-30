@@ -300,5 +300,6 @@ export const getIModelAppOptions = (
         ? options.i18nUrlTemplate
         : viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`,
     }),
+    toolAdmin: options?.toolAdmin,
   };
 };

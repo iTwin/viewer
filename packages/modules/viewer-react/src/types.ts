@@ -19,6 +19,7 @@ import {
 import {
   IModelConnection,
   NativeAppAuthorization,
+  ToolAdmin,
   ViewChangeOptions,
 } from "@bentley/imodeljs-frontend";
 import { BackstageItem, UiItemsProvider } from "@bentley/ui-abstract";
@@ -150,6 +151,8 @@ export interface ItwinViewerInitializerParams {
   additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
   /** override the default message that sends users to the iTwin Synchronizer when there are data-related errors with an iModel. Pass empty string to override with no message. */
   iModelDataErrorMessage?: string;
+  /** optional ToolAdmin to initialize */
+  toolAdmin?: ToolAdmin;
 }
 
 /**

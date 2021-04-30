@@ -63,8 +63,6 @@ export class ItwinViewer {
     this.uiProviders = options.uiProviders;
     this.extensions = options.extensions;
     this.authConfig = options.authConfig;
-
-    // void WebInitializer.startWebViewer(options);
   }
 
   /** load a model in the viewer once iTwinViewerApp is ready */

@@ -82,9 +82,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
           throw error;
         });
     }
-    return () => {
-      BaseInitializer.cancel();
-    };
+    return BaseInitializer.cancel;
   }, [
     appInsightsKey,
     backend,

@@ -152,4 +152,7 @@ describe("Viewer", () => {
   //     },
   //   });
   // });
+
+  // it("registers optional toolAdmin", async () => {
+  // });
 });

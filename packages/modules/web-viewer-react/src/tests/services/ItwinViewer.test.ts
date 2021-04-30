@@ -109,4 +109,20 @@ describe("iTwinViewer", () => {
       document.getElementById(elementId)
     );
   });
+
+  it("registers optional toolAdmin", async () => {
+    // jest.spyOn(React, "createElement");
+    // jest.spyOn(ReactDOM, "render");
+    // jest.spyOn(ViewerReact, "getIModelAppOptions");
+    // const viewer = new ItwinViewer({
+    //   elementId,
+    //   authConfig,
+    //   toolAdmin: new MockToolAdmin(),
+    // });
+    // act(async () => {
+    //   await viewer.load({ contextId: mockProjectId, iModelId: mockiModelId });
+    //   await WebInitializer.initialized;
+    // });
+    // expect(ViewerReact.getIModelAppOptions).toHaveBeenCalled();
+  });
 });

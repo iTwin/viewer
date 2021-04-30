@@ -42,7 +42,7 @@
   "dependencies": {
     "@bentley/icons-generic-webfont": "^1.0.15",
     "@bentley/property-grid-react": "^1.2.1",
-    "@bentley/tree-widget-react": "^1.2.5",
+    "@bentley/tree-widget-react": "^1.2.8",
     "@itwin/error-handling-react": "0.1.3",
     "@microsoft/applicationinsights-react-js": "2.3.1",
     "@microsoft/applicationinsights-web": "2.3.1",
