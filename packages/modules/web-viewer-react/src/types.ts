@@ -28,13 +28,9 @@ export interface WebViewerPropsFull extends ViewerProps {
   rpcRoutingToken?: RpcRoutingToken;
   /** aiuthorization configuration */
   authConfig: WebAuthorizationOptions;
-  /** contextId that contains the iModel to view */
-  contextId: string;
-  /** id of the iModel to view */
-  iModelId: string;
 }
 
-// TODO remove this and required contextId and iModelId once we support opening snapshots remotely
+// TODO remove this once we support opening snapshots remotely
 export type WebViewerProps = Omit<WebViewerPropsFull, "snapshotPath">;
 
 export interface WebBlankViewerProps extends BlankViewerProps {
