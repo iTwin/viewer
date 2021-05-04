@@ -10,15 +10,12 @@ import { Viewer } from "../../components/Viewer";
 import { ItwinViewer } from "../../services/ItwinViewer";
 import { WebAuthorizationOptions } from "../../types";
 
-jest.mock("@microsoft/applicationinsights-react-js", () => ({
-  ReactPlugin: jest.fn(),
-  withAITracking: (
-    reactPlugin: any | undefined, // eslint-disable-line no-unused-vars
-    component: any,
-    componentName?: string, // eslint-disable-line no-unused-vars
-    className?: string // eslint-disable-line no-unused-vars
-  ) => component,
-}));
+jest.mock("@itwin/viewer-react", () => {
+  return {
+    BaseViewer: jest.fn(({ children }) => null),
+  };
+});
+
 jest.mock("@bentley/imodeljs-frontend", () => {
   return {
     IModelApp: {
@@ -108,21 +105,5 @@ describe("iTwinViewer", () => {
       expect.anything(),
       document.getElementById(elementId)
     );
-  });
-
-  it("registers optional toolAdmin", async () => {
-    // jest.spyOn(React, "createElement");
-    // jest.spyOn(ReactDOM, "render");
-    // jest.spyOn(ViewerReact, "getIModelAppOptions");
-    // const viewer = new ItwinViewer({
-    //   elementId,
-    //   authConfig,
-    //   toolAdmin: new MockToolAdmin(),
-    // });
-    // act(async () => {
-    //   await viewer.load({ contextId: mockProjectId, iModelId: mockiModelId });
-    //   await WebInitializer.initialized;
-    // });
-    // expect(ViewerReact.getIModelAppOptions).toHaveBeenCalled();
   });
 });
