@@ -5,7 +5,7 @@
 
 import "@testing-library/jest-dom/extend-expect";
 
-import { IModelApp, SnapshotConnection } from "@bentley/imodeljs-frontend";
+import { SnapshotConnection } from "@bentley/imodeljs-frontend";
 import { UiCore } from "@bentley/ui-core";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
@@ -13,7 +13,6 @@ import React from "react";
 import { BaseViewer } from "../..";
 import { BaseInitializer } from "../../services/BaseInitializer";
 import * as IModelService from "../../services/iModel/IModelService";
-import { ai } from "../../services/telemetry/TelemetryService";
 import {
   IModelBackend,
   IModelBackendHost,
@@ -191,63 +190,6 @@ describe("BaseViewer", () => {
     });
   });
 
-  it("instantiates an instance of the Telemetry Service when an app insights key is provided", async () => {
-    const appInsightsKey = "123";
-    const { getByTestId } = render(
-      <BaseViewer
-        contextId={mockProjectId}
-        iModelId={mockIModelId}
-        appInsightsKey={appInsightsKey}
-      />
-    );
-
-    await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(ai.initialize).toHaveBeenCalledWith(appInsightsKey);
-  });
-
-  it("does not instantiate an instance of the Telemetry Service when an app insights key is not provided", async () => {
-    const { getByTestId } = render(
-      <BaseViewer contextId={mockProjectId} iModelId={mockIModelId} />
-    );
-
-    await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(ai.initialize).not.toHaveBeenCalled();
-  });
-
-  it("adds the iModel.js telemetry client when the imjs key is provided", async () => {
-    const appInsightsKey = "123";
-    const imjsAppInsightsKey = "456";
-    const { getByTestId } = render(
-      <BaseViewer
-        contextId={mockProjectId}
-        iModelId={mockIModelId}
-        appInsightsKey={appInsightsKey}
-        imjsAppInsightsKey={imjsAppInsightsKey}
-      />
-    );
-
-    await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(IModelApp.telemetry.addClient).toHaveBeenCalledTimes(2);
-  });
-
-  it("does not add the iModel.js telemetry client when the imjs key is not provided", async () => {
-    const appInsightsKey = "123";
-    const { getByTestId } = render(
-      <BaseViewer
-        contextId={mockProjectId}
-        iModelId={mockIModelId}
-        appInsightsKey={appInsightsKey}
-      />
-    );
-
-    await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(IModelApp.telemetry.addClient).toHaveBeenCalledTimes(1);
-  });
-
   it("executes a callback after IModelApp is initialized", async () => {
     const callbacks = {
       onIModelAppInit: jest.fn(),
@@ -264,20 +206,5 @@ describe("BaseViewer", () => {
 
     expect(loader).toBeInTheDocument();
     expect(callbacks.onIModelAppInit).toHaveBeenCalled();
-  });
-
-  it("registers additional i18n namespaces", async () => {
-    const { getByTestId } = render(
-      <BaseViewer
-        contextId={mockProjectId}
-        iModelId={mockIModelId}
-        additionalI18nNamespaces={["test1", "test2"]}
-      />
-    );
-
-    await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(IModelApp.i18n.registerNamespace).toHaveBeenCalledWith("test1");
-    expect(IModelApp.i18n.registerNamespace).toHaveBeenCalledWith("test2");
   });
 });
