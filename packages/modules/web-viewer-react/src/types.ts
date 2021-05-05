@@ -13,6 +13,8 @@ import {
   ItwinViewerParams,
   ViewerProps,
 } from "@itwin/viewer-react";
+import { UserManager } from "oidc-client";
+
 /**
  * Authorization options. Must provide one.
  */
@@ -21,6 +23,8 @@ export interface WebAuthorizationOptions {
   oidcClient?: BrowserAuthorizationClient;
   /** provide configuration for an oidc client to be managed within the Viewer */
   config?: BrowserAuthorizationClientConfiguration;
+  /** reference to a function that returns a pre-configured oidc UserManager */
+  getUserManagerFunction?: () => UserManager;
 }
 
 export interface WebViewerPropsFull extends ViewerProps {

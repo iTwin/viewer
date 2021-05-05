@@ -14,6 +14,7 @@ import { UrlDiscoveryClient } from "@bentley/itwin-client";
 import { getIModelAppOptions, IModelBackendOptions } from "@itwin/viewer-react";
 
 import { WebViewerProps } from "../types";
+import AuthorizationClient from "./auth/AuthorizationClient";
 
 const getHostedConnectionInfo = async (
   backendOptions?: IModelBackendOptions
@@ -112,13 +113,17 @@ export class WebInitializer {
           };
           await WebViewerApp.startup(webViewerOptions);
 
-          if (
-            !IModelApp.authorizationClient &&
-            options?.authConfig.oidcClient
-          ) {
-            // Consumer provided a full client instead of just configuration
-            IModelApp.authorizationClient = options?.authConfig.oidcClient;
+          if (!IModelApp.authorizationClient) {
+            if (options?.authConfig.oidcClient) {
+              // Consumer provided a full client instead of just configuration
+              IModelApp.authorizationClient = options?.authConfig.oidcClient;
+            } else if (options?.authConfig.getUserManagerFunction) {
+              IModelApp.authorizationClient = new AuthorizationClient(
+                options?.authConfig.getUserManagerFunction
+              );
+            }
           }
+
           console.log("web viewer started");
           resolve();
         } catch (error) {

@@ -49,6 +49,12 @@
       "projectFolder": "packages/apps/web-viewer-test",
       "versionPolicyName": "independentModule",
       "shouldPublish": false
+    },
+    {
+      "packageName": "@itwin/cdn-viewer",
+      "projectFolder": "packages/apps/cdn-viewer",
+      "versionPolicyName": "independentModule",
+      "shouldPublish": false
     }
   ]
 }

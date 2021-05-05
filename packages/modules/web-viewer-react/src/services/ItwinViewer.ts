@@ -26,6 +26,7 @@ import {
   WebItwinViewerParams,
   WebViewerProps,
 } from "../types";
+import { WebInitializer } from "./Initializer";
 
 export interface LoadParameters {
   contextId?: string;
@@ -63,6 +64,8 @@ export class ItwinViewer {
     this.uiProviders = options.uiProviders;
     this.extensions = options.extensions;
     this.authConfig = options.authConfig;
+
+    void WebInitializer.startWebViewer(options);
   }
 
   /** load a model in the viewer once iTwinViewerApp is ready */
@@ -70,8 +73,6 @@ export class ItwinViewer {
     if (!args?.contextId || !args?.iModelId) {
       throw new Error("Please provide a valid contextId and iModelId");
     }
-
-    //  await WebInitializer.initialized;
 
     // render the viewer for the given iModel on the given element
     ReactDOM.render(
@@ -97,12 +98,14 @@ export class ItwinViewer {
   /**
    * load an extension into the viewer instance
    */
-  addExtension = (
+  addExtension = async (
     extensionName: string,
     version?: string,
     url?: string,
     args?: string[]
   ): Promise<Extension | undefined> => {
+    await WebInitializer.initialized;
+
     if (url) {
       IModelApp.extensionAdmin.addExtensionLoaderFront(
         new ExternalServerExtensionLoader(url)
