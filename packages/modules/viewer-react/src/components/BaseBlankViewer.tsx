@@ -7,6 +7,7 @@ import { BlankConnectionProps, IModelApp } from "@bentley/imodeljs-frontend";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
+import { BaseInitializer } from "../services/BaseInitializer";
 import {
   BlankConnectionViewState,
   ItwinViewerCommonParams,
@@ -22,6 +23,7 @@ export interface BlankViewerProps extends ItwinViewerCommonParams {
 }
 
 export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
+  backend,
   extensions,
   appInsightsKey,
   theme,
@@ -34,9 +36,16 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
   uiProviders,
   blankConnection,
   viewStateOptions,
+  productId,
+  imjsAppInsightsKey,
+  i18nUrlTemplate,
+  onIModelAppInit,
+  additionalI18nNamespaces,
+  additionalRpcInterfaces,
 }: BlankViewerProps) => {
   const [uiConfig, setUiConfig] = useState<ItwinViewerUi>();
   const [authorized, setAuthorized] = useState(false);
+  const [iModelJsInitialized, setIModelJsInitialized] = useState(false);
 
   useEffect(() => {
     setAuthorized(
@@ -66,9 +75,44 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
     setUiConfig(blankViewerUiConfig);
   }, [defaultUiConfig]);
 
+  useEffect(() => {
+    if (!iModelJsInitialized) {
+      BaseInitializer.initialize({
+        appInsightsKey,
+        backend,
+        productId,
+        imjsAppInsightsKey,
+        i18nUrlTemplate,
+        onIModelAppInit,
+        additionalI18nNamespaces,
+        additionalRpcInterfaces,
+      })
+        .then(() => {
+          BaseInitializer.initialized
+            .then(() => setIModelJsInitialized(true))
+            .catch((error) => {
+              throw error;
+            });
+        })
+        .catch((error) => {
+          throw error;
+        });
+    }
+    return BaseInitializer.cancel;
+  }, [
+    appInsightsKey,
+    backend,
+    productId,
+    imjsAppInsightsKey,
+    i18nUrlTemplate,
+    onIModelAppInit,
+    additionalI18nNamespaces,
+    additionalRpcInterfaces,
+  ]);
+
   return (
     <ErrorBoundary>
-      {authorized && (
+      {authorized && iModelJsInitialized && (
         <IModelLoader
           defaultUiConfig={uiConfig}
           appInsightsKey={appInsightsKey}
