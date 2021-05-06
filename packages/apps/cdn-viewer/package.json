@@ -33,8 +33,7 @@
     "@itwin/web-viewer-react": "0.1.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-redux": "^7.2.0",
-    "rewire": "^5.0.0"
+    "react-redux": "^7.2.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -45,6 +44,7 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "cross-env": "^5.2.1",
+    "rewire": "^5.0.0",
     "typescript": "^3.7.2"
   },
   "browserslist": [
