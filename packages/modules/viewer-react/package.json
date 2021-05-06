@@ -47,7 +47,6 @@
     "@microsoft/applicationinsights-react-js": "2.3.1",
     "@microsoft/applicationinsights-web": "2.3.1",
     "history": "^4.10.1",
-    "node-sass": "^4.14.1",
     "react-spring": "^8.0.27"
   },
   "devDependencies": {
@@ -88,6 +87,7 @@
     "copyfiles": "^2.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.1.0",
+    "node-sass": "^4.14.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-redux": "^7.2.0",
