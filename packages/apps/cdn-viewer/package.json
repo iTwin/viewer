@@ -31,8 +31,9 @@
     "@bentley/ui-ninezone": "^2.14.0",
     "@bentley/webgl-compatibility": "^2.14.0",
     "@itwin/web-viewer-react": "0.1.0",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-redux": "^7.2.0",
     "rewire": "^5.0.0"
   },
   "devDependencies": {
