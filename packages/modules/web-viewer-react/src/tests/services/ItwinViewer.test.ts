@@ -7,12 +7,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { Viewer } from "../../components/Viewer";
+import { WebInitializer } from "../../services/Initializer";
 import { ItwinViewer } from "../../services/ItwinViewer";
 import { WebAuthorizationOptions } from "../../types";
 
 jest.mock("@itwin/viewer-react", () => {
   return {
     BaseViewer: jest.fn(({ children }) => null),
+    getIModelAppOptions: jest.fn(),
   };
 });
 
@@ -86,6 +88,7 @@ describe("iTwinViewer", () => {
       authConfig,
     });
     await viewer.load({ contextId: mockProjectId, iModelId: mockiModelId });
+    await WebInitializer.initialized;
     expect(React.createElement).toHaveBeenCalledWith(Viewer, {
       contextId: mockProjectId,
       iModelId: mockiModelId,

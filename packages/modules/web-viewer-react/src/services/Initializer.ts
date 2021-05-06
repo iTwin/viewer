@@ -23,11 +23,13 @@ const getHostedConnectionInfo = async (
   const urlClient = new UrlDiscoveryClient();
   const requestContext = new ClientRequestContext();
 
+  const orchestratorUrl = await urlClient.discoverUrl(
+    requestContext,
+    `iModelJsOrchestrator.K8S`,
+    backendOptions?.buddiRegion
+  );
+
   if (backendOptions?.hostedBackend) {
-    if (!backendOptions.hostedBackend.hostType) {
-      //TODO localize
-      throw new Error("Please provide a host type for the iModel.js backend");
-    }
     if (!backendOptions.hostedBackend.title) {
       //TODO localize
       throw new Error("Please provide the title for the iModel.js backend");
@@ -36,11 +38,6 @@ const getHostedConnectionInfo = async (
       //TODO localize
       throw new Error("Please provide a version for the iModel.js backend");
     }
-    const orchestratorUrl = await urlClient.discoverUrl(
-      requestContext,
-      `iModelJsOrchestrator.${backendOptions.hostedBackend.hostType}`,
-      backendOptions.buddiRegion
-    );
     return {
       info: {
         title: backendOptions.hostedBackend.title,
@@ -49,11 +46,6 @@ const getHostedConnectionInfo = async (
       uriPrefix: orchestratorUrl,
     };
   } else {
-    const orchestratorUrl = await urlClient.discoverUrl(
-      requestContext,
-      "iModelJsOrchestrator.K8S",
-      backendOptions?.buddiRegion
-    );
     return {
       info: { title: "general-purpose-imodeljs-backend", version: "v2.0" },
       uriPrefix: orchestratorUrl,

@@ -13,11 +13,7 @@ import React from "react";
 import { BaseViewer } from "../..";
 import { BaseInitializer } from "../../services/BaseInitializer";
 import * as IModelService from "../../services/iModel/IModelService";
-import {
-  IModelBackend,
-  IModelBackendHost,
-  IModelBackendOptions,
-} from "../../types";
+import { IModelBackend, IModelBackendOptions } from "../../types";
 
 jest.mock("../../services/iModel/IModelService");
 jest.mock("@bentley/ui-framework");
@@ -165,7 +161,6 @@ describe("BaseViewer", () => {
       hostedBackend: {
         title: IModelBackend.GeneralPurpose,
         version: "v2.0",
-        hostType: IModelBackendHost.K8S,
       },
     };
 

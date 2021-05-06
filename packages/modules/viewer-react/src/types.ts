@@ -38,21 +38,11 @@ export enum IModelBackend {
 }
 
 /**
- * Host type (Service Fabric or Kubernetes)
- */
-export enum IModelBackendHost {
-  ServiceFabric = "SF",
-  K8S = "K8S",
-}
-
-/**
  * Hosted backend configuration
  */
 export interface HostedBackendConfig {
   /* title for rpc config */
   title: IModelBackend | string;
-  /* SF/K8S */
-  hostType: IModelBackendHost;
   /* in the form "vx.x" */
   version: string;
 }
