@@ -63,7 +63,7 @@ Every change must be described with a change log: Run `rush change` on your comm
 4. Test changes with viewer-sample-react.
    - From root directory - `rushx build`.
    - From packages\apps\web-viewer-test - `rushx start`.
-   - Make changes to viewer-sample-react, if necessary.
+   - Make changes to web-viewer-test, if necessary.
    - Test changes.
    - Do not check in changes to web-viewer-test to source control.
 5. Commit your changes.
