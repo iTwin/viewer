@@ -38,13 +38,13 @@ export interface WebViewerPropsFull extends ViewerProps {
 export type WebViewerProps = Omit<WebViewerPropsFull, "snapshotPath">;
 
 export interface WebBlankViewerProps extends BlankViewerProps {
-  /** aiuthorization configuration */
+  /** authorization configuration */
   authConfig: WebAuthorizationOptions;
 }
 
 export interface WebItwinViewerParams extends ItwinViewerParams {
   /** routing token for rpcs */
   rpcRoutingToken?: RpcRoutingToken;
-  /** aiuthorization configuration */
+  /** authorization configuration */
   authConfig: WebAuthorizationOptions;
 }

@@ -62,10 +62,10 @@ Every change must be described with a change log: Run `rush change` on your comm
 3. Ensure unit tests pass when run locally: `rush test`.
 4. Test changes with viewer-sample-react.
    - From root directory - `rushx build`.
-   - From packages\apps\viewer-sample-react - `rushx start`.
-   - Make changes to viewer-sample-react, if necessary.
+   - From packages\apps\web-viewer-test - `rushx start`.
+   - Make changes to web-viewer-test, if necessary.
    - Test changes.
-   - Do not check in changes to viewer-sample-react to source control.
+   - Do not check in changes to web-viewer-test to source control.
 5. Commit your changes.
 6. Add a changelog entry (which could potentially cover several commits): `rush change`.
 7. Follow prompts to enter a change description or press ENTER if the change does not warrant a changelog entry. If multiple packages have changed, multiple sets of prompts will be presented.
