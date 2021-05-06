@@ -7,6 +7,7 @@ import { ClientRequestContext } from "@bentley/bentleyjs-core";
 import { BentleyCloudRpcParams } from "@bentley/imodeljs-common";
 import {
   IModelApp,
+  IModelAppOptions,
   WebViewerApp,
   WebViewerAppOpts,
 } from "@bentley/imodeljs-frontend";
@@ -77,6 +78,23 @@ export class WebInitializer {
   private static _initializing = false;
   private static _reject: (() => void) | undefined;
 
+  private static _checkForAuthorizationClient(
+    iModelAppOptions: IModelAppOptions,
+    viewerOptions?: WebViewerProps
+  ) {
+    const options = { ...iModelAppOptions };
+    if (!viewerOptions?.authConfig.config) {
+      if (viewerOptions?.authConfig.oidcClient) {
+        options.authorizationClient = viewerOptions.authConfig.oidcClient;
+      } else if (viewerOptions?.authConfig.getUserManagerFunction) {
+        options.authorizationClient = new AuthorizationClient(
+          viewerOptions.authConfig.getUserManagerFunction
+        );
+      }
+    }
+    return options;
+  }
+
   /** expose initialized promise */
   public static get initialized(): Promise<void> {
     return this._initialized;
@@ -104,7 +122,10 @@ export class WebInitializer {
           this._reject = () => reject("Web Startup Cancelled");
           const rpcParams = await initializeRpcParams(options?.backend);
           const webViewerOptions: WebViewerAppOpts = {
-            iModelApp: getIModelAppOptions(options),
+            iModelApp: this._checkForAuthorizationClient(
+              getIModelAppOptions(options),
+              options
+            ),
             webViewerApp: {
               rpcParams: rpcParams,
               authConfig: options?.authConfig.config,
@@ -112,17 +133,6 @@ export class WebInitializer {
             },
           };
           await WebViewerApp.startup(webViewerOptions);
-
-          if (!IModelApp.authorizationClient) {
-            if (options?.authConfig.oidcClient) {
-              // Consumer provided a full client instead of just configuration
-              IModelApp.authorizationClient = options?.authConfig.oidcClient;
-            } else if (options?.authConfig.getUserManagerFunction) {
-              IModelApp.authorizationClient = new AuthorizationClient(
-                options?.authConfig.getUserManagerFunction
-              );
-            }
-          }
 
           console.log("web viewer started");
           resolve();
