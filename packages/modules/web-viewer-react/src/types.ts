@@ -10,7 +10,7 @@ import {
 import { RpcRoutingToken } from "@bentley/imodeljs-common";
 import {
   BlankViewerProps,
-  ItwinViewerParams,
+  ItwinViewerCommonParams,
   ViewerProps,
 } from "@itwin/viewer-react";
 import { UserManager } from "oidc-client";
@@ -42,7 +42,9 @@ export interface WebBlankViewerProps extends BlankViewerProps {
   authConfig: WebAuthorizationOptions;
 }
 
-export interface WebItwinViewerParams extends ItwinViewerParams {
+export interface ItwinViewerParams extends ItwinViewerCommonParams {
+  /** id of the html element where the viewer should be rendered */
+  elementId: string;
   /** routing token for rpcs */
   rpcRoutingToken?: RpcRoutingToken;
   /** authorization configuration */
