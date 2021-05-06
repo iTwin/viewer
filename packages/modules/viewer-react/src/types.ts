@@ -65,18 +65,6 @@ export interface CustomBackendConfig {
 }
 
 /**
- * Authorization options. Must provide one.
- */
-export interface AuthorizationOptions {
-  /** provide an existing iModel.js authorization client */
-  oidcClient?: BrowserAuthorizationClient | NativeAppAuthorization;
-  /** provide configuration for an oidc client to be managed within the Viewer */
-  config?:
-    | BrowserAuthorizationClientConfiguration
-    | NativeAppAuthorizationConfiguration;
-}
-
-/**
  * Backend configuration
  */
 export interface IModelBackendOptions {
