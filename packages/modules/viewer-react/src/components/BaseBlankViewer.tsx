@@ -46,9 +46,8 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
     );
     IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
       setAuthorized(
-        (IModelApp.authorizationClient &&
-          IModelApp.authorizationClient.hasSignedIn &&
-          IModelApp.authorizationClient.isAuthorized) ||
+        (IModelApp.authorizationClient?.hasSignedIn &&
+          IModelApp.authorizationClient?.isAuthorized) ||
           false
       );
     });
