@@ -45,6 +45,6 @@ export interface WebBlankViewerProps extends BlankViewerProps {
 export interface WebItwinViewerParams extends ItwinViewerParams {
   /** routing token for rpcs */
   rpcRoutingToken?: RpcRoutingToken;
-  /** aiuthorization configuration */
+  /** authorization configuration */
   authConfig: WebAuthorizationOptions;
 }
