@@ -242,7 +242,7 @@ export class BaseInitializer {
 
         await TreeWidget.initialize(IModelApp.i18n);
 
-        // override the defaut daa error message
+        // override the default data error message
         this._iModelDataErrorMessage = viewerOptions?.iModelDataErrorMessage;
 
         console.log("iModel.js initialized");
