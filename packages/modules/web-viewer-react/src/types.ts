@@ -30,7 +30,7 @@ export interface WebAuthorizationOptions {
 export interface WebViewerPropsFull extends ViewerProps {
   /** routing token for rpcs */
   rpcRoutingToken?: RpcRoutingToken;
-  /** aiuthorization configuration */
+  /** authorization configuration */
   authConfig: WebAuthorizationOptions;
 }
 
