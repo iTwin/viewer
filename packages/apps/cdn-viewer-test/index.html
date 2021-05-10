@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="http://localhost:3003/static/css/itwin-viewer-react.css"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://dev-itwinviewer.bentley.com/v6/static/css/itwin-viewer-react.css"
+    /> -->
+    <title>iTwin Viewer Sample</title>
+    <style>
+      .itwin-viewer-container {
+        height: 750px !important;
+        margin-top: 5px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div>
+      <button id="login">Login</button>
+      <button id="logout">Logout</button>
+      <button id="viewModel">View Model</button>
+    </div>
+    <div id="viewerRoot"></div>
+    <script src="http://localhost:3003/static/js/itwin-viewer-react.js"></script>
+    <!-- <script src="https://dev-itwinviewer.bentley.com/v6/static/js/itwin-viewer-react.js"></script> -->
+    <script src="scripts/oidc-client.min.js"></script>
+    <script src="scripts/app.js"></script>
+  </body>
+</html>
