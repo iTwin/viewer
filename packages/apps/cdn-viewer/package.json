@@ -1,0 +1,63 @@
+{
+  "name": "@itwin/cdn-viewer",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.js",
+  "dependencies": {
+    "@bentley/bentleyjs-core": "^2.14.0",
+    "@bentley/extension-client": "^2.14.0",
+    "@bentley/frontend-application-insights-client": "^2.14.0",
+    "@bentley/frontend-authorization-client": "^2.14.0",
+    "@bentley/geometry-core": "^2.14.0",
+    "@bentley/icons-generic": "^1.0.13",
+    "@bentley/imodelhub-client": "^2.14.0",
+    "@bentley/imodeljs-common": "^2.14.0",
+    "@bentley/imodeljs-frontend": "^2.14.0",
+    "@bentley/imodeljs-i18n": "^2.14.0",
+    "@bentley/imodeljs-markup": "^2.14.0",
+    "@bentley/imodeljs-quantity": "^2.14.0",
+    "@bentley/itwin-client": "^2.14.0",
+    "@bentley/orbitgt-core": "^2.14.0",
+    "@bentley/presentation-common": "^2.14.0",
+    "@bentley/presentation-frontend": "^2.14.0",
+    "@bentley/product-settings-client": "^2.14.0",
+    "@bentley/rbac-client": "^2.14.0",
+    "@bentley/react-scripts": "3.4.1",
+    "@bentley/telemetry-client": "^2.14.0",
+    "@bentley/ui-abstract": "^2.14.0",
+    "@bentley/ui-components": "^2.14.0",
+    "@bentley/ui-core": "^2.14.0",
+    "@bentley/ui-framework": "^2.14.0",
+    "@bentley/ui-ninezone": "^2.14.0",
+    "@bentley/webgl-compatibility": "^2.14.0",
+    "@itwin/web-viewer-react": "0.1.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-redux": "^7.2.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^10.4.4",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^26.0.4",
+    "@types/node": "^14.0.19",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "cross-env": "^5.2.1",
+    "rewire": "^5.0.0",
+    "typescript": "^3.7.2"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not edge > 0",
+    "not ie > 0",
+    "not op_mini all",
+    "chrome 45"
+  ],
+  "scripts": {
+    "build": "cross-env SKIP_PREFLIGHT_CHECK=true node --max_old_space_size=4096 ./scripts/customBuild.js",
+    "build-dev": "cross-env SKIP_PREFLIGHT_CHECK=true node --max_old_space_size=4096 SKIP_PREFLIGHT_CHECK=true ./scripts/customBuild.js",
+    "test": ""
+  }
+}

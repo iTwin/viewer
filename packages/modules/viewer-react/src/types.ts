@@ -3,18 +3,23 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { FrontendAuthorizationClient } from "@bentley/frontend-authorization-client";
+import {
+  BrowserAuthorizationClient,
+  BrowserAuthorizationClientConfiguration,
+} from "@bentley/frontend-authorization-client";
 import { Vector3d, XAndY, XYAndZ } from "@bentley/geometry-core";
 import {
   BentleyCloudRpcParams,
   ColorDef,
+  NativeAppAuthorizationConfiguration,
   RenderMode,
   RpcInterface,
   RpcInterfaceDefinition,
 } from "@bentley/imodeljs-common";
 import {
-  DesktopAuthorizationClient,
   IModelConnection,
+  NativeAppAuthorization,
+  ToolAdmin,
   ViewChangeOptions,
 } from "@bentley/imodeljs-frontend";
 import { BackstageItem, UiItemsProvider } from "@bentley/ui-abstract";
@@ -24,7 +29,6 @@ import {
   FrontstageProvider,
   IModelViewportControlOptions,
 } from "@bentley/ui-framework";
-import { UserManager } from "oidc-client";
 
 /**
  * List of possible hosted backends that the iTwin Viewer can use
@@ -34,21 +38,11 @@ export enum IModelBackend {
 }
 
 /**
- * Host type (Service Fabric or Kubernetes)
- */
-export enum IModelBackendHost {
-  ServiceFabric = "SF",
-  K8S = "K8S",
-}
-
-/**
  * Hosted backend configuration
  */
 export interface HostedBackendConfig {
   /* title for rpc config */
   title: IModelBackend | string;
-  /* SF/K8S */
-  hostType: IModelBackendHost;
   /* in the form "vx.x" */
   version: string;
 }
@@ -58,16 +52,6 @@ export interface HostedBackendConfig {
  */
 export interface CustomBackendConfig {
   rpcParams: BentleyCloudRpcParams;
-}
-
-/**
- * Authorization options. Must provide one.
- */
-export interface AuthorizationOptions {
-  /** provide an existing iModel.js authorization client */
-  oidcClient?: FrontendAuthorizationClient | DesktopAuthorizationClient;
-  /** reference to a function that returns a pre-configured oidc UserManager */
-  getUserManagerFunction?: () => UserManager;
 }
 
 /**
@@ -124,10 +108,7 @@ export interface IModelLoaderParams {
 
 export interface ItwinViewerCommonParams
   extends ItwinViewerInitializerParams,
-    IModelLoaderParams {
-  /** authorization configuration */
-  authConfig: AuthorizationOptions;
-}
+    IModelLoaderParams {}
 
 export interface ItwinViewerInitializerParams {
   /** optional Azure Application Insights key for telemetry */
@@ -148,6 +129,8 @@ export interface ItwinViewerInitializerParams {
   additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
   /** override the default message that sends users to the iTwin Synchronizer when there are data-related errors with an iModel. Pass empty string to override with no message. */
   iModelDataErrorMessage?: string;
+  /** optional ToolAdmin to initialize */
+  toolAdmin?: ToolAdmin;
 }
 
 /**

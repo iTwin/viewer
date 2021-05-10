@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-export * from "./components/Viewer";
-export * from "./services/ItwinViewer";
+export * from "./components/BaseViewer";
+export * from "./components/BaseBlankViewer";
+export * from "./services/BaseInitializer";
 export * from "./types";
-export * from "./components/BlankViewer";

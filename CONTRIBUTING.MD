@@ -53,15 +53,22 @@ We follow the normal [GitHub pull request workflow](https://help.github.com/en/g
 
 Every change must be tested with proper unit tests. Integration tests are highly encouraged in libraries with critical workflows to ensure end-to-end consistency.
 
-Every change must be described with a change log: Run "rush change" on your committed and always choose "patch" as the change type. Commit your change log along with your pull request.
+Every change must be described with a change log: Run `rush change` on your committed and choose the appropriate change type. Commit your change log along with your pull request.
 
 ### Code Change Workflow
 
 1. Make source code changes on a new Git branch.
-2. Ensure unit tests pass when run locally: `rush test`.
-3. Commit your changes.
-4. Add a changelog entry (which could potentially cover several commits): `rush change`.
-5. Follow prompts to enter a change description or press ENTER if the change does not warrant a changelog entry. If multiple packages have changed, multiple sets of prompts will be presented.
-6. Completing the `rush change` prompts will cause new changelog entry JSON files to be created.
-7. Commit the changelog JSON files.
-8. Publish changes to the branch and open a pull request.
+2. Add unit tests.
+3. Ensure unit tests pass when run locally: `rush test`.
+4. Test changes with viewer-sample-react.
+   - From root directory - `rushx build`.
+   - From packages\apps\web-viewer-test - `rushx start`.
+   - Make changes to web-viewer-test, if necessary.
+   - Test changes.
+   - Do not check in changes to web-viewer-test to source control.
+5. Commit your changes.
+6. Add a changelog entry (which could potentially cover several commits): `rush change`.
+7. Follow prompts to enter a change description or press ENTER if the change does not warrant a changelog entry. If multiple packages have changed, multiple sets of prompts will be presented.
+8. Completing the `rush change` prompts will cause new changelog entry JSON files to be created.
+9. Commit the changelog JSON files.
+10. Publish changes to the branch and open a pull request.

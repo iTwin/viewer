@@ -32,13 +32,13 @@ import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
 import { useExtensions, useTheme, useUiProviders } from "../../hooks";
+import { BaseInitializer } from "../../services/BaseInitializer";
 import {
   getDefaultViewIds,
   openRemoteImodel,
 } from "../../services/iModel/IModelService";
 import { SelectionScopeClient } from "../../services/iModel/SelectionScopeClient";
 import { ViewCreator } from "../../services/iModel/ViewCreator";
-import Initializer from "../../services/Initializer";
 import { ai } from "../../services/telemetry/TelemetryService";
 import {
   BlankConnectionViewState,
@@ -103,7 +103,8 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
      */
     const initBlankConnection = (
       blankConnection: BlankConnectionProps,
-      viewStateOptions?: BlankConnectionViewState
+      viewStateOptions?: BlankConnectionViewState,
+      onIModelConnected?: (iModel: IModelConnection) => void
     ) => {
       const imodelConnection = BlankConnection.create(blankConnection);
       const viewState = ViewCreator.createBlankViewState(
@@ -111,6 +112,11 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         viewStateOptions
       );
       UiFramework.setIModelConnection(imodelConnection);
+
+      if (onIModelConnected) {
+        onIModelConnected(imodelConnection);
+      }
+
       UiFramework.setDefaultViewState(viewState);
       setViewState(viewState);
       setConnected(true);
@@ -144,7 +150,11 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         setConnected(false);
 
         if (blankConnection) {
-          return initBlankConnection(blankConnection, blankConnectionViewState);
+          return initBlankConnection(
+            blankConnection,
+            blankConnectionViewState,
+            onIModelConnected
+          );
         }
 
         if (!(contextId && iModelId) && !snapshotPath) {
@@ -183,7 +193,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           if (viewIds.length === 0 && contextId && iModelId) {
             // no valid view data in the model. Direct the user to the synchronization portal
             const msgDiv = document.createElement("div");
-            const msg = await Initializer.getIModelDataErrorMessage(
+            const msg = await BaseInitializer.getIModelDataErrorMessage(
               contextId,
               iModelId,
               IModelApp.i18n.translateWithNamespace(
@@ -228,10 +238,31 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         }
       };
 
+      const closeIModelConnection = async () => {
+        const iModelConn = UiFramework.getIModelConnection();
+        if (iModelConn) {
+          await iModelConn.close();
+        }
+      };
+
       getModelConnection().catch((error) => {
         errorManager.throwFatalError(error);
       });
-    }, [contextId, iModelId, snapshotPath, frontstages, backstageItems]);
+
+      return () => {
+        closeIModelConnection().catch(() => {
+          /* no-op */
+        });
+      };
+    }, [
+      contextId,
+      iModelId,
+      changeSetId,
+      snapshotPath,
+      frontstages,
+      blankConnection,
+      blankConnectionViewState,
+    ]);
 
     useEffect(() => {
       const allBackstageItems: ViewerBackstageItem[] = [];
