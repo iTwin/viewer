@@ -102,7 +102,7 @@ export interface IModelLoaderParams {
   viewportOptions?: IModelViewportControlOptions;
   /** UI Providers to register https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/ */
   uiProviders?: UiItemsProvider[];
-  /** iModel.js extensions to load */
+  /** iTwin.js extensions to load */
   extensions?: ViewerExtension[];
 }
 
@@ -113,7 +113,7 @@ export interface ItwinViewerCommonParams
 export interface ItwinViewerInitializerParams {
   /** optional Azure Application Insights key for telemetry */
   appInsightsKey?: string;
-  /** optional iModel.js Application Insights key for telemetry within iModel.js */
+  /** optional iTwin.js Application Insights key for telemetry within iTwin.js */
   imjsAppInsightsKey?: string;
   /** options to override the default backend (general-purpose-imodeljs-backend) */
   backend?: IModelBackendOptions;

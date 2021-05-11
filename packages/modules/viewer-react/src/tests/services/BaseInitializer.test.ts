@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { FrontendApplicationInsightsClient } from "@bentley/frontend-application-insights-client";
 import {
   IModelReadRpcInterface,
@@ -169,7 +170,7 @@ describe("BaseInitializer", () => {
     expect(ai.initialize).not.toHaveBeenCalled();
   });
 
-  it("adds the iModel.js telemetry client when the imjs key is provided", async () => {
+  it("adds the iTwin.js telemetry client when the imjs key is provided", async () => {
     const imjsAppInsightsKey = "456";
     await BaseInitializer.initialize({
       imjsAppInsightsKey: imjsAppInsightsKey,
@@ -182,7 +183,7 @@ describe("BaseInitializer", () => {
     );
   });
 
-  it("does not add the iModel.js telemetry client when the imjs key is not provided", async () => {
+  it("does not add the iTwin.js telemetry client when the imjs key is not provided", async () => {
     await BaseInitializer.initialize();
 
     await BaseInitializer.initialized;

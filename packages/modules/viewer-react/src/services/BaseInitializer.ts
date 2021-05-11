@@ -34,7 +34,7 @@ import {
 import { IModelBackendOptions, ItwinViewerInitializerParams } from "../types";
 import { ai, trackEvent } from "./telemetry/TelemetryService";
 
-// initialize required iModel.js services
+// initialize required iTwin.js services
 export class BaseInitializer {
   private static _initialized: Promise<void>;
   private static _initializing = false;
@@ -156,7 +156,7 @@ export class BaseInitializer {
     });
   }
 
-  /** initialize required iModel.js services */
+  /** initialize required iTwin.js services */
   public static async initialize(
     viewerOptions?: ItwinViewerInitializerParams
   ): Promise<void> {
@@ -245,7 +245,7 @@ export class BaseInitializer {
         // override the default data error message
         this._iModelDataErrorMessage = viewerOptions?.iModelDataErrorMessage;
 
-        console.log("iModel.js initialized");
+        console.log("iTwin.js initialized");
 
         resolve();
       } catch (error) {
