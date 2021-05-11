@@ -19,7 +19,7 @@ import { UserManager } from "oidc-client";
  * Authorization options. Must provide one.
  */
 export interface WebAuthorizationOptions {
-  /** provide an existing iModel.js authorization client */
+  /** provide an existing iTwin.js authorization client */
   oidcClient?: BrowserAuthorizationClient;
   /** provide configuration for an oidc client to be managed within the Viewer */
   config?: BrowserAuthorizationClientConfiguration;

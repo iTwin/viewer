@@ -1,6 +1,6 @@
 # iTwin Viewer for Web
 
-The iTwin Web Viewer is a configurable iModel.js viewer that offers basic tooling and widgets out-of-the-box and can be further extended through the use of [iModel.js extensions](https://github.com/imodeljs/extension-sample) and/or [UI Providers](https://www.itwinjs.org/learning/ui/augmentingui/). This package should be used for web-based applications. For desktop applications, use [@itwin/desktop-viewer-react](https://www.npmjs.com/package/@itwin/desktop-viewer-react).
+The iTwin Web Viewer is a configurable iTwin.js viewer that offers basic tooling and widgets out-of-the-box and can be further extended through the use of [iTwin.js extensions](https://github.com/imodeljs/extension-sample) and/or [UI Providers](https://www.itwinjs.org/learning/ui/augmentingui/). This package should be used for web-based applications. For desktop applications, use [@itwin/desktop-viewer-react](https://www.npmjs.com/package/@itwin/desktop-viewer-react).
 
 # Installation
 
@@ -16,14 +16,14 @@ npm install @itwin/web-viewer-react
 
 ## Dependencies
 
-Currently, in order to use the iTwin Viewer with iModel.js extensions, the consuming application would need to be compiled using Webpack with the IModeljsLibraryExportsPlugin that is in the [@bentley/webpack-tools-core](https://www.npmjs.com/package/@bentley/webpack-tools-core) package:
+Currently, in order to use the iTwin Viewer with iTwin.js extensions, the consuming application would need to be compiled using Webpack with the IModeljsLibraryExportsPlugin that is in the [@bentley/webpack-tools-core](https://www.npmjs.com/package/@bentley/webpack-tools-core) package:
 
 In your webpack.config file:
 
 ```javascript
     plugins: [
-      // NOTE: iModel.js specific plugin to allow exposing iModel.js shared libraries
-      // into the global scope for use within iModel.js Extensions.
+      // NOTE: iTwin.js specific plugin to allow exposing iTwin.js shared libraries
+      // into the global scope for use within iTwin.js Extensions.
       new IModeljsLibraryExportsPlugin(),
 ```
 
@@ -120,7 +120,7 @@ export const MyViewerComponent = () => {
   - `hideDefaultStatusBar` - hide the status bar
 - `productId` - application's GPRID
 - `appInsightsKey` - Application Insights key for telemetry
-- `imjsAppInsightsKey` - Application Insights key for iModel.js telemetry
+- `imjsAppInsightsKey` - Application Insights key for iTwin.js telemetry
 - `onIModelConnected` - Callback function that executes after the iModel connection is successful and contains the iModel connection as a parameter
 - `i18nUrlTemplate` - Override the default url template where i18n resource files are queried
 - `frontstages` - Provide additional frontstages for the viewer to render

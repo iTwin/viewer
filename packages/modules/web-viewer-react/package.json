@@ -1,7 +1,7 @@
 {
   "name": "@itwin/web-viewer-react",
   "version": "0.1.0",
-  "description": "Configurable iModel.js viewer for web applications",
+  "description": "Configurable iTwin.js viewer for web applications",
   "main": "lib/index.js",
   "module": "build/index.js",
   "types": "lib/index.d.ts",

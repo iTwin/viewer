@@ -32,11 +32,11 @@ const getHostedConnectionInfo = async (
   if (backendOptions?.hostedBackend) {
     if (!backendOptions.hostedBackend.title) {
       //TODO localize
-      throw new Error("Please provide the title for the iModel.js backend");
+      throw new Error("Please provide the title for the iTwin.js backend");
     }
     if (!backendOptions.hostedBackend.version) {
       //TODO localize
-      throw new Error("Please provide a version for the iModel.js backend");
+      throw new Error("Please provide a version for the iTwin.js backend");
     }
     return {
       info: {

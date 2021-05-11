@@ -34,4 +34,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 [Learn React](https://reactjs.org/).
 
-[Learn iModel.js](https://www.imodeljs.org/learning/).
+[Learn iTwin.js](https://www.itwinjs.org/learning/).

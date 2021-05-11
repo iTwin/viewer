@@ -1,7 +1,7 @@
 {
   "name": "@itwin/desktop-viewer-react",
   "version": "0.1.0",
-  "description": "Configurable iModel.js viewer for desktop applications",
+  "description": "Configurable iTwin.js viewer for desktop applications",
   "main": "lib/index.js",
   "module": "build/index.js",
   "types": "lib/index.d.ts",
