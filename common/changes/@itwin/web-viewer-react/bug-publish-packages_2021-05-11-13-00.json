@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/web-viewer-react",
+      "comment": "Replace use of iModel.js with iTwin.js",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/web-viewer-react",
+  "email": "6283674+kckst8@users.noreply.github.com"
+}
