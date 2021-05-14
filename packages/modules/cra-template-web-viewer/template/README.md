@@ -1,10 +1,24 @@
-# Getting Started with Create React App
+# Getting Started with the iTwin Viewer Create React App Template
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Environment Variables
 
-Prior to running the app, add a valid contextId and iModelId for your user in the .env file:
+Prior to running the app, you will need to add OIDC client configuration to the variables in the .env file:
+
+```
+# ---- Authorization Client Settings ----
+IMJS_AUTH_CLIENT_CLIENT_ID=""
+IMJS_AUTH_CLIENT_REDIRECT_URI=""
+IMJS_AUTH_CLIENT_LOGOUT_URI=""
+IMJS_AUTH_CLIENT_SCOPES =""
+```
+
+- You can generate a [test client](https://developer.bentley.com/tutorials/web-application-quick-start/#2-register-an-application) to get started.
+
+- When you are ready to build a production application, [register here](https://developer.bentley.com/register/).
+
+You should also add a valid contextId and iModelId for your user in the this file:
 
 ```
 # ---- Test ids ----
@@ -12,7 +26,11 @@ IMJS_CONTEXT_ID = ""
 IMJS_IMODEL_ID = ""
 ```
 
-You can also replace the OIDC client data in this file with your own if you'd prefer.
+- For the IMJS_CONTEXT_ID variable, you can use the id of one of your existing Projects or Assets. You can obtain their ids via the [Administration REST APIs](https://developer.bentley.com/api-groups/administration/api-reference/).
+
+- For the IMJS_IMODEL_ID variable, use the id of an iModel that belongs to the context that you specified in the IMJS_CONTEXT_ID variable. You can obtain iModel ids via the [Data Management REST APIs](https://developer.bentley.com/api-groups/data-management/apis/imodels/operations/get-project-or-asset-imodels/).
+
+- Alternatively, you can [generate a test iModel](https://developer.bentley.com/tutorials/web-application-quick-start/#3-create-an-imodel) to get started without an existing iModel.
 
 ## Available Scripts
 
@@ -51,8 +69,12 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Next Steps
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [iTwin Viewer options](https://www.npmjs.com/package/@itwin/web-viewer-react)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Extending the iTwin Viewer](https://www.itwinjs.org/learning/tutorials/hello-world-viewer/)
+
+- [Using the iTwin Platform](https://developer.bentley.com/)
+
+- [iTwin Developer Program](https://www.youtube.com/playlist?list=PL6YCKeNfXXd_dXq4u9vtSFfsP3OTVcL8N)

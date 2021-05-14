@@ -78,12 +78,10 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     extensions,
   }: ModelLoaderProps) => {
     const [error, setError] = useState<Error>();
-    const [finalFrontstages, setFinalFrontstages] = useState<
-      ViewerFrontstage[]
-    >();
-    const [finalBackstageItems, setFinalBackstageItems] = useState<
-      ViewerBackstageItem[]
-    >();
+    const [finalFrontstages, setFinalFrontstages] =
+      useState<ViewerFrontstage[]>();
+    const [finalBackstageItems, setFinalBackstageItems] =
+      useState<ViewerBackstageItem[]>();
     const [viewState, setViewState] = useState<ViewState>();
     const [connected, setConnected] = useState<boolean>(false);
     const extensionsLoaded = useExtensions(extensions);
@@ -229,7 +227,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           // TODO revist for snapshots once settings are removed
           if (!snapshotPath) {
             await SelectionScopeClient.initializeSelectionScope();
-            SelectionScopeClient.setupSelectionScopeHandler();
           }
 
           setViewState(savedViewState);

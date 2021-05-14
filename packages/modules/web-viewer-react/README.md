@@ -238,3 +238,7 @@ It allows for most of the same optional props as the Viewer component, with a fe
 # Development
 
 When making changes to the src, run `npm start` in the package's root folder to enable source watching and rebuild, so the dev-server will have access to updated code on succesful code compilation.
+
+# Next Steps
+
+[Extending the iTwin Viewer](https://www.itwinjs.org/learning/tutorials/hello-world-viewer/)

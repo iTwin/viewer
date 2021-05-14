@@ -53,6 +53,7 @@ export const AuthConfigHome: React.FC = () => {
   };
 
   const onIModelAppInit = () => {
+    setLoggedIn(IModelApp.authorizationClient?.isAuthorized || false);
     IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
       setLoggedIn(
         (IModelApp.authorizationClient?.hasSignedIn &&

@@ -7,7 +7,7 @@ import "./App.scss";
 
 import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
 import { IModelApp } from "@bentley/imodeljs-frontend";
-import { Viewer } from "@twin/web-viewer-react";
+import { Viewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 
 import { Header } from "./Header";
@@ -58,6 +58,17 @@ const App: React.FC = () => {
     setIsAuthorized(false);
   };
 
+  const onIModelAppInit = () => {
+    setIsAuthorized(IModelApp.authorizationClient?.isAuthorized || false);
+    IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
+      setIsAuthorized(
+        (IModelApp.authorizationClient?.hasSignedIn &&
+          IModelApp.authorizationClient?.isAuthorized) ||
+          false
+      );
+    });
+  };
+
   return (
     <div className="viewer-container">
       <Header
@@ -72,6 +83,7 @@ const App: React.FC = () => {
           contextId={process.env.IMJS_CONTEXT_ID ?? ""}
           iModelId={process.env.IMJS_IMODEL_ID ?? ""}
           authConfig={{ config: authConfig }}
+          onIModelAppInit={onIModelAppInit}
         />
       )}
     </div>

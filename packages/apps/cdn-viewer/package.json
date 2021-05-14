@@ -20,7 +20,6 @@
     "@bentley/orbitgt-core": "^2.14.0",
     "@bentley/presentation-common": "^2.14.0",
     "@bentley/presentation-frontend": "^2.14.0",
-    "@bentley/product-settings-client": "^2.14.0",
     "@bentley/rbac-client": "^2.14.0",
     "@bentley/react-scripts": "3.4.1",
     "@bentley/telemetry-client": "^2.14.0",

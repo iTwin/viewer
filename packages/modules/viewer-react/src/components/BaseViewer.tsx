@@ -89,7 +89,6 @@ export const BaseViewer: React.FC<ViewerProps> = ({
     productId,
     imjsAppInsightsKey,
     i18nUrlTemplate,
-    onIModelAppInit,
     additionalI18nNamespaces,
     additionalRpcInterfaces,
   ]);

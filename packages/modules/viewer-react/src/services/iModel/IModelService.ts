@@ -28,18 +28,23 @@ const getVersion = async (
   }
   const token = await IModelApp.authorizationClient?.getAccessToken();
   if (token) {
-    const requestContext = new AuthorizedClientRequestContext(token);
-    const hubClient = new IModelHubClient();
-    const namedVersions = await hubClient.versions.get(
-      requestContext,
-      iModelId,
-      new VersionQuery().top(1)
-    );
-    // if there is a named version (version with the latest changeset "should" be at the top), return the version as of its changeset
-    // otherwise return the version as of the latest changeset
-    return namedVersions.length === 1 && namedVersions[0].changeSetId
-      ? IModelVersion.asOfChangeSet(namedVersions[0].changeSetId)
-      : IModelVersion.latest();
+    try {
+      const requestContext = new AuthorizedClientRequestContext(token);
+      const hubClient = new IModelHubClient();
+      const namedVersions = await hubClient.versions.get(
+        requestContext,
+        iModelId,
+        new VersionQuery().top(1)
+      );
+      // if there is a named version (version with the latest changeset "should" be at the top), return the version as of its changeset
+      // otherwise return the version as of the latest changeset
+      return namedVersions.length === 1 && namedVersions[0].changeSetId
+        ? IModelVersion.asOfChangeSet(namedVersions[0].changeSetId)
+        : IModelVersion.latest();
+    } catch {
+      // default to the latest version
+      return IModelVersion.latest();
+    }
   }
   return IModelVersion.latest();
 };

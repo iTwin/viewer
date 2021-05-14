@@ -18,4 +18,4 @@ For more information, please refer to:
 
 - [Getting Started](https://create-react-app.dev/docs/getting-started) – How to create a new app.
 - [User Guide](https://create-react-app.dev) – How to develop apps that are bootstrapped with Create React App.
-- [iTwin Viewer](https://github.com/itwin/viewer/tree/main/packages/modules/web-viewer-react) - iTwin Viewer
+- [Developing applications with the iTwin Viewer Template](https://github.com/iTwin/viewer/blob/master/packages/modules/cra-template-web-viewer/template/README.md) - iTwin Viewer Template README
