@@ -7,6 +7,7 @@ import { IModelApp } from "@bentley/imodeljs-frontend";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
+import { useIsMounted } from "../hooks";
 import { BaseInitializer } from "../services/BaseInitializer";
 import { ItwinViewerCommonParams } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
@@ -43,6 +44,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
 }: ViewerProps) => {
   const [authorized, setAuthorized] = useState(false);
   const [iModelJsInitialized, setIModelJsInitialized] = useState(false);
+  const isMounted = useIsMounted();
 
   useEffect(() => {
     setAuthorized(
@@ -61,7 +63,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
 
   useEffect(() => {
     if (!iModelJsInitialized) {
-      BaseInitializer.initialize({
+      void BaseInitializer.initialize({
         appInsightsKey,
         backend,
         productId,
@@ -70,19 +72,22 @@ export const BaseViewer: React.FC<ViewerProps> = ({
         onIModelAppInit,
         additionalI18nNamespaces,
         additionalRpcInterfaces,
-      })
-        .then(() => {
-          BaseInitializer.initialized
-            .then(() => setIModelJsInitialized(true))
-            .catch((error) => {
+      }).then(() => {
+        void BaseInitializer.initialized
+          .then(() => setIModelJsInitialized(true))
+          .catch((error) => {
+            if (error === "Cancelled") {
+              // canceled from previous dismount. Not a true error
+              console.log(error);
+            } else {
               throw error;
-            });
-        })
-        .catch((error) => {
-          throw error;
-        });
+            }
+          });
+      });
     }
-    return BaseInitializer.cancel;
+    if (!isMounted.current) {
+      return BaseInitializer.cancel;
+    }
   }, [
     appInsightsKey,
     backend,
@@ -91,6 +96,9 @@ export const BaseViewer: React.FC<ViewerProps> = ({
     i18nUrlTemplate,
     additionalI18nNamespaces,
     additionalRpcInterfaces,
+    isMounted,
+    iModelJsInitialized,
+    onIModelAppInit,
   ]);
 
   // TODO not signed in message / loader

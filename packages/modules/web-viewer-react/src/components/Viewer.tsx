@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BaseViewer } from "@itwin/viewer-react";
+import { BaseViewer, useIsMounted } from "@itwin/viewer-react";
 import React, { useEffect, useMemo, useState } from "react";
 
 import { WebInitializer } from "../services/Initializer";
@@ -14,15 +14,27 @@ export const Viewer = (props: WebViewerProps) => {
   const memoizedProps = useMemo(() => {
     return { ...props };
   }, [props]);
+  const isMounted = useIsMounted();
 
   useEffect(() => {
     void WebInitializer.startWebViewer(memoizedProps).then(() => {
-      void WebInitializer.initialized.then(() => {
-        setInitialized(true);
-      });
+      void WebInitializer.initialized
+        .then(() => setInitialized(true))
+        .catch((error) => {
+          if (error === "Web Startup Cancelled") {
+            // canceled from previous dismount. Not a true error
+            console.log(error);
+          } else {
+            throw error;
+          }
+        });
     });
-    return WebInitializer.cancel;
-  }, [memoizedProps]);
+    return () => {
+      if (!isMounted.current) {
+        WebInitializer.cancel();
+      }
+    };
+  }, [memoizedProps, isMounted]);
 
   return initialized ? <BaseViewer {...props} /> : null; //TODO loader?
 };

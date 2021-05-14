@@ -11,6 +11,7 @@ import { Viewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 
 import { Header } from "./Header";
+import { history } from "./history";
 
 const App: React.FC = () => {
   const [isAuthorized, setIsAuthorized] = useState(
@@ -19,6 +20,8 @@ const App: React.FC = () => {
       false
   );
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [iModelId, setIModelId] = useState(process.env.IMJS_IMODEL_ID);
+  const [contextId, setContextId] = useState(process.env.IMJS_CONTEXT_ID);
 
   const authConfig: BrowserAuthorizationClientConfiguration = {
     scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
@@ -39,7 +42,19 @@ const App: React.FC = () => {
         "Please add a valid iModel ID in the .env file and restart the application"
       );
     }
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("contextId")) {
+      setContextId(urlParams.get("contextId") as string);
+    }
+
+    if (urlParams.has("iModelId")) {
+      setIModelId(urlParams.get("iModelId") as string);
+    }
   }, []);
+
+  useEffect(() => {
+    history.push(`?contextId=${contextId}&iModelId=${iModelId}`);
+  }, [contextId, iModelId]);
 
   useEffect(() => {
     if (isLoggingIn && isAuthorized) {
