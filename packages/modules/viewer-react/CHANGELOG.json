@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "0.1.5",
+      "tag": "@itwin/viewer-react_v0.1.5",
+      "date": "Mon, 17 May 2021 17:10:49 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Updates to CRA template"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.4",
       "tag": "@itwin/viewer-react_v0.1.4",
       "date": "Tue, 11 May 2021 13:38:27 GMT",

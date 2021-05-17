@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "0.1.3",
+      "tag": "@itwin/cra-template-web-viewer_v0.1.3",
+      "date": "Mon, 17 May 2021 17:10:49 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Updates to CRA template"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.2",
       "tag": "@itwin/cra-template-web-viewer_v0.1.2",
       "date": "Wed, 24 Mar 2021 21:29:43 GMT",
