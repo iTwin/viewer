@@ -40,6 +40,7 @@ jest.mock("@itwin/viewer-react", () => {
         authorizationClient: expect.anything(),
       };
     },
+    useIsMounted: jest.fn().mockReturnValue(true),
   };
 });
 
