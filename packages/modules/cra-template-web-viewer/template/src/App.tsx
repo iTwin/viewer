@@ -95,8 +95,8 @@ const App: React.FC = () => {
         <span>"Logging in...."</span>
       ) : (
         <Viewer
-          contextId={process.env.IMJS_CONTEXT_ID ?? ""}
-          iModelId={process.env.IMJS_IMODEL_ID ?? ""}
+          contextId={contextId}
+          iModelId={iModelId}
           authConfig={{ config: authConfig }}
           onIModelAppInit={onIModelAppInit}
         />

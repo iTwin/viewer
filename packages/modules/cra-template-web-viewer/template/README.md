@@ -32,6 +32,8 @@ IMJS_IMODEL_ID = ""
 
 - Alternatively, you can [generate a test iModel](https://developer.bentley.com/tutorials/web-application-quick-start/#3-create-an-imodel) to get started without an existing iModel.
 
+- If at any time you wish to change the iModel that you are viewing, you can change the values of the contextId or iModelId query parameters in the url (i.e. localhost:3000?contextId=myNewContextId&iModelId=myNewIModelId)
+
 ## Available Scripts
 
 In the project directory, you can run:
