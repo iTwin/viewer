@@ -37,7 +37,6 @@ import {
   getDefaultViewIds,
   openRemoteImodel,
 } from "../../services/iModel/IModelService";
-import { SelectionScopeClient } from "../../services/iModel/SelectionScopeClient";
 import { ViewCreator } from "../../services/iModel/ViewCreator";
 import { ai } from "../../services/telemetry/TelemetryService";
 import {
@@ -78,12 +77,10 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     extensions,
   }: ModelLoaderProps) => {
     const [error, setError] = useState<Error>();
-    const [finalFrontstages, setFinalFrontstages] = useState<
-      ViewerFrontstage[]
-    >();
-    const [finalBackstageItems, setFinalBackstageItems] = useState<
-      ViewerBackstageItem[]
-    >();
+    const [finalFrontstages, setFinalFrontstages] =
+      useState<ViewerFrontstage[]>();
+    const [finalBackstageItems, setFinalBackstageItems] =
+      useState<ViewerBackstageItem[]>();
     const [viewState, setViewState] = useState<ViewState>();
     const [connected, setConnected] = useState<boolean>(false);
     const extensionsLoaded = useExtensions(extensions);
@@ -228,8 +225,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
 
           // TODO revist for snapshots once settings are removed
           if (!snapshotPath) {
-            await SelectionScopeClient.initializeSelectionScope();
-            SelectionScopeClient.setupSelectionScopeHandler();
+            UiFramework.setActiveSelectionScope("top-assembly");
           }
 
           setViewState(savedViewState);

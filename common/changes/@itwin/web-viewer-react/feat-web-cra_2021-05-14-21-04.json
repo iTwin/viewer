@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/web-viewer-react",
+      "comment": "Updates to CRA template",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/web-viewer-react",
+  "email": "6283674+kckst8@users.noreply.github.com"
+}

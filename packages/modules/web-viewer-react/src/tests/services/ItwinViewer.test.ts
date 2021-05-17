@@ -15,6 +15,7 @@ jest.mock("@itwin/viewer-react", () => {
   return {
     BaseViewer: jest.fn(({ children }) => null),
     getIModelAppOptions: jest.fn(),
+    useIsMounted: jest.fn().mockReturnValue(true),
   };
 });
 

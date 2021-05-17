@@ -9,6 +9,7 @@ import { ColorTheme } from "@bentley/ui-framework";
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 
+import { history } from "../routing";
 import { Header } from ".";
 import styles from "./Home.module.scss";
 
@@ -22,9 +23,11 @@ export const AuthConfigHome: React.FC = () => {
       IModelApp.authorizationClient?.isAuthorized) ||
       false
   );
-
   const [iModelId, setIModelId] = useState(
-    process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string
+    process.env.IMJS_AUTH_CLIENT_IMODEL_ID
+  );
+  const [contextId, setContextId] = useState(
+    process.env.IMJS_AUTH_CLIENT_CONTEXT_ID
   );
 
   const authConfig: BrowserAuthorizationClientConfiguration = {
@@ -44,6 +47,21 @@ export const AuthConfigHome: React.FC = () => {
     );
   }, []);
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("contextId")) {
+      setContextId(urlParams.get("contextId") as string);
+    }
+
+    if (urlParams.has("iModelId")) {
+      setIModelId(urlParams.get("iModelId") as string);
+    }
+  }, []);
+
+  useEffect(() => {
+    history.push(`authconfig?contextId=${contextId}&iModelId=${iModelId}`);
+  }, [contextId, iModelId]);
+
   const toggleLogin = async () => {
     if (!loggedIn) {
       await IModelApp.authorizationClient?.signIn();
@@ -53,6 +71,7 @@ export const AuthConfigHome: React.FC = () => {
   };
 
   const onIModelAppInit = () => {
+    setLoggedIn(IModelApp.authorizationClient?.isAuthorized ?? false);
     IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
       setLoggedIn(
         (IModelApp.authorizationClient?.hasSignedIn &&
@@ -79,7 +98,7 @@ export const AuthConfigHome: React.FC = () => {
       />
       <Viewer
         authConfig={{ config: authConfig }}
-        contextId={process.env.IMJS_AUTH_CLIENT_CONTEXT_ID as string}
+        contextId={contextId}
         iModelId={iModelId}
         appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
         theme={ColorTheme.Dark}

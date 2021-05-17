@@ -7,3 +7,4 @@ export * from "./components/BaseViewer";
 export * from "./components/BaseBlankViewer";
 export * from "./services/BaseInitializer";
 export * from "./types";
+export * from "./hooks";
