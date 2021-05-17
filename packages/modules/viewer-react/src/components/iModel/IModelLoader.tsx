@@ -37,7 +37,6 @@ import {
   getDefaultViewIds,
   openRemoteImodel,
 } from "../../services/iModel/IModelService";
-import { SelectionScopeClient } from "../../services/iModel/SelectionScopeClient";
 import { ViewCreator } from "../../services/iModel/ViewCreator";
 import { ai } from "../../services/telemetry/TelemetryService";
 import {
@@ -226,7 +225,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
 
           // TODO revist for snapshots once settings are removed
           if (!snapshotPath) {
-            await SelectionScopeClient.initializeSelectionScope();
+            UiFramework.setActiveSelectionScope("top-assembly");
           }
 
           setViewState(savedViewState);

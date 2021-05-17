@@ -111,8 +111,6 @@ jest.mock("../../../services/iModel/ViewCreator", () => {
     },
   };
 });
-jest.mock("../../../services/iModel/SelectionScopeClient");
-
 class Frontstage1Provider extends FrontstageProvider {
   public get frontstage(): React.ReactElement<FrontstageProps> {
     return <div></div>;
@@ -305,8 +303,10 @@ describe("IModelLoader", () => {
     ).toHaveBeenCalledTimes(2);
 
     expect(IModelApp.extensionAdmin.loadExtension).toHaveBeenCalledTimes(3);
-    expect(
-      IModelApp.extensionAdmin.loadExtension
-    ).toHaveBeenCalledWith("Extension3", "2", ["one", "two"]);
+    expect(IModelApp.extensionAdmin.loadExtension).toHaveBeenCalledWith(
+      "Extension3",
+      "2",
+      ["one", "two"]
+    );
   });
 });
