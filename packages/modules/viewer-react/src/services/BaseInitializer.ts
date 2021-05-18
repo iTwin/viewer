@@ -173,7 +173,7 @@ export class BaseInitializer {
     this._initialized = new Promise(async (resolve, reject) => {
       try {
         this._reject = () => reject("Cancelled");
-        // Initialize state manager for extensions to have access to extending the redux store
+        // Initialize state manager
         // This will setup a singleton store inside the StoreManager class.
         new StateManager({
           frameworkState: FrameworkReducer,
@@ -188,9 +188,10 @@ export class BaseInitializer {
 
         // Add iModelJS ApplicationInsights telemetry client if a key is provided
         if (viewerOptions?.imjsAppInsightsKey) {
-          const imjsApplicationInsightsClient = new FrontendApplicationInsightsClient(
-            viewerOptions.imjsAppInsightsKey
-          );
+          const imjsApplicationInsightsClient =
+            new FrontendApplicationInsightsClient(
+              viewerOptions.imjsAppInsightsKey
+            );
           IModelApp.telemetry.addClient(imjsApplicationInsightsClient);
         }
 
@@ -229,7 +230,7 @@ export class BaseInitializer {
           activeLocale: IModelApp.i18n.languageList()[0],
         });
 
-        // allow uiAdmin to open key-in palette when Ctrl+F2 is pressed - good for manually loading extensions
+        // allow uiAdmin to open key-in palette when Ctrl+F2 is pressed - good for manually loading UI providers
         IModelApp.uiAdmin.updateFeatureFlags({ allowKeyinPalette: true });
 
         ConfigurableUiManager.initialize();

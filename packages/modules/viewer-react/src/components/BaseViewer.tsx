@@ -20,7 +20,6 @@ export interface ViewerProps extends ItwinViewerCommonParams {
 }
 
 export const BaseViewer: React.FC<ViewerProps> = ({
-  extensions,
   iModelId,
   contextId,
   appInsightsKey,
@@ -119,7 +118,6 @@ export const BaseViewer: React.FC<ViewerProps> = ({
           viewportOptions={viewportOptions}
           uiProviders={uiProviders}
           theme={theme}
-          extensions={extensions}
         />
       )}
     </ErrorBoundary>

@@ -57,11 +57,6 @@ async function viewModel() {
     },
   });
   if (viewer) {
-    viewer.addExtension(
-      "dialogItemsSample",
-      undefined,
-      "http://localhost:3000"
-    );
     viewer.load({
       contextId: "1bff8c44-3196-4231-b8f6-66cf6dacd45b",
       iModelId: "563956a0-b0a1-4e0b-b354-541985b0cc62"

@@ -43,7 +43,6 @@ export class ItwinViewer {
   uiFrameworkVersion: FrameworkVersion | undefined;
   viewportOptions: IModelViewportControlOptions | undefined;
   uiProviders: UiItemsProvider[] | undefined;
-  extensions: ViewerExtension[] | undefined;
   authConfig: WebAuthorizationOptions;
 
   onIModelConnected: ((iModel: CheckpointConnection) => void) | undefined;
@@ -62,7 +61,6 @@ export class ItwinViewer {
     this.uiFrameworkVersion = options.uiFrameworkVersion;
     this.viewportOptions = options.viewportOptions;
     this.uiProviders = options.uiProviders;
-    this.extensions = options.extensions;
     this.authConfig = options.authConfig;
 
     void WebInitializer.startWebViewer(options);
@@ -89,7 +87,6 @@ export class ItwinViewer {
         viewportOptions: this.viewportOptions,
         uiProviders: this.uiProviders,
         theme: this.theme,
-        extensions: this.extensions,
       } as WebViewerProps),
       document.getElementById(this.elementId)
     );

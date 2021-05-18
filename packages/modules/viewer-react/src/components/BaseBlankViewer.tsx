@@ -19,12 +19,10 @@ import IModelLoader from "./iModel/IModelLoader";
 export interface BlankViewerProps extends ItwinViewerCommonParams {
   blankConnection: BlankConnectionProps;
   viewStateOptions?: BlankConnectionViewState;
-  extensions?: ViewerExtension[];
 }
 
 export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
   backend,
-  extensions,
   appInsightsKey,
   theme,
   defaultUiConfig,
@@ -125,7 +123,6 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
           blankConnectionViewState={viewStateOptions}
           uiProviders={uiProviders}
           theme={theme}
-          extensions={extensions}
         />
       )}
     </ErrorBoundary>

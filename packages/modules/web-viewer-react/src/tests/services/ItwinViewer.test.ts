@@ -103,7 +103,6 @@ describe("iTwinViewer", () => {
       viewportOptions: undefined,
       uiProviders: undefined,
       theme: undefined,
-      extensions: undefined,
     });
     expect(ReactDOM.render).toHaveBeenCalledWith(
       expect.anything(),

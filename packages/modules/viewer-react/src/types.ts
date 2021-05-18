@@ -102,8 +102,6 @@ export interface IModelLoaderParams {
   viewportOptions?: IModelViewportControlOptions;
   /** UI Providers to register https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/ */
   uiProviders?: UiItemsProvider[];
-  /** iTwin.js extensions to load */
-  extensions?: ViewerExtension[];
 }
 
 export interface ItwinViewerCommonParams
