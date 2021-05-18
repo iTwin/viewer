@@ -103,7 +103,7 @@ export const MyViewerComponent = () => {
       - `fitView` - hide the fit view tool
       - `windowArea` - hide the window area tool
       - `undoView` - hide the undo view changes tool
-      - `redoView` - hide 1 the redo view changes tool
+      - `redoView` - hide the redo view changes tool
   - `hideToolSettings` - hide the contextual tool settings
   - `hideTreeView` - hide the tree view widget
   - `hidePropertyGrid` - hide the property grid widget
