@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "0.1.4",
+      "tag": "@itwin/cra-template-web-viewer_v0.1.4",
+      "date": "Tue, 18 May 2021 18:50:47 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Better handle missing env vars"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.3",
       "tag": "@itwin/cra-template-web-viewer_v0.1.3",
       "date": "Mon, 17 May 2021 17:10:49 GMT",
