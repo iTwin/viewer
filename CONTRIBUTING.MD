@@ -61,7 +61,7 @@ Every change must be described with a change log: Run `rush change` on your comm
 2. Add unit tests.
 3. Ensure unit tests pass when run locally: `rush test`.
 4. Test changes with the appropriate development app for your changes (web-viewer-test, cdn-viewer-test, desktop-viewer-test).
-   - From root directory - `rushx build` (alternatively, run `npm start`in each project folder that you are editing as well as the development app folder to watch for changes and re-compile).
+   - From root directory - `rushx build` (alternatively, run `rushx start`in each project folder that you are editing as well as the development app folder to watch for changes and re-compile).
    - From packages\apps\web-viewer-test - `rushx start`.
    - Make changes to web-viewer-test, if necessary.
    - Test changes.
