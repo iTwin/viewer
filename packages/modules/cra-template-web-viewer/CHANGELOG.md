@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Tue, 18 May 2021 18:50:47 GMT and should not be manually modified.
+This log was last generated on Wed, 19 May 2021 13:41:38 GMT and should not be manually modified.
+
+## 0.1.5
+Wed, 19 May 2021 13:41:38 GMT
+
+### Patches
+
+- Temporarily remove support for runtime extensions
 
 ## 0.1.4
 Tue, 18 May 2021 18:50:47 GMT

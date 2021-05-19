@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "0.1.5",
+      "tag": "@itwin/cra-template-web-viewer_v0.1.5",
+      "date": "Wed, 19 May 2021 13:41:38 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Temporarily remove support for runtime extensions"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.4",
       "tag": "@itwin/cra-template-web-viewer_v0.1.4",
       "date": "Tue, 18 May 2021 18:50:47 GMT",

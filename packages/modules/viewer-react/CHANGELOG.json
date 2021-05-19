@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "0.1.6",
+      "tag": "@itwin/viewer-react_v0.1.6",
+      "date": "Wed, 19 May 2021 13:41:38 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Temporarily remove support for runtime extensions"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.5",
       "tag": "@itwin/viewer-react_v0.1.5",
       "date": "Mon, 17 May 2021 17:10:49 GMT",
