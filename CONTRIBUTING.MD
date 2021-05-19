@@ -13,12 +13,12 @@ Please take a read through this document to help streamline the process of getti
 
 ## Adding a New Project
 
-A Project is defined as a self-contained piece of functionality. Each new project is in a sub-folder of the `./packages` folder in this repository. The name of the folder should share a similar name of the package that will be published and should contain the source code for that project.
+A Project is defined as a self-contained piece of functionality. Each new project is in a sub-folder of the `./packages/modules` or `./packages/apps` folder in this repository, depending on the type of project. The name of the folder should share a similar name of the package that will be published and should contain the source code for that project.
 
 Because each Project is self-contained, it is necessary for the contributor of the Project to specify a contact for PRs and bug reports. To do this, add an entry to the CODEOWNERS file in the root directory of the repository, e.g.:
 
     # Clara Developer owns the new extension snippet
-    /packages/imodel-select  @clara.developer
+    /packages/modules/imodel-select  @clara.developer
 
 Remember that the last entry for a matching directory or file name pattern takes precedence over any earlier entries.
 
@@ -60,8 +60,8 @@ Every change must be described with a change log: Run `rush change` on your comm
 1. Make source code changes on a new Git branch.
 2. Add unit tests.
 3. Ensure unit tests pass when run locally: `rush test`.
-4. Test changes with viewer-sample-react.
-   - From root directory - `rushx build`.
+4. Test changes with the appropriate development app for your changes (web-viewer-test, cdn-viewer-test, desktop-viewer-test).
+   - From root directory - `rushx build` (alternatively, run `rushx start`in each project folder that you are editing as well as the development app folder to watch for changes and re-compile).
    - From packages\apps\web-viewer-test - `rushx start`.
    - Make changes to web-viewer-test, if necessary.
    - Test changes.
