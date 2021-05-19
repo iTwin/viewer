@@ -48,10 +48,6 @@ jest.mock("@bentley/imodeljs-frontend", () => {
   return {
     IModelApp: {
       startup: jest.fn(),
-      extensionAdmin: {
-        addExtensionLoaderFront: jest.fn(),
-        loadExtension: jest.fn().mockResolvedValue(true),
-      },
       telemetry: {
         addClient: jest.fn(),
       },
@@ -72,7 +68,6 @@ jest.mock("@bentley/imodeljs-frontend", () => {
     ActivityMessageDetails: jest.fn(),
     PrimitiveTool: jest.fn(),
     NotificationManager: jest.fn(),
-    ExternalServerExtensionLoader: jest.fn(),
     Tool: jest.fn(),
     RemoteBriefcaseConnection: {
       open: jest.fn(),

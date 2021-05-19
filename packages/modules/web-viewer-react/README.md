@@ -1,6 +1,6 @@
 # iTwin Viewer for Web
 
-The iTwin Web Viewer is a configurable iTwin.js viewer that offers basic tooling and widgets out-of-the-box and can be further extended through the use of [iTwin.js extensions](https://github.com/imodeljs/extension-sample) and/or [UI Providers](https://www.itwinjs.org/learning/ui/augmentingui/). This package should be used for web-based applications. For desktop applications, use [@itwin/desktop-viewer-react](https://www.npmjs.com/package/@itwin/desktop-viewer-react).
+The iTwin Web Viewer is a configurable iTwin.js viewer that offers basic tooling and widgets out-of-the-box and can be further extended through the use of [iTwin.js UI Providers](https://www.itwinjs.org/learning/ui/augmentingui/). This package should be used for web-based applications. For desktop applications, use [@itwin/desktop-viewer-react](https://www.npmjs.com/package/@itwin/desktop-viewer-react).
 
 # Installation
 
@@ -16,14 +16,13 @@ npm install @itwin/web-viewer-react
 
 ## Dependencies
 
-Currently, in order to use the iTwin Viewer with iTwin.js extensions, the consuming application would need to be compiled using Webpack with the IModeljsLibraryExportsPlugin that is in the [@bentley/webpack-tools-core](https://www.npmjs.com/package/@bentley/webpack-tools-core) package:
+Currently, in order to use the iTwin Viewer, the consuming application would need to be compiled using Webpack with the IModeljsLibraryExportsPlugin that is in the [@bentley/webpack-tools-core](https://www.npmjs.com/package/@bentley/webpack-tools-core) package:
 
 In your webpack.config file:
 
 ```javascript
     plugins: [
-      // NOTE: iTwin.js specific plugin to allow exposing iTwin.js shared libraries
-      // into the global scope for use within iTwin.js Extensions.
+      // NOTE: iTwin.js specific plugin to allow exposing iTwin.js shared libraries into the global scope.
       new IModeljsLibraryExportsPlugin(),
 ```
 
@@ -37,18 +36,11 @@ npx create-react-app my-app --scripts-version @bentley/react-scripts --template 
 
 ```javascript
 import React, { useState, useEffect } from "react";
-import { Viewer, ViewerExtension } from "@itwin/web-viewer-react";
+import { Viewer } from "@itwin/web-viewer-react";
 
 export const MyViewerComponent = () => {
   const contextId = "myConnectProjectId";
   const iModelId = "myIModelId";
-
-  // list of extensions with their name and url where they are being served
-  const extensions: ViewerExtension[] = [
-    {
-      name: "dialogItemsSample",
-    },
-  ];
 
   // authorization client configuration
   const authConfig: BrowserAuthorizationClientConfiguration = {
@@ -65,7 +57,6 @@ export const MyViewerComponent = () => {
         authConfig={{ config: authConfig }}
         contextId={contextId}
         iModelId={iModelId}
-        extensions={extensions}
       />
     </div>
   );
@@ -83,7 +74,6 @@ export const MyViewerComponent = () => {
 #### Optional
 
 - `changeSetId` - changeset id to view if combined with the contextId and iModelId props
-- `extensions` - array of extensions to load in the viewer
 - `backend` - backend connection info (defaults to the iTwin General Purpose backend)
 - `theme` - override the default theme
 - `defaultUiConfig` - hide or override default tooling and widgets
@@ -164,7 +154,6 @@ const viewer = new iTwinViewer({
 });
 
 if (viewer) {
-  viewer.addExtension("dialogItemsSample");
   viewer.load({ contextId, iModelId });
 }
 ```
@@ -175,11 +164,7 @@ For cases where you would prefer to use a [Blank iModelConnection](https://www.i
 
 ```javascript
 import React, { useState, useEffect } from "react";
-import {
-  BlankConnectionViewState,
-  BlankViewer,
-  ViewerExtension,
-} from "@itwin/web-viewer-react";
+import { BlankConnectionViewState, BlankViewer } from "@itwin/web-viewer-react";
 import { Range3d } from "@bentley/geometry-core";
 import { Cartographic, ColorDef } from "@bentley/imodeljs-common";
 
@@ -196,13 +181,6 @@ export const MyBlankViewerComponent = () => {
     },
   };
 
-  // list of extensions with their name and url where they are being served
-  const extensions: ViewerExtension[] = [
-    {
-      name: "dialogItemsSample",
-    },
-  ];
-
   // authorization client configuration
   const authConfig: BrowserAuthorizationClientConfiguration = {
     scope: "profile email",
@@ -218,7 +196,6 @@ export const MyBlankViewerComponent = () => {
         authConfig={{ config: authConfig }}
         blankConnection={blankConnection}
         viewStateOptions={viewStateOptions}
-        extensions={extensions}
       />
     </div>
   );

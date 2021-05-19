@@ -102,8 +102,6 @@ export interface IModelLoaderParams {
   viewportOptions?: IModelViewportControlOptions;
   /** UI Providers to register https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/ */
   uiProviders?: UiItemsProvider[];
-  /** iTwin.js extensions to load */
-  extensions?: ViewerExtension[];
 }
 
 export interface ItwinViewerCommonParams
@@ -212,28 +210,6 @@ export interface ItwinViewerUi {
   hideTreeView?: boolean;
   hidePropertyGrid?: boolean;
   hideDefaultStatusBar?: boolean;
-}
-
-/**
- * Extension options
- */
-export interface ViewerExtension {
-  name: string;
-  url?: string;
-  version?: string;
-  args?: string[];
-}
-
-export interface ExtensionUrl {
-  url: string;
-  loaded: boolean;
-}
-
-export interface ExtensionInstance {
-  name: string;
-  loaded: boolean;
-  version?: string;
-  args?: string[];
 }
 
 /**

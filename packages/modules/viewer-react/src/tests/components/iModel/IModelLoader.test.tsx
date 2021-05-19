@@ -48,10 +48,6 @@ jest.mock("@bentley/imodeljs-frontend", () => {
   return {
     IModelApp: {
       startup: jest.fn(),
-      extensionAdmin: {
-        addExtensionLoaderFront: jest.fn(),
-        loadExtension: jest.fn().mockResolvedValue(true),
-      },
       telemetry: {
         addClient: jest.fn(),
       },
@@ -74,7 +70,6 @@ jest.mock("@bentley/imodeljs-frontend", () => {
     ActivityMessageDetails: jest.fn(),
     PrimitiveTool: jest.fn(),
     NotificationManager: jest.fn(),
-    ExternalServerExtensionLoader: jest.fn(),
     Tool: jest.fn(),
     RemoteBriefcaseConnection: {
       open: jest.fn(),
@@ -268,45 +263,5 @@ describe("IModelLoader", () => {
     await waitFor(() => result.getByTestId("loader-wrapper"));
 
     expect(UiItemsManager.unregister).toHaveBeenCalledTimes(1);
-  });
-
-  it("loads the specified extensions and only registers each unique url once", async () => {
-    const extensions = [
-      {
-        name: "Extension1",
-        url: "http://localhost:3001",
-      },
-      {
-        name: "Extension2",
-        url: "http://localhost:3002",
-      },
-      {
-        name: "Extension3",
-        url: "http://localhost:3001",
-        version: "2",
-        args: ["one", "two"],
-      },
-    ];
-
-    const { getByTestId } = render(
-      <IModelLoader
-        contextId={mockContextId}
-        iModelId={mockIModelId}
-        extensions={extensions}
-      />
-    );
-
-    await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(
-      IModelApp.extensionAdmin.addExtensionLoaderFront
-    ).toHaveBeenCalledTimes(2);
-
-    expect(IModelApp.extensionAdmin.loadExtension).toHaveBeenCalledTimes(3);
-    expect(IModelApp.extensionAdmin.loadExtension).toHaveBeenCalledWith(
-      "Extension3",
-      "2",
-      ["one", "two"]
-    );
   });
 });

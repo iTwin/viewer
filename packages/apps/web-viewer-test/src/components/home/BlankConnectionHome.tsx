@@ -7,7 +7,7 @@ import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-autho
 import { Range3d } from "@bentley/geometry-core";
 import { Cartographic, ColorDef } from "@bentley/imodeljs-common";
 import { IModelApp } from "@bentley/imodeljs-frontend";
-import { BlankViewer, ViewerExtension } from "@itwin/web-viewer-react";
+import { BlankViewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 
 import { GeometryDecorator } from "../../decorators/GeometryDecorator";
@@ -51,12 +51,6 @@ export const BlankConnectionHome: React.FC = () => {
     }
   };
 
-  const extensions: ViewerExtension[] = [
-    {
-      name: "dialogItemsSample",
-      url: "http://localhost:3000",
-    },
-  ];
   /**
    * This value is for the iTwin Viewer and will be the default if the productId prop is not provided.
    * This is merely an example on how to use the prop to override with your application's GPRID.
@@ -84,7 +78,6 @@ export const BlankConnectionHome: React.FC = () => {
             backgroundColor: ColorDef.blue,
           },
         }}
-        extensions={extensions}
         productId={productId}
         onIModelAppInit={iModelAppInit}
         uiProviders={[new TestUiProvider2()]}

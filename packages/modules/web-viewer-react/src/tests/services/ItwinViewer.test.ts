@@ -23,10 +23,6 @@ jest.mock("@bentley/imodeljs-frontend", () => {
   return {
     IModelApp: {
       startup: jest.fn().mockResolvedValue(true),
-      extensionAdmin: {
-        addExtensionLoaderFront: jest.fn(),
-        loadExtension: jest.fn().mockResolvedValue(true),
-      },
       telemetry: {
         addClient: jest.fn(),
       },
@@ -44,7 +40,6 @@ jest.mock("@bentley/imodeljs-frontend", () => {
     ActivityMessageDetails: jest.fn(),
     PrimitiveTool: jest.fn(),
     NotificationManager: jest.fn(),
-    ExternalServerExtensionLoader: jest.fn(),
     Tool: jest.fn(),
     SnapshotConnection: {
       openFile: jest.fn(),
@@ -103,7 +98,6 @@ describe("iTwinViewer", () => {
       viewportOptions: undefined,
       uiProviders: undefined,
       theme: undefined,
-      extensions: undefined,
     });
     expect(ReactDOM.render).toHaveBeenCalledWith(
       expect.anything(),

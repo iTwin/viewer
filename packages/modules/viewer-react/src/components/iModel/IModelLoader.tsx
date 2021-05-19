@@ -31,7 +31,7 @@ import { withAITracking } from "@microsoft/applicationinsights-react-js";
 import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
-import { useExtensions, useTheme, useUiProviders } from "../../hooks";
+import { useTheme, useUiProviders } from "../../hooks";
 import { BaseInitializer } from "../../services/BaseInitializer";
 import {
   getDefaultViewIds,
@@ -74,7 +74,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     blankConnectionViewState,
     uiProviders,
     theme,
-    extensions,
   }: ModelLoaderProps) => {
     const [error, setError] = useState<Error>();
     const [finalFrontstages, setFinalFrontstages] =
@@ -83,7 +82,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       useState<ViewerBackstageItem[]>();
     const [viewState, setViewState] = useState<ViewState>();
     const [connected, setConnected] = useState<boolean>(false);
-    const extensionsLoaded = useExtensions(extensions);
 
     useUiProviders(uiProviders);
     useTheme(theme);
@@ -341,7 +339,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           {finalFrontstages &&
           finalBackstageItems &&
           connected &&
-          extensionsLoaded &&
           StateManager.store ? (
             <Provider store={StateManager.store}>
               <IModelViewer
