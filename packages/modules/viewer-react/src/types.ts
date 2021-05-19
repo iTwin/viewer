@@ -213,28 +213,6 @@ export interface ItwinViewerUi {
 }
 
 /**
- * Extension options
- */
-export interface ViewerExtension {
-  name: string;
-  url?: string;
-  version?: string;
-  args?: string[];
-}
-
-export interface ExtensionUrl {
-  url: string;
-  loaded: boolean;
-}
-
-export interface ExtensionInstance {
-  name: string;
-  loaded: boolean;
-  version?: string;
-  args?: string[];
-}
-
-/**
  * Blank connection ViewState types
  */
 export interface BlankConnectionViewStateLookAt {

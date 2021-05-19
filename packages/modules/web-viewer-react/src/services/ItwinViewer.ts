@@ -3,19 +3,14 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  CheckpointConnection,
-  Extension,
-  ExternalServerExtensionLoader,
-  IModelApp,
-} from "@bentley/imodeljs-frontend";
+import { CheckpointConnection, IModelApp } from "@bentley/imodeljs-frontend";
 import { UiItemsProvider } from "@bentley/ui-abstract";
 import {
   ColorTheme,
   FrameworkVersion,
   IModelViewportControlOptions,
 } from "@bentley/ui-framework";
-import { ItwinViewerUi, ViewerExtension } from "@itwin/viewer-react";
+import { ItwinViewerUi } from "@itwin/viewer-react";
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -90,24 +85,5 @@ export class ItwinViewer {
       } as WebViewerProps),
       document.getElementById(this.elementId)
     );
-  };
-
-  /**
-   * load an extension into the viewer instance
-   */
-  addExtension = async (
-    extensionName: string,
-    version?: string,
-    url?: string,
-    args?: string[]
-  ): Promise<Extension | undefined> => {
-    await WebInitializer.initialized;
-
-    if (url) {
-      IModelApp.extensionAdmin.addExtensionLoaderFront(
-        new ExternalServerExtensionLoader(url)
-      );
-    }
-    return IModelApp.extensionAdmin.loadExtension(extensionName, version, args);
   };
 }

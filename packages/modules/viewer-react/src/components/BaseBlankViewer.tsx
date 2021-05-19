@@ -12,7 +12,6 @@ import {
   BlankConnectionViewState,
   ItwinViewerCommonParams,
   ItwinViewerUi,
-  ViewerExtension,
 } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 

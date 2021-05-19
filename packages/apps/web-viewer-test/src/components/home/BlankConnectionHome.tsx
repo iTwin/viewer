@@ -7,7 +7,7 @@ import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-autho
 import { Range3d } from "@bentley/geometry-core";
 import { Cartographic, ColorDef } from "@bentley/imodeljs-common";
 import { IModelApp } from "@bentley/imodeljs-frontend";
-import { BlankViewer, ViewerExtension } from "@itwin/web-viewer-react";
+import { BlankViewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 
 import { GeometryDecorator } from "../../decorators/GeometryDecorator";
