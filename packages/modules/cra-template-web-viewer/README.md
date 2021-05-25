@@ -1,4 +1,4 @@
-# cra-template-web-viewer
+# iTwin Viewer Create React App Template for Web
 
 This is a template for web applications that are based on the [iTwin Viewer](https://github.com/itwin/viewer/tree/main/packages/modules/web-viewer-react) for [Create React App](https://github.com/facebook/create-react-app).
 
