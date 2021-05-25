@@ -2,13 +2,14 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { ItwinViewer } from "@itwin/web-viewer-react";
 
 /**
  * get the viewer root url from the script tag
  */
 const script = document.querySelector(
-  'script[src$="static/js/itwin-viewer-react.js"]'
+  'script[src$="static/js/web-viewer-react.js"]'
 ) as HTMLScriptElement;
 
 if (script) {

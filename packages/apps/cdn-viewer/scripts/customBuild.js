@@ -16,7 +16,7 @@ config.optimization.splitChunks = {
 
 config.optimization.runtimeChunk = false;
 if (process.env.NODE_ENV === "production") {
-  config.output.filename = "static/js/itwin-viewer-react.js";
+  config.output.filename = "static/js/web-viewer-react.js";
 } else {
   config.output.filename = "static/js/bundle.js";
 }
@@ -30,7 +30,7 @@ for (let i = 0; i < config.plugins.length; i++) {
     config.plugins[i].options.filename &&
     config.plugins[i].options.filename.indexOf("static/css/") >= 0
   ) {
-    config.plugins[i].options.filename = "static/css/itwin-viewer-react.css";
+    config.plugins[i].options.filename = "static/css/web-viewer-react.css";
     delete config.plugins[i].options.chunkFilename;
     break;
   }
