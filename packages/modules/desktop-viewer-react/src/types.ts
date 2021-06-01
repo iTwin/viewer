@@ -3,6 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-export * from "@itwin/viewer-react";
-export * from "./components/Viewer";
-export * from "./types";
+import { ViewerProps } from "@itwin/viewer-react";
+
+export type DesktopViewerProps = ViewerProps;
