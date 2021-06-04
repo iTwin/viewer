@@ -2,6 +2,23 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "1.0.0",
+      "tag": "@itwin/viewer-react_v1.0.0",
+      "date": "Fri, 04 Jun 2021 15:23:23 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "Prepare README for 1.0 release"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/error-handling-react\" from `0.1.3` to `1.0.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.6",
       "tag": "@itwin/viewer-react_v0.1.6",
       "date": "Wed, 19 May 2021 13:41:38 GMT",

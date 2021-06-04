@@ -2,6 +2,18 @@
   "name": "@itwin/error-handling-react",
   "entries": [
     {
+      "version": "1.0.0",
+      "tag": "@itwin/error-handling-react_v1.0.0",
+      "date": "Fri, 04 Jun 2021 15:23:23 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "Prepare README for 1.0 release"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.3",
       "tag": "@itwin/error-handling-react_v0.1.3",
       "date": "Wed, 24 Mar 2021 21:48:57 GMT",
