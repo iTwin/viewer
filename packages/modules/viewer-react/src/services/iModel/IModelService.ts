@@ -72,16 +72,7 @@ export const openRemoteImodel = async (
     return await CheckpointConnection.openRemote(contextId, imodelId, version);
   } catch (error) {
     console.log(`Error opening the iModel connection: ${error}`);
-    const connectionError = IModelApp.i18n.translateWithNamespace(
-      "iTwinViewer",
-      "iModels.connectionError"
-    );
-    const msg = await BaseInitializer.getIModelDataErrorMessage(
-      contextId,
-      imodelId,
-      connectionError
-    );
-    throw msg;
+    throw error;
   }
 };
 

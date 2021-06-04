@@ -1,6 +1,6 @@
-# iTwinViewer
+# iTwin Viewer
 
-The iTwinViewer is an iTwin model viewer that can be embedded in a web application via a script tag.
+The iTwin Viewer is an iTwin model viewer that can be embedded in a web application via a script tag.
 
 ## Building the viewer
 
