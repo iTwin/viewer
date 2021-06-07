@@ -18,7 +18,7 @@
       "@bentley/presentation-frontend": "^2.14.0",
       "@bentley/product-settings-client": "^2.14.0",
       "@bentley/rbac-client": "^2.14.0",
-      "@bentley/react-scripts": "^3.4.1",
+      "@bentley/react-scripts": "^3.4.11",
       "@bentley/telemetry-client": "^2.14.0",
       "@bentley/ui-abstract": "^2.14.0",
       "@bentley/ui-components": "^2.14.0",
