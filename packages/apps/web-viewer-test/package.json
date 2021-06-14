@@ -20,7 +20,6 @@
     "@bentley/presentation-frontend": "^2.14.0",
     "@bentley/product-settings-client": "^2.14.0",
     "@bentley/rbac-client": "^2.14.0",
-    "@bentley/react-scripts": "3.4.1",
     "@bentley/telemetry-client": "^2.14.0",
     "@bentley/ui-abstract": "^2.14.0",
     "@bentley/ui-components": "^2.14.0",
@@ -38,18 +37,15 @@
     "redux": "^4.0.5"
   },
   "devDependencies": {
-    "@svgr/webpack": "4.3.3",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^10.4.4",
-    "@testing-library/user-event": "^7.1.2",
+    "@bentley/react-scripts": "^4.0.3-dev.1",
+    "@svgr/webpack": "^5.5.0",
     "@types/history": "^4.7.6",
-    "@types/jest": "^26.0.4",
     "@types/node": "^14.0.19",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
-    "typescript": "^3.7.2"
+    "typescript": "~4.1.0"
   },
   "browserslist": [
     ">0.2%",
@@ -63,5 +59,10 @@
     "start": "react-scripts --max_old_space_size=8192 start",
     "build": "",
     "test": ""
+  },
+  "eslintConfig": {
+    "extends": [
+      "../../../common/scripts/.eslintrc.ts.json"
+    ]
   }
 }
