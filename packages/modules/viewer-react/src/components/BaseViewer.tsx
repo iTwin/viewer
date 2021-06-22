@@ -41,24 +41,30 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   additionalI18nNamespaces,
   additionalRpcInterfaces,
 }: ViewerProps) => {
-  const [authorized, setAuthorized] = useState(false);
+  // assume authorized when using a local snapshot
+  const [authorized, setAuthorized] = useState(snapshotPath ? true : false);
   const [iModelJsInitialized, setIModelJsInitialized] = useState(false);
   const isMounted = useIsMounted();
 
   useEffect(() => {
-    setAuthorized(
-      (IModelApp.authorizationClient?.hasSignedIn &&
-        IModelApp.authorizationClient?.isAuthorized) ||
-        false
-    );
-    IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
+    // assume authorized when using a local snapshot
+    if (snapshotPath) {
+      setAuthorized(true);
+    } else {
       setAuthorized(
         (IModelApp.authorizationClient?.hasSignedIn &&
           IModelApp.authorizationClient?.isAuthorized) ||
           false
       );
-    });
-  }, []);
+      IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
+        setAuthorized(
+          (IModelApp.authorizationClient?.hasSignedIn &&
+            IModelApp.authorizationClient?.isAuthorized) ||
+            false
+        );
+      });
+    }
+  }, [snapshotPath]);
 
   useEffect(() => {
     if (!iModelJsInitialized) {

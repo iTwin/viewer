@@ -56,7 +56,6 @@
     "@bentley/ui-core": "^2.14.0",
     "@svgr/cli": "^5.3.1",
     "@testing-library/react": "^10.4.4",
-    "@types/classnames": "^2.2.10",
     "@types/jest": "^26.0.4",
     "@types/node": "^14.0.19",
     "@types/react": "^16.9.0",

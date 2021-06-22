@@ -3,7 +3,17 @@
   // Hover to view descriptions of existing attributes.
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
-  "configurations": [{
+  "compounds": [
+    {
+      "name": "itwin-viewer-desktop",
+      "configurations": [
+        "[BACKEND] itwin-viewer-desktop",
+        "[FRONTEND] itwin-viewer-desktop"
+      ]
+    },
+  ],
+  "configurations": [
+    {
       "name": "Attach by Process ID",
       "processId": "${command:PickProcess}",
       "request": "attach",
@@ -40,5 +50,34 @@
       "internalConsoleOptions": "neverOpen",
       "port": 9230
     },
+    { /* PARTIAL */
+      "name": "[BACKEND] itwin-viewer-desktop",
+      "cwd": "${workspaceFolder}/packages/apps/desktop-viewer-test",
+      "type": "pwa-node",
+      "request": "launch",
+      "console": "internalConsole",
+      "outputCapture": "std",
+      "runtimeExecutable": "${workspaceFolder}/common/temp/node_modules/.bin/electron",
+      "runtimeArgs": [
+        "${workspaceFolder}/packages/apps/desktop-viewer-test/lib/backend/main.js",
+        "--remote-debugging-port=9223"
+      ],
+      "env": {
+        "NODE_ENV": "development",
+      },      
+      "presentation": {
+        "group": "desktop-starter"
+      },
+    },
+    { /* PARTIAL */
+      "name": "[FRONTEND] itwin-viewer-desktop",
+      "type": "pwa-chrome",
+      "request": "attach",
+      "port": 9223,
+      "timeout": 90000,
+      "presentation": {
+        "group": "desktop-starter"
+      },
+    }
   ]
 }

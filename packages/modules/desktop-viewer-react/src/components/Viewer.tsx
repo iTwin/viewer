@@ -36,5 +36,5 @@ export const Viewer = (props: DesktopViewerProps) => {
     };
   }, [memoizedProps, isMounted]);
 
-  return initialized ? <BaseViewer {...props} /> : null; //TODO loader?
+  return initialized ? <BaseViewer {...memoizedProps} /> : null; //TODO loader?
 };

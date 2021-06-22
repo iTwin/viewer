@@ -33,3 +33,8 @@ common/temp/
 # local env vars
 .env.local
 .env.*.local 
+
+# local snapshot files
+**/*.db
+**/*.db-journal
+**/*.Tiles
