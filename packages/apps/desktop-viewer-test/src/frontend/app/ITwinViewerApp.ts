@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { FrontendAuthorizationClient } from "@bentley/frontend-authorization-client";
 import {
   AsyncMethodsOf,
   IModelApp,
