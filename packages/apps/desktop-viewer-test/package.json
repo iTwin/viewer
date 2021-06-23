@@ -25,7 +25,8 @@
     "start:frontend": "cross-env USE_FULL_SOURCEMAPS=true USE_FAST_SASS=true BROWSER=none SKIP_PREFLIGHT_CHECK=true react-scripts start",
     "build:pack": "electron-builder --dir",
     "build:dist": "electron-builder",
-    "test": ""
+    "test": "",
+    "pseudolocalize": "betools pseudolocalize --englishDir ./public/locales/en --out ./public/locales/en-PSEUDO"
   },
   "browserslist": [
     "electron 10.0.0"
