@@ -42,7 +42,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   additionalRpcInterfaces,
 }: ViewerProps) => {
   // assume authorized when using a local snapshot
-  const [authorized, setAuthorized] = useState(snapshotPath ? true : false);
+  const [authorized, setAuthorized] = useState(!!snapshotPath);
   const [iModelJsInitialized, setIModelJsInitialized] = useState(false);
   const isMounted = useIsMounted();
 
