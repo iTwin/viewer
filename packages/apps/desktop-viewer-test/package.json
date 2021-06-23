@@ -24,7 +24,8 @@
     "start": "npm run build:backend && run-p \"start:frontend\" \"electron:debug\"",
     "start:frontend": "cross-env USE_FULL_SOURCEMAPS=true USE_FAST_SASS=true BROWSER=none SKIP_PREFLIGHT_CHECK=true react-scripts start",
     "build:pack": "electron-builder --dir",
-    "build:dist": "electron-builder"
+    "build:dist": "electron-builder",
+    "test": ""
   },
   "browserslist": [
     "electron 10.0.0"
@@ -73,7 +74,7 @@
   },
   "devDependencies": {
     "@bentley/build-tools": "^2.14.0",
-    "@bentley/react-scripts": "3.4.9",
+    "@bentley/react-scripts": "3.4.11",
     "@types/electron-devtools-installer": "^2.2.0",
     "@types/minimist": "^1.2.0",
     "@types/react": "^16.9.0",

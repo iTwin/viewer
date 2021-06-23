@@ -32,7 +32,7 @@ dependencies:
   '@bentley/product-settings-client': 2.16.2_2b43108933ec51aa43f6278ddec93c9a
   '@bentley/property-grid-react': 1.3.6_e520c109826dfb222743c39def1b3a3a
   '@bentley/rbac-client': 2.16.2_@bentley+itwin-client@2.16.2
-  '@bentley/react-scripts': 3.4.9_b476bede212392d6496701edb1afefcc
+  '@bentley/react-scripts': 3.4.11_860e224ed2543611ca26702b7673f8bf
   '@bentley/telemetry-client': 2.16.2_@bentley+itwin-client@2.16.2
   '@bentley/tree-widget-react': 1.3.0_f02d13f54e711a2529e066ea9ca43416
   '@bentley/ui-abstract': 2.16.2_bd80812996c73064070b811237b6891a
@@ -43,7 +43,7 @@ dependencies:
   '@bentley/webgl-compatibility': 2.16.2_@bentley+bentleyjs-core@2.16.2
   '@microsoft/applicationinsights-react-js': 2.3.1
   '@microsoft/applicationinsights-web': 2.3.1
-  '@rush-temp/cdn-viewer': 'file:projects/cdn-viewer.tgz_319290f41e270ff133ba7da25a8a5c40'
+  '@rush-temp/cdn-viewer': 'file:projects/cdn-viewer.tgz_f007c5df96a02c65f57c35203f2aec27'
   '@rush-temp/cra-template-web-viewer': 'file:projects/cra-template-web-viewer.tgz'
   '@rush-temp/desktop-viewer-react': 'file:projects/desktop-viewer-react.tgz_7da90a24d6e48526c982f8f5773837f9'
   '@rush-temp/desktop-viewer-test': 'file:projects/desktop-viewer-test.tgz_node-sass@4.14.1'
@@ -51,7 +51,7 @@ dependencies:
   '@rush-temp/viewer-react': 'file:projects/viewer-react.tgz_ef78076dc9c8cb9823b3dfb1943f693e'
   '@rush-temp/viewer-scripts': 'file:projects/viewer-scripts.tgz_typescript@3.9.9'
   '@rush-temp/web-viewer-react': 'file:projects/web-viewer-react.tgz_webpack@4.42.0'
-  '@rush-temp/web-viewer-test': 'file:projects/web-viewer-test.tgz_863c8946d8b698c93d628d15bca02cd9'
+  '@rush-temp/web-viewer-test': 'file:projects/web-viewer-test.tgz_node-sass@4.14.1+webpack@4.42.0'
   '@svgr/cli': 5.5.0
   '@svgr/webpack': 4.3.3
   '@testing-library/jest-dom': 4.2.4
@@ -240,7 +240,7 @@ packages:
       gensync: 1.0.0-beta.2
       json5: 2.2.0
       lodash: 4.17.21
-      resolve: 1.15.0
+      resolve: 1.20.0
       semver: 5.7.1
       source-map: 0.5.7
     dev: false
@@ -771,6 +771,16 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-ebR0zU9OvI2N4qiAC38KIAK75KItpIPTpAtd2r4OZmMFeKbKJpUFLYP2EuDut82+BmYi8sz42B+TfTptJ9iG5Q==
+  /@babel/plugin-proposal-nullish-coalescing-operator/7.14.2_@babel+core@7.9.0:
+    dependencies:
+      '@babel/core': 7.9.0
+      '@babel/helper-plugin-utils': 7.13.0
+      '@babel/plugin-syntax-nullish-coalescing-operator': 7.8.3_@babel+core@7.9.0
+    dev: false
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-ebR0zU9OvI2N4qiAC38KIAK75KItpIPTpAtd2r4OZmMFeKbKJpUFLYP2EuDut82+BmYi8sz42B+TfTptJ9iG5Q==
   /@babel/plugin-proposal-nullish-coalescing-operator/7.8.3_@babel+core@7.9.0:
     dependencies:
       '@babel/core': 7.9.0
@@ -795,6 +805,16 @@ packages:
       '@babel/core': 7.14.3_@babel+core@7.14.3
       '@babel/helper-plugin-utils': 7.13.0
       '@babel/plugin-syntax-numeric-separator': 7.10.4_@babel+core@7.14.3
+    dev: false
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-DcTQY9syxu9BpU3Uo94fjCB3LN9/hgPS8oUL7KrSW3bA2ePrKZZPJcc5y0hoJAM9dft3pGfErtEUvxXQcfLxUg==
+  /@babel/plugin-proposal-numeric-separator/7.14.2_@babel+core@7.9.0:
+    dependencies:
+      '@babel/core': 7.9.0
+      '@babel/helper-plugin-utils': 7.13.0
+      '@babel/plugin-syntax-numeric-separator': 7.10.4_@babel+core@7.9.0
     dev: false
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -893,6 +913,17 @@ packages:
       '@babel/helper-plugin-utils': 7.13.0
       '@babel/helper-skip-transparent-expression-wrappers': 7.12.1
       '@babel/plugin-syntax-optional-chaining': 7.8.3_@babel+core@7.14.3
+    dev: false
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-qQByMRPwMZJainfig10BoaDldx/+VDtNcrA7qdNaEOAj6VXud+gfrkA8j4CRAU5HjnWREXqIpSpH30qZX1xivA==
+  /@babel/plugin-proposal-optional-chaining/7.14.2_@babel+core@7.9.0:
+    dependencies:
+      '@babel/core': 7.9.0
+      '@babel/helper-plugin-utils': 7.13.0
+      '@babel/helper-skip-transparent-expression-wrappers': 7.12.1
+      '@babel/plugin-syntax-optional-chaining': 7.8.3_@babel+core@7.9.0
     dev: false
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -2091,6 +2122,15 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-zCubvP+jjahpnFJvPaHPiGVfuVUjXHhFvJKQdNnsmSsiU9kR/rCZ41jHc++tERD2zV+p7Hr6is+t5b6iWTCqSw==
+  /@babel/plugin-transform-react-display-name/7.14.2_@babel+core@7.9.0:
+    dependencies:
+      '@babel/core': 7.9.0
+      '@babel/helper-plugin-utils': 7.13.0
+    dev: false
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-zCubvP+jjahpnFJvPaHPiGVfuVUjXHhFvJKQdNnsmSsiU9kR/rCZ41jHc++tERD2zV+p7Hr6is+t5b6iWTCqSw==
   /@babel/plugin-transform-react-display-name/7.8.3_@babel+core@7.9.0:
     dependencies:
       '@babel/core': 7.9.0
@@ -2639,11 +2679,11 @@ packages:
       '@babel/plugin-proposal-async-generator-functions': 7.14.2_@babel+core@7.9.0
       '@babel/plugin-proposal-dynamic-import': 7.14.2_@babel+core@7.9.0
       '@babel/plugin-proposal-json-strings': 7.14.2_@babel+core@7.9.0
-      '@babel/plugin-proposal-nullish-coalescing-operator': 7.8.3_@babel+core@7.9.0
-      '@babel/plugin-proposal-numeric-separator': 7.8.3_@babel+core@7.9.0
+      '@babel/plugin-proposal-nullish-coalescing-operator': 7.14.2_@babel+core@7.9.0
+      '@babel/plugin-proposal-numeric-separator': 7.14.2_@babel+core@7.9.0
       '@babel/plugin-proposal-object-rest-spread': 7.14.4_@babel+core@7.9.0
       '@babel/plugin-proposal-optional-catch-binding': 7.14.2_@babel+core@7.9.0
-      '@babel/plugin-proposal-optional-chaining': 7.9.0_@babel+core@7.9.0
+      '@babel/plugin-proposal-optional-chaining': 7.14.2_@babel+core@7.9.0
       '@babel/plugin-proposal-unicode-property-regex': 7.12.13_@babel+core@7.9.0
       '@babel/plugin-syntax-async-generators': 7.8.4_@babel+core@7.9.0
       '@babel/plugin-syntax-dynamic-import': 7.8.3_@babel+core@7.9.0
@@ -2766,7 +2806,7 @@ packages:
     dependencies:
       '@babel/core': 7.9.0
       '@babel/helper-plugin-utils': 7.13.0
-      '@babel/plugin-transform-react-display-name': 7.8.3_@babel+core@7.9.0
+      '@babel/plugin-transform-react-display-name': 7.14.2_@babel+core@7.9.0
       '@babel/plugin-transform-react-jsx': 7.14.3_@babel+core@7.9.0
       '@babel/plugin-transform-react-jsx-development': 7.12.17_@babel+core@7.9.0
       '@babel/plugin-transform-react-jsx-self': 7.12.13_@babel+core@7.9.0
@@ -3544,7 +3584,7 @@ packages:
       '@bentley/itwin-client': ^2.16.2
     resolution:
       integrity: sha512-RYSpMrkiXnIHxcQcU1pohhSxJ8NQqo33LMUGjpu6tjCgvI9d1cUS/+flEzEKMlvxDxsJ85eV1rZLlhbzAwpjRw==
-  /@bentley/react-scripts/3.4.9_b476bede212392d6496701edb1afefcc:
+  /@bentley/react-scripts/3.4.11_860e224ed2543611ca26702b7673f8bf:
     dependencies:
       '@babel/core': 7.9.0
       '@bentley/webpack-tools-core': 2.16.2_webpack@4.42.0
@@ -3592,6 +3632,7 @@ packages:
       react-dev-utils: 11.0.4
       resolve: 1.15.0
       resolve-url-loader: 3.1.2
+      sass: 1.34.1
       sass-loader: 8.0.2_863c8946d8b698c93d628d15bca02cd9
       semver: 6.3.0
       source-map-loader: 1.1.3_webpack@4.42.0
@@ -3616,13 +3657,12 @@ packages:
       fsevents: 2.1.2
     peerDependencies:
       node-sass: '*'
-      sass: '*'
       typescript: ^3.2.1
     peerDependenciesMeta:
       typescript:
         optional: true
     resolution:
-      integrity: sha512-hgopwXROuw8iES05mxF1gylvVMOuqYfLR88YjDz1D0CUP6g5ZycSUuV0zwjN32XySKDdZi0OmerbITRj1VgwOA==
+      integrity: sha512-cVMPBhO5qPg2thmZFRBXfM5j4YCNbdOtP/1U0PoluPSAk3FgAps5ZIp52OsMQJGJMTpz+rsnCJiYUKgwLEihNQ==
   /@bentley/reality-data-client/2.16.2_@bentley+itwin-client@2.16.2:
     dependencies:
       '@bentley/bentleyjs-core': 2.16.2
@@ -6861,7 +6901,7 @@ packages:
       '@babel/types': 7.14.4
       eslint: 6.8.0
       eslint-visitor-keys: 1.3.0
-      resolve: 1.15.0
+      resolve: 1.20.0
     deprecated: babel-eslint is now @babel/eslint-parser. This package will no longer receive updates.
     dev: false
     engines:
@@ -7071,7 +7111,7 @@ packages:
       integrity: sha1-jzQsOCduh6R9X6CovT1etsytj8w=
   /babel-plugin-macros/2.8.0:
     dependencies:
-      '@babel/runtime': 7.9.0
+      '@babel/runtime': 7.14.0
       cosmiconfig: 6.0.0
       resolve: 1.20.0
     dev: false
@@ -11283,7 +11323,7 @@ packages:
       integrity: sha512-7Eczs8gIPDrVzT+EksYBcupqMyxSHXXrHOLRRxU2/DicV8789MRBRR8+Hc2uWzUupOs4YS4JzBmBxjjCVBxD/g==
   /faye-websocket/0.10.0:
     dependencies:
-      websocket-driver: 0.6.5
+      websocket-driver: 0.7.4
     dev: false
     engines:
       node: '>=0.4.0'
@@ -11631,7 +11671,7 @@ packages:
       integrity: sha1-+8cfDEGt6zf5bFd60e1C2P2sypE=
   /fork-ts-checker-webpack-plugin/4.1.6:
     dependencies:
-      '@babel/code-frame': 7.10.4
+      '@babel/code-frame': 7.12.13
       chalk: 2.4.2
       micromatch: 3.1.10
       minimatch: 3.0.4
@@ -22178,7 +22218,7 @@ packages:
       lodash.memoize: 4.1.2
       make-error: 1.3.6
       mkdirp: 0.5.5
-      resolve: 1.19.0
+      resolve: 1.20.0
       semver: 5.7.1
       yargs-parser: 10.1.0
     dev: false
@@ -23934,7 +23974,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==
-  'file:projects/cdn-viewer.tgz_319290f41e270ff133ba7da25a8a5c40':
+  'file:projects/cdn-viewer.tgz_f007c5df96a02c65f57c35203f2aec27':
     dependencies:
       '@bentley/bentleyjs-core': 2.16.2
       '@bentley/frontend-application-insights-client': 2.16.2_@bentley+itwin-client@2.16.2
@@ -23953,7 +23993,7 @@ packages:
       '@bentley/presentation-frontend': 2.16.2_3cb7bf4db2fdf315adf25957a221d639
       '@bentley/product-settings-client': 2.16.2_2b43108933ec51aa43f6278ddec93c9a
       '@bentley/rbac-client': 2.16.2_@bentley+itwin-client@2.16.2
-      '@bentley/react-scripts': 3.4.9_b476bede212392d6496701edb1afefcc
+      '@bentley/react-scripts': 3.4.11_860e224ed2543611ca26702b7673f8bf
       '@bentley/telemetry-client': 2.16.2_@bentley+itwin-client@2.16.2
       '@bentley/ui-abstract': 2.16.2_bd80812996c73064070b811237b6891a
       '@bentley/ui-components': 2.16.2_77e1cbe031f70bf94130f097c52b0785
@@ -23980,10 +24020,9 @@ packages:
     peerDependencies:
       node-sass: '*'
       redux: '*'
-      sass: '*'
       webpack: '*'
     resolution:
-      integrity: sha512-DJxEyxSdabWamSOLed+K61XM5GsD2vfWuhMlaz8P5cDsscrLgSm+zo4hJ2YJ6Cyx6aP3MD+8fvPdFuJDFhodzg==
+      integrity: sha512-1xozFDK9vJz48unEftBWE6oMOF43EAnTPotTQNaCejckMl0BDqDGB7lQFvVkrQ/W3jbKxcpGkjQesdaVsEzssg==
       tarball: 'file:projects/cdn-viewer.tgz'
     version: 0.0.0
   'file:projects/cra-template-web-viewer.tgz':
@@ -24079,7 +24118,7 @@ packages:
       '@bentley/presentation-frontend': 2.16.2_3cb7bf4db2fdf315adf25957a221d639
       '@bentley/product-settings-client': 2.16.2_2b43108933ec51aa43f6278ddec93c9a
       '@bentley/rbac-client': 2.16.2_@bentley+itwin-client@2.16.2
-      '@bentley/react-scripts': 3.4.9_b476bede212392d6496701edb1afefcc
+      '@bentley/react-scripts': 3.4.11_860e224ed2543611ca26702b7673f8bf
       '@bentley/telemetry-client': 2.16.2_@bentley+itwin-client@2.16.2
       '@bentley/ui-abstract': 2.16.2_bd80812996c73064070b811237b6891a
       '@bentley/ui-components': 2.16.2_77e1cbe031f70bf94130f097c52b0785
@@ -24114,7 +24153,7 @@ packages:
     peerDependencies:
       node-sass: '*'
     resolution:
-      integrity: sha512-K+LhBmJY2iL8jx6NHMknqJk4QYTw4kP99KR4yYcTU0fa/lRTHyC8mjfywhvqVCGXgP1qiQLStLKJHR5QN2/mCg==
+      integrity: sha512-w7juRcWCrQZ5T3noaDB9ZNTNnX0KTf4UEfhPrSUN+N5m+3qmk9/b7ky2xmlmGGYlEv6ZQ3I/y7A7/qFDvodq2w==
       tarball: 'file:projects/desktop-viewer-test.tgz'
     version: 0.0.0
   'file:projects/error-handling-react.tgz_d7b057a43bb8ffbfb60a4dfbbef72e9e':
@@ -24318,7 +24357,7 @@ packages:
       integrity: sha512-Cqy8m/Zk8BhaE3k8vrwohYiBTLNizlDApX5rhsQBwFunNLVXhbNOj9OaKwLpCwmNH6v7+qPEdLAEBkK7sa+XlA==
       tarball: 'file:projects/web-viewer-react.tgz'
     version: 0.0.0
-  'file:projects/web-viewer-test.tgz_863c8946d8b698c93d628d15bca02cd9':
+  'file:projects/web-viewer-test.tgz_node-sass@4.14.1+webpack@4.42.0':
     dependencies:
       '@bentley/bentleyjs-core': 2.16.2
       '@bentley/frontend-application-insights-client': 2.16.2_@bentley+itwin-client@2.16.2
@@ -24337,7 +24376,7 @@ packages:
       '@bentley/presentation-frontend': 2.16.2_3cb7bf4db2fdf315adf25957a221d639
       '@bentley/product-settings-client': 2.16.2_2b43108933ec51aa43f6278ddec93c9a
       '@bentley/rbac-client': 2.16.2_@bentley+itwin-client@2.16.2
-      '@bentley/react-scripts': 3.4.9_b476bede212392d6496701edb1afefcc
+      '@bentley/react-scripts': 3.4.11_860e224ed2543611ca26702b7673f8bf
       '@bentley/telemetry-client': 2.16.2_@bentley+itwin-client@2.16.2
       '@bentley/ui-abstract': 2.16.2_bd80812996c73064070b811237b6891a
       '@bentley/ui-components': 2.16.2_77e1cbe031f70bf94130f097c52b0785
@@ -24369,10 +24408,9 @@ packages:
     name: '@rush-temp/web-viewer-test'
     peerDependencies:
       node-sass: '*'
-      sass: '*'
       webpack: '*'
     resolution:
-      integrity: sha512-uu9OeIAnC2mLGZZ9RjwhfWHNF4pZvfMPMyiN3z26kU0L00Am/RIZ5YjrIZcylhwYcqQFQ3AnFtEKHSIHUX97Tw==
+      integrity: sha512-LJu1dckyoe9FVI/cA0ZLtr5s4zuN5HOU8xh0PXp42HLTscCIOeSeC7YNML/TGGeOJWFepP+4P7ouYBKaXDb6lw==
       tarball: 'file:projects/web-viewer-test.tgz'
     version: 0.0.0
 registry: ''
@@ -24410,7 +24448,7 @@ specifiers:
   '@bentley/product-settings-client': ^2.14.0
   '@bentley/property-grid-react': ^1.2.1
   '@bentley/rbac-client': ^2.14.0
-  '@bentley/react-scripts': 3.4.9
+  '@bentley/react-scripts': 3.4.11
   '@bentley/telemetry-client': ^2.14.0
   '@bentley/tree-widget-react': ^1.2.8
   '@bentley/ui-abstract': ^2.14.0
