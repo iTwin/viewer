@@ -15,7 +15,6 @@ import { ITwinViewerApp } from "./app/ITwinViewerApp";
 import { AppComponent } from "./components/AppComponent";
 
 const viewerFrontendMain = async () => {
-  console.log("index tsx");
   // Setup logging immediately to pick up any logging during App.startup()
   Logger.initializeToConsole();
   Logger.setLevelDefault(LogLevel.Warning);

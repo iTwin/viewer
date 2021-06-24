@@ -7,4 +7,3 @@
 // from the frontend.
 
 import "./frontend/index";
-console.log("index");

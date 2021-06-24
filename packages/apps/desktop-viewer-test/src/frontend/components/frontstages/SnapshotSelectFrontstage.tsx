@@ -3,6 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { Logger } from "@bentley/bentleyjs-core";
 import {
   Button,
   ButtonSize,
@@ -27,6 +28,7 @@ import {
 import { OpenDialogOptions, OpenDialogReturnValue } from "electron";
 import * as React from "react";
 
+import { AppLoggerCategory } from "../../../common/LoggerCategory";
 import { ITwinViewerApp } from "../../app/ITwinViewerApp";
 
 /* eslint-disable react/jsx-key */
@@ -104,7 +106,9 @@ class LocalFilePage extends React.Component {
           type: "App:OPEN_SNAPSHOT",
           payload: file,
         });
-      } catch (e) {}
+      } catch (e) {
+        Logger.logError(AppLoggerCategory.Frontend, e);
+      }
     }
   };
 
