@@ -36,8 +36,6 @@ class IModelSelectorControl extends ContentControl {
     ITwinViewerApp.store.dispatch({
       type: "App:OPEN_IMODEL",
       payload: {
-        projectName: iModelInfo.projectInfo.name,
-        imodelName: iModelInfo.name,
         projectId: iModelInfo.projectInfo.wsgId,
         iModelId: iModelInfo.wsgId,
       },

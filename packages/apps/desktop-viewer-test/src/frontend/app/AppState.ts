@@ -22,8 +22,6 @@ export enum SwitchState {
 }
 
 export interface SelectedIModel {
-  iModelName: string;
-  projectName: string;
   iModelId: string;
   projectId: string;
 }
