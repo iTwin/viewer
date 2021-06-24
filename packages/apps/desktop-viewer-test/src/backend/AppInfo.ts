@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 export const appInfo = {
   id: "itwin-viewer",
-  title: "iTwin Viewer",
+  title: "iTwin Desktop Viewer",
   envPrefix: "ITWIN_VIEWER_",
 };
 
