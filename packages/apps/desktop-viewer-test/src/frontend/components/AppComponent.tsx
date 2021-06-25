@@ -35,7 +35,7 @@ const fromLocalStorage = (name: LocalStoreName) =>
 const toLocalStorage = (baseName: LocalStoreName, val?: string) => {
   const name = makeLocalStoreName(baseName);
   const storage = window.localStorage;
-  if (val === undefined || val.length === 0) {
+  if (!val) {
     storage.removeItem(name);
   } else {
     storage.setItem(name, val);
