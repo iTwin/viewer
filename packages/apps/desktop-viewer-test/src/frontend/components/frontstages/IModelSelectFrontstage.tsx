@@ -20,7 +20,7 @@ import {
 } from "@bentley/ui-framework";
 import * as React from "react";
 
-import { ITwinViewerApp } from "../../app/ITwinViewerApp";
+import store from "../../app/store";
 
 /* eslint-disable react/jsx-key */
 
@@ -33,8 +33,8 @@ class IModelSelectorControl extends ContentControl {
 
   // called when an imodel has been selected on the IModelSelect
   private _onSelectIModel = async (iModelInfo: IModelInfo) => {
-    ITwinViewerApp.store.dispatch({
-      type: "App:OPEN_IMODEL",
+    store.dispatch({
+      type: "OPEN_IMODEL",
       payload: {
         projectId: iModelInfo.projectInfo.wsgId,
         iModelId: iModelInfo.wsgId,

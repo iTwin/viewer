@@ -29,6 +29,7 @@ import { OpenDialogOptions, OpenDialogReturnValue } from "electron";
 import * as React from "react";
 
 import { AppLoggerCategory } from "../../../common/LoggerCategory";
+import store from "../../app/store";
 import { ITwinViewerApp } from "../../app/ITwinViewerApp";
 
 /* eslint-disable react/jsx-key */
@@ -102,8 +103,8 @@ class LocalFilePage extends React.Component {
     const file = val.canceled ? undefined : val.filePaths[0];
     if (file) {
       try {
-        ITwinViewerApp.store.dispatch({
-          type: "App:OPEN_SNAPSHOT",
+        store.dispatch({
+          type: "OPEN_SNAPSHOT",
           payload: file,
         });
       } catch (e) {

@@ -17,7 +17,12 @@ import {
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { RootState, SelectedIModel, SwitchState } from "../app/AppState";
+import {
+  RootState,
+  SelectedIModel,
+  SwitchState,
+  useAppDispatch,
+} from "../app/store";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import { IModelSelectFrontstage } from "./frontstages/IModelSelectFrontstage";
 import { SignInFrontstage } from "./frontstages/SignInFrontstage";
@@ -46,26 +51,29 @@ export const AppComponent = () => {
   const [backstageItems, setBackstageItems] = useState<ViewerBackstageItem[]>();
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
   const [connectedMode, setConnectedMode] = useState<boolean>(false);
-  const [frontstage, setFrontstage] =
-    useState<"IModelSelector" | "SnapshotSelector" | "Viewer">();
+  const [frontstage, setFrontstage] = useState<
+    "IModelSelector" | "SnapshotSelector" | "Viewer"
+  >();
 
   const selectedSnapshot = useSelector<RootState, string>(
-    (state: RootState) => state?.switchIModelState?.selectedSnapshot
+    (state: RootState) => state?.selectedSnapshot
   );
   const selectedIModel = useSelector<RootState, SelectedIModel | undefined>(
-    (state: RootState) => state?.switchIModelState?.selectedIModel
+    (state: RootState) => state?.selectedIModel
   );
   const switchSelectionState = useSelector<RootState, SwitchState>(
-    (state: RootState) => state?.switchIModelState?.switchState
+    (state: RootState) => state?.switchState
   );
+
+  const dispatch = useAppDispatch();
 
   const onIModelAppInitialized = async () => {
     await IModelSelect.initialize(IModelApp.i18n);
 
     const config = await ITwinViewerApp.getConfig();
     if (config?.snapshotName) {
-      ITwinViewerApp.store.dispatch({
-        type: "App:OPEN_SNAPSHOT",
+      dispatch({
+        type: "OPEN_SNAPSHOT",
         payload: config.snapshotName,
       });
     }

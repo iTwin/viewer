@@ -43,6 +43,7 @@ dependencies:
   '@bentley/webgl-compatibility': 2.16.2_@bentley+bentleyjs-core@2.16.2
   '@microsoft/applicationinsights-react-js': 2.3.1
   '@microsoft/applicationinsights-web': 2.3.1
+  '@reduxjs/toolkit': 1.6.0_react-redux@7.2.4
   '@rush-temp/cdn-viewer': 'file:projects/cdn-viewer.tgz_f007c5df96a02c65f57c35203f2aec27'
   '@rush-temp/cra-template-web-viewer': 'file:projects/cra-template-web-viewer.tgz'
   '@rush-temp/desktop-viewer-react': 'file:projects/desktop-viewer-react.tgz_7da90a24d6e48526c982f8f5773837f9'
@@ -5032,6 +5033,43 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Pc/AFTdwZwEKJxFJvlxrSmGe/di+aAOBn60sremrpLo6VI/6cmiUYNNwlI5KNYttg7uypzA3ILPMPgxB2GYZEg==
+  /@reduxjs/toolkit/1.6.0_react-redux@7.2.4:
+    dependencies:
+      immer: 9.0.2
+      react-redux: 7.2.4
+      redux: 4.1.0
+      redux-thunk: 2.3.0
+      reselect: 4.0.0
+    dev: false
+    peerDependencies:
+      react: ^16.14.0 || ^17.0.0
+      react-redux: ^7.2.1
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-redux:
+        optional: true
+    resolution:
+      integrity: sha512-eGL50G+Vj5AG5uD0lineb6rRtbs96M8+hxbcwkHpZ8LQcmt0Bm33WyBSnj5AweLkjQ7ZP+KFRDHiLMznljRQ3A==
+  /@reduxjs/toolkit/1.6.0_react-redux@7.2.4+react@16.13.1:
+    dependencies:
+      immer: 9.0.2
+      react: 16.13.1
+      react-redux: 7.2.4_react-dom@16.13.1+react@16.13.1
+      redux: 4.1.0
+      redux-thunk: 2.3.0
+      reselect: 4.0.0
+    dev: false
+    peerDependencies:
+      react: ^16.14.0 || ^17.0.0
+      react-redux: ^7.2.1
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-redux:
+        optional: true
+    resolution:
+      integrity: sha512-eGL50G+Vj5AG5uD0lineb6rRtbs96M8+hxbcwkHpZ8LQcmt0Bm33WyBSnj5AweLkjQ7ZP+KFRDHiLMznljRQ3A==
   /@sindresorhus/is/0.14.0:
     dev: false
     engines:
@@ -19787,6 +19825,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==
+  /redux-thunk/2.3.0:
+    dev: false
+    resolution:
+      integrity: sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw==
   /redux/4.1.0:
     dependencies:
       '@babel/runtime': 7.14.0
@@ -20098,6 +20140,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+  /reselect/4.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-qUgANli03jjAyGlnbYVAV5vvnOmJnODyABz51RdBN7M4WaVu8mecZWgyQNkG8Yqe3KRGRt0l4K4B3XVEULC4CA==
   /resize-observer-polyfill/1.5.1:
     dev: false
     resolution:
@@ -24126,6 +24172,7 @@ packages:
       '@bentley/ui-framework': 2.16.2_f2a14ff5f0f0f22e9ed05a97ea9541ef
       '@bentley/ui-ninezone': 2.16.2_aa6278b34629050459068f16dfb14ca6
       '@bentley/webgl-compatibility': 2.16.2_@bentley+bentleyjs-core@2.16.2
+      '@reduxjs/toolkit': 1.6.0_react-redux@7.2.4+react@16.13.1
       '@types/electron-devtools-installer': 2.2.0
       '@types/minimist': 1.2.1
       '@types/react': 16.14.8
@@ -24153,7 +24200,7 @@ packages:
     peerDependencies:
       node-sass: '*'
     resolution:
-      integrity: sha512-w7juRcWCrQZ5T3noaDB9ZNTNnX0KTf4UEfhPrSUN+N5m+3qmk9/b7ky2xmlmGGYlEv6ZQ3I/y7A7/qFDvodq2w==
+      integrity: sha512-rV5xmgU4RYTZ2b4Zpsn3luscS2EsHN1DMFUgqLxDMx0Lr1jYzbO5wljwJC+RgnukeXOyTT6x9OjBGL5VcuMyoQ==
       tarball: 'file:projects/desktop-viewer-test.tgz'
     version: 0.0.0
   'file:projects/error-handling-react.tgz_d7b057a43bb8ffbfb60a4dfbbef72e9e':
@@ -24204,7 +24251,7 @@ packages:
       '@bentley/ui-abstract': '*'
       webpack: '*'
     resolution:
-      integrity: sha512-V1MbjupiPAKqsRqH08eH6Lnz6OZmu/NDoMaiilN9QBNIZiqpYEfzPsH3Dyl5RvzUIqnR7QlkZEgY8VDH8ZKyBA==
+      integrity: sha512-XxhpT6RlyiVSUrI4/gSBiDYq57u5r6tkjNxgFS0F+xlKdftwmpCKK796HzSc+NlV5xPLYjeTLVS+OzecsXxyOg==
       tarball: 'file:projects/error-handling-react.tgz'
     version: 0.0.0
   'file:projects/viewer-react.tgz_ef78076dc9c8cb9823b3dfb1943f693e':
@@ -24459,6 +24506,7 @@ specifiers:
   '@bentley/webgl-compatibility': ^2.14.0
   '@microsoft/applicationinsights-react-js': 2.3.1
   '@microsoft/applicationinsights-web': 2.3.1
+  '@reduxjs/toolkit': ~1.6.0
   '@rush-temp/cdn-viewer': 'file:./projects/cdn-viewer.tgz'
   '@rush-temp/cra-template-web-viewer': 'file:./projects/cra-template-web-viewer.tgz'
   '@rush-temp/desktop-viewer-react': 'file:./projects/desktop-viewer-react.tgz'
@@ -24490,7 +24538,7 @@ specifiers:
   apollo-client: ^2.6.4
   babel-jest: ^25.2.6
   babel-plugin-import-remove-resource-query: ^1.0.0
-  classnames: ^2.2.6
+  classnames: ^2.3.1
   concurrently: ^5.2.0
   copyfiles: ^2.1.0
   cpx: ^1.5.0

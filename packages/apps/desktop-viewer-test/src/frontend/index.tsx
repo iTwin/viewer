@@ -11,7 +11,7 @@ import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";
-import { ITwinViewerApp } from "./app/ITwinViewerApp";
+import store from "./app/store";
 import { AppComponent } from "./components/AppComponent";
 
 const viewerFrontendMain = async () => {
@@ -20,12 +20,9 @@ const viewerFrontendMain = async () => {
   Logger.setLevelDefault(LogLevel.Warning);
   Logger.setLevel(AppLoggerCategory.Frontend, LogLevel.Info);
 
-  // Start the viewer app
-  await ITwinViewerApp.startup();
-
   // when initialization is complete, render
   ReactDOM.render(
-    <Provider store={ITwinViewerApp.store}>
+    <Provider store={store}>
       <AppComponent />
     </Provider>,
     document.getElementById("root")
