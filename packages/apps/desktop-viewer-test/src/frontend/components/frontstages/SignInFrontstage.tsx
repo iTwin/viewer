@@ -45,10 +45,7 @@ class SignInControl extends ContentControl {
   };
 
   private _onRegister = () => {
-    window.open(
-      "https://www.imodeljs.org/getting-started/#developer-registration",
-      "_blank"
-    );
+    window.open("https://developer.bentley.com/register/", "_blank");
   };
 }
 

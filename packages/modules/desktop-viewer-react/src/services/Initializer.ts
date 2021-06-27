@@ -34,7 +34,7 @@ export class DesktopInitializer {
     }
   };
 
-  /** Web viewer startup */
+  /** Desktop viewer startup */
   public static async startDesktopViewer(options?: DesktopViewerProps) {
     if (!IModelApp.initialized && !this._initializing) {
       console.log("starting desktop viewer");
