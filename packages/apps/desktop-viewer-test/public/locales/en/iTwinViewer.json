@@ -1,0 +1,20 @@
+{
+  "signing-in": "Signing-in",
+  "opening": "Opening",
+  "noViewDefinition": "No valid view definitions in iModel",
+  "snapshotOpenError": "Cannot open \"{{fileName}}\": {{error}}",
+  "noIModel": "iModel with name {{imodelName}} does not exist in project {{projectName}}",
+  "noProject": "Project with name {{projectName}} does not exist",
+  "components": {
+    "properties": "Properties"
+  },
+  "backstage": {
+    "selectIModel": "Open Online iModel",
+    "selectSnapshot": "Open Offline Snapshot",
+    "mainFrontstage": "View Active Model"
+  },
+  "snapshotSelect": {
+    "title": "Open Local Snapshot",
+    "open": "Select Snapshot File"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "signing-in": "$ígñïñg-íñ",
+  "opening": "Òpéñïñg",
+  "noViewDefinition": "Ñó vâlïd vìéw dêfïñítîøñs íñ ïMödél",
+  "snapshotOpenError": "Çáññöt øpêñ \"{{fileName}}\": {{error}}",
+  "noIModel": "ìMódêl wïth ñåmê {{imodelName}} dóès ñöt ë×íst îñ pröjé¢t {{projectName}}",
+  "noProject": "Pròjé¢t wïth ñåmê {{projectName}} dóès ñöt ë×íst",
+  "components": {
+    "properties": "Pròpértîës"
+  },
+  "backstage": {
+    "selectIModel": "Òpéñ Õñlíñë ìMõdêl",
+    "selectSnapshot": "Òpéñ Õfflìñê §ñãpshöt",
+    "mainFrontstage": "Vìéw ,çtìvé Mòdël"
+  },
+  "snapshotSelect": {
+    "title": "Òpéñ £öçàl §ñãpshöt",
+    "open": "$élêçt $ñàpshót Fìlé"
+  }
+}
