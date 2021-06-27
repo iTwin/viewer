@@ -1,6 +1,6 @@
 {
   "name": "@itwin/desktop-viewer-react",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Configurable iTwin.js viewer for desktop applications",
   "main": "lib/index.js",
   "module": "build/index.js",
@@ -85,7 +85,7 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "@itwin/viewer-react": "1.0.0"
+    "@itwin/viewer-react": "1.0.1"
   },
   "peerDependencies": {
     "@bentley/bentleyjs-core": "^2.14.0",
