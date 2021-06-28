@@ -67,7 +67,7 @@ export const MyViewerComponent = () => {
 
 #### Required
 
-- `contextId` - GUID for the context (project, asset, etc.) that contains the iMode that you wish to view
+- `contextId` - GUID for the context (project, asset, etc.) that contains the iModel that you wish to view
 - `iModelId` - GUID for the iModel that you wish to view
 - `authConfig` - OIDC configuration or an instance of an iTwin.js [BrowserAuthorizationClient](https://www.itwinjs.org/reference/frontend-authorization-client/browserauthorization/browserauthorizationclient/)
 

@@ -7,7 +7,10 @@ import {
   BrowserAuthorizationClient,
   BrowserAuthorizationClientConfiguration,
 } from "@bentley/frontend-authorization-client";
-import { RpcRoutingToken } from "@bentley/imodeljs-common";
+import {
+  BentleyCloudRpcParams,
+  RpcRoutingToken,
+} from "@bentley/imodeljs-common";
 import {
   BlankViewerProps,
   ItwinViewerCommonParams,
@@ -27,11 +30,47 @@ export interface WebAuthorizationOptions {
   getUserManagerFunction?: () => UserManager;
 }
 
+/**
+ * List of possible hosted backends that the iTwin Viewer can use
+ */
+export enum IModelBackend {
+  GeneralPurpose = "general-purpose-imodeljs-backend",
+}
+
+/**
+ * Hosted backend configuration
+ */
+export interface HostedBackendConfig {
+  /* title for rpc config */
+  title: IModelBackend | string;
+  /* in the form "vx.x" */
+  version: string;
+}
+
+/**
+ * Custom rpc configuration
+ */
+export interface CustomBackendConfig {
+  rpcParams: BentleyCloudRpcParams;
+}
+
+/**
+ * Backend configuration
+ */
+export interface IModelBackendOptions {
+  hostedBackend?: HostedBackendConfig;
+  customBackend?: CustomBackendConfig;
+  buddiRegion?: number;
+  buddiServer?: string;
+}
+
 export interface WebViewerPropsFull extends ViewerProps {
   /** routing token for rpcs */
   rpcRoutingToken?: RpcRoutingToken;
   /** authorization configuration */
   authConfig: WebAuthorizationOptions;
+  /** options to override the default backend (general-purpose-imodeljs-backend) */
+  backend?: IModelBackendOptions;
 }
 
 // TODO remove this once we support opening snapshots remotely

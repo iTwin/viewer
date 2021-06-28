@@ -30,40 +30,6 @@ import {
   IModelViewportControlOptions,
 } from "@bentley/ui-framework";
 
-/**
- * List of possible hosted backends that the iTwin Viewer can use
- */
-export enum IModelBackend {
-  GeneralPurpose = "general-purpose-imodeljs-backend",
-}
-
-/**
- * Hosted backend configuration
- */
-export interface HostedBackendConfig {
-  /* title for rpc config */
-  title: IModelBackend | string;
-  /* in the form "vx.x" */
-  version: string;
-}
-
-/**
- * Custom rpc configuration
- */
-export interface CustomBackendConfig {
-  rpcParams: BentleyCloudRpcParams;
-}
-
-/**
- * Backend configuration
- */
-export interface IModelBackendOptions {
-  hostedBackend?: HostedBackendConfig;
-  customBackend?: CustomBackendConfig;
-  buddiRegion?: number;
-  buddiServer?: string;
-}
-
 export interface ViewerFrontstage {
   /** frontstage provider to register */
   provider: FrontstageProvider;
@@ -113,8 +79,6 @@ export interface ItwinViewerInitializerParams {
   appInsightsKey?: string;
   /** optional iTwin.js Application Insights key for telemetry within iTwin.js */
   imjsAppInsightsKey?: string;
-  /** options to override the default backend (general-purpose-imodeljs-backend) */
-  backend?: IModelBackendOptions;
   /** GPRID for the consuming application. Will default to the iTwin Viewer GPRID */
   productId?: string;
   /** urlTemplate for querying i18n json files */

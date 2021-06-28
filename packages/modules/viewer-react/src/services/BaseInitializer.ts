@@ -31,7 +31,7 @@ import {
   UiFramework,
 } from "@bentley/ui-framework";
 
-import { IModelBackendOptions, ItwinViewerInitializerParams } from "../types";
+import { ItwinViewerInitializerParams } from "../types";
 import { ai, trackEvent } from "./telemetry/TelemetryService";
 
 // initialize required iTwin.js services
@@ -144,18 +144,6 @@ export class BaseInitializer {
     await IModelApp.shutdown();
   }
 
-  /** add required values to Config.App */
-  static setupEnv(options?: IModelBackendOptions): void {
-    Config.App.merge({
-      imjs_buddi_url:
-        options?.buddiServer !== undefined
-          ? options.buddiServer
-          : "https://buddi.bentley.com/WebService",
-      imjs_buddi_resolve_url_using_region:
-        options?.buddiRegion !== undefined ? options.buddiRegion : 0,
-    });
-  }
-
   /** initialize required iTwin.js services */
   public static async initialize(
     viewerOptions?: ItwinViewerInitializerParams
@@ -178,8 +166,6 @@ export class BaseInitializer {
         new StateManager({
           frameworkState: FrameworkReducer,
         });
-
-        this.setupEnv(viewerOptions?.backend);
 
         // execute the iModelApp initialization callback if provided
         if (viewerOptions?.onIModelAppInit) {
