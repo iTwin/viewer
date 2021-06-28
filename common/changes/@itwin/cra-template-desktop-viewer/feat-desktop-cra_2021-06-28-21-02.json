@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/cra-template-desktop-viewer",
       "comment": "Create CRA template for desktop apps",
-      "type": "major"
+      "type": "patch"
     }
   ],
   "packageName": "@itwin/cra-template-desktop-viewer",
