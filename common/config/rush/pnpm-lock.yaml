@@ -24,7 +24,7 @@ importers:
       '@bentley/presentation-frontend': ^2.14.0
       '@bentley/product-settings-client': ^2.14.0
       '@bentley/rbac-client': ^2.14.0
-      '@bentley/react-scripts': 3.4.11
+      '@bentley/react-scripts': 3.4.13
       '@bentley/telemetry-client': ^2.14.0
       '@bentley/ui-abstract': ^2.14.0
       '@bentley/ui-components': ^2.14.0
@@ -64,7 +64,7 @@ importers:
       '@bentley/presentation-frontend': 2.16.2_3cb7bf4db2fdf315adf25957a221d639
       '@bentley/product-settings-client': 2.16.2_2b43108933ec51aa43f6278ddec93c9a
       '@bentley/rbac-client': 2.16.2_@bentley+itwin-client@2.16.2
-      '@bentley/react-scripts': 3.4.11_typescript@3.9.9
+      '@bentley/react-scripts': 3.4.13_typescript@3.9.9
       '@bentley/telemetry-client': 2.16.2_@bentley+itwin-client@2.16.2
       '@bentley/ui-abstract': 2.16.2_bd80812996c73064070b811237b6891a
       '@bentley/ui-components': 2.16.2_77e1cbe031f70bf94130f097c52b0785
@@ -116,7 +116,7 @@ importers:
       '@bentley/presentation-frontend': ^2.14.0
       '@bentley/product-settings-client': ^2.14.0
       '@bentley/rbac-client': ^2.14.0
-      '@bentley/react-scripts': 3.4.11
+      '@bentley/react-scripts': 3.4.13
       '@bentley/telemetry-client': ^2.14.0
       '@bentley/ui-abstract': ^2.14.0
       '@bentley/ui-components': ^2.14.0
@@ -189,7 +189,7 @@ importers:
       react-redux: 7.2.4_react-dom@16.13.1+react@16.13.1
     devDependencies:
       '@bentley/build-tools': 2.16.7
-      '@bentley/react-scripts': 3.4.11_typescript@3.9.9
+      '@bentley/react-scripts': 3.4.13_typescript@3.9.9
       '@types/electron-devtools-installer': 2.2.0
       '@types/minimist': 1.2.1
       '@types/react': 16.14.8
@@ -224,7 +224,7 @@ importers:
       '@bentley/presentation-frontend': ^2.14.0
       '@bentley/product-settings-client': ^2.14.0
       '@bentley/rbac-client': ^2.14.0
-      '@bentley/react-scripts': 3.4.11
+      '@bentley/react-scripts': 3.4.13
       '@bentley/telemetry-client': ^2.14.0
       '@bentley/ui-abstract': ^2.14.0
       '@bentley/ui-components': ^2.14.0
@@ -286,7 +286,7 @@ importers:
       react-router-dom: 5.2.0_react@16.13.1
       redux: 4.1.0
     devDependencies:
-      '@bentley/react-scripts': 3.4.11_typescript@3.9.9
+      '@bentley/react-scripts': 3.4.13_typescript@3.9.9
       '@svgr/webpack': 4.3.3
       '@testing-library/jest-dom': 4.2.4
       '@testing-library/react': 10.4.9_react-dom@16.13.1+react@16.13.1
@@ -4025,8 +4025,8 @@ packages:
       '@bentley/bentleyjs-core': 2.16.2
       '@bentley/itwin-client': 2.16.2_@bentley+bentleyjs-core@2.16.2
 
-  /@bentley/react-scripts/3.4.11_typescript@3.9.9:
-    resolution: {integrity: sha512-cVMPBhO5qPg2thmZFRBXfM5j4YCNbdOtP/1U0PoluPSAk3FgAps5ZIp52OsMQJGJMTpz+rsnCJiYUKgwLEihNQ==}
+  /@bentley/react-scripts/3.4.13_typescript@3.9.9:
+    resolution: {integrity: sha512-VsH6p/H7JQbqqVcIap7BmFy/gWykUZ3Bp5xMuIjIWgmYM/c/ijJiOQjKeVXYOKFMscnsf7CzQ+5DasBfWZWglw==}
     engines: {node: '>=8.10'}
     hasBin: true
     peerDependencies:
@@ -4069,8 +4069,8 @@ packages:
       jest-environment-jsdom-fourteen: 1.0.1
       jest-resolve: 24.9.0
       jest-watch-typeahead: 0.4.2
-      mini-css-extract-plugin: 0.9.0_webpack@4.42.0
-      optimize-css-assets-webpack-plugin: 5.0.3_webpack@4.42.0
+      mini-css-extract-plugin: 0.11.3_webpack@4.42.0
+      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.42.0
       pnp-webpack-plugin: 1.6.4_typescript@3.9.9
       postcss-flexbugs-fixes: 4.1.0
       postcss-loader: 3.0.0
@@ -15307,11 +15307,11 @@ packages:
       tiny-warning: 1.0.3
     dev: false
 
-  /mini-css-extract-plugin/0.9.0_webpack@4.42.0:
-    resolution: {integrity: sha512-lp3GeY7ygcgAmVIcRPBVhIkf8Us7FZjA+ILpal44qLdSu11wmjKQ3d9k15lfD7pO4esu9eUIAW7qiYIBppv40A==}
+  /mini-css-extract-plugin/0.11.3_webpack@4.42.0:
+    resolution: {integrity: sha512-n9BA8LonkOkW1/zn+IbLPQmovsL0wMb9yx75fMJQZf2X1Zoec9yTZtyMePcyu19wPkmFbzZZA6fLTotpFhQsOA==}
     engines: {node: '>= 6.9.0'}
     peerDependencies:
-      webpack: ^4.4.0
+      webpack: ^4.4.0 || ^5.0.0
     dependencies:
       loader-utils: 1.4.0
       normalize-url: 1.9.1
@@ -16029,8 +16029,8 @@ packages:
     dependencies:
       is-wsl: 1.1.0
 
-  /optimize-css-assets-webpack-plugin/5.0.3_webpack@4.42.0:
-    resolution: {integrity: sha512-q9fbvCRS6EYtUKKSwI87qm2IxlyJK5b4dygW1rKUBT6mMDhdG5e5bZT63v6tnJR9F9FB/H5a0HTmtw+laUBxKA==}
+  /optimize-css-assets-webpack-plugin/5.0.8_webpack@4.42.0:
+    resolution: {integrity: sha512-mgFS1JdOtEGzD8l+EuISqL57cKO+We9GcoiQEmdCWRqqck+FGNmYJtx9qfAPzEz+lRrlThWMuGDaRkI/yWNx/Q==}
     peerDependencies:
       webpack: ^4.0.0
     dependencies:
