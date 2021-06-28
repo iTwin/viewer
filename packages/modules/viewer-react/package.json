@@ -1,6 +1,6 @@
 {
   "name": "@itwin/viewer-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Configurable iTwin.js viewer",
   "main": "lib/index.js",
   "module": "build/index.js",

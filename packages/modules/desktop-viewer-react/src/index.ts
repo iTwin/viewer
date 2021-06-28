@@ -5,3 +5,4 @@
 
 export * from "@itwin/viewer-react";
 export * from "./components/Viewer";
+export * from "./types";

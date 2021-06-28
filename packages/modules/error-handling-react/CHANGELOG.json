@@ -2,6 +2,18 @@
   "name": "@itwin/error-handling-react",
   "entries": [
     {
+      "version": "1.0.1",
+      "tag": "@itwin/error-handling-react_v1.0.1",
+      "date": "Sun, 27 Jun 2021 21:12:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update react-scripts"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.0",
       "tag": "@itwin/error-handling-react_v1.0.0",
       "date": "Fri, 04 Jun 2021 15:23:23 GMT",
