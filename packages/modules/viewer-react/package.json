@@ -51,7 +51,6 @@
   },
   "devDependencies": {
     "@bentley/bentleyjs-core": "^2.14.0",
-    "@bentley/frontend-application-insights-client": "^2.14.0",
     "@bentley/frontend-authorization-client": "^2.14.0",
     "@bentley/geometry-core": "^2.14.0",
     "@bentley/imodelhub-client": "^2.14.0",
@@ -96,7 +95,6 @@
   },
   "peerDependencies": {
     "@bentley/bentleyjs-core": "^2.14.0",
-    "@bentley/frontend-application-insights-client": "^2.14.0",
     "@bentley/frontend-authorization-client": "^2.14.0",
     "@bentley/geometry-core": "^2.14.0",
     "@bentley/imodelhub-client": "^2.14.0",

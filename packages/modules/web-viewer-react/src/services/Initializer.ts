@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ClientRequestContext, Config } from "@bentley/bentleyjs-core";
+import { FrontendApplicationInsightsClient } from "@bentley/frontend-application-insights-client";
 import { BentleyCloudRpcParams } from "@bentley/imodeljs-common";
 import {
   IModelApp,
@@ -140,6 +141,13 @@ export class WebInitializer {
 
           // optionally change the environment
           this._setupEnv(options?.backend);
+
+          // Add iModelJS ApplicationInsights telemetry client if a key is provided
+          if (options?.imjsAppInsightsKey) {
+            const imjsApplicationInsightsClient =
+              new FrontendApplicationInsightsClient(options.imjsAppInsightsKey);
+            IModelApp.telemetry.addClient(imjsApplicationInsightsClient);
+          }
 
           console.log("web viewer started");
           resolve();

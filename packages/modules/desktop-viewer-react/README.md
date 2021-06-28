@@ -89,8 +89,6 @@ export const MyViewerComponent = () => {
   - `hidePropertyGrid` - hide the property grid widget
   - `hideDefaultStatusBar` - hide the status bar
 - `productId` - application's GPRID
-- `appInsightsKey` - Application Insights key for telemetry
-- `imjsAppInsightsKey` - Application Insights key for iTwin.js telemetry
 - `onIModelConnected` - Callback function that executes after the iModel connection is successful and contains the iModel connection as a parameter
 - `i18nUrlTemplate` - Override the default url template where i18n resource files are queried
 - `frontstages` - Provide additional frontstages for the viewer to render
