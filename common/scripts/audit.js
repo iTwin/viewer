@@ -6,7 +6,7 @@
 const fs = require("fs");
 const path = require("path");
 const { spawn } = require("child_process");
-const { logBuildError, logBuildWarning, throwAfterTimeout } = require("./utils");
+const { logBuildError, logBuildWarning, failBuild, throwAfterTimeout } = require("./utils");
 
 const rushCommonDir = path.join(__dirname, "../");
 
@@ -37,11 +37,10 @@ const rushCommonDir = path.join(__dirname, "../");
   // for development dependencies only.
   // All security issues should be addressed asap.
   const excludedAdvisories = [
-    1674, // https://npmjs.com/advisories/1674
-    1700, // https://npmjs.com/advisories/1700
+    1754, // https://npmjs.com/advisories/1754
   ];
 
-  const failBuild = false;
+  let shouldFailBuild = false;
   for (const action of jsonOut.actions) {
     for (const issue of action.resolves) {
       const advisory = jsonOut.advisories[issue.id];
@@ -55,14 +54,14 @@ const rushCommonDir = path.join(__dirname, "../");
       // For now, we'll only treat CRITICAL and HIGH vulnerabilities as errors in CI builds.
       if (!excludedAdvisories.includes(advisory.id) && (severity === "HIGH" || severity === "CRITICAL")) {
         logBuildError(message);
-        failBuild = true;
+        shouldFailBuild = true;
       } else if (excludedAdvisories.includes(advisory.id) || severity === "MODERATE") // Only warn on MODERATE severity items
         logBuildWarning(message);
     }
   }
 
   // For some reason yarn audit can return the json without the vulnerabilities
-  if (undefined === jsonOut.metadata.vulnerabilities || failBuild)
+  if (undefined === jsonOut.metadata.vulnerabilities || shouldFailBuild)
     failBuild();
 
   process.exit();
