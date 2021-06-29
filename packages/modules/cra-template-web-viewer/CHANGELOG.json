@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "1.0.2",
+      "tag": "@itwin/cra-template-web-viewer_v1.0.2",
+      "date": "Tue, 29 Jun 2021 14:16:33 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "bump version of bentley/react-scripts to get localized strings and static assets in development "
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.1",
       "tag": "@itwin/cra-template-web-viewer_v1.0.1",
       "date": "Sun, 27 Jun 2021 21:12:37 GMT",
