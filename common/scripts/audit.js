@@ -24,7 +24,7 @@ const rushCommonDir = path.join(__dirname, "../");
   try {
     console.time("Audit time");
     jsonOut = await Promise.race([
-      runYarnAuditAsync(commonTempDir),
+      runPnpmAuditAsync(commonTempDir),
       throwAfterTimeout(180000, "Timed out contacting npm registry."),
     ]);
     console.timeEnd("Audit time");
