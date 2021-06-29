@@ -64,7 +64,7 @@
     "@bentley/ui-framework": "^2.14.0",
     "@bentley/ui-ninezone": "^2.14.0",
     "@bentley/webgl-compatibility": "^2.14.0",
-    "@itwin/desktop-viewer-react": "^1.0.0",
+    "@itwin/desktop-viewer-react": "workspace:*",
     "@reduxjs/toolkit": "^1.6.0",
     "electron": "^11.1.0",
     "minimist": "^1.2.5",
@@ -75,7 +75,7 @@
   },
   "devDependencies": {
     "@bentley/build-tools": "^2.14.0",
-    "@bentley/react-scripts": "3.4.11",
+    "@bentley/react-scripts": "3.4.13",
     "@types/electron-devtools-installer": "^2.2.0",
     "@types/minimist": "^1.2.0",
     "@types/react": "^16.9.0",
