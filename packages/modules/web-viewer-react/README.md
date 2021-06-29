@@ -52,13 +52,11 @@ export const MyViewerComponent = () => {
   };
 
   return (
-    <div>
-      <Viewer
-        authConfig={{ config: authConfig }}
-        contextId={contextId}
-        iModelId={iModelId}
-      />
-    </div>
+    <Viewer
+      authConfig={{ config: authConfig }}
+      contextId={contextId}
+      iModelId={iModelId}
+    />
   );
 };
 ```
@@ -191,13 +189,11 @@ export const MyBlankViewerComponent = () => {
   };
 
   return (
-    <div>
-      <BlankViewer
-        authConfig={{ config: authConfig }}
-        blankConnection={blankConnection}
-        viewStateOptions={viewStateOptions}
-      />
-    </div>
+    <BlankViewer
+      authConfig={{ config: authConfig }}
+      blankConnection={blankConnection}
+      viewStateOptions={viewStateOptions}
+    />
   );
 };
 ```
