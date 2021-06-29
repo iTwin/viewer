@@ -7,7 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Prior to running the app, you will need to add OIDC client configuration to the variables in the .env file:
 
 ```
-ITWIN_VIEWER_CLIENT_ID="myClientId"
+ITWIN_VIEWER_CLIENT_ID="native-xxxxxxxx"
 ```
 
 - You can generate a [test client](https://developer.bentley.com/tutorials/web-application-quick-start/#2-register-an-application) to get started. The client that you generate should be for a desktop app and use the Visualization apis. You can add the default redirect uri (http://localhost:3000/signin-callback).
