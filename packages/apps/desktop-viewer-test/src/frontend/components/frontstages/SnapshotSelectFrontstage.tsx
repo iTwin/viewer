@@ -29,8 +29,8 @@ import { OpenDialogOptions, OpenDialogReturnValue } from "electron";
 import * as React from "react";
 
 import { AppLoggerCategory } from "../../../common/LoggerCategory";
-import { ITwinViewerApp } from "../../app/ITwinViewerApp";
 import store from "../../app/store";
+import { ITwinViewerApp } from "../../app/ITwinViewerApp";
 
 /* eslint-disable react/jsx-key */
 

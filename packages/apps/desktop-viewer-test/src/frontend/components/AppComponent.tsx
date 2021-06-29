@@ -17,13 +17,13 @@ import {
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import {
   RootState,
   SelectedIModel,
   SwitchState,
   useAppDispatch,
 } from "../app/store";
+import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import { IModelSelectFrontstage } from "./frontstages/IModelSelectFrontstage";
 import { SignInFrontstage } from "./frontstages/SignInFrontstage";
 import { SnapshotSelectFrontstage } from "./frontstages/SnapshotSelectFrontstage";

@@ -85,7 +85,7 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "@itwin/viewer-react": "workspace:*"
+    "@itwin/viewer-react": "1.0.1"
   },
   "peerDependencies": {
     "@bentley/bentleyjs-core": "^2.14.0",
