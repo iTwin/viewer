@@ -20,7 +20,6 @@
     "@bentley/presentation-frontend": "^2.14.0",
     "@bentley/product-settings-client": "^2.14.0",
     "@bentley/rbac-client": "^2.14.0",
-    "@bentley/react-scripts": "3.4.13",
     "@bentley/telemetry-client": "^2.14.0",
     "@bentley/ui-abstract": "^2.14.0",
     "@bentley/ui-components": "^2.14.0",
@@ -28,7 +27,7 @@
     "@bentley/ui-framework": "^2.14.0",
     "@bentley/ui-ninezone": "^2.14.0",
     "@bentley/webgl-compatibility": "^2.14.0",
-    "@itwin/web-viewer-react": "1.0.1",
+    "@itwin/web-viewer-react": "workspace:*",
     "history": "^4.10.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -38,6 +37,7 @@
     "redux": "^4.0.5"
   },
   "devDependencies": {
+    "@bentley/react-scripts": "3.4.13",
     "@svgr/webpack": "4.3.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^10.4.4",
