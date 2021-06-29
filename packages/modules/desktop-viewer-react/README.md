@@ -29,7 +29,7 @@ In your webpack.config file:
 If you are creating a new application and are using React, it is advised that you use create-react-app with @bentley/react-scripts, which already include this plugin, as well as some other optimizations. There is also a predefined template that includes the iTwin Viewer package:
 
 ```
-npx create-react-app my-app --scripts-version @bentley/react-scripts --template @itwin/web-viewer
+npx create-react-app my-app --scripts-version @bentley/react-scripts --template @itwin/desktop-viewer
 ```
 
 ## React component
