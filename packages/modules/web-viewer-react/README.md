@@ -52,13 +52,11 @@ export const MyViewerComponent = () => {
   };
 
   return (
-    <div>
-      <Viewer
-        authConfig={{ config: authConfig }}
-        contextId={contextId}
-        iModelId={iModelId}
-      />
-    </div>
+    <Viewer
+      authConfig={{ config: authConfig }}
+      contextId={contextId}
+      iModelId={iModelId}
+    />
   );
 };
 ```
@@ -67,7 +65,7 @@ export const MyViewerComponent = () => {
 
 #### Required
 
-- `contextId` - GUID for the context (project, asset, etc.) that contains the iMode that you wish to view
+- `contextId` - GUID for the context (project, asset, etc.) that contains the iModel that you wish to view
 - `iModelId` - GUID for the iModel that you wish to view
 - `authConfig` - OIDC configuration or an instance of an iTwin.js [BrowserAuthorizationClient](https://www.itwinjs.org/reference/frontend-authorization-client/browserauthorization/browserauthorizationclient/)
 
@@ -191,13 +189,11 @@ export const MyBlankViewerComponent = () => {
   };
 
   return (
-    <div>
-      <BlankViewer
-        authConfig={{ config: authConfig }}
-        blankConnection={blankConnection}
-        viewStateOptions={viewStateOptions}
-      />
-    </div>
+    <BlankViewer
+      authConfig={{ config: authConfig }}
+      blankConnection={blankConnection}
+      viewStateOptions={viewStateOptions}
+    />
   );
 };
 ```

@@ -28,14 +28,20 @@ const viewerMain = async () => {
   Logger.setLevelDefault(LogLevel.Warning);
   Logger.setLevel(AppLoggerCategory.Backend, LogLevel.Info);
 
+  const clientId = getAppEnvVar("CLIENT_ID") ?? "";
+  const scope = getAppEnvVar("SCOPE") ?? "";
+  const redirectUri = getAppEnvVar("REDIRECT_URI");
+
   const electronHost: ElectronHostOptions = {
     webResourcesPath: path.join(__dirname, "..", "..", "build"),
     rpcInterfaces: viewerRpcs,
     developmentServer: process.env.NODE_ENV === "development",
     ipcHandlers: [ViewerHandler],
     authConfig: {
-      clientId: getAppEnvVar("CLIENT_ID") ?? "",
-      scope: getAppEnvVar("SCOPE") ?? "",
+      clientId,
+      scope,
+      redirectUri:
+        redirectUri && redirectUri.length > 0 ? redirectUri : undefined,
     },
   };
 

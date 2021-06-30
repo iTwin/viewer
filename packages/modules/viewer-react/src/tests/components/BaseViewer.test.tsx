@@ -11,9 +11,7 @@ import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
 import { BaseViewer } from "../..";
-import { BaseInitializer } from "../../services/BaseInitializer";
 import * as IModelService from "../../services/iModel/IModelService";
-import { IModelBackend, IModelBackendOptions } from "../../types";
 
 jest.mock("../../services/iModel/IModelService");
 jest.mock("@bentley/ui-framework");
@@ -147,37 +145,6 @@ describe("BaseViewer", () => {
 
     expect(loader).toBeInTheDocument();
     expect(SnapshotConnection.openFile).toHaveBeenCalledWith(snapshotPath);
-  });
-
-  it("initializes the Viewer with the provided backend configuration", async () => {
-    jest.spyOn(BaseInitializer, "initialize");
-
-    const backendConfig: IModelBackendOptions = {
-      hostedBackend: {
-        title: IModelBackend.GeneralPurpose,
-        version: "v2.0",
-      },
-    };
-
-    const { getByTestId } = render(
-      <BaseViewer
-        contextId={mockProjectId}
-        iModelId={mockIModelId}
-        backend={backendConfig}
-        productId={"0000"}
-      />
-    );
-
-    const viewerContainer = await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(viewerContainer).toBeInTheDocument();
-
-    expect(BaseInitializer.initialize).toHaveBeenCalledWith({
-      appInsightsKey: undefined,
-      backend: backendConfig,
-      imjsAppInsightsKey: undefined,
-      productId: "0000",
-    });
   });
 
   it("executes a callback after IModelApp is initialized", async () => {

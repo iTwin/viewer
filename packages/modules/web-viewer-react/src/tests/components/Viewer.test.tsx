@@ -17,6 +17,8 @@ import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
 import { Viewer } from "../../components/Viewer";
+import { WebInitializer } from "../../services/Initializer";
+import { IModelBackendOptions } from "../../types";
 
 jest.mock("@itwin/viewer-react", () => {
   return {
@@ -141,6 +143,39 @@ describe("Viewer", () => {
         uiAdmin: expect.anything(),
         toolAdmin: undefined,
       },
+    });
+  });
+
+  it("initializes the Viewer with the provided backend configuration", async () => {
+    jest.spyOn(WebInitializer, "startWebViewer");
+
+    const backendConfig: IModelBackendOptions = {
+      customBackend: {
+        rpcParams: {
+          info: {
+            title: "myBackend",
+            version: "v1.0",
+          },
+        },
+      },
+    };
+
+    const { getByTestId } = render(
+      <Viewer
+        authConfig={{ config: authConfig }}
+        contextId={mockProjectId}
+        iModelId={mockIModelId}
+        backend={backendConfig}
+      />
+    );
+
+    await waitFor(() => getByTestId("mock-div"));
+
+    expect(WebInitializer.startWebViewer).toHaveBeenCalledWith({
+      authConfig: { config: authConfig },
+      backend: backendConfig,
+      contextId: mockProjectId,
+      iModelId: mockIModelId,
     });
   });
 });
