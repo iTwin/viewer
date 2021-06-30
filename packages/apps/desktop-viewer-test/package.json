@@ -29,7 +29,7 @@
     "pseudolocalize": "betools pseudolocalize --englishDir ./public/locales/en --out ./public/locales/en-PSEUDO"
   },
   "browserslist": [
-    "electron 10.0.0"
+    "electron 8.0.0"
   ],
   "dependencies": {
     "@bentley/backend-itwin-client": "^2.14.0",
