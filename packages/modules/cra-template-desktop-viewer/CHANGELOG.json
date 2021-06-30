@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-desktop-viewer",
   "entries": [
     {
+      "version": "1.0.0",
+      "tag": "@itwin/cra-template-desktop-viewer_v1.0.0",
+      "date": "Wed, 30 Jun 2021 19:45:03 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "update deps and browserlist, bump to 1.0"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.1",
       "tag": "@itwin/cra-template-desktop-viewer_v0.1.1",
       "date": "Wed, 30 Jun 2021 18:27:06 GMT",
