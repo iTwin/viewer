@@ -83,35 +83,6 @@ const rushCommonDir = path.join(__dirname, "../");
   process.exit();
 })();
 
-function runYarnAuditAsync(cwd) {
-  return new Promise((resolve, reject) => {
-    const child = spawn("yarn", ["audit", "--json"], { cwd, shell: true });
-
-    let stdout = "";
-    let result = {
-      actions: [{ resolves: [] }],
-      advisories: {},
-    };
-    child.stdout.on("data", (data) => {
-      stdout += data;
-    });
-
-    child.on("error", (data) => reject(data));
-    child.on("close", () => {
-      const objs = JSON.parse("[" + stdout.trim().split("\n").join(",") + "]");
-      for (obj of objs) {
-        if (obj.type && obj.type === "auditAdvisory") {
-          result.actions[0].resolves.push(obj.data.resolution);
-          result.advisories[obj.data.resolution.id] = obj.data.advisory;
-        } else if (obj.type && obj.type === "auditSummary") {
-          result.metadata = obj.data;
-        }
-        resolve(result);
-      }
-    });
-  });
-}
-
 function runPnpmAuditAsync(cwd) {
   return new Promise((resolve, reject) => {
     // pnpm audit requires a package.json file so we temporarily create one and
