@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { IpcHandler } from "@bentley/imodeljs-backend";
 import { dialog } from "electron";
 import * as minimist from "minimist";

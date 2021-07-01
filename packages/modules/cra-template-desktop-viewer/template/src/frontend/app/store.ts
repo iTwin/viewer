@@ -31,10 +31,12 @@ const initialState: RootState = {
   selectedSnapshot: "",
 };
 
-export const openIModel =
-  createAction<SelectedIModel, "OPEN_IMODEL">("OPEN_IMODEL");
-export const openSnapshot =
-  createAction<string, "OPEN_SNAPSHOT">("OPEN_SNAPSHOT");
+export const openIModel = createAction<SelectedIModel, "OPEN_IMODEL">(
+  "OPEN_IMODEL"
+);
+export const openSnapshot = createAction<string, "OPEN_SNAPSHOT">(
+  "OPEN_SNAPSHOT"
+);
 export const appReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(openIModel, (state, action) => {
