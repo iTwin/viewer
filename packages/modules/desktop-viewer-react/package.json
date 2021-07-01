@@ -1,6 +1,6 @@
 {
   "name": "@itwin/desktop-viewer-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Configurable iTwin.js viewer for desktop applications",
   "main": "lib/index.js",
   "module": "build/index.js",
@@ -42,7 +42,6 @@
   "devDependencies": {
     "@bentley/bentleyjs-core": "^2.14.0",
     "@bentley/electron-manager": "^2.14.0",
-    "@bentley/frontend-application-insights-client": "^2.14.0",
     "@bentley/frontend-authorization-client": "^2.14.0",
     "@bentley/geometry-core": "^2.14.0",
     "@bentley/imodelhub-client": "^2.14.0",
@@ -85,12 +84,11 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "@itwin/viewer-react": "workspace:*"
+    "@itwin/viewer-react": "1.0.2"
   },
   "peerDependencies": {
     "@bentley/bentleyjs-core": "^2.14.0",
     "@bentley/electron-manager": "^2.14.0",
-    "@bentley/frontend-application-insights-client": "^2.14.0",
     "@bentley/frontend-authorization-client": "^2.14.0",
     "@bentley/geometry-core": "^2.14.0",
     "@bentley/imodelhub-client": "^2.14.0",

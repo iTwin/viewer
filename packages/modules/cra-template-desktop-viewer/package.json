@@ -1,0 +1,34 @@
+{
+  "name": "@itwin/cra-template-desktop-viewer",
+  "version": "1.0.0",
+  "keywords": [
+    "react",
+    "create-react-app",
+    "template",
+    "typescript",
+    "iModel",
+    "iModelJs",
+    "iTwin",
+    "iTwin Viewer",
+    "electron"
+  ],
+  "description": "The iTwin Viewer template for Create React App electron-based desktop applications.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itwin/viewer.git",
+    "directory": "packages/modules/cra-template-desktop-viewer"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/itwin/viewer/issues"
+  },
+  "files": [
+    "template",
+    "template.json"
+  ],
+  "main": "template.json",
+  "scripts": {
+    "build": "",
+    "test": ""
+  }
+}

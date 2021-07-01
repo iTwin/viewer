@@ -3,7 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ClientRequestContext } from "@bentley/bentleyjs-core";
+import { ClientRequestContext, Config } from "@bentley/bentleyjs-core";
+import { FrontendApplicationInsightsClient } from "@bentley/frontend-application-insights-client";
 import { BentleyCloudRpcParams } from "@bentley/imodeljs-common";
 import {
   IModelApp,
@@ -12,9 +13,9 @@ import {
   WebViewerAppOpts,
 } from "@bentley/imodeljs-frontend";
 import { UrlDiscoveryClient } from "@bentley/itwin-client";
-import { getIModelAppOptions, IModelBackendOptions } from "@itwin/viewer-react";
+import { getIModelAppOptions } from "@itwin/viewer-react";
 
-import { WebViewerProps } from "../types";
+import { IModelBackendOptions, WebViewerProps } from "../types";
 import AuthorizationClient from "./auth/AuthorizationClient";
 
 const getHostedConnectionInfo = async (
@@ -87,6 +88,18 @@ export class WebInitializer {
     return options;
   }
 
+  /** add required values to Config.App */
+  private static _setupEnv(options?: IModelBackendOptions): void {
+    Config.App.merge({
+      imjs_buddi_url:
+        options?.buddiServer !== undefined
+          ? options.buddiServer
+          : "https://buddi.bentley.com/WebService",
+      imjs_buddi_resolve_url_using_region:
+        options?.buddiRegion !== undefined ? options.buddiRegion : 0,
+    });
+  }
+
   /** expose initialized promise */
   public static get initialized(): Promise<void> {
     return this._initialized;
@@ -125,6 +138,16 @@ export class WebInitializer {
             },
           };
           await WebViewerApp.startup(webViewerOptions);
+
+          // optionally change the environment
+          this._setupEnv(options?.backend);
+
+          // Add iModelJS ApplicationInsights telemetry client if a key is provided
+          if (options?.imjsAppInsightsKey) {
+            const imjsApplicationInsightsClient =
+              new FrontendApplicationInsightsClient(options.imjsAppInsightsKey);
+            IModelApp.telemetry.addClient(imjsApplicationInsightsClient);
+          }
 
           console.log("web viewer started");
           resolve();

@@ -21,7 +21,6 @@ export interface BlankViewerProps extends ItwinViewerCommonParams {
 }
 
 export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
-  backend,
   appInsightsKey,
   theme,
   defaultUiConfig,
@@ -76,7 +75,6 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
     if (!iModelJsInitialized) {
       BaseInitializer.initialize({
         appInsightsKey,
-        backend,
         productId,
         imjsAppInsightsKey,
         i18nUrlTemplate,
@@ -98,7 +96,6 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
     return BaseInitializer.cancel;
   }, [
     appInsightsKey,
-    backend,
     productId,
     imjsAppInsightsKey,
     i18nUrlTemplate,

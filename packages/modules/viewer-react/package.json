@@ -1,6 +1,6 @@
 {
   "name": "@itwin/viewer-react",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Configurable iTwin.js viewer",
   "main": "lib/index.js",
   "module": "build/index.js",
@@ -43,7 +43,7 @@
     "@bentley/icons-generic-webfont": "^1.0.15",
     "@bentley/property-grid-react": "^1.2.1",
     "@bentley/tree-widget-react": "^1.2.8",
-    "@itwin/error-handling-react": "workspace:*",
+    "@itwin/error-handling-react": "1.0.1",
     "@microsoft/applicationinsights-react-js": "2.3.1",
     "@microsoft/applicationinsights-web": "2.3.1",
     "history": "^4.10.1",
@@ -51,7 +51,6 @@
   },
   "devDependencies": {
     "@bentley/bentleyjs-core": "^2.14.0",
-    "@bentley/frontend-application-insights-client": "^2.14.0",
     "@bentley/frontend-authorization-client": "^2.14.0",
     "@bentley/geometry-core": "^2.14.0",
     "@bentley/imodelhub-client": "^2.14.0",
@@ -95,7 +94,6 @@
   },
   "peerDependencies": {
     "@bentley/bentleyjs-core": "^2.14.0",
-    "@bentley/frontend-application-insights-client": "^2.14.0",
     "@bentley/frontend-authorization-client": "^2.14.0",
     "@bentley/geometry-core": "^2.14.0",
     "@bentley/imodelhub-client": "^2.14.0",

@@ -5,4 +5,4 @@
 
 import { ViewerProps } from "@itwin/viewer-react";
 
-export type DesktopViewerProps = ViewerProps;
+export type DesktopViewerProps = Omit<ViewerProps, "appInsightsKey">;

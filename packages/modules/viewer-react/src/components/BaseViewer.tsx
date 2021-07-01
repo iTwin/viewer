@@ -23,7 +23,6 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   iModelId,
   contextId,
   appInsightsKey,
-  backend,
   theme,
   changeSetId,
   defaultUiConfig,
@@ -70,7 +69,6 @@ export const BaseViewer: React.FC<ViewerProps> = ({
     if (!iModelJsInitialized) {
       void BaseInitializer.initialize({
         appInsightsKey,
-        backend,
         productId,
         imjsAppInsightsKey,
         i18nUrlTemplate,
@@ -95,7 +93,6 @@ export const BaseViewer: React.FC<ViewerProps> = ({
     }
   }, [
     appInsightsKey,
-    backend,
     productId,
     imjsAppInsightsKey,
     i18nUrlTemplate,

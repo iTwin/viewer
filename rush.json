@@ -1,13 +1,10 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
-  "rushVersion": "5.47.0",
-  "pnpmVersion": "6.4.0",
-  "nodeSupportedVersionRange": ">=12.17.0 <15.0.0",
+  "rushVersion": "5.28.0",
+  "pnpmVersion": "4.12.5",
+  "nodeSupportedVersionRange": ">=10.13.0 <13.0.0",
   "projectFolderMinDepth": 2,
   "projectFolderMaxDepth": 3,
-  "pnpmOptions": {
-    "useWorkspaces": true
-  },
   "repository": {
     "url": "https://github.com/itwin/viewer"
   },
@@ -44,6 +41,12 @@
     {
       "packageName": "@itwin/desktop-viewer-react",
       "projectFolder": "packages/modules/desktop-viewer-react",
+      "versionPolicyName": "independentModule",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@itwin/cra-template-desktop-viewer",
+      "projectFolder": "packages/modules/cra-template-desktop-viewer",
       "versionPolicyName": "independentModule",
       "shouldPublish": true
     },
