@@ -32,7 +32,7 @@ dependencies:
   '@bentley/product-settings-client': 2.17.0_2b8d880978fb29cfede23ec33fe98e65
   '@bentley/property-grid-react': 1.3.7_ec89993e9145fe5e93e267f61f57f633
   '@bentley/rbac-client': 2.17.0_@bentley+itwin-client@2.17.0
-  '@bentley/react-scripts': 3.4.11_typescript@3.9.10
+  '@bentley/react-scripts': 3.4.13_typescript@3.9.10
   '@bentley/telemetry-client': 2.17.0_@bentley+itwin-client@2.17.0
   '@bentley/tree-widget-react': 1.3.1_22bb1b6215fd3288c7aa8c3892f957a3
   '@bentley/ui-abstract': 2.17.0_f1ad28fe900a743804810f3c603adba7
@@ -269,7 +269,7 @@ packages:
       gensync: 1.0.0-beta.2
       json5: 2.2.0
       lodash: 4.17.21
-      resolve: 1.15.0
+      resolve: 1.20.0
       semver: 5.7.1
       source-map: 0.5.7
     dev: false
@@ -903,6 +903,18 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-gun/SOnMqjSb98Nkaq2rTKMwervfdAoz6NphdY0vTfuzMfryj+tDGb2n6UkDKwez+Y8PZDhE3D143v6Gepp4Hg==
+  /@babel/plugin-proposal-nullish-coalescing-operator/7.14.5_@babel+core@7.9.0:
+    dependencies:
+      '@babel/core': 7.9.0
+      '@babel/helper-plugin-utils': 7.14.5
+      '@babel/plugin-syntax-nullish-coalescing-operator': 7.8.3_@babel+core@7.9.0
+    dev: false
+    engines:
+      node: '>=6.9.0'
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-gun/SOnMqjSb98Nkaq2rTKMwervfdAoz6NphdY0vTfuzMfryj+tDGb2n6UkDKwez+Y8PZDhE3D143v6Gepp4Hg==
   /@babel/plugin-proposal-nullish-coalescing-operator/7.8.3_@babel+core@7.9.0:
     dependencies:
       '@babel/core': 7.9.0
@@ -929,6 +941,18 @@ packages:
       '@babel/core': 7.14.6_@babel+core@7.14.6
       '@babel/helper-plugin-utils': 7.14.5
       '@babel/plugin-syntax-numeric-separator': 7.10.4_@babel+core@7.14.6
+    dev: false
+    engines:
+      node: '>=6.9.0'
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-yiclALKe0vyZRZE0pS6RXgjUOt87GWv6FYa5zqj15PvhOGFO69R5DusPlgK/1K5dVnCtegTiWu9UaBSrLLJJBg==
+  /@babel/plugin-proposal-numeric-separator/7.14.5_@babel+core@7.9.0:
+    dependencies:
+      '@babel/core': 7.9.0
+      '@babel/helper-plugin-utils': 7.14.5
+      '@babel/plugin-syntax-numeric-separator': 7.10.4_@babel+core@7.9.0
     dev: false
     engines:
       node: '>=6.9.0'
@@ -1043,6 +1067,19 @@ packages:
       '@babel/helper-plugin-utils': 7.14.5
       '@babel/helper-skip-transparent-expression-wrappers': 7.14.5
       '@babel/plugin-syntax-optional-chaining': 7.8.3_@babel+core@7.14.6
+    dev: false
+    engines:
+      node: '>=6.9.0'
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-ycz+VOzo2UbWNI1rQXxIuMOzrDdHGrI23fRiz/Si2R4kv2XZQ1BK8ccdHwehMKBlcH/joGW/tzrUmo67gbJHlQ==
+  /@babel/plugin-proposal-optional-chaining/7.14.5_@babel+core@7.9.0:
+    dependencies:
+      '@babel/core': 7.9.0
+      '@babel/helper-plugin-utils': 7.14.5
+      '@babel/helper-skip-transparent-expression-wrappers': 7.14.5
+      '@babel/plugin-syntax-optional-chaining': 7.8.3_@babel+core@7.9.0
     dev: false
     engines:
       node: '>=6.9.0'
@@ -2403,6 +2440,17 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-07aqY1ChoPgIxsuDviptRpVkWCSbXWmzQqcgy65C6YSFOfPFvb/DX3bBRHh7pCd/PMEEYHYWUTSVkCbkVainYQ==
+  /@babel/plugin-transform-react-display-name/7.14.5_@babel+core@7.9.0:
+    dependencies:
+      '@babel/core': 7.9.0
+      '@babel/helper-plugin-utils': 7.14.5
+    dev: false
+    engines:
+      node: '>=6.9.0'
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-07aqY1ChoPgIxsuDviptRpVkWCSbXWmzQqcgy65C6YSFOfPFvb/DX3bBRHh7pCd/PMEEYHYWUTSVkCbkVainYQ==
   /@babel/plugin-transform-react-display-name/7.8.3_@babel+core@7.9.0:
     dependencies:
       '@babel/core': 7.9.0
@@ -3031,11 +3079,11 @@ packages:
       '@babel/plugin-proposal-async-generator-functions': 7.14.7_@babel+core@7.9.0
       '@babel/plugin-proposal-dynamic-import': 7.14.5_@babel+core@7.9.0
       '@babel/plugin-proposal-json-strings': 7.14.5_@babel+core@7.9.0
-      '@babel/plugin-proposal-nullish-coalescing-operator': 7.8.3_@babel+core@7.9.0
-      '@babel/plugin-proposal-numeric-separator': 7.8.3_@babel+core@7.9.0
+      '@babel/plugin-proposal-nullish-coalescing-operator': 7.14.5_@babel+core@7.9.0
+      '@babel/plugin-proposal-numeric-separator': 7.14.5_@babel+core@7.9.0
       '@babel/plugin-proposal-object-rest-spread': 7.14.7_@babel+core@7.9.0
       '@babel/plugin-proposal-optional-catch-binding': 7.14.5_@babel+core@7.9.0
-      '@babel/plugin-proposal-optional-chaining': 7.9.0_@babel+core@7.9.0
+      '@babel/plugin-proposal-optional-chaining': 7.14.5_@babel+core@7.9.0
       '@babel/plugin-proposal-unicode-property-regex': 7.14.5_@babel+core@7.9.0
       '@babel/plugin-syntax-async-generators': 7.8.4_@babel+core@7.9.0
       '@babel/plugin-syntax-dynamic-import': 7.8.3_@babel+core@7.9.0
@@ -3162,7 +3210,7 @@ packages:
     dependencies:
       '@babel/core': 7.9.0
       '@babel/helper-plugin-utils': 7.14.5
-      '@babel/plugin-transform-react-display-name': 7.8.3_@babel+core@7.9.0
+      '@babel/plugin-transform-react-display-name': 7.14.5_@babel+core@7.9.0
       '@babel/plugin-transform-react-jsx': 7.14.5_@babel+core@7.9.0
       '@babel/plugin-transform-react-jsx-development': 7.14.5_@babel+core@7.9.0
       '@babel/plugin-transform-react-jsx-self': 7.14.5_@babel+core@7.9.0
@@ -3957,7 +4005,7 @@ packages:
       '@bentley/itwin-client': ^2.17.0
     resolution:
       integrity: sha512-RFnVBiYCD2qg4Y67zTAriTn/rchkMgvdu2duJjPZYSEEd6Z2Z1YZ0ooNy8y5bPq6djZV0OrLe9uhk42LkncVhA==
-  /@bentley/react-scripts/3.4.11_typescript@3.9.10:
+  /@bentley/react-scripts/3.4.13_typescript@3.9.10:
     dependencies:
       '@babel/core': 7.9.0
       '@bentley/webpack-tools-core': 2.17.0_webpack@4.42.0
@@ -3993,8 +4041,8 @@ packages:
       jest-environment-jsdom-fourteen: 1.0.1
       jest-resolve: 24.9.0_jest-resolve@24.9.0
       jest-watch-typeahead: 0.4.2
-      mini-css-extract-plugin: 0.9.0_webpack@4.42.0
-      optimize-css-assets-webpack-plugin: 5.0.3_webpack@4.42.0
+      mini-css-extract-plugin: 0.11.3_webpack@4.42.0
+      optimize-css-assets-webpack-plugin: 5.0.8_webpack@4.42.0
       pnp-webpack-plugin: 1.6.4_typescript@3.9.10
       postcss-flexbugs-fixes: 4.1.0
       postcss-loader: 3.0.0
@@ -4034,7 +4082,7 @@ packages:
       typescript:
         optional: true
     resolution:
-      integrity: sha512-cVMPBhO5qPg2thmZFRBXfM5j4YCNbdOtP/1U0PoluPSAk3FgAps5ZIp52OsMQJGJMTpz+rsnCJiYUKgwLEihNQ==
+      integrity: sha512-VsH6p/H7JQbqqVcIap7BmFy/gWykUZ3Bp5xMuIjIWgmYM/c/ijJiOQjKeVXYOKFMscnsf7CzQ+5DasBfWZWglw==
   /@bentley/reality-data-client/2.17.0_@bentley+itwin-client@2.17.0:
     dependencies:
       '@bentley/bentleyjs-core': 2.17.0
@@ -6556,12 +6604,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-ZQl7LOWaF5ePqqcX4hLuv/bLXYQNfNWw2c0/yX/TsPRKamzHcTGQnlCjHT3TsmkOUVEPS3crCxiPfdzE/Trlhg==
-  /acorn-jsx/5.3.1:
-    dev: false
-    peerDependencies:
-      acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
-    resolution:
-      integrity: sha512-K0Ptm/47OKfQRpNQ2J/oIN/3QYiK6FwW+eJbILhsdxh2WTLdl+30o8aGdTbm5JbffpFFAg/g+zi1E+jvJha5ng==
   /acorn-jsx/5.3.1_acorn@7.4.1:
     dependencies:
       acorn: 7.4.1
@@ -6652,7 +6694,9 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-4I7Td01quW/RpocfNayFdFVk1qSuoh0E7JrbRJ16nH01HhKFQ88INq9Sd+nd72zqRySlr9BmDA8xlEJ6vJMrYA==
-  /ajv-errors/1.0.1:
+  /ajv-errors/1.0.1_ajv@6.12.6:
+    dependencies:
+      ajv: 6.12.6
     dev: false
     peerDependencies:
       ajv: '>=5.0.0'
@@ -7217,7 +7261,7 @@ packages:
       '@babel/types': 7.14.5
       eslint: 6.8.0
       eslint-visitor-keys: 1.3.0
-      resolve: 1.15.0
+      resolve: 1.20.0
     deprecated: babel-eslint is now @babel/eslint-parser. This package will no longer receive updates.
     dev: false
     engines:
@@ -7398,7 +7442,7 @@ packages:
       integrity: sha512-PO9t0697lNTmcEHH69mdtYiOIkkOlj9fySqfO3K1eCcdISevLAE0xY59VLLUj0SoiPiTX/JU2CYFpILydUa5Lw==
   /babel-plugin-macros/2.8.0:
     dependencies:
-      '@babel/runtime': 7.9.0
+      '@babel/runtime': 7.14.6
       cosmiconfig: 6.0.0
       resolve: 1.20.0
     dev: false
@@ -10589,7 +10633,7 @@ packages:
       minimatch: 3.0.4
       object.values: 1.1.4
       read-pkg-up: 2.0.0
-      resolve: 1.15.0
+      resolve: 1.20.0
     dev: false
     engines:
       node: '>=4'
@@ -10904,7 +10948,7 @@ packages:
   /espree/6.2.1:
     dependencies:
       acorn: 7.4.1
-      acorn-jsx: 5.3.1
+      acorn-jsx: 5.3.1_acorn@7.4.1
       eslint-visitor-keys: 1.3.0
     dev: false
     engines:
@@ -11309,7 +11353,7 @@ packages:
       integrity: sha512-7Eczs8gIPDrVzT+EksYBcupqMyxSHXXrHOLRRxU2/DicV8789MRBRR8+Hc2uWzUupOs4YS4JzBmBxjjCVBxD/g==
   /faye-websocket/0.10.0:
     dependencies:
-      websocket-driver: 0.6.5
+      websocket-driver: 0.7.4
     dev: false
     engines:
       node: '>=0.4.0'
@@ -11637,7 +11681,7 @@ packages:
       integrity: sha1-+8cfDEGt6zf5bFd60e1C2P2sypE=
   /fork-ts-checker-webpack-plugin/4.1.6:
     dependencies:
-      '@babel/code-frame': 7.10.4
+      '@babel/code-frame': 7.14.5
       chalk: 2.4.2
       micromatch: 3.1.10
       minimatch: 3.0.4
@@ -15842,7 +15886,7 @@ packages:
       react: ^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     resolution:
       integrity: sha512-YWCYEmd5CQeHGSAKrYvXgmzzkrvssZcuuQDDeqkT+PziKGMgE+0MCCtcKbROzocGBG1meBLl2FotlRwf4gAzbQ==
-  /mini-css-extract-plugin/0.9.0_webpack@4.42.0:
+  /mini-css-extract-plugin/0.11.3_webpack@4.42.0:
     dependencies:
       loader-utils: 1.4.0
       normalize-url: 1.9.1
@@ -15853,9 +15897,9 @@ packages:
     engines:
       node: '>= 6.9.0'
     peerDependencies:
-      webpack: ^4.4.0
+      webpack: ^4.4.0 || ^5.0.0
     resolution:
-      integrity: sha512-lp3GeY7ygcgAmVIcRPBVhIkf8Us7FZjA+ILpal44qLdSu11wmjKQ3d9k15lfD7pO4esu9eUIAW7qiYIBppv40A==
+      integrity: sha512-n9BA8LonkOkW1/zn+IbLPQmovsL0wMb9yx75fMJQZf2X1Zoec9yTZtyMePcyu19wPkmFbzZZA6fLTotpFhQsOA==
   /minimalistic-assert/1.0.1:
     dev: false
     resolution:
@@ -16623,7 +16667,7 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-PqHpggC9bLV0VeWcdKhkpxY+3JTzetLSqTCWL/z/tFIbI6G8JCjondXklT1JinczLz2Xib62sSp0T/gKT4KksA==
-  /optimize-css-assets-webpack-plugin/5.0.3_webpack@4.42.0:
+  /optimize-css-assets-webpack-plugin/5.0.8_webpack@4.42.0:
     dependencies:
       cssnano: 4.1.11
       last-call-webpack-plugin: 3.0.0
@@ -16632,7 +16676,7 @@ packages:
     peerDependencies:
       webpack: ^4.0.0
     resolution:
-      integrity: sha512-q9fbvCRS6EYtUKKSwI87qm2IxlyJK5b4dygW1rKUBT6mMDhdG5e5bZT63v6tnJR9F9FB/H5a0HTmtw+laUBxKA==
+      integrity: sha512-mgFS1JdOtEGzD8l+EuISqL57cKO+We9GcoiQEmdCWRqqck+FGNmYJtx9qfAPzEz+lRrlThWMuGDaRkI/yWNx/Q==
   /optionator/0.8.3:
     dependencies:
       deep-is: 0.1.3
@@ -19891,8 +19935,8 @@ packages:
   /schema-utils/1.0.0:
     dependencies:
       ajv: 6.12.6
-      ajv-errors: 1.0.1
-      ajv-keywords: 3.5.2
+      ajv-errors: 1.0.1_ajv@6.12.6
+      ajv-keywords: 3.5.2_ajv@6.12.6
     dev: false
     engines:
       node: '>= 4'
@@ -19902,7 +19946,7 @@ packages:
     dependencies:
       '@types/json-schema': 7.0.7
       ajv: 6.12.6
-      ajv-keywords: 3.5.2
+      ajv-keywords: 3.5.2_ajv@6.12.6
     dev: false
     engines:
       node: '>= 8.9.0'
@@ -19912,7 +19956,7 @@ packages:
     dependencies:
       '@types/json-schema': 7.0.7
       ajv: 6.12.6
-      ajv-keywords: 3.5.2
+      ajv-keywords: 3.5.2_ajv@6.12.6
     dev: false
     engines:
       node: '>= 10.13.0'
@@ -23211,7 +23255,7 @@ packages:
       '@bentley/presentation-frontend': 2.17.0_dcd969d1d6536b1ef6fe24a17e1767aa
       '@bentley/product-settings-client': 2.17.0_2b8d880978fb29cfede23ec33fe98e65
       '@bentley/rbac-client': 2.17.0_@bentley+itwin-client@2.17.0
-      '@bentley/react-scripts': 3.4.11_typescript@3.9.10
+      '@bentley/react-scripts': 3.4.13_typescript@3.9.10
       '@bentley/telemetry-client': 2.17.0_@bentley+itwin-client@2.17.0
       '@bentley/ui-abstract': 2.17.0_f1ad28fe900a743804810f3c603adba7
       '@bentley/ui-components': 2.17.0_358af9d1d5ddc0b2985b410dbba88fd7
@@ -23239,7 +23283,7 @@ packages:
       redux: '*'
       webpack: '*'
     resolution:
-      integrity: sha512-w5WfmsyGoGRC/cyDCx/Ts4G/+lq/6mdufJGulfmIuvFPlZSyX56yMfhDuQp7+HOSMPtXcu+qq/twfQEQcqe/DQ==
+      integrity: sha512-N3lhRHVPycN5uVcWyr1Ppv6g28WD2Dz18jstAgG2d3zv3VlRsbqazJkSEf1pO7xevFON2+/Utq8Cfn/hUaEiPQ==
       tarball: 'file:projects/cdn-viewer.tgz'
     version: 0.0.0
   'file:projects/cra-template-desktop-viewer.tgz':
@@ -23341,7 +23385,7 @@ packages:
       '@bentley/presentation-frontend': 2.17.0_dcd969d1d6536b1ef6fe24a17e1767aa
       '@bentley/product-settings-client': 2.17.0_2b8d880978fb29cfede23ec33fe98e65
       '@bentley/rbac-client': 2.17.0_@bentley+itwin-client@2.17.0
-      '@bentley/react-scripts': 3.4.11_typescript@3.9.10
+      '@bentley/react-scripts': 3.4.13_typescript@3.9.10
       '@bentley/telemetry-client': 2.17.0_@bentley+itwin-client@2.17.0
       '@bentley/ui-abstract': 2.17.0_f1ad28fe900a743804810f3c603adba7
       '@bentley/ui-components': 2.17.0_358af9d1d5ddc0b2985b410dbba88fd7
@@ -23376,7 +23420,7 @@ packages:
     peerDependencies:
       redux: '*'
     resolution:
-      integrity: sha512-tCEL9kYQmDqcpT89H0v+CtTvHnbFKzfNm1X+8pXMASFweAQ7r4IncipQVH0G3pPdU5uSVmC2lYFYYcxlJHsaSA==
+      integrity: sha512-0OTpfIr6IOL08gqeZcuvQDr6ZKAWnTNMx3r+jxt7SxeGOAdeE075flk3WnBixxSWUgQHElAJybqlQbF1CSQFPQ==
       tarball: 'file:projects/desktop-viewer-test.tgz'
     version: 0.0.0
   'file:projects/error-handling-react.tgz_56d7e2b7e0e6224f0b1f1f1386e9d9ed':
@@ -23597,7 +23641,7 @@ packages:
       '@bentley/presentation-frontend': 2.17.0_dcd969d1d6536b1ef6fe24a17e1767aa
       '@bentley/product-settings-client': 2.17.0_2b8d880978fb29cfede23ec33fe98e65
       '@bentley/rbac-client': 2.17.0_@bentley+itwin-client@2.17.0
-      '@bentley/react-scripts': 3.4.11_typescript@3.9.10
+      '@bentley/react-scripts': 3.4.13_typescript@3.9.10
       '@bentley/telemetry-client': 2.17.0_@bentley+itwin-client@2.17.0
       '@bentley/ui-abstract': 2.17.0_f1ad28fe900a743804810f3c603adba7
       '@bentley/ui-components': 2.17.0_358af9d1d5ddc0b2985b410dbba88fd7
@@ -23630,9 +23674,10 @@ packages:
     peerDependencies:
       webpack: '*'
     resolution:
-      integrity: sha512-51T1ZBuH3CRxHWyD+DwC3+ivKjUYvkkag57HGxqAgJT/VpNFW88Ic4glxY9dzG0yJaohpJoaCtU4T7htoUV8Xw==
+      integrity: sha512-WXb/e2ShTtcOpTkapjizy6oYejIYeAG2SBpK1tLrGO7nujKnIwetCONhVqZ6J+UFyDN+q/IPFMjOk0lOiww6hg==
       tarball: 'file:projects/web-viewer-test.tgz'
     version: 0.0.0
+registry: ''
 specifiers:
   '@babel/plugin-proposal-class-properties': ^7.8.3
   '@babel/plugin-transform-runtime': ^7.9.6
@@ -23667,7 +23712,7 @@ specifiers:
   '@bentley/product-settings-client': ^2.14.0
   '@bentley/property-grid-react': ^1.2.1
   '@bentley/rbac-client': ^2.14.0
-  '@bentley/react-scripts': 3.4.11
+  '@bentley/react-scripts': ^3.4.13
   '@bentley/telemetry-client': ^2.14.0
   '@bentley/tree-widget-react': ^1.2.8
   '@bentley/ui-abstract': ^2.14.0
