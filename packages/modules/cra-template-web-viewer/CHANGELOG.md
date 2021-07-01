@@ -1,6 +1,14 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Tue, 29 Jun 2021 14:16:33 GMT and should not be manually modified.
+This log was last generated on Thu, 01 Jul 2021 18:46:45 GMT and should not be manually modified.
+
+## 1.0.3
+Thu, 01 Jul 2021 18:46:45 GMT
+
+### Patches
+
+- bump react-scripts to 3.4.13
+- add other public assets like favicon, logos, manifest
 
 ## 1.0.2
 Tue, 29 Jun 2021 14:16:33 GMT

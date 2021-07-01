@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-desktop-viewer",
   "entries": [
     {
+      "version": "1.0.1",
+      "tag": "@itwin/cra-template-desktop-viewer_v1.0.1",
+      "date": "Thu, 01 Jul 2021 18:46:45 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump bentley/react-scripts to ^3.4.13"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.0",
       "tag": "@itwin/cra-template-desktop-viewer_v1.0.0",
       "date": "Wed, 30 Jun 2021 19:45:03 GMT",

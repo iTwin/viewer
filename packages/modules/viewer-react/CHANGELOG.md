@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Wed, 30 Jun 2021 18:27:06 GMT and should not be manually modified.
+This log was last generated on Thu, 01 Jul 2021 18:46:45 GMT and should not be manually modified.
+
+## 1.0.3
+Thu, 01 Jul 2021 18:46:45 GMT
+
+### Patches
+
+- drop dep on node-sass to fix cve-1753
 
 ## 1.0.2
 Wed, 30 Jun 2021 18:27:06 GMT
