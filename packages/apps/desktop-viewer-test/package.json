@@ -78,6 +78,7 @@
     "@bentley/react-scripts": "^4.0.3",
     "@types/electron-devtools-installer": "^2.2.0",
     "@types/minimist": "^1.2.0",
+    "@types/node": "^14.0.19",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.9",

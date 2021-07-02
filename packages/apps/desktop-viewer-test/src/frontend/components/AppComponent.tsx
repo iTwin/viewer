@@ -67,6 +67,8 @@ export const AppComponent = () => {
   const dispatch = useAppDispatch();
 
   const onIModelAppInitialized = async () => {
+    console.log("IModelApp.i18n defined");
+    console.log(!!IModelApp.i18n);
     await IModelSelect.initialize(IModelApp.i18n);
 
     const config = await ITwinViewerApp.getConfig();

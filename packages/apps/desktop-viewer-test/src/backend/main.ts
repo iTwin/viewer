@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Logger, LogLevel } from "@bentley/bentleyjs-core";
+import { assert, Logger, LogLevel } from "@bentley/bentleyjs-core";
 import {
   ElectronHost,
   ElectronHostOptions,
@@ -29,6 +29,10 @@ const viewerMain = async () => {
   Logger.setLevel(AppLoggerCategory.Backend, LogLevel.Info);
 
   const clientId = getAppEnvVar("CLIENT_ID") ?? "";
+  assert(
+    clientId.startsWith("native-"),
+    "OIDC Client should be a desktop client, CLIENT_ID should start with native-"
+  );
   const scope = getAppEnvVar("SCOPE") ?? "";
   const redirectUri = getAppEnvVar("REDIRECT_URI");
 

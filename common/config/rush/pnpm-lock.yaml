@@ -23812,6 +23812,7 @@ packages:
       '@reduxjs/toolkit': 1.6.0_react-redux@7.2.4+react@16.13.1
       '@types/electron-devtools-installer': 2.2.0
       '@types/minimist': 1.2.1
+      '@types/node': 14.17.0
       '@types/react': 16.14.6
       '@types/react-dom': 16.9.13
       '@types/react-redux': 7.1.16
@@ -23836,7 +23837,7 @@ packages:
     peerDependencies:
       redux: '*'
     resolution:
-      integrity: sha512-sIiKpQP2MNum8jeNHDBOq/D36f2zs7alKrqFIxnlGmApt5ZOCL2gPDTHmRMTQoyh5CRDNYLise3VYTMqQIfgtA==
+      integrity: sha512-I5p6HzxMhq77LPL7tGH3zmge+f8l5+3ZEhSE2w2MSXSikyDic6S+A2l3zyFTWr0seN6pxvuNQTeiwE7iuFC2Hw==
       tarball: 'file:projects/desktop-viewer-test.tgz'
     version: 0.0.0
   'file:projects/error-handling-react.tgz_02dda2b95d1b38f0dfd73621c7547e95':
