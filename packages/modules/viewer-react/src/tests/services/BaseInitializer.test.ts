@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { FrontendApplicationInsightsClient } from "@bentley/frontend-application-insights-client";
 import {
   IModelReadRpcInterface,
   IModelTileRpcInterface,
@@ -61,7 +60,6 @@ jest.mock("@bentley/imodeljs-frontend", () => {
 });
 jest.mock("@bentley/property-grid-react");
 jest.mock("../../services/telemetry/TelemetryService");
-jest.mock("@bentley/frontend-application-insights-client");
 
 describe("BaseInitializer", () => {
   beforeEach(() => {
@@ -163,26 +161,5 @@ describe("BaseInitializer", () => {
     await BaseInitializer.initialized;
 
     expect(ai.initialize).not.toHaveBeenCalled();
-  });
-
-  it("adds the iTwin.js telemetry client when the imjs key is provided", async () => {
-    const imjsAppInsightsKey = "456";
-    await BaseInitializer.initialize({
-      imjsAppInsightsKey: imjsAppInsightsKey,
-    });
-
-    await BaseInitializer.initialized;
-
-    expect(FrontendApplicationInsightsClient).toHaveBeenCalledWith(
-      imjsAppInsightsKey
-    );
-  });
-
-  it("does not add the iTwin.js telemetry client when the imjs key is not provided", async () => {
-    await BaseInitializer.initialize();
-
-    await BaseInitializer.initialized;
-
-    expect(FrontendApplicationInsightsClient).not.toHaveBeenCalled();
   });
 });

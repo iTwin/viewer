@@ -1,6 +1,6 @@
 {
   "name": "@itwin/desktop-viewer-react",
-  "version": "0.1.0",
+  "version": "1.0.2",
   "description": "Configurable iTwin.js viewer for desktop applications",
   "main": "lib/index.js",
   "module": "build/index.js",
@@ -42,7 +42,6 @@
   "devDependencies": {
     "@bentley/bentleyjs-core": "^2.14.0",
     "@bentley/electron-manager": "^2.14.0",
-    "@bentley/frontend-application-insights-client": "^2.14.0",
     "@bentley/frontend-authorization-client": "^2.14.0",
     "@bentley/geometry-core": "^2.14.0",
     "@bentley/imodelhub-client": "^2.14.0",
@@ -76,6 +75,7 @@
     "@types/react-redux": "^7.1.9",
     "concurrently": "^5.2.0",
     "copyfiles": "^2.1.0",
+    "electron": "^11.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.1.0",
     "react": "16.13.1",
@@ -84,12 +84,11 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "@itwin/viewer-react": "1.0.0"
+    "@itwin/viewer-react": "1.0.3"
   },
   "peerDependencies": {
     "@bentley/bentleyjs-core": "^2.14.0",
     "@bentley/electron-manager": "^2.14.0",
-    "@bentley/frontend-application-insights-client": "^2.14.0",
     "@bentley/frontend-authorization-client": "^2.14.0",
     "@bentley/geometry-core": "^2.14.0",
     "@bentley/imodelhub-client": "^2.14.0",
@@ -113,6 +112,7 @@
     "@bentley/ui-framework": "^2.14.0",
     "@bentley/ui-ninezone": "^2.14.0",
     "@bentley/webgl-compatibility": "^2.14.0",
+    "electron": "^11.1.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-redux": "^7.2.0",

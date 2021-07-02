@@ -10,6 +10,14 @@
       "ignoreMissingScript": false,
       "ignoreDependencyOrder": true,
       "allowWarningsInSuccessfulBuild": true
+    },
+    {
+      "name": "audit",
+      "commandKind": "global",
+      "summary": "Runs npm audit for the entire monorepo",
+      "description": "Scans the entire monorepo for security vulnerabilities via npm audit",
+      "shellCommand": "node common/scripts/audit.js",
+      "allowWarningsInSuccessfulBuild": true
     }
   ],
   "parameters": []

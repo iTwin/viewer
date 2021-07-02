@@ -28,9 +28,12 @@ jobs:
 
           echo 'Verifying Dependency Versions...'
           node common/scripts/install-run-rush.js check
-             
+
           echo 'Building...'
           node common/scripts/install-run-rush.js rebuild
 
           echo 'Testing...'
           node common/scripts/install-run-rush.js test --verbose
+
+          echo 'Auditing...'
+          node common/scripts/install-run-rush.js audit

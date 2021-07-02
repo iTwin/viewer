@@ -31,7 +31,7 @@ import { withAITracking } from "@microsoft/applicationinsights-react-js";
 import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
-import { useTheme, useUiProviders } from "../../hooks";
+import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
 import { BaseInitializer } from "../../services/BaseInitializer";
 import {
   getDefaultViewIds,
@@ -82,6 +82,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       useState<ViewerBackstageItem[]>();
     const [viewState, setViewState] = useState<ViewState>();
     const [connected, setConnected] = useState<boolean>(false);
+    const isMounted = useIsMounted();
 
     useUiProviders(uiProviders);
     useTheme(theme);
@@ -244,9 +245,11 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       });
 
       return () => {
-        closeIModelConnection().catch(() => {
-          /* no-op */
-        });
+        if (!isMounted.current) {
+          closeIModelConnection().catch(() => {
+            /* no-op */
+          });
+        }
       };
     }, [
       contextId,
@@ -256,6 +259,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       frontstages,
       blankConnection,
       blankConnectionViewState,
+      isMounted,
     ]);
 
     useEffect(() => {

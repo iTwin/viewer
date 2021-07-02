@@ -2,6 +2,45 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "1.0.3",
+      "tag": "@itwin/cra-template-web-viewer_v1.0.3",
+      "date": "Thu, 01 Jul 2021 18:46:45 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "bump react-scripts to 3.4.13"
+          },
+          {
+            "comment": "add other public assets like favicon, logos, manifest"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.0.2",
+      "tag": "@itwin/cra-template-web-viewer_v1.0.2",
+      "date": "Tue, 29 Jun 2021 14:16:33 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "bump version of bentley/react-scripts to get localized strings and static assets in development "
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.0.1",
+      "tag": "@itwin/cra-template-web-viewer_v1.0.1",
+      "date": "Sun, 27 Jun 2021 21:12:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Upgrade react-scripts"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.0",
       "tag": "@itwin/cra-template-web-viewer_v1.0.0",
       "date": "Fri, 04 Jun 2021 15:23:23 GMT",

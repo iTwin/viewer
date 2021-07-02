@@ -2,6 +2,47 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "1.0.3",
+      "tag": "@itwin/viewer-react_v1.0.3",
+      "date": "Thu, 01 Jul 2021 18:46:45 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "drop dep on node-sass to fix cve-1753"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.0.2",
+      "tag": "@itwin/viewer-react_v1.0.2",
+      "date": "Wed, 30 Jun 2021 18:27:06 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Move types into web viewer package"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.0.1",
+      "tag": "@itwin/viewer-react_v1.0.1",
+      "date": "Sun, 27 Jun 2021 21:12:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update react-scripts"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/error-handling-react\" from `1.0.0` to `1.0.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.0",
       "tag": "@itwin/viewer-react_v1.0.0",
       "date": "Fri, 04 Jun 2021 15:23:23 GMT",

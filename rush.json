@@ -41,7 +41,14 @@
     {
       "packageName": "@itwin/desktop-viewer-react",
       "projectFolder": "packages/modules/desktop-viewer-react",
-      "shouldPublish": false
+      "versionPolicyName": "independentModule",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@itwin/cra-template-desktop-viewer",
+      "projectFolder": "packages/modules/cra-template-desktop-viewer",
+      "versionPolicyName": "independentModule",
+      "shouldPublish": true
     },
     {
       "packageName": "@itwin/web-viewer-test",
@@ -51,6 +58,11 @@
     {
       "packageName": "@itwin/cdn-viewer",
       "projectFolder": "packages/apps/cdn-viewer",
+      "shouldPublish": false
+    },
+    {
+      "packageName": "@itwin/desktop-viewer-test",
+      "projectFolder": "packages/apps/desktop-viewer-test",
       "shouldPublish": false
     }
   ]

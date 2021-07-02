@@ -23,7 +23,6 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   iModelId,
   contextId,
   appInsightsKey,
-  backend,
   theme,
   changeSetId,
   defaultUiConfig,
@@ -41,30 +40,35 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   additionalI18nNamespaces,
   additionalRpcInterfaces,
 }: ViewerProps) => {
-  const [authorized, setAuthorized] = useState(false);
+  // assume authorized when using a local snapshot
+  const [authorized, setAuthorized] = useState(!!snapshotPath);
   const [iModelJsInitialized, setIModelJsInitialized] = useState(false);
   const isMounted = useIsMounted();
 
   useEffect(() => {
-    setAuthorized(
-      (IModelApp.authorizationClient?.hasSignedIn &&
-        IModelApp.authorizationClient?.isAuthorized) ||
-        false
-    );
-    IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
+    // assume authorized when using a local snapshot
+    if (snapshotPath) {
+      setAuthorized(true);
+    } else {
       setAuthorized(
         (IModelApp.authorizationClient?.hasSignedIn &&
           IModelApp.authorizationClient?.isAuthorized) ||
           false
       );
-    });
-  }, []);
+      IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
+        setAuthorized(
+          (IModelApp.authorizationClient?.hasSignedIn &&
+            IModelApp.authorizationClient?.isAuthorized) ||
+            false
+        );
+      });
+    }
+  }, [snapshotPath]);
 
   useEffect(() => {
     if (!iModelJsInitialized) {
       void BaseInitializer.initialize({
         appInsightsKey,
-        backend,
         productId,
         imjsAppInsightsKey,
         i18nUrlTemplate,
@@ -89,7 +93,6 @@ export const BaseViewer: React.FC<ViewerProps> = ({
     }
   }, [
     appInsightsKey,
-    backend,
     productId,
     imjsAppInsightsKey,
     i18nUrlTemplate,

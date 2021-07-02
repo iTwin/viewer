@@ -1,0 +1,51 @@
+{
+  "name": "@itwin/desktop-viewer-react",
+  "entries": [
+    {
+      "version": "1.0.2",
+      "tag": "@itwin/desktop-viewer-react_v1.0.2",
+      "date": "Thu, 01 Jul 2021 18:46:45 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" from `1.0.2` to `1.0.3`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.0.1",
+      "tag": "@itwin/desktop-viewer-react_v1.0.1",
+      "date": "Wed, 30 Jun 2021 18:27:06 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update README"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" from `1.0.1` to `1.0.2`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.0.0",
+      "tag": "@itwin/desktop-viewer-react_v1.0.0",
+      "date": "Sun, 27 Jun 2021 21:12:37 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "Add desktop viewer package"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" from `1.0.0` to `1.0.1`"
+          }
+        ]
+      }
+    }
+  ]
+}
