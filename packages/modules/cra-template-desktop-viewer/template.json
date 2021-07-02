@@ -27,7 +27,7 @@
       "@bentley/presentation-frontend": "^2.14.0",
       "@bentley/product-settings-client": "^2.14.0",
       "@bentley/rbac-client": "^2.14.0",
-      "@bentley/react-scripts": "3.4.11",
+      "@bentley/react-scripts": "^4.0.3",
       "@bentley/telemetry-client": "^2.14.0",
       "@bentley/ui-abstract": "^2.14.0",
       "@bentley/ui-components": "^2.14.0",
@@ -52,7 +52,7 @@
       "react-dom": "16.13.1",
       "react-redux": "^7.2.0",
       "sass": "^1.29.0",
-      "typescript": "^3.7.2",
+      "typescript": "~4.1.0",
       "webpack": "4.42.0"
     },
     "scripts": {
