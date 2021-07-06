@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Thu, 01 Jul 2021 18:46:45 GMT and should not be manually modified.
+This log was last generated on Tue, 06 Jul 2021 20:16:10 GMT and should not be manually modified.
+
+## 1.0.4
+Tue, 06 Jul 2021 20:16:10 GMT
+
+### Patches
+
+- Upgrade web-viewer-react min version
 
 ## 1.0.3
 Thu, 01 Jul 2021 18:46:45 GMT

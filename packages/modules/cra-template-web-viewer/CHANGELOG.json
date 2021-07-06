@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "1.0.4",
+      "tag": "@itwin/cra-template-web-viewer_v1.0.4",
+      "date": "Tue, 06 Jul 2021 20:16:10 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Upgrade web-viewer-react min version"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.3",
       "tag": "@itwin/cra-template-web-viewer_v1.0.3",
       "date": "Thu, 01 Jul 2021 18:46:45 GMT",
