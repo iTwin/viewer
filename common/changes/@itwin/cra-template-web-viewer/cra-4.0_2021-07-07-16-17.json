@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-web-viewer",
+      "comment": "Bump bentley/react-scripts to ^4.0.3, ts to ~4.1, add some default env configs",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/cra-template-web-viewer",
+  "email": "aruniverse@users.noreply.github.com"
+}

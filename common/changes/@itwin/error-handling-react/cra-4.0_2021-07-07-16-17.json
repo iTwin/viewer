@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/error-handling-react",
+      "comment": "Bump TS to ~4.1",
+      "type": "none"
+    }
+  ],
+  "packageName": "@itwin/error-handling-react",
+  "email": "aruniverse@users.noreply.github.com"
+}

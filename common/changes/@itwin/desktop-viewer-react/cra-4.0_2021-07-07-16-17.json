@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/desktop-viewer-react",
+      "comment": "Bump TS to ~4.1",
+      "type": "none"
+    }
+  ],
+  "packageName": "@itwin/desktop-viewer-react",
+  "email": "aruniverse@users.noreply.github.com"
+}
