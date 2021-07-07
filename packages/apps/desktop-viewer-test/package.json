@@ -75,9 +75,10 @@
   },
   "devDependencies": {
     "@bentley/build-tools": "^2.14.0",
-    "@bentley/react-scripts": "^3.4.13",
+    "@bentley/react-scripts": "^4.0.3",
     "@types/electron-devtools-installer": "^2.2.0",
     "@types/minimist": "^1.2.0",
+    "@types/node": "^14.0.19",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.9",
@@ -88,7 +89,12 @@
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "sass": "^1.29.0",
-    "typescript": "^3.7.2",
+    "typescript": "~4.3.0",
     "webpack": "4.42.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "../../../common/scripts/.eslintrc.ts.json"
+    ]
   }
 }

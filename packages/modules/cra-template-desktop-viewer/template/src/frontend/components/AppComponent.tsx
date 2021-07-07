@@ -51,9 +51,8 @@ export const AppComponent = () => {
   const [backstageItems, setBackstageItems] = useState<ViewerBackstageItem[]>();
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
   const [connectedMode, setConnectedMode] = useState<boolean>(false);
-  const [frontstage, setFrontstage] = useState<
-    "IModelSelector" | "SnapshotSelector" | "Viewer"
-  >();
+  const [frontstage, setFrontstage] =
+    useState<"IModelSelector" | "SnapshotSelector" | "Viewer">();
 
   const selectedSnapshot = useSelector<RootState, string>(
     (state: RootState) => state?.selectedSnapshot
