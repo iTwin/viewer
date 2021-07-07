@@ -39,6 +39,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   onIModelAppInit,
   additionalI18nNamespaces,
   additionalRpcInterfaces,
+  viewCreatorOptions,
 }: ViewerProps) => {
   // assume authorized when using a local snapshot
   const [authorized, setAuthorized] = useState(!!snapshotPath);
@@ -121,6 +122,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
           viewportOptions={viewportOptions}
           uiProviders={uiProviders}
           theme={theme}
+          viewCreatorOptions={viewCreatorOptions}
         />
       )}
     </ErrorBoundary>
