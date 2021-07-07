@@ -2,6 +2,23 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "1.0.4",
+      "tag": "@itwin/viewer-react_v1.0.4",
+      "date": "Wed, 07 Jul 2021 21:58:42 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump TS to ~4.3"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/error-handling-react\" from `1.0.1` to `1.0.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.3",
       "tag": "@itwin/viewer-react_v1.0.3",
       "date": "Thu, 01 Jul 2021 18:46:45 GMT",

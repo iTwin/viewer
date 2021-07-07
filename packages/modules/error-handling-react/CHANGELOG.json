@@ -2,6 +2,18 @@
   "name": "@itwin/error-handling-react",
   "entries": [
     {
+      "version": "1.0.2",
+      "tag": "@itwin/error-handling-react_v1.0.2",
+      "date": "Wed, 07 Jul 2021 21:58:42 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump TS to ~4.3"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.1",
       "tag": "@itwin/error-handling-react_v1.0.1",
       "date": "Sun, 27 Jun 2021 21:12:37 GMT",

@@ -1,6 +1,13 @@
 # Change Log - @itwin/error-handling-react
 
-This log was last generated on Sun, 27 Jun 2021 21:12:37 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Jul 2021 21:58:42 GMT and should not be manually modified.
+
+## 1.0.2
+Wed, 07 Jul 2021 21:58:42 GMT
+
+### Patches
+
+- Bump TS to ~4.3
 
 ## 1.0.1
 Sun, 27 Jun 2021 21:12:37 GMT

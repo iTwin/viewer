@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Tue, 06 Jul 2021 20:16:10 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Jul 2021 21:58:42 GMT and should not be manually modified.
+
+## 1.0.5
+Wed, 07 Jul 2021 21:58:42 GMT
+
+### Patches
+
+- Bump bentley/react-scripts to ^4.0.3, ts to ~4.3, add some default env configs
 
 ## 1.0.4
 Tue, 06 Jul 2021 20:16:10 GMT

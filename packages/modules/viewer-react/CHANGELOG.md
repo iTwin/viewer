@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Thu, 01 Jul 2021 18:46:45 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Jul 2021 21:58:42 GMT and should not be manually modified.
+
+## 1.0.4
+Wed, 07 Jul 2021 21:58:42 GMT
+
+### Patches
+
+- Bump TS to ~4.3
 
 ## 1.0.3
 Thu, 01 Jul 2021 18:46:45 GMT

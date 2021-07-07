@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "1.0.5",
+      "tag": "@itwin/cra-template-web-viewer_v1.0.5",
+      "date": "Wed, 07 Jul 2021 21:58:42 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump bentley/react-scripts to ^4.0.3, ts to ~4.3, add some default env configs"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.4",
       "tag": "@itwin/cra-template-web-viewer_v1.0.4",
       "date": "Tue, 06 Jul 2021 20:16:10 GMT",
