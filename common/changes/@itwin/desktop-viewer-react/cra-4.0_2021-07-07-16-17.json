@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/desktop-viewer-react",
       "comment": "Bump TS to ~4.3",
-      "type": "none"
+      "type": "patch"
     }
   ],
   "packageName": "@itwin/desktop-viewer-react",
