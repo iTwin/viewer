@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Allow creation of a default view if none exists in the model",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react",
+  "email": "6283674+kckst8@users.noreply.github.com"
+}
