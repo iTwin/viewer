@@ -108,6 +108,15 @@ jest.mock("../../../services/iModel/ViewCreatorBlank", () => {
     createBlankViewState: jest.fn().mockResolvedValue({}),
   };
 });
+jest.mock("../../../services/iModel/ViewCreator3d", () => {
+  return {
+    ViewCreator3d: jest.fn().mockImplementation(() => {
+      return {
+        createDefaultView: jest.fn().mockResolvedValue({}),
+      };
+    }),
+  };
+});
 class Frontstage1Provider extends FrontstageProvider {
   public get frontstage(): React.ReactElement<FrontstageProps> {
     return <div></div>;
