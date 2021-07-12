@@ -12,7 +12,6 @@ import {
   IModelApp,
   IModelConnection,
   SnapshotConnection,
-  ViewCreator3d,
   ViewCreator3dOptions,
   ViewState,
 } from "@bentley/imodeljs-frontend";
@@ -32,8 +31,8 @@ import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
 import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
-import { openRemoteImodel } from "../../services/iModel/IModelService";
-import { createBlankViewState } from "../../services/iModel/ViewCreatorBlank";
+import { openRemoteImodel } from "../../services/iModel";
+import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
 import { ai } from "../../services/telemetry/TelemetryService";
 import {
   BlankConnectionViewState,
@@ -182,6 +181,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           }
 
           // attempt to construct a default viewState
+          // TODO replace this with the core class once the issue with the model query is resolved
           const viewCreator = new ViewCreator3d(imodelConnection);
 
           const options: ViewCreator3dOptions = viewCreatorOptions
