@@ -25,7 +25,7 @@ import React from "react";
 
 import IModelLoader from "../../../components/iModel/IModelLoader";
 import * as IModelServices from "../../../services/iModel/IModelService";
-import { ViewCreator } from "../../../services/iModel/ViewCreator";
+import { createBlankViewState } from "../../../services/iModel/ViewCreatorBlank";
 import {
   BlankConnectionViewState,
   ViewerBackstageItem,
@@ -94,16 +94,27 @@ jest.mock("@bentley/imodeljs-frontend", () => {
     WebViewerApp: {
       startup: jest.fn().mockResolvedValue(true),
     },
+    ViewCreator3d: jest.fn().mockImplementation(() => {
+      return {
+        createDefaultView: jest.fn().mockResolvedValue({}),
+      };
+    }),
   };
 });
 jest.mock("../../../services/iModel/IModelService");
 jest.mock("@bentley/itwin-client");
-jest.mock("../../../services/iModel/ViewCreator", () => {
+jest.mock("../../../services/iModel/ViewCreatorBlank", () => {
   return {
-    ViewCreator: {
-      createDefaultView: jest.fn().mockResolvedValue({}),
-      createBlankViewState: jest.fn().mockResolvedValue({}),
-    },
+    createBlankViewState: jest.fn().mockResolvedValue({}),
+  };
+});
+jest.mock("../../../services/iModel/ViewCreator3d", () => {
+  return {
+    ViewCreator3d: jest.fn().mockImplementation(() => {
+      return {
+        createDefaultView: jest.fn().mockResolvedValue({}),
+      };
+    }),
   };
 });
 class Frontstage1Provider extends FrontstageProvider {
@@ -123,7 +134,6 @@ const mockIModelId = "mockIModelId";
 
 describe("IModelLoader", () => {
   beforeEach(() => {
-    jest.spyOn(IModelServices, "getDefaultViewIds").mockResolvedValue([]);
     jest
       .spyOn(IModelServices, "openRemoteImodel")
       .mockResolvedValue({} as CheckpointConnection);
@@ -182,16 +192,6 @@ describe("IModelLoader", () => {
     expect(IModelApp.i18n.translate).toHaveBeenCalledTimes(5);
   });
 
-  it("notifies the user when the model has no data", async () => {
-    const { getByTestId } = render(
-      <IModelLoader contextId={mockContextId} iModelId={mockIModelId} />
-    );
-
-    await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(IModelApp.notifications.openMessageBox).toHaveBeenCalled();
-  });
-
   it("creates a blank connection and a blank ViewState", async () => {
     const blankConnection: BlankConnectionProps = {
       name: "GeometryConnection",
@@ -216,10 +216,7 @@ describe("IModelLoader", () => {
     await waitFor(() => getByTestId("loader-wrapper"));
 
     expect(BlankConnection.create).toHaveBeenCalledWith(blankConnection);
-    expect(ViewCreator.createBlankViewState).toHaveBeenCalledWith(
-      {},
-      viewStateOptions
-    );
+    expect(createBlankViewState).toHaveBeenCalledWith({}, viewStateOptions);
   });
 
   it("sets the theme to the provided theme", async () => {

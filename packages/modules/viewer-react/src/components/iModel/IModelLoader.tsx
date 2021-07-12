@@ -11,9 +11,8 @@ import {
   BlankConnectionProps,
   IModelApp,
   IModelConnection,
-  MessageBoxIconType,
-  MessageBoxType,
   SnapshotConnection,
+  ViewCreator3dOptions,
   ViewState,
 } from "@bentley/imodeljs-frontend";
 import {
@@ -32,12 +31,8 @@ import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
 import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
-import { BaseInitializer } from "../../services/BaseInitializer";
-import {
-  getDefaultViewIds,
-  openRemoteImodel,
-} from "../../services/iModel/IModelService";
-import { ViewCreator } from "../../services/iModel/ViewCreator";
+import { openRemoteImodel } from "../../services/iModel";
+import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
 import { ai } from "../../services/telemetry/TelemetryService";
 import {
   BlankConnectionViewState,
@@ -74,6 +69,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     blankConnectionViewState,
     uiProviders,
     theme,
+    viewCreatorOptions,
   }: ModelLoaderProps) => {
     const [error, setError] = useState<Error>();
     const [finalFrontstages, setFinalFrontstages] =
@@ -103,7 +99,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       onIModelConnected?: (iModel: IModelConnection) => void
     ) => {
       const imodelConnection = BlankConnection.create(blankConnection);
-      const viewState = ViewCreator.createBlankViewState(
+      const viewState = createBlankViewState(
         imodelConnection,
         viewStateOptions
       );
@@ -184,35 +180,18 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             onIModelConnected(imodelConnection);
           }
 
-          const viewIds = await getDefaultViewIds(imodelConnection);
-
-          if (viewIds.length === 0 && contextId && iModelId) {
-            // no valid view data in the model. Direct the user to the synchronization portal
-            const msgDiv = document.createElement("div");
-            const msg = await BaseInitializer.getIModelDataErrorMessage(
-              contextId,
-              iModelId,
-              IModelApp.i18n.translateWithNamespace(
-                "iTwinViewer",
-                "iModels.emptyIModelError"
-              )
-            );
-            msgDiv.innerHTML = msg;
-            // this can and should be async. No need to wait on it
-            // eslint-disable-next-line @typescript-eslint/no-floating-promises
-            IModelApp.notifications.openMessageBox(
-              MessageBoxType.Ok,
-              msgDiv,
-              MessageBoxIconType.Critical
-            );
-          }
-
           // attempt to construct a default viewState
-          const savedViewState = await ViewCreator.createDefaultView(
-            imodelConnection,
-            undefined,
-            viewIds.length > 0 ? viewIds[0] : undefined
-          );
+          // TODO replace this with the core class once the issue with the model query is resolved
+          const viewCreator = new ViewCreator3d(imodelConnection);
+
+          const options: ViewCreator3dOptions = viewCreatorOptions
+            ? { ...viewCreatorOptions }
+            : { useSeedView: true };
+
+          if (options.useSeedView === undefined) {
+            options.useSeedView = true;
+          }
+          const savedViewState = await viewCreator.createDefaultView(options);
 
           // Should not be undefined
           if (!savedViewState) {

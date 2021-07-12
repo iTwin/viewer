@@ -3,24 +3,18 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  BrowserAuthorizationClient,
-  BrowserAuthorizationClientConfiguration,
-} from "@bentley/frontend-authorization-client";
 import { Vector3d, XAndY, XYAndZ } from "@bentley/geometry-core";
 import {
-  BentleyCloudRpcParams,
   ColorDef,
-  NativeAppAuthorizationConfiguration,
   RenderMode,
   RpcInterface,
   RpcInterfaceDefinition,
 } from "@bentley/imodeljs-common";
 import {
   IModelConnection,
-  NativeAppAuthorization,
   ToolAdmin,
   ViewChangeOptions,
+  ViewCreator3dOptions,
 } from "@bentley/imodeljs-frontend";
 import { BackstageItem, UiItemsProvider } from "@bentley/ui-abstract";
 import {
@@ -68,6 +62,8 @@ export interface IModelLoaderParams {
   viewportOptions?: IModelViewportControlOptions;
   /** UI Providers to register https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/ */
   uiProviders?: UiItemsProvider[];
+  /** options for creating the default viewState */
+  viewCreatorOptions?: ViewCreator3dOptions;
 }
 
 export interface ItwinViewerCommonParams

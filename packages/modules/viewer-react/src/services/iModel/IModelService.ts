@@ -75,28 +75,3 @@ export const openRemoteImodel = async (
     throw error;
   }
 };
-
-/** Return the proper views based on the accepted classes
- */
-export const getDefaultViewIds = async (
-  imodel: IModelConnection
-): Promise<Id64String[]> => {
-  // check for a default view first
-  const defaultViewId = await imodel.views.queryDefaultViewId();
-  if (defaultViewId && Id64.isValidId64(defaultViewId)) {
-    return [defaultViewId];
-  }
-
-  const viewSpecs = await imodel.views.queryProps({});
-  const acceptedViewClasses = getAcceptedViewClasses();
-  const acceptedViewSpecs = viewSpecs.filter(
-    (spec) => acceptedViewClasses.indexOf(spec.classFullName) !== -1
-  );
-  if (acceptedViewSpecs.length < 1) {
-    return [];
-  }
-  const ids = acceptedViewSpecs.map((spec) => {
-    return spec.id as Id64String;
-  });
-  return ids;
-};
