@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "1.0.5",
+      "tag": "@itwin/viewer-react_v1.0.5",
+      "date": "Mon, 12 Jul 2021 18:54:20 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Allow creation of a default view if none exists in the model"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.4",
       "tag": "@itwin/viewer-react_v1.0.4",
       "date": "Wed, 07 Jul 2021 21:58:42 GMT",

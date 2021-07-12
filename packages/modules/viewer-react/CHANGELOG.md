@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Wed, 07 Jul 2021 21:58:42 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Jul 2021 18:54:20 GMT and should not be manually modified.
+
+## 1.0.5
+Mon, 12 Jul 2021 18:54:20 GMT
+
+### Patches
+
+- Allow creation of a default view if none exists in the model
 
 ## 1.0.4
 Wed, 07 Jul 2021 21:58:42 GMT
