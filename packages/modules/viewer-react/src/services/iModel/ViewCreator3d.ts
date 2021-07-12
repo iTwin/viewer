@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 /*---------------------------------------------------------------------------------------------
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
@@ -310,7 +311,7 @@ export class ViewCreator3d {
     try {
       models = await this._executeQuery(query);
     } catch {
-      // possible that the isNotSpatiallyLocated property is not available in the model's schema
+      // possible that the isNotSpatiallyLocated property is not available in the iModel's schema
       query =
         "SELECT ECInstanceId FROM Bis.GeometricModel3D WHERE IsPrivate = false AND IsTemplate = false";
       models = await this._executeQuery(query);
