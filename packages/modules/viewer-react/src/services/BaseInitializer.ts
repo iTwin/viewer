@@ -12,7 +12,13 @@ import {
   RpcInterfaceDefinition,
   SnapshotIModelRpcInterface,
 } from "@bentley/imodeljs-common";
-import { IModelApp, IModelAppOptions } from "@bentley/imodeljs-frontend";
+import {
+  FitViewTool,
+  IModelApp,
+  IModelAppOptions,
+  ScreenViewport,
+  StandardViewId,
+} from "@bentley/imodeljs-frontend";
 import { I18N } from "@bentley/imodeljs-i18n";
 import { UrlDiscoveryClient } from "@bentley/itwin-client";
 import { PresentationRpcInterface } from "@bentley/presentation-common";
@@ -170,6 +176,12 @@ export class BaseInitializer {
         if (viewerOptions?.onIModelAppInit) {
           viewerOptions.onIModelAppInit();
         }
+
+        // fit view by default
+        IModelApp.viewManager.onViewOpen.addOnce((vp: ScreenViewport) => {
+          IModelApp.tools.run(FitViewTool.toolId, vp, true);
+          vp.view.setStandardRotation(StandardViewId.Iso);
+        });
 
         // Add the app's telemetry client if a key was provided
         if (viewerOptions?.appInsightsKey) {
