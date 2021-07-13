@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "1.0.6",
+      "tag": "@itwin/viewer-react_v1.0.6",
+      "date": "Tue, 13 Jul 2021 14:25:52 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Run the fit view tool on initial load"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.5",
       "tag": "@itwin/viewer-react_v1.0.5",
       "date": "Mon, 12 Jul 2021 18:54:20 GMT",
