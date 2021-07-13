@@ -52,6 +52,11 @@ jest.mock("@bentley/imodeljs-frontend", () => {
           addListener: jest.fn(),
         },
       },
+      viewManager: {
+        onViewOpen: {
+          addOnce: jest.fn(),
+        },
+      },
     },
     SnapMode: {},
     ActivityMessageDetails: jest.fn(),
