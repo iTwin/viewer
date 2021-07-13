@@ -2,9 +2,14 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 /** Clone of core BasicNavigationWidget with conditional tooling
  */
+import { IModelApp } from "@bentley/imodeljs-frontend";
 import {
   CommonToolbarItem,
   ToolbarOrientation,
@@ -15,6 +20,7 @@ import {
   NavigationWidgetComposer,
   ToolbarComposer,
   ToolbarHelper,
+  ToolItemDef,
 } from "@bentley/ui-framework";
 import * as React from "react";
 
@@ -31,75 +37,82 @@ export interface BasicNavigationWidgetProps {
 export function BasicNavigationWidget({
   config,
 }: BasicNavigationWidgetProps): JSX.Element {
-  const getHorizontalToolbarItems = React.useCallback((): CommonToolbarItem[] => {
-    if (config?.hideDefaultHorizontalItems) {
-      return [];
-    }
-    const items: CommonToolbarItem[] = [];
+  const getHorizontalToolbarItems =
+    React.useCallback((): CommonToolbarItem[] => {
+      if (config?.hideDefaultHorizontalItems) {
+        return [];
+      }
+      const items: CommonToolbarItem[] = [];
 
-    if (
-      config?.horizontalItems?.rotateView === undefined ||
-      config?.horizontalItems?.rotateView === true
-    ) {
-      items.push(
-        ToolbarHelper.createToolbarItemFromItemDef(
-          10,
-          CoreTools.rotateViewCommand
-        )
-      );
-    }
-    if (
-      config?.horizontalItems?.panView === undefined ||
-      config?.horizontalItems?.panView === true
-    ) {
-      items.push(
-        ToolbarHelper.createToolbarItemFromItemDef(20, CoreTools.panViewCommand)
-      );
-    }
-    if (
-      config?.horizontalItems?.fitView === undefined ||
-      config?.horizontalItems?.fitView === true
-    ) {
-      items.push(
-        ToolbarHelper.createToolbarItemFromItemDef(30, CoreTools.fitViewCommand)
-      );
-    }
-    if (
-      config?.horizontalItems?.windowArea === undefined ||
-      config?.horizontalItems?.windowArea === true
-    ) {
-      items.push(
-        ToolbarHelper.createToolbarItemFromItemDef(
-          40,
-          CoreTools.windowAreaCommand
-        )
-      );
-    }
-    if (
-      config?.horizontalItems?.undoView === undefined ||
-      config?.horizontalItems?.undoView === true
-    ) {
-      items.push(
-        ToolbarHelper.createToolbarItemFromItemDef(
-          50,
-          CoreTools.viewUndoCommand
-        )
-      );
-    }
-    if (
-      config?.horizontalItems?.redoView === undefined ||
-      config?.horizontalItems?.redoView === true
-    ) {
-      items.push(
-        ToolbarHelper.createToolbarItemFromItemDef(
-          60,
-          CoreTools.viewRedoCommand
-        )
-      );
-    }
+      if (
+        config?.horizontalItems?.rotateView === undefined ||
+        config?.horizontalItems?.rotateView === true
+      ) {
+        items.push(
+          ToolbarHelper.createToolbarItemFromItemDef(
+            10,
+            CoreTools.rotateViewCommand
+          )
+        );
+      }
+      if (
+        config?.horizontalItems?.panView === undefined ||
+        config?.horizontalItems?.panView === true
+      ) {
+        items.push(
+          ToolbarHelper.createToolbarItemFromItemDef(
+            20,
+            CoreTools.panViewCommand
+          )
+        );
+      }
+      if (
+        config?.horizontalItems?.fitView === undefined ||
+        config?.horizontalItems?.fitView === true
+      ) {
+        items.push(
+          ToolbarHelper.createToolbarItemFromItemDef(
+            30,
+            CoreTools.fitViewCommand
+          )
+        );
+      }
+      if (
+        config?.horizontalItems?.windowArea === undefined ||
+        config?.horizontalItems?.windowArea === true
+      ) {
+        items.push(
+          ToolbarHelper.createToolbarItemFromItemDef(
+            40,
+            CoreTools.windowAreaCommand
+          )
+        );
+      }
+      if (
+        config?.horizontalItems?.undoView === undefined ||
+        config?.horizontalItems?.undoView === true
+      ) {
+        items.push(
+          ToolbarHelper.createToolbarItemFromItemDef(
+            50,
+            CoreTools.viewUndoCommand
+          )
+        );
+      }
+      if (
+        config?.horizontalItems?.redoView === undefined ||
+        config?.horizontalItems?.redoView === true
+      ) {
+        items.push(
+          ToolbarHelper.createToolbarItemFromItemDef(
+            60,
+            CoreTools.viewRedoCommand
+          )
+        );
+      }
 
-    return items;
-  }, [config]);
+      return items;
+    }, [config]);
 
   const getVerticalToolbarItems = React.useCallback((): CommonToolbarItem[] => {
     if (config?.hideDefaultVerticalItems) {
@@ -114,7 +127,16 @@ export function BasicNavigationWidget({
       items.push(
         ToolbarHelper.createToolbarItemFromItemDef(
           10,
-          CoreTools.walkViewCommand
+          new ToolItemDef({
+            toolId: "View.LookAndMove",
+            iconSpec: "icon-walk",
+            execute: () =>
+              IModelApp.tools.run(
+                "View.LookAndMove",
+                IModelApp.viewManager.selectedView
+              ),
+            labelKey: IModelApp.i18n.translate("iTwinViewer:tools.walkTool"),
+          })
         )
       );
     }
