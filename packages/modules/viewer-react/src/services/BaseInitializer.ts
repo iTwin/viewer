@@ -2,6 +2,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import { ClientRequestContext } from "@bentley/bentleyjs-core";
 import { Config } from "@bentley/bentleyjs-core";
@@ -23,7 +27,7 @@ import { I18N } from "@bentley/imodeljs-i18n";
 import { UrlDiscoveryClient } from "@bentley/itwin-client";
 import { PresentationRpcInterface } from "@bentley/presentation-common";
 import { Presentation } from "@bentley/presentation-frontend";
-import { PropertyGridManager } from "@bentley/property-grid-react";
+//import { PropertyGridManager } from "@bentley/property-grid-react";
 import { TreeWidget } from "@bentley/tree-widget-react";
 import { UiComponents } from "@bentley/ui-components";
 import { UiCore } from "@bentley/ui-core";
@@ -227,7 +231,7 @@ export class BaseInitializer {
           trackEvent("iTwinViewer.Viewer.Initialized");
         }
 
-        await PropertyGridManager.initialize(IModelApp.i18n);
+        //await PropertyGridManager.initialize(IModelApp.i18n);
 
         await TreeWidget.initialize(IModelApp.i18n);
 

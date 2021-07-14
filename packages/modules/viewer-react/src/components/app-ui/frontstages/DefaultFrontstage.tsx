@@ -2,12 +2,16 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import "./DefaultFrontstage.scss";
 
 import { Id64 } from "@bentley/bentleyjs-core";
 import { ViewState } from "@bentley/imodeljs-frontend";
-import { MultiElementPropertyGridWidgetControl } from "@bentley/property-grid-react";
+//import { MultiElementPropertyGridWidgetControl } from "@bentley/property-grid-react";
 import { TreeWidgetControl } from "@bentley/tree-widget-react";
 import {
   ContentGroup,
@@ -165,21 +169,21 @@ export class DefaultFrontstage extends FrontstageProvider {
             widgets={
               !this._uiConfig?.hidePropertyGrid
                 ? [
-                    <Widget
-                      key={DefaultFrontstage.DEFAULT_PROPERTIES_WIDGET_KEY}
-                      control={MultiElementPropertyGridWidgetControl}
-                      defaultState={WidgetState.Hidden}
-                      fillZone={true}
-                      iconSpec="icon-properties-list"
-                      labelKey="iTwinViewer:components.properties"
-                      applicationData={{
-                        iModelConnection: UiFramework.getIModelConnection(),
-                        projectId: UiFramework.getIModelConnection()?.contextId,
-                        rootClassName: "itv-property-grid",
-                      }}
-                      syncEventIds={[SyncUiEventId.SelectionSetChanged]}
-                      stateFunc={_determineWidgetStateForSelectionSet}
-                    />,
+                    // <Widget
+                    //   key={DefaultFrontstage.DEFAULT_PROPERTIES_WIDGET_KEY}
+                    //   control={MultiElementPropertyGridWidgetControl}
+                    //   defaultState={WidgetState.Hidden}
+                    //   fillZone={true}
+                    //   iconSpec="icon-properties-list"
+                    //   labelKey="iTwinViewer:components.properties"
+                    //   applicationData={{
+                    //     iModelConnection: UiFramework.getIModelConnection(),
+                    //     projectId: UiFramework.getIModelConnection()?.contextId,
+                    //     rootClassName: "itv-property-grid",
+                    //   }}
+                    //   syncEventIds={[SyncUiEventId.SelectionSetChanged]}
+                    //   stateFunc={_determineWidgetStateForSelectionSet}
+                    // />,
                   ]
                 : []
             }

@@ -19,6 +19,7 @@
     "@bentley/presentation-common": "^2.14.0",
     "@bentley/presentation-frontend": "^2.14.0",
     "@bentley/product-settings-client": "^2.14.0",
+    "@bentley/property-grid-react": "2.0.0",
     "@bentley/rbac-client": "^2.14.0",
     "@bentley/telemetry-client": "^2.14.0",
     "@bentley/ui-abstract": "^2.14.0",

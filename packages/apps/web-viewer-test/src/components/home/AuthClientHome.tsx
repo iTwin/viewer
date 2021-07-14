@@ -4,6 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IModelApp } from "@bentley/imodeljs-frontend";
+import { PropertyGridManager } from "@bentley/property-grid-react";
+import { PropertyGridUiItemsProvider } from "@bentley/property-grid-react/lib/components/PropertyGridUiItemsProvider";
 import { ColorTheme } from "@bentley/ui-framework";
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
@@ -66,6 +68,10 @@ export const AuthClientHome: React.FC = () => {
     }
   };
 
+  const onImodelAppInit = async () => {
+    await PropertyGridManager.initialize(IModelApp.i18n);
+  };
+
   return (
     <div className={styles.home}>
       <Header handleLoginToggle={toggleLogin} loggedIn={loggedIn} />
@@ -76,6 +82,9 @@ export const AuthClientHome: React.FC = () => {
           iModelId={process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string}
           appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
           theme={ColorTheme.Dark}
+          // onIModelAppInit={onImodelAppInit}
+          onIModelConnected={onImodelAppInit}
+          uiProviders={[new PropertyGridUiItemsProvider()]}
         />
       )}
     </div>
