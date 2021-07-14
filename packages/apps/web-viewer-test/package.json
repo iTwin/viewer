@@ -17,6 +17,7 @@
     "@bentley/itwin-client": "^2.14.0",
     "@bentley/orbitgt-core": "^2.14.0",
     "@bentley/presentation-common": "^2.14.0",
+    "@bentley/presentation-components": "^2.7.0",
     "@bentley/presentation-frontend": "^2.14.0",
     "@bentley/product-settings-client": "^2.14.0",
     "@bentley/property-grid-react": "2.0.0",

@@ -3,10 +3,10 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IModelApp } from "@bentley/imodeljs-frontend";
+import { IModelApp, IModelConnection } from "@bentley/imodeljs-frontend";
 import { PropertyGridManager } from "@bentley/property-grid-react";
-import { PropertyGridUiItemsProvider } from "@bentley/property-grid-react/lib/components/PropertyGridUiItemsProvider";
-import { ColorTheme } from "@bentley/ui-framework";
+import { PropertyGridUiItemsProvider } from "../../PropertyGridUiItemsProvider";
+import { ColorTheme, UiFramework } from "@bentley/ui-framework";
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
@@ -27,7 +27,6 @@ export const AuthClientHome: React.FC = () => {
   );
 
   const [oidcInitialized, setOidcInitialized] = useState(false);
-
   const location = useLocation();
 
   useEffect(() => {
