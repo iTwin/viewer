@@ -130,7 +130,7 @@ export function BasicNavigationWidget({
                 "View.LookAndMove",
                 IModelApp.viewManager.selectedView
               ),
-            labelKey: IModelApp.i18n.translate("iTwinViewer:tools.walkTool"),
+            labelKey: IModelApp.i18n?.translate("iTwinViewer:tools.walkTool"),
           })
         )
       );
