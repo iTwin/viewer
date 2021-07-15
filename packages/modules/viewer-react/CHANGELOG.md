@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Tue, 13 Jul 2021 14:25:52 GMT and should not be manually modified.
+This log was last generated on Thu, 15 Jul 2021 17:38:16 GMT and should not be manually modified.
+
+## 1.1.0
+Thu, 15 Jul 2021 17:38:16 GMT
+
+### Minor changes
+
+- Updated walk tool to use the lookAndMove tool
 
 ## 1.0.6
 Tue, 13 Jul 2021 14:25:52 GMT
