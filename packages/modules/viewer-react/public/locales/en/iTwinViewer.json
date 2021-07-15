@@ -12,5 +12,8 @@
   "missingConnectionProps": "Please provide a valid contextId and iModelId or a local snapshotPath",
   "backstage": {
     "mainFrontstage": "Main Frontstage"
+  },
+  "tools": {
+    "walkTool": "Walk Tool"
   }
 }
