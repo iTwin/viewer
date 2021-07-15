@@ -113,15 +113,10 @@ export const AuthConfigHome: React.FC = () => {
       });
     };
 
-    tileTreesLoaded()
-      .then(() => {
-        IModelApp.tools.run(FitViewTool.toolId, viewPort, true);
-        viewPort.view.setStandardRotation(StandardViewId.Iso);
-      })
-      .catch(() => {
-        IModelApp.tools.run(FitViewTool.toolId, viewPort, true);
-        viewPort.view.setStandardRotation(StandardViewId.Iso);
-      });
+    tileTreesLoaded().finally(() => {
+      IModelApp.tools.run(FitViewTool.toolId, viewPort, true);
+      viewPort.view.setStandardRotation(StandardViewId.Iso);
+    });
   };
 
   return (

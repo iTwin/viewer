@@ -126,19 +126,12 @@ export class ViewCreator3d {
         });
       };
 
-      tileTreesLoaded()
-        .then(() => {
-          IModelApp.tools.run(FitViewTool.toolId, viewPort, true);
-          viewPort.view.setStandardRotation(
-            options?.standardViewId ?? StandardViewId.Iso
-          );
-        })
-        .catch(() => {
-          IModelApp.tools.run(FitViewTool.toolId, viewPort, true);
-          viewPort.view.setStandardRotation(
-            options?.standardViewId ?? StandardViewId.Iso
-          );
-        });
+      tileTreesLoaded().finally(() => {
+        IModelApp.tools.run(FitViewTool.toolId, viewPort, true);
+        viewPort.view.setStandardRotation(
+          options?.standardViewId ?? StandardViewId.Iso
+        );
+      });
     });
 
     return viewState;
@@ -348,7 +341,7 @@ export class ViewCreator3d {
    */
   private async _getAllModels(): Promise<Id64Array> {
     let query =
-      "SELECT ECInstanceId FROM Bis.GeometricModel3D WHERE IsPrivate = false AND IsTemplate = false AND isNotSpatiallyLocated = false";
+      "SELECT ECInstanceId FROM Bis.GeometricModel3D WHERE IsPrivate = false AND IsTemplate = false AND (isNotSpatiallyLocated = false OR isNotSpatiallyLocated IS NULL)";
     let models = [];
     try {
       models = await this._executeQuery(query);
