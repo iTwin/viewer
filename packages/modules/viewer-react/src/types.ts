@@ -12,9 +12,10 @@ import {
 } from "@bentley/imodeljs-common";
 import {
   IModelConnection,
+  ScreenViewport,
+  StandardViewId,
   ToolAdmin,
   ViewChangeOptions,
-  ViewCreator3dOptions,
 } from "@bentley/imodeljs-frontend";
 import { BackstageItem, UiItemsProvider } from "@bentley/ui-abstract";
 import {
@@ -23,6 +24,24 @@ import {
   FrontstageProvider,
   IModelViewportControlOptions,
 } from "@bentley/ui-framework";
+
+/**
+ * options for configuration of 3D view
+ */
+export interface ViewCreator3dOptions {
+  /** Turn [[Camera]] on when generating the view. */
+  cameraOn?: boolean;
+  /** Turn [[SkyBox]] on when generating the view. */
+  skyboxOn?: boolean;
+  /** [[StandardViewId]] for the view state. */
+  standardViewId?: StandardViewId;
+  /** Merge in props from the seed view (default spatial view) of the iModel.  */
+  useSeedView?: boolean;
+  /** Aspect ratio of [[Viewport]]. Required to fit contents of the model(s) in the initial state of the view. */
+  vpAspect?: number;
+  /** optional function to configure the viewport on load */
+  viewportConfigurer?: (viewport: ScreenViewport) => void;
+}
 
 export interface ViewerFrontstage {
   /** frontstage provider to register */

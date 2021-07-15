@@ -4,7 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
-import { IModelApp } from "@bentley/imodeljs-frontend";
+import {
+  FitViewTool,
+  IModelApp,
+  ScreenViewport,
+  StandardViewId,
+} from "@bentley/imodeljs-frontend";
 import { ColorTheme } from "@bentley/ui-framework";
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
@@ -89,6 +94,36 @@ export const AuthConfigHome: React.FC = () => {
     }
   };
 
+  const viewConfiguration = (viewPort: ScreenViewport) => {
+    // default execute the fitview tool and use the iso standard view after tile trees are loaded
+    const tileTreesLoaded = () => {
+      return new Promise((resolve, reject) => {
+        const start = new Date();
+        const intvl = setInterval(() => {
+          if (viewPort.areAllTileTreesLoaded) {
+            clearInterval(intvl);
+            resolve(true);
+          }
+          const now = new Date();
+          // after 20 seconds, stop waiting and fit the view
+          if (now.getTime() - start.getTime() > 20000) {
+            reject();
+          }
+        }, 100);
+      });
+    };
+
+    tileTreesLoaded()
+      .then(() => {
+        IModelApp.tools.run(FitViewTool.toolId, viewPort, true);
+        viewPort.view.setStandardRotation(StandardViewId.Iso);
+      })
+      .catch(() => {
+        IModelApp.tools.run(FitViewTool.toolId, viewPort, true);
+        viewPort.view.setStandardRotation(StandardViewId.Iso);
+      });
+  };
+
   return (
     <div className={styles.home}>
       <Header
@@ -103,6 +138,7 @@ export const AuthConfigHome: React.FC = () => {
         appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
         theme={ColorTheme.Dark}
         onIModelAppInit={onIModelAppInit}
+        viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
       />
     </div>
   );

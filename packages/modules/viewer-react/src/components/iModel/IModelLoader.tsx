@@ -12,7 +12,6 @@ import {
   IModelApp,
   IModelConnection,
   SnapshotConnection,
-  ViewCreator3dOptions,
   ViewState,
 } from "@bentley/imodeljs-frontend";
 import {
@@ -37,6 +36,7 @@ import { ai } from "../../services/telemetry/TelemetryService";
 import {
   BlankConnectionViewState,
   IModelLoaderParams,
+  ViewCreator3dOptions,
   ViewerBackstageItem,
   ViewerFrontstage,
 } from "../../types";

@@ -3,16 +3,19 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-// TODO: This is a clone of the iTwin.js class. Once the issue with the models query is resolved in core, this should be deprecated.
-/** @packageDocumentation
- */
+// TODO: This is a, EDITED clone of the iTwin.js class. Once the issue with the models query is resolved in core, this should be deprecated. However, there is additional viewport customization logic that would need to be accounted for in core or elsewhere in this package
 
 /*
 API for creating a 3D default view for an iModel.
 Either takes in a list of modelIds, or displays all 3D models by default.
 */
 
-import { Id64Array, Id64String, IModelStatus } from "@bentley/bentleyjs-core";
+import {
+  Id64,
+  Id64Array,
+  Id64String,
+  IModelStatus,
+} from "@bentley/bentleyjs-core";
 import { Range3d } from "@bentley/geometry-core";
 import {
   Camera,
@@ -30,27 +33,16 @@ import {
 } from "@bentley/imodeljs-common";
 import {
   Environment,
+  FitViewTool,
+  IModelApp,
   IModelConnection,
+  ScreenViewport,
   SpatialViewState,
   StandardViewId,
   ViewState,
 } from "@bentley/imodeljs-frontend";
 
-/** Options for creating a [[ViewState3d]] via [[ViewCreator3d]].
- *  @public
- */
-export interface ViewCreator3dOptions {
-  /** Turn [[Camera]] on when generating the view. */
-  cameraOn?: boolean;
-  /** Turn [[SkyBox]] on when generating the view. */
-  skyboxOn?: boolean;
-  /** [[StandardViewId]] for the view state. */
-  standardViewId?: StandardViewId;
-  /** Merge in props from the seed view (default spatial view) of the iModel.  */
-  useSeedView?: boolean;
-  /** Aspect ratio of [[Viewport]]. Required to fit contents of the model(s) in the initial state of the view. */
-  vpAspect?: number;
-}
+import { ViewCreator3dOptions } from "../../types";
 
 /**
  * API for creating a 3D default [[ViewState3d]] for an iModel. @see [[ViewCreator2d]] to create a view for a 2d model.
@@ -86,17 +78,68 @@ export class ViewCreator3d {
       );
     }
 
-    const props = await this._createViewStateProps(models, options);
+    const defaultViewId = await this._imodel.views.queryDefaultViewId();
+    const props = await this._createViewStateProps(
+      models,
+      defaultViewId,
+      options
+    );
     const viewState = SpatialViewState.createFromProps(props, this._imodel);
     try {
       await viewState.load();
     } catch {}
 
-    if (options?.standardViewId) {
-      viewState.setStandardRotation(options.standardViewId);
-    }
-    const range = viewState.computeFitRange();
-    viewState.lookAtVolume(range, options?.vpAspect);
+    // configure the view
+    IModelApp.viewManager.onViewOpen.addOnce((viewPort: ScreenViewport) => {
+      // check for a custom configurer and execute
+      if (options?.viewportConfigurer) {
+        options.viewportConfigurer(viewPort);
+        return;
+      }
+
+      // failing that, if there is a valid default view id, adjust the volume but otherwise retain the view as is
+      if (Id64.isValidId64(defaultViewId)) {
+        if (options?.standardViewId) {
+          viewState.setStandardRotation(options.standardViewId);
+        }
+        const range = viewState.computeFitRange();
+        viewState.lookAtVolume(range, options?.vpAspect);
+        return;
+      }
+
+      // no default view and no custom configurer
+      // default execute the fitview tool and use the iso standard view after tile trees are loaded
+      const tileTreesLoaded = () => {
+        return new Promise((resolve, reject) => {
+          const start = new Date();
+          const intvl = setInterval(() => {
+            if (viewPort.areAllTileTreesLoaded) {
+              clearInterval(intvl);
+              resolve(true);
+            }
+            const now = new Date();
+            // after 20 seconds, stop waiting and fit the view
+            if (now.getTime() - start.getTime() > 20000) {
+              reject();
+            }
+          }, 100);
+        });
+      };
+
+      tileTreesLoaded()
+        .then(() => {
+          IModelApp.tools.run(FitViewTool.toolId, viewPort, true);
+          viewPort.view.setStandardRotation(
+            options?.standardViewId ?? StandardViewId.Iso
+          );
+        })
+        .catch(() => {
+          IModelApp.tools.run(FitViewTool.toolId, viewPort, true);
+          viewPort.view.setStandardRotation(
+            options?.standardViewId ?? StandardViewId.Iso
+          );
+        });
+    });
 
     return viewState;
   }
@@ -108,6 +151,7 @@ export class ViewCreator3d {
    */
   private async _createViewStateProps(
     models: Id64String[],
+    defaultViewId: string,
     options?: ViewCreator3dOptions
   ): Promise<ViewStateProps> {
     // Use dictionary model in all props
@@ -206,7 +250,7 @@ export class ViewCreator3d {
 
     // merge seed view props if needed
     return options?.useSeedView
-      ? this._mergeSeedView(viewStateProps)
+      ? this._mergeSeedView(viewStateProps, defaultViewId)
       : viewStateProps;
   }
 
@@ -215,9 +259,10 @@ export class ViewCreator3d {
    * @param viewStateProps Input view props to be merged
    */
   private async _mergeSeedView(
-    viewStateProps: ViewStateProps
+    viewStateProps: ViewStateProps,
+    defaultViewId: string
   ): Promise<ViewStateProps> {
-    const viewId = await this._getDefaultViewId();
+    const viewId = await this._getSeedViewId(defaultViewId);
     // Handle iModels without any default view id
     if (viewId === undefined) {
       return viewStateProps;
@@ -250,8 +295,10 @@ export class ViewCreator3d {
   /**
    * Get ID of default view.
    */
-  private async _getDefaultViewId(): Promise<Id64String | undefined> {
-    const viewId = await this._imodel.views.queryDefaultViewId();
+  private async _getSeedViewId(
+    defaultViewId: string
+  ): Promise<Id64String | undefined> {
+    const viewId = defaultViewId;
     const params: ViewQueryParams = {};
     params.from = SpatialViewState.classFullName;
     params.where = `ECInstanceId=${viewId}`;
