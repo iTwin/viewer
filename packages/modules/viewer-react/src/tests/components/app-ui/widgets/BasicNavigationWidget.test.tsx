@@ -2,8 +2,13 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
-import { CoreTools, ToolbarHelper } from "@bentley/ui-framework";
+import { IModelApp } from "@bentley/imodeljs-frontend";
+import { CoreTools, ToolbarHelper, ToolItemDef } from "@bentley/ui-framework";
 import { render } from "@testing-library/react";
 import React from "react";
 
@@ -35,6 +40,7 @@ jest.mock("@bentley/ui-framework", () => {
         removeListener: jest.fn(),
       },
     },
+    ToolItemDef: jest.fn(),
   };
 });
 
@@ -71,7 +77,16 @@ describe("BasicNavigationWidget", () => {
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
-      CoreTools.walkViewCommand
+      new ToolItemDef({
+        toolId: "View.LookAndMove",
+        iconSpec: "icon-walk",
+        execute: () =>
+          IModelApp.tools.run(
+            "View.LookAndMove",
+            IModelApp.viewManager.selectedView
+          ),
+        labelKey: "iTwinViewer:tools.walkTool",
+      })
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       20,
@@ -110,7 +125,16 @@ describe("BasicNavigationWidget", () => {
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
-      CoreTools.walkViewCommand
+      new ToolItemDef({
+        toolId: "View.LookAndMove",
+        iconSpec: "icon-walk",
+        execute: () =>
+          IModelApp.tools.run(
+            "View.LookAndMove",
+            IModelApp.viewManager.selectedView
+          ),
+        labelKey: "iTwinViewer:tools.walkTool",
+      })
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       20,
@@ -149,7 +173,16 @@ describe("BasicNavigationWidget", () => {
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).not.toHaveBeenCalledWith(
       10,
-      CoreTools.walkViewCommand
+      new ToolItemDef({
+        toolId: "View.LookAndMove",
+        iconSpec: "icon-walk",
+        execute: () =>
+          IModelApp.tools.run(
+            "View.LookAndMove",
+            IModelApp.viewManager.selectedView
+          ),
+        labelKey: "iTwinViewer:tools.walkTool",
+      })
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).not.toHaveBeenCalledWith(
       20,
@@ -194,7 +227,16 @@ describe("BasicNavigationWidget", () => {
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
-      CoreTools.walkViewCommand
+      new ToolItemDef({
+        toolId: "View.LookAndMove",
+        iconSpec: "icon-walk",
+        execute: () =>
+          IModelApp.tools.run(
+            "View.LookAndMove",
+            IModelApp.viewManager.selectedView
+          ),
+        labelKey: "iTwinViewer:tools.walkTool",
+      })
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       20,
@@ -239,7 +281,16 @@ describe("BasicNavigationWidget", () => {
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
-      CoreTools.walkViewCommand
+      new ToolItemDef({
+        toolId: "View.LookAndMove",
+        iconSpec: "icon-walk",
+        execute: () =>
+          IModelApp.tools.run(
+            "View.LookAndMove",
+            IModelApp.viewManager.selectedView
+          ),
+        labelKey: "iTwinViewer:tools.walkTool",
+      })
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       20,
@@ -284,7 +335,16 @@ describe("BasicNavigationWidget", () => {
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
-      CoreTools.walkViewCommand
+      new ToolItemDef({
+        toolId: "View.LookAndMove",
+        iconSpec: "icon-walk",
+        execute: () =>
+          IModelApp.tools.run(
+            "View.LookAndMove",
+            IModelApp.viewManager.selectedView
+          ),
+        labelKey: "iTwinViewer:tools.walkTool",
+      })
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       20,
@@ -329,7 +389,16 @@ describe("BasicNavigationWidget", () => {
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
-      CoreTools.walkViewCommand
+      new ToolItemDef({
+        toolId: "View.LookAndMove",
+        iconSpec: "icon-walk",
+        execute: () =>
+          IModelApp.tools.run(
+            "View.LookAndMove",
+            IModelApp.viewManager.selectedView
+          ),
+        labelKey: "iTwinViewer:tools.walkTool",
+      })
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       20,
@@ -374,7 +443,16 @@ describe("BasicNavigationWidget", () => {
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
-      CoreTools.walkViewCommand
+      new ToolItemDef({
+        toolId: "View.LookAndMove",
+        iconSpec: "icon-walk",
+        execute: () =>
+          IModelApp.tools.run(
+            "View.LookAndMove",
+            IModelApp.viewManager.selectedView
+          ),
+        labelKey: "iTwinViewer:tools.walkTool",
+      })
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       20,
@@ -419,7 +497,16 @@ describe("BasicNavigationWidget", () => {
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
-      CoreTools.walkViewCommand
+      new ToolItemDef({
+        toolId: "View.LookAndMove",
+        iconSpec: "icon-walk",
+        execute: () =>
+          IModelApp.tools.run(
+            "View.LookAndMove",
+            IModelApp.viewManager.selectedView
+          ),
+        labelKey: "iTwinViewer:tools.walkTool",
+      })
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       20,
@@ -464,7 +551,16 @@ describe("BasicNavigationWidget", () => {
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).not.toHaveBeenCalledWith(
       10,
-      CoreTools.walkViewCommand
+      new ToolItemDef({
+        toolId: "View.LookAndMove",
+        iconSpec: "icon-walk",
+        execute: () =>
+          IModelApp.tools.run(
+            "View.LookAndMove",
+            IModelApp.viewManager.selectedView
+          ),
+        labelKey: "iTwinViewer:tools.walkTool",
+      })
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       20,
@@ -509,7 +605,16 @@ describe("BasicNavigationWidget", () => {
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
-      CoreTools.walkViewCommand
+      new ToolItemDef({
+        toolId: "View.LookAndMove",
+        iconSpec: "icon-walk",
+        execute: () =>
+          IModelApp.tools.run(
+            "View.LookAndMove",
+            IModelApp.viewManager.selectedView
+          ),
+        labelKey: "iTwinViewer:tools.walkTool",
+      })
     );
     expect(ToolbarHelper.createToolbarItemFromItemDef).not.toHaveBeenCalledWith(
       20,
