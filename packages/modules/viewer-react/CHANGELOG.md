@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Thu, 15 Jul 2021 17:38:16 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Jul 2021 01:06:41 GMT and should not be manually modified.
+
+## 1.2.0
+Fri, 16 Jul 2021 01:06:41 GMT
+
+### Minor changes
+
+- Fix view configuration and add the ability to customize the view
 
 ## 1.1.0
 Thu, 15 Jul 2021 17:38:16 GMT
