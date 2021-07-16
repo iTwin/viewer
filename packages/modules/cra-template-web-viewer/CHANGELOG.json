@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "1.0.6",
+      "tag": "@itwin/cra-template-web-viewer_v1.0.6",
+      "date": "Fri, 16 Jul 2021 13:42:02 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Upgrade minimum iTwin Viewer version"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.5",
       "tag": "@itwin/cra-template-web-viewer_v1.0.5",
       "date": "Wed, 07 Jul 2021 21:58:42 GMT",
