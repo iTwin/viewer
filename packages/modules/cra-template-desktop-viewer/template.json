@@ -35,7 +35,7 @@
       "@bentley/ui-framework": "^2.14.0",
       "@bentley/ui-ninezone": "^2.14.0",
       "@bentley/webgl-compatibility": "^2.14.0",
-      "@itwin/desktop-viewer-react": "^1.0.1",
+      "@itwin/desktop-viewer-react": "^1.0.7",
       "@reduxjs/toolkit": "^1.6.0",
       "@types/electron-devtools-installer": "^2.2.0",
       "@types/minimist": "^1.2.0",
