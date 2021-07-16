@@ -1,0 +1,63 @@
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
+
+@import "~@bentley/ui-core/lib/ui-core/style/index";
+@import "~@bentley/ui-core/lib/ui-core/text/index";
+
+.pcomponents-property-grid-with-unified-selection {
+  overflow: hidden !important;
+}
+
+.filtering-property-grid-with-unified-selection {
+  flex: 1;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.virtualized-grid-node-content > .components--hoverable:hover {
+  background: $buic-row-hover !important;
+}
+
+.property-grid-react-panel-label-and-class {
+  display: block;
+}
+
+.property-grid-react-panel-label {
+  @include uicore-text(leading);
+  font-size: $uicore-font-size-leading;
+  padding: $uicore-xs 0;
+}
+
+.property-grid-react-panel-info-btn {
+  cursor: pointer;
+  margin-left: auto;
+  padding: $uicore-xs;
+  display: flex;
+  flex-direction: column;
+}
+
+.property-grid-react-panel-back-btn {
+  cursor: pointer;
+  padding: $uicore-xs;
+  display: flex;
+  flex-direction: column;
+}
+
+.property-grid-react-panel-icon {
+  font-size: 24px;
+  margin: auto;
+  padding: $uicore-s;
+}
+
+.property-grid-react-panel-header {
+  display: flex;
+  padding-top: $uicore-xs;
+}
+
+.property-grid-react-panel-class {
+  @include uicore-text;
+  font-size: $uicore-font-size;
+}

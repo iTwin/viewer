@@ -13,7 +13,8 @@ import {
 } from "@bentley/ui-abstract";
 import { UiFramework } from "@bentley/ui-framework";
 import { IModelConnection } from "@bentley/imodeljs-frontend";
-import { PropertyGrid, PropertyGridProps } from "@bentley/property-grid-react";
+import { PropertyGrid } from "./PropertyGrid";
+import { /*PropertyGrid,*/ PropertyGridProps } from "@bentley/property-grid-react";
 import * as React from "react";
 
 /** Provides the property grid widget to zone 9 */
