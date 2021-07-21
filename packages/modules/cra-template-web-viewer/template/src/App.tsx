@@ -135,7 +135,7 @@ const App: React.FC = () => {
     };
 
     tileTreesLoaded().finally(() => {
-      IModelApp.tools.run(FitViewTool.toolId, viewPort, true);
+      IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
       viewPort.view.setStandardRotation(StandardViewId.Iso);
     });
   };
