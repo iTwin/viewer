@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Fri, 16 Jul 2021 01:06:41 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Jul 2021 19:45:37 GMT and should not be manually modified.
+
+## 1.2.1
+Wed, 21 Jul 2021 19:45:37 GMT
+
+### Patches
+
+- don't run animation on fitview to avoid code path that throws an error in core
 
 ## 1.2.0
 Fri, 16 Jul 2021 01:06:41 GMT

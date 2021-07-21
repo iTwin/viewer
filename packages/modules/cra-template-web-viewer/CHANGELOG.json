@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "1.0.7",
+      "tag": "@itwin/cra-template-web-viewer_v1.0.7",
+      "date": "Wed, 21 Jul 2021 19:45:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Execute the fitview tool when the iModel is loaded"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.6",
       "tag": "@itwin/cra-template-web-viewer_v1.0.6",
       "date": "Fri, 16 Jul 2021 13:42:02 GMT",

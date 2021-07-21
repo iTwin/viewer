@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Wed, 21 Jul 2021 15:33:11 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Jul 2021 19:45:37 GMT and should not be manually modified.
+
+## 1.0.5
+Wed, 21 Jul 2021 19:45:37 GMT
+
+### Patches
+
+- Execute the fitview tool when the iModel is loaded
 
 ## 1.0.4
 Wed, 21 Jul 2021 15:33:11 GMT

@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "1.2.1",
+      "tag": "@itwin/viewer-react_v1.2.1",
+      "date": "Wed, 21 Jul 2021 19:45:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "don't run animation on fitview to avoid code path that throws an error in core"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.0",
       "tag": "@itwin/viewer-react_v1.2.0",
       "date": "Fri, 16 Jul 2021 01:06:41 GMT",
