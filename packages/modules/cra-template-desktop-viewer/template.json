@@ -58,7 +58,7 @@
     },
     "scripts": {
       "build:backend": "tsc -p tsconfig.backend.json",
-      "build:frontend": "pseudolocalize && react-scripts build",
+      "build:frontend": "npm run pseudolocalize && react-scripts build",
       "electron": "electron lib/backend/main.js",
       "electron:debug": "cross-env NODE_ENV=development electron lib/backend/main.js",
       "start": "npm run build:backend && run-p \"start:frontend\" \"electron:debug\"",
