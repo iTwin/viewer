@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-desktop-viewer",
   "entries": [
     {
+      "version": "1.0.4",
+      "tag": "@itwin/cra-template-desktop-viewer_v1.0.4",
+      "date": "Wed, 21 Jul 2021 15:33:11 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix build:frontend command"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.3",
       "tag": "@itwin/cra-template-desktop-viewer_v1.0.3",
       "date": "Fri, 16 Jul 2021 13:42:02 GMT",

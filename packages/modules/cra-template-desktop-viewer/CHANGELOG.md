@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Fri, 16 Jul 2021 13:42:02 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Jul 2021 15:33:11 GMT and should not be manually modified.
+
+## 1.0.4
+Wed, 21 Jul 2021 15:33:11 GMT
+
+### Patches
+
+- fix build:frontend command
 
 ## 1.0.3
 Fri, 16 Jul 2021 13:42:02 GMT
