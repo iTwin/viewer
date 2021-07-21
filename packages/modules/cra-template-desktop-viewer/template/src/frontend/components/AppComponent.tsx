@@ -7,7 +7,12 @@ import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./AppComponent.css";
 
 import { IModelSelect } from "@bentley/imodel-select-react";
-import { IModelApp } from "@bentley/imodeljs-frontend";
+import {
+  FitViewTool,
+  IModelApp,
+  ScreenViewport,
+  StandardViewId,
+} from "@bentley/imodeljs-frontend";
 import { FrontstageManager } from "@bentley/ui-framework";
 import {
   Viewer,
@@ -51,8 +56,9 @@ export const AppComponent = () => {
   const [backstageItems, setBackstageItems] = useState<ViewerBackstageItem[]>();
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
   const [connectedMode, setConnectedMode] = useState<boolean>(false);
-  const [frontstage, setFrontstage] =
-    useState<"IModelSelector" | "SnapshotSelector" | "Viewer">();
+  const [frontstage, setFrontstage] = useState<
+    "IModelSelector" | "SnapshotSelector" | "Viewer"
+  >();
 
   const selectedSnapshot = useSelector<RootState, string>(
     (state: RootState) => state?.selectedSnapshot
@@ -181,6 +187,35 @@ export const AppComponent = () => {
     }
   }, []);
 
+  /** NOTE: This function will execute the "Fit View" tool after the iModel is loaded into the Viewer.
+   * This will provide an "optimal" view of the model. However, it will override any default views that are
+   * stored in the iModel. Delete this function and the prop that it is passed to if you prefer
+   * to honor default views when they are present instead (the Viewer will still apply a similar function to iModels that do not have a default view).
+   */
+  const viewConfiguration = (viewPort: ScreenViewport) => {
+    const tileTreesLoaded = () => {
+      return new Promise((resolve, reject) => {
+        const start = new Date();
+        const intvl = setInterval(() => {
+          if (viewPort.areAllTileTreesLoaded) {
+            clearInterval(intvl);
+            resolve(true);
+          }
+          const now = new Date();
+          // after 20 seconds, stop waiting and fit the view
+          if (now.getTime() - start.getTime() > 20000) {
+            reject();
+          }
+        }, 100);
+      });
+    };
+
+    tileTreesLoaded().finally(() => {
+      IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
+      viewPort.view.setStandardRotation(StandardViewId.Iso);
+    });
+  };
+
   return (
     <Viewer
       contextId={projectId}
@@ -189,6 +224,7 @@ export const AppComponent = () => {
       onIModelAppInit={onIModelAppInitialized}
       frontstages={frontstages}
       backstageItems={backstageItems}
+      viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
     />
   );
 };

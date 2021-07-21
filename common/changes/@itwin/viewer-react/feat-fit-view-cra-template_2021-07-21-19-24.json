@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "don't run animation on fitview to avoid code path that throws an error in core",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react",
+  "email": "aruniverse@users.noreply.github.com"
+}
