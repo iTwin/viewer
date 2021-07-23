@@ -24,7 +24,7 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
       snapshotName: parsedArgs._[0] ?? getAppEnvVar("SNAPSHOT"),
       clientId: getAppEnvVar("CLIENT_ID") ?? "",
       redirectUri: getAppEnvVar("REDIRECT_URI") ?? "",
-      issuer: getAppEnvVar("ISSUER"),
+      issuerUrl: getAppEnvVar("ISSUER_URL"),
     };
   }
   /**
