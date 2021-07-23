@@ -23,6 +23,7 @@ export interface ViewerConfig {
   snapshotName?: string;
   clientId: string;
   redirectUri: string;
+  issuer?: string;
 }
 
 /** RPC interfaces required by the viewer */
