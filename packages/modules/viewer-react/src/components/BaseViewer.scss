@@ -1,0 +1,13 @@
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+@import "~@bentley/ui-core/lib/ui-core/colorthemes.scss";
+
+.not-signed-in-container {
+    min-width: 200px;
+    min-height: 150px;
+    background-color: $buic-background-1;
+
+
+}
