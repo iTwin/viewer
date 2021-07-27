@@ -115,7 +115,9 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   // TODO not signed in message / loader
   return (
     <ErrorBoundary>
-      {!authorized && <FillCentered>Not Signed In</FillCentered>}
+      {(!authorized || !iModelJsInitialized) && (
+        <FillCentered>Not Signed In</FillCentered>
+      )}
       {authorized && iModelJsInitialized && (
         <IModelLoader
           contextId={contextId}
