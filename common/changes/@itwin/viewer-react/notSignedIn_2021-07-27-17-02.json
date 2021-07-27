@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/viewer-react",
       "comment": "Added a component displaying Not Signed In when the user isn't authorized",
-      "type": "minor"
+      "type": "patch"
     }
   ],
   "packageName": "@itwin/viewer-react",
