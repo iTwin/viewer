@@ -2,12 +2,23 @@
 * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
-@import "~@bentley/ui-core/lib/ui-core/colorthemes.scss";
+@import "~@bentley/ui-core/lib/ui-core/style/themecolors.scss";
 
 .not-signed-in-container {
-    min-width: 200px;
-    min-height: 150px;
-    background-color: $buic-background-1;
+    width: 200px;
+    height: 100px;
+    background-color: $buic-background-3;
+    color: $buic-text-color;
+    text-align: center;
+    margin-top: 100px;
+    margin-left: 50%;
+    left: -75px;
+    position: absolute;
+    border-radius: 5px;
+    font-size: 25px;
+    border: 2px $buic-inputs-border solid;
 
-
+    div {
+        margin-top:30px;
+    }
 }
