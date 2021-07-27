@@ -5,7 +5,7 @@
 
 import "./IModelBusy.scss";
 
-import { BodyText, LoadingSpinner, SpinnerSize } from "@bentley/ui-core";
+import { BodyText, LoadingSpinner } from "@bentley/ui-core";
 import React from "react";
 
 export const IModelBusy = (): JSX.Element => {
@@ -16,7 +16,7 @@ export const IModelBusy = (): JSX.Element => {
         <LoadingSpinner
           message={"Your iModel is loading"}
           messageOnTop={true}
-          size={SpinnerSize.Large}
+          size={"large"}
         />
       </div>
       <div className="imodelbusy__loadingText">

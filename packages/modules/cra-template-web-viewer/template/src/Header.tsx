@@ -25,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({
         <Button
           className={styles.button}
           onClick={handleLogin}
-          buttonType={ButtonType.Primary}
+          styleType={"cta"}
           disabled={loggedIn}
         >
           {"Sign In"}
@@ -33,7 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
         <Button
           className={styles.button}
           onClick={handleLogout}
-          buttonType={ButtonType.Primary}
+          styleType={"high-visibility"}
           disabled={!loggedIn}
         >
           {"Sign Out"}

@@ -3,7 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Subheading, Subheading2 } from "@bentley/ui-core";
+import { Subheading2 } from "@bentley/ui-core";
+import { Subheading } from "@itwin/itwinui-react";
 import classNames from "classnames";
 import React from "react";
 import { Helmet } from "react-helmet-async";
