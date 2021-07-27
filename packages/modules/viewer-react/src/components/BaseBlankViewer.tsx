@@ -2,8 +2,13 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import { BlankConnectionProps, IModelApp } from "@bentley/imodeljs-frontend";
+import { FillCentered } from "@bentley/ui-core/lib/ui-core";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
@@ -106,20 +111,26 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
 
   return (
     <ErrorBoundary>
-      {authorized && iModelJsInitialized && (
-        <IModelLoader
-          defaultUiConfig={uiConfig}
-          appInsightsKey={appInsightsKey}
-          onIModelConnected={onIModelConnected}
-          frontstages={frontstages}
-          backstageItems={backstageItems}
-          uiFrameworkVersion={uiFrameworkVersion}
-          viewportOptions={viewportOptions}
-          blankConnection={blankConnection}
-          blankConnectionViewState={viewStateOptions}
-          uiProviders={uiProviders}
-          theme={theme}
-        />
+      {authorized ? (
+        iModelJsInitialized ? (
+          <IModelLoader
+            defaultUiConfig={uiConfig}
+            appInsightsKey={appInsightsKey}
+            onIModelConnected={onIModelConnected}
+            frontstages={frontstages}
+            backstageItems={backstageItems}
+            uiFrameworkVersion={uiFrameworkVersion}
+            viewportOptions={viewportOptions}
+            blankConnection={blankConnection}
+            blankConnectionViewState={viewStateOptions}
+            uiProviders={uiProviders}
+            theme={theme}
+          />
+        ) : (
+          <FillCentered>initializing...</FillCentered>
+        )
+      ) : (
+        <FillCentered>Please sign in.</FillCentered>
       )}
     </ErrorBoundary>
   );
