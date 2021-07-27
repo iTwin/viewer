@@ -11,6 +11,7 @@
 import "./BaseViewer.scss";
 
 import { IModelApp } from "@bentley/imodeljs-frontend";
+import { FillCentered } from "@bentley/ui-core/lib/ui-core";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
@@ -114,11 +115,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   // TODO not signed in message / loader
   return (
     <ErrorBoundary>
-      {!authorized && (
-        <div className="not-signed-in-container">
-          <div>Not Signed In</div>
-        </div>
-      )}
+      {!authorized && <FillCentered>Not Signed In</FillCentered>}
       {authorized && iModelJsInitialized && (
         <IModelLoader
           contextId={contextId}
