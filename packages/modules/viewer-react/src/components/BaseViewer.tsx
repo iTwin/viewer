@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { IModelApp } from "@bentley/imodeljs-frontend";
 import { FillCentered } from "@bentley/ui-core/lib/ui-core";
 import { ErrorBoundary } from "@itwin/error-handling-react";
@@ -108,7 +109,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   return (
     <ErrorBoundary>
       {(!authorized || !iModelJsInitialized) && (
-        <FillCentered>Not Signed In</FillCentered>
+        <FillCentered>Please sign in.</FillCentered>
       )}
       {authorized && iModelJsInitialized && (
         <IModelLoader
