@@ -1,9 +1,13 @@
 {
   "extends": ["./.eslintrc.ts.base.json"],
+  "plugins": [
+    "deprecation"
+  ],
   "rules": {
     "@typescript-eslint/no-floating-promises": "error",
     "@typescript-eslint/prefer-optional-chain": "warn",
     "@typescript-eslint/prefer-nullish-coalescing": "warn",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "deprecation/deprecation": "error"
   }
 }
