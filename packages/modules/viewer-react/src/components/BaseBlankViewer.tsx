@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 /*---------------------------------------------------------------------------------------------
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
@@ -107,6 +108,7 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
     onIModelAppInit,
     additionalI18nNamespaces,
     additionalRpcInterfaces,
+    iModelJsInitialized,
   ]);
 
   return (
