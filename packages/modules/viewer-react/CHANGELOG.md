@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Wed, 21 Jul 2021 19:45:37 GMT and should not be manually modified.
+This log was last generated on Wed, 28 Jul 2021 13:51:25 GMT and should not be manually modified.
+
+## 1.2.2
+Wed, 28 Jul 2021 13:51:25 GMT
+
+### Patches
+
+- Added a component displaying Not Signed In when the user isn't authorized
 
 ## 1.2.1
 Wed, 21 Jul 2021 19:45:37 GMT
