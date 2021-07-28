@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { BlankConnectionProps, IModelApp } from "@bentley/imodeljs-frontend";
+import { FillCentered } from "@bentley/ui-core/lib/ui-core";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
@@ -102,24 +103,31 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
     onIModelAppInit,
     additionalI18nNamespaces,
     additionalRpcInterfaces,
+    iModelJsInitialized,
   ]);
 
   return (
     <ErrorBoundary>
-      {authorized && iModelJsInitialized && (
-        <IModelLoader
-          defaultUiConfig={uiConfig}
-          appInsightsKey={appInsightsKey}
-          onIModelConnected={onIModelConnected}
-          frontstages={frontstages}
-          backstageItems={backstageItems}
-          uiFrameworkVersion={uiFrameworkVersion}
-          viewportOptions={viewportOptions}
-          blankConnection={blankConnection}
-          blankConnectionViewState={viewStateOptions}
-          uiProviders={uiProviders}
-          theme={theme}
-        />
+      {authorized ? (
+        iModelJsInitialized ? (
+          <IModelLoader
+            defaultUiConfig={uiConfig}
+            appInsightsKey={appInsightsKey}
+            onIModelConnected={onIModelConnected}
+            frontstages={frontstages}
+            backstageItems={backstageItems}
+            uiFrameworkVersion={uiFrameworkVersion}
+            viewportOptions={viewportOptions}
+            blankConnection={blankConnection}
+            blankConnectionViewState={viewStateOptions}
+            uiProviders={uiProviders}
+            theme={theme}
+          />
+        ) : (
+          <FillCentered>initializing...</FillCentered>
+        )
+      ) : (
+        <FillCentered>Please sign in.</FillCentered>
       )}
     </ErrorBoundary>
   );

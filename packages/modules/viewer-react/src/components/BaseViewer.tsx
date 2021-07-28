@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IModelApp } from "@bentley/imodeljs-frontend";
+import { FillCentered } from "@bentley/ui-core/lib/ui-core";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
@@ -104,26 +105,31 @@ export const BaseViewer: React.FC<ViewerProps> = ({
     onIModelAppInit,
   ]);
 
-  // TODO not signed in message / loader
   return (
     <ErrorBoundary>
-      {authorized && iModelJsInitialized && (
-        <IModelLoader
-          contextId={contextId}
-          iModelId={iModelId}
-          changeSetId={changeSetId}
-          defaultUiConfig={defaultUiConfig}
-          appInsightsKey={appInsightsKey}
-          onIModelConnected={onIModelConnected}
-          snapshotPath={snapshotPath}
-          frontstages={frontstages}
-          backstageItems={backstageItems}
-          uiFrameworkVersion={uiFrameworkVersion}
-          viewportOptions={viewportOptions}
-          uiProviders={uiProviders}
-          theme={theme}
-          viewCreatorOptions={viewCreatorOptions}
-        />
+      {authorized ? (
+        iModelJsInitialized ? (
+          <IModelLoader
+            contextId={contextId}
+            iModelId={iModelId}
+            changeSetId={changeSetId}
+            defaultUiConfig={defaultUiConfig}
+            appInsightsKey={appInsightsKey}
+            onIModelConnected={onIModelConnected}
+            snapshotPath={snapshotPath}
+            frontstages={frontstages}
+            backstageItems={backstageItems}
+            uiFrameworkVersion={uiFrameworkVersion}
+            viewportOptions={viewportOptions}
+            uiProviders={uiProviders}
+            theme={theme}
+            viewCreatorOptions={viewCreatorOptions}
+          />
+        ) : (
+          <FillCentered>initializing...</FillCentered>
+        )
+      ) : (
+        <FillCentered>Please sign in.</FillCentered>
       )}
     </ErrorBoundary>
   );
