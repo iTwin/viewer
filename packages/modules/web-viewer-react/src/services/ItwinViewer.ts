@@ -17,7 +17,7 @@ import ReactDOM from "react-dom";
 import { ViewerFrontstage } from "..";
 import { Viewer } from "../components/Viewer";
 import {
-  ItwinViewerParams,
+  ItwinWebViewerParams,
   WebAuthorizationOptions,
   WebViewerProps,
 } from "../types";
@@ -42,7 +42,7 @@ export class ItwinViewer {
 
   onIModelConnected: ((iModel: CheckpointConnection) => void) | undefined;
 
-  constructor(options: ItwinViewerParams) {
+  constructor(options: ItwinWebViewerParams) {
     if (!options.elementId) {
       //TODO localize
       throw new Error("Please supply a root elementId as the first parameter"); //TODO localize
