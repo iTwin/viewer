@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Wed, 28 Jul 2021 13:51:25 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Jul 2021 15:01:33 GMT and should not be manually modified.
+
+## 1.2.3
+Fri, 30 Jul 2021 15:01:33 GMT
+
+### Patches
+
+- Fixed bug with the height of the viewer when app insights were on
 
 ## 1.2.2
 Wed, 28 Jul 2021 13:51:25 GMT
