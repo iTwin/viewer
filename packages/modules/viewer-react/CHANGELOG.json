@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "1.2.4",
+      "tag": "@itwin/viewer-react_v1.2.4",
+      "date": "Mon, 02 Aug 2021 19:16:49 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "remove internal ITwinViewerParams interface from base and promote it to the web-viewer pkg"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.3",
       "tag": "@itwin/viewer-react_v1.2.3",
       "date": "Fri, 30 Jul 2021 15:01:33 GMT",

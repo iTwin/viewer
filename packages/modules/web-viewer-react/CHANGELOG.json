@@ -2,6 +2,26 @@
   "name": "@itwin/web-viewer-react",
   "entries": [
     {
+      "version": "1.1.0",
+      "tag": "@itwin/web-viewer-react_v1.1.0",
+      "date": "Mon, 02 Aug 2021 19:16:49 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "change type of WebAuthorizationOptions.oidcClient to FrontendAuthorizationClient"
+          },
+          {
+            "comment": "export types from web-viewer-react pkg"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" from `1.2.3` to `1.2.4`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.11",
       "tag": "@itwin/web-viewer-react_v1.0.11",
       "date": "Fri, 30 Jul 2021 15:01:33 GMT",

@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Fri, 30 Jul 2021 15:01:33 GMT and should not be manually modified.
+This log was last generated on Mon, 02 Aug 2021 19:16:49 GMT and should not be manually modified.
+
+## 1.2.4
+Mon, 02 Aug 2021 19:16:49 GMT
+
+### Patches
+
+- remove internal ITwinViewerParams interface from base and promote it to the web-viewer pkg
 
 ## 1.2.3
 Fri, 30 Jul 2021 15:01:33 GMT
