@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { CheckpointConnection, IModelApp } from "@bentley/imodeljs-frontend";
+import { CheckpointConnection } from "@bentley/imodeljs-frontend";
 import { UiItemsProvider } from "@bentley/ui-abstract";
 import {
   ColorTheme,

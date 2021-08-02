@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import {
-  BrowserAuthorizationClient,
   BrowserAuthorizationClientConfiguration,
+  FrontendAuthorizationClient,
 } from "@bentley/frontend-authorization-client";
 import {
   BentleyCloudRpcParams,
@@ -23,7 +23,7 @@ import { UserManager } from "oidc-client";
  */
 export interface WebAuthorizationOptions {
   /** provide an existing iTwin.js authorization client */
-  oidcClient?: BrowserAuthorizationClient;
+  oidcClient?: FrontendAuthorizationClient;
   /** provide configuration for an oidc client to be managed within the Viewer */
   config?: BrowserAuthorizationClientConfiguration;
   /** reference to a function that returns a pre-configured oidc UserManager */
