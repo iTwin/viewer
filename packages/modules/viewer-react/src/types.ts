@@ -56,14 +56,6 @@ export type ViewerBackstageItem = BackstageItem & {
   labeli18nKey?: string;
 };
 
-/**
- * iTwin Viewer parameter list
- */
-export interface ItwinViewerParams extends ItwinViewerCommonParams {
-  /** id of the html element where the viewer should be rendered */
-  elementId: string;
-}
-
 export interface IModelLoaderParams {
   /** color theme */
   theme?: ColorTheme | string;
