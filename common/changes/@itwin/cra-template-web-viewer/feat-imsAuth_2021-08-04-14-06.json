@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@itwin/cra-template-web-viewer",
-      "comment": "default to using ims for issuer",
+      "comment": "Default to using `ims.bentley.com` for auth issuer. Newly registered apps at [developer.bentley.com](https://developer.bentley.com/register/) will use the `itwinjs` scope under the Visualization API section, eliminating the need for having the following scopes: `rbac-user:external-client`, `projectwise-share`, `product-settings-service`, `context-registry-service:read-only`, and `imodelhub`. Users will now be able to make requests to other iTwin Platform APIs without having to manage a separate client. If you have an app generated from an older template, update your app to use the new issuer and add the new scope.",
       "type": "minor"
     }
   ],
