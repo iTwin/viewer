@@ -31,6 +31,7 @@ const viewerMain = async () => {
   const clientId = getAppEnvVar("CLIENT_ID") ?? "";
   const scope = getAppEnvVar("SCOPE") ?? "";
   const redirectUri = getAppEnvVar("REDIRECT_URI");
+  const issuerUrl = getAppEnvVar("ISSUER_URL");
 
   const electronHost: ElectronHostOptions = {
     webResourcesPath: path.join(__dirname, "..", "..", "build"),
@@ -40,8 +41,8 @@ const viewerMain = async () => {
     authConfig: {
       clientId,
       scope,
-      redirectUri:
-        redirectUri && redirectUri.length > 0 ? redirectUri : undefined,
+      redirectUri: redirectUri || undefined,
+      issuerUrl: issuerUrl || undefined,
     },
   };
 

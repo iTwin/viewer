@@ -50,6 +50,7 @@ const App: React.FC = () => {
     redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
     postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
     responseType: "code",
+    authority: process.env.IMJS_AUTH_AUTHORITY,
   };
 
   useEffect(() => {
