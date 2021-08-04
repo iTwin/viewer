@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-web-viewer",
+      "comment": "default to using ims for issuer",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/cra-template-web-viewer",
+  "email": "aruniverse@users.noreply.github.com"
+}
