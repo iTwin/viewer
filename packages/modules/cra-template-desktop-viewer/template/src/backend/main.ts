@@ -41,9 +41,8 @@ const viewerMain = async () => {
     authConfig: {
       clientId,
       scope,
-      redirectUri:
-        redirectUri && redirectUri.length > 0 ? redirectUri : undefined,
-      issuerUrl,
+      redirectUri: redirectUri || undefined,
+      issuerUrl: issuerUrl || undefined,
     },
   };
 
