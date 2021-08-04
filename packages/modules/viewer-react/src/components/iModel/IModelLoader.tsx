@@ -341,7 +341,12 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
   }
 );
 
-const TrackedLoader = withAITracking(ai.reactPlugin, Loader, "IModelLoader");
+const TrackedLoader = withAITracking(
+  ai.reactPlugin,
+  Loader,
+  "IModelLoader",
+  "tracked-loader"
+);
 
 const IModelLoader: React.FC<ModelLoaderProps> = (props: ModelLoaderProps) => {
   if (props.appInsightsKey) {
