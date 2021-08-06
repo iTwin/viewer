@@ -5,6 +5,7 @@
 
 import { ClientRequestContext } from "@bentley/bentleyjs-core";
 import { Config } from "@bentley/bentleyjs-core";
+import { IModelHubClient } from "@bentley/imodelhub-client";
 import {
   IModelReadRpcInterface,
   IModelTileRpcInterface,
@@ -290,5 +291,6 @@ export const getIModelAppOptions = (
         : viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`,
     }),
     toolAdmin: options?.toolAdmin,
+    imodelClient: options?.imodelClient || new IModelHubClient(),
   };
 };

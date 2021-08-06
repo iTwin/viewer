@@ -3,17 +3,14 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Id64, Id64String } from "@bentley/bentleyjs-core";
-import { IModelHubClient, VersionQuery } from "@bentley/imodelhub-client";
+import { VersionQuery } from "@bentley/imodelhub-client";
 import { IModelVersion } from "@bentley/imodeljs-common";
 import {
   CheckpointConnection,
   IModelApp,
-  IModelConnection,
+  IModelHubFrontend,
 } from "@bentley/imodeljs-frontend";
 import { AuthorizedClientRequestContext } from "@bentley/itwin-client";
-
-import { BaseInitializer } from "../BaseInitializer";
 
 /** determine the proper version of the iModel to open
  * 1. If named versions exist, get the named version that contains the latest changeset
@@ -30,8 +27,7 @@ const getVersion = async (
   if (token) {
     try {
       const requestContext = new AuthorizedClientRequestContext(token);
-      const hubClient = new IModelHubClient();
-      const namedVersions = await hubClient.versions.get(
+      const namedVersions = await IModelHubFrontend.iModelClient.versions.get(
         requestContext,
         iModelId,
         new VersionQuery().top(1)
@@ -47,16 +43,6 @@ const getVersion = async (
     }
   }
   return IModelVersion.latest();
-};
-
-/** parse the comma-delimited config value that is a list of accepted schema:classnames or return a default */
-const getAcceptedViewClasses = (): string[] => {
-  // TODO configurable? support for 2d (DrawingViewDefinition)?
-  const acceptedClasses = [
-    "BisCore:SpatialViewDefinition",
-    "BisCore:OrthographicViewDefinition",
-  ];
-  return acceptedClasses;
 };
 
 /** open and return an IModelConnection from a project's wsgId and an imodel's wsgId */

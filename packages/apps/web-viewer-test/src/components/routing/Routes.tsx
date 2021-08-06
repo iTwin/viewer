@@ -13,6 +13,7 @@ import {
   BlankConnectionHome,
   Home,
 } from "../home";
+import { IModelBankHome } from "../home/IModelBankHome";
 
 export const Routes = () => {
   return (
@@ -27,6 +28,7 @@ export const Routes = () => {
         component={BlankConnectionHome}
       />
       <Route path="/authconfig" exact={true} component={AuthConfigHome} />
+      <Route path="/imodelbank" exact={true} component={IModelBankHome} />
     </Switch>
   );
 };
