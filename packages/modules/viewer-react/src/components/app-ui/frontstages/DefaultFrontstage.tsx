@@ -2,17 +2,11 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-/*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
-
 import "./DefaultFrontstage.scss";
 
 import { Id64 } from "@bentley/bentleyjs-core";
 import { ViewState } from "@bentley/imodeljs-frontend";
 import { MultiElementPropertyGridWidgetControl } from "@bentley/property-grid-react";
-import { TreeWidgetControl } from "@bentley/tree-widget-react";
 import {
   ContentGroup,
   ContentLayoutDef,
@@ -29,7 +23,6 @@ import {
   WidgetState,
   Zone,
   ZoneLocation,
-  ZoneState,
 } from "@bentley/ui-framework";
 import * as React from "react";
 
