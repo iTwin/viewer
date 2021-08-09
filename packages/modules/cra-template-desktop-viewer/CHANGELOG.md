@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Wed, 21 Jul 2021 19:45:37 GMT and should not be manually modified.
+This log was last generated on Wed, 04 Aug 2021 19:32:44 GMT and should not be manually modified.
+
+## 1.1.0
+Wed, 04 Aug 2021 19:32:44 GMT
+
+### Minor changes
+
+- Default to using `ims.bentley.com` for auth issuer. Newly registered apps at [developer.bentley.com](https://developer.bentley.com/register/) will use the `itwinjs` scope under the Visualization API section, eliminating the need for having the following scopes: `rbac-user:external-client`, `projectwise-share`, `product-settings-service`, `context-registry-service:read-only`, and `imodelhub`. Users will now be able to make requests to other iTwin Platform APIs without having to manage a separate client. If you have an app generated from an older template, update your app to use the new issuer and add the new scope.
 
 ## 1.0.5
 Wed, 21 Jul 2021 19:45:37 GMT

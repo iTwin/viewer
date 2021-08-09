@@ -28,6 +28,7 @@ export class AuthorizationClient {
     const clientId = process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "";
     const redirectUri = process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "";
     const postSignoutRedirectUri = process.env.IMJS_AUTH_CLIENT_LOGOUT_URI;
+    const authority = process.env.IMJS_AUTH_AUTHORITY;
 
     // authority is optional and will default to Production IMS
     const oidcConfiguration: BrowserAuthorizationClientConfiguration = {
@@ -36,6 +37,7 @@ export class AuthorizationClient {
       postSignoutRedirectUri,
       scope,
       responseType: "code",
+      authority,
     };
 
     await BrowserAuthorizationCallbackHandler.handleSigninCallback(
