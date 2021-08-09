@@ -34,7 +34,7 @@ export class ITwinViewerApp {
   }
 
   public static ipcCall = new Proxy({} as IpcMethods, {
-    async get(_target, key: keyof IpcMethods) {
+    get(_target, key: keyof IpcMethods): AsyncFunction {
       const makeIpcCall =
         <T extends keyof IpcMethods>(methodName: T) =>
         async (...args: Parameters<IpcMethods[T]>) =>
@@ -45,8 +45,12 @@ export class ITwinViewerApp {
           ) as PromiseReturnType<ViewerIpc[T]>;
 
       switch (key) {
-        case "getConfig": // cache getConfig results
-          return (ITwinViewerApp.config ??= await makeIpcCall("getConfig")());
+        case "getConfig":
+          return async () =>
+            // if we already cached getConfig results, just resolve to that
+            Promise.resolve(
+              (ITwinViewerApp.config ??= await makeIpcCall("getConfig")())
+            );
         default:
           return makeIpcCall(key);
       }
