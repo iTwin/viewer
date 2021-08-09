@@ -21,6 +21,7 @@ import {
 import * as React from "react";
 
 import store from "../../app/store";
+import SelectProject from "../SelectProject";
 
 /* eslint-disable react/jsx-key */
 
@@ -28,7 +29,7 @@ class IModelSelectorControl extends ContentControl {
   constructor(info: ConfigurableCreateInfo, options: any) {
     super(info, options);
 
-    this.reactNode = <IModelSelector onIModelSelected={this._onSelectIModel} />;
+    this.reactNode = <SelectProject />;
   }
 
   // called when an imodel has been selected on the IModelSelect
