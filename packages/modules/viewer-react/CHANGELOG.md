@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Mon, 02 Aug 2021 19:16:49 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Aug 2021 14:16:48 GMT and should not be manually modified.
+
+## 1.3.0
+Tue, 10 Aug 2021 14:16:48 GMT
+
+### Minor changes
+
+- Add support for custom iModelClient for iTwin Stack
 
 ## 1.2.4
 Mon, 02 Aug 2021 19:16:49 GMT
