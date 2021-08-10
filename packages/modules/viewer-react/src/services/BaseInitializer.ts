@@ -1,12 +1,10 @@
 /*---------------------------------------------------------------------------------------------
-* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
-* See LICENSE.md in the project root for license terms and full copyright notice.
-*--------------------------------------------------------------------------------------------*/
-
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import { ClientRequestContext } from "@bentley/bentleyjs-core";
 import { Config } from "@bentley/bentleyjs-core";
-import { IModelHubClient } from "@bentley/imodelhub-client";
 import {
   IModelReadRpcInterface,
   IModelTileRpcInterface,
