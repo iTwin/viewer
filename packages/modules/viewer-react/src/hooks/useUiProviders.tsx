@@ -7,7 +7,7 @@ import { TreeWidgetUiItemsProvider } from "@bentley/tree-widget-react";
 import { UiItemsManager, UiItemsProvider } from "@bentley/ui-abstract";
 import { useEffect } from "react";
 
-import { ItwinViewerUi } from "..";
+import { ItwinViewerUi } from "../types";
 
 export function useUiProviders(
   customUiProviders?: UiItemsProvider[],
