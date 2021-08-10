@@ -2,7 +2,6 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-
 import { Config } from "@bentley/bentleyjs-core";
 import { Range3d } from "@bentley/geometry-core";
 import { Cartographic, ColorDef } from "@bentley/imodeljs-common";
@@ -252,7 +251,7 @@ describe("IModelLoader", () => {
 
     await waitFor(() => result.getByTestId("loader-wrapper"));
 
-    expect(UiItemsManager.register).toHaveBeenCalledTimes(1);
+    expect(UiItemsManager.register).toHaveBeenCalledTimes(2);
 
     result.rerender(
       <IModelLoader
@@ -264,6 +263,6 @@ describe("IModelLoader", () => {
 
     await waitFor(() => result.getByTestId("loader-wrapper"));
 
-    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(1);
+    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(2);
   });
 });
