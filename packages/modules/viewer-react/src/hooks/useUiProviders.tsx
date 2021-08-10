@@ -16,7 +16,7 @@ export function useUiProviders(
   useEffect(() => {
     const defaultProviders: UiItemsProvider[] = [];
 
-    if (defaultUiConfig?.hideTreeView !== true) {
+    if (!!defaultUiConfig?.hideTreeView) {
       defaultProviders.push(new TreeWidgetUiItemsProvider());
     }
 
