@@ -32,5 +32,5 @@ export function useUiProviders(
         UiItemsManager.unregister(uiProvider.id);
       });
     };
-  }, [customUiProviders]);
+  }, [customUiProviders, defaultUiConfig]);
 }
