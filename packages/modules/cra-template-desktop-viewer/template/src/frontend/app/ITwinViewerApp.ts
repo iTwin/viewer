@@ -33,6 +33,9 @@ export class ITwinViewerApp {
     return IModelApp.i18n.translate(`iTwinViewer:${key}`, options);
   }
 
+  // This proxy object forwards any method calls to the backend over IPC.
+  // This way, you can call all ipc methods like `ITwinViewerApp.ipcCall.openFile(args)`
+  // Any new backend/ipc methods you need should be added to the ViewerIpc interface, and then implemented in the ViewerHandler
   public static ipcCall = new Proxy({} as IpcMethods, {
     get(_target, key: keyof IpcMethods): AsyncFunction {
       const makeIpcCall =
