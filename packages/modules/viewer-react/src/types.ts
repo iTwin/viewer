@@ -96,8 +96,6 @@ export interface ItwinViewerInitializerParams {
   [index: string]: any;
   /** optional Azure Application Insights key for telemetry */
   appInsightsKey?: string;
-  /** optional iTwin.js Application Insights key for telemetry within iTwin.js */
-  imjsAppInsightsKey?: string;
   /** GPRID for the consuming application. Will default to the iTwin Viewer GPRID */
   productId?: string;
   /** urlTemplate for querying i18n json files */

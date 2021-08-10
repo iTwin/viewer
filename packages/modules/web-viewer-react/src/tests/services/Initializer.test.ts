@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { FrontendApplicationInsightsClient } from "@bentley/frontend-application-insights-client";
 import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
 import { UiCore } from "@bentley/ui-core";
 
@@ -58,7 +57,6 @@ jest.mock("@bentley/imodeljs-frontend", () => {
     }),
   };
 });
-jest.mock("@bentley/frontend-application-insights-client");
 jest.mock("@microsoft/applicationinsights-react-js", () => ({
   ReactPlugin: jest.fn(),
   withAITracking: (
@@ -90,27 +88,5 @@ describe("Initializer", () => {
     if (UiCore.initialized) {
       UiCore.terminate();
     }
-  });
-
-  it("adds the iTwin.js telemetry client when the imjs key is provided", async () => {
-    const imjsAppInsightsKey = "456";
-    await WebInitializer.startWebViewer({
-      authConfig: { config: authConfig },
-      imjsAppInsightsKey: imjsAppInsightsKey,
-    });
-
-    await WebInitializer.initialized;
-
-    expect(FrontendApplicationInsightsClient).toHaveBeenCalledWith(
-      imjsAppInsightsKey
-    );
-  });
-
-  it("does not add the iTwin.js telemetry client when the imjs key is not provided", async () => {
-    await WebInitializer.startWebViewer();
-
-    await WebInitializer.initialized;
-
-    expect(FrontendApplicationInsightsClient).not.toHaveBeenCalled();
   });
 });

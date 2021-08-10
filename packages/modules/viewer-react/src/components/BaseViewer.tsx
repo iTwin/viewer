@@ -36,7 +36,6 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   uiFrameworkVersion,
   viewportOptions,
   uiProviders,
-  imjsAppInsightsKey,
   i18nUrlTemplate,
   onIModelAppInit,
   additionalI18nNamespaces,
