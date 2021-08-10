@@ -2,6 +2,18 @@
   "name": "@itwin/web-viewer-react",
   "entries": [
     {
+      "version": "1.1.2",
+      "tag": "@itwin/web-viewer-react_v1.1.2",
+      "date": "Tue, 10 Aug 2021 14:50:15 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add documentation for the imodelClient prop"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.1",
       "tag": "@itwin/web-viewer-react_v1.1.1",
       "date": "Tue, 10 Aug 2021 14:16:48 GMT",

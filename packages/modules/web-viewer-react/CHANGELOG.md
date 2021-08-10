@@ -1,6 +1,13 @@
 # Change Log - @itwin/web-viewer-react
 
-This log was last generated on Tue, 10 Aug 2021 14:16:48 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Aug 2021 14:50:15 GMT and should not be manually modified.
+
+## 1.1.2
+Tue, 10 Aug 2021 14:50:15 GMT
+
+### Patches
+
+- Add documentation for the imodelClient prop
 
 ## 1.1.1
 Tue, 10 Aug 2021 14:16:48 GMT
