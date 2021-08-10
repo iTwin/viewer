@@ -2,7 +2,6 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-
 import { TreeWidgetUiItemsProvider } from "@bentley/tree-widget-react";
 import { UiItemsManager, UiItemsProvider } from "@bentley/ui-abstract";
 import { useEffect } from "react";
@@ -16,7 +15,7 @@ export function useUiProviders(
   useEffect(() => {
     const defaultProviders: UiItemsProvider[] = [];
 
-    if (!!defaultUiConfig?.hideTreeView) {
+    if (!defaultUiConfig?.hideTreeView) {
       defaultProviders.push(new TreeWidgetUiItemsProvider());
     }
 
