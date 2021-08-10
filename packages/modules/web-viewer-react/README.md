@@ -120,6 +120,7 @@ export const MyViewerComponent = () => {
 - `iModelDataErrorMessage` - Override the default message that sends users to the iTwin Synchronization Portal when there are data-related errors with an iModel. Pass empty string to override with no message.
 - `toolAdmin` - Optional `ToolAdmin` to register
 - `rpcRoutingToken` - routing token for rpcs
+- `imodelClient` - provide a client other than the default iModelHub client to access iModels (i.e. iModelBankClient)
 
 ## Typescript API
 
