@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Vector3d, XAndY, XYAndZ } from "@bentley/geometry-core";
+import { IModelClient } from "@bentley/imodelhub-client";
 import {
   ColorDef,
   RenderMode,
@@ -100,6 +101,8 @@ export interface ItwinViewerInitializerParams {
   iModelDataErrorMessage?: string;
   /** optional ToolAdmin to initialize */
   toolAdmin?: ToolAdmin;
+  /** option imodelClient (defaults to iModelHubClient) */
+  imodelClient?: IModelClient;
 }
 
 /**

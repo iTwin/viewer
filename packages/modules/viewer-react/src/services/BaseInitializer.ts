@@ -290,5 +290,6 @@ export const getIModelAppOptions = (
         : viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`,
     }),
     toolAdmin: options?.toolAdmin,
+    imodelClient: options?.imodelClient,
   };
 };

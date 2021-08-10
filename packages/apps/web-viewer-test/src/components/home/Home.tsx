@@ -44,6 +44,13 @@ export const Home = ({ history }: RouteComponentProps) => {
           >
             {"Blank Connection"}
           </Button>
+          <Button
+            className={styles.homeButton}
+            onClick={() => history.push("/imodelbank")}
+            buttonType={ButtonType.Hollow}
+          >
+            {"iModel Bank"}
+          </Button>
         </div>
       </div>
     </div>
