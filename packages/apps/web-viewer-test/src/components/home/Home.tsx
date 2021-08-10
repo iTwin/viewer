@@ -47,7 +47,7 @@ export const Home = ({ history }: RouteComponentProps) => {
           <Button
             className={styles.homeButton}
             onClick={() => history.push("/imodelbank")}
-            buttonType={ButtonType.Hollow}
+            styleType={"default"}
           >
             {"iModel Bank"}
           </Button>
