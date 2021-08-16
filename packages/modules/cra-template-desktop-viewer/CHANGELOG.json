@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-desktop-viewer",
   "entries": [
     {
+      "version": "1.2.0",
+      "tag": "@itwin/cra-template-desktop-viewer_v1.2.0",
+      "date": "Mon, 16 Aug 2021 15:22:00 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "proxy frontend ipc calls to remove some boilerplate for defining new ipc calls"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.0",
       "tag": "@itwin/cra-template-desktop-viewer_v1.1.0",
       "date": "Wed, 04 Aug 2021 19:32:44 GMT",

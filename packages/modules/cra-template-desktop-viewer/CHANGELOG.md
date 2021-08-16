@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Wed, 04 Aug 2021 19:32:44 GMT and should not be manually modified.
+This log was last generated on Mon, 16 Aug 2021 15:22:00 GMT and should not be manually modified.
+
+## 1.2.0
+Mon, 16 Aug 2021 15:22:00 GMT
+
+### Minor changes
+
+- proxy frontend ipc calls to remove some boilerplate for defining new ipc calls
 
 ## 1.1.0
 Wed, 04 Aug 2021 19:32:44 GMT
