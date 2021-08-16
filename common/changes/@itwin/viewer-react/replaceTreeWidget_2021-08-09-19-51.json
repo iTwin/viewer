@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Updated base viewer to use the @bentley/tree-widget-react UiProvider instead of the widget control",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/viewer-react",
+  "email": "48142512+spap975@users.noreply.github.com"
+}

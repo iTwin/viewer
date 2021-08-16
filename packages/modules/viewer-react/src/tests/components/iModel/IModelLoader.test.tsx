@@ -2,7 +2,6 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-
 import { Config } from "@bentley/bentleyjs-core";
 import { Range3d } from "@bentley/geometry-core";
 import { Cartographic, ColorDef } from "@bentley/imodeljs-common";
@@ -148,6 +147,39 @@ describe("IModelLoader", () => {
     jest.spyOn(Config.App, "get").mockReturnValue(1);
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("registers and unregisters ui providers", async () => {
+    jest.spyOn(UiItemsManager, "register");
+    jest.spyOn(UiItemsManager, "unregister");
+
+    const result = render(
+      <IModelLoader
+        contextId={mockContextId}
+        iModelId={mockIModelId}
+        uiProviders={[new TestUiProvider()]}
+      />
+    );
+
+    await waitFor(() => result.getByTestId("loader-wrapper"));
+
+    expect(UiItemsManager.register).toHaveBeenCalledTimes(2);
+
+    result.rerender(
+      <IModelLoader
+        contextId={mockContextId}
+        iModelId={mockIModelId}
+        uiProviders={[new TestUiProvider2()]}
+      />
+    );
+
+    await waitFor(() => result.getByTestId("loader-wrapper"));
+
+    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(2);
+  });
+
   it("adds backstage items and translates their labels", async () => {
     const fs1 = new Frontstage1Provider();
     const fs2 = new Frontstage2Provider();
@@ -236,34 +268,5 @@ describe("IModelLoader", () => {
     await waitFor(() => getByTestId("loader-wrapper"));
 
     expect(UiFramework.setColorTheme).toHaveBeenCalledWith(ColorTheme.Dark);
-  });
-
-  it("registers and unregisters ui providers", async () => {
-    jest.spyOn(UiItemsManager, "register");
-    jest.spyOn(UiItemsManager, "unregister");
-
-    const result = render(
-      <IModelLoader
-        contextId={mockContextId}
-        iModelId={mockIModelId}
-        uiProviders={[new TestUiProvider()]}
-      />
-    );
-
-    await waitFor(() => result.getByTestId("loader-wrapper"));
-
-    expect(UiItemsManager.register).toHaveBeenCalledTimes(1);
-
-    result.rerender(
-      <IModelLoader
-        contextId={mockContextId}
-        iModelId={mockIModelId}
-        uiProviders={[new TestUiProvider2()]}
-      />
-    );
-
-    await waitFor(() => result.getByTestId("loader-wrapper"));
-
-    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(1);
   });
 });

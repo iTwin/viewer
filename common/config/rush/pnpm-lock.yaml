@@ -34,7 +34,7 @@ dependencies:
   '@bentley/rbac-client': 2.19.2_@bentley+itwin-client@2.19.2
   '@bentley/react-scripts': 4.0.3_typescript@4.3.5
   '@bentley/telemetry-client': 2.19.2_@bentley+itwin-client@2.19.2
-  '@bentley/tree-widget-react': 1.4.1_6fc85104c8ed8763efc51aa785f9577a
+  '@bentley/tree-widget-react': 1.4.2_6fc85104c8ed8763efc51aa785f9577a
   '@bentley/ui-abstract': 2.19.2_40a4e57198d75461f96f944f6ce152ae
   '@bentley/ui-components': 2.19.2_c26858b1b1ae8e4c5bf0c8857275857c
   '@bentley/ui-core': 2.19.2_4835f297079c1a82c861799bf873e2ab
@@ -4271,7 +4271,7 @@ packages:
       '@bentley/itwin-client': ^2.19.2
     resolution:
       integrity: sha512-ETt+67k9m7dzh/zsfyWncOZsJaa8tpMln4d56JATfWHJEv3sW+4v7z25at3DrmBWEDDOwGPBuXIUPyhNHaP2RA==
-  /@bentley/tree-widget-react/1.4.1_282d2f2d2fe82818db8edd6e04e073b7:
+  /@bentley/tree-widget-react/1.4.2_282d2f2d2fe82818db8edd6e04e073b7:
     dependencies:
       '@bentley/bentleyjs-core': 2.19.2
       '@bentley/context-registry-client': 2.19.2_538e3326b409b38505bacf1f6599ae6e
@@ -4328,8 +4328,8 @@ packages:
       react: ^16.8.0
       react-dom: ^16.8.0
     resolution:
-      integrity: sha512-3203mIVcAIXD1V/zAuEB9EKu5Jdm79xXk03Br1JoJDJZfw8DXUOe+DJMXrxu7/CYrUaz0qDEoub1PE05zoyegg==
-  /@bentley/tree-widget-react/1.4.1_6fc85104c8ed8763efc51aa785f9577a:
+      integrity: sha512-V+lYZlerAkUsSTCE+zZNPfUqNHGc53ELErKjFvIbL6+MnOQKevQHAjQPy00Cg/hXPy7OYpUWdDCpL+G8R4Qqhg==
+  /@bentley/tree-widget-react/1.4.2_6fc85104c8ed8763efc51aa785f9577a:
     dependencies:
       '@bentley/bentleyjs-core': 2.19.2
       '@bentley/context-registry-client': 2.19.2_538e3326b409b38505bacf1f6599ae6e
@@ -4384,7 +4384,7 @@ packages:
       react: ^16.8.0
       react-dom: ^16.8.0
     resolution:
-      integrity: sha512-3203mIVcAIXD1V/zAuEB9EKu5Jdm79xXk03Br1JoJDJZfw8DXUOe+DJMXrxu7/CYrUaz0qDEoub1PE05zoyegg==
+      integrity: sha512-V+lYZlerAkUsSTCE+zZNPfUqNHGc53ELErKjFvIbL6+MnOQKevQHAjQPy00Cg/hXPy7OYpUWdDCpL+G8R4Qqhg==
   /@bentley/ui-abstract/2.19.2_40a4e57198d75461f96f944f6ce152ae:
     dependencies:
       '@bentley/bentleyjs-core': 2.19.2
@@ -23493,7 +23493,7 @@ packages:
       '@bentley/property-grid-react': 1.3.7_b91ffe89ac1d70e00278ee7c634ebe01
       '@bentley/rbac-client': 2.19.2_@bentley+itwin-client@2.19.2
       '@bentley/telemetry-client': 2.19.2_@bentley+itwin-client@2.19.2
-      '@bentley/tree-widget-react': 1.4.1_282d2f2d2fe82818db8edd6e04e073b7
+      '@bentley/tree-widget-react': 1.4.2_282d2f2d2fe82818db8edd6e04e073b7
       '@bentley/ui-abstract': 2.19.2_40a4e57198d75461f96f944f6ce152ae
       '@bentley/ui-components': 2.19.2_165ef811b80293819fdf54e831e1f3a1
       '@bentley/ui-core': 2.19.2_328642044cde344e9b13fd7abb49803a
@@ -23531,7 +23531,7 @@ packages:
       '@bentley/ecschema-metadata': '*'
       webpack: '*'
     resolution:
-      integrity: sha512-hZtZ7p8hxNCNXUPgjd8EeUpx4zkT1EzfGK3VUIxbzxmDCnu4bjgJfV4F+vxhmXwdY+3ltOG1MAlkjRxQpdoJkA==
+      integrity: sha512-45JamDg7BK9kbG5rV7Nc5kgOk0iCd6uyLvWTCSe3uejqL7sM+qwtQiitZFKA/WuX2iNi8/HjyvtE5nKKed7MTw==
       tarball: 'file:projects/viewer-react.tgz'
     version: 0.0.0
   'file:projects/viewer-scripts.tgz_typescript@4.3.5':
@@ -23671,6 +23671,7 @@ packages:
       integrity: sha512-solcrRxLAgxcYlE8q22OF2Ogqvs7XGL51AZXxSbKGWQJ5N+1wITmg1ONfQWKBF2t5Yyu6AiCSl821BBQ5nEjiA==
       tarball: 'file:projects/web-viewer-test.tgz'
     version: 0.0.0
+registry: ''
 specifiers:
   '@babel/plugin-proposal-class-properties': ^7.8.3
   '@babel/plugin-transform-runtime': ^7.9.6
@@ -23707,7 +23708,7 @@ specifiers:
   '@bentley/rbac-client': ^2.14.0
   '@bentley/react-scripts': ^4.0.3
   '@bentley/telemetry-client': ^2.14.0
-  '@bentley/tree-widget-react': ^1.2.8
+  '@bentley/tree-widget-react': ^1.4.2
   '@bentley/ui-abstract': ^2.14.0
   '@bentley/ui-components': ^2.14.0
   '@bentley/ui-core': ^2.14.0

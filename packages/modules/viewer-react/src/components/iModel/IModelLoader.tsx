@@ -2,7 +2,6 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
@@ -80,7 +79,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     const [connected, setConnected] = useState<boolean>(false);
     const isMounted = useIsMounted();
 
-    useUiProviders(uiProviders);
+    useUiProviders(uiProviders, defaultUiConfig);
     useTheme(theme);
 
     // trigger error boundary when fatal error is thrown

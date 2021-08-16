@@ -2,13 +2,11 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-
 import "./DefaultFrontstage.scss";
 
 import { Id64 } from "@bentley/bentleyjs-core";
 import { ViewState } from "@bentley/imodeljs-frontend";
 import { MultiElementPropertyGridWidgetControl } from "@bentley/property-grid-react";
-import { TreeWidgetControl } from "@bentley/tree-widget-react";
 import {
   ContentGroup,
   ContentLayoutDef,
@@ -25,7 +23,6 @@ import {
   WidgetState,
   Zone,
   ZoneLocation,
-  ZoneState,
 } from "@bentley/ui-framework";
 import * as React from "react";
 
@@ -133,29 +130,6 @@ export class DefaultFrontstage extends FrontstageProvider {
                 }
               />,
             ]}
-          />
-        }
-        centerRight={
-          <Zone
-            defaultState={ZoneState.Minimized}
-            allowsMerging={true}
-            widgets={
-              !this._uiConfig?.hideTreeView
-                ? [
-                    <Widget
-                      key={DefaultFrontstage.DEFAULT_TREE_WIDGET_KEY}
-                      control={TreeWidgetControl}
-                      fillZone={true}
-                      iconSpec="icon-tree"
-                      labelKey="iTwinViewer:components.tree"
-                      applicationData={{
-                        iModelConnection: UiFramework.getIModelConnection(),
-                        enableElementsClassGrouping: true,
-                      }}
-                    />,
-                  ]
-                : []
-            }
           />
         }
         bottomRight={
