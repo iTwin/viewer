@@ -32,6 +32,7 @@
     "react/display-name": "off",
     "react/prop-types": "off",
     "@typescript-eslint/interface-name-prefix": "off",
-    "no-unused-vars": [1, { "ignoreRestSiblings": true }]
+    "no-unused-vars": 0,
+    "@typescript-eslint/no-unused-vars": [1, { "ignoreRestSiblings": true }]
   }
 }

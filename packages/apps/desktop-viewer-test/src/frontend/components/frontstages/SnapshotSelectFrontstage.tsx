@@ -25,7 +25,7 @@ import {
   Widget,
   Zone,
 } from "@bentley/ui-framework";
-import { OpenDialogOptions, OpenDialogReturnValue } from "electron";
+import { OpenDialogOptions } from "electron";
 import * as React from "react";
 
 import { AppLoggerCategory } from "../../../common/LoggerCategory";
@@ -96,10 +96,7 @@ class LocalFilePage extends React.Component {
       filters: [{ name: "iModels", extensions: ["ibim", "bim"] }],
     };
 
-    const val = (await ITwinViewerApp.callBackend(
-      "openFile",
-      options
-    )) as OpenDialogReturnValue;
+    const val = await ITwinViewerApp.ipcCall.openFile(options);
     const file = val.canceled ? undefined : val.filePaths[0];
     if (file) {
       try {

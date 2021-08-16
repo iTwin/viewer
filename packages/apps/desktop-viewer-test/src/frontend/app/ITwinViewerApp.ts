@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import {
-  AsyncMethodsOf,
+  AsyncFunction,
   IModelApp,
   IpcApp,
   PromiseReturnType,
@@ -16,27 +16,44 @@ import {
   ViewerIpc,
 } from "../../common/ViewerConfig";
 
-// this is a singleton - all methods are static and no instances may be created
+export declare type PickAsyncMethods<T> = {
+  [P in keyof T]: T[P] extends AsyncFunction ? T[P] : never;
+};
+
+type IpcMethods = PickAsyncMethods<ViewerIpc>;
+
 export class ITwinViewerApp {
-  public static config: ViewerConfig;
+  // this is a singleton - all methods are static and no instances may be created
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  private constructor() {}
+
+  private static config: ViewerConfig;
 
   public static translate(key: string | string[], options?: any): string {
     return IModelApp.i18n.translate(`iTwinViewer:${key}`, options);
   }
-  public static async callBackend<T extends AsyncMethodsOf<ViewerIpc>>(
-    methodName: T,
-    ...args: Parameters<ViewerIpc[T]>
-  ) {
-    return IpcApp.callIpcChannel(
-      channelName,
-      methodName,
-      ...args
-    ) as PromiseReturnType<ViewerIpc[T]>;
-  }
-  public static async getConfig(): Promise<ViewerConfig> {
-    if (!this.config) {
-      this.config = await this.callBackend("getConfig");
-    }
-    return this.config;
-  }
+
+  public static ipcCall = new Proxy({} as IpcMethods, {
+    get(_target, key: keyof IpcMethods): AsyncFunction {
+      const makeIpcCall =
+        <T extends keyof IpcMethods>(methodName: T) =>
+        async (...args: Parameters<IpcMethods[T]>) =>
+          IpcApp.callIpcChannel(
+            channelName,
+            methodName,
+            ...args
+          ) as PromiseReturnType<ViewerIpc[T]>;
+
+      switch (key) {
+        case "getConfig":
+          return async () =>
+            // if we already cached getConfig results, just resolve to that
+            Promise.resolve(
+              (ITwinViewerApp.config ??= await makeIpcCall("getConfig")())
+            );
+        default:
+          return makeIpcCall(key);
+      }
+    },
+  });
 }

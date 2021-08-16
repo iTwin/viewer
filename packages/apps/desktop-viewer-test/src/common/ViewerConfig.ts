@@ -10,13 +10,13 @@ import {
   SnapshotIModelRpcInterface,
 } from "@bentley/imodeljs-common";
 import { PresentationRpcInterface } from "@bentley/presentation-common";
-import { OpenDialogReturnValue } from "electron";
+import type { OpenDialogOptions, OpenDialogReturnValue } from "electron";
 
 export const channelName = iTwinChannel("desktop-viewer");
 
 export interface ViewerIpc {
   getConfig: () => Promise<ViewerConfig>;
-  openFile: (options: any) => Promise<OpenDialogReturnValue>;
+  openFile: (options: OpenDialogOptions) => Promise<OpenDialogReturnValue>;
 }
 
 export interface ViewerConfig {

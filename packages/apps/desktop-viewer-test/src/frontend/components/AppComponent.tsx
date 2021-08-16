@@ -75,7 +75,7 @@ export const AppComponent = () => {
   const onIModelAppInitialized = async () => {
     await IModelSelect.initialize(IModelApp.i18n);
 
-    const config = await ITwinViewerApp.getConfig();
+    const config = await ITwinViewerApp.ipcCall.getConfig();
     if (config?.snapshotName) {
       dispatch({
         type: "OPEN_SNAPSHOT",
