@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 export function makeCancellable(
-  fn: (args?: any[]) => Generator<Promise<void> | Promise<void[]>, any>,
+  fn: (args?: any[]) => Generator<Promise<any> | Promise<void>, void, any>,
   ...args: any[]
 ): { promise: Promise<any>; cancel: () => void } {
   const gen = fn(...args);

@@ -13,10 +13,9 @@ import {
   WebViewerAppOpts,
 } from "@bentley/imodeljs-frontend";
 import { UrlDiscoveryClient } from "@bentley/itwin-client";
-import { getIModelAppOptions } from "@itwin/viewer-react";
+import { getIModelAppOptions, makeCancellable } from "@itwin/viewer-react";
 
 import { IModelBackendOptions, WebViewerProps } from "../types";
-import { makeCancellable } from "../utilities/MakeCancellable";
 import AuthorizationClient from "./auth/AuthorizationClient";
 
 const getHostedConnectionInfo = async (

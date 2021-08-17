@@ -8,10 +8,9 @@ import {
   ElectronAppOpts,
 } from "@bentley/electron-manager/lib/ElectronFrontend";
 import { IModelApp } from "@bentley/imodeljs-frontend";
-import { getIModelAppOptions } from "@itwin/viewer-react";
+import { getIModelAppOptions, makeCancellable } from "@itwin/viewer-react";
 
 import { DesktopViewerProps } from "../types";
-import { makeCancellable } from "../utilities/MakeCancellable";
 
 export class DesktopInitializer {
   private static _initialized: Promise<void>;
