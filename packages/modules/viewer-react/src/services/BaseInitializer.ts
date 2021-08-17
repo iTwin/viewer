@@ -37,6 +37,7 @@ import {
 } from "@bentley/ui-framework";
 
 import { ItwinViewerInitializerParams } from "../types";
+import { makeCancellable } from "../utilities/MakeCancellable";
 import { ai, trackEvent } from "./telemetry/TelemetryService";
 
 // initialize required iTwin.js services
@@ -45,7 +46,7 @@ export class BaseInitializer {
   private static _initializing = false;
   private static _iModelDataErrorMessage: string | undefined;
   private static _synchronizerRootUrl: string | undefined;
-  private static _reject: (() => void) | undefined;
+  private static _cancel: (() => void) | undefined;
 
   public static async getSynchronizerUrl(
     contextId: string,
@@ -77,8 +78,8 @@ export class BaseInitializer {
   /** expose initialized cancel method */
   public static cancel: () => void = () => {
     if (BaseInitializer._initializing) {
-      if (BaseInitializer._reject) {
-        BaseInitializer._reject();
+      if (BaseInitializer._cancel) {
+        BaseInitializer._cancel();
       }
       try {
         Presentation.presentation.dispose();
@@ -163,88 +164,90 @@ export class BaseInitializer {
       this._initializing = true;
     }
 
-    this._initialized = new Promise(async (resolve, reject) => {
-      try {
-        this._reject = () => reject("Cancelled");
-        // Initialize state manager
-        // This will setup a singleton store inside the StoreManager class.
-        new StateManager({
-          frameworkState: FrameworkReducer,
-        });
+    const cancellable = makeCancellable(function* () {
+      // Initialize state manager
+      // This will setup a singleton store inside the StoreManager class.
+      new StateManager({
+        frameworkState: FrameworkReducer,
+      });
 
-        // fit view by default
-        IModelApp.viewManager.onViewOpen.addOnce((vp: ScreenViewport) => {
-          IModelApp.tools.run(FitViewTool.toolId, vp, true);
-          vp.view.setStandardRotation(StandardViewId.Iso);
-        });
+      // fit view by default
+      IModelApp.viewManager.onViewOpen.addOnce((vp: ScreenViewport) => {
+        IModelApp.tools.run(FitViewTool.toolId, vp, true);
+        vp.view.setStandardRotation(StandardViewId.Iso);
+      });
 
-        // execute the iModelApp initialization callback if provided
-        if (viewerOptions?.onIModelAppInit) {
-          viewerOptions.onIModelAppInit();
-        }
-
-        // Add the app's telemetry client if a key was provided
-        if (viewerOptions?.appInsightsKey) {
-          ai.initialize(viewerOptions?.appInsightsKey);
-          IModelApp.telemetry.addClient(ai);
-        }
-
-        // initialize localization for the app
-        const viewerNamespace = "iTwinViewer";
-        let i18nNamespaces = [viewerNamespace];
-        if (viewerOptions?.additionalI18nNamespaces) {
-          i18nNamespaces = i18nNamespaces.concat(
-            viewerOptions.additionalI18nNamespaces
-          );
-        }
-        const i18nPromises = i18nNamespaces.map(
-          async (ns) => IModelApp.i18n.registerNamespace(ns).readFinished
-        );
-
-        await Promise.all(i18nPromises);
-
-        // initialize UiCore
-        await UiCore.initialize(IModelApp.i18n);
-
-        // initialize UiComponents
-        await UiComponents.initialize(IModelApp.i18n);
-
-        // initialize UiFramework
-        // Use undefined so that UiFramework uses StateManager
-        await UiFramework.initialize(undefined, IModelApp.i18n);
-
-        // initialize Presentation
-        await Presentation.initialize({
-          activeLocale: IModelApp.i18n.languageList()[0],
-        });
-
-        // allow uiAdmin to open key-in palette when Ctrl+F2 is pressed - good for manually loading UI providers
-        IModelApp.uiAdmin.updateFeatureFlags({ allowKeyinPalette: true });
-
-        ConfigurableUiManager.initialize();
-
-        if (viewerOptions?.appInsightsKey) {
-          trackEvent("iTwinViewer.Viewer.Initialized");
-        }
-
-        await PropertyGridManager.initialize(IModelApp.i18n);
-
-        await TreeWidget.initialize(IModelApp.i18n);
-
-        // override the default data error message
-        this._iModelDataErrorMessage = viewerOptions?.iModelDataErrorMessage;
-
-        console.log("iTwin.js initialized");
-
-        resolve();
-      } catch (error) {
-        console.error(error);
-        reject(error);
-      } finally {
-        this._initializing = false;
-        this._reject = undefined;
+      // execute the iModelApp initialization callback if provided
+      if (viewerOptions?.onIModelAppInit) {
+        viewerOptions.onIModelAppInit();
       }
+
+      // Add the app's telemetry client if a key was provided
+      if (viewerOptions?.appInsightsKey) {
+        ai.initialize(viewerOptions?.appInsightsKey);
+        IModelApp.telemetry.addClient(ai);
+      }
+
+      // initialize localization for the app
+      const viewerNamespace = "iTwinViewer";
+      let i18nNamespaces = [viewerNamespace];
+      if (viewerOptions?.additionalI18nNamespaces) {
+        i18nNamespaces = i18nNamespaces.concat(
+          viewerOptions.additionalI18nNamespaces
+        );
+      }
+      const i18nPromises = i18nNamespaces.map(
+        async (ns) => IModelApp.i18n.registerNamespace(ns).readFinished
+      );
+
+      yield Promise.all(i18nPromises);
+
+      // initialize UiCore
+      yield UiCore.initialize(IModelApp.i18n);
+
+      // initialize UiComponents
+      yield UiComponents.initialize(IModelApp.i18n);
+
+      // initialize UiFramework
+      // Use undefined so that UiFramework uses StateManager
+      yield UiFramework.initialize(undefined, IModelApp.i18n);
+
+      // initialize Presentation
+      yield Presentation.initialize({
+        activeLocale: IModelApp.i18n.languageList()[0],
+      });
+
+      // allow uiAdmin to open key-in palette when Ctrl+F2 is pressed - good for manually loading UI providers
+      IModelApp.uiAdmin.updateFeatureFlags({ allowKeyinPalette: true });
+
+      ConfigurableUiManager.initialize();
+
+      if (viewerOptions?.appInsightsKey) {
+        trackEvent("iTwinViewer.Viewer.Initialized");
+      }
+
+      yield PropertyGridManager.initialize(IModelApp.i18n);
+
+      yield TreeWidget.initialize(IModelApp.i18n);
+
+      // override the default data error message
+      BaseInitializer._iModelDataErrorMessage =
+        viewerOptions?.iModelDataErrorMessage;
+
+      console.log("iTwin.js initialized");
     });
+
+    BaseInitializer._cancel = cancellable.cancel;
+    this._initialized = cancellable.promise
+      .catch((err) => {
+        if (err.reason !== "cancelled") {
+          throw err;
+        }
+      })
+      .finally(() => {
+        BaseInitializer._initializing = false;
+        BaseInitializer._cancel = undefined;
+      });
   }
 }
 
