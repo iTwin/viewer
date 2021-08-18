@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
@@ -25,7 +26,7 @@ import {
 } from "@bentley/ui-framework";
 import { useErrorManager } from "@itwin/error-handling-react";
 import { withAITracking } from "@microsoft/applicationinsights-react-js";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
 import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
@@ -76,7 +77,8 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     const [finalBackstageItems, setFinalBackstageItems] =
       useState<ViewerBackstageItem[]>();
     const [viewState, setViewState] = useState<ViewState>();
-    const [connected, setConnected] = useState<boolean>(false);
+    const [noConnection, setNoConnection] = useState<boolean>(false);
+    const [connection, setConnection] = useState<IModelConnection>();
     const isMounted = useIsMounted();
 
     useUiProviders(uiProviders, defaultUiConfig);
@@ -94,24 +96,68 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
      */
     const initBlankConnection = (
       blankConnection: BlankConnectionProps,
-      viewStateOptions?: BlankConnectionViewState,
       onIModelConnected?: (iModel: IModelConnection) => void
     ) => {
       const imodelConnection = BlankConnection.create(blankConnection);
-      const viewState = createBlankViewState(
-        imodelConnection,
-        viewStateOptions
-      );
       UiFramework.setIModelConnection(imodelConnection);
 
       if (onIModelConnected) {
         onIModelConnected(imodelConnection);
       }
-
-      UiFramework.setDefaultViewState(viewState);
-      setViewState(viewState);
-      setConnected(true);
+      setConnection(imodelConnection);
     };
+
+    const getViewState = useCallback(async () => {
+      if (viewportOptions?.viewState) {
+        if (typeof viewportOptions.viewState === "function") {
+          setViewState(viewportOptions.viewState());
+        } else {
+          setViewState(viewportOptions.viewState);
+        }
+        return;
+      }
+      if (connection) {
+        let defaultViewState: ViewState;
+        if (connection.isBlankConnection()) {
+          defaultViewState = createBlankViewState(
+            connection,
+            blankConnectionViewState
+          );
+        } else {
+          // attempt to construct a default viewState
+          const viewCreator = new ViewCreator3d(connection);
+
+          const options: ViewCreator3dOptions = viewCreatorOptions
+            ? { ...viewCreatorOptions }
+            : { useSeedView: true };
+
+          if (options.useSeedView === undefined) {
+            options.useSeedView = true;
+          }
+
+          defaultViewState = await viewCreator.createDefaultView(options);
+          UiFramework.setActiveSelectionScope("top-assembly");
+        }
+
+        // Should not be undefined
+        if (!defaultViewState) {
+          throw new Error("No default view state for the imodel!");
+        }
+
+        // Set default view state
+        UiFramework.setDefaultViewState(defaultViewState);
+        setViewState(defaultViewState);
+      }
+    }, [
+      connection,
+      viewportOptions,
+      blankConnectionViewState,
+      viewCreatorOptions,
+    ]);
+
+    useEffect(() => {
+      void getViewState();
+    }, [connection, viewportOptions, blankConnectionViewState, getViewState]);
 
     useEffect(() => {
       const getModelConnection = async () => {
@@ -132,20 +178,14 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             }
             if (!requiresConnection) {
               // allow to continue to render
-              setConnected(true);
+              setNoConnection(true);
               return;
             }
           }
         }
 
-        setConnected(false);
-
         if (blankConnection) {
-          return initBlankConnection(
-            blankConnection,
-            blankConnectionViewState,
-            onIModelConnected
-          );
+          return initBlankConnection(blankConnection, onIModelConnected);
         }
 
         if (!(contextId && iModelId) && !snapshotPath) {
@@ -179,35 +219,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             onIModelConnected(imodelConnection);
           }
 
-          // attempt to construct a default viewState
-          // TODO replace this with the core class once the issue with the model query is resolved
-          const viewCreator = new ViewCreator3d(imodelConnection);
-
-          const options: ViewCreator3dOptions = viewCreatorOptions
-            ? { ...viewCreatorOptions }
-            : { useSeedView: true };
-
-          if (options.useSeedView === undefined) {
-            options.useSeedView = true;
-          }
-          const savedViewState = await viewCreator.createDefaultView(options);
-
-          // Should not be undefined
-          if (!savedViewState) {
-            throw new Error("No default view state for the imodel!");
-          }
-
-          // Set default view state
-          UiFramework.setDefaultViewState(savedViewState);
-
-          // TODO revist for snapshots once settings are removed
-          if (!snapshotPath) {
-            UiFramework.setActiveSelectionScope("top-assembly");
-          }
-
-          setViewState(savedViewState);
-
-          setConnected(true);
+          setConnection(imodelConnection);
         }
       };
 
@@ -311,7 +323,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       }
 
       setFinalFrontstages(allFrontstages);
-    }, [frontstages, viewportOptions, viewState]);
+    }, [frontstages, viewportOptions, viewState, defaultUiConfig]);
 
     if (error) {
       throw error;
@@ -320,7 +332,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         <div className="itwin-viewer-container">
           {finalFrontstages &&
           finalBackstageItems &&
-          connected &&
+          (viewState || noConnection) &&
           StateManager.store ? (
             <Provider store={StateManager.store}>
               <IModelViewer

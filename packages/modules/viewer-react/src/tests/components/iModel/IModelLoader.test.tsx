@@ -2,14 +2,15 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { Config } from "@bentley/bentleyjs-core";
 import { Range3d } from "@bentley/geometry-core";
 import { Cartographic, ColorDef } from "@bentley/imodeljs-common";
 import {
   BlankConnection,
   BlankConnectionProps,
-  CheckpointConnection,
   IModelApp,
+  SnapshotConnection,
 } from "@bentley/imodeljs-frontend";
 import { UrlDiscoveryClient } from "@bentley/itwin-client";
 import { BackstageItemUtilities, UiItemsManager } from "@bentley/ui-abstract";
@@ -17,12 +18,14 @@ import {
   ColorTheme,
   FrontstageProps,
   FrontstageProvider,
+  IModelViewportControlOptions,
   UiFramework,
 } from "@bentley/ui-framework";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
 import IModelLoader from "../../../components/iModel/IModelLoader";
+import { ViewCreator3d } from "../../../services/iModel";
 import * as IModelServices from "../../../services/iModel/IModelService";
 import { createBlankViewState } from "../../../services/iModel/ViewCreatorBlank";
 import {
@@ -88,7 +91,9 @@ jest.mock("@bentley/imodeljs-frontend", () => {
       Critical: 1,
     },
     BlankConnection: {
-      create: jest.fn().mockReturnValue({}),
+      create: jest
+        .fn()
+        .mockReturnValue({ isBlankConnection: () => true } as any),
     },
     ItemField: {},
     CompassMode: {},
@@ -140,11 +145,14 @@ describe("IModelLoader", () => {
   beforeEach(() => {
     jest
       .spyOn(IModelServices, "openRemoteImodel")
-      .mockResolvedValue({} as CheckpointConnection);
+      .mockResolvedValue({ isBlankConnection: () => false } as any);
     jest
       .spyOn(UrlDiscoveryClient.prototype, "discoverUrl")
       .mockResolvedValue("https://test.com");
     jest.spyOn(Config.App, "get").mockReturnValue(1);
+    jest
+      .spyOn(SnapshotConnection, "openFile")
+      .mockResolvedValue({ isBlankConnection: () => true } as any);
   });
 
   afterEach(() => {
@@ -253,7 +261,10 @@ describe("IModelLoader", () => {
     await waitFor(() => getByTestId("loader-wrapper"));
 
     expect(BlankConnection.create).toHaveBeenCalledWith(blankConnection);
-    expect(createBlankViewState).toHaveBeenCalledWith({}, viewStateOptions);
+    expect(createBlankViewState).toHaveBeenCalledWith(
+      expect.anything(),
+      viewStateOptions
+    );
   });
 
   it("sets the theme to the provided theme", async () => {
@@ -268,5 +279,55 @@ describe("IModelLoader", () => {
     await waitFor(() => getByTestId("loader-wrapper"));
 
     expect(UiFramework.setColorTheme).toHaveBeenCalledWith(ColorTheme.Dark);
+  });
+
+  it("creates a default viewstate", async () => {
+    jest.spyOn(UiFramework, "setDefaultViewState");
+    const result = render(
+      <IModelLoader contextId={mockContextId} iModelId={mockIModelId} />
+    );
+
+    await waitFor(() => result.getByTestId("loader-wrapper"));
+
+    expect(UiFramework.setDefaultViewState).toHaveBeenCalled();
+  });
+
+  it("uses the provided viewstate", async () => {
+    jest.spyOn(UiFramework, "setDefaultViewState");
+    const viewportOptions: IModelViewportControlOptions = {
+      viewState: {} as any,
+    };
+    const result = render(
+      <IModelLoader
+        contextId={mockContextId}
+        iModelId={mockIModelId}
+        viewportOptions={viewportOptions}
+      />
+    );
+
+    await waitFor(() => result.getByTestId("loader-wrapper"));
+
+    expect(UiFramework.setDefaultViewState).not.toHaveBeenCalled();
+  });
+
+  it("renders without a viewState if the default frontstage does not require a connection", async () => {
+    jest.spyOn(UiFramework, "setDefaultViewState");
+    const frontstages: ViewerFrontstage[] = [
+      {
+        default: true,
+        provider: {} as any,
+      },
+    ];
+    const result = render(
+      <IModelLoader
+        contextId={mockContextId}
+        iModelId={mockIModelId}
+        frontstages={frontstages}
+      />
+    );
+
+    await waitFor(() => result.getByTestId("loader-wrapper"));
+
+    expect(UiFramework.setDefaultViewState).not.toHaveBeenCalled();
   });
 });
