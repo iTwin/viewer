@@ -14,17 +14,34 @@ import { BaseViewer } from "../..";
 import * as IModelService from "../../services/iModel/IModelService";
 
 jest.mock("../../services/iModel/IModelService");
-jest.mock("@bentley/ui-framework");
-jest.mock("@bentley/presentation-frontend");
+jest.mock("@bentley/ui-framework", () => {
+  return {
+    ...jest.createMockFromModule<any>("@bentley/ui-framework"),
+    UiFramework: {
+      ...jest.createMockFromModule<any>("@bentley/ui-framework").UiFramework,
+      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+    },
+  };
+});
+jest.mock("@bentley/presentation-frontend", () => {
+  return {
+    ...jest.createMockFromModule<any>("@bentley/presentation-frontend"),
+    Presentation: {
+      ...jest.createMockFromModule<any>("@bentley/presentation-frontend")
+        .Presentation,
+      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+    },
+  };
+});
 jest.mock("react-i18next");
 
 jest.mock("@microsoft/applicationinsights-react-js", () => ({
   ReactPlugin: jest.fn(),
   withAITracking: (
-    reactPlugin: any | undefined, // eslint-disable-line no-unused-vars
+    _reactPlugin: any | undefined, // eslint-disable-line no-unused-vars
     component: any,
-    componentName?: string, // eslint-disable-line no-unused-vars
-    className?: string // eslint-disable-line no-unused-vars
+    _componentName?: string, // eslint-disable-line no-unused-vars
+    _className?: string // eslint-disable-line no-unused-vars
   ) => component,
 }));
 
@@ -57,6 +74,7 @@ jest.mock("@bentley/imodeljs-frontend", () => {
           addOnce: jest.fn(),
         },
       },
+      shutdown: jest.fn().mockImplementation(() => Promise.resolve()),
     },
     SnapMode: {},
     ActivityMessageDetails: jest.fn(),
@@ -78,7 +96,16 @@ jest.mock("@bentley/imodeljs-frontend", () => {
 });
 
 jest.mock("../../services/telemetry/TelemetryService");
-jest.mock("@bentley/property-grid-react");
+jest.mock("@bentley/property-grid-react", () => {
+  return {
+    ...jest.createMockFromModule<any>("@bentley/property-grid-react"),
+    PropertyGridManager: {
+      ...jest.createMockFromModule<any>("@bentley/property-grid-react")
+        .PropertyGridManager,
+      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+    },
+  };
+});
 
 const mockProjectId = "123";
 const mockIModelId = "456";

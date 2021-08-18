@@ -22,7 +22,7 @@ import { IModelBackendOptions } from "../../types";
 
 jest.mock("@itwin/viewer-react", () => {
   return {
-    BaseViewer: jest.fn(({ children }) => <div data-testid="mock-div"></div>),
+    BaseViewer: jest.fn(() => <div data-testid="mock-div"></div>),
     getIModelAppOptions: (
       options: ItwinViewerInitializerParams
     ): IModelAppOptions => {
@@ -43,6 +43,9 @@ jest.mock("@itwin/viewer-react", () => {
       };
     },
     useIsMounted: jest.fn().mockReturnValue(true),
+    makeCancellable: jest.requireActual(
+      "@itwin/viewer-react/lib/utilities/MakeCancellable"
+    ).makeCancellable,
   };
 });
 
