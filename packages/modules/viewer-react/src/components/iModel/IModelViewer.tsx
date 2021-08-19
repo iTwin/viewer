@@ -42,6 +42,9 @@ export const IModelViewer: React.FC<ModelProps> = ({
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       FrontstageManager.setActiveFrontstageDef(defaultFrontstage.frontstageDef);
     }
+    return () => {
+      FrontstageManager.clearFrontstageDefs();
+    };
   }, [frontstages]);
 
   // there will always be at least one (for the default frontstage). Wait for it to be loaded into the list before rendering the content
