@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "1.4.1",
+      "tag": "@itwin/viewer-react_v1.4.1",
+      "date": "Thu, 19 Aug 2021 16:48:09 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix race condition with user provided viewstate"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.4.0",
       "tag": "@itwin/viewer-react_v1.4.0",
       "date": "Mon, 16 Aug 2021 13:47:40 GMT",
