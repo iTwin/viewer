@@ -157,7 +157,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
 
     useEffect(() => {
       void getViewState();
-    }, [connection, viewportOptions, blankConnectionViewState, getViewState]);
+    }, [getViewState]);
 
     useEffect(() => {
       const getModelConnection = async () => {
