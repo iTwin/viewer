@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ClientRequestContext } from "@bentley/bentleyjs-core";
-import { Config } from "@bentley/bentleyjs-core";
 import {
   IModelReadRpcInterface,
   IModelTileRpcInterface,
@@ -51,7 +50,7 @@ export class BaseInitializer {
       this._synchronizerRootUrl = await urlDiscoveryClient.discoverUrl(
         new ClientRequestContext(),
         "itwinbridgeportal",
-        Config.App.get("imjs_buddi_resolve_url_using_region")
+        undefined
       );
     }
     const portalUrl = `${this._synchronizerRootUrl}/${contextId}/${iModelId}`;

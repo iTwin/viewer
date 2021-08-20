@@ -4,9 +4,9 @@
   "private": true,
   "main": "src/index.js",
   "dependencies": {
-    "@bentley/bentleyjs-core": "^3.0.0-dev.21",
-    "@bentley/frontend-authorization-client": "^3.0.0-dev.21",
-    "@bentley/geometry-core": "^3.0.0-dev.21",
+    "@bentley/bentleyjs-core": "^3.0.0-dev.31",
+    "@bentley/frontend-authorization-client": "^3.0.0-dev.31",
+    "@bentley/geometry-core": "^3.0.0-dev.31",
     "@bentley/icons-generic": "^1.0.13",
     "@bentley/imodelhub-client": "^2.14.0",
     "@bentley/imodeljs-common": "^2.14.0",

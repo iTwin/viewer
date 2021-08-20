@@ -61,7 +61,6 @@ export interface IModelBackendOptions {
   hostedBackend?: HostedBackendConfig;
   customBackend?: CustomBackendConfig;
   buddiRegion?: number;
-  buddiServer?: string;
 }
 
 export interface WebViewerPropsFull extends ViewerProps {

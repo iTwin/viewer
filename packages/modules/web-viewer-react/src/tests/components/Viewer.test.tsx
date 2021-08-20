@@ -5,9 +5,9 @@
 
 import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
 import {
+  DevToolsRpcInterface,
   IModelReadRpcInterface,
   IModelTileRpcInterface,
-  IModelWriteRpcInterface,
   SnapshotIModelRpcInterface,
 } from "@bentley/imodeljs-common";
 import { IModelAppOptions, WebViewerApp } from "@bentley/imodeljs-frontend";
@@ -122,7 +122,7 @@ describe("Viewer", () => {
         authConfig={{ config: authConfig }}
         contextId={mockProjectId}
         iModelId={mockIModelId}
-        additionalRpcInterfaces={[IModelWriteRpcInterface]}
+        additionalRpcInterfaces={[DevToolsRpcInterface]}
       />
     );
 
@@ -150,7 +150,7 @@ describe("Viewer", () => {
           IModelTileRpcInterface,
           PresentationRpcInterface,
           SnapshotIModelRpcInterface,
-          IModelWriteRpcInterface,
+          DevToolsRpcInterface,
         ],
         uiAdmin: expect.anything(),
         toolAdmin: undefined,
