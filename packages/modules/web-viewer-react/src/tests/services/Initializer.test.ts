@@ -56,13 +56,20 @@ jest.mock("@bentley/frontend-application-insights-client");
 jest.mock("@microsoft/applicationinsights-react-js", () => ({
   ReactPlugin: jest.fn(),
   withAITracking: (
-    reactPlugin: any | undefined, // eslint-disable-line no-unused-vars
+    _reactPlugin: any | undefined, // eslint-disable-line no-unused-vars
     component: any,
-    componentName?: string, // eslint-disable-line no-unused-vars
-    className?: string // eslint-disable-line no-unused-vars
+    _componentName?: string, // eslint-disable-line no-unused-vars
+    _className?: string // eslint-disable-line no-unused-vars
   ) => component,
 }));
-jest.mock("@itwin/viewer-react");
+jest.mock("@itwin/viewer-react", () => {
+  return {
+    ...jest.createMockFromModule<any>("@itwin/viewer-react"),
+    makeCancellable: jest.requireActual(
+      "@itwin/viewer-react/lib/utilities/MakeCancellable"
+    ).makeCancellable,
+  };
+});
 
 const authConfig: BrowserAuthorizationClientConfiguration = {
   clientId: "test-client",

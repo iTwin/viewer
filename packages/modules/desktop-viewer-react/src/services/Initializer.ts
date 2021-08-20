@@ -8,14 +8,14 @@ import {
   ElectronAppOpts,
 } from "@bentley/electron-manager/lib/ElectronFrontend";
 import { IModelApp } from "@bentley/imodeljs-frontend";
-import { getIModelAppOptions } from "@itwin/viewer-react";
+import { getIModelAppOptions, makeCancellable } from "@itwin/viewer-react";
 
 import { DesktopViewerProps } from "../types";
 
 export class DesktopInitializer {
   private static _initialized: Promise<void>;
   private static _initializing = false;
-  private static _reject: (() => void) | undefined;
+  private static _cancel: (() => void) | undefined;
 
   /** expose initialized promise */
   public static get initialized(): Promise<void> {
@@ -25,8 +25,8 @@ export class DesktopInitializer {
   /** expose initialized cancel method */
   public static cancel: () => void = () => {
     if (DesktopInitializer._initializing) {
-      if (DesktopInitializer._reject) {
-        DesktopInitializer._reject();
+      if (DesktopInitializer._cancel) {
+        DesktopInitializer._cancel();
       }
       ElectronApp.shutdown().catch(() => {
         // Do nothing, its possible that we never started.
@@ -39,24 +39,27 @@ export class DesktopInitializer {
     if (!IModelApp.initialized && !this._initializing) {
       console.log("starting desktop viewer");
       this._initializing = true;
-      this._initialized = new Promise(async (resolve, reject) => {
-        try {
-          this._reject = () => reject("Desktop Startup Cancelled");
-          const electronViewerOpts: ElectronAppOpts = {
-            iModelApp: getIModelAppOptions(options),
-          };
-          await ElectronApp.startup(electronViewerOpts);
 
-          console.log("desktop viewer started");
-          resolve();
-        } catch (error) {
-          console.error(error);
-          reject(error);
-        } finally {
-          this._initializing = false;
-          this._reject = undefined;
-        }
+      const cancellable = makeCancellable(function* () {
+        const electronViewerOpts: ElectronAppOpts = {
+          iModelApp: getIModelAppOptions(options),
+        };
+        yield ElectronApp.startup(electronViewerOpts);
+
+        console.log("desktop viewer started");
       });
+
+      DesktopInitializer._cancel = cancellable.cancel;
+      this._initialized = cancellable.promise
+        .catch((err) => {
+          if (err.reason !== "cancelled") {
+            throw err;
+          }
+        })
+        .finally(() => {
+          DesktopInitializer._initializing = false;
+          DesktopInitializer._cancel = undefined;
+        });
     }
   }
 }

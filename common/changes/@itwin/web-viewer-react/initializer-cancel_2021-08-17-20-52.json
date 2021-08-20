@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/web-viewer-react",
+      "comment": "Changed how cencelling initialization works. Cancelling now returns early.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/web-viewer-react",
+  "email": "stefan.retief@bentley.com"
+}
