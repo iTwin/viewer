@@ -2,27 +2,20 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-import "./DefaultFrontstage.scss";
 
-import { Id64 } from "@bentley/bentleyjs-core";
 import { ViewState } from "@bentley/imodeljs-frontend";
-import { MultiElementPropertyGridWidgetControl } from "@bentley/property-grid-react";
 import {
   ContentGroup,
   ContentLayoutDef,
-  ContentViewManager,
   CoreTools,
   Frontstage,
   FrontstageProvider,
   IModelViewportControl,
   IModelViewportControlOptions,
   StagePanel,
-  SyncUiEventId,
   UiFramework,
   Widget,
-  WidgetState,
   Zone,
-  ZoneLocation,
 } from "@bentley/ui-framework";
 import * as React from "react";
 
@@ -132,33 +125,6 @@ export class DefaultFrontstage extends FrontstageProvider {
             ]}
           />
         }
-        bottomRight={
-          <Zone
-            allowsMerging={true}
-            mergeWithZone={ZoneLocation.CenterRight}
-            widgets={
-              !this._uiConfig?.hidePropertyGrid
-                ? [
-                    <Widget
-                      key={DefaultFrontstage.DEFAULT_PROPERTIES_WIDGET_KEY}
-                      control={MultiElementPropertyGridWidgetControl}
-                      defaultState={WidgetState.Hidden}
-                      fillZone={true}
-                      iconSpec="icon-properties-list"
-                      labelKey="iTwinViewer:components.properties"
-                      applicationData={{
-                        iModelConnection: UiFramework.getIModelConnection(),
-                        projectId: UiFramework.getIModelConnection()?.contextId,
-                        rootClassName: "itv-property-grid",
-                      }}
-                      syncEventIds={[SyncUiEventId.SelectionSetChanged]}
-                      stateFunc={_determineWidgetStateForSelectionSet}
-                    />,
-                  ]
-                : []
-            }
-          />
-        }
         statusBar={
           <Zone
             widgets={
@@ -181,18 +147,3 @@ export class DefaultFrontstage extends FrontstageProvider {
     );
   }
 }
-
-const _determineWidgetStateForSelectionSet = (): WidgetState => {
-  const activeContentControl = ContentViewManager.getActiveContentControl();
-  if (
-    activeContentControl?.viewport &&
-    activeContentControl?.viewport.view.iModel.selectionSet.size > 0
-  ) {
-    for (const id of activeContentControl.viewport.view.iModel.selectionSet.elements.values()) {
-      if (Id64.isValid(id) && !Id64.isTransient(id)) {
-        return WidgetState.Open;
-      }
-    }
-  }
-  return WidgetState.Closed;
-};
