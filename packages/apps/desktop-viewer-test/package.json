@@ -41,7 +41,6 @@
     "@bentley/frontend-authorization-client": "^2.14.0",
     "@bentley/geometry-core": "^2.14.0",
     "@bentley/icons-generic-webfont": "^1.0.15",
-    "@bentley/imodel-select-react": "^2.0.7",
     "@bentley/imodelhub-client": "^2.14.0",
     "@bentley/imodeljs-backend": "^2.14.0",
     "@bentley/imodeljs-common": "^2.14.0",
@@ -73,6 +72,7 @@
     "react-redux": "^7.2.0",
     "dotenv-flow": "^3.2.0",
     "@itwin/imodel-browser-react": "~0.11.0",
+    "@itwin/itwinui-css": "^0.18.1",
     "@itwin/itwinui-react": "~1.14.1",
     "@itwin/itwinui-icons-react": "~1.2.0"
   },

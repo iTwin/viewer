@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IModelInfo, IModelSelector } from "@bentley/imodel-select-react";
 import {
   BackstageAppButton,
   ConfigurableCreateInfo,
@@ -31,17 +30,6 @@ class IModelSelectorControl extends ContentControl {
 
     this.reactNode = <SelectProject />;
   }
-
-  // called when an imodel has been selected on the IModelSelect
-  private _onSelectIModel = async (iModelInfo: IModelInfo) => {
-    store.dispatch({
-      type: "OPEN_IMODEL",
-      payload: {
-        projectId: iModelInfo.projectInfo.wsgId,
-        iModelId: iModelInfo.wsgId,
-      },
-    });
-  };
 }
 
 export class IModelSelectFrontstage extends FrontstageProvider {

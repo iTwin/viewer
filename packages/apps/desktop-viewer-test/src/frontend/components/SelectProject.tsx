@@ -3,6 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import "./SelectProject.scss";
+
 import { IModelApp } from "@bentley/imodeljs-frontend";
 import { AccessToken } from "@bentley/itwin-client";
 import {
@@ -25,7 +27,6 @@ import {
   LabeledInput,
 } from "@itwin/itwinui-react";
 import React, { useEffect, useState } from "react";
-// import "./SelectProject.scss";
 
 const PROJECT_TYPE_MAP = ["", "?recents", "?myprojects"];
 

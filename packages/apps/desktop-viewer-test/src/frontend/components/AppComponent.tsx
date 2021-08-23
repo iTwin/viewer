@@ -6,7 +6,6 @@
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./AppComponent.css";
 
-import { IModelSelect } from "@bentley/imodel-select-react";
 import {
   FitViewTool,
   IModelApp,
@@ -73,8 +72,6 @@ export const AppComponent = () => {
   const dispatch = useAppDispatch();
 
   const onIModelAppInitialized = async () => {
-    await IModelSelect.initialize(IModelApp.i18n);
-
     const config = await ITwinViewerApp.ipcCall.getConfig();
     if (config?.snapshotName) {
       dispatch({
