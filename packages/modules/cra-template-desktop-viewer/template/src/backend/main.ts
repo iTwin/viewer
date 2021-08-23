@@ -18,8 +18,8 @@ import ViewerHandler from "./ViewerHandler";
 
 require("dotenv-flow").config(); // eslint-disable-line @typescript-eslint/no-var-requires
 
-/** This is the function that gets called when we start iTwinViewer via `electron ViewerMain.js` from the command line.
- * It runs in the Electron main process and hosts the iModeljs backend (IModelHost) code. It starts the render (frontend) process
+/** This is the function that gets called when we start iTwinViewer via `electron main.js` from the command line.
+ * It runs in the Electron main process and hosts the iTwin.js backend (IModelHost) code. It starts the render (frontend) process
  * that starts from the file "index.ts". That launches the viewer frontend (IModelApp).
  */
 const viewerMain = async () => {

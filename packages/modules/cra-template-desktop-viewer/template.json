@@ -57,6 +57,7 @@
       "webpack": "4.42.0"
     },
     "scripts": {
+      "build": "npm run build:backend && build:frontend",
       "build:backend": "tsc -p tsconfig.backend.json",
       "build:frontend": "npm run pseudolocalize && react-scripts build",
       "electron": "electron lib/backend/main.js",
