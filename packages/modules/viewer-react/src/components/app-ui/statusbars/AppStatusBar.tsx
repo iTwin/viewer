@@ -5,7 +5,6 @@
 
 import { StatusBarSection } from "@bentley/ui-abstract";
 import {
-  ClearEmphasisStatusField,
   ConfigurableCreateInfo,
   FooterModeField,
   MessageCenterField,
@@ -36,7 +35,6 @@ export class AppStatusBarWidget extends StatusBarWidgetControl {
 
     const ToolAssistance = withStatusFieldProps(ToolAssistanceField);
     const MessageCenter = withMessageCenterFieldProps(MessageCenterField);
-    const ClearEmphasis = withStatusFieldProps(ClearEmphasisStatusField);
     const TileLoadIndicator = withStatusFieldProps(TileLoadingIndicator);
     const SelectionScope = withStatusFieldProps(SelectionScopeField);
     const FooterOnlyDisplay = withStatusFieldProps(FooterModeField);
@@ -81,15 +79,6 @@ export class AppStatusBarWidget extends StatusBarWidgetControl {
         StatusBarSection.Left,
         25,
         this._footerModeOnlySeparator()
-      )
-    );
-
-    this._statusBarItems.push(
-      StatusBarItemUtilities.createStatusBarItem(
-        "ClearEmphasis",
-        StatusBarSection.Center,
-        30,
-        <ClearEmphasis hideWhenUnused={true} />
       )
     );
 
