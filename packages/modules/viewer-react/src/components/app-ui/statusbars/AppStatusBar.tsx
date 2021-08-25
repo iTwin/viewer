@@ -9,6 +9,7 @@ import {
   ConfigurableCreateInfo,
   FooterModeField,
   MessageCenterField,
+  SelectionInfoField,
   SelectionScopeField,
   SnapModeField,
   StatusBarComposer,
@@ -40,6 +41,7 @@ export class AppStatusBarWidget extends StatusBarWidgetControl {
     const SelectionScope = withStatusFieldProps(SelectionScopeField);
     const FooterOnlyDisplay = withStatusFieldProps(FooterModeField);
     const SnapMode = withStatusFieldProps(SnapModeField);
+    const SelectionInfo = withStatusFieldProps(SelectionInfoField);
 
     this._footerModeOnlySeparator = (): React.ReactNode => {
       return (
@@ -113,6 +115,14 @@ export class AppStatusBarWidget extends StatusBarWidgetControl {
         StatusBarSection.Right,
         30,
         <SelectionScope />
+      )
+    );
+    this._statusBarItems.push(
+      StatusBarItemUtilities.createStatusBarItem(
+        "SelectionInfo",
+        StatusBarSection.Right,
+        40,
+        <SelectionInfo />
       )
     );
   }
