@@ -2,6 +2,18 @@
   "name": "@itwin/web-viewer-react",
   "entries": [
     {
+      "version": "1.1.6",
+      "tag": "@itwin/web-viewer-react_v1.1.6",
+      "date": "Thu, 26 Aug 2021 17:06:47 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" from `1.4.2` to `1.5.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.5",
       "tag": "@itwin/web-viewer-react_v1.1.5",
       "date": "Fri, 20 Aug 2021 19:35:01 GMT",

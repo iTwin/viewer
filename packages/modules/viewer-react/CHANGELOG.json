@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "1.5.0",
+      "tag": "@itwin/viewer-react_v1.5.0",
+      "date": "Thu, 26 Aug 2021 17:06:47 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Use UiProvider to load PropertyGrid. Add SelectionInfo to statusbar\""
+          }
+        ]
+      }
+    },
+    {
       "version": "1.4.2",
       "tag": "@itwin/viewer-react_v1.4.2",
       "date": "Fri, 20 Aug 2021 19:35:01 GMT",
