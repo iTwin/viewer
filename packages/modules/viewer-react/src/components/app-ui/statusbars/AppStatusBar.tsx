@@ -5,10 +5,10 @@
 
 import { StatusBarSection } from "@bentley/ui-abstract";
 import {
-  ClearEmphasisStatusField,
   ConfigurableCreateInfo,
   FooterModeField,
   MessageCenterField,
+  SelectionInfoField,
   SelectionScopeField,
   SnapModeField,
   StatusBarComposer,
@@ -35,11 +35,11 @@ export class AppStatusBarWidget extends StatusBarWidgetControl {
 
     const ToolAssistance = withStatusFieldProps(ToolAssistanceField);
     const MessageCenter = withMessageCenterFieldProps(MessageCenterField);
-    const ClearEmphasis = withStatusFieldProps(ClearEmphasisStatusField);
     const TileLoadIndicator = withStatusFieldProps(TileLoadingIndicator);
     const SelectionScope = withStatusFieldProps(SelectionScopeField);
     const FooterOnlyDisplay = withStatusFieldProps(FooterModeField);
     const SnapMode = withStatusFieldProps(SnapModeField);
+    const SelectionInfo = withStatusFieldProps(SelectionInfoField);
 
     this._footerModeOnlySeparator = (): React.ReactNode => {
       return (
@@ -84,15 +84,6 @@ export class AppStatusBarWidget extends StatusBarWidgetControl {
 
     this._statusBarItems.push(
       StatusBarItemUtilities.createStatusBarItem(
-        "ClearEmphasis",
-        StatusBarSection.Center,
-        30,
-        <ClearEmphasis hideWhenUnused={true} />
-      )
-    );
-
-    this._statusBarItems.push(
-      StatusBarItemUtilities.createStatusBarItem(
         "TileLoadIndicator",
         StatusBarSection.Right,
         10,
@@ -113,6 +104,14 @@ export class AppStatusBarWidget extends StatusBarWidgetControl {
         StatusBarSection.Right,
         30,
         <SelectionScope />
+      )
+    );
+    this._statusBarItems.push(
+      StatusBarItemUtilities.createStatusBarItem(
+        "SelectionInfo",
+        StatusBarSection.Right,
+        40,
+        <SelectionInfo />
       )
     );
   }

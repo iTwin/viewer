@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Use UiProvider to load PropertyGrid. Add SelectionInfo to statusbar\"",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/viewer-react",
+  "email": "aruniverse@users.noreply.github.com"
+}

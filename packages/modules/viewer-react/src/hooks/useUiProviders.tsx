@@ -2,6 +2,8 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
+import { PropertyGridUiItemsProvider } from "@bentley/property-grid-react";
 import { TreeWidgetUiItemsProvider } from "@bentley/tree-widget-react";
 import { UiItemsManager, UiItemsProvider } from "@bentley/ui-abstract";
 import { useEffect } from "react";
@@ -17,6 +19,9 @@ export function useUiProviders(
 
     if (!defaultUiConfig?.hideTreeView) {
       defaultProviders.push(new TreeWidgetUiItemsProvider());
+    }
+    if (!defaultUiConfig?.hidePropertyGrid) {
+      defaultProviders.push(new PropertyGridUiItemsProvider());
     }
 
     const uiProviders = customUiProviders
