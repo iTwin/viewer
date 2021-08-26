@@ -173,7 +173,7 @@ describe("IModelLoader", () => {
 
     await waitFor(() => result.getByTestId("loader-wrapper"));
 
-    expect(UiItemsManager.register).toHaveBeenCalledTimes(2);
+    expect(UiItemsManager.register).toHaveBeenCalledTimes(3);
 
     result.rerender(
       <IModelLoader
@@ -185,7 +185,7 @@ describe("IModelLoader", () => {
 
     await waitFor(() => result.getByTestId("loader-wrapper"));
 
-    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(2);
+    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(3);
   });
 
   it("adds backstage items and translates their labels", async () => {
