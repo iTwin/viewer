@@ -28,7 +28,6 @@
     "prod-copy-images": "copyfiles -u1 \"./src/images/**\" ./lib",
     "dev-build-images": "npm run build-svgs && npm run dev-copy-images",
     "build-svgs": "svgr -d src/images/components src/images/svgs --typescript",
-    "prepare": "npm run build",
     "test": "",
     "clean:build": "rimraf lib build",
     "rebuild": "npm run clean:build && npm run build"
@@ -59,8 +58,8 @@
     "@testing-library/react": "^10.4.4",
     "@types/jest": "^26.0.4",
     "@types/node": "^14.0.19",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
+    "@types/react": "^17.0.19",
+    "@types/react-dom": "^17.0.9",
     "@types/react-transition-group": "^4.4.0",
     "babel-jest": "^25.2.6",
     "babel-plugin-import-remove-resource-query": "^1.0.0",
