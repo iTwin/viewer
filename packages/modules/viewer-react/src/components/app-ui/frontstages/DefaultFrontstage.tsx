@@ -80,6 +80,7 @@ export class DefaultFrontstage extends FrontstageProvider {
         defaultLayout={this._contentLayoutDef}
         contentGroup={this._contentGroup}
         isInFooterMode={true}
+        usage={StageUsage.General}
         contentManipulationTools={
           <Zone
             widgets={[
