@@ -8,11 +8,12 @@ import { FillCentered } from "@bentley/ui-core/lib/ui-core";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
-import { useIsMounted } from "../hooks";
+import { useBaseViewerInitializer, useIsMounted } from "../hooks";
 import { BaseInitializer } from "../services/BaseInitializer";
 import { ItwinViewerCommonParams } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
+// TODO Kevin cleanup
 export interface ViewerProps extends ItwinViewerCommonParams {
   contextId?: string;
   iModelId?: string;
@@ -44,9 +45,17 @@ export const BaseViewer: React.FC<ViewerProps> = ({
 }: ViewerProps) => {
   // assume authorized when using a local snapshot
   const [authorized, setAuthorized] = useState(!!snapshotPath);
-  const [iModelJsInitialized, setIModelJsInitialized] = useState(false);
-  const isMounted = useIsMounted();
-
+  //const [iModelJsInitialized, setIModelJsInitialized] = useState(false);
+  //const isMounted = useIsMounted();
+  const viewerInitialized = useBaseViewerInitializer({
+    appInsightsKey,
+    productId,
+    imjsAppInsightsKey,
+    i18nUrlTemplate,
+    onIModelAppInit,
+    additionalI18nNamespaces,
+    additionalRpcInterfaces,
+  });
   useEffect(() => {
     // assume authorized when using a local snapshot
     if (snapshotPath) {
@@ -67,48 +76,48 @@ export const BaseViewer: React.FC<ViewerProps> = ({
     }
   }, [snapshotPath]);
 
-  useEffect(() => {
-    if (!iModelJsInitialized) {
-      void BaseInitializer.initialize({
-        appInsightsKey,
-        productId,
-        imjsAppInsightsKey,
-        i18nUrlTemplate,
-        onIModelAppInit,
-        additionalI18nNamespaces,
-        additionalRpcInterfaces,
-      }).then(() => {
-        void BaseInitializer.initialized
-          .then(() => setIModelJsInitialized(true))
-          .catch((error) => {
-            if (error === "Cancelled") {
-              // canceled from previous dismount. Not a true error
-              console.log(error);
-            } else {
-              throw error;
-            }
-          });
-      });
-    }
-    if (!isMounted.current) {
-      return BaseInitializer.cancel;
-    }
-  }, [
-    appInsightsKey,
-    productId,
-    imjsAppInsightsKey,
-    i18nUrlTemplate,
-    additionalI18nNamespaces,
-    additionalRpcInterfaces,
-    isMounted,
-    iModelJsInitialized,
-    onIModelAppInit,
-  ]);
+  // useEffect(() => {
+  //   if (!iModelJsInitialized) {
+  //     void BaseInitializer.initialize({
+  //       appInsightsKey,
+  //       productId,
+  //       imjsAppInsightsKey,
+  //       i18nUrlTemplate,
+  //       onIModelAppInit,
+  //       additionalI18nNamespaces,
+  //       additionalRpcInterfaces,
+  //     }).then(() => {
+  //       void BaseInitializer.initialized
+  //         .then(() => setIModelJsInitialized(true))
+  //         .catch((error) => {
+  //           if (error === "Cancelled") {
+  //             // canceled from previous dismount. Not a true error
+  //             console.log(error);
+  //           } else {
+  //             throw error;
+  //           }
+  //         });
+  //     });
+  //   }
+  //   if (!isMounted.current) {
+  //     return BaseInitializer.cancel;
+  //   }
+  // }, [
+  //   appInsightsKey,
+  //   productId,
+  //   imjsAppInsightsKey,
+  //   i18nUrlTemplate,
+  //   additionalI18nNamespaces,
+  //   additionalRpcInterfaces,
+  //   isMounted,
+  //   iModelJsInitialized,
+  //   onIModelAppInit,
+  // ]);
 
   return (
     <ErrorBoundary>
       {authorized ? (
-        iModelJsInitialized ? (
+        viewerInitialized ? (
           <IModelLoader
             contextId={contextId}
             iModelId={iModelId}

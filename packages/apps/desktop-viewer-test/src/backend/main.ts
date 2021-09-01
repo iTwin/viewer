@@ -9,6 +9,7 @@ import {
   ElectronHostOptions,
 } from "@bentley/electron-manager/lib/ElectronBackend";
 import { Presentation } from "@bentley/presentation-backend";
+import { Menu } from "electron";
 import * as path from "path";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";
@@ -41,8 +42,8 @@ const viewerMain = async () => {
     authConfig: {
       clientId,
       scope,
-      redirectUri: redirectUri || undefined,
-      issuerUrl: issuerUrl || undefined,
+      redirectUri: redirectUri ?? undefined,
+      issuerUrl: issuerUrl ?? undefined,
     },
   };
 
@@ -60,9 +61,27 @@ const viewerMain = async () => {
   if (process.env.NODE_ENV === "development") {
     ElectronHost.mainWindow?.webContents.toggleDevTools();
   }
+
+  // TODO Kevin
+  // ElectronHost.mainWindow?.on("ready-to-show", createWindow);
+};
+
+const createWindow = () => {
+  const menu = Menu.buildFromTemplate([
+    {
+      label: "Menu",
+      submenu: [
+        { label: "Adjust Notification Value" },
+        { label: "CoinMarketCap" },
+        { label: "Exit" },
+      ],
+    },
+  ]);
+  Menu.setApplicationMenu(menu);
 };
 
 try {
+  //app.on("ready", createWindow);
   viewerMain(); // eslint-disable-line @typescript-eslint/no-floating-promises
 } catch (error) {
   Logger.logError(AppLoggerCategory.Backend, error);

@@ -23,10 +23,6 @@ export declare type PickAsyncMethods<T> = {
 type IpcMethods = PickAsyncMethods<ViewerIpc>;
 
 export class ITwinViewerApp {
-  // this is a singleton - all methods are static and no instances may be created
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private constructor() {}
-
   private static config: ViewerConfig;
 
   public static translate(key: string | string[], options?: any): string {

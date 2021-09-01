@@ -3,6 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+// TODO Kevin remove
 import {
   BackstageAppButton,
   ConfigurableCreateInfo,
@@ -20,7 +21,7 @@ import {
 import * as React from "react";
 
 import store from "../../app/store";
-import SelectProject from "../SelectProject";
+import { SelectProject } from "../modelSelector";
 
 /* eslint-disable react/jsx-key */
 

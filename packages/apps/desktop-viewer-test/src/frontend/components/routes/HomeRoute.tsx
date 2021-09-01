@@ -2,9 +2,11 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+import { RouteComponentProps } from "@reach/router";
+import React from "react";
 
-export * from "@itwin/viewer-react";
-export * from "./components/Viewer";
-export * from "./types";
-export * from "./services/Initializer";
-export * from "./hooks";
+import Home from "../home/Home";
+
+export const HomeRoute = ({}: RouteComponentProps) => {
+  return <Home />;
+};

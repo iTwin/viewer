@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";
 import store from "./app/store";
-import { AppComponent } from "./components/AppComponent";
+import App from "./components/App";
 
 const viewerFrontendMain = async () => {
   // Setup logging immediately to pick up any logging during App.startup()
@@ -20,13 +20,13 @@ const viewerFrontendMain = async () => {
   Logger.setLevelDefault(LogLevel.Warning);
   Logger.setLevel(AppLoggerCategory.Frontend, LogLevel.Info);
 
-  // TODO add theme toggle
+  // TODO Kevin add theme toggle
   document.documentElement.classList.add(`iui-theme-dark`);
 
   // when initialization is complete, render
   ReactDOM.render(
     <Provider store={store}>
-      <AppComponent />
+      <App />
     </Provider>,
     document.getElementById("root")
   );

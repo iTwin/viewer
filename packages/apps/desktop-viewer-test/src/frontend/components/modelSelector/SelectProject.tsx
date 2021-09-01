@@ -3,6 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+// TODO Kevin cleanup and scss
 import "./SelectProject.scss";
 
 import { IModelApp } from "@bentley/imodeljs-frontend";
@@ -26,6 +27,7 @@ import {
   IconButton,
   LabeledInput,
 } from "@itwin/itwinui-react";
+import { useNavigate } from "@reach/router";
 import React, { useEffect, useState } from "react";
 
 const PROJECT_TYPE_MAP = ["", "?recents", "?myprojects"];
@@ -44,7 +46,7 @@ const tabsWithIcons = [
   <HorizontalTab key="all" label="My projects" startIcon={<SvgList />} />,
 ];
 
-const SelectProject = ({ ...gridProps }) => {
+export const SelectProject = () => {
   const [projectType, setProjectType] = useState(
     () =>
       // PROJECT_TYPE_MAP.includes(location.search)
@@ -59,6 +61,7 @@ const SelectProject = ({ ...gridProps }) => {
     setSearchParam(!searchValue ? "" : `?$search=${searchValue}`);
   }, [searchValue]);
   const [accessToken, setAccessToken] = useState<AccessToken | undefined>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getAccessToken = async () => {
@@ -70,13 +73,13 @@ const SelectProject = ({ ...gridProps }) => {
 
   return accessToken ? (
     <>
-      <div className="scrolling-tab-container select-project">
+      <div className="itv-scrolling-container select-project">
         <HorizontalTabs
           labels={tabsWithIcons}
           onTabSelected={setProjectType}
           activeIndex={projectType}
           type={"borderless"}
-          contentClassName=" grid-holding-tab"
+          contentClassName="grid-holding-tab"
           tabsClassName="grid-holding-tabs"
         >
           <div className={"title-section"}>
@@ -120,14 +123,13 @@ const SelectProject = ({ ...gridProps }) => {
                   : (searchParam as any) ?? ""
               }
               onThumbnailClick={(project) => {
-                //     trackEvent("ProjectClicked", { project: project.id });
-                //  navigate?.(`project/${project.id}`);
+                void navigate(`projects/${project.id}`);
               }}
               //  projectActions={projectActions}
               //   apiOverrides={apiOverrides}
               //  key={refreshKey}
               stringsOverrides={{ noIModels: "No projects found" } as any}
-              {...gridProps}
+              // {...gridProps}
             />
           </div>
         </HorizontalTabs>
@@ -135,5 +137,3 @@ const SelectProject = ({ ...gridProps }) => {
     </>
   ) : null;
 };
-
-export default SelectProject;
