@@ -2,10 +2,12 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-
-import { Point3d, Vector3d } from "@bentley/geometry-core";
 import { ColorDef, RenderMode } from "@bentley/imodeljs-common";
-import { BlankConnection, SpatialViewState } from "@bentley/imodeljs-frontend";
+import {
+  BlankConnection,
+  SpatialViewState,
+  ViewStatus,
+} from "@bentley/imodeljs-frontend";
 
 import { BlankConnectionViewState } from "../../types";
 
@@ -27,21 +29,24 @@ export const createBlankViewState = (
 
   viewState.setAllow3dManipulations(allow3dManipulations);
 
-  const viewStateLookAt = viewStateOptions?.lookAt ?? {
-    eyePoint: new Point3d(15, 15, 15),
-    targetPoint: new Point3d(0, 0, 0),
-    upVector: new Vector3d(0, 0, 1),
-  };
+  const viewStateLookAt = viewStateOptions?.lookAt;
+  if (viewStateLookAt) {
+    const viewStatus = viewState.lookAt(
+      viewStateLookAt.eyePoint,
+      viewStateLookAt.targetPoint,
+      viewStateLookAt.upVector,
+      viewStateLookAt.newExtents,
+      viewStateLookAt.frontDistance,
+      viewStateLookAt.backDistance,
+      viewStateLookAt.opts
+    );
 
-  viewState.lookAt(
-    viewStateLookAt.eyePoint,
-    viewStateLookAt.targetPoint,
-    viewStateLookAt.upVector,
-    viewStateLookAt.newExtents,
-    viewStateLookAt.frontDistance,
-    viewStateLookAt.backDistance,
-    viewStateLookAt.opts
-  );
+    if (viewStatus !== ViewStatus.Success) {
+      throw new Error(
+        "Invalid 'lookAt' view state option: " + ViewStatus[viewStatus]
+      );
+    }
+  }
 
   viewState.displayStyle.backgroundColor =
     viewStateOptions?.displayStyle?.backgroundColor ?? ColorDef.white;
