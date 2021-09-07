@@ -18,6 +18,8 @@ jest.mock("@bentley/ui-framework");
 jest.mock("@bentley/ui-abstract");
 jest.mock("@microsoft/applicationinsights-react-js");
 
+const flushPromises = () => new Promise(setImmediate);
+
 class Frontstage1Provider extends FrontstageProvider {
   public get frontstage(): React.ReactElement<FrontstageProps> {
     return <div></div>;
@@ -31,7 +33,7 @@ class Frontstage2Provider extends FrontstageProvider {
 }
 
 describe("IModelViewer", () => {
-  it("loads all frontstages", () => {
+  it("loads all frontstages", async () => {
     const fs1 = new Frontstage1Provider();
     const fs2 = new Frontstage2Provider();
     const frontstages: ViewerFrontstage[] = [
@@ -47,6 +49,7 @@ describe("IModelViewer", () => {
     render(<IModelViewer frontstages={frontstages} backstageItems={[]} />);
     expect(FrontstageManager.addFrontstageProvider).toHaveBeenCalledTimes(2);
     // expect(BackstageItemUtilities.createStageLauncher).toHaveBeenCalledTimes(2);
+    await flushPromises();
     expect(FrontstageManager.setActiveFrontstageDef).toHaveBeenCalledTimes(1);
   });
 });
