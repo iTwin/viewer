@@ -145,10 +145,10 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         if (!view) {
           throw new Error("No default view state for the imodel!");
         }
+        // Set default view state
+        UiFramework.setDefaultViewState(view);
       }
 
-      // Set default view state
-      UiFramework.setDefaultViewState(view);
       setViewState(view);
     }, [
       connection,
@@ -187,6 +187,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     }, [frontstages]);
 
     useEffect(() => {
+      let closeConnection: (() => void) | undefined;
       const getModelConnection = async () => {
         if (blankConnection) {
           return initBlankConnection(blankConnection, onIModelConnected);
@@ -223,6 +224,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             onIModelConnected(imodelConnection);
           }
 
+          closeConnection = imodelConnection.close;
           setConnection(imodelConnection);
         }
       };
@@ -232,14 +234,13 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       });
 
       return () => {
-        setConnection((conn) => {
-          if (conn) {
-            conn.close().catch(() => {
-              /* no-op */
-            });
-          }
-          return undefined;
-        });
+        if (closeConnection) {
+          closeConnection();
+          closeConnection = undefined;
+        }
+        if (isMounted.current) {
+          setConnection(undefined);
+        }
       };
     }, [
       contextId,
