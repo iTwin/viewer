@@ -162,30 +162,32 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     }, [getViewState]);
 
     useEffect(() => {
-      const getModelConnection = async () => {
-        // first check to see if some other frontstage is defined as the default
-        // allow fronstages other than the default viewport to continue to render if so
-        if (frontstages) {
-          const defaultFrontstages = frontstages.filter(
-            (frontstage) => frontstage.default
-          );
-          if (defaultFrontstages.length > 0) {
-            // there should only be one, but check if any default frontstage requires an iModel connection
-            let requiresConnection = false;
-            for (let i = 0; i < defaultFrontstages.length; i++) {
-              if (defaultFrontstages[i].requiresIModelConnection) {
-                requiresConnection = true;
-                break;
-              }
-            }
-            if (!requiresConnection) {
-              // allow to continue to render
-              setNoConnection(true);
-              return;
+      // first check to see if some other frontstage is defined as the default
+      // allow fronstages other than the default viewport to continue to render if so
+      if (frontstages) {
+        const defaultFrontstages = frontstages.filter(
+          (frontstage) => frontstage.default
+        );
+        if (defaultFrontstages.length > 0) {
+          // there should only be one, but check if any default frontstage requires an iModel connection
+          let requiresConnection = false;
+          for (let i = 0; i < defaultFrontstages.length; i++) {
+            if (defaultFrontstages[i].requiresIModelConnection) {
+              requiresConnection = true;
+              break;
             }
           }
+          if (!requiresConnection) {
+            // allow to continue to render
+            setNoConnection(true);
+            return;
+          }
         }
+      }
+    }, [frontstages]);
 
+    useEffect(() => {
+      const getModelConnection = async () => {
         if (blankConnection) {
           return initBlankConnection(blankConnection, onIModelConnected);
         }
@@ -244,7 +246,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       iModelId,
       changeSetId,
       snapshotPath,
-      frontstages,
       blankConnection,
       blankConnectionViewState,
       isMounted,
