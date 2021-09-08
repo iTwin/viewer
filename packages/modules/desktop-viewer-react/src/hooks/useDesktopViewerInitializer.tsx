@@ -2,9 +2,14 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-import { useEffect, useState } from "react";
 
-import { useBaseViewerInitializer } from "../../../viewer-react/lib";
+import {
+  getInitializationOptions,
+  isEqual,
+  useBaseViewerInitializer,
+} from "@itwin/viewer-react";
+import { useEffect, useMemo, useState } from "react";
+
 import { DesktopInitializer } from "../services/Initializer";
 import { DesktopViewerProps } from "../types";
 
@@ -17,19 +22,28 @@ export const useDesktopViewerInitializer = (options?: DesktopViewerProps) => {
     options,
     !desktopViewerInitalized
   );
+
+  // only re-initialize when initialize options change
+  const initializationOptions = useMemo(
+    () => getInitializationOptions(options),
+    [options]
+  );
+
   useEffect(() => {
-    if (!desktopViewerInitOptions || options !== desktopViewerInitOptions) {
+    if (
+      !desktopViewerInitOptions ||
+      !isEqual(initializationOptions, desktopViewerInitOptions)
+    ) {
       //TODO omit imodelid, snapshotPath, etc.?
       setDesktopViewerInitalized(false);
-      setDesktopViewerInitOptions(options);
-      DesktopInitializer.cancel(); //TODO rename stopDesktopInitalizer
+      setDesktopViewerInitOptions(initializationOptions);
       void DesktopInitializer.startDesktopViewer(options).then(() => {
         void DesktopInitializer.initialized.then(() => {
           setDesktopViewerInitalized(true);
         });
       });
     }
-  }, [options, desktopViewerInitOptions]);
+  }, [initializationOptions, desktopViewerInitOptions]);
 
   return baseViewerInitialized && desktopViewerInitalized;
 };

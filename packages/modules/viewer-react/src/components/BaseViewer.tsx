@@ -15,6 +15,7 @@ import IModelLoader from "./iModel/IModelLoader";
 
 // TODO Kevin cleanup
 export interface ViewerProps extends ItwinViewerCommonParams {
+  [index: string]: any;
   contextId?: string;
   iModelId?: string;
   changeSetId?: string;
@@ -43,10 +44,8 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   additionalRpcInterfaces,
   viewCreatorOptions,
 }: ViewerProps) => {
-  // assume authorized when using a local snapshot
+  // assume authorized when using a local snapshot TODO poor assumption
   const [authorized, setAuthorized] = useState(!!snapshotPath);
-  //const [iModelJsInitialized, setIModelJsInitialized] = useState(false);
-  //const isMounted = useIsMounted();
   const viewerInitialized = useBaseViewerInitializer({
     appInsightsKey,
     productId,
@@ -75,44 +74,6 @@ export const BaseViewer: React.FC<ViewerProps> = ({
       });
     }
   }, [snapshotPath]);
-
-  // useEffect(() => {
-  //   if (!iModelJsInitialized) {
-  //     void BaseInitializer.initialize({
-  //       appInsightsKey,
-  //       productId,
-  //       imjsAppInsightsKey,
-  //       i18nUrlTemplate,
-  //       onIModelAppInit,
-  //       additionalI18nNamespaces,
-  //       additionalRpcInterfaces,
-  //     }).then(() => {
-  //       void BaseInitializer.initialized
-  //         .then(() => setIModelJsInitialized(true))
-  //         .catch((error) => {
-  //           if (error === "Cancelled") {
-  //             // canceled from previous dismount. Not a true error
-  //             console.log(error);
-  //           } else {
-  //             throw error;
-  //           }
-  //         });
-  //     });
-  //   }
-  //   if (!isMounted.current) {
-  //     return BaseInitializer.cancel;
-  //   }
-  // }, [
-  //   appInsightsKey,
-  //   productId,
-  //   imjsAppInsightsKey,
-  //   i18nUrlTemplate,
-  //   additionalI18nNamespaces,
-  //   additionalRpcInterfaces,
-  //   isMounted,
-  //   iModelJsInitialized,
-  //   onIModelAppInit,
-  // ]);
 
   return (
     <ErrorBoundary>

@@ -1,0 +1,23 @@
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+.signin-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signin {
+  display: grid;
+  grid-template-rows: 125px 60px 50px;
+  .signin-user {
+    font-size: 7em;
+    margin: auto;
+  }
+  .signin-button {
+    width: 150px;
+    margin: auto;
+  }
+}

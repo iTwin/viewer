@@ -2,15 +2,18 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import {
   FitViewTool,
   IModelApp,
   ScreenViewport,
   StandardViewId,
 } from "@bentley/imodeljs-frontend";
-import { Viewer } from "@itwin/desktop-viewer-react";
+import { useAccessToken, Viewer } from "@itwin/desktop-viewer-react";
 import { RouteComponentProps } from "@reach/router";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
+
+import { SignIn } from "../signin/SignIn";
 
 enum ViewerType {
   ONLINE,
@@ -34,15 +37,7 @@ export const ViewerRoute = ({
   snapshotPath,
   iModelId,
 }: RouteComponentProps<ViewerRouteParams>) => {
-  // const [iModelId, setIModelId] = useState<string>();
-
-  // useEffect(() => {
-  //   switch (type) {
-  //     case ViewerType.ONLINE:
-  //       setIModelId(id);
-  //       break;
-  //   }
-  // }, [type, id]);
+  const accessToken = useAccessToken();
 
   const viewConfiguration = (viewPort: ScreenViewport) => {
     // default execute the fitview tool and use the iso standard view after tile trees are loaded
@@ -70,26 +65,23 @@ export const ViewerRoute = ({
   };
 
   const onIModelAppInitialized = useMemo(() => {
-    console.log("initialized!!");
+    console.log("Initialized!!");
   }, []);
 
-  // function onIModelAppInitialized() {
-  //   console.log("initialized!!");
-  // }
-
-  return (
-    <Viewer
-      contextId={projectId}
-      iModelId={iModelId}
-      snapshotPath={snapshotPath}
-      onIModelAppInit={onIModelAppInitialized as any}
-      // frontstages={frontstages}
-      // backstageItems={backstageItems}
-      viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
-      defaultUiConfig={{
-        contentManipulationTools: { cornerItem: { hideDefault: true } },
-      }}
-      // theme={} //TODO
-    />
-  );
+  if (accessToken) {
+    return (
+      <Viewer
+        contextId={projectId}
+        iModelId={iModelId}
+        snapshotPath={snapshotPath}
+        onIModelAppInit={onIModelAppInitialized as any}
+        viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
+        defaultUiConfig={{
+          contentManipulationTools: { cornerItem: { hideDefault: true } },
+        }}
+      />
+    );
+  } else {
+    return <SignIn />;
+  }
 };

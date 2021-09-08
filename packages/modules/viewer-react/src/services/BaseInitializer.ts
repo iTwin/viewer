@@ -77,51 +77,46 @@ export class BaseInitializer {
 
   /** expose initialized cancel method */
   public static cancel: () => void = () => {
-    if (BaseInitializer._initializing) {
-      if (BaseInitializer._cancel) {
-        BaseInitializer._cancel();
+    if (BaseInitializer._cancel) {
+      BaseInitializer._cancel();
+    }
+    try {
+      Presentation.presentation.dispose();
+    } catch (err) {
+      // Do nothing, its possible that we never started.
+    }
+    try {
+      Presentation.terminate();
+    } catch (err) {
+      // Do nothing, its possible that we never started.
+    }
+    try {
+      if (UiFramework.initialized) {
+        UiFramework.terminate();
       }
-      try {
-        Presentation.presentation.dispose();
-      } catch (err) {
-        // Do nothing, its possible that we never started.
+    } catch (err) {
+      // Do nothing.
+    }
+    try {
+      if (UiComponents.initialized) {
+        UiComponents.terminate();
       }
-      try {
-        Presentation.terminate();
-      } catch (err) {
-        // Do nothing, its possible that we never started.
+    } catch (err) {
+      // Do nothing.
+    }
+    try {
+      if (UiCore.initialized) {
+        UiCore.terminate();
       }
-      try {
-        if (UiFramework.initialized) {
-          UiFramework.terminate();
-        }
-      } catch (err) {
-        // Do nothing.
-      }
-      try {
-        if (UiComponents.initialized) {
-          UiComponents.terminate();
-        }
-      } catch (err) {
-        // Do nothing.
-      }
-      try {
-        if (UiCore.initialized) {
-          UiCore.terminate();
-        }
-      } catch (err) {
-        // Do nothing
-      }
-      try {
-        IModelApp.i18n
-          .languageList()
-          .forEach((ns) => IModelApp.i18n.unregisterNamespace(ns));
-      } catch (err) {
-        // Do nothing
-      }
-      IModelApp.shutdown().catch(() => {
-        // Do nothing, its possible that we never started.
-      });
+    } catch (err) {
+      // Do nothing
+    }
+    try {
+      IModelApp.i18n
+        .languageList()
+        .forEach((ns) => IModelApp.i18n.unregisterNamespace(ns));
+    } catch (err) {
+      // Do nothing
     }
   };
 
@@ -154,8 +149,13 @@ export class BaseInitializer {
   public static async initialize(
     viewerOptions?: ItwinViewerInitializerParams
   ): Promise<void> {
+    if (!IModelApp.initialized) {
+      throw new Error(
+        "IModelApp must be initialized prior to rendering the Base Viewer"
+      ); //TODO Kevin localize
+    }
     if (UiCore.initialized && !this._initializing) {
-      return Promise.resolve();
+      return (this._initialized = Promise.resolve());
     } else if (this._initializing) {
       // in the process of initializing, so return
       return;
