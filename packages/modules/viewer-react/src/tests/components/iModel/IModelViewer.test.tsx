@@ -18,7 +18,7 @@ jest.mock("@bentley/ui-framework");
 jest.mock("@bentley/ui-abstract");
 jest.mock("@microsoft/applicationinsights-react-js");
 
-const flushPromises = () => new Promise(setImmediate);
+const flushPromises = () => new Promise((res) => setTimeout(res, 0));
 
 class Frontstage1Provider extends FrontstageProvider {
   public get frontstage(): React.ReactElement<FrontstageProps> {
