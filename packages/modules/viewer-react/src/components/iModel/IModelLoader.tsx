@@ -187,7 +187,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     }, [frontstages]);
 
     useEffect(() => {
-      let closeConnection: (() => void) | undefined;
+      let prevConnection: IModelConnection | undefined;
       const getModelConnection = async () => {
         if (blankConnection) {
           return initBlankConnection(blankConnection, onIModelConnected);
@@ -224,8 +224,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             onIModelConnected(imodelConnection);
           }
 
-          closeConnection = imodelConnection.close;
-          closeConnection = closeConnection.bind(imodelConnection);
+          prevConnection = imodelConnection;
           setConnection(imodelConnection);
         }
       };
@@ -235,9 +234,9 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       });
 
       return () => {
-        if (closeConnection) {
-          closeConnection();
-          closeConnection = undefined;
+        if (prevConnection) {
+          void prevConnection.close();
+          prevConnection = undefined;
         }
         if (isMounted.current) {
           setConnection(undefined);
@@ -332,9 +331,9 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       return (
         <div className="itwin-viewer-container">
           {finalFrontstages &&
-          finalBackstageItems &&
-          ((viewState && connection) || noConnection) &&
-          StateManager.store ? (
+            finalBackstageItems &&
+            ((viewState && connection) || noConnection) &&
+            StateManager.store ? (
             <Provider store={StateManager.store}>
               <IModelViewer
                 frontstages={finalFrontstages}

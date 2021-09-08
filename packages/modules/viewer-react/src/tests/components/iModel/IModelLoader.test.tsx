@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import { Config } from "@bentley/bentleyjs-core";
 import { Range3d } from "@bentley/geometry-core";
@@ -113,8 +113,8 @@ jest.mock("@bentley/imodeljs-frontend", () => {
     ItemField: {},
     CompassMode: {},
     RotationMode: {},
-    AccuDraw: class {},
-    ToolAdmin: class {},
+    AccuDraw: class { },
+    ToolAdmin: class { },
     WebViewerApp: {
       startup: jest.fn().mockResolvedValue(true),
     },
@@ -166,6 +166,7 @@ describe("IModelLoader", () => {
     jest.spyOn(IModelServices, "openRemoteImodel").mockResolvedValue({
       isBlankConnection: () => false,
       iModelId: mockIModelId,
+      close: jest.fn()
     } as any);
     jest
       .spyOn(UrlDiscoveryClient.prototype, "discoverUrl")
@@ -339,6 +340,7 @@ describe("IModelLoader", () => {
     jest.spyOn(IModelServices, "openRemoteImodel").mockResolvedValue({
       isBlankConnection: () => false,
       iModelId: undefined,
+      close: jest.fn()
     } as any);
     jest.spyOn(UiFramework, "setDefaultViewState");
     const viewportOptions: IModelViewportControlOptions = {
