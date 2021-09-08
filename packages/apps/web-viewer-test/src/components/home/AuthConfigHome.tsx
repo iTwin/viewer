@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
 import {
@@ -12,7 +12,7 @@ import {
 } from "@bentley/imodeljs-frontend";
 import { ColorTheme } from "@bentley/ui-framework";
 import { Viewer } from "@itwin/web-viewer-react";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";
 import { Header } from ".";
@@ -26,7 +26,7 @@ export const AuthConfigHome: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(
     (IModelApp.authorizationClient?.hasSignedIn &&
       IModelApp.authorizationClient?.isAuthorized) ||
-      false
+    false
   );
   const [iModelId, setIModelId] = useState(
     process.env.IMJS_AUTH_CLIENT_IMODEL_ID
@@ -48,7 +48,7 @@ export const AuthConfigHome: React.FC = () => {
     setLoggedIn(
       IModelApp.authorizationClient
         ? IModelApp.authorizationClient.hasSignedIn &&
-            IModelApp.authorizationClient.isAuthorized
+        IModelApp.authorizationClient.isAuthorized
         : false
     );
   }, []);
@@ -82,7 +82,7 @@ export const AuthConfigHome: React.FC = () => {
       setLoggedIn(
         (IModelApp.authorizationClient?.hasSignedIn &&
           IModelApp.authorizationClient?.isAuthorized) ||
-          false
+        false
       );
     });
   };
@@ -95,7 +95,7 @@ export const AuthConfigHome: React.FC = () => {
     }
   };
 
-  const viewConfiguration = (viewPort: ScreenViewport) => {
+  const viewConfiguration = useCallback((viewPort: ScreenViewport) => {
     // default execute the fitview tool and use the iso standard view after tile trees are loaded
     const tileTreesLoaded = () => {
       return new Promise((resolve, reject) => {
@@ -118,7 +118,9 @@ export const AuthConfigHome: React.FC = () => {
       IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
       viewPort.view.setStandardRotation(StandardViewId.Iso);
     });
-  };
+  }, []);
+
+  const viewCreatorOptions = useMemo(() => ({ viewportConfigurer: viewConfiguration }), [viewConfiguration])
 
   return (
     <div className={styles.home}>
@@ -134,7 +136,7 @@ export const AuthConfigHome: React.FC = () => {
         appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
         theme={ColorTheme.Dark}
         onIModelAppInit={onIModelAppInit}
-        viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
+        viewCreatorOptions={viewCreatorOptions}
       />
     </div>
   );
