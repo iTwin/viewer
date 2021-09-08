@@ -8,12 +8,10 @@ import { FillCentered } from "@bentley/ui-core/lib/ui-core";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
-import { useBaseViewerInitializer, useIsMounted } from "../hooks";
-import { BaseInitializer } from "../services/BaseInitializer";
+import { useBaseViewerInitializer } from "../hooks";
 import { ItwinViewerCommonParams } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
-// TODO Kevin cleanup
 export interface ViewerProps extends ItwinViewerCommonParams {
   [index: string]: any;
   contextId?: string;

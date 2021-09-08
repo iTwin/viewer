@@ -34,7 +34,6 @@ export const useDesktopViewerInitializer = (options?: DesktopViewerProps) => {
       !desktopViewerInitOptions ||
       !isEqual(initializationOptions, desktopViewerInitOptions)
     ) {
-      //TODO omit imodelid, snapshotPath, etc.?
       setDesktopViewerInitalized(false);
       setDesktopViewerInitOptions(initializationOptions);
       void DesktopInitializer.startDesktopViewer(options).then(() => {

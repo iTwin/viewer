@@ -20,7 +20,7 @@ const viewerFrontendMain = async () => {
   Logger.setLevelDefault(LogLevel.Warning);
   Logger.setLevel(AppLoggerCategory.Frontend, LogLevel.Info);
 
-  // TODO Kevin add theme toggle
+  // TODO add theme toggle
   document.documentElement.classList.add(`iui-theme-dark`);
 
   // when initialization is complete, render
