@@ -108,21 +108,23 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     };
 
     const getViewState = useCallback(async () => {
-      if (viewportOptions?.viewState) {
-        if (typeof viewportOptions.viewState === "function") {
-          setViewState(viewportOptions.viewState());
-        } else {
-          setViewState(viewportOptions.viewState);
-        }
+      if (!connection) {
+        setViewState(undefined);
         return;
       }
-      if (connection) {
-        let defaultViewState: ViewState;
+
+      let view: ViewState | undefined;
+      if (viewportOptions?.viewState) {
+        if (typeof viewportOptions.viewState === "function") {
+          view = viewportOptions.viewState();
+        } else {
+          view = viewportOptions.viewState;
+        }
+      }
+
+      if (!view || view.iModel.iModelId !== connection.iModelId) {
         if (connection.isBlankConnection()) {
-          defaultViewState = createBlankViewState(
-            connection,
-            blankConnectionViewState
-          );
+          view = createBlankViewState(connection, blankConnectionViewState);
         } else {
           // attempt to construct a default viewState
           const viewCreator = new ViewCreator3d(connection);
@@ -135,19 +137,19 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             options.useSeedView = true;
           }
 
-          defaultViewState = await viewCreator.createDefaultView(options);
+          view = await viewCreator.createDefaultView(options);
           UiFramework.setActiveSelectionScope("top-assembly");
         }
 
         // Should not be undefined
-        if (!defaultViewState) {
+        if (!view) {
           throw new Error("No default view state for the imodel!");
         }
-
         // Set default view state
-        UiFramework.setDefaultViewState(defaultViewState);
-        setViewState(defaultViewState);
+        UiFramework.setDefaultViewState(view);
       }
+
+      setViewState(view);
     }, [
       connection,
       viewportOptions,
@@ -160,30 +162,33 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     }, [getViewState]);
 
     useEffect(() => {
-      const getModelConnection = async () => {
-        // first check to see if some other frontstage is defined as the default
-        // allow fronstages other than the default viewport to continue to render if so
-        if (frontstages) {
-          const defaultFrontstages = frontstages.filter(
-            (frontstage) => frontstage.default
-          );
-          if (defaultFrontstages.length > 0) {
-            // there should only be one, but check if any default frontstage requires an iModel connection
-            let requiresConnection = false;
-            for (let i = 0; i < defaultFrontstages.length; i++) {
-              if (defaultFrontstages[i].requiresIModelConnection) {
-                requiresConnection = true;
-                break;
-              }
-            }
-            if (!requiresConnection) {
-              // allow to continue to render
-              setNoConnection(true);
-              return;
+      // first check to see if some other frontstage is defined as the default
+      // allow fronstages other than the default viewport to continue to render if so
+      if (frontstages) {
+        const defaultFrontstages = frontstages.filter(
+          (frontstage) => frontstage.default
+        );
+        if (defaultFrontstages.length > 0) {
+          // there should only be one, but check if any default frontstage requires an iModel connection
+          let requiresConnection = false;
+          for (let i = 0; i < defaultFrontstages.length; i++) {
+            if (defaultFrontstages[i].requiresIModelConnection) {
+              requiresConnection = true;
+              break;
             }
           }
+          if (!requiresConnection) {
+            // allow to continue to render
+            setNoConnection(true);
+            return;
+          }
         }
+      }
+    }, [frontstages]);
 
+    useEffect(() => {
+      let prevConnection: IModelConnection | undefined;
+      const getModelConnection = async () => {
         if (blankConnection) {
           return initBlankConnection(blankConnection, onIModelConnected);
         }
@@ -211,7 +216,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         }
         if (imodelConnection) {
           // Tell the SyncUiEventDispatcher and StateManager about the iModelConnection
-          UiFramework.setIModelConnection(imodelConnection);
+          UiFramework.setIModelConnection(imodelConnection, true);
 
           SyncUiEventDispatcher.initializeConnectionEvents(imodelConnection);
 
@@ -219,14 +224,8 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             onIModelConnected(imodelConnection);
           }
 
+          prevConnection = imodelConnection;
           setConnection(imodelConnection);
-        }
-      };
-
-      const closeIModelConnection = async () => {
-        const iModelConn = UiFramework.getIModelConnection();
-        if (iModelConn) {
-          await iModelConn.close();
         }
       };
 
@@ -235,10 +234,12 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       });
 
       return () => {
-        if (!isMounted.current) {
-          closeIModelConnection().catch(() => {
-            /* no-op */
-          });
+        if (prevConnection) {
+          void prevConnection.close();
+          prevConnection = undefined;
+        }
+        if (isMounted.current) {
+          setConnection(undefined);
         }
       };
     }, [
@@ -246,7 +247,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       iModelId,
       changeSetId,
       snapshotPath,
-      frontstages,
       blankConnection,
       blankConnectionViewState,
       isMounted,
@@ -332,7 +332,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         <div className="itwin-viewer-container">
           {finalFrontstages &&
           finalBackstageItems &&
-          (viewState || noConnection) &&
+          ((viewState && connection) || noConnection) &&
           StateManager.store ? (
             <Provider store={StateManager.store}>
               <IModelViewer

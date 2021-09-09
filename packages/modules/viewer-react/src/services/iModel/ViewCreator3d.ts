@@ -296,6 +296,9 @@ export class ViewCreator3d {
     params.from = SpatialViewState.classFullName;
     params.where = `ECInstanceId=${viewId}`;
 
+    if (!this._imodel.isOpen) {
+      return;
+    }
     // Check validity of default view
     const viewProps =
       await IModelReadRpcInterface.getClient().queryElementProps(
@@ -360,8 +363,10 @@ export class ViewCreator3d {
    */
   private _executeQuery = async (query: string) => {
     const rows = [];
-    for await (const row of this._imodel.query(query)) {
-      rows.push(row.id);
+    if (this._imodel.isOpen) {
+      for await (const row of this._imodel.query(query)) {
+        rows.push(row.id);
+      }
     }
     return rows;
   };
