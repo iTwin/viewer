@@ -9,6 +9,7 @@ import {
   IpcApp,
   PromiseReturnType,
 } from "@bentley/imodeljs-frontend";
+import { OpenDialogOptions } from "electron";
 
 import {
   channelName,
@@ -52,4 +53,17 @@ export class ITwinViewerApp {
       }
     },
   });
+
+  public static async getSnapshotFile(): Promise<string | undefined> {
+    const options: OpenDialogOptions = {
+      title: ITwinViewerApp.translate("openSnapshot"),
+      properties: ["openFile"],
+      filters: [{ name: "iModels", extensions: ["ibim", "bim"] }],
+    };
+    const val = await ITwinViewerApp.ipcCall.openFile(options);
+
+    return val.canceled || val.filePaths.length === 0
+      ? undefined
+      : val.filePaths[0];
+  }
 }

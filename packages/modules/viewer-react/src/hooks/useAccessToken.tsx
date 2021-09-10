@@ -2,12 +2,16 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { IModelApp } from "@bentley/imodeljs-frontend";
 import { AccessToken } from "@bentley/itwin-client";
 import { useCallback, useEffect, useState } from "react";
 
+import { useIsMounted } from ".";
+
 export const useAccessToken = () => {
   const [accessToken, setAccessToken] = useState<AccessToken>();
+  const isMounted = useIsMounted();
 
   const getAccessToken = useCallback(async () => {
     if (IModelApp.authorizationClient?.hasSignedIn) {
@@ -22,7 +26,9 @@ export const useAccessToken = () => {
 
   useEffect(() => {
     IModelApp?.authorizationClient?.onUserStateChanged.addListener((token) => {
-      setAccessToken(token);
+      if (isMounted.current) {
+        setAccessToken(token);
+      }
     });
   }, []);
 

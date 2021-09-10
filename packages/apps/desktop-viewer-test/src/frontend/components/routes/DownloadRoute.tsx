@@ -7,17 +7,22 @@ import { useAccessToken } from "@itwin/desktop-viewer-react";
 import { RouteComponentProps } from "@reach/router";
 import React from "react";
 
-import { SelectProject } from "../modelSelector";
 import { SignIn } from "../signin/SignIn";
+import { ModelViewer } from "../viewer/ModelViewer";
 
-interface ProjectsRouteProps extends RouteComponentProps {
-  children?: any;
+interface DownloadRouteParams {
+  iTwinId: string;
+  iModelId: string;
 }
-export const ProjectsRoute = ({}: ProjectsRouteProps) => {
+
+export const DownloadRoute = ({
+  iTwinId,
+  iModelId,
+}: RouteComponentProps<DownloadRouteParams>) => {
   const accessToken = useAccessToken();
 
   if (accessToken) {
-    return <SelectProject />;
+    return <ModelViewer iTwinId={iTwinId} iModelId={iModelId} />;
   } else {
     return <SignIn />;
   }

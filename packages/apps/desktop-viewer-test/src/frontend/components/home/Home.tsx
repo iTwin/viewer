@@ -5,18 +5,30 @@
 
 import "./Home.scss";
 
-import { Link } from "@reach/router";
+import { Link, useNavigate } from "@reach/router";
 import React from "react";
 
 import { ITwinViewerApp } from "../../app/ITwinViewerApp";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const openSnapshot = async () => {
+    const snapshotPath = await ITwinViewerApp.getSnapshotFile();
+    if (snapshotPath) {
+      void navigate("/snapshot", { state: { snapshotPath } });
+    }
+  };
   return (
-    <nav>
-      <Link to="viewer">{ITwinViewerApp.translate("openLocalBriefcase")}</Link>
-      <Link to="viewer">{ITwinViewerApp.translate("openSnapshot")}</Link>
-      <Link to="projects">{ITwinViewerApp.translate("downloadBriefcase")}</Link>
-    </nav>
+    <div>
+      <div className={"home-section-title"}>Start</div>
+      <nav>
+        <span onClick={openSnapshot}>
+          {ITwinViewerApp.translate("openSnapshot")}
+        </span>
+        <Link to="itwins">{ITwinViewerApp.translate("viewRemoteIModel")}</Link>
+      </nav>
+    </div>
   );
 };
 

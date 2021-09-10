@@ -15,7 +15,6 @@ export const SelectIModel = ({ accessToken, projectId }: IModelGridProps) => {
     <div className="idp-scrolling-container select-imodel">
       <div className="idp-scrolling-content">
         <IModelGrid
-          //  key={refreshKey}
           accessToken={accessToken}
           projectId={projectId}
           onThumbnailClick={(imodel) => {

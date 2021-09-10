@@ -4,11 +4,20 @@
 *--------------------------------------------------------------------------------------------*/
 @import "@itwin/itwinui-css/scss/variables";
 
+.home-section-title {
+  font-size: larger;
+  margin: 50px 0 0 50px;
+  color: t(iui-color-foreground-accessory);
+}
+
 nav {
-  margin: 50px;
-  a {
+  margin-left: 50px;
+  a,
+  span {
     display: block;
-    margin: 5px;
+    margin: 8px;
     color: t(iui-color-foreground-primary);
+    text-decoration: underline;
+    cursor: pointer;
   }
 }

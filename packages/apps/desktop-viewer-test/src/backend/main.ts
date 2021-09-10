@@ -8,12 +8,14 @@ import {
   ElectronHost,
   ElectronHostOptions,
 } from "@bentley/electron-manager/lib/ElectronBackend";
+import { IpcHost } from "@bentley/imodeljs-backend";
 import { Presentation } from "@bentley/presentation-backend";
 import { Menu } from "electron";
+import { MenuItemConstructorOptions } from "electron/main";
 import * as path from "path";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";
-import { viewerRpcs } from "../common/ViewerConfig";
+import { channelName, viewerRpcs } from "../common/ViewerConfig";
 import { appInfo, getAppEnvVar } from "./AppInfo";
 import ViewerHandler from "./ViewerHandler";
 
@@ -42,8 +44,8 @@ const viewerMain = async () => {
     authConfig: {
       clientId,
       scope,
-      redirectUri: redirectUri || undefined,
-      issuerUrl: issuerUrl || undefined,
+      redirectUri: redirectUri ?? undefined,
+      issuerUrl: issuerUrl ?? undefined,
     },
   };
 
@@ -63,20 +65,49 @@ const viewerMain = async () => {
   }
 
   // TODO Kevin
-  // ElectronHost.mainWindow?.on("ready-to-show", createWindow);
+  ElectronHost.mainWindow?.on("ready-to-show", createMenu);
 };
 
-const createWindow = () => {
-  const menu = Menu.buildFromTemplate([
+const createMenu = () => {
+  const isMac = process.platform === "darwin";
+
+  const template = [
     {
-      label: "Menu",
+      label: "File",
       submenu: [
-        { label: "Adjust Notification Value" },
-        { label: "CoinMarketCap" },
-        { label: "Exit" },
+        {
+          label: "Open Snapshot File",
+          click: () => {
+            IpcHost.send(channelName, "snapshot");
+          },
+        },
+        {
+          label: "View Remote iModel",
+          click: () => {
+            IpcHost.send(channelName, "remote");
+          },
+        },
+        { type: "separator" },
+        isMac ? { role: "close" } : { role: "quit" },
       ],
     },
-  ]);
+    {
+      label: "View", //TODO Kevin remove this
+      submenu: [
+        {
+          label: "Reload",
+          role: "reload",
+        },
+      ],
+    },
+  ] as MenuItemConstructorOptions[];
+
+  if (isMac) {
+    template.unshift({ label: "" } as MenuItemConstructorOptions);
+  }
+
+  const menu = Menu.buildFromTemplate(template as MenuItemConstructorOptions[]);
+
   Menu.setApplicationMenu(menu);
 };
 

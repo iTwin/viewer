@@ -3,17 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-// TODO Kevin cleanup and scss
 import "./SelectProject.scss";
 
 import { IModelApp } from "@bentley/imodeljs-frontend";
 import { AccessToken } from "@bentley/itwin-client";
-import {
-  ApiOverrides,
-  ProjectFull,
-  ProjectGrid,
-  ProjectGridProps,
-} from "@itwin/imodel-browser-react";
+import { ProjectGrid } from "@itwin/imodel-browser-react";
 import {
   SvgCalendar,
   SvgList,
@@ -21,7 +15,6 @@ import {
   SvgStarHollow,
 } from "@itwin/itwinui-icons-react";
 import {
-  ButtonGroup,
   HorizontalTab,
   HorizontalTabs,
   IconButton,
@@ -29,6 +22,8 @@ import {
 } from "@itwin/itwinui-react";
 import { useNavigate } from "@reach/router";
 import React, { useEffect, useState } from "react";
+
+import { SignIn } from "../signin/SignIn";
 
 const PROJECT_TYPE_MAP = ["", "?recents", "?myprojects"];
 
@@ -47,18 +42,16 @@ const tabsWithIcons = [
 ];
 
 export const SelectProject = () => {
-  const [projectType, setProjectType] = useState(
-    () =>
-      // PROJECT_TYPE_MAP.includes(location.search)
-      //   ? PROJECT_TYPE_MAP.indexOf(location.search)
-      //   : 0
-      0
+  const [projectType, setProjectType] = useState(() =>
+    PROJECT_TYPE_MAP.includes(window.location.search)
+      ? PROJECT_TYPE_MAP.indexOf(window.location.search)
+      : 0
   );
 
   const [searchValue, setSearchValue] = React.useState("");
   const [searchParam, setSearchParam] = React.useState("");
   const startSearch = React.useCallback(() => {
-    setSearchParam(!searchValue ? "" : `?$search=${searchValue}`);
+    setSearchParam(searchValue);
   }, [searchValue]);
   const [accessToken, setAccessToken] = useState<AccessToken | undefined>();
   const navigate = useNavigate();
@@ -83,34 +76,32 @@ export const SelectProject = () => {
           tabsClassName="grid-holding-tabs"
         >
           <div className={"title-section"}>
-            {projectType === 2 && (
-              <div className={"inline-input-with-button"}>
-                <LabeledInput
-                  label={"Search"}
-                  placeholder={"Will search in name or number"}
-                  displayStyle={"inline"}
-                  value={searchValue}
-                  onChange={(event) => {
-                    const {
-                      target: { value },
-                    } = event;
-                    setSearchValue(value);
-                  }}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter") {
-                      startSearch();
-                    }
-                    if (event.key === "Escape") {
-                      setSearchValue("");
-                      setSearchParam("");
-                    }
-                  }}
-                />
-                <IconButton onClick={startSearch}>
-                  <SvgSearch />
-                </IconButton>
-              </div>
-            )}
+            <div className={"inline-input-with-button"}>
+              <LabeledInput
+                label={"Search"}
+                placeholder={"Will search in name or number"}
+                displayStyle={"inline"}
+                value={searchValue}
+                onChange={(event) => {
+                  const {
+                    target: { value },
+                  } = event;
+                  setSearchValue(value);
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    startSearch();
+                  }
+                  if (event.key === "Escape") {
+                    setSearchValue("");
+                    setSearchParam("");
+                  }
+                }}
+              />
+              <IconButton onClick={startSearch}>
+                <SvgSearch />
+              </IconButton>
+            </div>
           </div>
           <div className={"scrolling-tab-content"}>
             <ProjectGrid
@@ -123,17 +114,16 @@ export const SelectProject = () => {
                   : (searchParam as any) ?? ""
               }
               onThumbnailClick={(project) => {
-                void navigate(`projects/${project.id}`);
+                void navigate(`itwins/${project.id}`);
               }}
-              //  projectActions={projectActions}
-              //   apiOverrides={apiOverrides}
-              //  key={refreshKey}
               stringsOverrides={{ noIModels: "No projects found" } as any}
-              // {...gridProps}
+              filterOptions={searchParam}
             />
           </div>
         </HorizontalTabs>
       </div>
     </>
-  ) : null;
+  ) : (
+    <SignIn />
+  );
 };
