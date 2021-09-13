@@ -63,8 +63,7 @@ const viewerMain = async () => {
   if (process.env.NODE_ENV === "development") {
     ElectronHost.mainWindow?.webContents.toggleDevTools();
   }
-
-  // TODO Kevin
+  // add the menu
   ElectronHost.mainWindow?.on("ready-to-show", createMenu);
 };
 

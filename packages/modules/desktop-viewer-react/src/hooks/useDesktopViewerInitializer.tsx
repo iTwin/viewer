@@ -13,7 +13,6 @@ import { useEffect, useMemo, useState } from "react";
 import { DesktopInitializer } from "../services/Initializer";
 import { DesktopViewerProps } from "../types";
 
-// TODO Kevin cleanup
 export const useDesktopViewerInitializer = (options?: DesktopViewerProps) => {
   const [desktopViewerInitOptions, setDesktopViewerInitOptions] =
     useState<DesktopViewerProps>();
