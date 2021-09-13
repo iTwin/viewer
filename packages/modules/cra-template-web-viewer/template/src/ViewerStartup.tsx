@@ -16,7 +16,7 @@ import React, { useState } from "react";
 
 import AuthorizationOptions from "./AuthorizationOptions";
 
-const View: React.FC = () => {
+const ViewerStartup: React.FC = () => {
   // Convert process var to window var
   const [iModelId] = useState(sessionStorage.getItem("IMJS_IMODEL_ID"));
   const [contextId] = useState(sessionStorage.getItem("IMJS_CONTEXT_ID"));
@@ -64,4 +64,4 @@ const View: React.FC = () => {
   );
 };
 
-export default View;
+export default ViewerStartup;

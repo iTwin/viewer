@@ -15,7 +15,7 @@ import React from "react";
 
 import AuthorizationOptions from "./AuthorizationOptions";
 import { history } from "./history";
-import View from "./View";
+import ViewerStartup from "./ViewerStartup";
 
 const App: React.FC = () => {
   /** Ensure client variables exist. */
@@ -91,7 +91,7 @@ const App: React.FC = () => {
 
   return (
     <div className="viewer-container">
-      <View />
+      <ViewerStartup />
     </div>
   );
 };
