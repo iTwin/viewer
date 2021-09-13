@@ -14,16 +14,21 @@ import Home from "../home/Home";
 //eslint-disable-next-line no-empty-pattern
 export const HomeRoute = ({}: RouteComponentProps) => {
   const navigate = useNavigate();
-  // TODO Kevin move this
   useEffect(() => {
     IpcApp.addListener(channelName, async (sender, arg) => {
-      if (arg === "snapshot") {
-        const snapshotPath = await ITwinViewerApp.getSnapshotFile();
-        if (snapshotPath) {
-          await navigate(`/snapshot`, { state: { snapshotPath } });
-        }
-      } else if (arg === "remote") {
-        await navigate("/itwins");
+      switch (arg) {
+        case "snapshot":
+          const snapshotPath = await ITwinViewerApp.getSnapshotFile();
+          if (snapshotPath) {
+            await navigate(`/snapshot`, { state: { snapshotPath } });
+          }
+          break;
+        case "remote":
+          await navigate("/itwins");
+          break;
+        case "home": //TODO Kevin remove this
+          await navigate("/");
+          break;
       }
     });
   }, []);

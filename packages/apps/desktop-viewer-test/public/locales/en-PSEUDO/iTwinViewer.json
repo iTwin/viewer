@@ -2,5 +2,14 @@
   "downloadBriefcase": "Download Briefcase",
   "openSnapshot": "Open Snapshot File",
   "openLocalBriefcase": "Open Local Briefcase",
-  "viewRemoteIModel": "View Remote iModel"
+  "viewRemoteIModel": "View Remote iModel",
+  "home":{
+    "start": "Start",
+    "learn": "Learn",
+    "openRecent": "Open Recent",
+    "links": {
+      "viewerComponent": "Learn more about the Viewer component",
+      "customizeViewer": "Learn how to customize your iTwin Viewer"
+    }
+  }
 }

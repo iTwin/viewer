@@ -44,8 +44,8 @@ const viewerMain = async () => {
     authConfig: {
       clientId,
       scope,
-      redirectUri: redirectUri || undefined,
-      issuerUrl: issuerUrl || undefined,
+      redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+      issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
     },
   };
 
@@ -96,6 +96,12 @@ const createMenu = () => {
         {
           label: "Reload",
           role: "reload",
+        },
+        {
+          label: "Home",
+          click: () => {
+            IpcHost.send(channelName, "home");
+          },
         },
       ],
     },
