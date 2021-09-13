@@ -12,48 +12,14 @@ import {
   StandardViewId,
 } from "@bentley/imodeljs-frontend";
 import { Viewer } from "@itwin/web-viewer-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import AuthorizationOptions from "./AuthorizationOptions";
-import { history } from "./history";
 
 const View: React.FC = () => {
   // Convert process var to window var
-  const [iModelId, setIModelId] = useState(
-    sessionStorage.getItem("IMJS_IMODEL_ID")
-  );
-  const [contextId, setContextId] = useState(
-    sessionStorage.getItem("IMJS_CONTEXT_ID")
-  );
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has("contextId")) {
-      setContextId(urlParams.get("contextId") as string);
-    } else {
-      if (sessionStorage.getItem("IMJS_CONTEXT_ID") === null) {
-        throw new Error(
-          "Please add a valid context ID in the .env file and restart the application or add it to the contextId query parameter in the url and refresh the page. See the README for more information."
-        );
-      }
-    }
-
-    if (urlParams.has("iModelId")) {
-      setIModelId(urlParams.get("iModelId") as string);
-    } else {
-      if (sessionStorage.getItem("IMJS_IMODEL_ID") === null) {
-        throw new Error(
-          "Please add a valid iModel ID in the .env file and restart the application or add it to the iModelId query parameter in the url and refresh the page. See the README for more information."
-        );
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    if (contextId && iModelId) {
-      history.push(`?contextId=${contextId}&iModelId=${iModelId}`);
-    }
-  }, [contextId, iModelId]);
+  const [iModelId] = useState(sessionStorage.getItem("IMJS_IMODEL_ID"));
+  const [contextId] = useState(sessionStorage.getItem("IMJS_CONTEXT_ID"));
 
   /** NOTE: This function will execute the "Fit View" tool after the iModel is loaded into the Viewer.
    * This will provide an "optimal" view of the model. However, it will override any default views that are
