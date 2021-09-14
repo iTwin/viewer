@@ -5,7 +5,7 @@
 
 import "./Home.scss";
 
-import { Blockquote, Headline } from "@itwin/itwinui-react";
+import { Blockquote, Headline, Title } from "@itwin/itwinui-react";
 import { Link, useNavigate } from "@reach/router";
 import React, { useEffect, useState } from "react";
 
@@ -38,40 +38,36 @@ const Home = () => {
   };
 
   return (
-    <div className="home">
-      <div className="home-section start">
-        <Headline> {ITwinViewerApp.translate("home.start")}</Headline>
-        <nav>
-          <span onClick={openSnapshot}>
-            {ITwinViewerApp.translate("openSnapshot")}
-          </span>
-          <Link to="itwins">
-            {ITwinViewerApp.translate("viewRemoteIModel")}
-          </Link>
-        </nav>
-      </div>
-      <div className="home-section learn">
-        <Headline> {ITwinViewerApp.translate("home.learn")}</Headline>
-        {learnLinks.map((link) => {
-          return (
-            <Blockquote key={link.url}>
-              <a href={link.url} target="_blank" rel="noreferrer">
-                {ITwinViewerApp.translate(link.textKey)}
-              </a>
-            </Blockquote>
-          );
-        })}
-      </div>
-      <div className="home-section recent">
-        <Headline> {ITwinViewerApp.translate("home.openRecent")}</Headline>
-        <nav>
-          <span onClick={openSnapshot}>
-            {ITwinViewerApp.translate("openSnapshot")}
-          </span>
-          <Link to="itwins">
-            {ITwinViewerApp.translate("viewRemoteIModel")}
-          </Link>
-        </nav>
+    <div>
+      <Headline className="home-title">iTwin Viewer for Desktop</Headline>
+      <div className="home">
+        <div className="home-section start">
+          <Title> {ITwinViewerApp.translate("home.start")}</Title>
+          <nav>
+            <span onClick={openSnapshot}>
+              {ITwinViewerApp.translate("openSnapshot")}
+            </span>
+            <Link to="itwins">
+              {ITwinViewerApp.translate("viewRemoteIModel")}
+            </Link>
+          </nav>
+        </div>
+        <div className="home-section learn">
+          <Title> {ITwinViewerApp.translate("home.learn")}</Title>
+          {learnLinks.map((link) => {
+            return (
+              <Blockquote key={link.url}>
+                <a href={link.url} target="_blank" rel="noreferrer">
+                  {ITwinViewerApp.translate(link.textKey)}
+                </a>
+              </Blockquote>
+            );
+          })}
+        </div>
+        <div className="home-section recent">
+          <Title> {ITwinViewerApp.translate("home.openRecent")}</Title>
+          <div>Coming Soon!</div>
+        </div>
       </div>
     </div>
   );

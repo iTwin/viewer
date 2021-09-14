@@ -91,24 +91,44 @@ const createMenu = () => {
       ],
     },
     {
-      label: "View", //TODO Kevin remove this
+      label: "View",
       submenu: [
         {
-          label: "Reload",
-          role: "reload",
-        },
-        {
-          label: "Home",
+          label: "Getting Started",
           click: () => {
             IpcHost.send(channelName, "home");
           },
         },
       ],
     },
+    {
+      label: "Window",
+      submenu: [
+        {
+          label: "Minimize",
+          role: "minimize",
+        },
+        {
+          label: "Zoom",
+          role: "zoom",
+        },
+      ],
+    },
   ] as MenuItemConstructorOptions[];
 
   if (isMac) {
-    template.unshift({ label: "" } as MenuItemConstructorOptions);
+    template.unshift({
+      label: "iTwin Viewer",
+      role: "appMenu",
+      submenu: [
+        {
+          label: "Preferences",
+          click: () => {
+            IpcHost.send(channelName, "preferences");
+          },
+        },
+      ],
+    } as MenuItemConstructorOptions);
   }
 
   const menu = Menu.buildFromTemplate(template as MenuItemConstructorOptions[]);
