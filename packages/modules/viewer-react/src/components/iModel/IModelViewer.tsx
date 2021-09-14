@@ -1,7 +1,8 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import { BackstageItem } from "@bentley/ui-abstract";
 import {
@@ -40,11 +41,7 @@ export const IModelViewer: React.FC<ModelProps> = ({
     // set the active frontstage to the current default
     if (defaultFrontstage) {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      setTimeout(
-        FrontstageManager.setActiveFrontstageDef,
-        0,
-        defaultFrontstage.frontstageDef
-      );
+      FrontstageManager.setActiveFrontstageDef(defaultFrontstage.frontstageDef);
     }
     return () => {
       FrontstageManager.clearFrontstageDefs();
