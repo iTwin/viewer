@@ -1,10 +1,12 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 import { ColorDef, RenderMode } from "@bentley/imodeljs-common";
 import {
   BlankConnection,
+  IModelApp,
   SpatialViewState,
   ViewStatus,
 } from "@bentley/imodeljs-frontend";
@@ -55,5 +57,12 @@ export const createBlankViewState = (
   flags.renderMode =
     viewStateOptions?.viewFlags?.renderMode ?? RenderMode.SmoothShade;
   viewState.displayStyle.viewFlags = flags;
+
+  IModelApp.viewManager.onViewOpen.addOnce((vp) => {
+    if (vp.view.hasSameCoordinates(viewState)) {
+      vp.applyViewState(viewState);
+    }
+  });
+
   return viewState;
 };
