@@ -61,6 +61,7 @@ jest.mock("@bentley/imodeljs-frontend", () => {
           readFinished: jest.fn().mockResolvedValue(true),
         }),
         languageList: jest.fn().mockReturnValue(["en-US"]),
+        translateWithNamespace: jest.fn(),
       },
       uiAdmin: {
         updateFeatureFlags: jest.fn(),

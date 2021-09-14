@@ -137,8 +137,7 @@ const createMenu = () => {
 };
 
 try {
-  //app.on("ready", createWindow);
-  viewerMain(); // eslint-disable-line @typescript-eslint/no-floating-promises
+  void viewerMain();
 } catch (error) {
   Logger.logError(AppLoggerCategory.Backend, error);
   process.exitCode = 1;
