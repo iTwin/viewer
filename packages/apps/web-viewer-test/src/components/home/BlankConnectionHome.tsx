@@ -1,11 +1,12 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
 import { Range3d } from "@bentley/geometry-core";
-import { Cartographic, ColorDef } from "@bentley/imodeljs-common";
+import { Cartographic, ColorDef, RenderMode } from "@bentley/imodeljs-common";
 import { IModelApp } from "@bentley/imodeljs-frontend";
 import { BlankViewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
@@ -23,7 +24,7 @@ export const BlankConnectionHome: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(
     (IModelApp.authorizationClient?.hasSignedIn &&
       IModelApp.authorizationClient?.isAuthorized) ||
-      false
+    false
   );
 
   const authConfig: BrowserAuthorizationClientConfiguration = {
@@ -39,7 +40,7 @@ export const BlankConnectionHome: React.FC = () => {
     setLoggedIn(
       IModelApp.authorizationClient
         ? IModelApp.authorizationClient.hasSignedIn &&
-            IModelApp.authorizationClient.isAuthorized
+        IModelApp.authorizationClient.isAuthorized
         : false
     );
   }, []);
@@ -75,9 +76,9 @@ export const BlankConnectionHome: React.FC = () => {
           extents: new Range3d(-30, -30, -30, 30, 30, 30),
         }}
         viewStateOptions={{
-          displayStyle: {
-            backgroundColor: ColorDef.blue,
-          },
+          displayStyle: { backgroundColor: ColorDef.white },
+          viewFlags: { grid: true, renderMode: RenderMode.SmoothShade },
+          setAllow3dManipulations: false,
         }}
         productId={productId}
         onIModelAppInit={iModelAppInit}
