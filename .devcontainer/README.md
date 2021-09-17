@@ -2,6 +2,8 @@
 
 ## Bootstrap
 
+### Windows only
+
 Ensure both Containers and Hyper-V are enabled in Windows.
 
 - Open the Start Menu and starting typing "Turn Windows features on or off" to select it
@@ -16,6 +18,8 @@ Customize Docker settings (in task bar notification area, right-click the Docker
 
 - Shared Drives: You must share the drive(s) that contain your source code **and** your home drive.
 - Advanced: Building is resource-intensive; we recommend at least 4 vCPUs and 4 GB of RAM.
+
+### All OS
 
 Update VS Code to at least 1.35.0 (May 2019).
 
