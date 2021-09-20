@@ -7,7 +7,7 @@ import { IModelApp } from "@bentley/imodeljs-frontend";
 import { AccessToken } from "@bentley/itwin-client";
 import { useCallback, useEffect, useState } from "react";
 
-import { useIsMounted } from ".";
+import { useIsMounted } from "./useIsMounted";
 
 export const useAccessToken = () => {
   const [accessToken, setAccessToken] = useState<AccessToken>();
