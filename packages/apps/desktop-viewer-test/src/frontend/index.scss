@@ -19,4 +19,8 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
+  .itv-scrolling-content {
+    overflow: auto;
+    flex-basis: 100%;
+  }
 }

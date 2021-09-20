@@ -12,8 +12,8 @@ import React from "react";
 export const SelectIModel = ({ accessToken, projectId }: IModelGridProps) => {
   const navigate = useNavigate();
   return (
-    <div className="idp-scrolling-container select-imodel">
-      <div className="idp-scrolling-content">
+    <div className="itv-scrolling-container select-imodel">
+      <div className="itv-scrolling-content">
         <IModelGrid
           accessToken={accessToken}
           projectId={projectId}

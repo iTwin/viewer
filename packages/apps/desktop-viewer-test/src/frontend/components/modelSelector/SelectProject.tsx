@@ -5,8 +5,7 @@
 
 import "./SelectProject.scss";
 
-import { IModelApp } from "@bentley/imodeljs-frontend";
-import { AccessToken } from "@bentley/itwin-client";
+import { useAccessToken } from "@itwin/desktop-viewer-react";
 import { ProjectGrid } from "@itwin/imodel-browser-react";
 import {
   SvgCalendar,
@@ -21,7 +20,7 @@ import {
   LabeledInput,
 } from "@itwin/itwinui-react";
 import { useNavigate } from "@reach/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { SignIn } from "../signin/SignIn";
 
@@ -53,16 +52,8 @@ export const SelectProject = () => {
   const startSearch = React.useCallback(() => {
     setSearchParam(searchValue);
   }, [searchValue]);
-  const [accessToken, setAccessToken] = useState<AccessToken | undefined>();
+  const accessToken = useAccessToken();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const getAccessToken = async () => {
-      const token = await IModelApp.authorizationClient?.getAccessToken();
-      setAccessToken(token);
-    };
-    void getAccessToken();
-  }, []);
 
   return accessToken ? (
     <>
@@ -103,7 +94,7 @@ export const SelectProject = () => {
               </IconButton>
             </div>
           </div>
-          <div className={"scrolling-tab-content"}>
+          <div className="itv-scrolling-content">
             <ProjectGrid
               accessToken={accessToken.toTokenString()}
               requestType={

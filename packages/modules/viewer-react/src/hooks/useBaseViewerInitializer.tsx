@@ -40,9 +40,9 @@ export const useBaseViewerInitializer = (
       });
     }
     if (!isMounted.current) {
-      return BaseInitializer.cancel(); //TODO rename stopDesktopInitalizer
+      return BaseInitializer.cancel();
     }
-  }, [options, delay, baseViewerInitOptions]);
+  }, [options, delay, baseViewerInitOptions, isMounted]);
 
   return baseViewerInitalized;
 };

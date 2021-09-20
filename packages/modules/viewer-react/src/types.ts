@@ -107,20 +107,24 @@ export interface ItwinViewerInitializerParams {
 }
 
 /**
- * list of all properties needed for iTwin.js initialization
- * This list should be updated each time a property is added/removed from ItwinViewerInitializerParams
+ * Maintain a list of initilalizer params for use in useBaseViewerInitializer
+ * This list MUST match what is in the ItwinViewerInitializerParams interface and should be updated as new properties are added/removed
  */
-export const iTwinViewerInitializerParamList = [
-  "appInsightsKey",
-  "imjsAppInsightsKey",
-  "productId",
-  "i18nUrlTemplate",
-  "onIModelAppInit",
-  "additionalI18nNamespaces",
-  "additionalRpcInterfaces",
-  "toolAdmin",
-  "imodelClient",
-];
+const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
+  appInsightKey: undefined,
+  imjsAppInsightsKey: undefined,
+  productId: undefined,
+  i18nUrlTemplate: undefined,
+  onIModelAppInit: undefined,
+  additionalI18nNamespaces: undefined,
+  additionalRpcInterfaces: undefined,
+  iModelDataErrorMessage: undefined,
+  toolAdmin: undefined,
+  imodelClient: undefined,
+};
+export const iTwinViewerInitializerParamList = Object.keys(
+  iTwinViewerInitializerParamSample
+) as (keyof ItwinViewerInitializerParams)[];
 
 /**
  * Configure options for the top left corner item
