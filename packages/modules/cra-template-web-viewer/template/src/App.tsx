@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 /*---------------------------------------------------------------------------------------------
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
@@ -20,7 +21,7 @@ import React, { useContext } from "react";
 import AuthorizationOptions from "./AuthorizationOptions";
 import IModelJsContext from "./Context";
 import { history } from "./history";
-import View from "./ViewerStartup";
+import ViewerStartup from "./ViewerStartup";
 
 const App: React.FC = () => {
   // This will be the default context read from Context.tsx
@@ -83,7 +84,7 @@ const App: React.FC = () => {
 
   return (
     <div className="viewer-container">
-      <View />
+      <ViewerStartup />
     </div>
   );
 };
