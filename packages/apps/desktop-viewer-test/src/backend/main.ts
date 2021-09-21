@@ -47,6 +47,7 @@ const viewerMain = async () => {
       redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
       issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
     },
+    iconName: "itwin-viewer.ico",
   };
 
   await ElectronHost.startup({ electronHost });
@@ -58,6 +59,7 @@ const viewerMain = async () => {
     height: 800,
     show: true,
     title: appInfo.title,
+    autoHideMenuBar: false,
   });
 
   if (process.env.NODE_ENV === "development") {
@@ -101,7 +103,10 @@ const createMenu = () => {
         },
       ],
     },
-    {
+  ] as MenuItemConstructorOptions[];
+
+  if (isMac) {
+    template.push({
       label: "Window",
       submenu: [
         {
@@ -113,10 +118,7 @@ const createMenu = () => {
           role: "zoom",
         },
       ],
-    },
-  ] as MenuItemConstructorOptions[];
-
-  if (isMac) {
+    });
     template.unshift({
       label: "iTwin Viewer",
       role: "appMenu",
@@ -134,6 +136,9 @@ const createMenu = () => {
   const menu = Menu.buildFromTemplate(template as MenuItemConstructorOptions[]);
 
   Menu.setApplicationMenu(menu);
+  ElectronHost.mainWindow?.setMenuBarVisibility(true);
+  // this is overridden in ElectronHost and set to true so it needs to be...re-overriden??
+  ElectronHost.mainWindow?.setAutoHideMenuBar(false);
 };
 
 try {
