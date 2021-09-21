@@ -2,6 +2,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import "./App.scss";
 
@@ -12,14 +16,14 @@ import {
   StandardViewId,
 } from "@bentley/imodeljs-frontend";
 import { Viewer } from "@itwin/web-viewer-react";
-import React, { useState } from "react";
+import React, { useContext } from "react";
 
 import AuthorizationOptions from "./AuthorizationOptions";
+import IModelJsContext from "./Context";
 
 const ViewerStartup: React.FC = () => {
   // Convert process var to window var
-  const [iModelId] = useState(sessionStorage.getItem("IMJS_IMODEL_ID"));
-  const [contextId] = useState(sessionStorage.getItem("IMJS_CONTEXT_ID"));
+  const context = useContext(IModelJsContext);
 
   /** NOTE: This function will execute the "Fit View" tool after the iModel is loaded into the Viewer.
    * This will provide an "optimal" view of the model. However, it will override any default views that are
@@ -51,16 +55,12 @@ const ViewerStartup: React.FC = () => {
   };
 
   return (
-    <>
-      {contextId && iModelId && (
-        <Viewer
-          contextId={contextId}
-          iModelId={iModelId}
-          authConfig={AuthorizationOptions}
-          viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
-        />
-      )}
-    </>
+    <Viewer
+      contextId={context.contextId}
+      iModelId={context.iModelId}
+      authConfig={context.authOptions}
+      viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
+    />
   );
 };
 
