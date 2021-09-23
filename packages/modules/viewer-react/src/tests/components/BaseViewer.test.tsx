@@ -48,6 +48,7 @@ jest.mock("@microsoft/applicationinsights-react-js", () => ({
 jest.mock("@bentley/imodeljs-frontend", () => {
   return {
     IModelApp: {
+      initialized: true,
       startup: jest.fn(),
       telemetry: {
         addClient: jest.fn(),

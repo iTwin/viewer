@@ -98,9 +98,17 @@ describe("BaseInitializer", () => {
   beforeEach(() => {
     BaseInitializer.cancel();
     jest.clearAllMocks();
+    jest.resetModules();
     if (UiCore.initialized) {
       UiCore.terminate();
     }
+    // reset the getter function to true so that it can be overridden to false if needed
+    Object.defineProperty(IModelApp, "initialized", {
+      get: () => {
+        return true;
+      },
+      configurable: true,
+    });
   });
 
   it("gets default iModelApp options", () => {
@@ -195,5 +203,26 @@ describe("BaseInitializer", () => {
     await BaseInitializer.initialized;
 
     expect(ai.initialize).not.toHaveBeenCalled();
+  });
+
+  it("fails to initialize if iModelApp has not been initialized", async () => {
+    // override the return value of the getter function
+    Object.defineProperty(IModelApp, "initialized", {
+      get: () => {
+        return false;
+      },
+      configurable: true,
+    });
+    try {
+      await BaseInitializer.initialize();
+      console.log("awaited");
+    } catch (error) {
+      console.log("error happened");
+      expect(error).toBeDefined();
+      expect(IModelApp.i18n.translateWithNamespace).toHaveBeenCalledWith(
+        "iTwinViewer",
+        "notInitialized"
+      );
+    }
   });
 });
