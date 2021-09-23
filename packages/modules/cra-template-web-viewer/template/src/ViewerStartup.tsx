@@ -6,6 +6,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import "./App.scss";
 
@@ -18,8 +22,7 @@ import {
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useContext } from "react";
 
-import AuthorizationOptions from "./AuthorizationOptions";
-import IModelJsContext from "./Context";
+import IModelJsContext from "./ViewerContext";
 
 const ViewerStartup: React.FC = () => {
   // Convert process var to window var

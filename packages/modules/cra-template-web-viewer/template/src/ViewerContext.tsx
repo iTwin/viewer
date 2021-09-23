@@ -2,16 +2,20 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 import { WebAuthorizationOptions } from "@itwin/web-viewer-react";
 import React from "react";
 
-export interface IModelJsConfig {
+export interface ViewerContext {
   contextId: string;
   iModelId: string;
   authOptions: WebAuthorizationOptions;
 }
 
-export const iModelJsConfig: IModelJsConfig = {
+export const defaultContext: ViewerContext = {
   contextId: process.env.IMJS_CONTEXT_ID ?? "",
   iModelId: process.env.IMJS_IMODEL_ID ?? "",
   authOptions: {
@@ -26,6 +30,6 @@ export const iModelJsConfig: IModelJsConfig = {
   },
 };
 
-const iModelJsConfigContext = React.createContext(iModelJsConfig);
+const viewerContext = React.createContext(defaultContext);
 
-export default iModelJsConfigContext;
+export default viewerContext;

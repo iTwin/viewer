@@ -2,12 +2,6 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
-
 import "./App.scss";
 
 import {
@@ -16,16 +10,16 @@ import {
   FrontendAuthorizationClient,
 } from "@bentley/frontend-authorization-client";
 import { FrontendRequestContext } from "@bentley/imodeljs-frontend";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
-import AuthorizationOptions from "./AuthorizationOptions";
-import IModelJsContext from "./Context";
 import { history } from "./history";
+import ViewerContext from "./ViewerContext";
 import ViewerStartup from "./ViewerStartup";
 
 const App: React.FC = () => {
-  // This will be the default context read from Context.tsx
-  const context = useContext(IModelJsContext);
+  const { contextId, iModelId, authOptions } = useContext(ViewerContext);
+  const [currContextId, setCurrContextId] = useState(contextId);
+  const [currIModelId, setCurrIModelId] = useState(iModelId);
 
   /** Ensure client variables exist. */
   if (!process.env.IMJS_AUTH_CLIENT_CLIENT_ID) {
@@ -46,16 +40,19 @@ const App: React.FC = () => {
 
   /** Grab the ContextId and IModelId from the URL parameters first, else the .ENV variables */
   const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.has("contextId")) {
-    context.contextId = urlParams.get("contextId") as string;
+  if (
+    urlParams.has("contextId") &&
+    urlParams.get("contextId") !== currContextId
+  ) {
+    setCurrContextId(urlParams.get("contextId") as string);
   } else if (!process.env.IMJS_CONTEXT_ID) {
     throw new Error(
       "Please add a valid context ID in the .env file and restart the application or add it to the contextId query parameter in the url and refresh the page. See the README for more information."
     );
   }
 
-  if (urlParams.has("iModelId")) {
-    context.iModelId = urlParams.get("iModelId") as string;
+  if (urlParams.has("iModelId") && urlParams.get("iModelId") !== currIModelId) {
+    setCurrIModelId(urlParams.get("iModelId") as string);
   } else if (!process.env.IMJS_IMODEL_ID) {
     throw new Error(
       "Please add a valid iModel ID in the .env file and restart the application or add it to the iModelId query parameter in the url and refresh the page. See the README for more information."
@@ -64,10 +61,10 @@ const App: React.FC = () => {
 
   /** Creation of a client */
   let client: FrontendAuthorizationClient;
-  if (AuthorizationOptions.config) {
-    client = new BrowserAuthorizationClient(AuthorizationOptions.config);
-  } else if (AuthorizationOptions.oidcClient) {
-    client = AuthorizationOptions.oidcClient;
+  if (authOptions.config) {
+    client = new BrowserAuthorizationClient(authOptions.config);
+  } else if (authOptions.oidcClient) {
+    client = authOptions.oidcClient;
   } else {
     throw new Error("Please provide a valid AuthOptions file.");
   }
@@ -77,15 +74,20 @@ const App: React.FC = () => {
     process.env.IMJS_AUTH_CLIENT_REDIRECT_URI
   ).then(() => {
     client.signIn(new FrontendRequestContext());
-    history.push(
-      `?contextId=${context.contextId}&iModelId=${context.iModelId}`
-    );
   });
 
+  useEffect(() => {
+    history.push(`?contextId=${currContextId}&iModelId=${currIModelId}`);
+  }, [currContextId, currIModelId]);
+
   return (
-    <div className="viewer-container">
-      <ViewerStartup />
-    </div>
+    <ViewerContext.Provider
+      value={{ contextId: currContextId, iModelId: currIModelId, authOptions }}
+    >
+      <div className="viewer-container">
+        <ViewerStartup />
+      </div>
+    </ViewerContext.Provider>
   );
 };
 
