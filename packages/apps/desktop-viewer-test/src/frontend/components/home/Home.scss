@@ -19,9 +19,16 @@
       display: block;
       margin: 8px 8px 8px 0;
       color: t(iui-color-foreground-primary);
-      text-decoration: underline;
+      text-decoration: none;
       cursor: pointer;
       width: 200px;
+    }
+    svg {
+      height: 15px;
+      width: 15px;
+      float: left;
+      margin: 4px 8px 0 0;
+      fill: t(iui-color-foreground-primary);
     }
   }
   .start {

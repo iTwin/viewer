@@ -77,26 +77,28 @@ const createMenu = () => {
       label: "File",
       submenu: [
         {
-          label: "Open Snapshot File",
+          label: "Open snapshot file",
           click: () => {
             IpcHost.send(channelName, "snapshot");
           },
         },
         {
-          label: "View Remote iModel",
+          label: "View remote iModel",
           click: () => {
             IpcHost.send(channelName, "remote");
           },
         },
         { type: "separator" },
-        isMac ? { role: "close" } : { role: "quit" },
+        isMac
+          ? { label: "Close", role: "close" }
+          : { label: "Close", role: "quit" },
       ],
     },
     {
       label: "View",
       submenu: [
         {
-          label: "Getting Started",
+          label: "Getting started",
           click: () => {
             IpcHost.send(channelName, "home");
           },

@@ -5,6 +5,7 @@
 
 import "./Home.scss";
 
+import { SvgFolderOpened, SvgImodel } from "@itwin/itwinui-icons-react";
 import { Blockquote, Headline, Title } from "@itwin/itwinui-react";
 import { Link, useNavigate } from "@reach/router";
 import React, { useEffect, useState } from "react";
@@ -44,12 +45,18 @@ const Home = () => {
         <div className="home-section start">
           <Title> {ITwinViewerApp.translate("home.start")}</Title>
           <nav>
-            <span onClick={openSnapshot}>
-              {ITwinViewerApp.translate("openSnapshot")}
-            </span>
-            <Link to="itwins">
-              {ITwinViewerApp.translate("viewRemoteIModel")}
-            </Link>
+            <div>
+              <SvgFolderOpened />
+              <span onClick={openSnapshot}>
+                {ITwinViewerApp.translate("openSnapshot")}
+              </span>
+            </div>
+            <div>
+              <SvgImodel />
+              <Link to="itwins">
+                {ITwinViewerApp.translate("viewRemoteIModel")}
+              </Link>
+            </div>
           </nav>
         </div>
         <div className="home-section learn">
