@@ -20,7 +20,7 @@ const App = () => {
 
   return initialized ? (
     <div style={{ height: "100%" }}>
-      <Router style={{ height: "calc(100% - 20px)" }}>
+      <Router style={{ height: "100%" }}>
         <HomeRoute path="/" />
         <DownloadRoute path="itwins/:iTwinId/:iModelId" />
         <IModelsRoute path="/itwins/:iTwinId" />
