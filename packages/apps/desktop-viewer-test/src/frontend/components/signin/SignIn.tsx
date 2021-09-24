@@ -6,9 +6,9 @@
 import "./SignIn.scss";
 
 import { IModelApp } from "@bentley/imodeljs-frontend";
+import { SvgUser } from "@itwin/itwinui-icons-react";
 import { Button } from "@itwin/itwinui-react";
 import React, { useState } from "react";
-
 export const SignIn = () => {
   const [signingIn, setSigningIn] = useState(false);
 
@@ -20,7 +20,7 @@ export const SignIn = () => {
   return (
     <div className="signin-container">
       <div className="signin">
-        <span className="icon icon-user signin-user" />
+        <SvgUser className="signin-user" />
         <Button
           className="signin-button"
           styleType="cta"

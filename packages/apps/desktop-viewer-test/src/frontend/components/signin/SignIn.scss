@@ -2,6 +2,8 @@
 * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
+@import "@itwin/itwinui-css/scss/variables";
+
 .signin-container {
   height: 100%;
   display: flex;
@@ -13,8 +15,10 @@
   display: grid;
   grid-template-rows: 125px 60px 50px;
   .signin-user {
-    font-size: 7em;
     margin: auto;
+    fill: t(iui-color-foreground-accessory);
+    height: 100px;
+    width: 100px;
   }
   .signin-button {
     width: 150px;
