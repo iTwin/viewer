@@ -216,12 +216,10 @@ describe("BaseInitializer", () => {
     try {
       await BaseInitializer.initialize();
       console.log("awaited");
-    } catch (error) {
-      console.log("error happened");
+    } catch (error: any) {
       expect(error).toBeDefined();
-      expect(IModelApp.i18n.translateWithNamespace).toHaveBeenCalledWith(
-        "iTwinViewer",
-        "notInitialized"
+      expect(error.message).toEqual(
+        "IModelApp must be initialized prior to rendering the Base Viewer"
       );
     }
   });

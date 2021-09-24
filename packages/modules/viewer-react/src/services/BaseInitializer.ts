@@ -151,7 +151,7 @@ export class BaseInitializer {
   ): Promise<void> {
     if (!IModelApp.initialized) {
       throw new Error(
-        IModelApp.i18n.translateWithNamespace("iTwinViewer", "notInitialized")
+        "IModelApp must be initialized prior to rendering the Base Viewer"
       );
     }
     if (UiCore.initialized && !this._initializing) {

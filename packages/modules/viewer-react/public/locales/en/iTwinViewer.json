@@ -15,6 +15,5 @@
   },
   "tools": {
     "walkTool": "Walk Tool"
-  },
-  "notInitialized": "IModelApp must be initialized prior to rendering the Base Viewer"
+  }
 }
