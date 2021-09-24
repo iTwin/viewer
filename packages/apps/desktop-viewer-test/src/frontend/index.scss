@@ -24,3 +24,7 @@ body {
     flex-basis: 100%;
   }
 }
+
+.itv-content-margins {
+  margin: 20px calc(var(--responsive-grid-margin, 64px) - 3px) 0;
+}

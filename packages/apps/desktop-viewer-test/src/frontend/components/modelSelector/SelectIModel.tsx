@@ -6,13 +6,25 @@
 import "./SelectIModel.scss";
 
 import { IModelGrid, IModelGridProps } from "@itwin/imodel-browser-react";
+import { Title } from "@itwin/itwinui-react";
 import { useNavigate } from "@reach/router";
 import React from "react";
 
-export const SelectIModel = ({ accessToken, projectId }: IModelGridProps) => {
+interface SelectIModelProps extends IModelGridProps {
+  projectName?: string;
+}
+
+export const SelectIModel = ({
+  accessToken,
+  projectId,
+  projectName,
+}: SelectIModelProps) => {
   const navigate = useNavigate();
   return (
     <div className="itv-scrolling-container select-imodel">
+      <div className={"itv-content-margins"}>
+        <Title>{`iModels for ${projectName}`}</Title>
+      </div>
       <div className="itv-scrolling-content">
         <IModelGrid
           accessToken={accessToken}
