@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { ElectronHost } from "@bentley/electron-manager/lib/ElectronBackend";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { join } from "path";
@@ -14,7 +15,6 @@ class UserSettings {
 
   constructor() {
     // cannot set here as we are using ElectronHost.app to obtain and it will not yet be initialized
-    // initialize to empty instead
     this._dataPath = "";
     this._settings = {};
   }
@@ -23,13 +23,19 @@ class UserSettings {
    * Write the settings.json file to user's app data directory
    */
   private _writeSettings() {
-    if (!existsSync(this.dataPath)) {
-      mkdirSync(this.dataPath);
-    }
     writeFileSync(
       join(this.dataPath, "settings.json"),
       JSON.stringify(this.settings)
     );
+  }
+
+  /**
+   * Generate default settings values
+   */
+  private defaultSettings() {
+    this._settings.defaultRecent = false;
+    this._settings.recents = [];
+    this._writeSettings();
   }
 
   public get dataPath() {
@@ -37,12 +43,18 @@ class UserSettings {
       this._dataPath = ElectronHost.app
         .getPath("userData")
         .replace("/Electron", "/iTwin Viewer");
+      if (!existsSync(this._dataPath)) {
+        mkdirSync(this._dataPath);
+      }
     }
     return this._dataPath;
   }
 
   public get settings() {
     if (Object.keys(this._settings).length === 0) {
+      if (!existsSync(join(this.dataPath, "settings.json"))) {
+        this.defaultSettings();
+      }
       this._settings = JSON.parse(
         readFileSync(join(this.dataPath, "settings.json"), "utf8")
       ) as ViewerSettings;

@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { useNavigate } from "@reach/router";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -30,11 +31,16 @@ export const Recents = () => {
   return (
     <nav>
       {recents?.map((recent) => {
+        let displayValue = recent.displayName;
+        // limit display value to 25 chars
+        if (displayValue.length > 25) {
+          displayValue = `${displayValue.substr(0, 25)}...`;
+        }
         switch (recent.type) {
           case ViewerFileType.SNAPSHOT:
             return (
               <span key={recent.path} onClick={() => openSnapshot(recent.path)}>
-                {recent.displayName}
+                {displayValue}
               </span>
             );
           case ViewerFileType.ONLINE:
@@ -43,7 +49,7 @@ export const Recents = () => {
                 key={recent.iModelId}
                 onClick={() => openRemote(recent.iTwinId, recent.iModelId)}
               >
-                {recent.displayName}
+                {displayValue}
               </span>
             );
           default:
