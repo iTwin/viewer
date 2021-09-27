@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import "./App.scss";
 
 import {
@@ -13,11 +14,10 @@ import {
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useContext } from "react";
 
-import IModelJsContext from "./ViewerContext";
+import ViewerContext from "./ViewerContext";
 
 const ViewerStartup: React.FC = () => {
-  // Convert process var to window var
-  const context = useContext(IModelJsContext);
+  const { contextId, iModelId, authOptions } = useContext(ViewerContext);
 
   /** NOTE: This function will execute the "Fit View" tool after the iModel is loaded into the Viewer.
    * This will provide an "optimal" view of the model. However, it will override any default views that are
@@ -50,9 +50,9 @@ const ViewerStartup: React.FC = () => {
 
   return (
     <Viewer
-      contextId={context.contextId}
-      iModelId={context.iModelId}
-      authConfig={context.authOptions}
+      contextId={contextId}
+      iModelId={iModelId}
+      authConfig={authOptions}
       viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
     />
   );
