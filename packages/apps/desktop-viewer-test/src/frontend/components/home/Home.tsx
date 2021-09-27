@@ -8,9 +8,11 @@ import "./Home.scss";
 import { SvgFolderOpened, SvgImodel } from "@itwin/itwinui-icons-react";
 import { Blockquote, Headline, Title } from "@itwin/itwinui-react";
 import { Link, useNavigate } from "@reach/router";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { ITwinViewerApp } from "../../app/ITwinViewerApp";
+import { SettingsContext } from "../../services/SettingsClient";
+import { Recents } from "./Recents";
 
 interface LearnLink {
   textKey: string;
@@ -20,6 +22,7 @@ interface LearnLink {
 const Home = () => {
   const navigate = useNavigate();
   const [learnLinks, setLearnLinks] = useState<LearnLink[]>([]);
+  const userSettings = useContext(SettingsContext);
 
   useEffect(() => {
     void fetch("./links.json").then((response) => {
@@ -34,6 +37,7 @@ const Home = () => {
   const openSnapshot = async () => {
     const snapshotPath = await ITwinViewerApp.getSnapshotFile();
     if (snapshotPath) {
+      void userSettings.addRecentSnapshot(snapshotPath);
       void navigate("/snapshot", { state: { snapshotPath } });
     }
   };
@@ -72,8 +76,8 @@ const Home = () => {
           })}
         </div>
         <div className="home-section recent">
-          <Title> {ITwinViewerApp.translate("home.openRecent")}</Title>
-          <div>Coming Soon!</div>
+          <Title>{ITwinViewerApp.translate("home.openRecent")}</Title>
+          <Recents />
         </div>
       </div>
     </div>
