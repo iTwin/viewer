@@ -3,6 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import "@testing-library/jest-dom/extend-expect";
+
 import { Config } from "@bentley/bentleyjs-core";
 import { Range3d } from "@bentley/geometry-core";
 import { Cartographic, ColorDef } from "@bentley/imodeljs-common";
@@ -331,5 +333,24 @@ describe("IModelLoader", () => {
     await waitFor(() => result.getByTestId("loader-wrapper"));
 
     expect(UiFramework.setDefaultViewState).not.toHaveBeenCalled();
+  });
+
+  it("renders a custom loading component", async () => {
+    const Loader = () => {
+      return <div>Things are happening</div>;
+    };
+    const result = render(
+      <IModelLoader
+        contextId={mockContextId}
+        iModelId={mockIModelId}
+        loadingComponent={<Loader />}
+      />
+    );
+
+    const loadingComponent = await waitFor(() =>
+      result.getByText("Things are happening")
+    );
+
+    expect(loadingComponent).toBeInTheDocument();
   });
 });
