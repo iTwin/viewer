@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Add support for a custom loading component",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/viewer-react",
+  "email": "6283674+kckst8@users.noreply.github.com"
+}
