@@ -8,7 +8,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ViewerProps } from "../components/BaseViewer";
 import { BaseInitializer } from "../services/BaseInitializer";
 import { getInitializationOptions, isEqual } from "../utilities";
-import { useIsMounted } from "./";
+import { useIsMounted } from "./useIsMounted";
 
 export const useBaseViewerInitializer = (
   options?: ViewerProps,

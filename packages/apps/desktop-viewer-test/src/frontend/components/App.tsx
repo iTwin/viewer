@@ -5,7 +5,7 @@
 
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
 import { Router } from "@reach/router";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { ViewerSettings } from "../../common/ViewerConfig";
 import {
@@ -34,25 +34,24 @@ const App = () => {
     }
   }, [initialized]);
 
-  const addRecentSnapshot = async (path: string) => {
+  const addRecentSnapshot = useCallback(async (path: string) => {
     const updatedSettings = await addRecentSnapshotClient(path);
     setSettings(updatedSettings);
     return updatedSettings;
-  };
+  }, []);
 
-  const addRecentOnline = async (
-    iTwinId: string,
-    iModelId: string,
-    iModelName?: string
-  ) => {
-    const updatedSettings = await addRecentOnlineClient(
-      iTwinId,
-      iModelId,
-      iModelName
-    );
-    setSettings(updatedSettings);
-    return updatedSettings;
-  };
+  const addRecentOnline = useCallback(
+    async (iTwinId: string, iModelId: string, iModelName?: string) => {
+      const updatedSettings = await addRecentOnlineClient(
+        iTwinId,
+        iModelId,
+        iModelName
+      );
+      setSettings(updatedSettings);
+      return updatedSettings;
+    },
+    []
+  );
 
   return initialized && settings ? (
     <SettingsContext.Provider

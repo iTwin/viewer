@@ -39,7 +39,13 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    margin: 0 20px 0 20px;
+    > .iui-tabs {
+      margin-top: 20px;
+    }
+    > .iui-tab-stripe {
+      margin-top: 20px;
+    }
   }
 
   .grid-holding-tab {

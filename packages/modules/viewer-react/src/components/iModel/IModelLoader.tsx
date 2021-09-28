@@ -161,7 +161,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       if (isMounted.current) {
         void getViewState();
       }
-    }, [getViewState]);
+    }, [getViewState, isMounted]);
 
     useEffect(() => {
       const getModelConnection = async () => {

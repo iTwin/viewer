@@ -30,7 +30,7 @@ export const useAccessToken = () => {
         setAccessToken(token);
       }
     });
-  }, []);
+  }, [isMounted]);
 
   return accessToken;
 };

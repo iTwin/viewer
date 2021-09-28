@@ -1,15 +1,15 @@
 {
-  "downloadBriefcase": "Download Briefcase",
-  "openSnapshot": "Open snapshot file",
-  "openLocalBriefcase": "Open local Briefcase",
-  "viewRemoteIModel": "View remote iModel",
-  "home":{
-    "start": "Start",
-    "learn": "Learn",
-    "openRecent": "Open recent",
+  "downloadBriefcase": "Ðówñlõäd ßrîëf¢ãsê",
+  "openSnapshot": "Òpéñ sñäpshøt fîlë",
+  "openLocalBriefcase": "Òpéñ lõ¢ål ßrïèfçäsë",
+  "viewRemoteIModel": "Vìéw rêmõtè íMòdël",
+  "home": {
+    "start": "$tárt",
+    "learn": "£éârñ",
+    "openRecent": "Òpéñ rë¢éñt",
     "links": {
-      "viewerComponent": "Learn more about the Viewer component",
-      "customizeViewer": "Learn how to customize your iTwin Viewer"
+      "viewerComponent": "£éârñ möré àbóût thé Vîëwèr çômpõñéñt",
+      "customizeViewer": "£éârñ höw tø ¢ústômízê ÿòûr îTwïñ Víêwër"
     }
   }
 }
