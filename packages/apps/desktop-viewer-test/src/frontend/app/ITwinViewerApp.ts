@@ -9,6 +9,7 @@ import {
   IpcApp,
   PromiseReturnType,
 } from "@bentley/imodeljs-frontend";
+import { OpenDialogOptions } from "electron";
 
 import {
   channelName,
@@ -23,10 +24,6 @@ export declare type PickAsyncMethods<T> = {
 type IpcMethods = PickAsyncMethods<ViewerIpc>;
 
 export class ITwinViewerApp {
-  // this is a singleton - all methods are static and no instances may be created
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private constructor() {}
-
   private static config: ViewerConfig;
 
   public static translate(key: string | string[], options?: any): string {
@@ -56,4 +53,17 @@ export class ITwinViewerApp {
       }
     },
   });
+
+  public static async getSnapshotFile(): Promise<string | undefined> {
+    const options: OpenDialogOptions = {
+      title: ITwinViewerApp.translate("openSnapshot"),
+      properties: ["openFile"],
+      filters: [{ name: "iModels", extensions: ["ibim", "bim"] }],
+    };
+    const val = await ITwinViewerApp.ipcCall.openFile(options);
+
+    return val.canceled || val.filePaths.length === 0
+      ? undefined
+      : val.filePaths[0];
+  }
 }

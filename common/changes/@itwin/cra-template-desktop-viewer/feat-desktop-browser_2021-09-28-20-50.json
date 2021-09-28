@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-desktop-viewer",
+      "comment": "Upgrade the UX",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/cra-template-desktop-viewer",
+  "email": "6283674+kckst8@users.noreply.github.com"
+}

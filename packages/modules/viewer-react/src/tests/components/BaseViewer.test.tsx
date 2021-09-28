@@ -48,6 +48,7 @@ jest.mock("@microsoft/applicationinsights-react-js", () => ({
 jest.mock("@bentley/imodeljs-frontend", () => {
   return {
     IModelApp: {
+      initialized: true,
       startup: jest.fn(),
       telemetry: {
         addClient: jest.fn(),
@@ -58,6 +59,7 @@ jest.mock("@bentley/imodeljs-frontend", () => {
         }),
         languageList: jest.fn().mockReturnValue(["en-US"]),
         unregisterNamespace: jest.fn(),
+        translateWithNamespace: jest.fn(),
       },
       uiAdmin: {
         updateFeatureFlags: jest.fn(),

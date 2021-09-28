@@ -6,6 +6,6 @@
 export * from "./components/BaseViewer";
 export * from "./components/BaseBlankViewer";
 export * from "./services/BaseInitializer";
-export * from "./utilities/MakeCancellable";
+export * from "./utilities";
 export * from "./types";
 export * from "./hooks";

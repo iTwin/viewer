@@ -116,7 +116,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         }
         return;
       }
-      if (connection) {
+      if (connection && connection.isOpen) {
         let defaultViewState: ViewState;
         if (connection.isBlankConnection()) {
           defaultViewState = createBlankViewState(
@@ -145,8 +145,10 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         }
 
         // Set default view state
-        UiFramework.setDefaultViewState(defaultViewState);
-        setViewState(defaultViewState);
+        if (connection && connection.isOpen) {
+          UiFramework.setDefaultViewState(defaultViewState);
+          setViewState(defaultViewState);
+        }
       }
     }, [
       connection,
@@ -156,8 +158,10 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     ]);
 
     useEffect(() => {
-      void getViewState();
-    }, [getViewState]);
+      if (isMounted.current) {
+        void getViewState();
+      }
+    }, [getViewState, isMounted]);
 
     useEffect(() => {
       const getModelConnection = async () => {
@@ -209,7 +213,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             changeSetId
           );
         }
-        if (imodelConnection) {
+        if (imodelConnection && isMounted.current) {
           // Tell the SyncUiEventDispatcher and StateManager about the iModelConnection
           UiFramework.setIModelConnection(imodelConnection);
 
@@ -224,9 +228,8 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       };
 
       const closeIModelConnection = async () => {
-        const iModelConn = UiFramework.getIModelConnection();
-        if (iModelConn) {
-          await iModelConn.close();
+        if (connection) {
+          await connection.close();
         }
       };
 
