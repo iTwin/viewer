@@ -1,0 +1,68 @@
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
+@import "@itwin/itwinui-css/scss/variables";
+
+.select-project {
+  .title-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    justify-content: space-between;
+    flex-wrap: wrap-reverse;
+
+    .inline-input-with-button {
+      display: flex;
+      flex-direction: row;
+
+      .iui-input-container.iui-inline > .iui-input:last-child {
+        min-width: 300px;
+        padding-right: 61px;
+      }
+
+      .iui-button {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        margin-left: -50px;
+      }
+    }
+
+    .iui-input-container.iui-inline {
+      margin: 0;
+    }
+  }
+
+  > .iui-tabs-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px 0 20px;
+    > .iui-tabs {
+      margin-top: 20px;
+    }
+    > .iui-tab-stripe {
+      margin-top: 20px;
+    }
+  }
+
+  .grid-holding-tab {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding-bottom: 0;
+    padding-right: 0;
+    padding-left: 0;
+    margin-top: -9px;
+    padding-top: 9px;
+    @include themed {
+      border-top: 2px solid t(iui-color-background-5);
+    }
+  }
+
+  ul.grid-holding-tabs {
+    padding-left: calc(var(--responsive-grid-margin, 64px) - 3px);
+  }
+}
