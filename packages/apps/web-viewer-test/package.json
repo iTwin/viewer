@@ -27,7 +27,7 @@
     "@bentley/ui-framework": "^2.14.0",
     "@bentley/ui-ninezone": "^2.14.0",
     "@bentley/webgl-compatibility": "^2.14.0",
-    "@itwin/web-viewer-react": "1.2.0",
+    "@itwin/web-viewer-react": "1.2.1",
     "history": "^4.10.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
