@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Tue, 28 Sep 2021 22:45:05 GMT and should not be manually modified.
+This log was last generated on Wed, 29 Sep 2021 17:19:00 GMT and should not be manually modified.
+
+## 1.3.2
+Wed, 29 Sep 2021 17:19:00 GMT
+
+### Patches
+
+- Fix issues with duplicate menu listeners
 
 ## 1.3.1
 Tue, 28 Sep 2021 22:45:05 GMT
