@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Tue, 28 Sep 2021 21:15:48 GMT and should not be manually modified.
+This log was last generated on Wed, 29 Sep 2021 17:58:34 GMT and should not be manually modified.
+
+## 1.7.0
+Wed, 29 Sep 2021 17:58:34 GMT
+
+### Minor changes
+
+- Add support for a custom loading component
 
 ## 1.6.0
 Tue, 28 Sep 2021 21:15:48 GMT

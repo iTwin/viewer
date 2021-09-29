@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "1.7.0",
+      "tag": "@itwin/viewer-react_v1.7.0",
+      "date": "Wed, 29 Sep 2021 17:58:34 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add support for a custom loading component"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.6.0",
       "tag": "@itwin/viewer-react_v1.6.0",
       "date": "Tue, 28 Sep 2021 21:15:48 GMT",
