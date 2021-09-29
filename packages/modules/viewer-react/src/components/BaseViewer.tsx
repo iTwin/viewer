@@ -18,6 +18,7 @@ export interface ViewerProps extends ItwinViewerCommonParams {
   iModelId?: string;
   changeSetId?: string;
   snapshotPath?: string;
+  loadingComponent?: React.ReactNode;
 }
 
 export const BaseViewer: React.FC<ViewerProps> = ({
@@ -41,6 +42,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   additionalI18nNamespaces,
   additionalRpcInterfaces,
   viewCreatorOptions,
+  loadingComponent,
 }: ViewerProps) => {
   // assume authorized when using a local snapshot TODO poor assumption
   const [authorized, setAuthorized] = useState(!!snapshotPath);
@@ -92,6 +94,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
             uiProviders={uiProviders}
             theme={theme}
             viewCreatorOptions={viewCreatorOptions}
+            loadingComponent={loadingComponent}
           />
         ) : (
           <FillCentered>initializing...</FillCentered>

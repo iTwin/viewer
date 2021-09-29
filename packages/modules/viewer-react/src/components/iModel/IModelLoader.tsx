@@ -51,6 +51,7 @@ export interface ModelLoaderProps extends IModelLoaderParams {
   snapshotPath?: string;
   blankConnection?: BlankConnectionProps;
   blankConnectionViewState?: BlankConnectionViewState;
+  loadingComponent?: React.ReactNode;
 }
 
 const Loader: React.FC<ModelLoaderProps> = React.memo(
@@ -70,6 +71,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     uiProviders,
     theme,
     viewCreatorOptions,
+    loadingComponent,
   }: ModelLoaderProps) => {
     const [error, setError] = useState<Error>();
     const [finalFrontstages, setFinalFrontstages] =
@@ -346,7 +348,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             </Provider>
           ) : (
             <div className="itwin-viewer-loading-container">
-              <IModelBusy />
+              {loadingComponent ?? <IModelBusy />}
             </div>
           )}
         </div>
