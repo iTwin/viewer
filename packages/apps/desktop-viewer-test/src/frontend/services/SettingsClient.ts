@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { createContext } from "react";
 
 import { ViewerFileType, ViewerSettings } from "../../common/ViewerConfig";
@@ -39,8 +40,18 @@ export const addRecentOnline = async (
   return await getUserSettings();
 };
 
+export interface Settings {
+  settings: ViewerSettings;
+  addRecentOnline: (
+    iTwinId: string,
+    iModelId: string,
+    iModelName?: string
+  ) => Promise<ViewerSettings>;
+  addRecentSnapshot: (path: string) => Promise<ViewerSettings>;
+}
+
 export const SettingsContext = createContext({
   settings: {} as ViewerSettings,
   addRecentOnline,
   addRecentSnapshot,
-});
+} as Settings);

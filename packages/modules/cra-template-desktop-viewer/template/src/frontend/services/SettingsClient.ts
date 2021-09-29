@@ -40,8 +40,18 @@ export const addRecentOnline = async (
   return await getUserSettings();
 };
 
+export interface Settings {
+  settings: ViewerSettings;
+  addRecentOnline: (
+    iTwinId: string,
+    iModelId: string,
+    iModelName?: string
+  ) => Promise<ViewerSettings>;
+  addRecentSnapshot: (path: string) => Promise<ViewerSettings>;
+}
+
 export const SettingsContext = createContext({
   settings: {} as ViewerSettings,
   addRecentOnline,
   addRecentSnapshot,
-});
+} as Settings);
