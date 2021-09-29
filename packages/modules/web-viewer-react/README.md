@@ -121,6 +121,7 @@ export const MyViewerComponent = () => {
 - `toolAdmin` - Optional `ToolAdmin` to register
 - `rpcRoutingToken` - routing token for rpcs
 - `imodelClient` - provide a client other than the default iModelHub client to access iModels (i.e. iModelBankClient)
+- `loadingComponent` - provide a custom React component to override the spinner and text that displays when an iModel is loading
 
 ## Typescript API
 
