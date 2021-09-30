@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-web-viewer",
+      "comment": "App.tsx refactored to modularize the viewer. A react context has been added to feed in the iModelId and contextId. The header has been removed and authentication is now automatically handled on app start.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/cra-template-web-viewer",
+  "email": "dustin.lebsock@bentley.com"
+}
