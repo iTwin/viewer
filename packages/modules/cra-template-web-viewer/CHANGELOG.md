@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Wed, 04 Aug 2021 19:32:44 GMT and should not be manually modified.
+This log was last generated on Thu, 30 Sep 2021 13:57:43 GMT and should not be manually modified.
+
+## 1.2.0
+Thu, 30 Sep 2021 13:57:43 GMT
+
+### Minor changes
+
+- App.tsx refactored to modularize the viewer. A react context has been added to feed in the iModelId and contextId. The header has been removed and authentication is now automatically handled on app start.
 
 ## 1.1.0
 Wed, 04 Aug 2021 19:32:44 GMT

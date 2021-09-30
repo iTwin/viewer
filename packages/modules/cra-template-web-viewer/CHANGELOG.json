@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "1.2.0",
+      "tag": "@itwin/cra-template-web-viewer_v1.2.0",
+      "date": "Thu, 30 Sep 2021 13:57:43 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "App.tsx refactored to modularize the viewer. A react context has been added to feed in the iModelId and contextId. The header has been removed and authentication is now automatically handled on app start."
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.0",
       "tag": "@itwin/cra-template-web-viewer_v1.1.0",
       "date": "Wed, 04 Aug 2021 19:32:44 GMT",
