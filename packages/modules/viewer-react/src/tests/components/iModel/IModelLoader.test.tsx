@@ -21,10 +21,9 @@ import {
   FrontstageProps,
   FrontstageProvider,
   IModelViewportControlOptions,
-  StateManager,
   UiFramework,
 } from "@bentley/ui-framework";
-import { render, waitFor } from "@testing-library/react";
+import { configure, getByText, render, waitFor } from "@testing-library/react";
 import React from "react";
 
 import { IModelViewer } from "../../../components/iModel";
@@ -148,6 +147,7 @@ jest.mock("../../../components/iModel/IModelViewer", () => ({
   __esModule: true,
   IModelViewer: jest.fn(() => <div data-testid="viewer"></div>),
 }));
+
 class Frontstage1Provider extends FrontstageProvider {
   public get frontstage(): React.ReactElement<FrontstageProps> {
     return <div></div>;
@@ -345,6 +345,7 @@ describe("IModelLoader", () => {
       isBlankConnection: () => false,
       iModelId: undefined,
       close: jest.fn(),
+      isOpen: true,
     } as any);
     jest.spyOn(UiFramework, "setDefaultViewState");
     const viewportOptions: IModelViewportControlOptions = {
@@ -454,6 +455,22 @@ describe("IModelLoader", () => {
   });
 
   it("renders a custom loading component", async () => {
+    jest.spyOn(IModelServices, "openRemoteImodel").mockImplementation(
+      () =>
+        new Promise((resolve) =>
+          setTimeout(
+            () =>
+              resolve({
+                isBlankConnection: () => false,
+                iModelId: mockIModelId,
+                close: jest.fn(),
+                isOpen: true,
+              } as any),
+            500
+          )
+        )
+    );
+
     const Loader = () => {
       return <div>Things are happening</div>;
     };
