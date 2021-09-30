@@ -51,6 +51,11 @@ jest.mock("@bentley/imodeljs-frontend", () => {
       startup: jest.fn().mockResolvedValue(true),
       shutdown: jest.fn().mockResolvedValue(true),
     },
+    ViewCreator3d: jest.fn().mockImplementation(() => {
+      return {
+        createDefaultView: jest.fn().mockResolvedValue({}),
+      };
+    }),
   };
 });
 jest.mock("@bentley/frontend-application-insights-client");
