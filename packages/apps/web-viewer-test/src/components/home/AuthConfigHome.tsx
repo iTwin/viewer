@@ -1,7 +1,11 @@
 /*---------------------------------------------------------------------------------------------
-* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
-* See LICENSE.md in the project root for license terms and full copyright notice.
-*--------------------------------------------------------------------------------------------*/
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
 import {
@@ -26,7 +30,7 @@ export const AuthConfigHome: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(
     (IModelApp.authorizationClient?.hasSignedIn &&
       IModelApp.authorizationClient?.isAuthorized) ||
-    false
+      false
   );
   const [iModelId, setIModelId] = useState(
     process.env.IMJS_AUTH_CLIENT_IMODEL_ID
@@ -48,7 +52,7 @@ export const AuthConfigHome: React.FC = () => {
     setLoggedIn(
       IModelApp.authorizationClient
         ? IModelApp.authorizationClient.hasSignedIn &&
-        IModelApp.authorizationClient.isAuthorized
+            IModelApp.authorizationClient.isAuthorized
         : false
     );
   }, []);
@@ -82,7 +86,7 @@ export const AuthConfigHome: React.FC = () => {
       setLoggedIn(
         (IModelApp.authorizationClient?.hasSignedIn &&
           IModelApp.authorizationClient?.isAuthorized) ||
-        false
+          false
       );
     });
   };
@@ -120,7 +124,14 @@ export const AuthConfigHome: React.FC = () => {
     });
   }, []);
 
-  const viewCreatorOptions = useMemo(() => ({ viewportConfigurer: viewConfiguration }), [viewConfiguration])
+  const viewCreatorOptions = useMemo(
+    () => ({ viewportConfigurer: viewConfiguration }),
+    [viewConfiguration]
+  );
+
+  const Loader = () => {
+    return <div>Things are happening...</div>;
+  };
 
   return (
     <div className={styles.home}>
@@ -137,6 +148,7 @@ export const AuthConfigHome: React.FC = () => {
         theme={ColorTheme.Dark}
         onIModelAppInit={onIModelAppInit}
         viewCreatorOptions={viewCreatorOptions}
+        loadingComponent={<Loader />}
       />
     </div>
   );

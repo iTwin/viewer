@@ -2,6 +2,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
 import {
@@ -46,6 +50,9 @@ jest.mock("@itwin/viewer-react", () => {
     makeCancellable: jest.requireActual(
       "@itwin/viewer-react/lib/utilities/MakeCancellable"
     ).makeCancellable,
+    useBaseViewerInitializer: jest.fn().mockReturnValue(true),
+    getInitializationOptions: jest.fn().mockReturnValue({}),
+    isEqual: jest.fn().mockReturnValue(true),
   };
 });
 
@@ -61,6 +68,7 @@ jest.mock("@bentley/imodeljs-frontend", () => {
           readFinished: jest.fn().mockResolvedValue(true),
         }),
         languageList: jest.fn().mockReturnValue(["en-US"]),
+        translateWithNamespace: jest.fn(),
       },
       uiAdmin: {
         updateFeatureFlags: jest.fn(),

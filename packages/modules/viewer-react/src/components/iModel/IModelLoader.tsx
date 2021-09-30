@@ -6,6 +6,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
@@ -55,6 +59,7 @@ export interface ModelLoaderProps extends IModelLoaderParams {
   snapshotPath?: string;
   blankConnection?: BlankConnectionProps;
   blankConnectionViewState?: BlankConnectionViewState;
+  loadingComponent?: React.ReactNode;
 }
 
 const Loader: React.FC<ModelLoaderProps> = React.memo(
@@ -74,6 +79,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     uiProviders,
     theme,
     viewCreatorOptions,
+    loadingComponent,
   }: ModelLoaderProps) => {
     const [error, setError] = useState<Error>();
     const [finalFrontstages, setFinalFrontstages] =
@@ -125,7 +131,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           view = viewportOptions.viewState;
         }
       }
-
       if (
         !view ||
         (view.iModel.iModelId !== connection.iModelId && connection.isOpen)
@@ -165,8 +170,10 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     ]);
 
     useEffect(() => {
-      void getViewState();
-    }, [getViewState]);
+      if (isMounted.current) {
+        void getViewState();
+      }
+    }, [getViewState, isMounted]);
 
     useEffect(() => {
       // first check to see if some other frontstage is defined as the default
@@ -221,7 +228,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             changeSetId
           );
         }
-        if (imodelConnection) {
+        if (imodelConnection && isMounted.current) {
           // Tell the SyncUiEventDispatcher and StateManager about the iModelConnection
           UiFramework.setIModelConnection(imodelConnection, true);
 
@@ -350,7 +357,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             </Provider>
           ) : (
             <div className="itwin-viewer-loading-container">
-              <IModelBusy />
+              {loadingComponent ?? <IModelBusy />}
             </div>
           )}
         </div>

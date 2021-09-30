@@ -2,13 +2,24 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import { IpcHandler } from "@bentley/imodeljs-backend";
 import { dialog } from "electron";
 import * as minimist from "minimist";
 
-import { channelName, ViewerConfig, ViewerIpc } from "../common/ViewerConfig";
+import {
+  channelName,
+  ViewerConfig,
+  ViewerFile,
+  ViewerIpc,
+  ViewerSettings,
+} from "../common/ViewerConfig";
 import { getAppEnvVar } from "./AppInfo";
+import UserSettings from "./UserSettings";
 
 class ViewerHandler extends IpcHandler implements ViewerIpc {
   public get channelName() {
@@ -34,6 +45,22 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
    */
   public async openFile(options: any): Promise<Electron.OpenDialogReturnValue> {
     return dialog.showOpenDialog(options);
+  }
+
+  /**
+   * Get user settings
+   * @returns ViewerSettings
+   */
+  public async getSettings(): Promise<ViewerSettings> {
+    return UserSettings.settings;
+  }
+
+  /**
+   * Add a recent file
+   * @param file
+   */
+  public async addRecentFile(file: ViewerFile): Promise<void> {
+    UserSettings.addRecent(file);
   }
 }
 

@@ -2,6 +2,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import {
   ElectronApp,
@@ -60,6 +64,8 @@ export class DesktopInitializer {
           DesktopInitializer._initializing = false;
           DesktopInitializer._cancel = undefined;
         });
+    } else {
+      this._initialized = Promise.resolve();
     }
   }
 }

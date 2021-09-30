@@ -2,6 +2,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import {
   IModelReadRpcInterface,
@@ -17,6 +21,8 @@ export const channelName = iTwinChannel("desktop-viewer");
 export interface ViewerIpc {
   getConfig: () => Promise<ViewerConfig>;
   openFile: (options: OpenDialogOptions) => Promise<OpenDialogReturnValue>;
+  getSettings: () => Promise<ViewerSettings>;
+  addRecentFile: (file: ViewerFile) => Promise<void>;
 }
 
 export interface ViewerConfig {
@@ -33,3 +39,22 @@ export const viewerRpcs = [
   PresentationRpcInterface,
   SnapshotIModelRpcInterface,
 ];
+
+export enum ViewerFileType {
+  ONLINE,
+  SNAPSHOT,
+  LOCAL,
+}
+
+export interface ViewerFile {
+  displayName: string;
+  type: ViewerFileType;
+  path?: string;
+  iTwinId?: string;
+  iModelId?: string;
+}
+
+export interface ViewerSettings {
+  defaultRecent?: boolean;
+  recents?: ViewerFile[];
+}

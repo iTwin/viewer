@@ -2,19 +2,27 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
+import { IpcListener } from "@bentley/imodeljs-common";
 import {
   AsyncFunction,
   IModelApp,
   IpcApp,
   PromiseReturnType,
 } from "@bentley/imodeljs-frontend";
+import { NavigateFn } from "@reach/router";
+import { OpenDialogOptions } from "electron";
 
 import {
   channelName,
   ViewerConfig,
   ViewerIpc,
 } from "../../common/ViewerConfig";
+import { Settings } from "../services/SettingsClient";
 
 export declare type PickAsyncMethods<T> = {
   [P in keyof T]: T[P] extends AsyncFunction ? T[P] : never;
@@ -23,19 +31,13 @@ export declare type PickAsyncMethods<T> = {
 type IpcMethods = PickAsyncMethods<ViewerIpc>;
 
 export class ITwinViewerApp {
-  // this is a singleton - all methods are static and no instances may be created
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private constructor() {}
-
-  private static config: ViewerConfig;
+  private static _config: ViewerConfig;
+  private static _menuListener: IpcListener | undefined;
 
   public static translate(key: string | string[], options?: any): string {
     return IModelApp.i18n.translate(`iTwinViewer:${key}`, options);
   }
 
-  // This proxy object forwards any method calls to the backend over IPC.
-  // This way, you can call all ipc methods like `ITwinViewerApp.ipcCall.openFile(args)`
-  // Any new backend/ipc methods you need should be added to the ViewerIpc interface, and then implemented in the ViewerHandler
   public static ipcCall = new Proxy({} as IpcMethods, {
     get(_target, key: keyof IpcMethods): AsyncFunction {
       const makeIpcCall =
@@ -52,11 +54,55 @@ export class ITwinViewerApp {
           return async () =>
             // if we already cached getConfig results, just resolve to that
             Promise.resolve(
-              (ITwinViewerApp.config ??= await makeIpcCall("getConfig")())
+              (ITwinViewerApp._config ??= await makeIpcCall("getConfig")())
             );
         default:
           return makeIpcCall(key);
       }
     },
   });
+
+  public static async getSnapshotFile(): Promise<string | undefined> {
+    const options: OpenDialogOptions = {
+      title: ITwinViewerApp.translate("openSnapshot"),
+      properties: ["openFile"],
+      filters: [{ name: "iModels", extensions: ["ibim", "bim"] }],
+    };
+    const val = await ITwinViewerApp.ipcCall.openFile(options);
+
+    return val.canceled || val.filePaths.length === 0
+      ? undefined
+      : val.filePaths[0];
+  }
+
+  public static initializeMenuListeners(
+    navigate: NavigateFn,
+    userSettings: Settings
+  ) {
+    if (this._menuListener) {
+      // initialize only once
+      return;
+    }
+    this._menuListener = async (sender, arg) => {
+      switch (arg) {
+        case "snapshot":
+          const snapshotPath = await ITwinViewerApp.getSnapshotFile();
+          if (snapshotPath) {
+            void userSettings.addRecentSnapshot(snapshotPath);
+            await navigate(`/snapshot`, { state: { snapshotPath } });
+          }
+          break;
+        case "remote":
+          await navigate("/itwins");
+          break;
+        case "home":
+          await navigate("/");
+          break;
+        case "preferences":
+          alert("Coming Soon!");
+          break;
+      }
+    };
+    IpcApp.addListener(channelName, this._menuListener);
+  }
 }

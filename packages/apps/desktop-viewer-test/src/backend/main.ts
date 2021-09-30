@@ -2,17 +2,24 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import { Logger, LogLevel } from "@bentley/bentleyjs-core";
 import {
   ElectronHost,
   ElectronHostOptions,
 } from "@bentley/electron-manager/lib/ElectronBackend";
+import { IpcHost } from "@bentley/imodeljs-backend";
 import { Presentation } from "@bentley/presentation-backend";
+import { Menu } from "electron";
+import { MenuItemConstructorOptions } from "electron/main";
 import * as path from "path";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";
-import { viewerRpcs } from "../common/ViewerConfig";
+import { channelName, viewerRpcs } from "../common/ViewerConfig";
 import { appInfo, getAppEnvVar } from "./AppInfo";
 import ViewerHandler from "./ViewerHandler";
 
@@ -41,9 +48,10 @@ const viewerMain = async () => {
     authConfig: {
       clientId,
       scope,
-      redirectUri: redirectUri || undefined,
-      issuerUrl: issuerUrl || undefined,
+      redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+      issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
     },
+    iconName: "itwin-viewer.ico",
   };
 
   await ElectronHost.startup({ electronHost });
@@ -55,15 +63,92 @@ const viewerMain = async () => {
     height: 800,
     show: true,
     title: appInfo.title,
+    autoHideMenuBar: false,
   });
 
   if (process.env.NODE_ENV === "development") {
     ElectronHost.mainWindow?.webContents.toggleDevTools();
   }
+  // add the menu
+  ElectronHost.mainWindow?.on("ready-to-show", createMenu);
+};
+
+const createMenu = () => {
+  const isMac = process.platform === "darwin";
+
+  const template = [
+    {
+      label: "File",
+      submenu: [
+        {
+          label: "Open snapshot file",
+          click: () => {
+            IpcHost.send(channelName, "snapshot");
+          },
+        },
+        {
+          label: "View remote iModel",
+          click: () => {
+            IpcHost.send(channelName, "remote");
+          },
+        },
+        { type: "separator" },
+        isMac
+          ? { label: "Close", role: "close" }
+          : { label: "Close", role: "quit" },
+      ],
+    },
+    {
+      label: "View",
+      submenu: [
+        {
+          label: "Getting started",
+          click: () => {
+            IpcHost.send(channelName, "home");
+          },
+        },
+      ],
+    },
+  ] as MenuItemConstructorOptions[];
+
+  if (isMac) {
+    template.push({
+      label: "Window",
+      submenu: [
+        {
+          label: "Minimize",
+          role: "minimize",
+        },
+        {
+          label: "Zoom",
+          role: "zoom",
+        },
+      ],
+    });
+    template.unshift({
+      label: "iTwin Viewer",
+      role: "appMenu",
+      submenu: [
+        {
+          label: "Preferences",
+          click: () => {
+            IpcHost.send(channelName, "preferences");
+          },
+        },
+      ],
+    } as MenuItemConstructorOptions);
+  }
+
+  const menu = Menu.buildFromTemplate(template as MenuItemConstructorOptions[]);
+
+  Menu.setApplicationMenu(menu);
+  ElectronHost.mainWindow?.setMenuBarVisibility(true);
+  // this is overridden in ElectronHost and set to true so it needs to be...re-overriden??
+  ElectronHost.mainWindow?.setAutoHideMenuBar(false);
 };
 
 try {
-  viewerMain(); // eslint-disable-line @typescript-eslint/no-floating-promises
+  void viewerMain();
 } catch (error) {
   Logger.logError(AppLoggerCategory.Backend, error);
   process.exitCode = 1;

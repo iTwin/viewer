@@ -2,10 +2,14 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 export const appInfo = {
   id: "itwin-viewer",
-  title: "iTwin Desktop Viewer",
+  title: "iTwin Viewer for Desktop",
   envPrefix: "ITWIN_VIEWER_",
 };
 

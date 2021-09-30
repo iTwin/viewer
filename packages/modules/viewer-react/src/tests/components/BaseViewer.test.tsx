@@ -2,6 +2,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import "@testing-library/jest-dom/extend-expect";
 
@@ -49,6 +53,7 @@ jest.mock("@bentley/imodeljs-frontend", () => {
   return {
     ...jest.createMockFromModule<any>("@bentley/imodeljs-frontend"),
     IModelApp: {
+      initialized: true,
       startup: jest.fn(),
       telemetry: {
         addClient: jest.fn(),
@@ -59,6 +64,7 @@ jest.mock("@bentley/imodeljs-frontend", () => {
         }),
         languageList: jest.fn().mockReturnValue(["en-US"]),
         unregisterNamespace: jest.fn(),
+        translateWithNamespace: jest.fn(),
       },
       uiAdmin: {
         updateFeatureFlags: jest.fn(),

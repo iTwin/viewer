@@ -1,7 +1,13 @@
 /*---------------------------------------------------------------------------------------------
-* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
-* See LICENSE.md in the project root for license terms and full copyright notice.
-*--------------------------------------------------------------------------------------------*/
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
+
+import "@testing-library/jest-dom/extend-expect";
 
 import { Config } from "@bentley/bentleyjs-core";
 import { Range3d } from "@bentley/geometry-core";
@@ -27,7 +33,6 @@ import React from "react";
 
 import { IModelViewer } from "../../../components/iModel";
 import IModelLoader from "../../../components/iModel/IModelLoader";
-import { ViewCreator3d } from "../../../services/iModel";
 import * as IModelServices from "../../../services/iModel/IModelService";
 import { createBlankViewState } from "../../../services/iModel/ViewCreatorBlank";
 import {
@@ -106,15 +111,16 @@ jest.mock("@bentley/imodeljs-frontend", () => {
       Critical: 1,
     },
     BlankConnection: {
-      create: jest
-        .fn()
-        .mockReturnValue({ isBlankConnection: () => true } as any),
+      create: jest.fn().mockReturnValue({
+        isBlankConnection: () => true,
+        isOpen: true,
+      } as any),
     },
     ItemField: {},
     CompassMode: {},
     RotationMode: {},
-    AccuDraw: class { },
-    ToolAdmin: class { },
+    AccuDraw: class {},
+    ToolAdmin: class {},
     WebViewerApp: {
       startup: jest.fn().mockResolvedValue(true),
     },
@@ -166,15 +172,17 @@ describe("IModelLoader", () => {
     jest.spyOn(IModelServices, "openRemoteImodel").mockResolvedValue({
       isBlankConnection: () => false,
       iModelId: mockIModelId,
-      close: jest.fn()
+      close: jest.fn(),
+      isOpen: true,
     } as any);
     jest
       .spyOn(UrlDiscoveryClient.prototype, "discoverUrl")
       .mockResolvedValue("https://test.com");
     jest.spyOn(Config.App, "get").mockReturnValue(1);
-    jest
-      .spyOn(SnapshotConnection, "openFile")
-      .mockResolvedValue({ isBlankConnection: () => true } as any);
+    jest.spyOn(SnapshotConnection, "openFile").mockResolvedValue({
+      isBlankConnection: () => true,
+      isOpen: true,
+    } as any);
   });
 
   afterEach(() => {
@@ -340,7 +348,7 @@ describe("IModelLoader", () => {
     jest.spyOn(IModelServices, "openRemoteImodel").mockResolvedValue({
       isBlankConnection: () => false,
       iModelId: undefined,
-      close: jest.fn()
+      close: jest.fn(),
     } as any);
     jest.spyOn(UiFramework, "setDefaultViewState");
     const viewportOptions: IModelViewportControlOptions = {
@@ -447,5 +455,24 @@ describe("IModelLoader", () => {
 
     await waitFor(() => result.getByTestId("viewer"));
     expect(connection.close).toHaveBeenCalled();
+  });
+
+  it("renders a custom loading component", async () => {
+    const Loader = () => {
+      return <div>Things are happening</div>;
+    };
+    const result = render(
+      <IModelLoader
+        contextId={mockContextId}
+        iModelId={mockIModelId}
+        loadingComponent={<Loader />}
+      />
+    );
+
+    const loadingComponent = await waitFor(() =>
+      result.getByText("Things are happening")
+    );
+
+    expect(loadingComponent).toBeInTheDocument();
   });
 });

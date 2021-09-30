@@ -2,6 +2,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import { Vector3d, XAndY, XYAndZ } from "@bentley/geometry-core";
 import { IModelClient } from "@bentley/imodelhub-client";
@@ -83,6 +87,7 @@ export interface ItwinViewerCommonParams
     IModelLoaderParams {}
 
 export interface ItwinViewerInitializerParams {
+  [index: string]: any;
   /** optional Azure Application Insights key for telemetry */
   appInsightsKey?: string;
   /** optional iTwin.js Application Insights key for telemetry within iTwin.js */
@@ -104,6 +109,26 @@ export interface ItwinViewerInitializerParams {
   /** option imodelClient (defaults to iModelHubClient) */
   imodelClient?: IModelClient;
 }
+
+/**
+ * Maintain a list of initilalizer params for use in useBaseViewerInitializer
+ * This list MUST match what is in the ItwinViewerInitializerParams interface and should be updated as new properties are added/removed
+ */
+const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
+  appInsightKey: undefined,
+  imjsAppInsightsKey: undefined,
+  productId: undefined,
+  i18nUrlTemplate: undefined,
+  onIModelAppInit: undefined,
+  additionalI18nNamespaces: undefined,
+  additionalRpcInterfaces: undefined,
+  iModelDataErrorMessage: undefined,
+  toolAdmin: undefined,
+  imodelClient: undefined,
+};
+export const iTwinViewerInitializerParamList = Object.keys(
+  iTwinViewerInitializerParamSample
+) as (keyof ItwinViewerInitializerParams)[];
 
 /**
  * Configure options for the top left corner item

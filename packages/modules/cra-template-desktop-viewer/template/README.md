@@ -12,14 +12,6 @@ ITWIN_VIEWER_CLIENT_ID="native-xxxxxxxx"
 
 - You should generate a [client](https://developer.bentley.com/register/) to get started. The client that you generate should be for a desktop app and use the Visualization apis. You can add the default redirect uri (http://localhost:3000/signin-callback).
 
-- You may also replace the path of the sample snapshot with one of your own local snapshots in the following variable:
-
-```
-ITWIN_VIEWER_SNAPSHOT="./path/to/my/snapshot"
-```
-
-This will load the snapshot in the Viewer by default.
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -38,6 +30,8 @@ Compiles the backend.
 Compiles and bundles the frontend.
 
 ## Next Steps
+
+- There is a sample snapshot file in the "samples" directory that can be used for testing application features
 
 - [iTwin Viewer options](https://www.npmjs.com/package/@itwin/desktop-viewer-react)
 
