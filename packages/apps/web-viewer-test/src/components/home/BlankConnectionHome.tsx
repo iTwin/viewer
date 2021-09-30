@@ -1,8 +1,7 @@
 /*---------------------------------------------------------------------------------------------
-* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
-* See LICENSE.md in the project root for license terms and full copyright notice.
-*--------------------------------------------------------------------------------------------*/
-
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
 import { Range3d } from "@bentley/geometry-core";
@@ -24,7 +23,7 @@ export const BlankConnectionHome: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(
     (IModelApp.authorizationClient?.hasSignedIn &&
       IModelApp.authorizationClient?.isAuthorized) ||
-    false
+      false
   );
 
   const authConfig: BrowserAuthorizationClientConfiguration = {
@@ -40,7 +39,7 @@ export const BlankConnectionHome: React.FC = () => {
     setLoggedIn(
       IModelApp.authorizationClient
         ? IModelApp.authorizationClient.hasSignedIn &&
-        IModelApp.authorizationClient.isAuthorized
+            IModelApp.authorizationClient.isAuthorized
         : false
     );
   }, []);
