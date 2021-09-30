@@ -1,8 +1,4 @@
 /*---------------------------------------------------------------------------------------------
-* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
-* See LICENSE.md in the project root for license terms and full copyright notice.
-*--------------------------------------------------------------------------------------------*/
-/*---------------------------------------------------------------------------------------------
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
@@ -60,13 +56,13 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
     setAuthorized(
       (IModelApp.authorizationClient?.hasSignedIn &&
         IModelApp.authorizationClient?.isAuthorized) ||
-      false
+        false
     );
     IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
       setAuthorized(
         (IModelApp.authorizationClient?.hasSignedIn &&
           IModelApp.authorizationClient?.isAuthorized) ||
-        false
+          false
       );
     });
   }, []);

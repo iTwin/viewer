@@ -2,10 +2,6 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-/*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
 
 import { FrontendApplicationInsightsClient } from "@bentley/frontend-application-insights-client";
 import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
