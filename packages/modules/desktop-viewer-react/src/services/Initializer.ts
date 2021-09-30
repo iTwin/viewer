@@ -60,6 +60,8 @@ export class DesktopInitializer {
           DesktopInitializer._initializing = false;
           DesktopInitializer._cancel = undefined;
         });
+    } else {
+      this._initialized = Promise.resolve();
     }
   }
 }

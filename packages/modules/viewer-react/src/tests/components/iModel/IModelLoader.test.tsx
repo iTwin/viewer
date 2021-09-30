@@ -3,6 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import "@testing-library/jest-dom/extend-expect";
+
 import { Config } from "@bentley/bentleyjs-core";
 import { Range3d } from "@bentley/geometry-core";
 import { Cartographic, ColorDef } from "@bentley/imodeljs-common";
@@ -25,7 +27,6 @@ import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
 import IModelLoader from "../../../components/iModel/IModelLoader";
-import { ViewCreator3d } from "../../../services/iModel";
 import * as IModelServices from "../../../services/iModel/IModelService";
 import { createBlankViewState } from "../../../services/iModel/ViewCreatorBlank";
 import {
@@ -91,9 +92,10 @@ jest.mock("@bentley/imodeljs-frontend", () => {
       Critical: 1,
     },
     BlankConnection: {
-      create: jest
-        .fn()
-        .mockReturnValue({ isBlankConnection: () => true } as any),
+      create: jest.fn().mockReturnValue({
+        isBlankConnection: () => true,
+        isOpen: true,
+      } as any),
     },
     ItemField: {},
     CompassMode: {},
@@ -143,16 +145,18 @@ const mockIModelId = "mockIModelId";
 
 describe("IModelLoader", () => {
   beforeEach(() => {
-    jest
-      .spyOn(IModelServices, "openRemoteImodel")
-      .mockResolvedValue({ isBlankConnection: () => false } as any);
+    jest.spyOn(IModelServices, "openRemoteImodel").mockResolvedValue({
+      isBlankConnection: () => false,
+      isOpen: true,
+    } as any);
     jest
       .spyOn(UrlDiscoveryClient.prototype, "discoverUrl")
       .mockResolvedValue("https://test.com");
     jest.spyOn(Config.App, "get").mockReturnValue(1);
-    jest
-      .spyOn(SnapshotConnection, "openFile")
-      .mockResolvedValue({ isBlankConnection: () => true } as any);
+    jest.spyOn(SnapshotConnection, "openFile").mockResolvedValue({
+      isBlankConnection: () => true,
+      isOpen: true,
+    } as any);
   });
 
   afterEach(() => {
@@ -329,5 +333,24 @@ describe("IModelLoader", () => {
     await waitFor(() => result.getByTestId("loader-wrapper"));
 
     expect(UiFramework.setDefaultViewState).not.toHaveBeenCalled();
+  });
+
+  it("renders a custom loading component", async () => {
+    const Loader = () => {
+      return <div>Things are happening</div>;
+    };
+    const result = render(
+      <IModelLoader
+        contextId={mockContextId}
+        iModelId={mockIModelId}
+        loadingComponent={<Loader />}
+      />
+    );
+
+    const loadingComponent = await waitFor(() =>
+      result.getByText("Things are happening")
+    );
+
+    expect(loadingComponent).toBeInTheDocument();
   });
 });

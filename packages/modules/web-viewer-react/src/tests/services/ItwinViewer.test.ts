@@ -16,6 +16,9 @@ jest.mock("@itwin/viewer-react", () => {
     BaseViewer: jest.fn(({ children }) => null),
     getIModelAppOptions: jest.fn(),
     useIsMounted: jest.fn().mockReturnValue(true),
+    useBaseViewerInitializer: jest.fn().mockReturnValue(true),
+    getInitializationOptions: jest.fn().mockReturnValue({}),
+    isEqual: jest.fn().mockReturnValue(true),
   };
 });
 
@@ -31,6 +34,7 @@ jest.mock("@bentley/imodeljs-frontend", () => {
           readFinished: jest.fn().mockResolvedValue(true),
         }),
         languageList: jest.fn().mockReturnValue(["en-US"]),
+        translateWithNamespace: jest.fn(),
       },
       uiAdmin: {
         updateFeatureFlags: jest.fn(),

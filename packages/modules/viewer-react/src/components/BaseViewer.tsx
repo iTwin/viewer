@@ -8,16 +8,17 @@ import { FillCentered } from "@bentley/ui-core/lib/ui-core";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
-import { useIsMounted } from "../hooks";
-import { BaseInitializer } from "../services/BaseInitializer";
+import { useBaseViewerInitializer } from "../hooks";
 import { ItwinViewerCommonParams } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
 export interface ViewerProps extends ItwinViewerCommonParams {
+  [index: string]: any;
   contextId?: string;
   iModelId?: string;
   changeSetId?: string;
   snapshotPath?: string;
+  loadingComponent?: React.ReactNode;
 }
 
 export const BaseViewer: React.FC<ViewerProps> = ({
@@ -41,12 +42,19 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   additionalI18nNamespaces,
   additionalRpcInterfaces,
   viewCreatorOptions,
+  loadingComponent,
 }: ViewerProps) => {
-  // assume authorized when using a local snapshot
+  // assume authorized when using a local snapshot TODO poor assumption
   const [authorized, setAuthorized] = useState(!!snapshotPath);
-  const [iModelJsInitialized, setIModelJsInitialized] = useState(false);
-  const isMounted = useIsMounted();
-
+  const viewerInitialized = useBaseViewerInitializer({
+    appInsightsKey,
+    productId,
+    imjsAppInsightsKey,
+    i18nUrlTemplate,
+    onIModelAppInit,
+    additionalI18nNamespaces,
+    additionalRpcInterfaces,
+  });
   useEffect(() => {
     // assume authorized when using a local snapshot
     if (snapshotPath) {
@@ -67,48 +75,10 @@ export const BaseViewer: React.FC<ViewerProps> = ({
     }
   }, [snapshotPath]);
 
-  useEffect(() => {
-    if (!iModelJsInitialized) {
-      void BaseInitializer.initialize({
-        appInsightsKey,
-        productId,
-        imjsAppInsightsKey,
-        i18nUrlTemplate,
-        onIModelAppInit,
-        additionalI18nNamespaces,
-        additionalRpcInterfaces,
-      }).then(() => {
-        void BaseInitializer.initialized
-          .then(() => setIModelJsInitialized(true))
-          .catch((error) => {
-            if (error === "Cancelled") {
-              // canceled from previous dismount. Not a true error
-              console.log(error);
-            } else {
-              throw error;
-            }
-          });
-      });
-    }
-    if (!isMounted.current) {
-      return BaseInitializer.cancel;
-    }
-  }, [
-    appInsightsKey,
-    productId,
-    imjsAppInsightsKey,
-    i18nUrlTemplate,
-    additionalI18nNamespaces,
-    additionalRpcInterfaces,
-    isMounted,
-    iModelJsInitialized,
-    onIModelAppInit,
-  ]);
-
   return (
     <ErrorBoundary>
       {authorized ? (
-        iModelJsInitialized ? (
+        viewerInitialized ? (
           <IModelLoader
             contextId={contextId}
             iModelId={iModelId}
@@ -124,6 +94,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
             uiProviders={uiProviders}
             theme={theme}
             viewCreatorOptions={viewCreatorOptions}
+            loadingComponent={loadingComponent}
           />
         ) : (
           <FillCentered>initializing...</FillCentered>

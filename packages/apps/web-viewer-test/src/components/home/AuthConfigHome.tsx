@@ -120,6 +120,10 @@ export const AuthConfigHome: React.FC = () => {
     });
   };
 
+  const Loader = () => {
+    return <div>Things are happening...</div>;
+  };
+
   return (
     <div className={styles.home}>
       <Header
@@ -135,6 +139,7 @@ export const AuthConfigHome: React.FC = () => {
         theme={ColorTheme.Dark}
         onIModelAppInit={onIModelAppInit}
         viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
+        loadingComponent={<Loader />}
       />
     </div>
   );

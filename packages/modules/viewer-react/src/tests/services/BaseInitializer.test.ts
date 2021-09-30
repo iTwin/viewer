@@ -55,6 +55,7 @@ jest.mock("@bentley/imodeljs-frontend", () => {
         }),
         languageList: jest.fn().mockReturnValue(["en-US"]),
         unregisterNamespace: jest.fn(),
+        translateWithNamespace: jest.fn(),
       },
       uiAdmin: {
         updateFeatureFlags: jest.fn(),
@@ -97,9 +98,17 @@ describe("BaseInitializer", () => {
   beforeEach(() => {
     BaseInitializer.cancel();
     jest.clearAllMocks();
+    jest.resetModules();
     if (UiCore.initialized) {
       UiCore.terminate();
     }
+    // reset the getter function to true so that it can be overridden to false if needed
+    Object.defineProperty(IModelApp, "initialized", {
+      get: () => {
+        return true;
+      },
+      configurable: true,
+    });
   });
 
   it("gets default iModelApp options", () => {
@@ -194,5 +203,24 @@ describe("BaseInitializer", () => {
     await BaseInitializer.initialized;
 
     expect(ai.initialize).not.toHaveBeenCalled();
+  });
+
+  it("fails to initialize if iModelApp has not been initialized", async () => {
+    // override the return value of the getter function
+    Object.defineProperty(IModelApp, "initialized", {
+      get: () => {
+        return false;
+      },
+      configurable: true,
+    });
+    try {
+      await BaseInitializer.initialize();
+      console.log("awaited");
+    } catch (error: any) {
+      expect(error).toBeDefined();
+      expect(error.message).toEqual(
+        "IModelApp must be initialized prior to rendering the Base Viewer"
+      );
+    }
   });
 });

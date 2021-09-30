@@ -1,0 +1,44 @@
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+@import "@itwin/itwinui-css/scss/variables";
+
+.home-title {
+  padding: 100px 100px 50px 100px !important;
+  font-weight: 900;
+}
+.home {
+  display: grid;
+  grid-template-rows: 250px auto;
+  grid-template-columns: minmax(300px, 50%) 50%;
+  padding: 0 100px 100px 100px;
+  .home-section {
+    a,
+    span {
+      display: block;
+      margin: 8px 8px 8px 0;
+      color: t(iui-color-foreground-primary);
+      text-decoration: none;
+      cursor: pointer;
+      width: 200px;
+    }
+    svg {
+      height: 15px;
+      width: 15px;
+      float: left;
+      margin: 4px 8px 0 0;
+      fill: t(iui-color-foreground-primary);
+    }
+  }
+  .start {
+    grid-row: 1;
+  }
+  .learn {
+    grid-row: 1/4;
+    a,
+    span {
+      width: 100% !important;
+    }
+  }
+}
