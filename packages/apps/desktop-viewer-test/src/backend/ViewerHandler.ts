@@ -4,7 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IpcHandler } from "@bentley/imodeljs-backend";
-import { dialog } from "electron";
+import {
+  dialog,
+  OpenDialogOptions,
+  OpenDialogReturnValue,
+  SaveDialogOptions,
+  SaveDialogReturnValue,
+} from "electron";
 import * as minimist from "minimist";
 
 import {
@@ -39,8 +45,21 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
    * @param options
    * @returns
    */
-  public async openFile(options: any): Promise<Electron.OpenDialogReturnValue> {
+  public async openFile(
+    options: OpenDialogOptions
+  ): Promise<OpenDialogReturnValue> {
     return dialog.showOpenDialog(options);
+  }
+
+  /**
+   * Save file dialog
+   * @param options
+   * @returns
+   */
+  public async saveFile(
+    options: SaveDialogOptions
+  ): Promise<SaveDialogReturnValue> {
+    return dialog.showSaveDialog(options);
   }
 
   /**

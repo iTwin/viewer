@@ -11,7 +11,7 @@ import {
   PromiseReturnType,
 } from "@bentley/imodeljs-frontend";
 import { NavigateFn } from "@reach/router";
-import { OpenDialogOptions } from "electron";
+import { OpenDialogOptions, SaveDialogOptions } from "electron";
 
 import {
   channelName,
@@ -100,5 +100,16 @@ export class ITwinViewerApp {
       }
     };
     IpcApp.addListener(channelName, this._menuListener);
+  }
+
+  public static async saveBriefcase(): Promise<string | undefined> {
+    const options: SaveDialogOptions = {
+      title: ITwinViewerApp.translate("saveBriefcase"), //TODO
+      // properties: ["saveFile"],
+      filters: [{ name: "iModels", extensions: ["ibim", "bim"] }], //TODO Kevin
+    };
+    const val = await ITwinViewerApp.ipcCall.saveFile(options);
+
+    return val.canceled || !val.filePath ? undefined : val.filePath;
   }
 }

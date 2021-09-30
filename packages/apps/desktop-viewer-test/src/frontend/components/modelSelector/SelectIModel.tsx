@@ -5,6 +5,9 @@
 
 import "./SelectIModel.scss";
 
+import { IModelVersion, SyncMode } from "@bentley/imodeljs-common";
+import { BriefcaseConnection, NativeApp } from "@bentley/imodeljs-frontend";
+import { ProgressInfo } from "@bentley/itwin-client";
 import {
   IModelFull,
   IModelGrid,
@@ -14,8 +17,8 @@ import { Title } from "@itwin/itwinui-react";
 import { useNavigate } from "@reach/router";
 import React, { useContext } from "react";
 
+import { ITwinViewerApp } from "../../app/ITwinViewerApp";
 import { SettingsContext } from "../../services/SettingsClient";
-
 interface SelectIModelProps extends IModelGridProps {
   projectName?: string;
 }
@@ -35,6 +38,36 @@ export const SelectIModel = ({
     await navigate(`${projectId}/${iModel.id}`);
   };
 
+  // TODO Kevin
+  const iModelActions = [
+    {
+      key: "download", //TODO localize,
+      children: "Download",
+      visible: () => true,
+      onClick: async (iModel: IModelFull) => {
+        // TODO get filename
+        const fileName = await ITwinViewerApp.saveBriefcase();
+        const req = await NativeApp.requestDownloadBriefcase(
+          iModel.projectId as string,
+          iModel.id,
+          { syncMode: SyncMode.PullOnly, fileName },
+          IModelVersion.latest(),
+          async (progress: ProgressInfo) => {
+            // eslint-disable-next-line no-console
+            console.log(
+              `Progress (${progress.loaded}/${progress.total}) -> ${progress.percent}%`
+            );
+          }
+        );
+        await req.downloadPromise;
+        const iModelConnection = await BriefcaseConnection.openFile({
+          fileName: req.fileName,
+          readonly: true,
+        });
+      },
+    },
+  ];
+
   return (
     <div className="itv-scrolling-container select-imodel">
       <div className={"itv-content-margins"}>
@@ -45,6 +78,7 @@ export const SelectIModel = ({
           accessToken={accessToken}
           projectId={projectId}
           onThumbnailClick={selectIModel}
+          iModelActions={iModelActions}
         />
       </div>
     </div>
