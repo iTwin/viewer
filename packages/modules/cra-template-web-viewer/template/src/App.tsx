@@ -2,6 +2,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 import "./App.scss";
 
 import {
@@ -12,7 +16,7 @@ import {
 import { FrontendRequestContext } from "@bentley/imodeljs-frontend";
 import React, { useContext, useEffect, useState } from "react";
 
-import { history } from "./history";
+import { browserhistory } from "./browserhistory";
 import ViewerContext from "./ViewerContext";
 import ViewerStartup from "./ViewerStartup";
 
@@ -77,7 +81,7 @@ const App: React.FC = () => {
   });
 
   useEffect(() => {
-    history.push(`?contextId=${currContextId}&iModelId=${currIModelId}`);
+    browserhistory.push(`?contextId=${currContextId}&iModelId=${currIModelId}`);
   }, [currContextId, currIModelId]);
 
   return (
