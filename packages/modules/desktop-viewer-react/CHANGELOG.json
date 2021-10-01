@@ -2,6 +2,18 @@
   "name": "@itwin/desktop-viewer-react",
   "entries": [
     {
+      "version": "1.1.2",
+      "tag": "@itwin/desktop-viewer-react_v1.1.2",
+      "date": "Fri, 01 Oct 2021 13:57:31 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" from `1.7.0` to `1.7.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.1",
       "tag": "@itwin/desktop-viewer-react_v1.1.1",
       "date": "Wed, 29 Sep 2021 17:58:34 GMT",

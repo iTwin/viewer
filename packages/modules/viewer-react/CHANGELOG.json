@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "1.7.1",
+      "tag": "@itwin/viewer-react_v1.7.1",
+      "date": "Fri, 01 Oct 2021 13:57:31 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Changed how viewstate is initialized and handled. Viewstate and the connection established by contextId & iModelId should be the same and the view will only render when both a connection and a viewstate has been established. Patched race condition and patched memory leak"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.7.0",
       "tag": "@itwin/viewer-react_v1.7.0",
       "date": "Wed, 29 Sep 2021 17:58:34 GMT",

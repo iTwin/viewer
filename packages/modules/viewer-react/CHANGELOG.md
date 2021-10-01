@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Wed, 29 Sep 2021 17:58:34 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Oct 2021 13:57:31 GMT and should not be manually modified.
+
+## 1.7.1
+Fri, 01 Oct 2021 13:57:31 GMT
+
+### Patches
+
+- Changed how viewstate is initialized and handled. Viewstate and the connection established by contextId & iModelId should be the same and the view will only render when both a connection and a viewstate has been established. Patched race condition and patched memory leak
 
 ## 1.7.0
 Wed, 29 Sep 2021 17:58:34 GMT
