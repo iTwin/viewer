@@ -23,9 +23,10 @@ import {
   IModelViewportControlOptions,
   UiFramework,
 } from "@bentley/ui-framework";
-import { render, waitFor } from "@testing-library/react";
+import { configure, getByText, render, waitFor } from "@testing-library/react";
 import React from "react";
 
+import { IModelViewer } from "../../../components/iModel";
 import IModelLoader from "../../../components/iModel/IModelLoader";
 import * as IModelServices from "../../../services/iModel/IModelService";
 import { createBlankViewState } from "../../../services/iModel/ViewCreatorBlank";
@@ -36,7 +37,20 @@ import {
 } from "../../../types";
 import { TestUiProvider, TestUiProvider2 } from "../../mocks/MockUiProviders";
 
-jest.mock("@bentley/ui-framework");
+jest.mock("react-redux", () => ({
+  ...jest.requireActual<any>("react-redux"),
+  Provider: jest.fn().mockImplementation(({ children }: any) => children),
+}));
+
+jest.mock("@bentley/ui-framework", () => {
+  return {
+    ...jest.createMockFromModule<any>("@bentley/ui-framework"),
+    StateManager: {
+      ...jest.createMockFromModule<any>("@bentley/ui-framework").StateManager,
+      store: jest.fn(),
+    },
+  };
+});
 jest.mock("@bentley/ui-abstract");
 jest.mock("@microsoft/applicationinsights-react-js", () => ({
   ReactPlugin: jest.fn(),
@@ -128,6 +142,12 @@ jest.mock("../../../services/iModel/ViewCreator3d", () => {
     }),
   };
 });
+
+jest.mock("../../../components/iModel/IModelViewer", () => ({
+  __esModule: true,
+  IModelViewer: jest.fn(() => <div data-testid="viewer"></div>),
+}));
+
 class Frontstage1Provider extends FrontstageProvider {
   public get frontstage(): React.ReactElement<FrontstageProps> {
     return <div></div>;
@@ -147,6 +167,8 @@ describe("IModelLoader", () => {
   beforeEach(() => {
     jest.spyOn(IModelServices, "openRemoteImodel").mockResolvedValue({
       isBlankConnection: () => false,
+      iModelId: mockIModelId,
+      close: jest.fn(),
       isOpen: true,
     } as any);
     jest
@@ -187,7 +209,7 @@ describe("IModelLoader", () => {
       />
     );
 
-    await waitFor(() => result.getByTestId("loader-wrapper"));
+    await waitFor(() => result.getByTestId("viewer"));
 
     expect(UiItemsManager.unregister).toHaveBeenCalledTimes(3);
   });
@@ -262,7 +284,7 @@ describe("IModelLoader", () => {
       />
     );
 
-    await waitFor(() => getByTestId("loader-wrapper"));
+    await waitFor(() => getByTestId("viewer"));
 
     expect(BlankConnection.create).toHaveBeenCalledWith(blankConnection);
     expect(createBlankViewState).toHaveBeenCalledWith(
@@ -296,10 +318,14 @@ describe("IModelLoader", () => {
     expect(UiFramework.setDefaultViewState).toHaveBeenCalled();
   });
 
-  it("uses the provided viewstate", async () => {
+  it("uses the provided viewstate when connection imodelid matches viewstate imodelid", async () => {
     jest.spyOn(UiFramework, "setDefaultViewState");
     const viewportOptions: IModelViewportControlOptions = {
-      viewState: {} as any,
+      viewState: {
+        iModel: {
+          iModelId: mockIModelId,
+        },
+      } as any,
     };
     const result = render(
       <IModelLoader
@@ -314,8 +340,35 @@ describe("IModelLoader", () => {
     expect(UiFramework.setDefaultViewState).not.toHaveBeenCalled();
   });
 
-  it("renders without a viewState if the default frontstage does not require a connection", async () => {
+  it("creates a default viewstate when connection imodelid does not match viewstate imodelid", async () => {
+    jest.spyOn(IModelServices, "openRemoteImodel").mockResolvedValue({
+      isBlankConnection: () => false,
+      iModelId: undefined,
+      close: jest.fn(),
+      isOpen: true,
+    } as any);
     jest.spyOn(UiFramework, "setDefaultViewState");
+    const viewportOptions: IModelViewportControlOptions = {
+      viewState: {
+        iModel: {
+          iModelId: mockIModelId,
+        },
+      } as any,
+    };
+    const result = render(
+      <IModelLoader
+        contextId={mockContextId}
+        iModelId={mockIModelId}
+        viewportOptions={viewportOptions}
+      />
+    );
+
+    await waitFor(() => result.getByTestId("loader-wrapper"));
+
+    expect(UiFramework.setDefaultViewState).toHaveBeenCalled();
+  });
+
+  it("renders without a viewState if the default frontstage does not require a connection", async () => {
     const frontstages: ViewerFrontstage[] = [
       {
         default: true,
@@ -329,13 +382,95 @@ describe("IModelLoader", () => {
         frontstages={frontstages}
       />
     );
+    await waitFor(() => result.getByTestId("viewer"));
+    expect(IModelViewer).toHaveBeenCalledWith(
+      { backstageItems: [], frontstages, uiFrameworkVersion: undefined },
+      {}
+    );
+  });
 
-    await waitFor(() => result.getByTestId("loader-wrapper"));
+  it("closes connection on unmount", async () => {
+    const connection = {
+      isBlankConnection: () => false,
+      iModelId: mockIModelId,
+      close: jest.fn(),
+    };
+    jest
+      .spyOn(IModelServices, "openRemoteImodel")
+      .mockResolvedValue(connection as any);
+    const result = render(
+      <IModelLoader contextId={mockContextId} iModelId={mockIModelId} />
+    );
+    await waitFor(() => result.getByTestId("viewer"));
 
-    expect(UiFramework.setDefaultViewState).not.toHaveBeenCalled();
+    result.unmount();
+
+    expect(connection.close).toHaveBeenCalled();
+  });
+
+  it("closes connection between model ids change", async () => {
+    const connection = {
+      isBlankConnection: () => false,
+      iModelId: mockIModelId,
+      close: jest.fn(),
+    };
+    jest
+      .spyOn(IModelServices, "openRemoteImodel")
+      .mockResolvedValue(connection as any);
+    const result = render(
+      <IModelLoader contextId={mockContextId} iModelId={mockIModelId} />
+    );
+
+    await waitFor(() => result.getByTestId("viewer"));
+
+    result.rerender(
+      <IModelLoader contextId={mockContextId} iModelId={mockIModelId + "1"} />
+    );
+
+    await waitFor(() => result.getByTestId("viewer"));
+    expect(connection.close).toHaveBeenCalled();
+  });
+
+  it("closes connection between context ids change", async () => {
+    const connection = {
+      isBlankConnection: () => false,
+      iModelId: mockIModelId,
+      close: jest.fn(),
+    };
+    jest
+      .spyOn(IModelServices, "openRemoteImodel")
+      .mockResolvedValue(connection as any);
+    const result = render(
+      <IModelLoader contextId={mockContextId} iModelId={mockIModelId} />
+    );
+
+    await waitFor(() => result.getByTestId("viewer"));
+
+    result.rerender(
+      <IModelLoader contextId={mockContextId + "1"} iModelId={mockIModelId} />
+    );
+
+    await waitFor(() => result.getByTestId("viewer"));
+    expect(connection.close).toHaveBeenCalled();
   });
 
   it("renders a custom loading component", async () => {
+    jest.spyOn(IModelServices, "openRemoteImodel").mockImplementation(
+      () =>
+        new Promise((resolve) =>
+          setTimeout(
+            () =>
+              resolve({
+                isBlankConnection: () => false,
+                iModelId: mockIModelId,
+                close: jest.fn(),
+                isOpen: true,
+              } as any),
+            500
+          )
+        )
+    );
+
     const Loader = () => {
       return <div>Things are happening</div>;
     };

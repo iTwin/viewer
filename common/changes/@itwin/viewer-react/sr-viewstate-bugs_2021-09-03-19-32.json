@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Changed how viewstate is initialized and handled. Viewstate and the connection established by contextId & iModelId should be the same and the view will only render when both a connection and a viewstate has been established. Patched race condition and patched memory leak",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react",
+  "email": "stefan.retief@bentley.com"
+}

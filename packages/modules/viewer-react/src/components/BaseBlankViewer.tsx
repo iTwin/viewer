@@ -8,7 +8,7 @@ import { FillCentered } from "@bentley/ui-core/lib/ui-core";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
-import { BaseInitializer } from "../services/BaseInitializer";
+import { useBaseViewerInitializer } from "../hooks";
 import {
   BlankConnectionViewState,
   ItwinViewerCommonParams,
@@ -42,7 +42,15 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
 }: BlankViewerProps) => {
   const [uiConfig, setUiConfig] = useState<ItwinViewerUi>();
   const [authorized, setAuthorized] = useState(false);
-  const [iModelJsInitialized, setIModelJsInitialized] = useState(false);
+  const viewerInitialized = useBaseViewerInitializer({
+    appInsightsKey,
+    productId,
+    imjsAppInsightsKey,
+    i18nUrlTemplate,
+    onIModelAppInit,
+    additionalI18nNamespaces,
+    additionalRpcInterfaces,
+  });
 
   useEffect(() => {
     setAuthorized(
@@ -72,44 +80,10 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
     setUiConfig(blankViewerUiConfig);
   }, [defaultUiConfig]);
 
-  useEffect(() => {
-    if (!iModelJsInitialized) {
-      BaseInitializer.initialize({
-        appInsightsKey,
-        productId,
-        imjsAppInsightsKey,
-        i18nUrlTemplate,
-        onIModelAppInit,
-        additionalI18nNamespaces,
-        additionalRpcInterfaces,
-      })
-        .then(() => {
-          BaseInitializer.initialized
-            .then(() => setIModelJsInitialized(true))
-            .catch((error) => {
-              throw error;
-            });
-        })
-        .catch((error) => {
-          throw error;
-        });
-    }
-    return BaseInitializer.cancel;
-  }, [
-    appInsightsKey,
-    productId,
-    imjsAppInsightsKey,
-    i18nUrlTemplate,
-    onIModelAppInit,
-    additionalI18nNamespaces,
-    additionalRpcInterfaces,
-    iModelJsInitialized,
-  ]);
-
   return (
     <ErrorBoundary>
       {authorized ? (
-        iModelJsInitialized ? (
+        viewerInitialized ? (
           <IModelLoader
             defaultUiConfig={uiConfig}
             appInsightsKey={appInsightsKey}

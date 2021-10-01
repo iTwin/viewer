@@ -5,7 +5,7 @@
 
 import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
 import { Range3d } from "@bentley/geometry-core";
-import { Cartographic, ColorDef } from "@bentley/imodeljs-common";
+import { Cartographic, ColorDef, RenderMode } from "@bentley/imodeljs-common";
 import { IModelApp } from "@bentley/imodeljs-frontend";
 import { BlankViewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
@@ -75,9 +75,9 @@ export const BlankConnectionHome: React.FC = () => {
           extents: new Range3d(-30, -30, -30, 30, 30, 30),
         }}
         viewStateOptions={{
-          displayStyle: {
-            backgroundColor: ColorDef.blue,
-          },
+          displayStyle: { backgroundColor: ColorDef.white },
+          viewFlags: { grid: true, renderMode: RenderMode.SmoothShade },
+          setAllow3dManipulations: false,
         }}
         productId={productId}
         onIModelAppInit={iModelAppInit}
