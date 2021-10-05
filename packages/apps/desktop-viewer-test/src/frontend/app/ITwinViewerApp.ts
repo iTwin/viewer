@@ -30,6 +30,10 @@ export class ITwinViewerApp {
   private static _config: ViewerConfig;
   private static _menuListener: IpcListener | undefined;
 
+  private static _getFileName(iModelName?: string) {
+    return iModelName ? iModelName.replace(/\s/g, "") : "Untitled";
+  }
+
   public static translate(key: string | string[], options?: any): string {
     return IModelApp.i18n.translate(`iTwinViewer:${key}`, options);
   }
@@ -102,11 +106,13 @@ export class ITwinViewerApp {
     IpcApp.addListener(channelName, this._menuListener);
   }
 
-  public static async saveBriefcase(): Promise<string | undefined> {
+  public static async saveBriefcase(
+    iModelName?: string
+  ): Promise<string | undefined> {
     const options: SaveDialogOptions = {
       title: ITwinViewerApp.translate("saveBriefcase"), //TODO
-      // properties: ["saveFile"],
-      filters: [{ name: "iModels", extensions: ["ibim", "bim"] }], //TODO Kevin
+      defaultPath: `${this._getFileName(iModelName)}.bim`,
+      filters: [{ name: "iModels", extensions: ["ibim", "bim"] }],
     };
     const val = await ITwinViewerApp.ipcCall.saveFile(options);
 

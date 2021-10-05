@@ -103,6 +103,9 @@ const createMenu = () => {
             IpcHost.send(channelName, "home");
           },
         },
+        {
+          role: "reload", //TODO Kevin remove
+        },
       ],
     },
   ] as MenuItemConstructorOptions[];

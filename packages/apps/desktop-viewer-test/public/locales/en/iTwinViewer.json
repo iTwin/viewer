@@ -11,5 +11,6 @@
       "viewerComponent": "Learn more about the Viewer component",
       "customizeViewer": "Learn how to customize your iTwin Viewer"
     }
-  }
+  },
+  "saveBriefcase": "Save Briefcase"
 }
