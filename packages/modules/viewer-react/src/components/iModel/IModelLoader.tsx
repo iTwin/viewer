@@ -118,14 +118,15 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       let view: ViewState | undefined;
       if (viewportOptions?.viewState) {
         if (typeof viewportOptions.viewState === "function") {
-          view = viewportOptions.viewState();
+          view = await viewportOptions.viewState(connection);
         } else {
           view = viewportOptions.viewState;
         }
       }
       if (
-        !view ||
-        (view.iModel.iModelId !== connection.iModelId && connection.isOpen)
+        !viewportOptions?.alwaysUseSuppliedViewState &&
+        (!view ||
+          (view.iModel.iModelId !== connection.iModelId && connection.isOpen))
       ) {
         if (connection.isBlankConnection()) {
           view = createBlankViewState(connection, blankConnectionViewState);
@@ -316,7 +317,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       if (viewState) {
         // initialize the DefaultFrontstage that contains the views that we want
         const defaultFrontstageProvider = new DefaultFrontstage(
-          [viewState],
+          viewState,
           defaultUiConfig,
           viewportOptions
         );

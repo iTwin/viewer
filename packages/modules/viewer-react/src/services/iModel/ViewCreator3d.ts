@@ -46,6 +46,10 @@ export class ViewCreator3d extends ViewCreator {
       // configure the view
       IModelApp.viewManager.onViewOpen.addOnce((viewPort: ScreenViewport) => {
         if (viewState.iModel.isOpen) {
+          // Always start with the standard rotation to ISO, it can be adjusted using any of the other methods after.
+          IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
+          viewPort.view.setStandardRotation(StandardViewId.Iso);
+
           // check for a custom configurer and execute
           if (options?.viewportConfigurer) {
             options.viewportConfigurer(viewPort);
@@ -83,9 +87,6 @@ export class ViewCreator3d extends ViewCreator {
 
           tileTreesLoaded().finally(() => {
             IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
-            viewPort.view.setStandardRotation(
-              options?.standardViewId ?? StandardViewId.Iso
-            );
           });
         }
       });

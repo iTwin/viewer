@@ -171,12 +171,6 @@ export class BaseInitializer {
         frameworkState: FrameworkReducer,
       });
 
-      // fit view by default
-      IModelApp.viewManager.onViewOpen.addOnce((vp: ScreenViewport) => {
-        IModelApp.tools.run(FitViewTool.toolId, vp, true);
-        vp.view.setStandardRotation(StandardViewId.Iso);
-      });
-
       // execute the iModelApp initialization callback if provided
       if (viewerOptions?.onIModelAppInit) {
         viewerOptions.onIModelAppInit();
