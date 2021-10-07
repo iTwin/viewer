@@ -87,6 +87,9 @@ export class ViewCreator3d extends ViewCreator {
 
           tileTreesLoaded().finally(() => {
             IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
+            viewPort.view.setStandardRotation(
+              options?.standardViewId ?? StandardViewId.Iso
+            );
           });
         }
       });
