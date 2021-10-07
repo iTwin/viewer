@@ -12,13 +12,7 @@ import {
   RpcInterfaceDefinition,
   SnapshotIModelRpcInterface,
 } from "@bentley/imodeljs-common";
-import {
-  FitViewTool,
-  IModelApp,
-  IModelAppOptions,
-  ScreenViewport,
-  StandardViewId,
-} from "@bentley/imodeljs-frontend";
+import { IModelApp, IModelAppOptions } from "@bentley/imodeljs-frontend";
 import { I18N } from "@bentley/imodeljs-i18n";
 import { UrlDiscoveryClient } from "@bentley/itwin-client";
 import { PresentationRpcInterface } from "@bentley/presentation-common";
