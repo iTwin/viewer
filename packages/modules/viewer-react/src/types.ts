@@ -2,6 +2,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import { Vector3d, XAndY, XYAndZ } from "@bentley/geometry-core";
 import { IModelClient } from "@bentley/imodelhub-client";
@@ -59,7 +63,7 @@ export type ViewerBackstageItem = BackstageItem & {
 };
 
 export interface ViewerViewportControlOptions
-  extends Omit<IModelViewportControlOptions, "viewState" | "iModelConnection"> {
+  extends Omit<IModelViewportControlOptions, "viewState"> {
   /** ViewState or a function to return a ViewState */
   viewState?:
     | ViewState
