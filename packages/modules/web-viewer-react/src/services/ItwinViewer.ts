@@ -5,12 +5,11 @@
 
 import { CheckpointConnection } from "@bentley/imodeljs-frontend";
 import { UiItemsProvider } from "@bentley/ui-abstract";
+import { ColorTheme, FrameworkVersion } from "@bentley/ui-framework";
 import {
-  ColorTheme,
-  FrameworkVersion,
-  IModelViewportControlOptions,
-} from "@bentley/ui-framework";
-import { ItwinViewerUi } from "@itwin/viewer-react";
+  ItwinViewerUi,
+  ViewerViewportControlOptions,
+} from "@itwin/viewer-react";
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -36,7 +35,7 @@ export class ItwinViewer {
   appInsightsKey: string | undefined;
   frontstages: ViewerFrontstage[] | undefined;
   uiFrameworkVersion: FrameworkVersion | undefined;
-  viewportOptions: IModelViewportControlOptions | undefined;
+  viewportOptions: ViewerViewportControlOptions | undefined;
   uiProviders: UiItemsProvider[] | undefined;
   authConfig: WebAuthorizationOptions;
 

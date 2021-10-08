@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/web-viewer-react",
+      "comment": "modified interface for viewport options",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/web-viewer-react",
+  "email": "stefan.retief@bentley.com"
+}

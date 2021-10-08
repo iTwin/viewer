@@ -17,6 +17,7 @@ import {
   StandardViewId,
   ToolAdmin,
   ViewChangeOptions,
+  ViewState,
 } from "@bentley/imodeljs-frontend";
 import { BackstageItem, UiItemsProvider } from "@bentley/ui-abstract";
 import {
@@ -57,6 +58,15 @@ export type ViewerBackstageItem = BackstageItem & {
   labeli18nKey?: string;
 };
 
+export interface ViewerViewportControlOptions
+  extends Omit<IModelViewportControlOptions, "viewState"> {
+  /** ViewState or a function to return a ViewState */
+  viewState?:
+    | ViewState
+    | ((iModelConnection: IModelConnection) => ViewState)
+    | ((iModelConnection: IModelConnection) => Promise<ViewState>);
+}
+
 export interface IModelLoaderParams {
   /** color theme */
   theme?: ColorTheme | string;
@@ -71,7 +81,7 @@ export interface IModelLoaderParams {
   /** optionally override the UI framework version (defaults to 2) */
   uiFrameworkVersion?: FrameworkVersion;
   /** additional viewport options for the default frontstage's viewport control */
-  viewportOptions?: IModelViewportControlOptions;
+  viewportOptions?: ViewerViewportControlOptions;
   /** UI Providers to register https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/ */
   uiProviders?: UiItemsProvider[];
   /** options for creating the default viewState */

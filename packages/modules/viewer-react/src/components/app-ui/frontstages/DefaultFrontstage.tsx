@@ -11,7 +11,6 @@ import {
   Frontstage,
   FrontstageProvider,
   IModelViewportControl,
-  IModelViewportControlOptions,
   StagePanel,
   UiFramework,
   Widget,
@@ -19,7 +18,7 @@ import {
 } from "@bentley/ui-framework";
 import * as React from "react";
 
-import { ItwinViewerUi } from "../../../types";
+import { ItwinViewerUi, ViewerViewportControlOptions } from "../../../types";
 import { AppStatusBarWidget } from "../statusbars/AppStatusBar";
 import { BasicNavigationWidget, BasicToolWidget } from "../widgets";
 
@@ -45,9 +44,9 @@ export class DefaultFrontstage extends FrontstageProvider {
   private _uiConfig?: ItwinViewerUi;
 
   constructor(
-    public viewStates: ViewState[],
+    public viewState: ViewState,
     uiConfig?: ItwinViewerUi,
-    viewportOptions?: IModelViewportControlOptions
+    viewportOptions?: ViewerViewportControlOptions
   ) {
     super();
 
@@ -63,9 +62,9 @@ export class DefaultFrontstage extends FrontstageProvider {
         {
           classId: IModelViewportControl,
           applicationData: {
-            viewState: this.viewStates[0],
-            iModelConnection: UiFramework.getIModelConnection(),
             ...viewportOptions,
+            iModelConnection: UiFramework.getIModelConnection(),
+            viewState: this.viewState,
           },
         },
       ],

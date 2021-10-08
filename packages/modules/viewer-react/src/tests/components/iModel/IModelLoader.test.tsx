@@ -12,6 +12,7 @@ import {
   BlankConnection,
   BlankConnectionProps,
   IModelApp,
+  IModelConnection,
   SnapshotConnection,
 } from "@bentley/imodeljs-frontend";
 import { UrlDiscoveryClient } from "@bentley/itwin-client";
@@ -20,10 +21,9 @@ import {
   ColorTheme,
   FrontstageProps,
   FrontstageProvider,
-  IModelViewportControlOptions,
   UiFramework,
 } from "@bentley/ui-framework";
-import { configure, getByText, render, waitFor } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
 import { IModelViewer } from "../../../components/iModel";
@@ -34,6 +34,7 @@ import {
   BlankConnectionViewState,
   ViewerBackstageItem,
   ViewerFrontstage,
+  ViewerViewportControlOptions,
 } from "../../../types";
 import { TestUiProvider, TestUiProvider2 } from "../../mocks/MockUiProviders";
 
@@ -320,7 +321,7 @@ describe("IModelLoader", () => {
 
   it("uses the provided viewstate when connection imodelid matches viewstate imodelid", async () => {
     jest.spyOn(UiFramework, "setDefaultViewState");
-    const viewportOptions: IModelViewportControlOptions = {
+    const viewportOptions: ViewerViewportControlOptions = {
       viewState: {
         iModel: {
           iModelId: mockIModelId,
@@ -340,6 +341,86 @@ describe("IModelLoader", () => {
     expect(UiFramework.setDefaultViewState).not.toHaveBeenCalled();
   });
 
+  it("calls the provided viewstate method when connection getting viewstate", async () => {
+    jest.spyOn(UiFramework, "setDefaultViewState");
+    const viewportOptions: ViewerViewportControlOptions = {
+      viewState: (connection: IModelConnection) =>
+        ({
+          iModel: connection,
+        } as any),
+    };
+    const result = render(
+      <IModelLoader
+        contextId={mockContextId}
+        iModelId={mockIModelId}
+        viewportOptions={viewportOptions}
+      />
+    );
+
+    await waitFor(() => result.getByTestId("loader-wrapper"));
+
+    expect(UiFramework.setDefaultViewState).not.toHaveBeenCalled();
+  });
+
+  it("awaits the provided viewstate async method when connection getting viewstate", async () => {
+    jest.spyOn(UiFramework, "setDefaultViewState");
+    const viewportOptions: ViewerViewportControlOptions = {
+      viewState: async (connection: IModelConnection) =>
+        new Promise((resolve) =>
+          resolve({
+            iModel: connection,
+          })
+        ) as any,
+    };
+    const result = render(
+      <IModelLoader
+        contextId={mockContextId}
+        iModelId={mockIModelId}
+        viewportOptions={viewportOptions}
+      />
+    );
+
+    await waitFor(() => result.getByTestId("loader-wrapper"));
+
+    expect(UiFramework.setDefaultViewState).not.toHaveBeenCalled();
+  });
+
+  it("waits for indefinitely for viewstate when alwaysUseSuppliedViewState is true", async () => {
+    jest.spyOn(UiFramework, "setDefaultViewState");
+    const viewportOptions: ViewerViewportControlOptions = {
+      alwaysUseSuppliedViewState: true,
+    };
+    const result = render(
+      <IModelLoader
+        contextId={mockContextId}
+        iModelId={mockIModelId}
+        viewportOptions={viewportOptions}
+      />
+    );
+
+    await waitFor(() => result.getByTestId("loader-wrapper"));
+
+    expect(UiFramework.setDefaultViewState).not.toHaveBeenCalled();
+  });
+
+  it("creates a default viewstate alwaysUseSuppliedViewState is false and no viewstate is provided", async () => {
+    jest.spyOn(UiFramework, "setDefaultViewState");
+    const viewportOptions: ViewerViewportControlOptions = {
+      alwaysUseSuppliedViewState: false,
+    };
+    const result = render(
+      <IModelLoader
+        contextId={mockContextId}
+        iModelId={mockIModelId}
+        viewportOptions={viewportOptions}
+      />
+    );
+
+    await waitFor(() => result.getByTestId("loader-wrapper"));
+
+    expect(UiFramework.setDefaultViewState).toHaveBeenCalled();
+  });
+
   it("creates a default viewstate when connection imodelid does not match viewstate imodelid", async () => {
     jest.spyOn(IModelServices, "openRemoteImodel").mockResolvedValue({
       isBlankConnection: () => false,
@@ -348,7 +429,7 @@ describe("IModelLoader", () => {
       isOpen: true,
     } as any);
     jest.spyOn(UiFramework, "setDefaultViewState");
-    const viewportOptions: IModelViewportControlOptions = {
+    const viewportOptions: ViewerViewportControlOptions = {
       viewState: {
         iModel: {
           iModelId: mockIModelId,
