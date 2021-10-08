@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "1.8.0",
+      "tag": "@itwin/viewer-react_v1.8.0",
+      "date": "Fri, 08 Oct 2021 17:32:09 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Modified viewportOptions to accept async methods for viewstate and alwaysUseSuppliedViewState does not create a default viewState when true. De-prioritized viewportOptions.iModelConnection and viewportOptions.viewState in favor of allowing viewer to supply both. View states and iModel connetions provided by the viewportOptions prop will no longer be passed directly to the default frontstage."
+          }
+        ]
+      }
+    },
+    {
       "version": "1.7.1",
       "tag": "@itwin/viewer-react_v1.7.1",
       "date": "Fri, 01 Oct 2021 13:57:31 GMT",

@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Fri, 01 Oct 2021 13:57:31 GMT and should not be manually modified.
+This log was last generated on Fri, 08 Oct 2021 17:32:09 GMT and should not be manually modified.
+
+## 1.8.0
+Fri, 08 Oct 2021 17:32:09 GMT
+
+### Minor changes
+
+- Modified viewportOptions to accept async methods for viewstate and alwaysUseSuppliedViewState does not create a default viewState when true. De-prioritized viewportOptions.iModelConnection and viewportOptions.viewState in favor of allowing viewer to supply both. View states and iModel connetions provided by the viewportOptions prop will no longer be passed directly to the default frontstage.
 
 ## 1.7.1
 Fri, 01 Oct 2021 13:57:31 GMT
