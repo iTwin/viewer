@@ -62,8 +62,8 @@ export class DefaultFrontstage extends FrontstageProvider {
         {
           classId: IModelViewportControl,
           applicationData: {
-            iModelConnection: UiFramework.getIModelConnection(),
             ...viewportOptions,
+            iModelConnection: UiFramework.getIModelConnection(),
             viewState: this.viewState,
           },
         },
