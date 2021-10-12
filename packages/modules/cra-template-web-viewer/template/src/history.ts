@@ -5,4 +5,4 @@
 
 import { createBrowserHistory } from "history";
 
-export const browserhistory = createBrowserHistory();
+export const history = createBrowserHistory();
