@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Thu, 30 Sep 2021 13:57:43 GMT and should not be manually modified.
+This log was last generated on Tue, 12 Oct 2021 16:52:48 GMT and should not be manually modified.
+
+## 1.3.0
+Tue, 12 Oct 2021 16:52:48 GMT
+
+### Minor changes
+
+- Revert Sandbox Export CRA Web Template Refactor (#47)
 
 ## 1.2.0
 Thu, 30 Sep 2021 13:57:43 GMT
