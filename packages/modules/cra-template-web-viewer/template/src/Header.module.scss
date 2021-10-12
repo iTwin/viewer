@@ -2,6 +2,15 @@
 * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
-.viewer-container {
-  height: calc(100vh - 50px);
+.header {
+  background-color: #282c34;
+
+  .buttonContainer {
+    text-align: center;
+
+    button {
+      width: 100px;
+      margin: 10px !important;
+    }
+  }
 }
