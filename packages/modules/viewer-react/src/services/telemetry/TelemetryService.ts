@@ -3,11 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IModelApp } from "@bentley/imodeljs-frontend";
-import { AuthorizedClientRequestContext } from "@bentley/itwin-client";
 import { TelemetryClient, TelemetryEvent } from "@bentley/telemetry-client";
+import { IModelApp } from "@itwin/core-frontend";
 import { ReactPlugin } from "@microsoft/applicationinsights-react-js";
 import { ApplicationInsights } from "@microsoft/applicationinsights-web";
+
+import { BaseInitializer } from "../BaseInitializer";
 
 class TelemetryService implements TelemetryClient {
   private _reactPlugin: ReactPlugin;
@@ -18,21 +19,29 @@ class TelemetryService implements TelemetryClient {
       return;
     }
 
-    const accessToken = await IModelApp.authorizationClient?.getAccessToken();
-    const user = accessToken?.getUserInfo();
-    if (user && IModelApp.authorizationClient?.isAuthorized) {
-      this._appInsights.setAuthenticatedUserContext(
-        user.id,
-        user.organization?.id,
-        true
-      );
-    } else {
+    try {
+      // TODO Kevin
+      // const token = await BaseInitializer.authClient?.
+      // const accessToken =
+      //   (await BaseInitializer.authClient?.getAccessToken()) as AccessToken; //TODO Kevin
+      // const user = accessToken?.getAccessToken().getUserInfo();
+      // if (user && accessToken) {
+      //   this._appInsights.setAuthenticatedUserContext(
+      //     user.id,
+      //     user.organization?.id,
+      //     true
+      //   );
+      // } else {
+      //   this._appInsights.clearAuthenticatedUserContext();
+      // }
+    } catch {
+      // Having no accessToken throws an error, but we just treat it as an unauthorized user
       this._appInsights.clearAuthenticatedUserContext();
     }
   };
 
   private _addAuthListeners = () => {
-    IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
+    BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
       this._configureUserContext().catch((err) => {
         throw err;
       });
@@ -47,7 +56,6 @@ class TelemetryService implements TelemetryClient {
    * iModelJS Telemetry Client implementation
    */
   public postTelemetry = async (
-    requestContext: AuthorizedClientRequestContext,
     telemetryEvent: TelemetryEvent
   ): Promise<void> => {
     const properties = telemetryEvent.getProperties();

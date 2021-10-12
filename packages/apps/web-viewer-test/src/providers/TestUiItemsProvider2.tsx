@@ -7,8 +7,8 @@ import {
   AbstractWidgetProps,
   StagePanelLocation,
   UiItemsProvider,
-} from "@bentley/ui-abstract";
-import { FillCentered } from "@bentley/ui-core";
+} from "@itwin/appui-abstract";
+import { FillCentered } from "@itwin/core-react";
 import React from "react";
 
 export class TestUiProvider2 implements UiItemsProvider {

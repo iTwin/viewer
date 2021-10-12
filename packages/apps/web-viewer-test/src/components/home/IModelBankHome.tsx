@@ -3,15 +3,15 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
 import { IModelBankClient } from "@bentley/imodelhub-client";
+import { ColorTheme } from "@itwin/appui-react";
+import { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
 import {
   FitViewTool,
   IModelApp,
   ScreenViewport,
   StandardViewId,
-} from "@bentley/imodeljs-frontend";
-import { ColorTheme } from "@bentley/ui-framework";
+} from "@itwin/core-frontend";
 import { IModelBackendOptions, Viewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 
@@ -130,7 +130,7 @@ export const IModelBankHome: React.FC = () => {
     };
 
     tileTreesLoaded().finally(() => {
-      IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
+      void IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
       viewPort.view.setStandardRotation(StandardViewId.Iso);
     });
   };

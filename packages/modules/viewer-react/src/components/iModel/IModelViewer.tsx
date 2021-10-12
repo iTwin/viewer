@@ -4,7 +4,7 @@
 *--------------------------------------------------------------------------------------------*/
 
 
-import { BackstageItem } from "@bentley/ui-abstract";
+import { BackstageItem } from "@itwin/appui-abstract";
 import {
   BackstageComposer,
   ConfigurableUiContent,
@@ -12,7 +12,7 @@ import {
   FrontstageManager,
   FrontstageProvider,
   ThemeManager,
-} from "@bentley/ui-framework";
+} from "@itwin/appui-react";
 import React, { useEffect } from "react";
 
 import { ViewerFrontstage } from "../../types";
@@ -40,7 +40,12 @@ export const IModelViewer: React.FC<ModelProps> = ({
     // set the active frontstage to the current default
     if (defaultFrontstage) {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      FrontstageManager.setActiveFrontstageDef(defaultFrontstage.frontstageDef);
+      void FrontstageManager.getFrontstageDef(defaultFrontstage.id).then(
+        (frontstageDef) => {
+          //TODO Kevin test this
+          void FrontstageManager.setActiveFrontstageDef(frontstageDef);
+        }
+      );
     }
     return () => {
       FrontstageManager.clearFrontstageDefs();

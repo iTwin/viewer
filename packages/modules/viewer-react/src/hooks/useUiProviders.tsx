@@ -6,7 +6,7 @@
 import { MeasureToolsUiItemsProvider } from "@bentley/measure-tools-react";
 import { PropertyGridUiItemsProvider } from "@bentley/property-grid-react";
 import { TreeWidgetUiItemsProvider } from "@bentley/tree-widget-react";
-import { UiItemsManager, UiItemsProvider } from "@bentley/ui-abstract";
+import { UiItemsManager, UiItemsProvider } from "@itwin/appui-abstract";
 import { useEffect } from "react";
 
 import { ItwinViewerUi } from "../types";

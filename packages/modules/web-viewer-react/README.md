@@ -116,9 +116,7 @@ export const MyViewerComponent = () => {
 - `viewportOptions` - Additional options for the default frontstage's IModelViewportControl
 - `additionalI18nNamespaces` - Additional i18n namespaces to register
 - `additionalRpcInterfaces` - Additional rpc interfaces to register (assumes that they are supported in your backend)
-- `iModelDataErrorMessage` - Override the default message that sends users to the iTwin Synchronization Portal when there are data-related errors with an iModel. Pass empty string to override with no message.
 - `toolAdmin` - Optional `ToolAdmin` to register
-- `rpcRoutingToken` - routing token for rpcs
 - `imodelClient` - provide a client other than the default iModelHub client to access iModels (i.e. iModelBankClient)
 - `loadingComponent` - provide a custom React component to override the spinner and text that displays when an iModel is loading
 
@@ -164,8 +162,8 @@ For cases where you would prefer to use a [Blank iModelConnection](https://www.i
 ```javascript
 import React, { useState, useEffect } from "react";
 import { BlankConnectionViewState, BlankViewer } from "@itwin/web-viewer-react";
-import { Range3d } from "@bentley/geometry-core";
-import { Cartographic, ColorDef } from "@bentley/imodeljs-common";
+import { Range3d } from "@itwin/core-geometry";
+import { Cartographic, ColorDef } from "@itwin/core-common";
 
 export const MyBlankViewerComponent = () => {
   const blankConnection: BlankConnectionProps = {

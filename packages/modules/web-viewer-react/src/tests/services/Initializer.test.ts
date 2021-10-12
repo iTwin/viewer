@@ -3,13 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
-import { UiCore } from "@bentley/ui-core";
+import { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
+import { UiCore } from "@itwin/core-react";
 
-import { WebInitializer } from "../../services/Initializer";
-
-jest.mock("@bentley/imodeljs-frontend", () => {
-  const noMock = jest.requireActual("@bentley/imodeljs-frontend");
+jest.mock("@itwin/core-frontend", () => {
+  const noMock = jest.requireActual("@itwin/core-frontend");
   return {
     IModelApp: {
       startup: jest.fn().mockResolvedValue(true),

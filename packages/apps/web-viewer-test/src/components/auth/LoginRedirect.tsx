@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { FrontendRequestContext } from "@bentley/imodeljs-frontend";
+import { FrontendRequestContext } from "@itwin/core-frontend";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 

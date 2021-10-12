@@ -8,11 +8,11 @@ import {
   IModelReadRpcInterface,
   IModelTileRpcInterface,
   SnapshotIModelRpcInterface,
-} from "@bentley/imodeljs-common";
-import { IModelApp } from "@bentley/imodeljs-frontend";
-import { I18N } from "@bentley/imodeljs-i18n";
-import { PresentationRpcInterface } from "@bentley/presentation-common";
-import { UiCore } from "@bentley/ui-core";
+} from "@itwin/core-common";
+import { IModelApp } from "@itwin/core-frontend";
+import { I18N } from "@itwin/core-i18n";
+import { UiCore } from "@itwin/core-react";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
 
 import {
   BaseInitializer,
@@ -21,28 +21,28 @@ import {
 import { ai } from "../../services/telemetry/TelemetryService";
 import { MockToolAdmin } from "../mocks/MockToolAdmin";
 
-jest.mock("@bentley/imodeljs-i18n");
-jest.mock("@bentley/ui-framework", () => {
+jest.mock("@itwin/core-i18n");
+jest.mock("@itwin/appui-react", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/ui-framework"),
+    ...jest.createMockFromModule<any>("@itwin/appui-react"),
     UiFramework: {
-      ...jest.createMockFromModule<any>("@bentley/ui-framework").UiFramework,
+      ...jest.createMockFromModule<any>("@itwin/appui-react").UiFramework,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
   };
 });
-jest.mock("@bentley/presentation-frontend", () => {
+jest.mock("@itwin/presentation-frontend", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/presentation-frontend"),
+    ...jest.createMockFromModule<any>("@itwin/presentation-frontend"),
     Presentation: {
-      ...jest.createMockFromModule<any>("@bentley/presentation-frontend")
+      ...jest.createMockFromModule<any>("@itwin/presentation-frontend")
         .Presentation,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
   };
 });
-jest.mock("@bentley/imodeljs-frontend", () => {
-  const noMock = jest.requireActual("@bentley/imodeljs-frontend");
+jest.mock("@itwin/core-frontend", () => {
+  const noMock = jest.requireActual("@itwin/core-frontend");
   return {
     IModelApp: {
       startup: jest.fn().mockResolvedValue(true),

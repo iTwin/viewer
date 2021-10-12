@@ -6,8 +6,8 @@
 import {
   ElectronApp,
   ElectronAppOpts,
-} from "@bentley/electron-manager/lib/ElectronFrontend";
-import { IModelApp } from "@bentley/imodeljs-frontend";
+} from "@itwin/core-electron/lib/ElectronFrontend";
+import { IModelApp } from "@itwin/core-frontend";
 import { getIModelAppOptions, makeCancellable } from "@itwin/viewer-react";
 
 import { DesktopViewerProps } from "../types";

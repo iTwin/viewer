@@ -4,6 +4,22 @@
  *--------------------------------------------------------------------------------------------*/
 
 import {
+  ColorDef,
+  LinePixels,
+  TextString,
+  ViewFlagOverrides,
+} from "@itwin/core-common";
+import {
+  DecorateContext,
+  Decorator,
+  GraphicBranch,
+  GraphicBuilder,
+  GraphicType,
+  IModelApp,
+  Marker,
+  RenderGraphic,
+} from "@itwin/core-frontend";
+import {
   Arc3d,
   CurveChainWithDistanceIndex,
   GeometryQuery,
@@ -15,23 +31,7 @@ import {
   Path,
   Point3d,
   Transform,
-} from "@bentley/geometry-core";
-import {
-  ColorDef,
-  LinePixels,
-  TextString,
-  ViewFlagOverrides,
-} from "@bentley/imodeljs-common";
-import {
-  DecorateContext,
-  Decorator,
-  GraphicBranch,
-  GraphicBuilder,
-  GraphicType,
-  IModelApp,
-  Marker,
-  RenderGraphic,
-} from "@bentley/imodeljs-frontend";
+} from "@itwin/core-geometry";
 
 // Since all geometry is rendered concurrently, when adding geometry, we attach their desired attributes to them in an object
 interface CustomGeometryQuery {

@@ -22,7 +22,15 @@ import {
   FrontstageProps,
   FrontstageProvider,
   UiFramework,
-} from "@bentley/ui-framework";
+} from "@itwin/appui-react";
+import { Cartographic, ColorDef } from "@itwin/core-common";
+import {
+  BlankConnection,
+  BlankConnectionProps,
+  IModelApp,
+  SnapshotConnection,
+} from "@itwin/core-frontend";
+import { Range3d } from "@itwin/core-geometry";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
@@ -62,7 +70,7 @@ jest.mock("@microsoft/applicationinsights-react-js", () => ({
     className?: string // eslint-disable-line no-unused-vars
   ) => component,
 }));
-jest.mock("@bentley/imodeljs-frontend", () => {
+jest.mock("@itwin/core-frontend", () => {
   return {
     IModelApp: {
       startup: jest.fn(),
@@ -150,12 +158,14 @@ jest.mock("../../../components/iModel/IModelViewer", () => ({
 }));
 
 class Frontstage1Provider extends FrontstageProvider {
+  public id = "Frontstage1";
   public get frontstage(): React.ReactElement<FrontstageProps> {
     return <div></div>;
   }
 }
 
 class Frontstage2Provider extends FrontstageProvider {
+  public id = "Frontstage2";
   public get frontstage(): React.ReactElement<FrontstageProps> {
     return <div></div>;
   }
@@ -267,7 +277,11 @@ describe("IModelLoader", () => {
   it("creates a blank connection and a blank ViewState", async () => {
     const blankConnection: BlankConnectionProps = {
       name: "GeometryConnection",
-      location: Cartographic.fromDegrees(0, 0, 0),
+      location: Cartographic.fromDegrees({
+        longitude: 0,
+        latitude: 0,
+        height: 0,
+      }),
       extents: new Range3d(-30, -30, -30, 30, 30, 30),
     };
 

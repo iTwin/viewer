@@ -7,14 +7,14 @@ import {
   CoreTools,
   SelectionContextToolDefinitions,
   ToolbarHelper,
-} from "@bentley/ui-framework";
+} from "@itwin/appui-react";
 import { render } from "@testing-library/react";
 import React from "react";
 
 import { BasicToolWidget } from "../../../../components/app-ui/widgets/BasicToolWidget";
 
-jest.mock("@bentley/ui-abstract");
-jest.mock("@bentley/ui-framework", () => {
+jest.mock("@itwin/appui-abstract");
+jest.mock("@itwin/appui-react", () => {
   return {
     BackstageAppButton: jest.fn(),
     ToolWidgetComposer: () => null,

@@ -16,7 +16,8 @@ import {
   StandardViewId,
   ViewCreator3d as ViewCreator,
   ViewState,
-} from "@bentley/imodeljs-frontend";
+} from "@itwin/core-frontend";
+import { Range3d } from "@itwin/core-geometry";
 
 import { ViewCreator3dOptions } from "../../types";
 

@@ -5,7 +5,7 @@
 
 import "./index.scss";
 
-import { Logger, LogLevel } from "@bentley/bentleyjs-core";
+import { Logger, LogLevel } from "@itwin/core-bentley";
 import React from "react";
 import * as ReactDOM from "react-dom";
 

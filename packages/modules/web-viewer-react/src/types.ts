@@ -4,26 +4,23 @@
  *--------------------------------------------------------------------------------------------*/
 
 import {
+  BrowserAuthorizationClient,
   BrowserAuthorizationClientConfiguration,
-  FrontendAuthorizationClient,
-} from "@bentley/frontend-authorization-client";
-import {
-  BentleyCloudRpcParams,
-  RpcRoutingToken,
-} from "@bentley/imodeljs-common";
+} from "@itwin/browser-authorization";
+import { BentleyCloudRpcParams, RpcRoutingToken } from "@itwin/core-common";
 import {
   BlankViewerProps,
   ItwinViewerCommonParams,
+  UserManager,
   ViewerProps,
 } from "@itwin/viewer-react";
-import { UserManager } from "oidc-client";
 
 /**
  * Authorization options. Must provide one.
  */
 export interface WebAuthorizationOptions {
   /** provide an existing iTwin.js authorization client */
-  oidcClient?: FrontendAuthorizationClient;
+  oidcClient?: BrowserAuthorizationClient;
   /** provide configuration for an oidc client to be managed within the Viewer */
   config?: BrowserAuthorizationClientConfiguration;
   /** reference to a function that returns a pre-configured oidc UserManager */
@@ -64,8 +61,6 @@ export interface IModelBackendOptions {
 }
 
 export interface WebViewerPropsFull extends ViewerProps {
-  /** routing token for rpcs */
-  rpcRoutingToken?: RpcRoutingToken;
   /** authorization configuration */
   authConfig: WebAuthorizationOptions;
   /** options to override the default backend (general-purpose-imodeljs-backend) */

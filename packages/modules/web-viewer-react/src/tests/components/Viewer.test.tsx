@@ -3,15 +3,15 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
+import { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
 import {
   DevToolsRpcInterface,
   IModelReadRpcInterface,
   IModelTileRpcInterface,
   SnapshotIModelRpcInterface,
-} from "@bentley/imodeljs-common";
-import { IModelAppOptions, WebViewerApp } from "@bentley/imodeljs-frontend";
-import { PresentationRpcInterface } from "@bentley/presentation-common";
+} from "@itwin/core-common";
+import { IModelApp, IModelAppOptions } from "@itwin/core-frontend";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { ItwinViewerInitializerParams } from "@itwin/viewer-react";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
@@ -52,7 +52,7 @@ jest.mock("@itwin/viewer-react", () => {
   };
 });
 
-jest.mock("@bentley/imodeljs-frontend", () => {
+jest.mock("@itwin/core-frontend", () => {
   return {
     IModelApp: {
       startup: jest.fn(),
@@ -128,7 +128,8 @@ describe("Viewer", () => {
 
     await waitFor(() => getByTestId("mock-div"));
 
-    expect(WebViewerApp.startup).toHaveBeenCalledWith({
+    expect(IModelApp.startup).toHaveBeenCalledWith({
+      //TODO Kevin
       webViewerApp: {
         rpcParams: {
           info: {

@@ -3,12 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BeEvent } from "@bentley/bentleyjs-core";
-import { FrontendAuthorizationClient } from "@bentley/frontend-authorization-client";
-import { AccessToken } from "@bentley/itwin-client";
+// import { AuthorizationClient } from "@itwin/core-common";   //TODO Kevin?
+import { AuthorizationClient } from "@bentley/itwin-client";
+import { AccessToken, BeEvent } from "@itwin/core-bentley";
 import { UserManager } from "oidc-client";
 
-class AuthorizationClient implements FrontendAuthorizationClient {
+export class ViewerAuthorizationClient implements AuthorizationClient {
   getUserManager: () => UserManager;
   /** Set to true if there's a current authorized user or client (in the case of agent applications).
    * Set to true if signed in and the access token has not expired, and false otherwise.
@@ -32,21 +32,6 @@ class AuthorizationClient implements FrontendAuthorizationClient {
         this.hasSignedIn = true;
       }
     }
-  };
-
-  /** Create an AccessToken instance for imodelJs based on the cached user.
-   * Re-construct so that we can continue to rely on the user manager and the user that is stored in local storage */
-  private _constructAccessToken = async (): Promise<AccessToken> => {
-    if (this.getUserManager()) {
-      const user = await this.getUserManager().getUser();
-      if (user) {
-        // build the AccessToken instance
-        return AccessToken.fromTokenResponseJson(user, user.profile);
-      }
-    }
-    // resolve an empty object so that authentication fails
-    const emptyToken: any = {};
-    return emptyToken;
   };
 
   /** initialize from existing user */
@@ -103,34 +88,36 @@ class AuthorizationClient implements FrontendAuthorizationClient {
   }
 
   /** Returns a promise that resolves to the AccessToken of the currently authorized user*/
-  getAccessToken = async (): Promise<AccessToken> => {
+  getAccessToken = async (): Promise<string> => {
     // if not currently authorized, attempt a silent signin
     if (!this.isAuthorized || this.hasExpired) {
       await this.getUserManager().signinSilent();
     }
-    return await this._constructAccessToken();
+    const user = await this.getUserManager().getUser();
+    if (user) {
+      return `Bearer ${user.access_token}`;
+    }
+    return "";
   };
 
   /**
-   * required by FrontendAuthorizationClient
+   * required by BrowserAuthorizationClient
    */
   signIn = (): Promise<void> => {
     return Promise.resolve();
   };
 
   /**
-   * required by FrontendAuthorizationClient
+   * required by BrowserAuthorizationClient
    */
   signOut = (): Promise<void> => {
     return Promise.resolve();
   };
 
   /**
-   * required by FrontendAuthorizationClient
+   * required by BrowserAuthorizationClient
    */
-  readonly onUserStateChanged = new BeEvent<
+  readonly onAccessTokenChanged = new BeEvent<
     (token: AccessToken | undefined) => void
   >();
 }
-
-export default AuthorizationClient;

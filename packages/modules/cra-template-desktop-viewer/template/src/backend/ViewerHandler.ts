@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IpcHandler } from "@bentley/imodeljs-backend";
+import { IpcHandler } from "@itwin/core-backend";
 import { dialog } from "electron";
 import * as minimist from "minimist";
 

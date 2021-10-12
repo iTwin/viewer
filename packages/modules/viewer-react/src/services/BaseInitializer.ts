@@ -3,7 +3,19 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ClientRequestContext } from "@bentley/bentleyjs-core";
+import { MeasureTools } from "@bentley/measure-tools-react";
+import { PropertyGridManager } from "@bentley/property-grid-react";
+import { TreeWidget } from "@bentley/tree-widget-react";
+import {
+  AppNotificationManager,
+  ConfigurableUiManager,
+  FrameworkReducer,
+  FrameworkUiAdmin,
+  StateManager,
+  UiFramework,
+} from "@itwin/appui-react";
+import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
+import { UiComponents } from "@itwin/components-react";
 import {
   IModelReadRpcInterface,
   IModelTileRpcInterface,
@@ -32,36 +44,36 @@ import {
 
 import { ItwinViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
+import { ViewerAuthorizationClient } from "./auth/ViewerAuthorizationClient";
 import { ai, trackEvent } from "./telemetry/TelemetryService";
 
 // initialize required iTwin.js services
 export class BaseInitializer {
   private static _initialized: Promise<void>;
   private static _initializing = false;
-  private static _iModelDataErrorMessage: string | undefined;
-  private static _synchronizerRootUrl: string | undefined;
   private static _cancel: (() => void) | undefined;
+  private static _authClient:
+    | BrowserAuthorizationClient
+    | ViewerAuthorizationClient
+    | undefined;
 
-  public static async getSynchronizerUrl(
-    contextId: string,
-    iModelId: string
-  ): Promise<string> {
-    if (!this._synchronizerRootUrl) {
-      const urlDiscoveryClient = new UrlDiscoveryClient();
-      this._synchronizerRootUrl = await urlDiscoveryClient.discoverUrl(
-        new ClientRequestContext(),
-        "itwinbridgeportal",
-        undefined
-      );
-    }
-    const portalUrl = `${this._synchronizerRootUrl}/${contextId}/${iModelId}`;
-    return IModelApp.i18n.translateWithNamespace(
-      "iTwinViewer",
-      "iModels.synchronizerLink",
-      {
-        bridgePortal: portalUrl,
-      }
-    );
+  /**
+   * Return the stored auth client    TODO Kevin account for desktop client as well
+   */
+  public static get authClient():
+    | BrowserAuthorizationClient
+    | ViewerAuthorizationClient
+    | undefined {
+    return this._authClient;
+  }
+
+  /**
+   * Set the stored auth client
+   */
+  public static set authClient(
+    client: BrowserAuthorizationClient | ViewerAuthorizationClient | undefined
+  ) {
+    this._authClient = client;
   }
 
   /** expose initialized promise */
@@ -113,26 +125,6 @@ export class BaseInitializer {
       // Do nothing
     }
   };
-
-  /** Message to display when there are iModel data-related errors */
-  public static async getIModelDataErrorMessage(
-    contextId: string,
-    iModelId: string,
-    prefix?: string
-  ): Promise<string> {
-    if (this._iModelDataErrorMessage !== undefined) {
-      return prefix
-        ? `${prefix} ${this._iModelDataErrorMessage}`
-        : this._iModelDataErrorMessage;
-    }
-    const synchronizerPortalUrl = await this.getSynchronizerUrl(
-      contextId,
-      iModelId
-    );
-    return prefix
-      ? `${prefix} ${synchronizerPortalUrl}`
-      : synchronizerPortalUrl;
-  }
 
   /** shutdown IModelApp */
   static async shutdown(): Promise<void> {
@@ -202,7 +194,9 @@ export class BaseInitializer {
 
       // initialize Presentation
       yield Presentation.initialize({
-        activeLocale: IModelApp.i18n.languageList()[0],
+        presentation: {
+          activeLocale: IModelApp.i18n.languageList()[0],
+        },
       });
 
       // allow uiAdmin to open key-in palette when Ctrl+F2 is pressed - good for manually loading UI providers
@@ -217,10 +211,6 @@ export class BaseInitializer {
       yield PropertyGridManager.initialize(IModelApp.i18n);
       yield TreeWidget.initialize(IModelApp.i18n);
       yield MeasureTools.startup();
-
-      // override the default data error message
-      BaseInitializer._iModelDataErrorMessage =
-        viewerOptions?.iModelDataErrorMessage;
 
       console.log("iTwin.js initialized");
     });

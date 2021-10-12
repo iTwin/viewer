@@ -5,7 +5,7 @@
 
 import "./IModelBusy.scss";
 
-import { BodyText, LoadingSpinner } from "@bentley/ui-core";
+import { BodyText, LoadingSpinner } from "@itwin/core-react";
 import React from "react";
 
 export const IModelBusy = (): JSX.Element => {

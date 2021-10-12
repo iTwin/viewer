@@ -7,23 +7,23 @@ import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
 import {
+  BackstageActionItem,
+  BackstageItemUtilities,
+  BackstageStageLauncher,
+} from "@itwin/appui-abstract";
+import {
+  StateManager,
+  SyncUiEventDispatcher,
+  UiFramework,
+} from "@itwin/appui-react";
+import {
   BlankConnection,
   BlankConnectionProps,
   IModelApp,
   IModelConnection,
   SnapshotConnection,
   ViewState,
-} from "@bentley/imodeljs-frontend";
-import {
-  BackstageActionItem,
-  BackstageItemUtilities,
-  BackstageStageLauncher,
-} from "@bentley/ui-abstract";
-import {
-  StateManager,
-  SyncUiEventDispatcher,
-  UiFramework,
-} from "@bentley/ui-framework";
+} from "@itwin/core-frontend";
 import { useErrorManager } from "@itwin/error-handling-react";
 import { withAITracking } from "@microsoft/applicationinsights-react-js";
 import React, { useCallback, useEffect, useState } from "react";

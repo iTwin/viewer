@@ -7,8 +7,8 @@ import {
   BrowserAuthorizationCallbackHandler,
   BrowserAuthorizationClient,
   BrowserAuthorizationClientConfiguration,
-} from "@bentley/frontend-authorization-client";
-import { FrontendRequestContext } from "@bentley/imodeljs-frontend";
+} from "@itwin/browser-authorization";
+import { FrontendRequestContext } from "@itwin/core-frontend";
 
 import { RedirectKey } from "./";
 

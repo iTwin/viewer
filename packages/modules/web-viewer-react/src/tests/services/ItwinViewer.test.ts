@@ -22,7 +22,7 @@ jest.mock("@itwin/viewer-react", () => {
   };
 });
 
-jest.mock("@bentley/imodeljs-frontend", () => {
+jest.mock("@itwin/core-frontend", () => {
   return {
     IModelApp: {
       startup: jest.fn().mockResolvedValue(true),

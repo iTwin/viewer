@@ -8,8 +8,8 @@ import {
   IModelTileRpcInterface,
   iTwinChannel,
   SnapshotIModelRpcInterface,
-} from "@bentley/imodeljs-common";
-import { PresentationRpcInterface } from "@bentley/presentation-common";
+} from "@itwin/core-common";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
 import type { OpenDialogOptions, OpenDialogReturnValue } from "electron";
 
 export const channelName = iTwinChannel("desktop-viewer");

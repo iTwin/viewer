@@ -7,8 +7,7 @@ import {
   BrowserAuthorizationCallbackHandler,
   BrowserAuthorizationClient,
   BrowserAuthorizationClientConfiguration,
-} from "@bentley/frontend-authorization-client";
-import { FrontendRequestContext } from "@bentley/imodeljs-frontend";
+} from "@itwin/browser-authorization";
 
 class MockAuthorizationClient {
   private static _oidcClient: BrowserAuthorizationClient;
@@ -40,11 +39,11 @@ class MockAuthorizationClient {
   }
 
   public static async signIn(): Promise<void> {
-    await this.oidcClient.signIn(new FrontendRequestContext());
+    await this.oidcClient.signIn();
   }
 
   public static async signOut(): Promise<void> {
-    await this.oidcClient.signOut(new FrontendRequestContext());
+    await this.oidcClient.signOut();
   }
 }
 

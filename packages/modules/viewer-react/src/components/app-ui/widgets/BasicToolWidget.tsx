@@ -9,7 +9,7 @@ import {
   CommonToolbarItem,
   ToolbarOrientation,
   ToolbarUsage,
-} from "@bentley/ui-abstract";
+} from "@itwin/appui-abstract";
 import {
   BackstageAppButton,
   CoreTools,
@@ -19,7 +19,7 @@ import {
   ToolWidgetComposer,
   UiFramework,
   UiVisibilityEventArgs,
-} from "@bentley/ui-framework";
+} from "@itwin/appui-react";
 import * as React from "react";
 
 import { ContentManipulationTools } from "../../../types";

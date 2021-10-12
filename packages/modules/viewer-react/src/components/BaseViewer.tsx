@@ -3,8 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IModelApp } from "@bentley/imodeljs-frontend";
-import { FillCentered } from "@bentley/ui-core/lib/ui-core";
+import { IModelApp } from "@itwin/core-frontend";
+import { FillCentered } from "@itwin/core-react";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
@@ -60,14 +60,14 @@ export const BaseViewer: React.FC<ViewerProps> = ({
       setAuthorized(true);
     } else {
       setAuthorized(
-        (IModelApp.authorizationClient?.hasSignedIn &&
-          IModelApp.authorizationClient?.isAuthorized) ||
+        (BaseInitializer.authClient?.hasSignedIn &&
+          BaseInitializer.authClient?.isAuthorized) ||
           false
       );
-      IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
+      BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
         setAuthorized(
-          (IModelApp.authorizationClient?.hasSignedIn &&
-            IModelApp.authorizationClient?.isAuthorized) ||
+          (BaseInitializer.authClient?.hasSignedIn &&
+            BaseInitializer.authClient?.isAuthorized) ||
             false
         );
       });

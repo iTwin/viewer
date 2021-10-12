@@ -15,8 +15,8 @@ import {
   ToolbarOrientation,
   ToolbarUsage,
   UiItemsProvider,
-} from "@bentley/ui-abstract";
-import { SyncUiEventDispatcher } from "@bentley/ui-framework";
+} from "@itwin/appui-abstract";
+import { SyncUiEventDispatcher } from "@itwin/appui-react";
 
 export class TestUiProvider implements UiItemsProvider {
   public readonly id = "TestUiProvider";

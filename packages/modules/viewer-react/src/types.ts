@@ -3,14 +3,20 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Vector3d, XAndY, XYAndZ } from "@bentley/geometry-core";
 import { IModelClient } from "@bentley/imodelhub-client";
+import { BackstageItem, UiItemsProvider } from "@itwin/appui-abstract";
+import {
+  ColorTheme,
+  FrameworkVersion,
+  FrontstageProvider,
+  IModelViewportControlOptions,
+} from "@itwin/appui-react";
 import {
   ColorDef,
   RenderMode,
   RpcInterface,
   RpcInterfaceDefinition,
-} from "@bentley/imodeljs-common";
+} from "@itwin/core-common";
 import {
   IModelConnection,
   ScreenViewport,
@@ -106,8 +112,6 @@ export interface ItwinViewerInitializerParams {
   additionalI18nNamespaces?: string[];
   /** custom rpc interfaces (assumes that they are supported in your backend) */
   additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
-  /** override the default message that sends users to the iTwin Synchronizer when there are data-related errors with an iModel. Pass empty string to override with no message. */
-  iModelDataErrorMessage?: string;
   /** optional ToolAdmin to initialize */
   toolAdmin?: ToolAdmin;
   /** option imodelClient (defaults to iModelHubClient) */

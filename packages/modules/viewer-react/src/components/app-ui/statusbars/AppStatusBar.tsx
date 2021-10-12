@@ -3,7 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { StatusBarSection } from "@bentley/ui-abstract";
+import { StatusBarSection } from "@itwin/appui-abstract";
+import { FooterSeparator } from "@itwin/appui-layout-react";
 import {
   ConfigurableCreateInfo,
   FooterModeField,
@@ -19,8 +20,7 @@ import {
   ToolAssistanceField,
   withMessageCenterFieldProps,
   withStatusFieldProps,
-} from "@bentley/ui-framework";
-import { FooterSeparator } from "@bentley/ui-ninezone";
+} from "@itwin/appui-react";
 import * as React from "react";
 
 /**

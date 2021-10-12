@@ -5,8 +5,8 @@
 
 import "@testing-library/jest-dom/extend-expect";
 
-import { SnapshotConnection } from "@bentley/imodeljs-frontend";
-import { UiCore } from "@bentley/ui-core";
+import { SnapshotConnection } from "@itwin/core-frontend";
+import { UiCore } from "@itwin/core-react";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
@@ -14,20 +14,20 @@ import { BaseViewer } from "../..";
 import * as IModelService from "../../services/iModel/IModelService";
 
 jest.mock("../../services/iModel/IModelService");
-jest.mock("@bentley/ui-framework", () => {
+jest.mock("@itwin/appui-react", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/ui-framework"),
+    ...jest.createMockFromModule<any>("@itwin/appui-react"),
     UiFramework: {
-      ...jest.createMockFromModule<any>("@bentley/ui-framework").UiFramework,
+      ...jest.createMockFromModule<any>("@itwin/appui-react").UiFramework,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
   };
 });
-jest.mock("@bentley/presentation-frontend", () => {
+jest.mock("@itwin/presentation-frontend", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/presentation-frontend"),
+    ...jest.createMockFromModule<any>("@itwin/presentation-frontend"),
     Presentation: {
-      ...jest.createMockFromModule<any>("@bentley/presentation-frontend")
+      ...jest.createMockFromModule<any>("@itwin/presentation-frontend")
         .Presentation,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
@@ -45,7 +45,7 @@ jest.mock("@microsoft/applicationinsights-react-js", () => ({
   ) => component,
 }));
 
-jest.mock("@bentley/imodeljs-frontend", () => {
+jest.mock("@itwin/core-frontend", () => {
   return {
     ...jest.createMockFromModule<any>("@bentley/imodeljs-frontend"),
     IModelApp: {
