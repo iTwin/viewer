@@ -21,8 +21,8 @@ import styles from "./Home.module.scss";
  */
 export const BlankConnectionHome: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(
-    (IModelApp.authorizationClient?.hasSignedIn &&
-      IModelApp.authorizationClient?.isAuthorized) ||
+    (BaseInitializer.authClient?.hasSignedIn &&
+      BaseInitializer.authClient?.isAuthorized) ||
       false
   );
 
@@ -37,18 +37,17 @@ export const BlankConnectionHome: React.FC = () => {
 
   useEffect(() => {
     setLoggedIn(
-      IModelApp.authorizationClient
-        ? IModelApp.authorizationClient.hasSignedIn &&
-            IModelApp.authorizationClient.isAuthorized
-        : false
+      (BaseInitializer.authClient?.hasSignedIn &&
+        BaseInitializer.authClient?.isAuthorized) ||
+        false
     );
   }, []);
 
   const toggleLogin = async () => {
     if (!loggedIn) {
-      await IModelApp.authorizationClient?.signIn();
+      await BaseInitializer.authClient?.signIn();
     } else {
-      await IModelApp.authorizationClient?.signOut();
+      await BaseInitializer.authClient?.signOut();
     }
   };
 
@@ -71,7 +70,11 @@ export const BlankConnectionHome: React.FC = () => {
         authConfig={{ config: authConfig }}
         blankConnection={{
           name: "GeometryConnection",
-          location: Cartographic.fromDegrees(0, 0, 0),
+          location: Cartographic.fromDegrees({
+            longitude: 0,
+            latitude: 0,
+            height: 0,
+          }),
           extents: new Range3d(-30, -30, -30, 30, 30, 30),
         }}
         viewStateOptions={{

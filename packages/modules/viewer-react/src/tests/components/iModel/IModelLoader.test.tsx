@@ -271,7 +271,7 @@ describe("IModelLoader", () => {
     // these calls will be doubled. items will be set first without a viewState and reset with one additional translation for the default frontstage once we have a viewState
     expect(BackstageItemUtilities.createStageLauncher).toHaveBeenCalledTimes(2);
     expect(BackstageItemUtilities.createActionItem).toHaveBeenCalledTimes(2);
-    expect(IModelApp.i18n.translate).toHaveBeenCalledTimes(5);
+    expect(IModelApp.localization.getLocalizedString).toHaveBeenCalledTimes(5);
   });
 
   it("creates a blank connection and a blank ViewState", async () => {

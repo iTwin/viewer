@@ -3,9 +3,10 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { MeasureTools } from "@bentley/measure-tools-react";
-import { PropertyGridManager } from "@bentley/property-grid-react";
-import { TreeWidget } from "@bentley/tree-widget-react";
+// TODO 3.0 re-add
+// import { MeasureTools } from "@bentley/measure-tools-react";
+// import { PropertyGridManager } from "@bentley/property-grid-react";
+// import { TreeWidget } from "@bentley/tree-widget-react";
 import {
   AppNotificationManager,
   ConfigurableUiManager,
@@ -24,23 +25,15 @@ import {
   SnapshotIModelRpcInterface,
 } from "@bentley/imodeljs-common";
 import { IModelApp, IModelAppOptions } from "@bentley/imodeljs-frontend";
-import { I18N } from "@bentley/imodeljs-i18n";
-import { UrlDiscoveryClient } from "@bentley/itwin-client";
-import { MeasureTools } from "@bentley/measure-tools-react";
 import { PresentationRpcInterface } from "@bentley/presentation-common";
 import { Presentation } from "@bentley/presentation-frontend";
-import { PropertyGridManager } from "@bentley/property-grid-react";
-import { TreeWidget } from "@bentley/tree-widget-react";
 import { UiComponents } from "@bentley/ui-components";
 import { UiCore } from "@bentley/ui-core";
-import {
-  AppNotificationManager,
-  ConfigurableUiManager,
-  FrameworkReducer,
-  FrameworkUiAdmin,
-  StateManager,
-  UiFramework,
-} from "@bentley/ui-framework";
+import { IModelApp, IModelAppOptions } from "@itwin/core-frontend";
+import { ITwinLocalization } from "@itwin/core-i18n";
+import { UiCore } from "@itwin/core-react";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
+import { Presentation } from "@itwin/presentation-frontend";
 
 import { ItwinViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
@@ -58,7 +51,7 @@ export class BaseInitializer {
     | undefined;
 
   /**
-   * Return the stored auth client    TODO Kevin account for desktop client as well
+   * Return the stored auth client    TODO 3.0 account for desktop client as well
    */
   public static get authClient():
     | BrowserAuthorizationClient
@@ -107,12 +100,12 @@ export class BaseInitializer {
       if (UiComponents.initialized) {
         UiComponents.terminate();
       }
-    } catch (err) {
-      // Do nothing.
-    }
-    try {
-      if (UiCore.initialized) {
-        UiCore.terminate();
+      try {
+        IModelApp.localization
+          .getLanguageList()
+          .forEach((ns) => IModelApp.localization.unregisterNamespace(ns));
+      } catch (err) {
+        // Do nothing
       }
     } catch (err) {
       // Do nothing
@@ -176,26 +169,26 @@ export class BaseInitializer {
           viewerOptions.additionalI18nNamespaces
         );
       }
-      const i18nPromises = i18nNamespaces.map(
-        async (ns) => IModelApp.i18n.registerNamespace(ns).readFinished
+      const i18nPromises = i18nNamespaces.map(async (ns) =>
+        IModelApp.localization.registerNamespace(ns)
       );
 
       yield Promise.all(i18nPromises);
 
       // initialize UiCore
-      yield UiCore.initialize(IModelApp.i18n);
+      yield UiCore.initialize(IModelApp.localization);
 
       // initialize UiComponents
-      yield UiComponents.initialize(IModelApp.i18n);
+      yield UiComponents.initialize(IModelApp.localization);
 
       // initialize UiFramework
       // Use undefined so that UiFramework uses StateManager
-      yield UiFramework.initialize(undefined, IModelApp.i18n);
+      yield UiFramework.initialize(undefined, IModelApp.localization);
 
       // initialize Presentation
       yield Presentation.initialize({
         presentation: {
-          activeLocale: IModelApp.i18n.languageList()[0],
+          activeLocale: IModelApp.localization.getLanguageList()[0],
         },
       });
 
@@ -208,9 +201,10 @@ export class BaseInitializer {
         trackEvent("iTwinViewer.Viewer.Initialized");
       }
 
-      yield PropertyGridManager.initialize(IModelApp.i18n);
-      yield TreeWidget.initialize(IModelApp.i18n);
-      yield MeasureTools.startup();
+      // TODO 3.0 re-add
+      // yield PropertyGridManager.initialize(IModelApp.i18n);
+      // yield TreeWidget.initialize(IModelApp.i18n);
+      // yield MeasureTools.startup();
 
       console.log("iTwin.js initialized");
     });
@@ -265,12 +259,12 @@ export const getIModelAppOptions = (
     notifications: new AppNotificationManager(),
     uiAdmin: new FrameworkUiAdmin(),
     rpcInterfaces: getSupportedRpcs(options?.additionalRpcInterfaces ?? []),
-    i18n: new I18N("iModelJs", {
+    localization: new ITwinLocalization({
       urlTemplate: options?.i18nUrlTemplate
         ? options.i18nUrlTemplate
         : viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`,
     }),
     toolAdmin: options?.toolAdmin,
-    imodelClient: options?.imodelClient,
+    // imodelClient: options?.imodelClient, //TODO 3.0 support iTwin Stack??
   };
 };

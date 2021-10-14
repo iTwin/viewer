@@ -20,10 +20,10 @@ class TelemetryService implements TelemetryClient {
     }
 
     try {
-      // TODO Kevin
+      // TODO 3.0 how to get user info?
       // const token = await BaseInitializer.authClient?.
       // const accessToken =
-      //   (await BaseInitializer.authClient?.getAccessToken()) as AccessToken; //TODO Kevin
+      //   (await BaseInitializer.authClient?.getAccessToken()) as AccessToken;
       // const user = accessToken?.getAccessToken().getUserInfo();
       // if (user && accessToken) {
       //   this._appInsights.setAuthenticatedUserContext(

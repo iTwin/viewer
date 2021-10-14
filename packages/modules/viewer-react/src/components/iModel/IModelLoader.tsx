@@ -202,7 +202,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
 
         if (!(contextId && iModelId) && !snapshotPath) {
           throw new Error(
-            IModelApp.i18n.translateWithNamespace(
+            IModelApp.localization.getLocalizedStringWithNamespace(
               "iTwinViewer",
               "missingConnectionProps"
             )
@@ -271,7 +271,9 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
                 (backstageItem as BackstageStageLauncher).stageId,
                 backstageItem.groupPriority,
                 backstageItem.itemPriority,
-                IModelApp.i18n.translate(backstageItem.labeli18nKey),
+                IModelApp.localization.getLocalizedString(
+                  backstageItem.labeli18nKey
+                ),
                 backstageItem.subtitle,
                 backstageItem.icon
               );
@@ -281,7 +283,9 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
                 backstageItem.groupPriority,
                 backstageItem.itemPriority,
                 (backstageItem as BackstageActionItem).execute,
-                IModelApp.i18n.translate(backstageItem.labeli18nKey),
+                IModelApp.localization.getLocalizedString(
+                  backstageItem.labeli18nKey
+                ),
                 backstageItem.subtitle,
                 backstageItem.icon
               );
@@ -299,7 +303,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           id: "DefaultFrontstage",
           groupPriority: 100,
           itemPriority: 10,
-          label: IModelApp.i18n.translate(
+          label: IModelApp.localization.getLocalizedString(
             "iTwinViewer:backstage.mainFrontstage"
           ),
         });

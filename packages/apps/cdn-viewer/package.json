@@ -4,8 +4,8 @@
   "private": true,
   "main": "src/index.js",
   "dependencies": {
-    "@itwin/core-bentley": "^3.0.0-dev.72",
-    "@itwin/core-geometry": "^3.0.0-dev.72",
+    "@itwin/core-bentley": "^3.0.0-dev.83",
+    "@itwin/core-geometry": "^3.0.0-dev.83",
     "@bentley/icons-generic": "^1.0.13",
     "@bentley/imodelhub-client": "^2.14.0",
     "@bentley/imodeljs-common": "^2.14.0",

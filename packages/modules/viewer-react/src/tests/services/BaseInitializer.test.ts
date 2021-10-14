@@ -10,7 +10,7 @@ import {
   SnapshotIModelRpcInterface,
 } from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
-import { I18N } from "@itwin/core-i18n";
+import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 
@@ -49,7 +49,7 @@ jest.mock("@itwin/core-frontend", () => {
       telemetry: {
         addClient: jest.fn(),
       },
-      i18n: {
+      localization: {
         registerNamespace: jest.fn().mockReturnValue({
           readFinished: jest.fn().mockResolvedValue(true),
         }),
@@ -123,7 +123,7 @@ describe("BaseInitializer", () => {
         PresentationRpcInterface,
         SnapshotIModelRpcInterface,
       ],
-      i18n: expect.anything(),
+      localization: expect.anything(),
       toolAdmin: undefined,
     });
   });
@@ -170,7 +170,7 @@ describe("BaseInitializer", () => {
       i18nUrlTemplate: i18nUrlTemplate,
     });
 
-    expect(I18N).toHaveBeenCalledWith("iModelJs", {
+    expect(ITwinLocalization.prototype).toHaveBeenCalledWith({
       urlTemplate: i18nUrlTemplate,
     });
   });
@@ -182,8 +182,12 @@ describe("BaseInitializer", () => {
 
     await BaseInitializer.initialized;
 
-    expect(IModelApp.i18n.registerNamespace).toHaveBeenCalledWith("test1");
-    expect(IModelApp.i18n.registerNamespace).toHaveBeenCalledWith("test2");
+    expect(IModelApp.localization.registerNamespace).toHaveBeenCalledWith(
+      "test1"
+    );
+    expect(IModelApp.localization.registerNamespace).toHaveBeenCalledWith(
+      "test2"
+    );
   });
 
   it("instantiates an instance of the Telemetry Service when an app insights key is provided", async () => {

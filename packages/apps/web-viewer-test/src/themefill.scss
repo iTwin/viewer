@@ -3,7 +3,9 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
-@import "~@itwin/core-react/lib/cjs/core-react/style/themecolors.scss";
+// TODO 3.0
+@import "~@itwin/core-react/lib/cjs/core-react/style/themecolors";
+// @import "~@itwin/core-react/lib/core-react/style/themecolors.scss";
 
 $buic-foreground-body-rgb: var(--buic-foreground-body-rgb, 000, 000, 000);
 $buic-foreground-primary-rgb: var(--buic-foreground-primary-rgb, 000, 139, 225);

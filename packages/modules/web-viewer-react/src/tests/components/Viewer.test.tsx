@@ -37,7 +37,7 @@ jest.mock("@itwin/viewer-react", () => {
           SnapshotIModelRpcInterface,
           ...(options?.additionalRpcInterfaces ?? []),
         ],
-        i18n: expect.anything(),
+        localization: expect.anything(),
         toolAdmin: options?.toolAdmin,
         authorizationClient: expect.anything(),
       };
@@ -129,33 +129,20 @@ describe("Viewer", () => {
     await waitFor(() => getByTestId("mock-div"));
 
     expect(IModelApp.startup).toHaveBeenCalledWith({
-      //TODO Kevin
-      webViewerApp: {
-        rpcParams: {
-          info: {
-            title: "general-purpose-imodeljs-backend",
-            version: "v2.0",
-          },
-          uriPrefix: "https://api.bentley.com/imodeljs",
-        },
-        authConfig: authConfig,
-        routing: undefined,
-      },
-      iModelApp: {
-        applicationId: "3098",
-        authorizationClient: expect.anything(),
-        i18n: expect.anything(),
-        notifications: expect.anything(),
-        rpcInterfaces: [
-          IModelReadRpcInterface,
-          IModelTileRpcInterface,
-          PresentationRpcInterface,
-          SnapshotIModelRpcInterface,
-          DevToolsRpcInterface,
-        ],
-        uiAdmin: expect.anything(),
-        toolAdmin: undefined,
-      },
+      applicationId: "3098",
+      authorizationClient: expect.anything(),
+      i18n: expect.anything(),
+      notifications: expect.anything(),
+      rpcInterfaces: [
+        IModelReadRpcInterface,
+        IModelTileRpcInterface,
+        PresentationRpcInterface,
+        SnapshotIModelRpcInterface,
+        DevToolsRpcInterface,
+      ],
+      uiAdmin: expect.anything(),
+      toolAdmin: undefined,
+      localization: expect.anything(),
     });
   });
 

@@ -22,7 +22,7 @@ import { ItwinViewerUi, ViewerViewportControlOptions } from "../../../types";
 import { AppStatusBarWidget } from "../statusbars/AppStatusBar";
 import { BasicNavigationWidget, BasicToolWidget } from "../widgets";
 
-// TODO Kevin
+// TODO 3.0 refactor?
 // const getContentGroup = (viewState: ViewState, viewportOptions: IModelViewportControlOptions): ContentGroupProps =>{
 //  return {id: "main", contents: [
 

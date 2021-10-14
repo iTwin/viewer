@@ -12,7 +12,11 @@ import {
   ScreenViewport,
   StandardViewId,
 } from "@itwin/core-frontend";
-import { IModelBackendOptions, Viewer } from "@itwin/web-viewer-react";
+import {
+  BaseInitializer,
+  IModelBackendOptions,
+  Viewer,
+} from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 
 import { history } from "../routing";
@@ -25,8 +29,8 @@ import styles from "./Home.module.scss";
  */
 export const IModelBankHome: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(
-    (IModelApp.authorizationClient?.hasSignedIn &&
-      IModelApp.authorizationClient?.isAuthorized) ||
+    (BaseInitializer.authClient?.hasSignedIn &&
+      BaseInitializer.authClient?.isAuthorized) ||
       false
   );
   const [iModelId, setIModelId] = useState(
@@ -61,10 +65,9 @@ export const IModelBankHome: React.FC = () => {
 
   useEffect(() => {
     setLoggedIn(
-      IModelApp.authorizationClient
-        ? IModelApp.authorizationClient.hasSignedIn &&
-            IModelApp.authorizationClient.isAuthorized
-        : false
+      (BaseInitializer.authClient?.hasSignedIn &&
+        BaseInitializer.authClient?.isAuthorized) ||
+        false
     );
   }, []);
 
@@ -85,18 +88,18 @@ export const IModelBankHome: React.FC = () => {
 
   const toggleLogin = async () => {
     if (!loggedIn) {
-      await IModelApp.authorizationClient?.signIn();
+      await BaseInitializer.authClient?.signIn();
     } else {
-      await IModelApp.authorizationClient?.signOut();
+      await BaseInitializer.authClient?.signOut();
     }
   };
 
   const onIModelAppInit = () => {
-    setLoggedIn(IModelApp.authorizationClient?.isAuthorized ?? false);
-    IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
+    setLoggedIn(BaseInitializer.authClient?.isAuthorized ?? false);
+    BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
       setLoggedIn(
-        (IModelApp.authorizationClient?.hasSignedIn &&
-          IModelApp.authorizationClient?.isAuthorized) ||
+        (BaseInitializer.authClient?.hasSignedIn &&
+          BaseInitializer.authClient?.isAuthorized) ||
           false
       );
     });

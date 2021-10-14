@@ -30,13 +30,13 @@
     "electron 8.0.0"
   ],
   "dependencies": {
-    "@bentley/backend-itwin-client": "^3.0.0-dev.72",
-    "@itwin/core-bentley": "^3.0.0-dev.72",
-    "@bentley/context-registry-client": "^3.0.0-dev.72",
-    "@itwin/ecschema-metadata": "^3.0.0-dev.72",
-    "@itwin/core-electron": "^3.0.0-dev.72",
-    "@itwin/express-server": "^3.0.0-dev.72",
-    "@itwin/core-geometry": "^3.0.0-dev.72",
+    "@bentley/backend-itwin-client": "^3.0.0-dev.83",
+    "@itwin/core-bentley": "^3.0.0-dev.83",
+    "@bentley/context-registry-client": "^3.0.0-dev.77",
+    "@itwin/ecschema-metadata": "^3.0.0-dev.83",
+    "@itwin/core-electron": "^3.0.0-dev.83",
+    "@itwin/express-server": "^3.0.0-dev.83",
+    "@itwin/core-geometry": "^3.0.0-dev.83",
     "@bentley/icons-generic-webfont": "^1.0.15",
     "@bentley/imodelhub-client": "^2.14.0",
     "@bentley/imodeljs-backend": "^2.14.0",
@@ -73,7 +73,7 @@
     "react-dom": "16.13.1"
   },
   "devDependencies": {
-    "@itwin/build-tools": "^3.0.0-dev.72",
+    "@itwin/build-tools": "^3.0.0-dev.83",
     "@bentley/react-scripts": "^4.0.3",
     "@types/electron-devtools-installer": "^2.2.0",
     "@types/minimist": "^1.2.0",

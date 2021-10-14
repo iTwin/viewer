@@ -8,7 +8,6 @@ import {
   BrowserAuthorizationClient,
   BrowserAuthorizationClientConfiguration,
 } from "@itwin/browser-authorization";
-import { FrontendRequestContext } from "@itwin/core-frontend";
 
 import { RedirectKey } from "./";
 
@@ -51,13 +50,13 @@ export class AuthorizationClient {
     if (redirectPath) {
       sessionStorage.setItem(RedirectKey, redirectPath);
     }
-    await this.oidcClient.signIn(new FrontendRequestContext());
+    await this.oidcClient.signIn();
   }
 
   public static async signOut(redirectPath?: string): Promise<void> {
     if (redirectPath) {
       sessionStorage.setItem(RedirectKey, redirectPath);
     }
-    await this.oidcClient.signOut(new FrontendRequestContext());
+    await this.oidcClient.signOut();
   }
 }

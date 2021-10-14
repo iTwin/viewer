@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ColorTheme } from "@itwin/appui-react";
-import { IModelApp } from "@itwin/core-frontend";
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
@@ -19,8 +18,8 @@ import styles from "./Home.module.scss";
  */
 export const AuthClientHome: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(
-    (IModelApp.authorizationClient?.hasSignedIn &&
-      IModelApp.authorizationClient?.isAuthorized) ||
+    (AuthorizationClient.oidcClient.hasSignedIn &&
+      AuthorizationClient.oidcClient.isAuthorized) ||
       false
   );
 
@@ -34,10 +33,9 @@ export const AuthClientHome: React.FC = () => {
         .then(() => {
           setOidcInitialized(true);
           setLoggedIn(
-            IModelApp.authorizationClient
-              ? IModelApp.authorizationClient.hasSignedIn &&
-                  IModelApp.authorizationClient.isAuthorized
-              : false
+            (AuthorizationClient.oidcClient.hasSignedIn &&
+              AuthorizationClient.oidcClient.isAuthorized) ||
+              false
           );
         })
         .catch((error) => {
@@ -46,10 +44,9 @@ export const AuthClientHome: React.FC = () => {
     } else {
       setOidcInitialized(true);
       setLoggedIn(
-        IModelApp.authorizationClient
-          ? IModelApp.authorizationClient.hasSignedIn &&
-              IModelApp.authorizationClient.isAuthorized
-          : false
+        (AuthorizationClient.oidcClient.hasSignedIn &&
+          AuthorizationClient.oidcClient.isAuthorized) ||
+          false
       );
     }
   }, []);

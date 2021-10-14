@@ -260,14 +260,15 @@ export class GeometryDecorator implements Decorator {
 
   // Generates new graphics if needed, and adds them to the scene
   public decorate(context: DecorateContext): void {
-    const overrides = new ViewFlagOverrides();
-    overrides.setShowVisibleEdges(true);
-    overrides.setApplyLighting(true);
+    const overrides: ViewFlagOverrides = {
+      lighting: true,
+      visibleEdges: true,
+    };
     const branch = new GraphicBranch(false);
 
     branch.setViewFlagOverrides(overrides);
 
-    context.viewFlags.visibleEdges = true;
+    // context.viewFlags.visibleEdges = true; TODO 3.0
     if (!this.graphics) {
       this.graphics = this.createGraphics(context);
     }

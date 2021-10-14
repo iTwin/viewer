@@ -3,9 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-// import { AuthorizationClient } from "@itwin/core-common";   //TODO Kevin?
-import { AuthorizationClient } from "@bentley/itwin-client";
 import { AccessToken, BeEvent } from "@itwin/core-bentley";
+import { AuthorizationClient } from "@itwin/core-common";
 import { UserManager } from "oidc-client";
 
 export class ViewerAuthorizationClient implements AuthorizationClient {

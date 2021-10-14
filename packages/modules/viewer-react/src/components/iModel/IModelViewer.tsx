@@ -42,7 +42,7 @@ export const IModelViewer: React.FC<ModelProps> = ({
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       void FrontstageManager.getFrontstageDef(defaultFrontstage.id).then(
         (frontstageDef) => {
-          //TODO Kevin test this
+          //TODO 3.0 test this
           void FrontstageManager.setActiveFrontstageDef(frontstageDef);
         }
       );

@@ -4,12 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { VersionQuery } from "@bentley/imodelhub-client";
+import { IModelHubClient } from "@bentley/imodelhub-client";
 import { IModelVersion } from "@itwin/core-common";
-import {
-  CheckpointConnection,
-  IModelApp,
-  IModelHubFrontend,
-} from "@itwin/core-frontend";
+import { CheckpointConnection, IModelApp } from "@itwin/core-frontend";
 
 /** determine the proper version of the iModel to open
  * 1. If named versions exist, get the named version that contains the latest changeset
@@ -25,7 +22,8 @@ const getVersion = async (
   const token = await IModelApp.authorizationClient?.getAccessToken();
   if (token) {
     try {
-      const namedVersions = await IModelHubFrontend.iModelClient.versions.get(
+      const hubClient = new IModelHubClient(); // TODO 3.0 - this needs to be configurable to support iTwin Stack
+      const namedVersions = await hubClient.versions.get(
         token,
         iModelId,
         new VersionQuery().top(1)

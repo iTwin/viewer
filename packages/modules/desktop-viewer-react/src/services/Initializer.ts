@@ -6,7 +6,7 @@
 import {
   ElectronApp,
   ElectronAppOpts,
-} from "@itwin/core-electron/lib/ElectronFrontend";
+} from "@itwin/core-electron/lib/cjs/ElectronFrontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { getIModelAppOptions, makeCancellable } from "@itwin/viewer-react";
 
