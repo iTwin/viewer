@@ -10,10 +10,12 @@
   justify-content: center;
   background-color: $buic-background-1;
   color: $buic-foreground-body;
+  height: 100%;
 }
 
 .content {
-  display: grid;
+  margin-top: 20px;
+  display: block;
   justify-items: center;
   max-width: 500px;
 }
@@ -27,4 +29,7 @@
 .message {
   padding-top: 40px;
   text-align: center;
+  pre {
+    white-space: normal;
+  }
 }

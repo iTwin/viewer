@@ -36,7 +36,7 @@ const getHostedConnectionInfo = async (
       break;
   }
 
-  const orchestratorUrl = `"https://${prefix}api.bentley.com/imodeljs"`;
+  const orchestratorUrl = `https://${prefix}api.bentley.com/imodeljs`;
 
   if (backendOptions?.hostedBackend) {
     if (!backendOptions.hostedBackend.title) {

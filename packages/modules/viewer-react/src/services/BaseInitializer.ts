@@ -265,6 +265,7 @@ export const getIModelAppOptions = (
         : viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`,
     }),
     toolAdmin: options?.toolAdmin,
+    hubAccess: new IModelHubFrontend(), // TODO 3.0
     // imodelClient: options?.imodelClient, //TODO 3.0 support iTwin Stack??
   };
 };
