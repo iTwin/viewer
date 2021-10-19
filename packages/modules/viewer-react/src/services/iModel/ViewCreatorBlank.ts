@@ -3,13 +3,13 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ColorDef, RenderMode } from "@bentley/imodeljs-common";
+import { ColorDef, RenderMode } from "@itwin/core-common";
 import {
   BlankConnection,
   IModelApp,
   SpatialViewState,
   ViewStatus,
-} from "@bentley/imodeljs-frontend";
+} from "@itwin/core-frontend";
 
 import { BlankConnectionViewState } from "../../types";
 
@@ -33,15 +33,15 @@ export const createBlankViewState = (
 
   const viewStateLookAt = viewStateOptions?.lookAt;
   if (viewStateLookAt) {
-    const viewStatus = viewState.lookAt(
-      viewStateLookAt.eyePoint,
-      viewStateLookAt.targetPoint,
-      viewStateLookAt.upVector,
-      viewStateLookAt.newExtents,
-      viewStateLookAt.frontDistance,
-      viewStateLookAt.backDistance,
-      viewStateLookAt.opts
-    );
+    const viewStatus = viewState.lookAt({
+      eyePoint: viewStateLookAt.eyePoint,
+      targetPoint: viewStateLookAt.targetPoint,
+      upVector: viewStateLookAt.upVector,
+      newExtents: viewStateLookAt.newExtents,
+      frontDistance: viewStateLookAt.frontDistance,
+      backDistance: viewStateLookAt.backDistance,
+      opts: viewStateLookAt.opts,
+    });
 
     if (viewStatus !== ViewStatus.Success) {
       throw new Error(
@@ -52,10 +52,11 @@ export const createBlankViewState = (
 
   viewState.displayStyle.backgroundColor =
     viewStateOptions?.displayStyle?.backgroundColor ?? ColorDef.white;
-  const flags = viewState.viewFlags.clone();
-  flags.grid = viewStateOptions?.viewFlags?.grid ?? false;
-  flags.renderMode =
-    viewStateOptions?.viewFlags?.renderMode ?? RenderMode.SmoothShade;
+  const flags = viewState.viewFlags.copy({
+    grid: viewStateOptions?.viewFlags?.grid ?? false,
+    renderMode:
+      viewStateOptions?.viewFlags?.renderMode ?? RenderMode.SmoothShade,
+  });
   viewState.displayStyle.viewFlags = flags;
 
   IModelApp.viewManager.onViewOpen.addOnce((vp) => {

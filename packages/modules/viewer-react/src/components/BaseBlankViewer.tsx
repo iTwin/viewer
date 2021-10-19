@@ -3,11 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BlankConnectionProps, IModelApp } from "@itwin/core-frontend";
+import { BlankConnectionProps } from "@itwin/core-frontend";
 import { FillCentered } from "@itwin/core-react";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
+import { BaseInitializer } from "..";
 import { useBaseViewerInitializer } from "../hooks";
 import {
   BlankConnectionViewState,
@@ -44,7 +45,6 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
   const viewerInitialized = useBaseViewerInitializer({
     appInsightsKey,
     productId,
-    imjsAppInsightsKey,
     i18nUrlTemplate,
     onIModelAppInit,
     additionalI18nNamespaces,
@@ -57,7 +57,7 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
         BaseInitializer.authClient?.isAuthorized) ||
         false
     );
-    BaseInitializer.authClient?.onAccessTokenChanged.addListener((token) => {
+    BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
       setAuthorized(
         (BaseInitializer.authClient?.hasSignedIn &&
           BaseInitializer.authClient?.isAuthorized) ||

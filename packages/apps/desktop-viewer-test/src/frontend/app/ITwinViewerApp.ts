@@ -3,13 +3,13 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IpcListener } from "@bentley/imodeljs-common";
+import { IpcListener } from "@itwin/core-common";
 import {
   AsyncFunction,
   IModelApp,
   IpcApp,
   PromiseReturnType,
-} from "@bentley/imodeljs-frontend";
+} from "@itwin/core-frontend";
 import { NavigateFn } from "@reach/router";
 import { OpenDialogOptions } from "electron";
 

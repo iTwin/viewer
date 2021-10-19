@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { TelemetryClient, TelemetryEvent } from "@bentley/telemetry-client";
-import { IModelApp } from "@itwin/core-frontend";
+import { RpcActivity } from "@itwin/core-common";
 import { ReactPlugin } from "@microsoft/applicationinsights-react-js";
 import { ApplicationInsights } from "@microsoft/applicationinsights-web";
 
@@ -56,6 +56,7 @@ class TelemetryService implements TelemetryClient {
    * iModelJS Telemetry Client implementation
    */
   public postTelemetry = async (
+    requestContext: RpcActivity,
     telemetryEvent: TelemetryEvent
   ): Promise<void> => {
     const properties = telemetryEvent.getProperties();

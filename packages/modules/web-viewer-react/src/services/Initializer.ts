@@ -122,7 +122,6 @@ export class WebInitializer {
           options?.authConfig
         );
         iModelAppOptions.authorizationClient = authClient;
-        // BaseInitializer.authClient = authClient;
         BaseInitializer.authClient = authClient;
         const rpcParams: BentleyCloudRpcParams = yield initializeRpcParams(
           options?.backend

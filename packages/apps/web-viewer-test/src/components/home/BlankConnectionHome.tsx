@@ -3,11 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
-import { Range3d } from "@bentley/geometry-core";
-import { Cartographic, ColorDef, RenderMode } from "@bentley/imodeljs-common";
-import { IModelApp } from "@bentley/imodeljs-frontend";
-import { BlankViewer } from "@itwin/web-viewer-react";
+import { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
+import { Cartographic, ColorDef, RenderMode } from "@itwin/core-common";
+import { IModelApp } from "@itwin/core-frontend";
+import { Range3d } from "@itwin/core-geometry";
+import { BaseInitializer, BlankViewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 
 import { GeometryDecorator } from "../../decorators/GeometryDecorator";

@@ -24,14 +24,8 @@ import {
   ToolAdmin,
   ViewChangeOptions,
   ViewState,
-} from "@bentley/imodeljs-frontend";
-import { BackstageItem, UiItemsProvider } from "@bentley/ui-abstract";
-import {
-  ColorTheme,
-  FrameworkVersion,
-  FrontstageProvider,
-  IModelViewportControlOptions,
-} from "@bentley/ui-framework";
+} from "@itwin/core-frontend";
+import { Vector3d, XAndY, XYAndZ } from "@itwin/core-geometry";
 
 /**
  * options for configuration of 3D view

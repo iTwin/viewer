@@ -8,7 +8,7 @@ import {
   IModelApp,
   ScreenViewport,
   StandardViewId,
-} from "@bentley/imodeljs-frontend";
+} from "@itwin/core-frontend";
 import { Viewer } from "@itwin/desktop-viewer-react";
 import React, { useCallback, useMemo } from "react";
 

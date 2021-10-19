@@ -8,7 +8,7 @@ API for creating a 3D default view for an iModel.
 Either takes in a list of modelIds, or displays all 3D models by default.
 */
 
-import { Id64 } from "@bentley/bentleyjs-core";
+import { Id64 } from "@itwin/core-bentley";
 import {
   FitViewTool,
   IModelApp,
@@ -17,7 +17,6 @@ import {
   ViewCreator3d as ViewCreator,
   ViewState,
 } from "@itwin/core-frontend";
-import { Range3d } from "@itwin/core-geometry";
 
 import { ViewCreator3dOptions } from "../../types";
 
@@ -48,7 +47,7 @@ export class ViewCreator3d extends ViewCreator {
       IModelApp.viewManager.onViewOpen.addOnce((viewPort: ScreenViewport) => {
         if (viewState.iModel.isOpen) {
           // Always start with the standard rotation to ISO, it can be adjusted using any of the other methods after.
-          IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
+          void IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
           viewPort.view.setStandardRotation(StandardViewId.Iso);
 
           // check for a custom configurer and execute
@@ -87,7 +86,7 @@ export class ViewCreator3d extends ViewCreator {
           };
 
           tileTreesLoaded().finally(() => {
-            IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
+            void IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
             viewPort.view.setStandardRotation(
               options?.standardViewId ?? StandardViewId.Iso
             );

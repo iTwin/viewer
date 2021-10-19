@@ -5,18 +5,7 @@
 
 import "@testing-library/jest-dom/extend-expect";
 
-import { Config } from "@bentley/bentleyjs-core";
-import { Range3d } from "@bentley/geometry-core";
-import { Cartographic, ColorDef } from "@bentley/imodeljs-common";
-import {
-  BlankConnection,
-  BlankConnectionProps,
-  IModelApp,
-  IModelConnection,
-  SnapshotConnection,
-} from "@bentley/imodeljs-frontend";
-import { UrlDiscoveryClient } from "@bentley/itwin-client";
-import { BackstageItemUtilities, UiItemsManager } from "@bentley/ui-abstract";
+import { BackstageItemUtilities, UiItemsManager } from "@itwin/appui-abstract";
 import {
   ColorTheme,
   FrontstageProps,
@@ -28,6 +17,7 @@ import {
   BlankConnection,
   BlankConnectionProps,
   IModelApp,
+  IModelConnection,
   SnapshotConnection,
 } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
@@ -51,16 +41,16 @@ jest.mock("react-redux", () => ({
   Provider: jest.fn().mockImplementation(({ children }: any) => children),
 }));
 
-jest.mock("@bentley/ui-framework", () => {
+jest.mock("@itwin/appui-react", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/ui-framework"),
+    ...jest.createMockFromModule<any>("@itwin/appui-react"),
     StateManager: {
-      ...jest.createMockFromModule<any>("@bentley/ui-framework").StateManager,
+      ...jest.createMockFromModule<any>("@itwin/appui-react").StateManager,
       store: jest.fn(),
     },
   };
 });
-jest.mock("@bentley/ui-abstract");
+jest.mock("@itwin/appui-abstract");
 jest.mock("@microsoft/applicationinsights-react-js", () => ({
   ReactPlugin: jest.fn(),
   withAITracking: (
@@ -182,10 +172,6 @@ describe("IModelLoader", () => {
       close: jest.fn(),
       isOpen: true,
     } as any);
-    jest
-      .spyOn(UrlDiscoveryClient.prototype, "discoverUrl")
-      .mockResolvedValue("https://test.com");
-    jest.spyOn(Config.App, "get").mockReturnValue(1);
     jest.spyOn(SnapshotConnection, "openFile").mockResolvedValue({
       isBlankConnection: () => true,
       isOpen: true,

@@ -3,11 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IModelApp } from "@itwin/core-frontend";
 import { FillCentered } from "@itwin/core-react";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
+import { BaseInitializer } from "..";
 import { useBaseViewerInitializer } from "../hooks";
 import { ItwinViewerCommonParams } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
@@ -48,7 +48,6 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   const viewerInitialized = useBaseViewerInitializer({
     appInsightsKey,
     productId,
-    imjsAppInsightsKey,
     i18nUrlTemplate,
     onIModelAppInit,
     additionalI18nNamespaces,

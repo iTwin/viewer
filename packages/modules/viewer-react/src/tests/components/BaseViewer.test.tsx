@@ -47,7 +47,7 @@ jest.mock("@microsoft/applicationinsights-react-js", () => ({
 
 jest.mock("@itwin/core-frontend", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/imodeljs-frontend"),
+    ...jest.createMockFromModule<any>("@itwin/core-frontend"),
     IModelApp: {
       initialized: true,
       startup: jest.fn(),

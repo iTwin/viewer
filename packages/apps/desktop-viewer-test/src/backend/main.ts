@@ -3,13 +3,13 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Logger, LogLevel } from "@itwin/core-bentley";
 import {
   ElectronHost,
   ElectronHostOptions,
 } from "@bentley/electron-manager/lib/ElectronBackend";
-import { IpcHost } from "@bentley/imodeljs-backend";
-import { Presentation } from "@bentley/presentation-backend";
+import { IpcHost } from "@itwin/core-backend";
+import { Logger, LogLevel } from "@itwin/core-bentley";
+import { Presentation } from "@itwin/presentation-backend";
 import { Menu } from "electron";
 import { MenuItemConstructorOptions } from "electron/main";
 import * as path from "path";

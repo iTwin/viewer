@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ViewState } from "@bentley/imodeljs-frontend";
+import { StageUsage, StandardContentLayouts } from "@itwin/appui-abstract";
 import {
   ContentGroup,
   CoreTools,

@@ -7,6 +7,7 @@
 // import { MeasureTools } from "@bentley/measure-tools-react";
 // import { PropertyGridManager } from "@bentley/property-grid-react";
 // import { TreeWidget } from "@bentley/tree-widget-react";
+import { IModelHubFrontend } from "@bentley/imodelhub-client";
 import {
   AppNotificationManager,
   ConfigurableUiManager,
@@ -23,12 +24,7 @@ import {
   RpcInterface,
   RpcInterfaceDefinition,
   SnapshotIModelRpcInterface,
-} from "@bentley/imodeljs-common";
-import { IModelApp, IModelAppOptions } from "@bentley/imodeljs-frontend";
-import { PresentationRpcInterface } from "@bentley/presentation-common";
-import { Presentation } from "@bentley/presentation-frontend";
-import { UiComponents } from "@bentley/ui-components";
-import { UiCore } from "@bentley/ui-core";
+} from "@itwin/core-common";
 import { IModelApp, IModelAppOptions } from "@itwin/core-frontend";
 import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
@@ -100,20 +96,13 @@ export class BaseInitializer {
       if (UiComponents.initialized) {
         UiComponents.terminate();
       }
-      try {
-        IModelApp.localization
-          .getLanguageList()
-          .forEach((ns) => IModelApp.localization.unregisterNamespace(ns));
-      } catch (err) {
-        // Do nothing
-      }
     } catch (err) {
       // Do nothing
     }
     try {
-      IModelApp.i18n
-        .languageList()
-        .forEach((ns) => IModelApp.i18n.unregisterNamespace(ns));
+      IModelApp.localization
+        .getLanguageList()
+        .forEach((ns) => IModelApp.localization.unregisterNamespace(ns));
     } catch (err) {
       // Do nothing
     }

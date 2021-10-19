@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Button, ButtonType } from "@bentley/ui-core";
+import { Button } from "@itwin/core-react";
 import React from "react";
 
 import styles from "./Header.module.scss";
