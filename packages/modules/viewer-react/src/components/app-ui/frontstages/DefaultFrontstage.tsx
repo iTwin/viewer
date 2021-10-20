@@ -9,6 +9,7 @@ import {
   ContentGroup,
   ContentLayoutDef,
   CoreTools,
+  FrameworkVersion,
   Frontstage,
   FrontstageProvider,
   IModelViewportControl,
@@ -45,15 +46,18 @@ export class DefaultFrontstage extends FrontstageProvider {
   private _contentGroup: ContentGroup;
 
   private _uiConfig?: ItwinViewerUi;
+  private _frameworkVersion?: FrameworkVersion;
 
   constructor(
     public viewState: ViewState,
     uiConfig?: ItwinViewerUi,
-    viewportOptions?: ViewerViewportControlOptions
+    viewportOptions?: ViewerViewportControlOptions,
+    frameworkVersion?: FrameworkVersion
   ) {
     super();
 
     this._uiConfig = uiConfig;
+    this._frameworkVersion = frameworkVersion || "2";
 
     this._contentLayoutDef = new ContentLayoutDef({
       id: DefaultFrontstage.MAIN_CONTENT_ID,
@@ -130,18 +134,17 @@ export class DefaultFrontstage extends FrontstageProvider {
           />
         }
         centerRight={
-          <Zone
-            defaultState={ZoneState.Minimized}
-            allowsMerging={true}
-            widgets={[]}
-          />
+          this._frameworkVersion === "1" ? (
+            <Zone allowsMerging={true} defaultState={ZoneState.Minimized} />
+          ) : undefined
         }
         bottomRight={
-          <Zone
-            allowsMerging={true}
-            mergeWithZone={ZoneLocation.CenterRight}
-            widgets={[]}
-          />
+          this._frameworkVersion === "1" ? (
+            <Zone
+              allowsMerging={true}
+              mergeWithZone={ZoneLocation.CenterRight}
+            />
+          ) : undefined
         }
         statusBar={
           <Zone
