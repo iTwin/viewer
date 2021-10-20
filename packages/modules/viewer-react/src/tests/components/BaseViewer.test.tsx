@@ -54,11 +54,10 @@ jest.mock("@itwin/core-frontend", () => {
       telemetry: {
         addClient: jest.fn(),
       },
-      i18n: {
-        registerNamespace: jest.fn().mockReturnValue({
-          readFinished: jest.fn().mockResolvedValue(true),
-        }),
-        languageList: jest.fn().mockReturnValue(["en-US"]),
+      localization: {
+        registerNamespace: jest.fn().mockResolvedValue(true),
+        getLanguageList: jest.fn().mockReturnValue(["en-US"]),
+        getLocalizedString: jest.fn(),
         unregisterNamespace: jest.fn(),
         translateWithNamespace: jest.fn(),
       },
@@ -66,9 +65,7 @@ jest.mock("@itwin/core-frontend", () => {
         updateFeatureFlags: jest.fn(),
       },
       authorizationClient: {
-        hasSignedIn: true,
-        isAuthorized: true,
-        onUserStateChanged: {
+        onAccessTokenChanged: {
           addListener: jest.fn(),
         },
       },
@@ -99,16 +96,34 @@ jest.mock("@itwin/core-frontend", () => {
 });
 
 jest.mock("../../services/telemetry/TelemetryService");
-jest.mock("@bentley/property-grid-react", () => {
+jest.mock("../../services/BaseInitializer", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/property-grid-react"),
-    PropertyGridManager: {
-      ...jest.createMockFromModule<any>("@bentley/property-grid-react")
-        .PropertyGridManager,
-      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+    BaseInitializer: {
+      authClient: {
+        hasSignedIn: true,
+        isAuthorized: true,
+        onAccessTokenChanged: {
+          addListener: jest.fn(),
+        },
+      },
+      initialize: jest.fn().mockResolvedValue(true),
+      cancel: jest.fn(),
+      shutdown: jest.fn(),
+      initialized: Promise.resolve(),
     },
   };
 });
+// TODO 3.0
+// jest.mock("@bentley/property-grid-react", () => {
+//   return {
+//     ...jest.createMockFromModule<any>("@bentley/property-grid-react"),
+//     PropertyGridManager: {
+//       ...jest.createMockFromModule<any>("@bentley/property-grid-react")
+//         .PropertyGridManager,
+//       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+//     },
+//   };
+// });
 
 const mockProjectId = "123";
 const mockIModelId = "456";
@@ -180,23 +195,5 @@ describe("BaseViewer", () => {
 
     expect(loader).toBeInTheDocument();
     expect(SnapshotConnection.openFile).toHaveBeenCalledWith(snapshotPath);
-  });
-
-  it("executes a callback after IModelApp is initialized", async () => {
-    const callbacks = {
-      onIModelAppInit: jest.fn(),
-    };
-    const { getByTestId } = render(
-      <BaseViewer
-        contextId={mockProjectId}
-        iModelId={mockIModelId}
-        onIModelAppInit={callbacks.onIModelAppInit}
-      />
-    );
-
-    const loader = await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(loader).toBeInTheDocument();
-    expect(callbacks.onIModelAppInit).toHaveBeenCalled();
   });
 });

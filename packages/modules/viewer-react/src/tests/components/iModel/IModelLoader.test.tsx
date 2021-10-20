@@ -67,13 +67,9 @@ jest.mock("@itwin/core-frontend", () => {
       telemetry: {
         addClient: jest.fn(),
       },
-      i18n: {
-        registerNamespace: jest.fn().mockReturnValue({
-          readFinished: jest.fn().mockResolvedValue(true),
-        }),
-        languageList: jest.fn().mockReturnValue(["en-US"]),
-        translate: jest.fn(),
-        translateWithNamespace: jest.fn(),
+      localization: {
+        getLocalizedString: jest.fn(),
+        registerNamespace: jest.fn().mockResolvedValue(true),
       },
       uiAdmin: {
         updateFeatureFlags: jest.fn(),
@@ -196,7 +192,8 @@ describe("IModelLoader", () => {
 
     await waitFor(() => result.getByTestId("loader-wrapper"));
 
-    expect(UiItemsManager.register).toHaveBeenCalledTimes(3);
+    // TODO 3.0 - update called times as default providers are re-added
+    expect(UiItemsManager.register).toHaveBeenCalledTimes(1);
 
     result.rerender(
       <IModelLoader
@@ -208,7 +205,8 @@ describe("IModelLoader", () => {
 
     await waitFor(() => result.getByTestId("viewer"));
 
-    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(3);
+    // TODO 3.0 - update called times as default providers are re-added
+    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(1);
   });
 
   it("adds backstage items and translates their labels", async () => {

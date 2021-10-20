@@ -4,7 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
+import { IModelApp } from "@itwin/core-frontend";
 import { UiCore } from "@itwin/core-react";
+
+import { WebInitializer } from "../../services/Initializer";
 
 jest.mock("@itwin/core-frontend", () => {
   const noMock = jest.requireActual("@itwin/core-frontend");
@@ -73,18 +76,16 @@ jest.mock("@itwin/viewer-react", () => {
   };
 });
 
-const authConfig: BrowserAuthorizationClientConfiguration = {
-  clientId: "test-client",
-  scope: "test-scope",
-  responseType: "code",
-  redirectUri: "http://localhost",
-};
-
 describe("Initializer", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     if (UiCore.initialized) {
       UiCore.terminate();
     }
+  });
+
+  it("initializes iModelApp", async () => {
+    await WebInitializer.startWebViewer();
+    expect(IModelApp.startup).toHaveBeenCalled();
   });
 });

@@ -11,14 +11,8 @@ import {
 import { render } from "@testing-library/react";
 import React from "react";
 
-import { IModelViewer } from "../../../components/iModel";
+import { IModelViewer } from "../../../components/iModel/IModelViewer";
 import { ViewerFrontstage } from "../../../types";
-
-jest.mock("@itwin/appui-react");
-jest.mock("@itwin/appui-abstract");
-jest.mock("@microsoft/applicationinsights-react-js");
-
-const flushPromises = () => new Promise((res) => setTimeout(res, 0));
 
 class Frontstage1Provider extends FrontstageProvider {
   public id = "Frontstage1";
@@ -33,6 +27,24 @@ class Frontstage2Provider extends FrontstageProvider {
     return <div></div>;
   }
 }
+
+jest.mock("@itwin/appui-react", () => {
+  return {
+    FrontstageManager: {
+      addFrontstageProvider: jest.fn(),
+      getFrontstageDef: jest
+        .fn()
+        .mockResolvedValue({ id: "Frontstage2", frontstage: jest.fn() }),
+      setActiveFrontstageDef: jest.fn().mockResolvedValue(true),
+      clearFrontstageDefs: jest.fn(),
+    },
+    FrontstageProvider: jest.fn(),
+  };
+});
+jest.mock("@itwin/appui-abstract");
+jest.mock("@microsoft/applicationinsights-react-js");
+
+const flushPromises = () => new Promise((res) => setTimeout(res, 0));
 
 describe("IModelViewer", () => {
   it("loads all frontstages", async () => {

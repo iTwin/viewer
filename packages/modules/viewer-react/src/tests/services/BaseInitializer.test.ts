@@ -53,7 +53,7 @@ jest.mock("@itwin/core-frontend", () => {
         registerNamespace: jest.fn().mockReturnValue({
           readFinished: jest.fn().mockResolvedValue(true),
         }),
-        languageList: jest.fn().mockReturnValue(["en-US"]),
+        getLanguageList: jest.fn().mockReturnValue(["en-US"]),
         unregisterNamespace: jest.fn(),
         translateWithNamespace: jest.fn(),
       },
@@ -82,16 +82,17 @@ jest.mock("@itwin/core-frontend", () => {
     AccuDraw: class {},
   };
 });
-jest.mock("@bentley/property-grid-react", () => {
-  return {
-    ...jest.createMockFromModule<any>("@bentley/property-grid-react"),
-    PropertyGridManager: {
-      ...jest.createMockFromModule<any>("@bentley/property-grid-react")
-        .PropertyGridManager,
-      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
-    },
-  };
-});
+// TODO 3.0
+// jest.mock("@bentley/property-grid-react", () => {
+//   return {
+//     ...jest.createMockFromModule<any>("@bentley/property-grid-react"),
+//     PropertyGridManager: {
+//       ...jest.createMockFromModule<any>("@bentley/property-grid-react")
+//         .PropertyGridManager,
+//       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+//     },
+//   };
+// });
 jest.mock("../../services/telemetry/TelemetryService");
 
 describe("BaseInitializer", () => {
@@ -125,6 +126,7 @@ describe("BaseInitializer", () => {
       ],
       localization: expect.anything(),
       toolAdmin: undefined,
+      hubAccess: expect.anything(),
     });
   });
 
@@ -170,7 +172,7 @@ describe("BaseInitializer", () => {
       i18nUrlTemplate: i18nUrlTemplate,
     });
 
-    expect(ITwinLocalization.prototype).toHaveBeenCalledWith({
+    expect(ITwinLocalization).toHaveBeenCalledWith({
       urlTemplate: i18nUrlTemplate,
     });
   });
@@ -226,5 +228,18 @@ describe("BaseInitializer", () => {
         "IModelApp must be initialized prior to rendering the Base Viewer"
       );
     }
+  });
+
+  it("executes a callback after IModelApp is initialized", async () => {
+    const callbacks = {
+      onIModelAppInit: jest.fn(),
+    };
+    await BaseInitializer.initialize({
+      onIModelAppInit: callbacks.onIModelAppInit,
+    });
+
+    await BaseInitializer.initialized;
+
+    expect(callbacks.onIModelAppInit).toHaveBeenCalled();
   });
 });
