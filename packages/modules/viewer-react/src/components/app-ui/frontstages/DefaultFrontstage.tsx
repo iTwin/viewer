@@ -15,6 +15,8 @@ import {
   UiFramework,
   Widget,
   Zone,
+  ZoneLocation,
+  ZoneState,
 } from "@bentley/ui-framework";
 import * as React from "react";
 
@@ -122,6 +124,20 @@ export class DefaultFrontstage extends FrontstageProvider {
                 }
               />,
             ]}
+          />
+        }
+        centerRight={
+          <Zone
+            defaultState={ZoneState.Minimized}
+            allowsMerging={true}
+            widgets={[]}
+          />
+        }
+        bottomRight={
+          <Zone
+            allowsMerging={true}
+            mergeWithZone={ZoneLocation.CenterRight}
+            widgets={[]}
           />
         }
         statusBar={
