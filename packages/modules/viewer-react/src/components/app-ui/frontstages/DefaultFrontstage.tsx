@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ViewState } from "@bentley/imodeljs-frontend";
+import { StageUsage } from "@bentley/ui-abstract";
 import {
   ContentGroup,
   ContentLayoutDef,
@@ -78,6 +79,8 @@ export class DefaultFrontstage extends FrontstageProvider {
     return (
       <Frontstage
         id="DefaultFrontstage"
+        version={1} // this value should be increased when changes are made to Frontstage
+        usage={StageUsage.General}
         defaultTool={CoreTools.selectElementCommand}
         defaultLayout={this._contentLayoutDef}
         contentGroup={this._contentGroup}
