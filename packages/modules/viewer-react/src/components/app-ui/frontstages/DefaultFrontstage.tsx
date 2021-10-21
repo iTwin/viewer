@@ -4,10 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ViewState } from "@bentley/imodeljs-frontend";
+import { StageUsage } from "@bentley/ui-abstract";
 import {
   ContentGroup,
   ContentLayoutDef,
   CoreTools,
+  FrameworkVersion,
   Frontstage,
   FrontstageProvider,
   IModelViewportControl,
@@ -15,6 +17,8 @@ import {
   UiFramework,
   Widget,
   Zone,
+  ZoneLocation,
+  ZoneState,
 } from "@bentley/ui-framework";
 import * as React from "react";
 
@@ -42,15 +46,18 @@ export class DefaultFrontstage extends FrontstageProvider {
   private _contentGroup: ContentGroup;
 
   private _uiConfig?: ItwinViewerUi;
+  private _frameworkVersion?: FrameworkVersion;
 
   constructor(
     public viewState: ViewState,
     uiConfig?: ItwinViewerUi,
-    viewportOptions?: ViewerViewportControlOptions
+    viewportOptions?: ViewerViewportControlOptions,
+    frameworkVersion?: FrameworkVersion
   ) {
     super();
 
     this._uiConfig = uiConfig;
+    this._frameworkVersion = frameworkVersion || "2";
 
     this._contentLayoutDef = new ContentLayoutDef({
       id: DefaultFrontstage.MAIN_CONTENT_ID,
@@ -76,6 +83,8 @@ export class DefaultFrontstage extends FrontstageProvider {
     return (
       <Frontstage
         id="DefaultFrontstage"
+        version={1} // this value should be increased when changes are made to Frontstage
+        usage={StageUsage.General}
         defaultTool={CoreTools.selectElementCommand}
         defaultLayout={this._contentLayoutDef}
         contentGroup={this._contentGroup}
@@ -123,6 +132,19 @@ export class DefaultFrontstage extends FrontstageProvider {
               />,
             ]}
           />
+        }
+        centerRight={
+          this._frameworkVersion === "1" ? (
+            <Zone allowsMerging={true} defaultState={ZoneState.Minimized} />
+          ) : undefined
+        }
+        bottomRight={
+          this._frameworkVersion === "1" ? (
+            <Zone
+              allowsMerging={true}
+              mergeWithZone={ZoneLocation.CenterRight}
+            />
+          ) : undefined
         }
         statusBar={
           <Zone
