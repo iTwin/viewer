@@ -49,6 +49,9 @@ jest.mock("@itwin/viewer-react", () => {
     useBaseViewerInitializer: jest.fn().mockReturnValue(true),
     getInitializationOptions: jest.fn().mockReturnValue({}),
     isEqual: jest.fn().mockReturnValue(true),
+    BaseInitializer: {
+      initialize: jest.fn(),
+    },
   };
 });
 
@@ -131,7 +134,7 @@ describe("Viewer", () => {
     expect(IModelApp.startup).toHaveBeenCalledWith({
       applicationId: "3098",
       authorizationClient: expect.anything(),
-      i18n: expect.anything(),
+      localization: expect.anything(),
       notifications: expect.anything(),
       rpcInterfaces: [
         IModelReadRpcInterface,
@@ -142,7 +145,6 @@ describe("Viewer", () => {
       ],
       uiAdmin: expect.anything(),
       toolAdmin: undefined,
-      localization: expect.anything(),
     });
   });
 

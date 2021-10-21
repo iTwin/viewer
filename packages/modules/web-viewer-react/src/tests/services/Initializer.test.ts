@@ -3,9 +3,15 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
-import { IModelApp } from "@itwin/core-frontend";
+import {
+  IModelReadRpcInterface,
+  IModelTileRpcInterface,
+  SnapshotIModelRpcInterface,
+} from "@itwin/core-common";
+import { IModelApp, IModelAppOptions } from "@itwin/core-frontend";
 import { UiCore } from "@itwin/core-react";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
+import { ItwinViewerInitializerParams } from "@itwin/viewer-react";
 
 import { WebInitializer } from "../../services/Initializer";
 
@@ -58,21 +64,39 @@ jest.mock("@itwin/core-frontend", () => {
     }),
   };
 });
-jest.mock("@microsoft/applicationinsights-react-js", () => ({
-  ReactPlugin: jest.fn(),
-  withAITracking: (
-    _reactPlugin: any | undefined, // eslint-disable-line no-unused-vars
-    component: any,
-    _componentName?: string, // eslint-disable-line no-unused-vars
-    _className?: string // eslint-disable-line no-unused-vars
-  ) => component,
-}));
+
 jest.mock("@itwin/viewer-react", () => {
   return {
-    ...jest.createMockFromModule<any>("@itwin/viewer-react"),
+    BaseViewer: jest.fn(),
+    getIModelAppOptions: (
+      options: ItwinViewerInitializerParams
+    ): IModelAppOptions => {
+      return {
+        applicationId: options?.productId ?? "3098",
+        notifications: expect.anything(),
+        uiAdmin: expect.anything(),
+        rpcInterfaces: [
+          IModelReadRpcInterface,
+          IModelTileRpcInterface,
+          PresentationRpcInterface,
+          SnapshotIModelRpcInterface,
+          ...(options?.additionalRpcInterfaces ?? []),
+        ],
+        localization: expect.anything(),
+        toolAdmin: options?.toolAdmin,
+        authorizationClient: expect.anything(),
+      };
+    },
+    useIsMounted: jest.fn().mockReturnValue(true),
     makeCancellable: jest.requireActual(
       "@itwin/viewer-react/lib/utilities/MakeCancellable"
     ).makeCancellable,
+    useBaseViewerInitializer: jest.fn().mockReturnValue(true),
+    getInitializationOptions: jest.fn().mockReturnValue({}),
+    isEqual: jest.fn().mockReturnValue(true),
+    BaseInitializer: {
+      initialize: jest.fn(),
+    },
   };
 });
 
@@ -86,6 +110,7 @@ describe("Initializer", () => {
 
   it("initializes iModelApp", async () => {
     await WebInitializer.startWebViewer();
+    await WebInitializer.initialized;
     expect(IModelApp.startup).toHaveBeenCalled();
   });
 });
