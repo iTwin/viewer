@@ -73,7 +73,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Next Steps
 
-- [iTwin Viewer options](https://www.npmjs.com/package/@itwin/web-viewer-react)
+- [iTwin Viewer options](https://www.npmjs.com/package/@itwin/web-viewer-react-3.0)
 
 - [Extending the iTwin Viewer](https://www.itwinjs.org/learning/tutorials/hello-world-viewer/)
 

@@ -9,7 +9,7 @@ import {
   ScreenViewport,
   StandardViewId,
 } from "@itwin/core-frontend";
-import { Viewer } from "@itwin/desktop-viewer-react";
+import { Viewer } from "@itwin/desktop-viewer-react-3.0";
 import React, { useCallback, useMemo } from "react";
 
 interface ModelViewerParams {

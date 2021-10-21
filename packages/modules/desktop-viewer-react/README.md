@@ -1,17 +1,17 @@
 # iTwin Viewer for Desktop
 
-The iTwin Desktop Viewer is a configurable iTwin.js viewer that offers basic tooling and widgets out-of-the-box and can be further extended through the use of [iTwin.js UI Providers](https://www.itwinjs.org/learning/ui/augmentingui/). This package should be used for Electron-based desktop applications. For web applications, use [@itwin/web-viewer-react](https://www.npmjs.com/package/@itwin/web-viewer-react).
+The iTwin Desktop Viewer is a configurable iTwin.js viewer that offers basic tooling and widgets out-of-the-box and can be further extended through the use of [iTwin.js UI Providers](https://www.itwinjs.org/learning/ui/augmentingui/). This package should be used for Electron-based desktop applications. For web applications, use [@itwin/web-viewer-react-3.0](https://www.npmjs.com/package/@itwin/web-viewer-react-3.0).
 
 ## Installation
 
 ```
-yarn add @itwin/desktop-viewer-react
+yarn add @itwin/desktop-viewer-react-3.0
 ```
 
 or
 
 ```
-npm install @itwin/desktop-viewer-react
+npm install @itwin/desktop-viewer-react-3.0
 ```
 
 ## Dependencies
@@ -36,7 +36,7 @@ npx create-react-app my-app --scripts-version @bentley/react-scripts --template 
 
 ```javascript
 import React, { useState, useEffect } from "react";
-import { Viewer } from "@itwin/desktop-viewer-react";
+import { Viewer } from "@itwin/desktop-viewer-react-3.0";
 
 export const MyViewerComponent = () => {
   const snapshotPath = "./samples/house_model.bim";

@@ -11,7 +11,7 @@ import { WebInitializer } from "../../services/Initializer";
 import { ItwinViewer } from "../../services/ItwinViewer";
 import { WebAuthorizationOptions } from "../../types";
 
-jest.mock("@itwin/viewer-react", () => {
+jest.mock("@itwin/viewer-react-3.0", () => {
   return {
     BaseViewer: jest.fn(({ children }) => null),
     getIModelAppOptions: jest.fn(),

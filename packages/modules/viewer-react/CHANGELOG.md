@@ -1,4 +1,4 @@
-# Change Log - @itwin/viewer-react
+# Change Log - @itwin/viewer-react-3.0
 
 This log was last generated on Fri, 08 Oct 2021 17:32:09 GMT and should not be manually modified.
 

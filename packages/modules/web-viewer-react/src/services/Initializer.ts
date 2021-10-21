@@ -14,7 +14,7 @@ import {
   getIModelAppOptions,
   makeCancellable,
   ViewerAuthorizationClient,
-} from "@itwin/viewer-react";
+} from "@itwin/viewer-react-3.0";
 
 import {
   IModelBackendOptions,

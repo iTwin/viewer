@@ -11,7 +11,7 @@ import {
 import { IModelApp, IModelAppOptions } from "@itwin/core-frontend";
 import { UiCore } from "@itwin/core-react";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
-import { ItwinViewerInitializerParams } from "@itwin/viewer-react";
+import { ItwinViewerInitializerParams } from "@itwin/viewer-react-3.0";
 
 import { WebInitializer } from "../../services/Initializer";
 
@@ -65,7 +65,7 @@ jest.mock("@itwin/core-frontend", () => {
   };
 });
 
-jest.mock("@itwin/viewer-react", () => {
+jest.mock("@itwin/viewer-react-3.0", () => {
   return {
     BaseViewer: jest.fn(),
     getIModelAppOptions: (
@@ -89,7 +89,7 @@ jest.mock("@itwin/viewer-react", () => {
     },
     useIsMounted: jest.fn().mockReturnValue(true),
     makeCancellable: jest.requireActual(
-      "@itwin/viewer-react/lib/utilities/MakeCancellable"
+      "@itwin/viewer-react-3.0/lib/utilities/MakeCancellable"
     ).makeCancellable,
     useBaseViewerInitializer: jest.fn().mockReturnValue(true),
     getInitializationOptions: jest.fn().mockReturnValue({}),

@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ColorTheme } from "@itwin/appui-react";
-import { Viewer } from "@itwin/web-viewer-react";
+import { Viewer } from "@itwin/web-viewer-react-3.0";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 

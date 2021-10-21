@@ -7,7 +7,7 @@ import { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authoriz
 import { Cartographic, ColorDef, RenderMode } from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
-import { BaseInitializer, BlankViewer } from "@itwin/web-viewer-react";
+import { BaseInitializer, BlankViewer } from "@itwin/web-viewer-react-3.0";
 import React, { useEffect, useState } from "react";
 
 import { GeometryDecorator } from "../../decorators/GeometryDecorator";

@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { useAccessToken } from "@itwin/desktop-viewer-react";
+import { useAccessToken } from "@itwin/desktop-viewer-react-3.0";
 import { RouteComponentProps } from "@reach/router";
 import React, { useEffect, useState } from "react";
 

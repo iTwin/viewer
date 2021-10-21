@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BaseBlankViewer } from "@itwin/viewer-react";
+import { BaseBlankViewer } from "@itwin/viewer-react-3.0";
 import React, { useEffect, useMemo, useState } from "react";
 
 import { WebInitializer } from "../services/Initializer";

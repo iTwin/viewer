@@ -1,4 +1,4 @@
-# Change Log - @itwin/cra-template-desktop-viewer
+# Change Log - @itwin/cra-template-desktop-viewer-3.0
 
 This log was last generated on Wed, 29 Sep 2021 17:19:00 GMT and should not be manually modified.
 

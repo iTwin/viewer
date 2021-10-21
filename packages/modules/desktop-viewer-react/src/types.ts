@@ -3,6 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ViewerProps } from "@itwin/viewer-react";
+import { ViewerProps } from "@itwin/viewer-react-3.0";
 
 export type DesktopViewerProps = Omit<ViewerProps, "appInsightsKey">;

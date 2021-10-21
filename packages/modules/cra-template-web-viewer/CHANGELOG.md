@@ -1,4 +1,4 @@
-# Change Log - @itwin/cra-template-web-viewer
+# Change Log - @itwin/cra-template-web-viewer-3.0
 
 This log was last generated on Tue, 12 Oct 2021 16:52:48 GMT and should not be manually modified.
 

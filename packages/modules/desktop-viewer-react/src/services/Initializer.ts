@@ -8,7 +8,7 @@ import {
   ElectronAppOpts,
 } from "@itwin/core-electron/lib/cjs/ElectronFrontend";
 import { IModelApp } from "@itwin/core-frontend";
-import { getIModelAppOptions, makeCancellable } from "@itwin/viewer-react";
+import { getIModelAppOptions, makeCancellable } from "@itwin/viewer-react-3.0";
 
 import { DesktopViewerProps } from "../types";
 

@@ -16,7 +16,7 @@ import {
   BaseInitializer,
   IModelBackendOptions,
   Viewer,
-} from "@itwin/web-viewer-react";
+} from "@itwin/web-viewer-react-3.0";
 import React, { useEffect, useState } from "react";
 
 import { history } from "../routing";

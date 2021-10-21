@@ -1,5 +1,5 @@
 {
-  "name": "@itwin/viewer-react",
+  "name": "@itwin/viewer-react-3.0",
   "entries": [
     {
       "version": "1.8.0",
@@ -217,7 +217,7 @@
         ],
         "dependency": [
           {
-            "comment": "Updating dependency \"@itwin/error-handling-react\" from `1.0.1` to `1.0.2`"
+            "comment": "Updating dependency \"@itwin/error-handling-react-3.0\" from `1.0.1` to `1.0.2`"
           }
         ]
       }
@@ -258,7 +258,7 @@
         ],
         "dependency": [
           {
-            "comment": "Updating dependency \"@itwin/error-handling-react\" from `1.0.0` to `1.0.1`"
+            "comment": "Updating dependency \"@itwin/error-handling-react-3.0\" from `1.0.0` to `1.0.1`"
           }
         ]
       }
@@ -275,7 +275,7 @@
         ],
         "dependency": [
           {
-            "comment": "Updating dependency \"@itwin/error-handling-react\" from `0.1.3` to `1.0.0`"
+            "comment": "Updating dependency \"@itwin/error-handling-react-3.0\" from `0.1.3` to `1.0.0`"
           }
         ]
       }
@@ -328,7 +328,7 @@
         ],
         "dependency": [
           {
-            "comment": "Updating dependency \"@itwin/error-handling-react\" from `0.1.2` to `0.1.3`"
+            "comment": "Updating dependency \"@itwin/error-handling-react-3.0\" from `0.1.2` to `0.1.3`"
           }
         ]
       }
@@ -345,7 +345,7 @@
         ],
         "dependency": [
           {
-            "comment": "Updating dependency \"@itwin/error-handling-react\" from `0.1.1` to `0.1.2`"
+            "comment": "Updating dependency \"@itwin/error-handling-react-3.0\" from `0.1.1` to `0.1.2`"
           }
         ]
       }
@@ -362,7 +362,7 @@
         ],
         "dependency": [
           {
-            "comment": "Updating dependency \"@itwin/error-handling-react\" from `0.1.0` to `0.1.1`"
+            "comment": "Updating dependency \"@itwin/error-handling-react-3.0\" from `0.1.0` to `0.1.1`"
           }
         ]
       }

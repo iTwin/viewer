@@ -13,7 +13,7 @@ import {
   ItwinViewerCommonParams,
   UserManager,
   ViewerProps,
-} from "@itwin/viewer-react";
+} from "@itwin/viewer-react-3.0";
 
 /**
  * Authorization options. Must provide one.

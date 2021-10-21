@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
+import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react-3.0";
 import { Router } from "@reach/router";
 import React, { useCallback, useEffect, useState } from "react";
 

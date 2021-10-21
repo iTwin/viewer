@@ -5,7 +5,7 @@
 
 import "./SelectProject.scss";
 
-import { useAccessToken } from "@itwin/desktop-viewer-react";
+import { useAccessToken } from "@itwin/desktop-viewer-react-3.0";
 import { ProjectGrid } from "@itwin/imodel-browser-react";
 import {
   SvgCalendar,
@@ -14,10 +14,10 @@ import {
   SvgStarHollow,
 } from "@itwin/itwinui-icons-react";
 import {
-  HorizontalTab,
   HorizontalTabs,
   IconButton,
   LabeledInput,
+  Tab,
 } from "@itwin/itwinui-react";
 import { useNavigate } from "@reach/router";
 import React, { useState } from "react";
@@ -27,17 +27,13 @@ import { SignIn } from "../signin/SignIn";
 const PROJECT_TYPE_MAP = ["", "?recents", "?myprojects"];
 
 const tabsWithIcons = [
-  <HorizontalTab
+  <Tab
     key="favorite"
     label="Favorite projects"
     startIcon={<SvgStarHollow />}
   />,
-  <HorizontalTab
-    key="recents"
-    label="Recent projects"
-    startIcon={<SvgCalendar />}
-  />,
-  <HorizontalTab key="all" label="My projects" startIcon={<SvgList />} />,
+  <Tab key="recents" label="Recent projects" startIcon={<SvgCalendar />} />,
+  <Tab key="all" label="My projects" startIcon={<SvgList />} />,
 ];
 
 export const SelectProject = () => {

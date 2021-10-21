@@ -5,7 +5,7 @@ name: iTwin Viewer NPM Publish
 
 on:
   push:
-    branches: [ master ]
+    branches: ["3.0"]
 
 jobs:
   build:
@@ -35,7 +35,7 @@ jobs:
         echo 'Publishing...'
         git config user.name "iTwinViewerWorkflow"
         git config user.email "itwinviewer@users.noreply.github.com"
-        node common/scripts/install-run-rush.js version --bump --target-branch master
-        node common/scripts/install-run-rush.js publish --include-all --set-access-level public --apply --publish --npm-auth-token $NPM_TOKEN --target-branch master --suffix alpha
+        node common/scripts/install-run-rush.js version --bump --target-branch 3.0
+        node common/scripts/install-run-rush.js publish --include-all --set-access-level public --apply --publish --npm-auth-token $NPM_TOKEN --target-branch 3.0 --prerelease-name "alpha"
       env:
         NPM_TOKEN: ${{ secrets.NPMJS_PUBLISH_ITWIN }}

@@ -33,7 +33,7 @@ Compiles and bundles the frontend.
 
 - There is a sample snapshot file in the "samples" directory that can be used for testing application features
 
-- [iTwin Viewer options](https://www.npmjs.com/package/@itwin/desktop-viewer-react)
+- [iTwin Viewer options](https://www.npmjs.com/package/@itwin/desktop-viewer-react-3.0)
 
 - [Extending the iTwin Viewer](https://www.itwinjs.org/learning/tutorials/hello-world-viewer/)
 

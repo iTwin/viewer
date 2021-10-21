@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ItwinViewer } from "@itwin/web-viewer-react";
+import { ItwinViewer } from "@itwin/web-viewer-react-3.0";
 
 /**
  * get the viewer root url from the script tag

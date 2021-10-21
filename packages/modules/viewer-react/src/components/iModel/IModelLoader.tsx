@@ -24,7 +24,7 @@ import {
   SnapshotConnection,
   ViewState,
 } from "@itwin/core-frontend";
-import { useErrorManager } from "@itwin/error-handling-react";
+import { useErrorManager } from "@itwin/error-handling-react-3.0";
 import { withAITracking } from "@microsoft/applicationinsights-react-js";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";

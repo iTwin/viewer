@@ -15,37 +15,37 @@
       "shouldPublish": false
     },
     {
-      "packageName": "@itwin/viewer-react",
+      "packageName": "@itwin/viewer-react-3.0",
       "projectFolder": "packages/modules/viewer-react",
       "versionPolicyName": "independentModule",
       "shouldPublish": true
     },
     {
-      "packageName": "@itwin/error-handling-react",
+      "packageName": "@itwin/error-handling-react-3.0",
       "projectFolder": "packages/modules/error-handling-react",
       "versionPolicyName": "independentModule",
       "shouldPublish": true
     },
     {
-      "packageName": "@itwin/cra-template-web-viewer",
+      "packageName": "@itwin/cra-template-web-viewer-3.0",
       "projectFolder": "packages/modules/cra-template-web-viewer",
       "versionPolicyName": "independentModule",
       "shouldPublish": true
     },
     {
-      "packageName": "@itwin/web-viewer-react",
+      "packageName": "@itwin/web-viewer-react-3.0",
       "projectFolder": "packages/modules/web-viewer-react",
       "versionPolicyName": "independentModule",
       "shouldPublish": true
     },
     {
-      "packageName": "@itwin/desktop-viewer-react",
+      "packageName": "@itwin/desktop-viewer-react-3.0",
       "projectFolder": "packages/modules/desktop-viewer-react",
       "versionPolicyName": "independentModule",
       "shouldPublish": true
     },
     {
-      "packageName": "@itwin/cra-template-desktop-viewer",
+      "packageName": "@itwin/cra-template-desktop-viewer-3.0",
       "projectFolder": "packages/modules/cra-template-desktop-viewer",
       "versionPolicyName": "independentModule",
       "shouldPublish": true

@@ -11,7 +11,7 @@ import {
   ScreenViewport,
   StandardViewId,
 } from "@itwin/core-frontend";
-import { BaseInitializer, Viewer } from "@itwin/web-viewer-react";
+import { BaseInitializer, Viewer } from "@itwin/web-viewer-react-3.0";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";

@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { FillCentered } from "@itwin/core-react";
-import { ErrorBoundary } from "@itwin/error-handling-react";
+import { ErrorBoundary } from "@itwin/error-handling-react-3.0";
 import React, { useEffect, useState } from "react";
 
 import { BaseInitializer } from "..";

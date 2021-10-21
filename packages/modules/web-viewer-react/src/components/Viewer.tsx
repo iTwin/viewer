@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BaseViewer } from "@itwin/viewer-react";
+import { BaseViewer } from "@itwin/viewer-react-3.0";
 import React, { useMemo } from "react";
 
 import { useWebViewerInitializer } from "../hooks";

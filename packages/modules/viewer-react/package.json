@@ -1,6 +1,6 @@
 {
-  "name": "@itwin/viewer-react",
-  "version": "1.8.0",
+  "name": "@itwin/viewer-react-3.0",
+  "version": "0.0.1",
   "description": "Configurable iTwin.js viewer",
   "main": "lib/index.js",
   "module": "build/index.js",
@@ -40,7 +40,7 @@
   ],
   "dependencies": {
     "@bentley/icons-generic-webfont": "^1.0.15",
-    "@itwin/error-handling-react": "1.0.2",
+    "@itwin/error-handling-react-3.0": "^0.0.1",
     "@itwin/itwinui-react": "^1.16.2",
     "@microsoft/applicationinsights-react-js": "2.3.1",
     "@microsoft/applicationinsights-web": "2.3.1",

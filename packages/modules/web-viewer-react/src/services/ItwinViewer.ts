@@ -9,7 +9,7 @@ import { CheckpointConnection } from "@itwin/core-frontend";
 import {
   ItwinViewerUi,
   ViewerViewportControlOptions,
-} from "@itwin/viewer-react";
+} from "@itwin/viewer-react-3.0";
 import React from "react";
 import ReactDOM from "react-dom";
 

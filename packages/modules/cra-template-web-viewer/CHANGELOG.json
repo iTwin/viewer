@@ -1,9 +1,9 @@
 {
-  "name": "@itwin/cra-template-web-viewer",
+  "name": "@itwin/cra-template-web-viewer-3.0",
   "entries": [
     {
       "version": "1.3.0",
-      "tag": "@itwin/cra-template-web-viewer_v1.3.0",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v1.3.0",
       "date": "Tue, 12 Oct 2021 16:52:48 GMT",
       "comments": {
         "minor": [
@@ -15,7 +15,7 @@
     },
     {
       "version": "1.2.0",
-      "tag": "@itwin/cra-template-web-viewer_v1.2.0",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v1.2.0",
       "date": "Thu, 30 Sep 2021 13:57:43 GMT",
       "comments": {
         "minor": [
@@ -27,7 +27,7 @@
     },
     {
       "version": "1.1.0",
-      "tag": "@itwin/cra-template-web-viewer_v1.1.0",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v1.1.0",
       "date": "Wed, 04 Aug 2021 19:32:44 GMT",
       "comments": {
         "minor": [
@@ -39,7 +39,7 @@
     },
     {
       "version": "1.0.7",
-      "tag": "@itwin/cra-template-web-viewer_v1.0.7",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v1.0.7",
       "date": "Wed, 21 Jul 2021 19:45:37 GMT",
       "comments": {
         "patch": [
@@ -51,7 +51,7 @@
     },
     {
       "version": "1.0.6",
-      "tag": "@itwin/cra-template-web-viewer_v1.0.6",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v1.0.6",
       "date": "Fri, 16 Jul 2021 13:42:02 GMT",
       "comments": {
         "patch": [
@@ -63,7 +63,7 @@
     },
     {
       "version": "1.0.5",
-      "tag": "@itwin/cra-template-web-viewer_v1.0.5",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v1.0.5",
       "date": "Wed, 07 Jul 2021 21:58:42 GMT",
       "comments": {
         "patch": [
@@ -75,7 +75,7 @@
     },
     {
       "version": "1.0.4",
-      "tag": "@itwin/cra-template-web-viewer_v1.0.4",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v1.0.4",
       "date": "Tue, 06 Jul 2021 20:16:10 GMT",
       "comments": {
         "patch": [
@@ -87,7 +87,7 @@
     },
     {
       "version": "1.0.3",
-      "tag": "@itwin/cra-template-web-viewer_v1.0.3",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v1.0.3",
       "date": "Thu, 01 Jul 2021 18:46:45 GMT",
       "comments": {
         "patch": [
@@ -102,7 +102,7 @@
     },
     {
       "version": "1.0.2",
-      "tag": "@itwin/cra-template-web-viewer_v1.0.2",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v1.0.2",
       "date": "Tue, 29 Jun 2021 14:16:33 GMT",
       "comments": {
         "patch": [
@@ -114,7 +114,7 @@
     },
     {
       "version": "1.0.1",
-      "tag": "@itwin/cra-template-web-viewer_v1.0.1",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v1.0.1",
       "date": "Sun, 27 Jun 2021 21:12:37 GMT",
       "comments": {
         "patch": [
@@ -126,7 +126,7 @@
     },
     {
       "version": "1.0.0",
-      "tag": "@itwin/cra-template-web-viewer_v1.0.0",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v1.0.0",
       "date": "Fri, 04 Jun 2021 15:23:23 GMT",
       "comments": {
         "major": [
@@ -138,7 +138,7 @@
     },
     {
       "version": "0.1.5",
-      "tag": "@itwin/cra-template-web-viewer_v0.1.5",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v0.1.5",
       "date": "Wed, 19 May 2021 13:41:38 GMT",
       "comments": {
         "patch": [
@@ -150,7 +150,7 @@
     },
     {
       "version": "0.1.4",
-      "tag": "@itwin/cra-template-web-viewer_v0.1.4",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v0.1.4",
       "date": "Tue, 18 May 2021 18:50:47 GMT",
       "comments": {
         "patch": [
@@ -162,7 +162,7 @@
     },
     {
       "version": "0.1.3",
-      "tag": "@itwin/cra-template-web-viewer_v0.1.3",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v0.1.3",
       "date": "Mon, 17 May 2021 17:10:49 GMT",
       "comments": {
         "patch": [
@@ -174,7 +174,7 @@
     },
     {
       "version": "0.1.2",
-      "tag": "@itwin/cra-template-web-viewer_v0.1.2",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v0.1.2",
       "date": "Wed, 24 Mar 2021 21:29:43 GMT",
       "comments": {
         "patch": [
@@ -186,7 +186,7 @@
     },
     {
       "version": "0.1.1",
-      "tag": "@itwin/cra-template-web-viewer_v0.1.1",
+      "tag": "@itwin/cra-template-web-viewer-3.0_v0.1.1",
       "date": "Wed, 24 Mar 2021 21:03:22 GMT",
       "comments": {
         "patch": [

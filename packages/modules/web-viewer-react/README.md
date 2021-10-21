@@ -1,17 +1,17 @@
 # iTwin Viewer for Web
 
-The iTwin Web Viewer is a configurable iTwin.js viewer that offers basic tooling and widgets out-of-the-box and can be further extended through the use of [iTwin.js UI Providers](https://www.itwinjs.org/learning/ui/augmentingui/). This package should be used for web-based applications. For desktop applications, use [@itwin/desktop-viewer-react](https://www.npmjs.com/package/@itwin/desktop-viewer-react).
+The iTwin Web Viewer is a configurable iTwin.js viewer that offers basic tooling and widgets out-of-the-box and can be further extended through the use of [iTwin.js UI Providers](https://www.itwinjs.org/learning/ui/augmentingui/). This package should be used for web-based applications. For desktop applications, use [@itwin/desktop-viewer-react-3.0](https://www.npmjs.com/package/@itwin/desktop-viewer-react-3.0).
 
 ## Installation
 
 ```
-yarn add @itwin/web-viewer-react
+yarn add @itwin/web-viewer-react-3.0
 ```
 
 or
 
 ```
-npm install @itwin/web-viewer-react
+npm install @itwin/web-viewer-react-3.0
 ```
 
 ## Dependencies
@@ -36,7 +36,7 @@ npx create-react-app my-app --scripts-version @bentley/react-scripts --template 
 
 ```javascript
 import React, { useState, useEffect } from "react";
-import { Viewer } from "@itwin/web-viewer-react";
+import { Viewer } from "@itwin/web-viewer-react-3.0";
 
 export const MyViewerComponent = () => {
   const contextId = "myConnectProjectId";
@@ -129,7 +129,7 @@ export const MyViewerComponent = () => {
 ```
 
 ```javascript
-import { ItwinViewer } from "@itwin/web-viewer-react";
+import { ItwinViewer } from "@itwin/web-viewer-react-3.0";
 
 const contextId = "myConnectProjectId";
 const iModelId = "myIModelId";
@@ -161,7 +161,10 @@ For cases where you would prefer to use a [Blank iModelConnection](https://www.i
 
 ```javascript
 import React, { useState, useEffect } from "react";
-import { BlankConnectionViewState, BlankViewer } from "@itwin/web-viewer-react";
+import {
+  BlankConnectionViewState,
+  BlankViewer,
+} from "@itwin/web-viewer-react-3.0";
 import { Range3d } from "@itwin/core-geometry";
 import { Cartographic, ColorDef } from "@itwin/core-common";
 

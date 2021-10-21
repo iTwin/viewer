@@ -7,7 +7,7 @@ import {
   getInitializationOptions,
   isEqual,
   useBaseViewerInitializer,
-} from "@itwin/viewer-react";
+} from "@itwin/viewer-react-3.0";
 import { useEffect, useMemo, useState } from "react";
 
 import { DesktopInitializer } from "../services/Initializer";
