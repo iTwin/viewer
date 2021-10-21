@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react-3.0
 
-This log was last generated on Fri, 08 Oct 2021 17:32:09 GMT and should not be manually modified.
+This log was last generated on Thu, 21 Oct 2021 17:57:47 GMT and should not be manually modified.
+
+## 0.0.2
+Thu, 21 Oct 2021 17:57:47 GMT
+
+### Patches
+
+- 3.0 prerelease
 
 ## 1.8.0
 Fri, 08 Oct 2021 17:32:09 GMT

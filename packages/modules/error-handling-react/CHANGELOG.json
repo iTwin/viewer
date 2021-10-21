@@ -2,6 +2,18 @@
   "name": "@itwin/error-handling-react-3.0",
   "entries": [
     {
+      "version": "0.0.2",
+      "tag": "@itwin/error-handling-react-3.0_v0.0.2",
+      "date": "Thu, 21 Oct 2021 17:57:47 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "3.0 prerelease"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.2",
       "tag": "@itwin/error-handling-react-3.0_v1.0.2",
       "date": "Wed, 07 Jul 2021 21:58:42 GMT",
