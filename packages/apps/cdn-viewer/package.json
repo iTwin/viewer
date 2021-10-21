@@ -25,7 +25,7 @@
     "@itwin/appui-react": "^3.0.0-dev.91",
     "@itwin/appui-layout-react": "^3.0.0-dev.91",
     "@itwin/webgl-compatibility": "^3.0.0-dev.91",
-    "@itwin/web-viewer-react-3.0": "0.0.1",
+    "@itwin/web-viewer-react-3.0": "0.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.0"

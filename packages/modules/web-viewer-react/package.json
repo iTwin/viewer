@@ -1,6 +1,6 @@
 {
   "name": "@itwin/web-viewer-react-3.0",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Configurable iTwin.js viewer for web applications",
   "main": "lib/index.js",
   "module": "build/index.js",
@@ -80,7 +80,7 @@
     "typescript": "~4.3.0"
   },
   "dependencies": {
-    "@itwin/viewer-react-3.0": "0.0.1",
+    "@itwin/viewer-react-3.0": "0.0.2",
     "oidc-client": "^1.10.1"
   },
   "peerDependencies": {
