@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react-3.0",
+      "comment": "3.0 prerelease",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react-3.0",
+  "email": "6283674+kckst8@users.noreply.github.com"
+}
