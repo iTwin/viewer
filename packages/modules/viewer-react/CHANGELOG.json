@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "1.8.1",
+      "tag": "@itwin/viewer-react_v1.8.1",
+      "date": "Thu, 21 Oct 2021 14:29:56 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Re-add the center and right zones for users who are still on ui-1.0\""
+          }
+        ]
+      }
+    },
+    {
       "version": "1.8.0",
       "tag": "@itwin/viewer-react_v1.8.0",
       "date": "Fri, 08 Oct 2021 17:32:09 GMT",
