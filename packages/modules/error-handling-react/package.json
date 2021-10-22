@@ -53,7 +53,7 @@
     "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
-    "@itwin/core-react": "^3.0.0-dev.91",
+    "@itwin/core-react": "^3.0.0-dev.94",
     "@svgr/cli": "^5.3.1",
     "@testing-library/react": "^10.4.4",
     "@types/jest": "^26.0.4",
@@ -78,7 +78,7 @@
     "@types/sanitize-html": "^1.27.1"
   },
   "peerDependencies": {
-    "@itwin/core-react": "^3.0.0-dev.91",
+    "@itwin/core-react": "^3.0.0-dev.94",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
