@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-// import { IModelHubBackend } from "@bentley/imodelhub-client/lib/cjs/imodelhub-node";
+import { IModelHubBackend } from "@bentley/imodelhub-client/lib/cjs/imodelhub-node";
 import { IModelHostConfiguration, IpcHost } from "@itwin/core-backend";
 import { Logger, LogLevel } from "@itwin/core-bentley";
 import {
@@ -52,7 +52,7 @@ const viewerMain = async () => {
   };
 
   const iModelHost = new IModelHostConfiguration();
-  // iModelHost.hubAccess = new IModelHubBackend();
+  iModelHost.hubAccess = new IModelHubBackend();
 
   await ElectronHost.startup({ electronHost, iModelHost });
 
