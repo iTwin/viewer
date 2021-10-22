@@ -5,7 +5,7 @@
 
 import "./SignIn.scss";
 
-import { IModelApp } from "@bentley/imodeljs-frontend";
+import { IModelApp, NativeAppAuthorization } from "@itwin/core-frontend";
 import { SvgUser } from "@itwin/itwinui-icons-react";
 import { Button } from "@itwin/itwinui-react";
 import React, { useState } from "react";
@@ -14,7 +14,9 @@ export const SignIn = () => {
 
   const onSignInClick = () => {
     setSigningIn(true);
-    IModelApp.authorizationClient?.signIn();
+    if (IModelApp.authorizationClient instanceof NativeAppAuthorization) {
+      IModelApp.authorizationClient.signIn(); // eslint-disable-line @typescript-eslint/no-floating-promises
+    }
   };
 
   return (

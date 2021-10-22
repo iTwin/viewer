@@ -92,7 +92,6 @@ export const MyViewerComponent = () => {
 - `onIModelAppInit` - Callback function that executes after IModelApp.startup completes
 - `viewportOptions` - Additional options for the default frontstage's IModelViewportControl
 - `additionalI18nNamespaces` - Additional i18n namespaces to register
-- `iModelDataErrorMessage` - Override the default message that sends users to the iTwin Synchronization Portal when there are data-related errors with an iModel. Pass empty string to override with no message.
 - `toolAdmin` - Optional `ToolAdmin` to register
 - `loadingComponent` - provide a custom React component to override the spinner and text that displays when an iModel is loading
 

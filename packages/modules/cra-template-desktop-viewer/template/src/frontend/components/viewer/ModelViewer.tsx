@@ -8,7 +8,7 @@ import {
   IModelApp,
   ScreenViewport,
   StandardViewId,
-} from "@bentley/imodeljs-frontend";
+} from "@itwin/core-frontend";
 import { Viewer } from "@itwin/desktop-viewer-react";
 import React, { useCallback, useMemo } from "react";
 
@@ -43,7 +43,7 @@ export const ModelViewer = ({
     };
 
     tileTreesLoaded().finally(() => {
-      IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
+      void IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
       viewPort.view.setStandardRotation(StandardViewId.Iso);
     });
   }, []);

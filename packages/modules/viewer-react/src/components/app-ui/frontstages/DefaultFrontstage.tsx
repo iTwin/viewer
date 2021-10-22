@@ -3,11 +3,9 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ViewState } from "@bentley/imodeljs-frontend";
-import { StageUsage } from "@bentley/ui-abstract";
+import { StageUsage, StandardContentLayouts } from "@itwin/appui-abstract";
 import {
   ContentGroup,
-  ContentLayoutDef,
   CoreTools,
   FrameworkVersion,
   Frontstage,
@@ -19,18 +17,55 @@ import {
   Zone,
   ZoneLocation,
   ZoneState,
-} from "@bentley/ui-framework";
+} from "@itwin/appui-react";
+import { ViewState } from "@itwin/core-frontend";
 import * as React from "react";
 
 import { ItwinViewerUi, ViewerViewportControlOptions } from "../../../types";
 import { AppStatusBarWidget } from "../statusbars/AppStatusBar";
 import { BasicNavigationWidget, BasicToolWidget } from "../widgets";
 
+// TODO 3.0 refactor?
+// const getContentGroup = (viewState: ViewState, viewportOptions: IModelViewportControlOptions): ContentGroupProps =>{
+//  return {id: "main", contents: [
+
+//  new ContentGroup({
+//    id: "viewport-content-group",
+//    layout: StandardContentLayouts.singleView,
+//   contents: [
+//     {
+//       id: "viewport",
+//       classId: IModelViewportControl,
+//       applicationData: {
+//         iModelConnection: UiFramework.getIModelConnection(),
+//         ...viewportOptions,
+//         viewState: viewState
+//       },
+//     },
+//   ],
+// })];
+// };
+
+// export const getDefaultFrontstage = (
+//   viewState: ViewState,
+//   uiConfig?: ItwinViewerUi,
+//   viewportOptions?: IModelViewportControlOptions
+// ) => {
+//   const frontstageProps: StandardFrontstageProps = {
+//     id: "DefaultFrontstage",
+//     usage: StageUsage.General,
+//     contentGroupProps: getContentGroup(viewState, viewportOptions)
+//   };
+
+//   return new StandardFrontstageProvider(frontstageProps);
+// };
+
 /**
  * Default Frontstage for the iTwinViewer
  */
 export class DefaultFrontstage extends FrontstageProvider {
   // constants
+  public id = "DefaultFrontstage";
   static MAIN_CONTENT_ID = "Main";
   static DEFAULT_TOOL_WIDGET_KEY = "DefaultToolWidget";
   static DEFAULT_TOOL_SETTINGS_KEY = "DefaultToolSettings";
@@ -38,9 +73,6 @@ export class DefaultFrontstage extends FrontstageProvider {
   static DEFAULT_TREE_WIDGET_KEY = "DefaultTreeWidget";
   static DEFAULT_STATUS_BAR_WIDGET_KEY = "DefaultStatusBarWidget";
   static DEFAULT_PROPERTIES_WIDGET_KEY = "DefaultPropertiesWidgetKey";
-
-  // Content layout for content views
-  private _contentLayoutDef: ContentLayoutDef;
 
   // Content group for all layouts
   private _contentGroup: ContentGroup;
@@ -59,15 +91,14 @@ export class DefaultFrontstage extends FrontstageProvider {
     this._uiConfig = uiConfig;
     this._frameworkVersion = frameworkVersion || "2";
 
-    this._contentLayoutDef = new ContentLayoutDef({
-      id: DefaultFrontstage.MAIN_CONTENT_ID,
-    });
-
     // Create the content group.
     this._contentGroup = new ContentGroup({
+      id: DefaultFrontstage.MAIN_CONTENT_ID,
+      layout: StandardContentLayouts.singleView,
       contents: [
         {
-          classId: IModelViewportControl,
+          id: "viewport",
+          classId: IModelViewportControl.id,
           applicationData: {
             ...viewportOptions,
             iModelConnection: UiFramework.getIModelConnection(),
@@ -86,7 +117,6 @@ export class DefaultFrontstage extends FrontstageProvider {
         version={1} // this value should be increased when changes are made to Frontstage
         usage={StageUsage.General}
         defaultTool={CoreTools.selectElementCommand}
-        defaultLayout={this._contentLayoutDef}
         contentGroup={this._contentGroup}
         isInFooterMode={true}
         contentManipulationTools={

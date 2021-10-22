@@ -5,13 +5,13 @@
 
 import "./App.scss";
 
-import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
+import { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
 import {
   FitViewTool,
   IModelApp,
   ScreenViewport,
   StandardViewId,
-} from "@bentley/imodeljs-frontend";
+} from "@itwin/core-frontend";
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 

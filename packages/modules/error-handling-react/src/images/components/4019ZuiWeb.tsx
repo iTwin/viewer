@@ -2,12 +2,16 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-
 import * as React from "react";
 
-function Svg4019ZuiWeb(props: React.SVGProps<SVGSVGElement>): JSX.Element {
+function Svg4019ZuiWeb(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg id="401-9ZUI-WEB_svg__Web" viewBox="0 0 428.65 257.832" {...props}>
+    <svg
+      id="401-9ZUI-WEB_svg__Web"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 428.65 257.832"
+      {...props}
+    >
       <defs>
         <style>
           {

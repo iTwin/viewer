@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ColorTheme, UiFramework } from "@bentley/ui-framework";
+import { ColorTheme, UiFramework } from "@itwin/appui-react";
 import { useEffect } from "react";
 
 export function useTheme(theme?: ColorTheme | string): void {

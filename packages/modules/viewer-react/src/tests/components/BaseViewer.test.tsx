@@ -5,8 +5,8 @@
 
 import "@testing-library/jest-dom/extend-expect";
 
-import { SnapshotConnection } from "@bentley/imodeljs-frontend";
-import { UiCore } from "@bentley/ui-core";
+import { SnapshotConnection } from "@itwin/core-frontend";
+import { UiCore } from "@itwin/core-react";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
@@ -14,20 +14,20 @@ import { BaseViewer } from "../..";
 import * as IModelService from "../../services/iModel/IModelService";
 
 jest.mock("../../services/iModel/IModelService");
-jest.mock("@bentley/ui-framework", () => {
+jest.mock("@itwin/appui-react", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/ui-framework"),
+    ...jest.createMockFromModule<any>("@itwin/appui-react"),
     UiFramework: {
-      ...jest.createMockFromModule<any>("@bentley/ui-framework").UiFramework,
+      ...jest.createMockFromModule<any>("@itwin/appui-react").UiFramework,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
   };
 });
-jest.mock("@bentley/presentation-frontend", () => {
+jest.mock("@itwin/presentation-frontend", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/presentation-frontend"),
+    ...jest.createMockFromModule<any>("@itwin/presentation-frontend"),
     Presentation: {
-      ...jest.createMockFromModule<any>("@bentley/presentation-frontend")
+      ...jest.createMockFromModule<any>("@itwin/presentation-frontend")
         .Presentation,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
@@ -45,20 +45,19 @@ jest.mock("@microsoft/applicationinsights-react-js", () => ({
   ) => component,
 }));
 
-jest.mock("@bentley/imodeljs-frontend", () => {
+jest.mock("@itwin/core-frontend", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/imodeljs-frontend"),
+    ...jest.createMockFromModule<any>("@itwin/core-frontend"),
     IModelApp: {
       initialized: true,
       startup: jest.fn(),
       telemetry: {
         addClient: jest.fn(),
       },
-      i18n: {
-        registerNamespace: jest.fn().mockReturnValue({
-          readFinished: jest.fn().mockResolvedValue(true),
-        }),
-        languageList: jest.fn().mockReturnValue(["en-US"]),
+      localization: {
+        registerNamespace: jest.fn().mockResolvedValue(true),
+        getLanguageList: jest.fn().mockReturnValue(["en-US"]),
+        getLocalizedString: jest.fn(),
         unregisterNamespace: jest.fn(),
         translateWithNamespace: jest.fn(),
       },
@@ -66,9 +65,7 @@ jest.mock("@bentley/imodeljs-frontend", () => {
         updateFeatureFlags: jest.fn(),
       },
       authorizationClient: {
-        hasSignedIn: true,
-        isAuthorized: true,
-        onUserStateChanged: {
+        onAccessTokenChanged: {
           addListener: jest.fn(),
         },
       },
@@ -99,16 +96,34 @@ jest.mock("@bentley/imodeljs-frontend", () => {
 });
 
 jest.mock("../../services/telemetry/TelemetryService");
-jest.mock("@bentley/property-grid-react", () => {
+jest.mock("../../services/BaseInitializer", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/property-grid-react"),
-    PropertyGridManager: {
-      ...jest.createMockFromModule<any>("@bentley/property-grid-react")
-        .PropertyGridManager,
-      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+    BaseInitializer: {
+      authClient: {
+        hasSignedIn: true,
+        isAuthorized: true,
+        onAccessTokenChanged: {
+          addListener: jest.fn(),
+        },
+      },
+      initialize: jest.fn().mockResolvedValue(true),
+      cancel: jest.fn(),
+      shutdown: jest.fn(),
+      initialized: Promise.resolve(),
     },
   };
 });
+// TODO 3.0
+// jest.mock("@bentley/property-grid-react", () => {
+//   return {
+//     ...jest.createMockFromModule<any>("@bentley/property-grid-react"),
+//     PropertyGridManager: {
+//       ...jest.createMockFromModule<any>("@bentley/property-grid-react")
+//         .PropertyGridManager,
+//       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+//     },
+//   };
+// });
 
 const mockProjectId = "123";
 const mockIModelId = "456";
@@ -180,23 +195,5 @@ describe("BaseViewer", () => {
 
     expect(loader).toBeInTheDocument();
     expect(SnapshotConnection.openFile).toHaveBeenCalledWith(snapshotPath);
-  });
-
-  it("executes a callback after IModelApp is initialized", async () => {
-    const callbacks = {
-      onIModelAppInit: jest.fn(),
-    };
-    const { getByTestId } = render(
-      <BaseViewer
-        contextId={mockProjectId}
-        iModelId={mockIModelId}
-        onIModelAppInit={callbacks.onIModelAppInit}
-      />
-    );
-
-    const loader = await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(loader).toBeInTheDocument();
-    expect(callbacks.onIModelAppInit).toHaveBeenCalled();
   });
 });

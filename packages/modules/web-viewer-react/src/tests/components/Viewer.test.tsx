@@ -3,15 +3,15 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
+import { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
 import {
+  DevToolsRpcInterface,
   IModelReadRpcInterface,
   IModelTileRpcInterface,
-  IModelWriteRpcInterface,
   SnapshotIModelRpcInterface,
-} from "@bentley/imodeljs-common";
-import { IModelAppOptions, WebViewerApp } from "@bentley/imodeljs-frontend";
-import { PresentationRpcInterface } from "@bentley/presentation-common";
+} from "@itwin/core-common";
+import { IModelApp, IModelAppOptions } from "@itwin/core-frontend";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { ItwinViewerInitializerParams } from "@itwin/viewer-react";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
@@ -37,7 +37,7 @@ jest.mock("@itwin/viewer-react", () => {
           SnapshotIModelRpcInterface,
           ...(options?.additionalRpcInterfaces ?? []),
         ],
-        i18n: expect.anything(),
+        localization: expect.anything(),
         toolAdmin: options?.toolAdmin,
         authorizationClient: expect.anything(),
       };
@@ -49,10 +49,13 @@ jest.mock("@itwin/viewer-react", () => {
     useBaseViewerInitializer: jest.fn().mockReturnValue(true),
     getInitializationOptions: jest.fn().mockReturnValue({}),
     isEqual: jest.fn().mockReturnValue(true),
+    BaseInitializer: {
+      initialize: jest.fn(),
+    },
   };
 });
 
-jest.mock("@bentley/imodeljs-frontend", () => {
+jest.mock("@itwin/core-frontend", () => {
   return {
     IModelApp: {
       startup: jest.fn(),
@@ -122,39 +125,26 @@ describe("Viewer", () => {
         authConfig={{ config: authConfig }}
         contextId={mockProjectId}
         iModelId={mockIModelId}
-        additionalRpcInterfaces={[IModelWriteRpcInterface]}
+        additionalRpcInterfaces={[DevToolsRpcInterface]}
       />
     );
 
     await waitFor(() => getByTestId("mock-div"));
 
-    expect(WebViewerApp.startup).toHaveBeenCalledWith({
-      webViewerApp: {
-        rpcParams: {
-          info: {
-            title: "general-purpose-imodeljs-backend",
-            version: "v2.0",
-          },
-          uriPrefix: "https://api.bentley.com/imodeljs",
-        },
-        authConfig: authConfig,
-        routing: undefined,
-      },
-      iModelApp: {
-        applicationId: "3098",
-        authorizationClient: expect.anything(),
-        i18n: expect.anything(),
-        notifications: expect.anything(),
-        rpcInterfaces: [
-          IModelReadRpcInterface,
-          IModelTileRpcInterface,
-          PresentationRpcInterface,
-          SnapshotIModelRpcInterface,
-          IModelWriteRpcInterface,
-        ],
-        uiAdmin: expect.anything(),
-        toolAdmin: undefined,
-      },
+    expect(IModelApp.startup).toHaveBeenCalledWith({
+      applicationId: "3098",
+      authorizationClient: expect.anything(),
+      localization: expect.anything(),
+      notifications: expect.anything(),
+      rpcInterfaces: [
+        IModelReadRpcInterface,
+        IModelTileRpcInterface,
+        PresentationRpcInterface,
+        SnapshotIModelRpcInterface,
+        DevToolsRpcInterface,
+      ],
+      uiAdmin: expect.anything(),
+      toolAdmin: undefined,
     });
   });
 

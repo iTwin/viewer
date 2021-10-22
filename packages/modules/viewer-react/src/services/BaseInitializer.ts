@@ -3,24 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ClientRequestContext } from "@bentley/bentleyjs-core";
-import { Config } from "@bentley/bentleyjs-core";
-import {
-  IModelReadRpcInterface,
-  IModelTileRpcInterface,
-  RpcInterface,
-  RpcInterfaceDefinition,
-  SnapshotIModelRpcInterface,
-} from "@bentley/imodeljs-common";
-import { IModelApp, IModelAppOptions } from "@bentley/imodeljs-frontend";
-import { I18N } from "@bentley/imodeljs-i18n";
-import { UrlDiscoveryClient } from "@bentley/itwin-client";
-import { PresentationRpcInterface } from "@bentley/presentation-common";
-import { Presentation } from "@bentley/presentation-frontend";
-import { PropertyGridManager } from "@bentley/property-grid-react";
-import { TreeWidget } from "@bentley/tree-widget-react";
-import { UiComponents } from "@bentley/ui-components";
-import { UiCore } from "@bentley/ui-core";
+// TODO 3.0 re-add
+// import { MeasureTools } from "@bentley/measure-tools-react";
+// import { PropertyGridManager } from "@bentley/property-grid-react";
+// import { TreeWidget } from "@bentley/tree-widget-react";
+import { IModelHubFrontend } from "@bentley/imodelhub-client";
 import {
   AppNotificationManager,
   ConfigurableUiManager,
@@ -28,40 +15,54 @@ import {
   FrameworkUiAdmin,
   StateManager,
   UiFramework,
-} from "@bentley/ui-framework";
+} from "@itwin/appui-react";
+import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
+import { UiComponents } from "@itwin/components-react";
+import {
+  IModelReadRpcInterface,
+  IModelTileRpcInterface,
+  RpcInterface,
+  RpcInterfaceDefinition,
+  SnapshotIModelRpcInterface,
+} from "@itwin/core-common";
+import { IModelApp, IModelAppOptions } from "@itwin/core-frontend";
+import { ITwinLocalization } from "@itwin/core-i18n";
+import { UiCore } from "@itwin/core-react";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
+import { Presentation } from "@itwin/presentation-frontend";
 
 import { ItwinViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
+import { ViewerAuthorizationClient } from "./auth/ViewerAuthorizationClient";
 import { ai, trackEvent } from "./telemetry/TelemetryService";
 
 // initialize required iTwin.js services
 export class BaseInitializer {
   private static _initialized: Promise<void>;
   private static _initializing = false;
-  private static _iModelDataErrorMessage: string | undefined;
-  private static _synchronizerRootUrl: string | undefined;
   private static _cancel: (() => void) | undefined;
+  private static _authClient:
+    | BrowserAuthorizationClient
+    | ViewerAuthorizationClient
+    | undefined;
 
-  public static async getSynchronizerUrl(
-    contextId: string,
-    iModelId: string
-  ): Promise<string> {
-    if (!this._synchronizerRootUrl) {
-      const urlDiscoveryClient = new UrlDiscoveryClient();
-      this._synchronizerRootUrl = await urlDiscoveryClient.discoverUrl(
-        new ClientRequestContext(),
-        "itwinbridgeportal",
-        Config.App.get("imjs_buddi_resolve_url_using_region")
-      );
-    }
-    const portalUrl = `${this._synchronizerRootUrl}/${contextId}/${iModelId}`;
-    return IModelApp.i18n.translateWithNamespace(
-      "iTwinViewer",
-      "iModels.synchronizerLink",
-      {
-        bridgePortal: portalUrl,
-      }
-    );
+  /**
+   * Return the stored auth client    TODO 3.0 account for desktop client as well
+   */
+  public static get authClient():
+    | BrowserAuthorizationClient
+    | ViewerAuthorizationClient
+    | undefined {
+    return this._authClient;
+  }
+
+  /**
+   * Set the stored auth client
+   */
+  public static set authClient(
+    client: BrowserAuthorizationClient | ViewerAuthorizationClient | undefined
+  ) {
+    this._authClient = client;
   }
 
   /** expose initialized promise */
@@ -96,43 +97,16 @@ export class BaseInitializer {
         UiComponents.terminate();
       }
     } catch (err) {
-      // Do nothing.
-    }
-    try {
-      if (UiCore.initialized) {
-        UiCore.terminate();
-      }
-    } catch (err) {
       // Do nothing
     }
     try {
-      IModelApp.i18n
-        .languageList()
-        .forEach((ns) => IModelApp.i18n.unregisterNamespace(ns));
+      IModelApp.localization
+        .getLanguageList()
+        .forEach((ns) => IModelApp.localization.unregisterNamespace(ns));
     } catch (err) {
       // Do nothing
     }
   };
-
-  /** Message to display when there are iModel data-related errors */
-  public static async getIModelDataErrorMessage(
-    contextId: string,
-    iModelId: string,
-    prefix?: string
-  ): Promise<string> {
-    if (this._iModelDataErrorMessage !== undefined) {
-      return prefix
-        ? `${prefix} ${this._iModelDataErrorMessage}`
-        : this._iModelDataErrorMessage;
-    }
-    const synchronizerPortalUrl = await this.getSynchronizerUrl(
-      contextId,
-      iModelId
-    );
-    return prefix
-      ? `${prefix} ${synchronizerPortalUrl}`
-      : synchronizerPortalUrl;
-  }
 
   /** shutdown IModelApp */
   static async shutdown(): Promise<void> {
@@ -184,25 +158,27 @@ export class BaseInitializer {
           viewerOptions.additionalI18nNamespaces
         );
       }
-      const i18nPromises = i18nNamespaces.map(
-        async (ns) => IModelApp.i18n.registerNamespace(ns).readFinished
+      const i18nPromises = i18nNamespaces.map(async (ns) =>
+        IModelApp.localization.registerNamespace(ns)
       );
 
       yield Promise.all(i18nPromises);
 
       // initialize UiCore
-      yield UiCore.initialize(IModelApp.i18n);
+      yield UiCore.initialize(IModelApp.localization);
 
       // initialize UiComponents
-      yield UiComponents.initialize(IModelApp.i18n);
+      yield UiComponents.initialize(IModelApp.localization);
 
       // initialize UiFramework
       // Use undefined so that UiFramework uses StateManager
-      yield UiFramework.initialize(undefined, IModelApp.i18n);
+      yield UiFramework.initialize(undefined, IModelApp.localization);
 
       // initialize Presentation
       yield Presentation.initialize({
-        activeLocale: IModelApp.i18n.languageList()[0],
+        presentation: {
+          activeLocale: IModelApp.localization.getLanguageList()[0],
+        },
       });
 
       // allow uiAdmin to open key-in palette when Ctrl+F2 is pressed - good for manually loading UI providers
@@ -214,13 +190,10 @@ export class BaseInitializer {
         trackEvent("iTwinViewer.Viewer.Initialized");
       }
 
-      yield PropertyGridManager.initialize(IModelApp.i18n);
-
-      yield TreeWidget.initialize(IModelApp.i18n);
-
-      // override the default data error message
-      BaseInitializer._iModelDataErrorMessage =
-        viewerOptions?.iModelDataErrorMessage;
+      // TODO 3.0 re-add
+      // yield PropertyGridManager.initialize(IModelApp.i18n);
+      // yield TreeWidget.initialize(IModelApp.i18n);
+      // yield MeasureTools.startup();
 
       console.log("iTwin.js initialized");
     });
@@ -275,12 +248,13 @@ export const getIModelAppOptions = (
     notifications: new AppNotificationManager(),
     uiAdmin: new FrameworkUiAdmin(),
     rpcInterfaces: getSupportedRpcs(options?.additionalRpcInterfaces ?? []),
-    i18n: new I18N("iModelJs", {
+    localization: new ITwinLocalization({
       urlTemplate: options?.i18nUrlTemplate
         ? options.i18nUrlTemplate
         : viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`,
     }),
     toolAdmin: options?.toolAdmin,
-    imodelClient: options?.imodelClient,
+    hubAccess: new IModelHubFrontend(), // TODO 3.0
+    // imodelClient: options?.imodelClient, //TODO 3.0 support iTwin Stack??
   };
 };

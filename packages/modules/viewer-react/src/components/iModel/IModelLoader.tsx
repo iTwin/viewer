@@ -7,23 +7,23 @@ import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
 import {
+  BackstageActionItem,
+  BackstageItemUtilities,
+  BackstageStageLauncher,
+} from "@itwin/appui-abstract";
+import {
+  StateManager,
+  SyncUiEventDispatcher,
+  UiFramework,
+} from "@itwin/appui-react";
+import {
   BlankConnection,
   BlankConnectionProps,
   IModelApp,
   IModelConnection,
   SnapshotConnection,
   ViewState,
-} from "@bentley/imodeljs-frontend";
-import {
-  BackstageActionItem,
-  BackstageItemUtilities,
-  BackstageStageLauncher,
-} from "@bentley/ui-abstract";
-import {
-  StateManager,
-  SyncUiEventDispatcher,
-  UiFramework,
-} from "@bentley/ui-framework";
+} from "@itwin/core-frontend";
 import { useErrorManager } from "@itwin/error-handling-react";
 import { withAITracking } from "@microsoft/applicationinsights-react-js";
 import React, { useCallback, useEffect, useState } from "react";
@@ -202,7 +202,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
 
         if (!(contextId && iModelId) && !snapshotPath) {
           throw new Error(
-            IModelApp.i18n.translateWithNamespace(
+            IModelApp.localization.getLocalizedStringWithNamespace(
               "iTwinViewer",
               "missingConnectionProps"
             )
@@ -271,7 +271,9 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
                 (backstageItem as BackstageStageLauncher).stageId,
                 backstageItem.groupPriority,
                 backstageItem.itemPriority,
-                IModelApp.i18n.translate(backstageItem.labeli18nKey),
+                IModelApp.localization.getLocalizedString(
+                  backstageItem.labeli18nKey
+                ),
                 backstageItem.subtitle,
                 backstageItem.icon
               );
@@ -281,7 +283,9 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
                 backstageItem.groupPriority,
                 backstageItem.itemPriority,
                 (backstageItem as BackstageActionItem).execute,
-                IModelApp.i18n.translate(backstageItem.labeli18nKey),
+                IModelApp.localization.getLocalizedString(
+                  backstageItem.labeli18nKey
+                ),
                 backstageItem.subtitle,
                 backstageItem.icon
               );
@@ -299,7 +303,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           id: "DefaultFrontstage",
           groupPriority: 100,
           itemPriority: 10,
-          label: IModelApp.i18n.translate(
+          label: IModelApp.localization.getLocalizedString(
             "iTwinViewer:backstage.mainFrontstage"
           ),
         });
