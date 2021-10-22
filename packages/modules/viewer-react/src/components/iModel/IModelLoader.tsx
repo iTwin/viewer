@@ -323,7 +323,8 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         const defaultFrontstageProvider = new DefaultFrontstage(
           viewState,
           defaultUiConfig,
-          viewportOptions
+          viewportOptions,
+          uiFrameworkVersion
         );
 
         // add the default frontstage first so that it's default status can be overridden
@@ -334,7 +335,13 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       }
 
       setFinalFrontstages(allFrontstages);
-    }, [frontstages, viewportOptions, viewState, defaultUiConfig]);
+    }, [
+      frontstages,
+      viewportOptions,
+      viewState,
+      defaultUiConfig,
+      uiFrameworkVersion,
+    ]);
 
     if (error) {
       throw error;

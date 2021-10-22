@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Fri, 08 Oct 2021 17:32:09 GMT and should not be manually modified.
+This log was last generated on Thu, 21 Oct 2021 14:29:56 GMT and should not be manually modified.
+
+## 1.8.1
+Thu, 21 Oct 2021 14:29:56 GMT
+
+### Patches
+
+- Re-add the center and right zones for users who are still on ui-1.0"
 
 ## 1.8.0
 Fri, 08 Oct 2021 17:32:09 GMT
