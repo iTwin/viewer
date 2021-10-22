@@ -26,18 +26,17 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: |
         set -e
+
         echo 'Installing...'
         node common/scripts/install-run-rush.js install
-    - run: |
-        set -e
+
         echo 'Building...'
         node common/scripts/install-run-rush.js rebuild
-    - run: |
-        set -e
+
         echo 'Publishing...'
         git config user.name "iTwinViewerWorkflow"
         git config user.email "itwinviewer@users.noreply.github.com"
         node common/scripts/install-run-rush.js version --bump --target-branch next
-        node common/scripts/install-run-rush.js publish --include-all --set-access-level public --apply --publish --npm-auth-token $NPM_TOKEN --target-branch next --tag next --prerelease-name "dev" --partial-prerelease
+        node common/scripts/install-run-rush.js publish --include-all --set-access-level public --apply --publish --npm-auth-token $NPM_TOKEN --target-branch next --tag next
       env:
         NPM_TOKEN: ${{ secrets.NPMJS_PUBLISH_ITWIN }}

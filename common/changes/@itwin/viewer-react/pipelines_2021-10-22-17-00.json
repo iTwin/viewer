@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "iTwin.js 3.0 pre-release",
+      "type": "none"
+    }
+  ],
+  "packageName": "@itwin/viewer-react",
+  "email": "aruniverse@users.noreply.github.com"
+}
