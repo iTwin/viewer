@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import modelImg from "@bentley/icons-generic/icons/imodeljs.svg";
-import { Button, ButtonType } from "@bentley/ui-core";
+import { Button } from "@itwin/itwinui-react";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 
@@ -26,28 +26,28 @@ export const Home = ({ history }: RouteComponentProps) => {
           <Button
             className={styles.homeButton}
             onClick={() => history.push("/authclient")}
-            buttonType={ButtonType.Blue}
+            styleType={"high-visibility"}
           >
             {"Use Auth Client"}
           </Button>
           <Button
             className={styles.homeButton}
             onClick={() => history.push("/authconfig")}
-            buttonType={ButtonType.Primary}
+            styleType={"cta"}
           >
             {"Use Auth Config"}
           </Button>
           <Button
             className={styles.homeButton}
             onClick={() => history.push("/blankconnection")}
-            buttonType={ButtonType.Hollow}
+            styleType={"default"}
           >
             {"Blank Connection"}
           </Button>
           <Button
             className={styles.homeButton}
             onClick={() => history.push("/imodelbank")}
-            buttonType={ButtonType.Hollow}
+            styleType={"default"}
           >
             {"iModel Bank"}
           </Button>

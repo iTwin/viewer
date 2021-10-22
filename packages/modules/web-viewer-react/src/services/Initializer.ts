@@ -3,32 +3,40 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ClientRequestContext, Config } from "@bentley/bentleyjs-core";
-import { FrontendApplicationInsightsClient } from "@bentley/frontend-application-insights-client";
-import { BentleyCloudRpcParams } from "@bentley/imodeljs-common";
+import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import {
-  IModelApp,
-  IModelAppOptions,
-  WebViewerApp,
-  WebViewerAppOpts,
-} from "@bentley/imodeljs-frontend";
-import { UrlDiscoveryClient } from "@bentley/itwin-client";
-import { getIModelAppOptions, makeCancellable } from "@itwin/viewer-react";
+  BentleyCloudRpcManager,
+  BentleyCloudRpcParams,
+} from "@itwin/core-common";
+import { IModelApp } from "@itwin/core-frontend";
+import {
+  BaseInitializer,
+  getIModelAppOptions,
+  makeCancellable,
+  ViewerAuthorizationClient,
+} from "@itwin/viewer-react";
 
-import { IModelBackendOptions, WebViewerProps } from "../types";
-import AuthorizationClient from "./auth/AuthorizationClient";
+import {
+  IModelBackendOptions,
+  WebAuthorizationOptions,
+  WebViewerProps,
+} from "../types";
 
 const getHostedConnectionInfo = async (
   backendOptions?: IModelBackendOptions
 ): Promise<BentleyCloudRpcParams> => {
-  const urlClient = new UrlDiscoveryClient();
-  const requestContext = new ClientRequestContext();
+  let prefix = "";
+  switch (backendOptions?.buddiRegion) {
+    case 101:
+    case 103:
+      prefix = "dev-";
+      break;
+    case 102:
+      prefix = "qa-";
+      break;
+  }
 
-  const orchestratorUrl = await urlClient.discoverUrl(
-    requestContext,
-    `iModelJsOrchestrator.K8S`,
-    backendOptions?.buddiRegion
-  );
+  const orchestratorUrl = `https://${prefix}api.bentley.com/imodeljs`;
 
   if (backendOptions?.hostedBackend) {
     if (!backendOptions.hostedBackend.title) {
@@ -71,33 +79,19 @@ export class WebInitializer {
   private static _initializing = false;
   private static _cancel: (() => void) | undefined;
 
-  private static _checkForAuthorizationClient(
-    iModelAppOptions: IModelAppOptions,
-    viewerOptions?: WebViewerProps
-  ) {
-    const options = { ...iModelAppOptions };
-    if (!viewerOptions?.authConfig.config) {
-      if (viewerOptions?.authConfig.oidcClient) {
-        options.authorizationClient = viewerOptions.authConfig.oidcClient;
-      } else if (viewerOptions?.authConfig.getUserManagerFunction) {
-        options.authorizationClient = new AuthorizationClient(
-          viewerOptions.authConfig.getUserManagerFunction
-        );
-      }
+  private static getAuthorizationClient(
+    authConfig?: WebAuthorizationOptions
+  ): BrowserAuthorizationClient | ViewerAuthorizationClient | undefined {
+    if (!authConfig) {
+      return;
     }
-    return options;
-  }
-
-  /** add required values to Config.App */
-  private static _setupEnv(options?: IModelBackendOptions): void {
-    Config.App.merge({
-      imjs_buddi_url:
-        options?.buddiServer !== undefined
-          ? options.buddiServer
-          : "https://buddi.bentley.com/WebService",
-      imjs_buddi_resolve_url_using_region:
-        options?.buddiRegion !== undefined ? options.buddiRegion : 0,
-    });
+    if (authConfig.config) {
+      return new BrowserAuthorizationClient(authConfig.config);
+    } else if (authConfig.oidcClient) {
+      return authConfig.oidcClient;
+    } else if (authConfig.getUserManagerFunction) {
+      return new ViewerAuthorizationClient(authConfig.getUserManagerFunction);
+    }
   }
 
   /** expose initialized promise */
@@ -111,7 +105,7 @@ export class WebInitializer {
       if (WebInitializer._cancel) {
         WebInitializer._cancel();
       }
-      WebViewerApp.shutdown().catch(() => {
+      IModelApp.shutdown().catch(() => {
         // Do nothing, its possible that we never started.
       });
     }
@@ -122,34 +116,22 @@ export class WebInitializer {
     if (!IModelApp.initialized && !this._initializing) {
       console.log("starting web viewer");
       this._initializing = true;
-
       const cancellable = makeCancellable(function* () {
+        const iModelAppOptions = getIModelAppOptions(options);
+        const authClient = WebInitializer.getAuthorizationClient(
+          options?.authConfig
+        );
+        iModelAppOptions.authorizationClient = authClient;
+        BaseInitializer.authClient = authClient;
         const rpcParams: BentleyCloudRpcParams = yield initializeRpcParams(
           options?.backend
         );
-        const webViewerOptions: WebViewerAppOpts = {
-          iModelApp: WebInitializer._checkForAuthorizationClient(
-            getIModelAppOptions(options),
-            options
-          ),
-          webViewerApp: {
-            rpcParams: rpcParams,
-            authConfig: options?.authConfig.config,
-            routing: options?.rpcRoutingToken,
-          },
-        };
-        yield WebViewerApp.startup(webViewerOptions);
 
-        // optionally change the environment
-        WebInitializer._setupEnv(options?.backend);
-
-        // Add iModelJS ApplicationInsights telemetry client if a key is provided
-        if (options?.imjsAppInsightsKey) {
-          const imjsApplicationInsightsClient =
-            new FrontendApplicationInsightsClient(options.imjsAppInsightsKey);
-          IModelApp.telemetry.addClient(imjsApplicationInsightsClient);
-        }
-
+        yield IModelApp.startup(iModelAppOptions);
+        BentleyCloudRpcManager.initializeClient(
+          rpcParams,
+          iModelAppOptions.rpcInterfaces ?? []
+        );
         console.log("web viewer started");
       });
 

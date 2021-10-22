@@ -3,15 +3,15 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
+import { ColorTheme } from "@itwin/appui-react";
+import { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
 import {
   FitViewTool,
   IModelApp,
   ScreenViewport,
   StandardViewId,
-} from "@bentley/imodeljs-frontend";
-import { ColorTheme } from "@bentley/ui-framework";
-import { Viewer } from "@itwin/web-viewer-react";
+} from "@itwin/core-frontend";
+import { BaseInitializer, Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";
@@ -24,8 +24,8 @@ import styles from "./Home.module.scss";
  */
 export const AuthConfigHome: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(
-    (IModelApp.authorizationClient?.hasSignedIn &&
-      IModelApp.authorizationClient?.isAuthorized) ||
+    (BaseInitializer.authClient?.hasSignedIn &&
+      BaseInitializer.authClient?.isAuthorized) ||
       false
   );
   const [iModelId, setIModelId] = useState(
@@ -46,10 +46,9 @@ export const AuthConfigHome: React.FC = () => {
 
   useEffect(() => {
     setLoggedIn(
-      IModelApp.authorizationClient
-        ? IModelApp.authorizationClient.hasSignedIn &&
-            IModelApp.authorizationClient.isAuthorized
-        : false
+      (BaseInitializer.authClient?.hasSignedIn &&
+        BaseInitializer.authClient?.isAuthorized) ||
+        false
     );
   }, []);
 
@@ -70,18 +69,18 @@ export const AuthConfigHome: React.FC = () => {
 
   const toggleLogin = async () => {
     if (!loggedIn) {
-      await IModelApp.authorizationClient?.signIn();
+      await BaseInitializer.authClient?.signIn();
     } else {
-      await IModelApp.authorizationClient?.signOut();
+      await BaseInitializer.authClient?.signOut();
     }
   };
 
   const onIModelAppInit = () => {
-    setLoggedIn(IModelApp.authorizationClient?.isAuthorized ?? false);
-    IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
+    setLoggedIn(BaseInitializer.authClient?.isAuthorized ?? false);
+    BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
       setLoggedIn(
-        (IModelApp.authorizationClient?.hasSignedIn &&
-          IModelApp.authorizationClient?.isAuthorized) ||
+        (BaseInitializer.authClient?.hasSignedIn &&
+          BaseInitializer.authClient?.isAuthorized) ||
           false
       );
     });
@@ -115,7 +114,7 @@ export const AuthConfigHome: React.FC = () => {
     };
 
     tileTreesLoaded().finally(() => {
-      IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
+      void IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
       viewPort.view.setStandardRotation(StandardViewId.Iso);
     });
   }, []);
@@ -145,6 +144,13 @@ export const AuthConfigHome: React.FC = () => {
         onIModelAppInit={onIModelAppInit}
         viewCreatorOptions={viewCreatorOptions}
         loadingComponent={<Loader />}
+        backend={{
+          hostedBackend: {
+            title: "visualization",
+            version: "v3.0",
+          },
+          buddiRegion: 103,
+        }}
       />
     </div>
   );

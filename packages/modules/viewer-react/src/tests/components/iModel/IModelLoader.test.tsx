@@ -5,24 +5,22 @@
 
 import "@testing-library/jest-dom/extend-expect";
 
-import { Config } from "@bentley/bentleyjs-core";
-import { Range3d } from "@bentley/geometry-core";
-import { Cartographic, ColorDef } from "@bentley/imodeljs-common";
+import { BackstageItemUtilities, UiItemsManager } from "@itwin/appui-abstract";
+import {
+  ColorTheme,
+  FrontstageProps,
+  FrontstageProvider,
+  UiFramework,
+} from "@itwin/appui-react";
+import { Cartographic, ColorDef } from "@itwin/core-common";
 import {
   BlankConnection,
   BlankConnectionProps,
   IModelApp,
   IModelConnection,
   SnapshotConnection,
-} from "@bentley/imodeljs-frontend";
-import { UrlDiscoveryClient } from "@bentley/itwin-client";
-import { BackstageItemUtilities, UiItemsManager } from "@bentley/ui-abstract";
-import {
-  ColorTheme,
-  FrontstageProps,
-  FrontstageProvider,
-  UiFramework,
-} from "@bentley/ui-framework";
+} from "@itwin/core-frontend";
+import { Range3d } from "@itwin/core-geometry";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
@@ -43,16 +41,16 @@ jest.mock("react-redux", () => ({
   Provider: jest.fn().mockImplementation(({ children }: any) => children),
 }));
 
-jest.mock("@bentley/ui-framework", () => {
+jest.mock("@itwin/appui-react", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/ui-framework"),
+    ...jest.createMockFromModule<any>("@itwin/appui-react"),
     StateManager: {
-      ...jest.createMockFromModule<any>("@bentley/ui-framework").StateManager,
+      ...jest.createMockFromModule<any>("@itwin/appui-react").StateManager,
       store: jest.fn(),
     },
   };
 });
-jest.mock("@bentley/ui-abstract");
+jest.mock("@itwin/appui-abstract");
 jest.mock("@microsoft/applicationinsights-react-js", () => ({
   ReactPlugin: jest.fn(),
   withAITracking: (
@@ -62,20 +60,16 @@ jest.mock("@microsoft/applicationinsights-react-js", () => ({
     className?: string // eslint-disable-line no-unused-vars
   ) => component,
 }));
-jest.mock("@bentley/imodeljs-frontend", () => {
+jest.mock("@itwin/core-frontend", () => {
   return {
     IModelApp: {
       startup: jest.fn(),
       telemetry: {
         addClient: jest.fn(),
       },
-      i18n: {
-        registerNamespace: jest.fn().mockReturnValue({
-          readFinished: jest.fn().mockResolvedValue(true),
-        }),
-        languageList: jest.fn().mockReturnValue(["en-US"]),
-        translate: jest.fn(),
-        translateWithNamespace: jest.fn(),
+      localization: {
+        getLocalizedString: jest.fn(),
+        registerNamespace: jest.fn().mockResolvedValue(true),
       },
       uiAdmin: {
         updateFeatureFlags: jest.fn(),
@@ -150,12 +144,14 @@ jest.mock("../../../components/iModel/IModelViewer", () => ({
 }));
 
 class Frontstage1Provider extends FrontstageProvider {
+  public id = "Frontstage1";
   public get frontstage(): React.ReactElement<FrontstageProps> {
     return <div></div>;
   }
 }
 
 class Frontstage2Provider extends FrontstageProvider {
+  public id = "Frontstage2";
   public get frontstage(): React.ReactElement<FrontstageProps> {
     return <div></div>;
   }
@@ -172,10 +168,6 @@ describe("IModelLoader", () => {
       close: jest.fn(),
       isOpen: true,
     } as any);
-    jest
-      .spyOn(UrlDiscoveryClient.prototype, "discoverUrl")
-      .mockResolvedValue("https://test.com");
-    jest.spyOn(Config.App, "get").mockReturnValue(1);
     jest.spyOn(SnapshotConnection, "openFile").mockResolvedValue({
       isBlankConnection: () => true,
       isOpen: true,
@@ -200,7 +192,8 @@ describe("IModelLoader", () => {
 
     await waitFor(() => result.getByTestId("loader-wrapper"));
 
-    expect(UiItemsManager.register).toHaveBeenCalledTimes(3);
+    // TODO 3.0 - update called times as default providers are re-added
+    expect(UiItemsManager.register).toHaveBeenCalledTimes(1);
 
     result.rerender(
       <IModelLoader
@@ -212,7 +205,8 @@ describe("IModelLoader", () => {
 
     await waitFor(() => result.getByTestId("viewer"));
 
-    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(3);
+    // TODO 3.0 - update called times as default providers are re-added
+    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(1);
   });
 
   it("adds backstage items and translates their labels", async () => {
@@ -261,13 +255,17 @@ describe("IModelLoader", () => {
     // these calls will be doubled. items will be set first without a viewState and reset with one additional translation for the default frontstage once we have a viewState
     expect(BackstageItemUtilities.createStageLauncher).toHaveBeenCalledTimes(2);
     expect(BackstageItemUtilities.createActionItem).toHaveBeenCalledTimes(2);
-    expect(IModelApp.i18n.translate).toHaveBeenCalledTimes(5);
+    expect(IModelApp.localization.getLocalizedString).toHaveBeenCalledTimes(5);
   });
 
   it("creates a blank connection and a blank ViewState", async () => {
     const blankConnection: BlankConnectionProps = {
       name: "GeometryConnection",
-      location: Cartographic.fromDegrees(0, 0, 0),
+      location: Cartographic.fromDegrees({
+        longitude: 0,
+        latitude: 0,
+        height: 0,
+      }),
       extents: new Range3d(-30, -30, -30, 30, 30, 30),
     };
 

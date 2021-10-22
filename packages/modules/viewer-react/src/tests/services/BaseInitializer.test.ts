@@ -4,15 +4,15 @@
  *--------------------------------------------------------------------------------------------*/
 
 import {
+  DevToolsRpcInterface,
   IModelReadRpcInterface,
   IModelTileRpcInterface,
-  IModelWriteRpcInterface,
   SnapshotIModelRpcInterface,
-} from "@bentley/imodeljs-common";
-import { IModelApp } from "@bentley/imodeljs-frontend";
-import { I18N } from "@bentley/imodeljs-i18n";
-import { PresentationRpcInterface } from "@bentley/presentation-common";
-import { UiCore } from "@bentley/ui-core";
+} from "@itwin/core-common";
+import { IModelApp } from "@itwin/core-frontend";
+import { ITwinLocalization } from "@itwin/core-i18n";
+import { UiCore } from "@itwin/core-react";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
 
 import {
   BaseInitializer,
@@ -21,39 +21,39 @@ import {
 import { ai } from "../../services/telemetry/TelemetryService";
 import { MockToolAdmin } from "../mocks/MockToolAdmin";
 
-jest.mock("@bentley/imodeljs-i18n");
-jest.mock("@bentley/ui-framework", () => {
+jest.mock("@itwin/core-i18n");
+jest.mock("@itwin/appui-react", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/ui-framework"),
+    ...jest.createMockFromModule<any>("@itwin/appui-react"),
     UiFramework: {
-      ...jest.createMockFromModule<any>("@bentley/ui-framework").UiFramework,
+      ...jest.createMockFromModule<any>("@itwin/appui-react").UiFramework,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
   };
 });
-jest.mock("@bentley/presentation-frontend", () => {
+jest.mock("@itwin/presentation-frontend", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/presentation-frontend"),
+    ...jest.createMockFromModule<any>("@itwin/presentation-frontend"),
     Presentation: {
-      ...jest.createMockFromModule<any>("@bentley/presentation-frontend")
+      ...jest.createMockFromModule<any>("@itwin/presentation-frontend")
         .Presentation,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
   };
 });
-jest.mock("@bentley/imodeljs-frontend", () => {
-  const noMock = jest.requireActual("@bentley/imodeljs-frontend");
+jest.mock("@itwin/core-frontend", () => {
+  const noMock = jest.requireActual("@itwin/core-frontend");
   return {
     IModelApp: {
       startup: jest.fn().mockResolvedValue(true),
       telemetry: {
         addClient: jest.fn(),
       },
-      i18n: {
+      localization: {
         registerNamespace: jest.fn().mockReturnValue({
           readFinished: jest.fn().mockResolvedValue(true),
         }),
-        languageList: jest.fn().mockReturnValue(["en-US"]),
+        getLanguageList: jest.fn().mockReturnValue(["en-US"]),
         unregisterNamespace: jest.fn(),
         translateWithNamespace: jest.fn(),
       },
@@ -82,16 +82,17 @@ jest.mock("@bentley/imodeljs-frontend", () => {
     AccuDraw: class {},
   };
 });
-jest.mock("@bentley/property-grid-react", () => {
-  return {
-    ...jest.createMockFromModule<any>("@bentley/property-grid-react"),
-    PropertyGridManager: {
-      ...jest.createMockFromModule<any>("@bentley/property-grid-react")
-        .PropertyGridManager,
-      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
-    },
-  };
-});
+// TODO 3.0
+// jest.mock("@bentley/property-grid-react", () => {
+//   return {
+//     ...jest.createMockFromModule<any>("@bentley/property-grid-react"),
+//     PropertyGridManager: {
+//       ...jest.createMockFromModule<any>("@bentley/property-grid-react")
+//         .PropertyGridManager,
+//       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+//     },
+//   };
+// });
 jest.mock("../../services/telemetry/TelemetryService");
 
 describe("BaseInitializer", () => {
@@ -123,8 +124,9 @@ describe("BaseInitializer", () => {
         PresentationRpcInterface,
         SnapshotIModelRpcInterface,
       ],
-      i18n: expect.anything(),
+      localization: expect.anything(),
       toolAdmin: undefined,
+      hubAccess: expect.anything(),
     });
   });
 
@@ -139,7 +141,7 @@ describe("BaseInitializer", () => {
   });
 
   it("registers additional rpcInterfaces", () => {
-    const additionalRpcInterfaces = [IModelWriteRpcInterface];
+    const additionalRpcInterfaces = [DevToolsRpcInterface];
 
     const appOptions = getIModelAppOptions({
       additionalRpcInterfaces: additionalRpcInterfaces,
@@ -150,7 +152,7 @@ describe("BaseInitializer", () => {
       IModelTileRpcInterface,
       PresentationRpcInterface,
       SnapshotIModelRpcInterface,
-      IModelWriteRpcInterface,
+      DevToolsRpcInterface,
     ]);
   });
 
@@ -170,7 +172,7 @@ describe("BaseInitializer", () => {
       i18nUrlTemplate: i18nUrlTemplate,
     });
 
-    expect(I18N).toHaveBeenCalledWith("iModelJs", {
+    expect(ITwinLocalization).toHaveBeenCalledWith({
       urlTemplate: i18nUrlTemplate,
     });
   });
@@ -182,8 +184,12 @@ describe("BaseInitializer", () => {
 
     await BaseInitializer.initialized;
 
-    expect(IModelApp.i18n.registerNamespace).toHaveBeenCalledWith("test1");
-    expect(IModelApp.i18n.registerNamespace).toHaveBeenCalledWith("test2");
+    expect(IModelApp.localization.registerNamespace).toHaveBeenCalledWith(
+      "test1"
+    );
+    expect(IModelApp.localization.registerNamespace).toHaveBeenCalledWith(
+      "test2"
+    );
   });
 
   it("instantiates an instance of the Telemetry Service when an app insights key is provided", async () => {
@@ -222,5 +228,18 @@ describe("BaseInitializer", () => {
         "IModelApp must be initialized prior to rendering the Base Viewer"
       );
     }
+  });
+
+  it("executes a callback after IModelApp is initialized", async () => {
+    const callbacks = {
+      onIModelAppInit: jest.fn(),
+    };
+    await BaseInitializer.initialize({
+      onIModelAppInit: callbacks.onIModelAppInit,
+    });
+
+    await BaseInitializer.initialized;
+
+    expect(callbacks.onIModelAppInit).toHaveBeenCalled();
   });
 });

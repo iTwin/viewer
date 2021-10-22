@@ -7,14 +7,14 @@ import {
   CoreTools,
   SelectionContextToolDefinitions,
   ToolbarHelper,
-} from "@bentley/ui-framework";
+} from "@itwin/appui-react";
 import { render } from "@testing-library/react";
 import React from "react";
 
 import { BasicToolWidget } from "../../../../components/app-ui/widgets/BasicToolWidget";
 
-jest.mock("@bentley/ui-abstract");
-jest.mock("@bentley/ui-framework", () => {
+jest.mock("@itwin/appui-abstract");
+jest.mock("@itwin/appui-react", () => {
   return {
     BackstageAppButton: jest.fn(),
     ToolWidgetComposer: () => null,
@@ -50,7 +50,8 @@ describe("BasicToolWidget", () => {
   });
   it("defaults all tools visible", () => {
     render(<BasicToolWidget />);
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(8);
+    // TODO 3.0 increase this once measure tools are re-added
+    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(7);
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
       CoreTools.clearSelectionItemDef
@@ -75,10 +76,11 @@ describe("BasicToolWidget", () => {
       10,
       CoreTools.selectElementCommand
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
-      20,
-      CoreTools.measureToolGroup
-    );
+    // TODO 3.0
+    // expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
+    //   20,
+    //   CoreTools.measureToolGroup
+    // );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       30,
       CoreTools.sectionToolGroup
@@ -87,7 +89,8 @@ describe("BasicToolWidget", () => {
 
   it("hides all horizontal tools", () => {
     render(<BasicToolWidget config={{ hideDefaultHorizontalItems: true }} />);
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(3);
+    // TODO 3.0 increase this once measure tools are re-added
+    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(2);
     expect(ToolbarHelper.createToolbarItemFromItemDef).not.toHaveBeenCalledWith(
       10,
       CoreTools.clearSelectionItemDef
@@ -112,10 +115,11 @@ describe("BasicToolWidget", () => {
       10,
       CoreTools.selectElementCommand
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
-      20,
-      CoreTools.measureToolGroup
-    );
+    // TODO 3.0
+    // expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
+    //   20,
+    //   CoreTools.measureToolGroup
+    // );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       30,
       CoreTools.sectionToolGroup
@@ -149,10 +153,11 @@ describe("BasicToolWidget", () => {
       10,
       CoreTools.selectElementCommand
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).not.toHaveBeenCalledWith(
-      20,
-      CoreTools.measureToolGroup
-    );
+    // TODO 3.0
+    // expect(ToolbarHelper.createToolbarItemFromItemDef).not.toHaveBeenCalledWith(
+    //   20,
+    //   CoreTools.measureToolGroup
+    // );
     expect(ToolbarHelper.createToolbarItemFromItemDef).not.toHaveBeenCalledWith(
       30,
       CoreTools.sectionToolGroup
@@ -169,7 +174,8 @@ describe("BasicToolWidget", () => {
         }}
       />
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(7);
+    // TODO 3.0 increase this once measure tools are re-added
+    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(6);
     expect(ToolbarHelper.createToolbarItemFromItemDef).not.toHaveBeenCalledWith(
       10,
       CoreTools.clearSelectionItemDef
@@ -194,10 +200,11 @@ describe("BasicToolWidget", () => {
       10,
       CoreTools.selectElementCommand
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
-      20,
-      CoreTools.measureToolGroup
-    );
+    // TODO 3.0
+    // expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
+    //   20,
+    //   CoreTools.measureToolGroup
+    // );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       30,
       CoreTools.sectionToolGroup
@@ -214,7 +221,8 @@ describe("BasicToolWidget", () => {
         }}
       />
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(7);
+    // TODO 3.0 increase this once measure tools are re-added
+    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(6);
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
       CoreTools.clearSelectionItemDef
@@ -239,10 +247,11 @@ describe("BasicToolWidget", () => {
       10,
       CoreTools.selectElementCommand
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
-      20,
-      CoreTools.measureToolGroup
-    );
+    // TODO 3.0
+    // expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
+    //   20,
+    //   CoreTools.measureToolGroup
+    // );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       30,
       CoreTools.sectionToolGroup
@@ -259,7 +268,8 @@ describe("BasicToolWidget", () => {
         }}
       />
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(7);
+    // TODO 3.0 increase this once measure tools are re-added
+    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(6);
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
       CoreTools.clearSelectionItemDef
@@ -284,10 +294,11 @@ describe("BasicToolWidget", () => {
       10,
       CoreTools.selectElementCommand
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
-      20,
-      CoreTools.measureToolGroup
-    );
+    // TODO 3.0
+    // expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
+    //   20,
+    //   CoreTools.measureToolGroup
+    // );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       30,
       CoreTools.sectionToolGroup
@@ -304,7 +315,8 @@ describe("BasicToolWidget", () => {
         }}
       />
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(7);
+    // TODO 3.0 increase this once measure tools are re-added
+    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(6);
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
       CoreTools.clearSelectionItemDef
@@ -329,10 +341,11 @@ describe("BasicToolWidget", () => {
       10,
       CoreTools.selectElementCommand
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
-      20,
-      CoreTools.measureToolGroup
-    );
+    // TODO 3.0
+    // expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
+    //   20,
+    //   CoreTools.measureToolGroup
+    // );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       30,
       CoreTools.sectionToolGroup
@@ -349,7 +362,8 @@ describe("BasicToolWidget", () => {
         }}
       />
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(7);
+    // TODO 3.0 increase this once measure tools are re-added
+    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(6);
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
       CoreTools.clearSelectionItemDef
@@ -374,10 +388,11 @@ describe("BasicToolWidget", () => {
       10,
       CoreTools.selectElementCommand
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
-      20,
-      CoreTools.measureToolGroup
-    );
+    // TODO 3.0
+    // expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
+    //   20,
+    //   CoreTools.measureToolGroup
+    // );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       30,
       CoreTools.sectionToolGroup
@@ -394,7 +409,8 @@ describe("BasicToolWidget", () => {
         }}
       />
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(7);
+    // TODO 3.0 increase this once measure tools are re-added
+    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(6);
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
       CoreTools.clearSelectionItemDef
@@ -419,10 +435,11 @@ describe("BasicToolWidget", () => {
       10,
       CoreTools.selectElementCommand
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
-      20,
-      CoreTools.measureToolGroup
-    );
+    // TODO 3.0
+    // expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
+    //   20,
+    //   CoreTools.measureToolGroup
+    // );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       30,
       CoreTools.sectionToolGroup
@@ -439,6 +456,7 @@ describe("BasicToolWidget", () => {
         }}
       />
     );
+    // TODO 3.0 increase this once measure tools are re-added
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(7);
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
@@ -464,10 +482,11 @@ describe("BasicToolWidget", () => {
       10,
       CoreTools.selectElementCommand
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).not.toHaveBeenCalledWith(
-      20,
-      CoreTools.measureToolGroup
-    );
+    // TODO 3.0
+    // expect(ToolbarHelper.createToolbarItemFromItemDef).not.toHaveBeenCalledWith(
+    //   20,
+    //   CoreTools.measureToolGroup
+    // );
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       30,
       CoreTools.sectionToolGroup
@@ -484,7 +503,8 @@ describe("BasicToolWidget", () => {
         }}
       />
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(7);
+    // TODO 3.0 increase this once measure tools are re-added
+    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledTimes(6);
     expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
       10,
       CoreTools.clearSelectionItemDef
@@ -509,10 +529,11 @@ describe("BasicToolWidget", () => {
       10,
       CoreTools.selectElementCommand
     );
-    expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
-      20,
-      CoreTools.measureToolGroup
-    );
+    // TODO 3.0
+    // expect(ToolbarHelper.createToolbarItemFromItemDef).toHaveBeenCalledWith(
+    //   20,
+    //   CoreTools.measureToolGroup
+    // );
     expect(ToolbarHelper.createToolbarItemFromItemDef).not.toHaveBeenCalledWith(
       30,
       CoreTools.sectionToolGroup

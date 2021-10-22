@@ -3,11 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BlankConnectionProps, IModelApp } from "@bentley/imodeljs-frontend";
-import { FillCentered } from "@bentley/ui-core/lib/ui-core";
+import { BlankConnectionProps } from "@itwin/core-frontend";
+import { FillCentered } from "@itwin/core-react";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
+import { BaseInitializer } from "..";
 import { useBaseViewerInitializer } from "../hooks";
 import {
   BlankConnectionViewState,
@@ -34,7 +35,6 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
   blankConnection,
   viewStateOptions,
   productId,
-  imjsAppInsightsKey,
   i18nUrlTemplate,
   onIModelAppInit,
   additionalI18nNamespaces,
@@ -45,7 +45,6 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
   const viewerInitialized = useBaseViewerInitializer({
     appInsightsKey,
     productId,
-    imjsAppInsightsKey,
     i18nUrlTemplate,
     onIModelAppInit,
     additionalI18nNamespaces,
@@ -54,14 +53,14 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
 
   useEffect(() => {
     setAuthorized(
-      (IModelApp.authorizationClient?.hasSignedIn &&
-        IModelApp.authorizationClient?.isAuthorized) ||
+      (BaseInitializer.authClient?.hasSignedIn &&
+        BaseInitializer.authClient?.isAuthorized) ||
         false
     );
-    IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
+    BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
       setAuthorized(
-        (IModelApp.authorizationClient?.hasSignedIn &&
-          IModelApp.authorizationClient?.isAuthorized) ||
+        (BaseInitializer.authClient?.hasSignedIn &&
+          BaseInitializer.authClient?.isAuthorized) ||
           false
       );
     });

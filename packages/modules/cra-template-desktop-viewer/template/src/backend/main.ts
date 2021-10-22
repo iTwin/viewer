@@ -3,14 +3,15 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Logger, LogLevel } from "@bentley/bentleyjs-core";
+import { IModelHubBackend } from "@bentley/imodelhub-client/lib/cjs/imodelhub-node";
+import { IModelHostConfiguration, IpcHost } from "@itwin/core-backend";
+import { Logger, LogLevel } from "@itwin/core-bentley";
 import {
   ElectronHost,
   ElectronHostOptions,
-} from "@bentley/electron-manager/lib/ElectronBackend";
-import { IpcHost } from "@bentley/imodeljs-backend";
-import { Presentation } from "@bentley/presentation-backend";
+} from "@itwin/core-electron/lib/cjs/ElectronBackend";
 import { Menu, shell } from "electron";
+import { Presentation } from "@itwin/presentation-backend";
 import { MenuItemConstructorOptions } from "electron/main";
 import * as path from "path";
 
@@ -28,7 +29,7 @@ require("dotenv-flow").config(); // eslint-disable-line @typescript-eslint/no-va
 const viewerMain = async () => {
   // Setup logging immediately to pick up any logging during IModelHost.startup()
   Logger.initializeToConsole();
-  Logger.setLevelDefault(LogLevel.Warning);
+  Logger.setLevelDefault(LogLevel.Trace);
   Logger.setLevel(AppLoggerCategory.Backend, LogLevel.Info);
 
   const electronHost: ElectronHostOptions = {
@@ -40,7 +41,10 @@ const viewerMain = async () => {
     noInitializeAuthClient: true,
   };
 
-  await ElectronHost.startup({ electronHost });
+  const iModelHost = new IModelHostConfiguration();
+  iModelHost.hubAccess = new IModelHubBackend();
+
+  await ElectronHost.startup({ electronHost, iModelHost });
 
   Presentation.initialize();
 

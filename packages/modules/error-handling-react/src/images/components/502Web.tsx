@@ -2,12 +2,15 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-
 import * as React from "react";
 
-function Svg502Web(props: React.SVGProps<SVGSVGElement>): JSX.Element {
+function Svg502Web(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 392.918 230.632" {...props}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 392.918 230.632"
+      {...props}
+    >
       <path
         fill="#edeff2"
         d="M201.533 0h1v37.475h-1zM161.947 66.992l39.89-25.271.535.845-39.89 25.271z"

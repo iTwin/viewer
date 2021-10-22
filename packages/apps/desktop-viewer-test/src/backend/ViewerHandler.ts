@@ -4,8 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ElectronAuthorizationBackend } from "@bentley/electron-manager/lib/ElectronBackend";
-import { IModelHost, IpcHandler } from "@bentley/imodeljs-backend";
-import { InternetConnectivityStatus } from "@bentley/imodeljs-common";
+import { InternetConnectivityStatus } from "@itwin/core-common";
 import {
   dialog,
   Menu,
@@ -14,6 +13,7 @@ import {
   SaveDialogOptions,
   SaveDialogReturnValue,
 } from "electron";
+import { IpcHandler, IModelHost } from "@itwin/core-backend";
 import * as minimist from "minimist";
 
 import {

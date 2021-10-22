@@ -5,21 +5,21 @@
 
 import "./IModelBusy.scss";
 
-import { IModelApp } from "@bentley/imodeljs-frontend";
-import { ProgressBar } from "@bentley/ui-core";
+import { IModelApp } from "@itwin/core-frontend";
+import { ProgressLinear } from "@itwin/itwinui-react";
 import React from "react";
 
 export const IModelBusy = (): JSX.Element => {
   return (
-    // TODO localize text once i18n strategy is in place
     <div data-testid="loader-wrapper" className="imodelbusy__centered">
       <div className="imodelbusy__contents">
-        <ProgressBar
+        <ProgressLinear
           indeterminate={true}
-          labelLeft={IModelApp.i18n.translateWithNamespace(
-            "iTwinViewer",
-            "iModels.iModelLoading"
-          )}
+          labels={[
+            IModelApp.localization.getLocalizedString(
+              "iTwinViewer:iModels.iModelLoading"
+            ),
+          ]}
         />
       </div>
     </div>

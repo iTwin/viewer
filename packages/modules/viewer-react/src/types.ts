@@ -3,14 +3,20 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Vector3d, XAndY, XYAndZ } from "@bentley/geometry-core";
 import { IModelClient } from "@bentley/imodelhub-client";
+import { BackstageItem, UiItemsProvider } from "@itwin/appui-abstract";
+import {
+  ColorTheme,
+  FrameworkVersion,
+  FrontstageProvider,
+  IModelViewportControlOptions,
+} from "@itwin/appui-react";
 import {
   ColorDef,
   RenderMode,
   RpcInterface,
   RpcInterfaceDefinition,
-} from "@bentley/imodeljs-common";
+} from "@itwin/core-common";
 import {
   IModelConnection,
   ScreenViewport,
@@ -18,14 +24,8 @@ import {
   ToolAdmin,
   ViewChangeOptions,
   ViewState,
-} from "@bentley/imodeljs-frontend";
-import { BackstageItem, UiItemsProvider } from "@bentley/ui-abstract";
-import {
-  ColorTheme,
-  FrameworkVersion,
-  FrontstageProvider,
-  IModelViewportControlOptions,
-} from "@bentley/ui-framework";
+} from "@itwin/core-frontend";
+import { Vector3d, XAndY, XYAndZ } from "@itwin/core-geometry";
 
 /**
  * options for configuration of 3D view
@@ -95,8 +95,6 @@ export interface ItwinViewerCommonParams
 export interface ItwinViewerInitializerParams {
   /** optional Azure Application Insights key for telemetry */
   appInsightsKey?: string;
-  /** optional iTwin.js Application Insights key for telemetry within iTwin.js */
-  imjsAppInsightsKey?: string;
   /** GPRID for the consuming application. Will default to the iTwin Viewer GPRID */
   productId?: string;
   /** urlTemplate for querying i18n json files */
@@ -107,8 +105,6 @@ export interface ItwinViewerInitializerParams {
   additionalI18nNamespaces?: string[];
   /** custom rpc interfaces (assumes that they are supported in your backend) */
   additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
-  /** override the default message that sends users to the iTwin Synchronizer when there are data-related errors with an iModel. Pass empty string to override with no message. */
-  iModelDataErrorMessage?: string;
   /** optional ToolAdmin to initialize */
   toolAdmin?: ToolAdmin;
   /** option imodelClient (defaults to iModelHubClient) */

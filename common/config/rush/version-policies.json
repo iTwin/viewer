@@ -1,6 +1,8 @@
 [
   {
     "policyName": "independentModule",
-    "definitionName": "individualVersion"
+    "definitionName": "individualVersion",
+    "lockedMajor": 2,
+    "nextBump": "prerelease"
   }
 ]

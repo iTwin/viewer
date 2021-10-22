@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ToolAdmin } from "@bentley/imodeljs-frontend";
+import { ToolAdmin } from "@itwin/core-frontend";
 
 export class MockToolAdmin extends ToolAdmin {
   public constructor() {

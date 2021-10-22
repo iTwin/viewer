@@ -46,12 +46,10 @@ export const IModelsRoute = ({
   }, [location?.state]);
 
   return (
-    <IModelContext.Provider
-value={{ pendingIModel, setPendingIModel }}
-    >
+    <IModelContext.Provider value={{ pendingIModel, setPendingIModel }}>
       {accessToken ? (
         <SelectIModel
-          accessToken={accessToken.toTokenString()}
+          accessToken={accessToken}
           projectId={iTwinId}
           projectName={projectName}
         />

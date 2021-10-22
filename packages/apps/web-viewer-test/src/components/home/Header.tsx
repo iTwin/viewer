@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ReactComponent as Home } from "@bentley/icons-generic/icons/home.svg";
-import { Button, ButtonType } from "@bentley/ui-core";
+import { Button } from "@itwin/itwinui-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -30,7 +30,7 @@ export const Header = ({
         <Button
           className={styles.button}
           onClick={handleLoginToggle}
-          buttonType={ButtonType.Primary}
+          styleType={"cta"}
         >
           {loggedIn ? "Sign Out" : "Sign In"}
         </Button>
@@ -38,7 +38,7 @@ export const Header = ({
           <Button
             className={styles.button}
             onClick={switchModel}
-            buttonType={ButtonType.Blue}
+            styleType={"high-visibility"}
           >
             {"Switch Model"}
           </Button>

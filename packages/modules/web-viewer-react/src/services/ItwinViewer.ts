@@ -3,9 +3,9 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { CheckpointConnection } from "@bentley/imodeljs-frontend";
-import { UiItemsProvider } from "@bentley/ui-abstract";
-import { ColorTheme, FrameworkVersion } from "@bentley/ui-framework";
+import { UiItemsProvider } from "@itwin/appui-abstract";
+import { ColorTheme, FrameworkVersion } from "@itwin/appui-react";
+import { CheckpointConnection } from "@itwin/core-frontend";
 import {
   ItwinViewerUi,
   ViewerViewportControlOptions,

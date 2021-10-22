@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Button, ButtonType } from "@bentley/ui-core";
+import { Button } from "@itwin/core-react";
 import React from "react";
 
 import styles from "./Header.module.scss";
@@ -25,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({
         <Button
           className={styles.button}
           onClick={handleLogin}
-          buttonType={ButtonType.Primary}
+          styleType={"cta"}
           disabled={loggedIn}
         >
           {"Sign In"}
@@ -33,7 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
         <Button
           className={styles.button}
           onClick={handleLogout}
-          buttonType={ButtonType.Primary}
+          styleType={"high-visibility"}
           disabled={!loggedIn}
         >
           {"Sign Out"}

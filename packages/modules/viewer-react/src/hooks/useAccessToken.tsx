@@ -3,10 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IModelApp } from "@bentley/imodeljs-frontend";
-import { AccessToken } from "@bentley/itwin-client";
+import { AccessToken } from "@itwin/core-bentley";
+import { IModelApp } from "@itwin/core-frontend";
 import { useCallback, useEffect, useState } from "react";
 
+import { BaseInitializer } from "..";
 import { useIsMounted } from "./useIsMounted";
 
 export const useAccessToken = () => {
@@ -14,7 +15,7 @@ export const useAccessToken = () => {
   const isMounted = useIsMounted();
 
   const getAccessToken = useCallback(async () => {
-    if (IModelApp.authorizationClient?.hasSignedIn) {
+    if (BaseInitializer.authClient?.hasSignedIn) {
       const token = await IModelApp.authorizationClient?.getAccessToken();
       setAccessToken(token);
     }
@@ -25,7 +26,7 @@ export const useAccessToken = () => {
   }, [getAccessToken]);
 
   useEffect(() => {
-    IModelApp?.authorizationClient?.onUserStateChanged.addListener((token) => {
+    BaseInitializer.authClient?.onAccessTokenChanged.addListener((token) => {
       if (isMounted.current) {
         setAccessToken(token);
       }
