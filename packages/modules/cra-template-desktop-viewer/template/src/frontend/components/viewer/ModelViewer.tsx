@@ -43,7 +43,7 @@ export const ModelViewer = ({
     };
 
     tileTreesLoaded().finally(() => {
-      IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
+      void IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
       viewPort.view.setStandardRotation(StandardViewId.Iso);
     });
   }, []);

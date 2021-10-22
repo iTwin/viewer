@@ -3,13 +3,9 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { AsyncFunction, PromiseReturnType } from "@itwin/core-bentley";
 import { IpcListener } from "@itwin/core-common";
-import {
-  AsyncFunction,
-  IModelApp,
-  IpcApp,
-  PromiseReturnType,
-} from "@itwin/core-frontend";
+import { IModelApp, IpcApp } from "@itwin/core-frontend";
 import { NavigateFn } from "@reach/router";
 import { OpenDialogOptions } from "electron";
 
@@ -31,7 +27,10 @@ export class ITwinViewerApp {
   private static _menuListener: IpcListener | undefined;
 
   public static translate(key: string | string[], options?: any): string {
-    return IModelApp.i18n.translate(`iTwinViewer:${key}`, options);
+    return IModelApp.localization.getLocalizedString(
+      `iTwinViewer:${key}`,
+      options
+    );
   }
 
   public static ipcCall = new Proxy({} as IpcMethods, {
