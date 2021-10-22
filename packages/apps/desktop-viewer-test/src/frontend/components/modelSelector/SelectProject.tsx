@@ -96,7 +96,7 @@ export const SelectProject = () => {
           </div>
           <div className="itv-scrolling-content">
             <ProjectGrid
-              accessToken={accessToken.toTokenString()}
+              accessToken={accessToken}
               requestType={
                 projectType === 0
                   ? "favorites"

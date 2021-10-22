@@ -12,6 +12,7 @@
   },
   "scripts": {
     "build": "",
+    "build:desktop": "npm run -s build:frontend && npm run -s build:backend",
     "build:backend": "tsc -p tsconfig.backend.json",
     "build:frontend": "react-scripts build",
     "clean": "rimraf lib build dist",

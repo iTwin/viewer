@@ -134,6 +134,17 @@ export function BasicToolWidget({ config }: BasicToolWidgetProps): JSX.Element {
       );
     }
     if (
+      config?.verticalItems?.measureTools === undefined ||
+      config?.verticalItems?.measureTools === true
+    ) {
+      items.push(
+        ToolbarHelper.createToolbarItemFromItemDef(
+          20,
+          CoreTools.measureToolGroup
+        )
+      );
+    }
+    if (
       config?.verticalItems?.sectionTools === undefined ||
       config?.verticalItems?.sectionTools === true
     ) {
