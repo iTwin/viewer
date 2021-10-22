@@ -4,8 +4,7 @@
 name: iTwin Viewer NPM Publish
 
 on:
-  push:
-    # branches: ["next"]
+  workflow_dispatch:
 
 jobs:
   build:
