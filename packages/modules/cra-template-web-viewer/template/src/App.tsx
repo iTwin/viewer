@@ -157,9 +157,6 @@ const App: React.FC = () => {
           authConfig={{ config: authConfig }}
           onIModelAppInit={onIModelAppInit}
           viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
-          backend={{
-            buddiRegion: 103,
-          }}
         />
       )}
     </div>
