@@ -57,7 +57,7 @@ const getHostedConnectionInfo = async (
     };
   } else {
     return {
-      info: { title: IModelBackend.GeneralPurpose, version: "v3.0" },
+      info: { title: IModelBackend.ITwinPlatform, version: "v3.0" },
       uriPrefix: orchestratorUrl,
     };
   }

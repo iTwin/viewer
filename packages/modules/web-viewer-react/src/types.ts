@@ -31,7 +31,7 @@ export interface WebAuthorizationOptions {
  * List of possible hosted backends that the iTwin Viewer can use
  */
 export enum IModelBackend {
-  GeneralPurpose = "visualization",
+  ITwinPlatform = "visualization",
 }
 
 /**
@@ -63,7 +63,7 @@ export interface IModelBackendOptions {
 export interface WebViewerPropsFull extends ViewerProps {
   /** authorization configuration */
   authConfig: WebAuthorizationOptions;
-  /** options to override the default backend (general-purpose-imodeljs-backend) */
+  /** options to override the default backend from iTwin Platform */
   backend?: IModelBackendOptions;
 }
 
