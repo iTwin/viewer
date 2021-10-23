@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/web-viewer-react",
+      "comment": "",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/web-viewer-react",
+  "email": "aruniverse@users.noreply.github.com"
+}
