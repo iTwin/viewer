@@ -33,7 +33,7 @@ jobs:
           node common/scripts/install-run-rush.js build
 
           echo 'Checking Rush Change...'
-          node common/scripts/install-run-rush.js change -v -b origin/next
+          node common/scripts/install-run-rush.js change -v -b HEAD
 
           # echo 'Testing...'
           # node common/scripts/install-run-rush.js test --verbose
