@@ -17,6 +17,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -33,7 +35,7 @@ jobs:
           node common/scripts/install-run-rush.js build
 
           echo 'Checking Rush Change...'
-          node common/scripts/install-run-rush.js change -v -b HEAD
+          node common/scripts/install-run-rush.js change -v -b origin/next
 
           # echo 'Testing...'
           # node common/scripts/install-run-rush.js test --verbose
