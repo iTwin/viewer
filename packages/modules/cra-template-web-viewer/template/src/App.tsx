@@ -12,7 +12,7 @@ import {
   ScreenViewport,
   StandardViewId,
 } from "@itwin/core-frontend";
-import { Viewer } from "@itwin/web-viewer-react";
+import { BaseInitializer, Viewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 
 import { Header } from "./Header";
@@ -20,8 +20,8 @@ import { history } from "./history";
 
 const App: React.FC = () => {
   const [isAuthorized, setIsAuthorized] = useState(
-    (IModelApp.authorizationClient?.hasSignedIn &&
-      IModelApp.authorizationClient?.isAuthorized) ||
+    (BaseInitializer.authClient?.hasSignedIn &&
+      BaseInitializer.authClient?.isAuthorized) ||
       false
   );
   const [isLoggingIn, setIsLoggingIn] = useState(false);
@@ -92,21 +92,21 @@ const App: React.FC = () => {
 
   const onLoginClick = async () => {
     setIsLoggingIn(true);
-    await IModelApp.authorizationClient?.signIn();
+    await BaseInitializer.authClient?.signIn();
   };
 
   const onLogoutClick = async () => {
     setIsLoggingIn(false);
-    await IModelApp.authorizationClient?.signOut();
+    await BaseInitializer.authClient?.signOut();
     setIsAuthorized(false);
   };
 
   const onIModelAppInit = () => {
-    setIsAuthorized(IModelApp.authorizationClient?.isAuthorized || false);
-    IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
+    setIsAuthorized(BaseInitializer.authClient?.isAuthorized ?? false);
+    BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
       setIsAuthorized(
-        (IModelApp.authorizationClient?.hasSignedIn &&
-          IModelApp.authorizationClient?.isAuthorized) ||
+        (BaseInitializer.authClient?.hasSignedIn &&
+          BaseInitializer.authClient?.isAuthorized) ||
           false
       );
     });
@@ -157,6 +157,9 @@ const App: React.FC = () => {
           authConfig={{ config: authConfig }}
           onIModelAppInit={onIModelAppInit}
           viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
+          backend={{
+            buddiRegion: 103,
+          }}
         />
       )}
     </div>
