@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Button } from "@itwin/core-react";
+import { Button } from "@itwin/itwinui-react";
 import React from "react";
 
 import styles from "./Header.module.scss";

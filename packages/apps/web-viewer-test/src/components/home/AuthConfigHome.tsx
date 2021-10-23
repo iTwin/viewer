@@ -145,10 +145,6 @@ export const AuthConfigHome: React.FC = () => {
         viewCreatorOptions={viewCreatorOptions}
         loadingComponent={<Loader />}
         backend={{
-          hostedBackend: {
-            title: "visualization",
-            version: "v3.0",
-          },
           buddiRegion: 103,
         }}
       />
