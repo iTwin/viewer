@@ -56,7 +56,7 @@ const getHostedConnectionInfo = async (
     };
   } else {
     return {
-      info: { title: "general-purpose-imodeljs-backend", version: "v2.0" },
+      info: { title: "visualization", version: "v3.0" },
       uriPrefix: orchestratorUrl,
     };
   }

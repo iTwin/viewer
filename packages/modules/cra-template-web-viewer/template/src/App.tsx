@@ -158,10 +158,6 @@ const App: React.FC = () => {
           onIModelAppInit={onIModelAppInit}
           viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
           backend={{
-            hostedBackend: {
-              title: "visualization",
-              version: "v3.0",
-            },
             buddiRegion: 103,
           }}
         />
