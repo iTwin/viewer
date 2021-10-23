@@ -17,6 +17,7 @@ import {
 } from "@itwin/viewer-react";
 
 import {
+  IModelBackend,
   IModelBackendOptions,
   WebAuthorizationOptions,
   WebViewerProps,
@@ -56,7 +57,7 @@ const getHostedConnectionInfo = async (
     };
   } else {
     return {
-      info: { title: "visualization", version: "v3.0" },
+      info: { title: IModelBackend.GeneralPurpose, version: "v3.0" },
       uriPrefix: orchestratorUrl,
     };
   }

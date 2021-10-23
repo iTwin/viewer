@@ -32,6 +32,9 @@ jobs:
           echo 'Building...'
           node common/scripts/install-run-rush.js build
 
+          echo 'Checking Rush Change...'
+          node common/scripts/install-run-rush.js change -v -b origin/next
+
           # echo 'Testing...'
           # node common/scripts/install-run-rush.js test --verbose
 

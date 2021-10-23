@@ -31,7 +31,7 @@ export interface WebAuthorizationOptions {
  * List of possible hosted backends that the iTwin Viewer can use
  */
 export enum IModelBackend {
-  GeneralPurpose = "general-purpose-imodeljs-backend",
+  GeneralPurpose = "visualization",
 }
 
 /**

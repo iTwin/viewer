@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/cra-template-desktop-viewer",
       "comment": "",
-      "type": "none"
+      "type": "patch"
     }
   ],
   "packageName": "@itwin/cra-template-desktop-viewer",
