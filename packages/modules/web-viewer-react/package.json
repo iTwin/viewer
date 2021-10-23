@@ -1,6 +1,6 @@
 {
   "name": "@itwin/web-viewer-react",
-  "version": "2.0.0-dev.16",
+  "version": "2.0.0-dev",
   "description": "Configurable iTwin.js viewer for web applications",
   "main": "lib/index.js",
   "module": "build/index.js",
