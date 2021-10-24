@@ -90,8 +90,8 @@ jest.mock("@itwin/core-frontend", () => {
     ItemField: {},
     CompassMode: {},
     RotationMode: {},
-    AccuDraw: class {},
-    ToolAdmin: class {},
+    AccuDraw: class { },
+    ToolAdmin: class { },
   };
 });
 
@@ -158,7 +158,7 @@ describe("BaseViewer", () => {
 
     await waitFor(() => getByTestId("loader-wrapper"));
 
-    expect(IModelService.openRemoteImodel).toHaveBeenCalledWith(
+    expect(IModelService.openRemoteIModel).toHaveBeenCalledWith(
       mockProjectId,
       mockIModelId,
       "123"

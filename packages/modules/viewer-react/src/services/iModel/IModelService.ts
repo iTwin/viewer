@@ -42,16 +42,16 @@ const getVersion = async (
 };
 
 /** open and return an IModelConnection from a project's wsgId and an imodel's wsgId */
-export const openRemoteImodel = async (
+export const openRemoteIModel = async (
   contextId: string,
-  imodelId: string,
+  iModelId: string,
   changeSetId?: string
 ): Promise<CheckpointConnection | undefined> => {
   try {
     // get the version to query
-    const version = await getVersion(imodelId, changeSetId);
+    const version = await getVersion(iModelId, changeSetId);
     // create a new connection
-    return await CheckpointConnection.openRemote(contextId, imodelId, version);
+    return await CheckpointConnection.openRemote(contextId, iModelId, version);
   } catch (error) {
     console.log(`Error opening the iModel connection: ${error}`);
     throw error;

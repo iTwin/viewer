@@ -30,7 +30,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
 import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
-import { openRemoteImodel } from "../../services/iModel";
+import { openRemoteIModel } from "../../services/iModel";
 import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
 import { ai } from "../../services/telemetry/TelemetryService";
 import {
@@ -64,7 +64,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     snapshotPath,
     frontstages,
     backstageItems,
-    uiFrameworkVersion,
     viewportOptions,
     blankConnection,
     blankConnectionViewState,
@@ -215,7 +214,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         if (snapshotPath) {
           imodelConnection = await SnapshotConnection.openFile(snapshotPath);
         } else if (contextId && iModelId) {
-          imodelConnection = await openRemoteImodel(
+          imodelConnection = await openRemoteIModel(
             contextId,
             iModelId,
             changeSetId
@@ -324,7 +323,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           viewState,
           defaultUiConfig,
           viewportOptions,
-          uiFrameworkVersion
         );
 
         // add the default frontstage first so that it's default status can be overridden
@@ -340,7 +338,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       viewportOptions,
       viewState,
       defaultUiConfig,
-      uiFrameworkVersion,
     ]);
 
     if (error) {
@@ -349,14 +346,13 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       return (
         <div className="itwin-viewer-container">
           {finalFrontstages &&
-          finalBackstageItems &&
-          ((viewState && connection) || noConnection) &&
-          StateManager.store ? (
+            finalBackstageItems &&
+            ((viewState && connection) || noConnection) &&
+            StateManager.store ? (
             <Provider store={StateManager.store}>
               <IModelViewer
                 frontstages={finalFrontstages}
                 backstageItems={finalBackstageItems}
-                uiFrameworkVersion={uiFrameworkVersion}
               />
             </Provider>
           ) : (

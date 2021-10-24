@@ -28,18 +28,11 @@ export interface WebAuthorizationOptions {
 }
 
 /**
- * List of possible hosted backends that the iTwin Viewer can use
- */
-export enum IModelBackend {
-  ITwinPlatform = "visualization",
-}
-
-/**
  * Hosted backend configuration
  */
 export interface HostedBackendConfig {
   /* title for rpc config */
-  title: IModelBackend | string;
+  title: string;
   /* in the form "vx.x" */
   version: string;
 }
@@ -57,7 +50,6 @@ export interface CustomBackendConfig {
 export interface IModelBackendOptions {
   hostedBackend?: HostedBackendConfig;
   customBackend?: CustomBackendConfig;
-  buddiRegion?: number;
 }
 
 export interface WebViewerPropsFull extends ViewerProps {
