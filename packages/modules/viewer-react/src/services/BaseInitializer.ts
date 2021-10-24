@@ -172,7 +172,7 @@ export class BaseInitializer {
 
       // initialize UiFramework
       // Use undefined so that UiFramework uses StateManager
-      yield UiFramework.initialize(undefined, IModelApp.localization);
+      yield UiFramework.initialize(undefined);
 
       // initialize Presentation
       yield Presentation.initialize({
