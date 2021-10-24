@@ -17,7 +17,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { history } from "../routing";
 import { Header } from ".";
 import styles from "./Home.module.scss";
-import MyExtension from "extension-prototype/lib/loader";
+import MyExtension from "extension-prototype";
 
 /**
  * Test a viewer that uses auth configuration provided at startup
