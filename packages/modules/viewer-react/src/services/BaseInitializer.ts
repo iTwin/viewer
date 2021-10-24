@@ -34,7 +34,6 @@ import { ItwinViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
 import { ViewerAuthorizationClient } from "./auth/ViewerAuthorizationClient";
 import { ai, trackEvent } from "./telemetry/TelemetryService";
-import MyExtension from "extension-prototype";
 
 // initialize required iTwin.js services
 export class BaseInitializer {
@@ -195,6 +194,7 @@ export class BaseInitializer {
           yield IModelApp.extensionAdmin.addBuildExtension(extension.manifest, extension.loader);
         }
       }
+      yield IModelApp.extensionAdmin.onStartup();
 
       // TODO 3.0 re-add
       // yield PropertyGridManager.initialize(IModelApp.i18n);
@@ -214,9 +214,6 @@ export class BaseInitializer {
       .finally(async () => {
         BaseInitializer._initializing = false;
         BaseInitializer._cancel = undefined;
-        const test = new ExtensionAdmin();
-        const manifest = await MyExtension.manifest;
-        test.addBuildExtension(manifest, MyExtension.load);
       });
   }
 }
