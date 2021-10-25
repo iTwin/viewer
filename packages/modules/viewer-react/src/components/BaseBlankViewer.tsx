@@ -55,13 +55,13 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
     setAuthorized(
       (BaseInitializer.authClient?.hasSignedIn &&
         BaseInitializer.authClient?.isAuthorized) ||
-        false
+      false
     );
     BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
       setAuthorized(
         (BaseInitializer.authClient?.hasSignedIn &&
           BaseInitializer.authClient?.isAuthorized) ||
-          false
+        false
       );
     });
   }, []);
@@ -89,7 +89,6 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
             onIModelConnected={onIModelConnected}
             frontstages={frontstages}
             backstageItems={backstageItems}
-            uiFrameworkVersion={uiFrameworkVersion}
             viewportOptions={viewportOptions}
             blankConnection={blankConnection}
             blankConnectionViewState={viewStateOptions}

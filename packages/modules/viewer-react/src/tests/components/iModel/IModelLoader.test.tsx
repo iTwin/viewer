@@ -109,8 +109,8 @@ jest.mock("@itwin/core-frontend", () => {
     ItemField: {},
     CompassMode: {},
     RotationMode: {},
-    AccuDraw: class {},
-    ToolAdmin: class {},
+    AccuDraw: class { },
+    ToolAdmin: class { },
     WebViewerApp: {
       startup: jest.fn().mockResolvedValue(true),
     },
@@ -162,7 +162,7 @@ const mockIModelId = "mockIModelId";
 
 describe("IModelLoader", () => {
   beforeEach(() => {
-    jest.spyOn(IModelServices, "openRemoteImodel").mockResolvedValue({
+    jest.spyOn(IModelServices, "openRemoteIModel").mockResolvedValue({
       isBlankConnection: () => false,
       iModelId: mockIModelId,
       close: jest.fn(),
@@ -343,9 +343,9 @@ describe("IModelLoader", () => {
     jest.spyOn(UiFramework, "setDefaultViewState");
     const viewportOptions: ViewerViewportControlOptions = {
       viewState: (connection: IModelConnection) =>
-        ({
-          iModel: connection,
-        } as any),
+      ({
+        iModel: connection,
+      } as any),
     };
     const result = render(
       <IModelLoader
@@ -420,7 +420,7 @@ describe("IModelLoader", () => {
   });
 
   it("creates a default viewstate when connection imodelid does not match viewstate imodelid", async () => {
-    jest.spyOn(IModelServices, "openRemoteImodel").mockResolvedValue({
+    jest.spyOn(IModelServices, "openRemoteIModel").mockResolvedValue({
       isBlankConnection: () => false,
       iModelId: undefined,
       close: jest.fn(),
@@ -475,7 +475,7 @@ describe("IModelLoader", () => {
       close: jest.fn(),
     };
     jest
-      .spyOn(IModelServices, "openRemoteImodel")
+      .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
     const result = render(
       <IModelLoader contextId={mockContextId} iModelId={mockIModelId} />
@@ -494,7 +494,7 @@ describe("IModelLoader", () => {
       close: jest.fn(),
     };
     jest
-      .spyOn(IModelServices, "openRemoteImodel")
+      .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
     const result = render(
       <IModelLoader contextId={mockContextId} iModelId={mockIModelId} />
@@ -517,7 +517,7 @@ describe("IModelLoader", () => {
       close: jest.fn(),
     };
     jest
-      .spyOn(IModelServices, "openRemoteImodel")
+      .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
     const result = render(
       <IModelLoader contextId={mockContextId} iModelId={mockIModelId} />
@@ -534,7 +534,7 @@ describe("IModelLoader", () => {
   });
 
   it("renders a custom loading component", async () => {
-    jest.spyOn(IModelServices, "openRemoteImodel").mockImplementation(
+    jest.spyOn(IModelServices, "openRemoteIModel").mockImplementation(
       () =>
         new Promise((resolve) =>
           setTimeout(

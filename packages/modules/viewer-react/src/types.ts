@@ -3,11 +3,9 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IModelClient } from "@bentley/imodelhub-client";
 import { BackstageItem, UiItemsProvider } from "@itwin/appui-abstract";
 import {
   ColorTheme,
-  FrameworkVersion,
   FrontstageProvider,
   IModelViewportControlOptions,
 } from "@itwin/appui-react";
@@ -18,6 +16,8 @@ import {
   RpcInterfaceDefinition,
 } from "@itwin/core-common";
 import {
+  BuiltInExtensionLoaderProps,
+  FrontendHubAccess,
   IModelConnection,
   ScreenViewport,
   StandardViewId,
@@ -62,9 +62,9 @@ export interface ViewerViewportControlOptions
   extends Omit<IModelViewportControlOptions, "viewState"> {
   /** ViewState or a function to return a ViewState */
   viewState?:
-    | ViewState
-    | ((iModelConnection: IModelConnection) => ViewState)
-    | ((iModelConnection: IModelConnection) => Promise<ViewState>);
+  | ViewState
+  | ((iModelConnection: IModelConnection) => ViewState)
+  | ((iModelConnection: IModelConnection) => Promise<ViewState>);
 }
 
 export interface IModelLoaderParams {
@@ -78,8 +78,6 @@ export interface IModelLoaderParams {
   frontstages?: ViewerFrontstage[];
   /** menu items for the backstage */
   backstageItems?: ViewerBackstageItem[];
-  /** optionally override the UI framework version (defaults to 2) */
-  uiFrameworkVersion?: FrameworkVersion;
   /** additional viewport options for the default frontstage's viewport control */
   viewportOptions?: ViewerViewportControlOptions;
   /** UI Providers to register https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/ */
@@ -90,7 +88,7 @@ export interface IModelLoaderParams {
 
 export interface ItwinViewerCommonParams
   extends ItwinViewerInitializerParams,
-    IModelLoaderParams {}
+  IModelLoaderParams { }
 
 export interface ItwinViewerInitializerParams {
   [index: string]: any;
@@ -108,8 +106,10 @@ export interface ItwinViewerInitializerParams {
   additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
   /** optional ToolAdmin to initialize */
   toolAdmin?: ToolAdmin;
-  /** option imodelClient (defaults to iModelHubClient) */
-  imodelClient?: IModelClient;
+  /** option hubAccess (defaults to iTwin Platform's iModels) */
+  hubAccess?: FrontendHubAccess;
+  /** List of Extensions */
+  extensions?: BuiltInExtensionLoaderProps[];
 }
 
 /**
@@ -118,7 +118,6 @@ export interface ItwinViewerInitializerParams {
  */
 const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
   appInsightKey: undefined,
-  imjsAppInsightsKey: undefined,
   productId: undefined,
   i18nUrlTemplate: undefined,
   onIModelAppInit: undefined,
@@ -126,7 +125,8 @@ const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
   additionalRpcInterfaces: undefined,
   iModelDataErrorMessage: undefined,
   toolAdmin: undefined,
-  imodelClient: undefined,
+  hubAccess: undefined,
+  extensions: undefined,
 };
 export const iTwinViewerInitializerParamList = Object.keys(
   iTwinViewerInitializerParamSample

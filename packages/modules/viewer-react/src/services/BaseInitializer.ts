@@ -25,8 +25,7 @@ import {
   RpcInterfaceDefinition,
   SnapshotIModelRpcInterface,
 } from "@itwin/core-common";
-import { IModelApp, IModelAppOptions } from "@itwin/core-frontend";
-import { ITwinLocalization } from "@itwin/core-i18n";
+import { ExtensionAdmin, IModelApp, IModelAppOptions, BuiltInExtensionLoaderProps } from "@itwin/core-frontend";
 import { UiCore } from "@itwin/core-react";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
@@ -172,7 +171,7 @@ export class BaseInitializer {
 
       // initialize UiFramework
       // Use undefined so that UiFramework uses StateManager
-      yield UiFramework.initialize(undefined, IModelApp.localization);
+      yield UiFramework.initialize(undefined);
 
       // initialize Presentation
       yield Presentation.initialize({
@@ -190,6 +189,13 @@ export class BaseInitializer {
         trackEvent("iTwinViewer.Viewer.Initialized");
       }
 
+      if (viewerOptions?.extensions) {
+        for (const extension of viewerOptions.extensions) {
+          yield IModelApp.extensionAdmin.addBuildExtension(extension.manifest, extension.loader);
+        }
+      }
+      yield IModelApp.extensionAdmin.onStartup();
+
       // TODO 3.0 re-add
       // yield PropertyGridManager.initialize(IModelApp.i18n);
       // yield TreeWidget.initialize(IModelApp.i18n);
@@ -205,7 +211,7 @@ export class BaseInitializer {
           throw err;
         }
       })
-      .finally(() => {
+      .finally(async () => {
         BaseInitializer._initializing = false;
         BaseInitializer._cancel = undefined;
       });
@@ -224,7 +230,6 @@ const getSupportedRpcs = (
     IModelReadRpcInterface,
     IModelTileRpcInterface,
     PresentationRpcInterface,
-    SnapshotIModelRpcInterface,
     ...additionalRpcInterfaces,
   ];
 };
@@ -248,13 +253,8 @@ export const getIModelAppOptions = (
     notifications: new AppNotificationManager(),
     uiAdmin: new FrameworkUiAdmin(),
     rpcInterfaces: getSupportedRpcs(options?.additionalRpcInterfaces ?? []),
-    localization: new ITwinLocalization({
-      urlTemplate: options?.i18nUrlTemplate
-        ? options.i18nUrlTemplate
-        : viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`,
-    }),
     toolAdmin: options?.toolAdmin,
-    hubAccess: new IModelHubFrontend(), // TODO 3.0
-    // imodelClient: options?.imodelClient, //TODO 3.0 support iTwin Stack??
+    hubAccess: options?.hubAccess ?? new IModelHubFrontend(), // TODO 3.0
+
   };
 };
