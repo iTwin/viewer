@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { UiItemsProvider } from "@itwin/appui-abstract";
-import { ColorTheme, FrameworkVersion } from "@itwin/appui-react";
+import { ColorTheme } from "@itwin/appui-react";
 import { CheckpointConnection } from "@itwin/core-frontend";
 import {
   ItwinViewerUi,
@@ -34,7 +34,6 @@ export class ItwinViewer {
   uiConfig: ItwinViewerUi | undefined;
   appInsightsKey: string | undefined;
   frontstages: ViewerFrontstage[] | undefined;
-  uiFrameworkVersion: FrameworkVersion | undefined;
   viewportOptions: ViewerViewportControlOptions | undefined;
   uiProviders: UiItemsProvider[] | undefined;
   authConfig: WebAuthorizationOptions;
@@ -52,7 +51,6 @@ export class ItwinViewer {
     this.appInsightsKey = options.appInsightsKey;
     this.onIModelConnected = options.onIModelConnected;
     this.frontstages = options.frontstages;
-    this.uiFrameworkVersion = options.uiFrameworkVersion;
     this.viewportOptions = options.viewportOptions;
     this.uiProviders = options.uiProviders;
     this.authConfig = options.authConfig;
@@ -77,7 +75,6 @@ export class ItwinViewer {
         appInsightsKey: this.appInsightsKey,
         onIModelConnected: this.onIModelConnected,
         frontstages: this.frontstages,
-        uiFrameworkVersion: this.uiFrameworkVersion,
         viewportOptions: this.viewportOptions,
         uiProviders: this.uiProviders,
         theme: this.theme,
