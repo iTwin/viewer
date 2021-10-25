@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-web-viewer",
+      "comment": " use hackathon version of core",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/cra-template-web-viewer",
+  "email": "aruniverse@users.noreply.github.com"
+}
