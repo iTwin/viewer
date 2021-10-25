@@ -33,6 +33,6 @@ jobs:
         echo 'Publishing...'
         git config user.name "iTwinViewerWorkflow"
         git config user.email "itwinviewer@users.noreply.github.com"
-        node common/scripts/install-run-rush.js publish --publish --apply --target-branch next --set-access-level public --npm-auth-token $NPM_TOKEN --tag next --prerelease-name dev --partial-prerelease
+        node common/scripts/install-run-rush.js publish --publish --apply --target-branch next --set-access-level public --npm-auth-token $NPM_TOKEN --tag next --prerelease-name ext.0 -partial-prerelease
       env:
         NPM_TOKEN: ${{ secrets.NPMJS_PUBLISH_ITWIN }}

@@ -1,6 +1,6 @@
 {
   "name": "@itwin/error-handling-react",
-  "version": "2.0.0-dev.16",
+  "version": "2.0.0-ext.0",
   "description": "iTwin Error Handling frontend components",
   "main": "lib/index.js",
   "module": "build/index.js",
@@ -53,7 +53,7 @@
     "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
-    "@itwin/core-react": "^3.0.0-dev.97",
+    "@itwin/core-react": "^3.0.0-extension.0",
     "@svgr/cli": "^5.3.1",
     "@testing-library/react": "^10.4.4",
     "@types/jest": "^26.0.4",
@@ -78,7 +78,7 @@
     "@types/sanitize-html": "^1.27.1"
   },
   "peerDependencies": {
-    "@itwin/core-react": "^3.0.0-dev.97",
+    "@itwin/core-react": "^3.0.0-extension.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
