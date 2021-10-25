@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import {
   BrowserAuthorizationCallbackHandler,
   BrowserAuthorizationClient,
@@ -44,11 +45,11 @@ export class AuthorizationClient {
     this._oidcClient = new BrowserAuthorizationClient(oidcConfiguration);
   }
 
-  public static async signIn(redirectPath?: string): Promise<void> {
+  public static async signIn(): Promise<void> {
     await this.oidcClient.signIn();
   }
 
-  public static async signOut(redirectPath?: string): Promise<void> {
+  public static async signOut(): Promise<void> {
     await this.oidcClient.signOut();
   }
 }
