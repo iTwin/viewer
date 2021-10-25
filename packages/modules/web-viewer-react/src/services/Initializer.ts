@@ -17,7 +17,6 @@ import {
 } from "@itwin/viewer-react";
 
 import {
-  IModelBackend,
   IModelBackendOptions,
   WebAuthorizationOptions,
   WebViewerProps,
@@ -26,18 +25,7 @@ import {
 const getHostedConnectionInfo = async (
   backendOptions?: IModelBackendOptions
 ): Promise<BentleyCloudRpcParams> => {
-  let prefix = "";
-  switch (backendOptions?.buddiRegion) {
-    case 101:
-    case 103:
-      prefix = "dev-";
-      break;
-    case 102:
-      prefix = "qa-";
-      break;
-  }
-
-  const orchestratorUrl = `https://${prefix}api.bentley.com/imodeljs`;
+  const orchestratorUrl = `https://${process.env.IMJS_URL_PREFIX ?? ""}api.bentley.com/imodeljs`;
 
   if (backendOptions?.hostedBackend) {
     if (!backendOptions.hostedBackend.title) {
@@ -57,7 +45,7 @@ const getHostedConnectionInfo = async (
     };
   } else {
     return {
-      info: { title: IModelBackend.ITwinPlatform, version: "v3.0" },
+      info: { title: "visualization", version: "v3.0" },
       uriPrefix: orchestratorUrl,
     };
   }

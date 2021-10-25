@@ -26,7 +26,7 @@ export const AuthConfigHome: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(
     (BaseInitializer.authClient?.hasSignedIn &&
       BaseInitializer.authClient?.isAuthorized) ||
-      false
+    false
   );
   const [iModelId, setIModelId] = useState(
     process.env.IMJS_AUTH_CLIENT_IMODEL_ID
@@ -48,7 +48,7 @@ export const AuthConfigHome: React.FC = () => {
     setLoggedIn(
       (BaseInitializer.authClient?.hasSignedIn &&
         BaseInitializer.authClient?.isAuthorized) ||
-        false
+      false
     );
   }, []);
 
@@ -81,7 +81,7 @@ export const AuthConfigHome: React.FC = () => {
       setLoggedIn(
         (BaseInitializer.authClient?.hasSignedIn &&
           BaseInitializer.authClient?.isAuthorized) ||
-          false
+        false
       );
     });
   };
@@ -144,9 +144,6 @@ export const AuthConfigHome: React.FC = () => {
         onIModelAppInit={onIModelAppInit}
         viewCreatorOptions={viewCreatorOptions}
         loadingComponent={<Loader />}
-        backend={{
-          buddiRegion: 103,
-        }}
       />
     </div>
   );

@@ -26,7 +26,7 @@ export const useAccessToken = () => {
   }, [getAccessToken]);
 
   useEffect(() => {
-    BaseInitializer.authClient?.onAccessTokenChanged.addListener((token) => {
+    BaseInitializer.authClient?.onAccessTokenChanged.addListener((token: any) => {
       if (isMounted.current) {
         setAccessToken(token);
       }

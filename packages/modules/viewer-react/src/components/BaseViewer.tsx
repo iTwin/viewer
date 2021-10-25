@@ -60,13 +60,13 @@ export const BaseViewer: React.FC<ViewerProps> = ({
       setAuthorized(
         (BaseInitializer.authClient?.hasSignedIn &&
           BaseInitializer.authClient?.isAuthorized) ||
-          false
+        false
       );
       BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
         setAuthorized(
           (BaseInitializer.authClient?.hasSignedIn &&
             BaseInitializer.authClient?.isAuthorized) ||
-            false
+          false
         );
       });
     }
@@ -86,7 +86,6 @@ export const BaseViewer: React.FC<ViewerProps> = ({
             snapshotPath={snapshotPath}
             frontstages={frontstages}
             backstageItems={backstageItems}
-            uiFrameworkVersion={uiFrameworkVersion}
             viewportOptions={viewportOptions}
             uiProviders={uiProviders}
             theme={theme}

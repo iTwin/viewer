@@ -29,7 +29,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
 import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
-import { openLocalImodel, openRemoteImodel } from "../../services/iModel";
+import { openLocalImodel, openRemoteIModel } from "../../services/iModel";
 import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
 import { ai } from "../../services/telemetry/TelemetryService";
 import {
@@ -63,7 +63,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     snapshotPath,
     frontstages,
     backstageItems,
-    uiFrameworkVersion,
     viewportOptions,
     blankConnection,
     blankConnectionViewState,
@@ -214,7 +213,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         if (snapshotPath) {
           imodelConnection = await openLocalImodel(snapshotPath);
         } else if (contextId && iModelId) {
-          imodelConnection = await openRemoteImodel(
+          imodelConnection = await openRemoteIModel(
             contextId,
             iModelId,
             changeSetId
@@ -322,8 +321,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         const defaultFrontstageProvider = new DefaultFrontstage(
           viewState,
           defaultUiConfig,
-          viewportOptions,
-          uiFrameworkVersion
+          viewportOptions
         );
 
         // add the default frontstage first so that it's default status can be overridden
@@ -334,13 +332,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       }
 
       setFinalFrontstages(allFrontstages);
-    }, [
-      frontstages,
-      viewportOptions,
-      viewState,
-      defaultUiConfig,
-      uiFrameworkVersion,
-    ]);
+    }, [frontstages, viewportOptions, viewState, defaultUiConfig]);
 
     if (error) {
       throw error;
@@ -355,7 +347,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
               <IModelViewer
                 frontstages={finalFrontstages}
                 backstageItems={finalBackstageItems}
-                uiFrameworkVersion={uiFrameworkVersion}
               />
             </Provider>
           ) : (

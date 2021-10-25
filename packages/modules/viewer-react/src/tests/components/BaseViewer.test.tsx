@@ -160,7 +160,7 @@ describe("BaseViewer", () => {
 
     await waitFor(() => getByTestId("loader-wrapper"));
 
-    expect(IModelService.openRemoteImodel).toHaveBeenCalledWith(
+    expect(IModelService.openRemoteIModel).toHaveBeenCalledWith(
       mockProjectId,
       mockIModelId,
       "123"
