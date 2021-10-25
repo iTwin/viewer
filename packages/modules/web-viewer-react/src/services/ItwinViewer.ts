@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { UiItemsProvider } from "@itwin/appui-abstract";
-import { ColorTheme, FrameworkVersion } from "@itwin/appui-react";
+import { ColorTheme } from "@itwin/appui-react";
 import { CheckpointConnection } from "@itwin/core-frontend";
 import {
   ItwinViewerUi,
