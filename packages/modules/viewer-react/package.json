@@ -46,8 +46,7 @@
     "@microsoft/applicationinsights-web": "2.3.1",
     "history": "^4.10.1",
     "oidc-client": "^1.10.1",
-    "react-spring": "^8.0.27",
-    "extension-prototype": "^3.0.0-dev.97"
+    "react-spring": "^8.0.27"
   },
   "devDependencies": {
     "@bentley/imodelhub-client": "^3.0.0-dev.97",

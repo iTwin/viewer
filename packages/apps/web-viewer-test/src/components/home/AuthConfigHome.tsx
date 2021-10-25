@@ -17,7 +17,6 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { history } from "../routing";
 import { Header } from ".";
 import styles from "./Home.module.scss";
-import MyExtension from "extension-prototype";
 
 /**
  * Test a viewer that uses auth configuration provided at startup
@@ -145,9 +144,6 @@ export const AuthConfigHome: React.FC = () => {
         onIModelAppInit={onIModelAppInit}
         viewCreatorOptions={viewCreatorOptions}
         loadingComponent={<Loader />}
-        extensions={[
-          MyExtension
-        ]}
       />
     </div>
   );
