@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/desktop-viewer-react",
+      "comment": " use hackathon version of core",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/desktop-viewer-react",
+  "email": "aruniverse@users.noreply.github.com"
+}

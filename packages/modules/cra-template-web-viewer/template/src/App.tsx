@@ -5,29 +5,20 @@
 
 import "./App.scss";
 
-import { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
 import {
   FitViewTool,
   IModelApp,
   ScreenViewport,
   StandardViewId,
 } from "@itwin/core-frontend";
-import { BaseInitializer, Viewer } from "@itwin/web-viewer-react";
+import { Viewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 
+import { AuthorizationClient } from "./AuthClient";
 import { Header } from "./Header";
 import { history } from "./history";
 
 const App: React.FC = () => {
-  const [isAuthorized, setIsAuthorized] = useState(
-    (BaseInitializer.authClient?.hasSignedIn &&
-      BaseInitializer.authClient?.isAuthorized) ||
-      false
-  );
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
-  const [iModelId, setIModelId] = useState(process.env.IMJS_IMODEL_ID);
-  const [contextId, setContextId] = useState(process.env.IMJS_CONTEXT_ID);
-
   if (!process.env.IMJS_AUTH_CLIENT_CLIENT_ID) {
     throw new Error(
       "Please add a valid OIDC client id to the .env file and restart the application. See the README for more information."
@@ -44,14 +35,33 @@ const App: React.FC = () => {
     );
   }
 
-  const authConfig: BrowserAuthorizationClientConfiguration = {
-    scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
-    clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
-    redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
-    postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
-    responseType: "code",
-    authority: process.env.IMJS_AUTH_AUTHORITY,
-  };
+  const [isAuthorized, setIsAuthorized] = useState(
+    (AuthorizationClient.oidcClient?.hasSignedIn &&
+      AuthorizationClient.oidcClient?.isAuthorized) ||
+      false
+  );
+  const [oidcInitialized, setOidcInitialized] = useState(false);
+  const [contextId, setContextId] = useState(process.env.IMJS_CONTEXT_ID);
+  const [iModelId, setIModelId] = useState(process.env.IMJS_IMODEL_ID);
+
+  useEffect(() => {
+    if (!AuthorizationClient.oidcClient) {
+      AuthorizationClient.initializeOidc()
+        .then(() => {
+          setOidcInitialized(true);
+          setIsAuthorized(
+            (AuthorizationClient.oidcClient.hasSignedIn &&
+              AuthorizationClient.oidcClient.isAuthorized) ||
+              false
+          );
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      setOidcInitialized(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (isAuthorized) {
@@ -84,32 +94,14 @@ const App: React.FC = () => {
     }
   }, [contextId, iModelId, isAuthorized]);
 
-  useEffect(() => {
-    if (isLoggingIn && isAuthorized) {
-      setIsLoggingIn(false);
-    }
-  }, [isAuthorized, isLoggingIn]);
-
   const onLoginClick = async () => {
-    setIsLoggingIn(true);
-    await BaseInitializer.authClient?.signIn();
+    await AuthorizationClient.signIn();
+    setOidcInitialized(true);
   };
 
   const onLogoutClick = async () => {
-    setIsLoggingIn(false);
-    await BaseInitializer.authClient?.signOut();
-    setIsAuthorized(false);
-  };
-
-  const onIModelAppInit = () => {
-    setIsAuthorized(BaseInitializer.authClient?.isAuthorized ?? false);
-    BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
-      setIsAuthorized(
-        (BaseInitializer.authClient?.hasSignedIn &&
-          BaseInitializer.authClient?.isAuthorized) ||
-          false
-      );
-    });
+    await AuthorizationClient.signOut();
+    setOidcInitialized(false);
   };
 
   /** NOTE: This function will execute the "Fit View" tool after the iModel is loaded into the Viewer.
@@ -144,18 +136,15 @@ const App: React.FC = () => {
   return (
     <div className="viewer-container">
       <Header
-        handleLogin={onLoginClick}
         loggedIn={isAuthorized}
+        handleLogin={onLoginClick}
         handleLogout={onLogoutClick}
       />
-      {isLoggingIn ? (
-        <span>"Logging in...."</span>
-      ) : (
+      {oidcInitialized && (
         <Viewer
           contextId={contextId}
           iModelId={iModelId}
-          authConfig={{ config: authConfig }}
-          onIModelAppInit={onIModelAppInit}
+          authConfig={{ oidcClient: AuthorizationClient.oidcClient }}
           viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
         />
       )}
