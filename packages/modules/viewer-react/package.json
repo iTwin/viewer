@@ -40,7 +40,7 @@
   ],
   "dependencies": {
     "@bentley/icons-generic-webfont": "^1.0.15",
-    "@itwin/error-handling-react": "^2.0.0-ext.0",
+    "@itwin/error-handling-react": "2.0.0-ext.0",
     "@itwin/itwinui-react": "^1.16.2",
     "@microsoft/applicationinsights-react-js": "2.3.1",
     "@microsoft/applicationinsights-web": "2.3.1",
