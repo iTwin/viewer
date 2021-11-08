@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "1.8.2",
+      "tag": "@itwin/viewer-react_v1.8.2",
+      "date": "Mon, 08 Nov 2021 20:49:09 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Change iModel loading spinner to a bar and remove redundant text"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.8.1",
       "tag": "@itwin/viewer-react_v1.8.1",
       "date": "Thu, 21 Oct 2021 14:29:56 GMT",
