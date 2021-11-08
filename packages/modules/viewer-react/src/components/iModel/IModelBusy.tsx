@@ -5,7 +5,8 @@
 
 import "./IModelBusy.scss";
 
-import { BodyText, LoadingSpinner, SpinnerSize } from "@bentley/ui-core";
+import { IModelApp } from "@bentley/imodeljs-frontend";
+import { ProgressBar } from "@bentley/ui-core";
 import React from "react";
 
 export const IModelBusy = (): JSX.Element => {
@@ -13,14 +14,13 @@ export const IModelBusy = (): JSX.Element => {
     // TODO localize text once i18n strategy is in place
     <div data-testid="loader-wrapper" className="imodelbusy__centered">
       <div className="imodelbusy__contents">
-        <LoadingSpinner
-          message={"Your iModel is loading"}
-          messageOnTop={true}
-          size={SpinnerSize.Large}
+        <ProgressBar
+          indeterminate={true}
+          labelLeft={IModelApp.i18n.translateWithNamespace(
+            "iTwinViewer",
+            "iModels.iModelLoading"
+          )}
         />
-      </div>
-      <div className="imodelbusy__loadingText">
-        <BodyText>{"Rendering your iModel"}</BodyText>
       </div>
     </div>
   );
