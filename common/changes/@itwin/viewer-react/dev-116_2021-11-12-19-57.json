@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "bump to dev.116, react to changes in ui pkgs (FrameworkVersion provider removed props), comment out extension work",
+      "type": "none"
+    }
+  ],
+  "packageName": "@itwin/viewer-react",
+  "email": "aruniverse@users.noreply.github.com"
+}

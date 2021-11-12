@@ -23,9 +23,8 @@ import {
   IModelTileRpcInterface,
   RpcInterface,
   RpcInterfaceDefinition,
-  SnapshotIModelRpcInterface,
 } from "@itwin/core-common";
-import { ExtensionAdmin, IModelApp, IModelAppOptions, BuiltInExtensionLoaderProps } from "@itwin/core-frontend";
+import { IModelApp, IModelAppOptions } from "@itwin/core-frontend";
 import { UiCore } from "@itwin/core-react";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
@@ -189,12 +188,13 @@ export class BaseInitializer {
         trackEvent("iTwinViewer.Viewer.Initialized");
       }
 
-      if (viewerOptions?.extensions) {
-        for (const extension of viewerOptions.extensions) {
-          yield IModelApp.extensionAdmin.addBuildExtension(extension.manifest, extension.loader);
-        }
-      }
-      yield IModelApp.extensionAdmin.onStartup();
+      // TODO 3.0 re-add
+      // if (viewerOptions?.extensions) {
+      //   for (const extension of viewerOptions.extensions) {
+      //     yield IModelApp.extensionAdmin.addBuildExtension(extension.manifest, extension.loader);
+      //   }
+      // }
+      // yield IModelApp.extensionAdmin.onStartup();
 
       // TODO 3.0 re-add
       // yield PropertyGridManager.initialize(IModelApp.i18n);
@@ -255,6 +255,5 @@ export const getIModelAppOptions = (
     rpcInterfaces: getSupportedRpcs(options?.additionalRpcInterfaces ?? []),
     toolAdmin: options?.toolAdmin,
     hubAccess: options?.hubAccess ?? new IModelHubFrontend(), // TODO 3.0
-
   };
 };
