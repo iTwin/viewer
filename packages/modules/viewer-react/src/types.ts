@@ -16,7 +16,7 @@ import {
   RpcInterfaceDefinition,
 } from "@itwin/core-common";
 import {
-  BuiltInExtensionLoaderProps,
+  // BuiltInExtensionLoaderProps,
   FrontendHubAccess,
   IModelConnection,
   ScreenViewport,
@@ -107,8 +107,9 @@ export interface ItwinViewerInitializerParams {
   toolAdmin?: ToolAdmin;
   /** option hubAccess (defaults to iTwin Platform's iModels) */
   hubAccess?: FrontendHubAccess;
-  /** List of Extensions */
-  extensions?: BuiltInExtensionLoaderProps[];
+  // TODO: 3.0 w/ extensions
+  // /** List of Extensions */
+  // extensions?: BuiltInExtensionLoaderProps[];
 }
 
 /**
