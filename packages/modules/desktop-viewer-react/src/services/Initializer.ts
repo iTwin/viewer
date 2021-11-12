@@ -3,6 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { SnapshotIModelRpcInterface } from "@itwin/core-common";
 import {
   ElectronApp,
   ElectronAppOpts,
@@ -41,8 +42,14 @@ export class DesktopInitializer {
       this._initializing = true;
 
       const cancellable = makeCancellable(function* () {
+        const additionalRpcInterfaces = options?.additionalRpcInterfaces ?? [];
+        additionalRpcInterfaces.push(SnapshotIModelRpcInterface);
+
         const electronViewerOpts: ElectronAppOpts = {
-          iModelApp: getIModelAppOptions(options),
+          iModelApp: getIModelAppOptions({
+            ...options,
+            additionalRpcInterfaces,
+          }),
         };
         // this is a hack to workaround a bug in ITJS 2.x where browser connectivity events are not registered
         // TODO verify and remove in 3.x
