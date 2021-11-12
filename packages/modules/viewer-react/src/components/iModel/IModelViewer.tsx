@@ -52,7 +52,7 @@ export const IModelViewer: React.FC<ModelProps> = ({
   // there will always be at least one (for the default frontstage). Wait for it to be loaded into the list before rendering the content
   return backstageItems.length > 0 ? (
     <ThemeManager>
-      <FrameworkVersion version={"2"}>
+      <FrameworkVersion>
         <ConfigurableUiContent
           appBackstage={<BackstageComposer items={backstageItems} />}
         />

@@ -3,11 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+/* eslint-disable */
 import { StageUsage, StandardContentLayouts } from "@itwin/appui-abstract";
 import {
   ContentGroup,
   CoreTools,
-  FrameworkVersion,
   Frontstage,
   FrontstageProvider,
   IModelViewportControl,
@@ -15,8 +15,6 @@ import {
   UiFramework,
   Widget,
   Zone,
-  ZoneLocation,
-  ZoneState,
 } from "@itwin/appui-react";
 import { ViewState } from "@itwin/core-frontend";
 import * as React from "react";
@@ -78,18 +76,15 @@ export class DefaultFrontstage extends FrontstageProvider {
   private _contentGroup: ContentGroup;
 
   private _uiConfig?: ItwinViewerUi;
-  private _frameworkVersion?: FrameworkVersion;
 
   constructor(
     public viewState: ViewState,
     uiConfig?: ItwinViewerUi,
-    viewportOptions?: ViewerViewportControlOptions,
-    frameworkVersion?: FrameworkVersion
+    viewportOptions?: ViewerViewportControlOptions
   ) {
     super();
 
     this._uiConfig = uiConfig;
-    this._frameworkVersion = frameworkVersion || "2";
 
     // Create the content group.
     this._contentGroup = new ContentGroup({
@@ -162,19 +157,6 @@ export class DefaultFrontstage extends FrontstageProvider {
               />,
             ]}
           />
-        }
-        centerRight={
-          this._frameworkVersion === "1" ? (
-            <Zone allowsMerging={true} defaultState={ZoneState.Minimized} />
-          ) : undefined
-        }
-        bottomRight={
-          this._frameworkVersion === "1" ? (
-            <Zone
-              allowsMerging={true}
-              mergeWithZone={ZoneLocation.CenterRight}
-            />
-          ) : undefined
         }
         statusBar={
           <Zone
