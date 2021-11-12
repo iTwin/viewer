@@ -16,7 +16,7 @@ import {
   RpcInterfaceDefinition,
 } from "@itwin/core-common";
 import {
-  BuiltInExtensionLoaderProps,
+  // BuiltInExtensionLoaderProps,
   FrontendHubAccess,
   IModelConnection,
   ScreenViewport,
@@ -62,9 +62,9 @@ export interface ViewerViewportControlOptions
   extends Omit<IModelViewportControlOptions, "viewState"> {
   /** ViewState or a function to return a ViewState */
   viewState?:
-  | ViewState
-  | ((iModelConnection: IModelConnection) => ViewState)
-  | ((iModelConnection: IModelConnection) => Promise<ViewState>);
+    | ViewState
+    | ((iModelConnection: IModelConnection) => ViewState)
+    | ((iModelConnection: IModelConnection) => Promise<ViewState>);
 }
 
 export interface IModelLoaderParams {
@@ -88,7 +88,7 @@ export interface IModelLoaderParams {
 
 export interface ItwinViewerCommonParams
   extends ItwinViewerInitializerParams,
-  IModelLoaderParams { }
+    IModelLoaderParams {}
 
 export interface ItwinViewerInitializerParams {
   [index: string]: any;
@@ -108,8 +108,9 @@ export interface ItwinViewerInitializerParams {
   toolAdmin?: ToolAdmin;
   /** option hubAccess (defaults to iTwin Platform's iModels) */
   hubAccess?: FrontendHubAccess;
-  /** List of Extensions */
-  extensions?: BuiltInExtensionLoaderProps[];
+  // TODO: 3.0 w/ extensions
+  // /** List of Extensions */
+  // extensions?: BuiltInExtensionLoaderProps[];
 }
 
 /**
