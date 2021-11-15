@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IModelBankClient } from "@bentley/imodelhub-client";
 import { ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
 import {
@@ -19,6 +18,7 @@ import {
 } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 
+import { IModelBankFrontend } from "../../services/IModelBankFrontendHubAccess";
 import { history } from "../routing";
 import { Header } from ".";
 import styles from "./Home.module.scss";
@@ -58,9 +58,8 @@ export const IModelBankHome: React.FC = () => {
     },
   };
 
-  const imodelClient = new IModelBankClient(
-    "https://dev-imodelbank.bentley.com",
-    undefined
+  const imodelBankClient = new IModelBankFrontend(
+    "https://dev-imodelbank.bentley.com"
   );
 
   useEffect(() => {
@@ -154,8 +153,7 @@ export const IModelBankHome: React.FC = () => {
         onIModelAppInit={onIModelAppInit}
         viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
         backend={backend}
-        // TODO: needs to be updated to use a IModelBankClient that implements the new FrontendHubAccess interface
-        // imodelClient={imodelClient}
+        hubAccess={imodelBankClient}
       />
     </div>
   );
