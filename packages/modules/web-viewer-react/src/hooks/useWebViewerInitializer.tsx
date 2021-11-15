@@ -6,6 +6,7 @@
 import {
   getInitializationOptions,
   isEqual,
+  ItwinViewerInitializerParams,
   useBaseViewerInitializer,
 } from "@itwin/viewer-react";
 import { useEffect, useMemo, useState } from "react";
@@ -15,7 +16,7 @@ import { WebViewerProps } from "../types";
 
 export const useWebViewerInitializer = (options?: WebViewerProps) => {
   const [webViewerInitOptions, setWebViewerInitOptions] =
-    useState<WebViewerProps>();
+    useState<ItwinViewerInitializerParams>();
   const [webViewerInitalized, setWebViewerInitalized] = useState(false);
   const baseViewerInitialized = useBaseViewerInitializer(
     options,

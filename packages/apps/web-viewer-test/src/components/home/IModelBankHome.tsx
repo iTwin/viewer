@@ -154,7 +154,8 @@ export const IModelBankHome: React.FC = () => {
         onIModelAppInit={onIModelAppInit}
         viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
         backend={backend}
-        imodelClient={imodelClient}
+        // TODO: needs to be updated to use a IModelBankClient that implements the new FrontendHubAccess interface
+        // imodelClient={imodelClient}
       />
     </div>
   );

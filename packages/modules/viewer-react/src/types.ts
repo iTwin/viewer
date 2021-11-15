@@ -91,7 +91,6 @@ export interface ItwinViewerCommonParams
     IModelLoaderParams {}
 
 export interface ItwinViewerInitializerParams {
-  [index: string]: any;
   /** optional Azure Application Insights key for telemetry */
   appInsightsKey?: string;
   /** GPRID for the consuming application. Will default to the iTwin Viewer GPRID */
@@ -118,20 +117,19 @@ export interface ItwinViewerInitializerParams {
  * This list MUST match what is in the ItwinViewerInitializerParams interface and should be updated as new properties are added/removed
  */
 const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
-  appInsightKey: undefined,
+  appInsightsKey: undefined,
   productId: undefined,
   i18nUrlTemplate: undefined,
   onIModelAppInit: undefined,
   additionalI18nNamespaces: undefined,
   additionalRpcInterfaces: undefined,
-  iModelDataErrorMessage: undefined,
   toolAdmin: undefined,
   hubAccess: undefined,
-  extensions: undefined,
+  // extensions: undefined,
 };
 export const iTwinViewerInitializerParamList = Object.keys(
   iTwinViewerInitializerParamSample
-) as (keyof ItwinViewerInitializerParams)[];
+);
 
 /**
  * Configure options for the top left corner item
