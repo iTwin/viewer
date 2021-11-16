@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Mon, 08 Nov 2021 20:49:09 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Nov 2021 17:38:03 GMT and should not be manually modified.
+
+## 1.8.3
+Tue, 16 Nov 2021 17:38:03 GMT
+
+### Patches
+
+- Fix intellisense
 
 ## 1.8.2
 Mon, 08 Nov 2021 20:49:09 GMT

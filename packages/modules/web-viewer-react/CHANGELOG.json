@@ -2,6 +2,23 @@
   "name": "@itwin/web-viewer-react",
   "entries": [
     {
+      "version": "1.3.3",
+      "tag": "@itwin/web-viewer-react_v1.3.3",
+      "date": "Tue, 16 Nov 2021 17:38:03 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Strongly type what's being memoized in initializer"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" from `1.8.2` to `1.8.3`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.3.2",
       "tag": "@itwin/web-viewer-react_v1.3.2",
       "date": "Mon, 08 Nov 2021 20:49:09 GMT",
