@@ -61,7 +61,7 @@
     "@bentley/ui-framework": "^2.14.0",
     "@bentley/ui-ninezone": "^2.14.0",
     "@bentley/webgl-compatibility": "^2.14.0",
-    "@itwin/desktop-viewer-react": "^1.1.5",
+    "@itwin/desktop-viewer-react": "^1.1.6",
     "@itwin/imodel-browser-react": "~0.11.0",
     "@itwin/itwinui-css": "^0.18.1",
     "@itwin/itwinui-icons-react": "~1.2.0",
