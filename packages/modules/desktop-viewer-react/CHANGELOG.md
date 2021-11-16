@@ -1,6 +1,13 @@
 # Change Log - @itwin/desktop-viewer-react
 
-This log was last generated on Mon, 08 Nov 2021 20:49:09 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Nov 2021 17:38:03 GMT and should not be manually modified.
+
+## 1.1.6
+Tue, 16 Nov 2021 17:38:03 GMT
+
+### Patches
+
+- Strongly type what's being memoized in initializer
 
 ## 1.1.5
 Mon, 08 Nov 2021 20:49:09 GMT
