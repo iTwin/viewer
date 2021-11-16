@@ -64,7 +64,7 @@ export class ITwinViewerApp {
 
   public static async getSnapshotFile(): Promise<string | undefined> {
     const options: OpenDialogOptions = {
-      title: ITwinViewerApp.translate("openSnapshot"),
+      title: ITwinViewerApp.translate("openLocalFile"),
       properties: ["openFile"],
       filters: [{ name: "iModels", extensions: ["ibim", "bim"] }],
     };

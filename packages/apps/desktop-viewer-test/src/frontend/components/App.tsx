@@ -9,6 +9,7 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import { ViewerSettings } from "../../common/ViewerConfig";
 import {
+  addRecentOffline as addRecentOfflineClient,
   addRecentOnline as addRecentOnlineClient,
   addRecentSnapshot as addRecentSnapshotClient,
   getUserSettings,
@@ -53,9 +54,28 @@ const App = () => {
     []
   );
 
+  const addRecentOffline = useCallback(
+    async (
+      iTwinId: string,
+      iModelId: string,
+      path: string,
+      iModelName: string
+    ) => {
+      const updatedSettings = await addRecentOfflineClient(
+        iTwinId,
+        iModelId,
+        path,
+        iModelName
+      );
+      setSettings(updatedSettings);
+      return updatedSettings;
+    },
+    []
+  );
+
   return initialized && settings ? (
     <SettingsContext.Provider
-      value={{ settings, addRecentOnline, addRecentSnapshot }}
+      value={{ settings, addRecentOnline, addRecentSnapshot, addRecentOffline }}
     >
       <div style={{ height: "100%" }}>
         <Router style={{ height: "100%" }}>

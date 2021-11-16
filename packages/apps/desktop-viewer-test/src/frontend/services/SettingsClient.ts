@@ -40,6 +40,22 @@ export const addRecentOnline = async (
   return await getUserSettings();
 };
 
+export const addRecentOffline = async (
+  iTwinId: string,
+  iModelId: string,
+  path: string,
+  iModelName?: string
+) => {
+  await ITwinViewerApp.ipcCall.addRecentFile({
+    iTwinId,
+    iModelId,
+    displayName: iModelName ?? iModelId,
+    path: path,
+    type: ViewerFileType.LOCAL,
+  });
+  return await getUserSettings();
+};
+
 export interface Settings {
   settings: ViewerSettings;
   addRecentOnline: (
@@ -48,10 +64,17 @@ export interface Settings {
     iModelName?: string
   ) => Promise<ViewerSettings>;
   addRecentSnapshot: (path: string) => Promise<ViewerSettings>;
+  addRecentOffline: (
+    iTwinId: string,
+    iModelId: string,
+    path: string,
+    iModelName: string
+  ) => Promise<ViewerSettings>;
 }
 
 export const SettingsContext = createContext({
   settings: {} as ViewerSettings,
   addRecentOnline,
   addRecentSnapshot,
+  addRecentOffline,
 } as Settings);

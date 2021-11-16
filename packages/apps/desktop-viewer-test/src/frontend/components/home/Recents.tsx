@@ -52,6 +52,16 @@ export const Recents = () => {
                 {displayValue}
               </span>
             );
+          case ViewerFileType.LOCAL:
+            // TODO Kevin Differentiate for Viewer icons
+            return (
+              <span
+                key={recent.iModelId}
+                onClick={() => openSnapshot(recent.path)}
+              >
+                {displayValue}
+              </span>
+            );
           default:
             return null;
         }

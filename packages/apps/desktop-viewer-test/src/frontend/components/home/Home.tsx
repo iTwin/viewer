@@ -52,7 +52,7 @@ const Home = () => {
             <div>
               <SvgFolderOpened />
               <span onClick={openSnapshot}>
-                {ITwinViewerApp.translate("openSnapshot")}
+                {ITwinViewerApp.translate("openLocalFile")}
               </span>
             </div>
             <div>
