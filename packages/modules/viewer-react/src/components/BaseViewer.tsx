@@ -13,7 +13,6 @@ import { ItwinViewerCommonParams } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
 export interface ViewerProps extends ItwinViewerCommonParams {
-  [index: string]: any;
   contextId?: string;
   iModelId?: string;
   changeSetId?: string;

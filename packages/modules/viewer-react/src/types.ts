@@ -93,7 +93,6 @@ export interface ItwinViewerCommonParams
     IModelLoaderParams {}
 
 export interface ItwinViewerInitializerParams {
-  [index: string]: any;
   /** optional Azure Application Insights key for telemetry */
   appInsightsKey?: string;
   /** optional iTwin.js Application Insights key for telemetry within iTwin.js */
@@ -121,7 +120,7 @@ export interface ItwinViewerInitializerParams {
  * This list MUST match what is in the ItwinViewerInitializerParams interface and should be updated as new properties are added/removed
  */
 const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
-  appInsightKey: undefined,
+  appInsightsKey: undefined,
   imjsAppInsightsKey: undefined,
   productId: undefined,
   i18nUrlTemplate: undefined,
@@ -134,7 +133,7 @@ const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
 };
 export const iTwinViewerInitializerParamList = Object.keys(
   iTwinViewerInitializerParamSample
-) as (keyof ItwinViewerInitializerParams)[];
+);
 
 /**
  * Configure options for the top left corner item

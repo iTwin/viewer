@@ -65,12 +65,10 @@ export const isEqual = (a?: any, b?: any) => {
  * @returns
  */
 export const getInitializationOptions = (options?: ViewerProps) => {
-  const initOptions = {} as ItwinViewerInitializerParams;
+  const initOptions: ItwinViewerInitializerParams = {};
   if (options) {
-    for (const key in options) {
-      if (iTwinViewerInitializerParamList.indexOf(key) >= 0) {
-        initOptions[key] = options[key];
-      }
+    for (const key in iTwinViewerInitializerParamList) {
+      (initOptions as any)[key] = (options as any)[key];
     }
   }
   return initOptions;
