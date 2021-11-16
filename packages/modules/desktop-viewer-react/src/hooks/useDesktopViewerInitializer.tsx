@@ -6,6 +6,7 @@
 import {
   getInitializationOptions,
   isEqual,
+  ItwinViewerInitializerParams,
   useBaseViewerInitializer,
 } from "@itwin/viewer-react";
 import { useEffect, useMemo, useState } from "react";
@@ -15,7 +16,7 @@ import { DesktopViewerProps } from "../types";
 
 export const useDesktopViewerInitializer = (options?: DesktopViewerProps) => {
   const [desktopViewerInitOptions, setDesktopViewerInitOptions] =
-    useState<DesktopViewerProps>();
+    useState<ItwinViewerInitializerParams>();
   const [desktopViewerInitalized, setDesktopViewerInitalized] = useState(false);
   const baseViewerInitialized = useBaseViewerInitializer(
     options,

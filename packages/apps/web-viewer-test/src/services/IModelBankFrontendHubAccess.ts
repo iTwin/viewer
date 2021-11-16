@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import {
   ChangeSet,
   ChangeSetQuery,
@@ -62,7 +63,7 @@ export class IModelBankFrontend implements FrontendHubAccess {
       arg.iModelId,
       new VersionQuery().select("ChangeSetId").byName(arg.versionName)
     );
-    if (!versions[0] || !versions[0].changeSetId) {
+    if (!versions?.length || !versions[0]?.changeSetId) {
       throw new BentleyError(
         BentleyStatus.ERROR,
         `Named version ${arg.versionName} not found`
