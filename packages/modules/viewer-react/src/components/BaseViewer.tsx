@@ -13,7 +13,6 @@ import { ItwinViewerCommonParams } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
 export interface ViewerProps extends ItwinViewerCommonParams {
-  [index: string]: any;
   contextId?: string;
   iModelId?: string;
   changeSetId?: string;
@@ -33,7 +32,6 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   snapshotPath,
   frontstages,
   backstageItems,
-  uiFrameworkVersion,
   viewportOptions,
   uiProviders,
   i18nUrlTemplate,
@@ -61,13 +59,13 @@ export const BaseViewer: React.FC<ViewerProps> = ({
       setAuthorized(
         (BaseInitializer.authClient?.hasSignedIn &&
           BaseInitializer.authClient?.isAuthorized) ||
-        false
+          false
       );
       BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
         setAuthorized(
           (BaseInitializer.authClient?.hasSignedIn &&
             BaseInitializer.authClient?.isAuthorized) ||
-          false
+            false
         );
       });
     }
