@@ -6,7 +6,11 @@
 import "./SelectIModel.scss";
 
 import { IModelVersion, SyncMode } from "@bentley/imodeljs-common";
-import { NativeApp } from "@bentley/imodeljs-frontend";
+import {
+  BriefcaseConnection,
+  CheckpointConnection,
+  NativeApp,
+} from "@bentley/imodeljs-frontend";
 import { ProgressInfo } from "@bentley/itwin-client";
 import {
   IModelFull,
@@ -16,11 +20,18 @@ import {
 import {
   SvgDownload,
   SvgStatusError,
+  SvgStatusSuccess,
   SvgSync,
 } from "@itwin/itwinui-icons-react";
 import { ProgressRadial, TileProps, Title } from "@itwin/itwinui-react";
 import { useNavigate } from "@reach/router";
-import React, { useCallback, useContext, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 import { ViewerFileType } from "../../../common/ViewerConfig";
 import { ITwinViewerApp } from "../../app/ITwinViewerApp";
@@ -31,9 +42,11 @@ interface SelectIModelProps extends IModelGridProps {
 
 enum ModelStatus {
   ONLINE,
-  LOCAL,
+  OUTDATED,
   DOWNLOADING,
+  MERGING,
   ERROR,
+  UPTODATE,
 }
 
 const useDownload = (iModelId: string, iModelName: string, iTwinId: string) => {
@@ -84,6 +97,47 @@ const useDownload = (iModelId: string, iModelName: string, iTwinId: string) => {
 const useProgressIndicator = (iModel: IModelFull) => {
   const userSettings = useContext(SettingsContext);
   const [status, setStatus] = useState<ModelStatus>(ModelStatus.ONLINE); //TODO check for downloads first
+  const [briefcase, setBriefcase] = useState<BriefcaseConnection>();
+
+  const getBriefcase = useCallback(async () => {
+    // if there is a local file, open a briefcase connection and store it in state
+    const recents = userSettings.settings.recents;
+    if (recents) {
+      const local = recents.find((recent) => {
+        return (
+          recent.iTwinId === iModel.projectId &&
+          recent.iModelId === iModel.id &&
+          recent.type === ViewerFileType.LOCAL
+        );
+      });
+      if (local?.path) {
+        const connection = await BriefcaseConnection.openFile({
+          fileName: local.path,
+        });
+        setBriefcase(connection);
+      }
+    }
+  }, [userSettings]);
+
+  const isBriefcaseUpToDate = useCallback(async () => {
+    // get the online version
+    let hasChanges = false;
+    if (iModel.projectId && briefcase) {
+      const remoteConnection = await CheckpointConnection.openRemote(
+        iModel.projectId,
+        iModel.id,
+        IModelVersion.latest()
+      );
+      // compare latest changeset
+      hasChanges = briefcase.changeset.id !== remoteConnection.changeset.id;
+      await remoteConnection.close();
+    }
+    if (hasChanges) {
+      setStatus(ModelStatus.OUTDATED);
+    } else {
+      setStatus(ModelStatus.UPTODATE);
+    }
+  }, [briefcase]);
 
   const { progress, doDownload } = useDownload(
     iModel.id,
@@ -91,32 +145,55 @@ const useProgressIndicator = (iModel: IModelFull) => {
     iModel.projectId ?? ""
   );
 
+  const getLatestChangesets = useCallback(async () => {
+    if (briefcase) {
+      await briefcase.pullAndMergeChanges();
+    }
+  }, [briefcase]);
+
   const startDownload = useCallback(async () => {
     try {
       setStatus(ModelStatus.DOWNLOADING);
       await doDownload();
-      setStatus(ModelStatus.LOCAL);
+      setStatus(ModelStatus.UPTODATE);
     } catch {
       setStatus(ModelStatus.ERROR);
     }
   }, []);
 
-  const tileProps = useMemo<Partial<TileProps>>(() => {
-    // first check if the iModel has already been downloaded
-    const recents = userSettings.settings.recents;
-    if (recents) {
-      const exists = recents.find((recent) => {
-        return (
-          recent.iTwinId === iModel.projectId &&
-          recent.iModelId === iModel.id &&
-          recent.type === ViewerFileType.LOCAL
-        );
-      });
-      if (exists) {
-        setStatus(ModelStatus.LOCAL);
-      }
+  useEffect(() => {
+    if (status === ModelStatus.MERGING) {
+      getLatestChangesets()
+        .then(() => {
+          setStatus(ModelStatus.UPTODATE);
+        })
+        .catch((error) => {
+          console.log(error);
+          setStatus(ModelStatus.ERROR);
+        });
     }
+  }, [status]);
 
+  useEffect(() => {
+    void getBriefcase();
+    return () => {
+      if (briefcase) {
+        void briefcase.close();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (briefcase) {
+      void isBriefcaseUpToDate();
+    }
+  }, [briefcase]);
+
+  const mergeChanges = useCallback(() => {
+    setStatus(ModelStatus.MERGING);
+  }, []);
+
+  const tileProps = useMemo<Partial<TileProps>>(() => {
     return {
       metadata: (
         <div
@@ -126,10 +203,12 @@ const useProgressIndicator = (iModel: IModelFull) => {
             display: "flex",
           }}
         >
-          {status === ModelStatus.LOCAL ? (
-            <SvgSync className="model-status" />
-          ) : status === ModelStatus.DOWNLOADING ? (
+          {status === ModelStatus.OUTDATED ? (
+            <SvgSync className="model-status" onClick={mergeChanges} />
+          ) : status === ModelStatus.DOWNLOADING ||
+            status === ModelStatus.MERGING ? (
             <ProgressRadial
+              indeterminate={status === ModelStatus.MERGING}
               value={progress}
               style={{
                 height: "20px",
@@ -137,6 +216,8 @@ const useProgressIndicator = (iModel: IModelFull) => {
             />
           ) : status === ModelStatus.ERROR ? (
             <SvgStatusError className="model-status" />
+          ) : status === ModelStatus.UPTODATE ? (
+            <SvgStatusSuccess className="model-status" />
           ) : (
             <SvgDownload className="model-status" onClick={startDownload} />
           )}
