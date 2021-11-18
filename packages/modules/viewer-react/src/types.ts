@@ -125,7 +125,7 @@ const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
   additionalRpcInterfaces: undefined,
   toolAdmin: undefined,
   hubAccess: undefined,
-  extensions: undefined,
+  // extensions: undefined,
 };
 export const iTwinViewerInitializerParamList = Object.keys(
   iTwinViewerInitializerParamSample

@@ -32,7 +32,6 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   snapshotPath,
   frontstages,
   backstageItems,
-  uiFrameworkVersion,
   viewportOptions,
   uiProviders,
   i18nUrlTemplate,
@@ -60,13 +59,13 @@ export const BaseViewer: React.FC<ViewerProps> = ({
       setAuthorized(
         (BaseInitializer.authClient?.hasSignedIn &&
           BaseInitializer.authClient?.isAuthorized) ||
-        false
+          false
       );
       BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
         setAuthorized(
           (BaseInitializer.authClient?.hasSignedIn &&
             BaseInitializer.authClient?.isAuthorized) ||
-          false
+            false
         );
       });
     }

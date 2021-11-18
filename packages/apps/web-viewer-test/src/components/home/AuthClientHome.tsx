@@ -18,8 +18,8 @@ import styles from "./Home.module.scss";
  */
 export const AuthClientHome: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(
-    (AuthorizationClient.oidcClient.hasSignedIn &&
-      AuthorizationClient.oidcClient.isAuthorized) ||
+    (AuthorizationClient.oidcClient?.hasSignedIn &&
+      AuthorizationClient.oidcClient?.isAuthorized) ||
       false
   );
 
@@ -33,8 +33,8 @@ export const AuthClientHome: React.FC = () => {
         .then(() => {
           setOidcInitialized(true);
           setLoggedIn(
-            (AuthorizationClient.oidcClient.hasSignedIn &&
-              AuthorizationClient.oidcClient.isAuthorized) ||
+            (AuthorizationClient.oidcClient?.hasSignedIn &&
+              AuthorizationClient.oidcClient?.isAuthorized) ||
               false
           );
         })
@@ -44,8 +44,8 @@ export const AuthClientHome: React.FC = () => {
     } else {
       setOidcInitialized(true);
       setLoggedIn(
-        (AuthorizationClient.oidcClient.hasSignedIn &&
-          AuthorizationClient.oidcClient.isAuthorized) ||
+        (AuthorizationClient.oidcClient?.hasSignedIn &&
+          AuthorizationClient.oidcClient?.isAuthorized) ||
           false
       );
     }
@@ -55,8 +55,8 @@ export const AuthClientHome: React.FC = () => {
     if (!loggedIn) {
       await AuthorizationClient.signIn(location.pathname);
       setLoggedIn(
-        AuthorizationClient.oidcClient.hasSignedIn &&
-          AuthorizationClient.oidcClient.isAuthorized
+        AuthorizationClient.oidcClient?.hasSignedIn &&
+          AuthorizationClient.oidcClient?.isAuthorized
       );
     } else {
       await AuthorizationClient.signOut(location.pathname);
