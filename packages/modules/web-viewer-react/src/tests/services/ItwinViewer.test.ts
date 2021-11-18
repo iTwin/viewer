@@ -103,7 +103,6 @@ describe("iTwinViewer", () => {
       appInsightsKey: undefined,
       onIModelConnected: undefined,
       frontstages: undefined,
-      uiFrameworkVersion: undefined,
       viewportOptions: undefined,
       uiProviders: undefined,
       theme: undefined,

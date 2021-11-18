@@ -109,8 +109,8 @@ jest.mock("@itwin/core-frontend", () => {
     ItemField: {},
     CompassMode: {},
     RotationMode: {},
-    AccuDraw: class { },
-    ToolAdmin: class { },
+    AccuDraw: class {},
+    ToolAdmin: class {},
     WebViewerApp: {
       startup: jest.fn().mockResolvedValue(true),
     },
@@ -343,9 +343,9 @@ describe("IModelLoader", () => {
     jest.spyOn(UiFramework, "setDefaultViewState");
     const viewportOptions: ViewerViewportControlOptions = {
       viewState: (connection: IModelConnection) =>
-      ({
-        iModel: connection,
-      } as any),
+        ({
+          iModel: connection,
+        } as any),
     };
     const result = render(
       <IModelLoader
@@ -463,7 +463,7 @@ describe("IModelLoader", () => {
     );
     await waitFor(() => result.getByTestId("viewer"));
     expect(IModelViewer).toHaveBeenCalledWith(
-      { backstageItems: [], frontstages, uiFrameworkVersion: undefined },
+      { backstageItems: [], frontstages },
       {}
     );
   });
