@@ -29,8 +29,8 @@
     "dev-build-images": "npm run build-svgs && npm run dev-copy-images",
     "build-svgs": "svgr -d src/images/components src/images/svgs --typescript",
     "test": "",
-    "clean:build": "rimraf lib build",
-    "rebuild": "npm run clean:build && npm run build"
+    "clean": "rimraf lib build",
+    "rebuild": "npm run clean && npm run build"
   },
   "files": [
     "lib/**/*",

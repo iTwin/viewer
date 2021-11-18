@@ -25,7 +25,9 @@ import {
 const getHostedConnectionInfo = async (
   backendOptions?: IModelBackendOptions
 ): Promise<BentleyCloudRpcParams> => {
-  const orchestratorUrl = `https://${process.env.IMJS_URL_PREFIX ?? ""}api.bentley.com/imodeljs`;
+  const orchestratorUrl = `https://${
+    process.env.IMJS_URL_PREFIX ?? ""
+  }api.bentley.com/imodeljs`;
 
   if (backendOptions?.hostedBackend) {
     if (!backendOptions.hostedBackend.title) {
@@ -81,6 +83,7 @@ export class WebInitializer {
     } else if (authConfig.getUserManagerFunction) {
       return new ViewerAuthorizationClient(authConfig.getUserManagerFunction);
     }
+    return undefined;
   }
 
   /** expose initialized promise */

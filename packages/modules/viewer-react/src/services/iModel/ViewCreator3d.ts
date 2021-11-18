@@ -36,7 +36,7 @@ export class ViewCreator3d extends ViewCreator {
    * @param [modelIds] Ids of models to display in the view.
    * @throws [IModelError]($common) If no 3d models are found in the iModel.
    */
-  public async createDefaultView(
+  public override async createDefaultView(
     options?: ViewCreator3dOptions,
     modelIds?: string[]
   ): Promise<ViewState> {

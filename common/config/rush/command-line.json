@@ -18,6 +18,15 @@
       "description": "Scans the entire monorepo for security vulnerabilities via npm audit",
       "shellCommand": "node common/scripts/audit.js",
       "allowWarningsInSuccessfulBuild": true
+    },
+    {
+      "name": "clean",
+      "commandKind": "bulk",
+      "summary": "Cleans build output within each package",
+      "description": "Iterates through each package in the monorepo and runs the 'clean' script",
+      "enableParallelism": true,
+      "ignoreMissingScript": true,
+      "ignoreDependencyOrder": true
     }
   ],
   "parameters": []
