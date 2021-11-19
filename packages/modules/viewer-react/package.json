@@ -97,7 +97,6 @@
     "@bentley/frontend-authorization-client": "^2.14.0",
     "@bentley/geometry-core": "^2.14.0",
     "@bentley/imodelhub-client": "^2.14.0",
-    "@bentley/imodeljs-backend": "^2.14.0",
     "@bentley/imodeljs-common": "^2.14.0",
     "@bentley/imodeljs-frontend": "^2.14.0",
     "@bentley/imodeljs-i18n": "^2.14.0",
