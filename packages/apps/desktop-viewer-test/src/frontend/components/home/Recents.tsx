@@ -6,7 +6,7 @@
 import { useNavigate } from "@reach/router";
 import React, { useContext, useEffect, useState } from "react";
 
-import { ViewerFile, ViewerFileType } from "../../../common/ViewerConfig";
+import { ViewerFile } from "../../../common/ViewerConfig";
 import { SettingsContext } from "../../services/SettingsClient";
 
 export const Recents = () => {
@@ -20,12 +20,8 @@ export const Recents = () => {
     }
   }, [userSettings]);
 
-  const openSnapshot = async (snapshotPath?: string) => {
-    await navigate(`/snapshot`, { state: { snapshotPath } });
-  };
-
-  const openRemote = async (iTwinId?: string, iModelId?: string) => {
-    await navigate(`/itwins/${iTwinId}/${iModelId}`);
+  const openFile = async (filePath?: string) => {
+    await navigate(`/viewer`, { state: { filePath } });
   };
 
   return (
@@ -36,35 +32,11 @@ export const Recents = () => {
         if (displayValue.length > 25) {
           displayValue = `${displayValue.substr(0, 25)}...`;
         }
-        switch (recent.type) {
-          case ViewerFileType.SNAPSHOT:
-            return (
-              <span key={recent.path} onClick={() => openSnapshot(recent.path)}>
-                {displayValue}
-              </span>
-            );
-          case ViewerFileType.ONLINE:
-            return (
-              <span
-                key={recent.iModelId}
-                onClick={() => openRemote(recent.iTwinId, recent.iModelId)}
-              >
-                {displayValue}
-              </span>
-            );
-          case ViewerFileType.LOCAL:
-            // TODO Kevin Differentiate for Viewer icons
-            return (
-              <span
-                key={recent.iModelId}
-                onClick={() => openSnapshot(recent.path)}
-              >
-                {displayValue}
-              </span>
-            );
-          default:
-            return null;
-        }
+        return (
+          <span key={recent.path} onClick={() => openFile(recent.path)}>
+            {displayValue}
+          </span>
+        );
       })}
     </nav>
   );

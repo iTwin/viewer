@@ -34,11 +34,11 @@ const Home = () => {
     });
   }, []);
 
-  const openSnapshot = async () => {
-    const snapshotPath = await ITwinViewerApp.getSnapshotFile();
-    if (snapshotPath) {
-      void userSettings.addRecentSnapshot(snapshotPath);
-      void navigate("/snapshot", { state: { snapshotPath } });
+  const openFile = async () => {
+    const filePath = await ITwinViewerApp.getFile();
+    if (filePath) {
+      void userSettings.addRecent(filePath);
+      void navigate("/viewer", { state: { filePath } });
     }
   };
 
@@ -51,15 +51,11 @@ const Home = () => {
           <nav>
             <div>
               <SvgFolderOpened />
-              <span onClick={openSnapshot}>
-                {ITwinViewerApp.translate("openLocalFile")}
-              </span>
+              <span onClick={openFile}>{ITwinViewerApp.translate("open")}</span>
             </div>
             <div>
               <SvgImodel />
-              <Link to="itwins">
-                {ITwinViewerApp.translate("viewRemoteIModel")}
-              </Link>
+              <Link to="itwins">{ITwinViewerApp.translate("download")}</Link>
             </div>
           </nav>
         </div>

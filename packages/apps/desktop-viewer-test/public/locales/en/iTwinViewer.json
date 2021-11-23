@@ -1,7 +1,7 @@
 {
   "downloadBriefcase": "Download Briefcase",
-  "openLocalFile": "Open local file",
-  "viewRemoteIModel": "View remote iModel",
+  "open": "Open",
+  "download": "Download",
   "home":{
     "start": "Start",
     "learn": "Learn",

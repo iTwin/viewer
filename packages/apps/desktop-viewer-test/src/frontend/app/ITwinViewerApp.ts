@@ -62,9 +62,9 @@ export class ITwinViewerApp {
     },
   });
 
-  public static async getSnapshotFile(): Promise<string | undefined> {
+  public static async getFile(): Promise<string | undefined> {
     const options: OpenDialogOptions = {
-      title: ITwinViewerApp.translate("openLocalFile"),
+      title: ITwinViewerApp.translate("open"),
       properties: ["openFile"],
       filters: [{ name: "iModels", extensions: ["ibim", "bim"] }],
     };
@@ -85,14 +85,14 @@ export class ITwinViewerApp {
     }
     this._menuListener = async (sender, arg) => {
       switch (arg) {
-        case "snapshot":
-          const snapshotPath = await ITwinViewerApp.getSnapshotFile();
-          if (snapshotPath) {
-            void userSettings.addRecentSnapshot(snapshotPath);
-            await navigate(`/snapshot`, { state: { snapshotPath } });
+        case "open":
+          const filePath = await ITwinViewerApp.getFile();
+          if (filePath) {
+            void userSettings.addRecent(filePath);
+            await navigate(`/viewer`, { state: { filePath } });
           }
           break;
-        case "remote":
+        case "download":
           await navigate("/itwins");
           break;
         case "home":

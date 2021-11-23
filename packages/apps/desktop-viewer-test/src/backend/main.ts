@@ -77,15 +77,15 @@ const createMenu = () => {
       label: "File",
       submenu: [
         {
-          label: "Open snapshot file",
+          label: "Open",
           click: () => {
-            IpcHost.send(channelName, "snapshot");
+            IpcHost.send(channelName, "open");
           },
         },
         {
-          label: "View remote iModel",
+          label: "Download",
           click: () => {
-            IpcHost.send(channelName, "remote");
+            IpcHost.send(channelName, "download");
           },
         },
         { type: "separator" },

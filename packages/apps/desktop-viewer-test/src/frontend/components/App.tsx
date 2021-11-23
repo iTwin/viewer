@@ -9,19 +9,11 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import { ViewerSettings } from "../../common/ViewerConfig";
 import {
-  addRecentOffline as addRecentOfflineClient,
-  addRecentOnline as addRecentOnlineClient,
-  addRecentSnapshot as addRecentSnapshotClient,
+  addRecent as addRecentClient,
   getUserSettings,
   SettingsContext,
 } from "../services/SettingsClient";
-import {
-  DownloadRoute,
-  HomeRoute,
-  IModelsRoute,
-  ITwinsRoute,
-  SnapshotRoute,
-} from "./routes";
+import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
 
 const App = () => {
   const initialized = useDesktopViewerInitializer();
@@ -35,37 +27,18 @@ const App = () => {
     }
   }, [initialized]);
 
-  const addRecentSnapshot = useCallback(async (path: string) => {
-    const updatedSettings = await addRecentSnapshotClient(path);
-    setSettings(updatedSettings);
-    return updatedSettings;
-  }, []);
-
-  const addRecentOnline = useCallback(
-    async (iTwinId: string, iModelId: string, iModelName?: string) => {
-      const updatedSettings = await addRecentOnlineClient(
-        iTwinId,
-        iModelId,
-        iModelName
-      );
-      setSettings(updatedSettings);
-      return updatedSettings;
-    },
-    []
-  );
-
-  const addRecentOffline = useCallback(
+  const addRecent = useCallback(
     async (
-      iTwinId: string,
-      iModelId: string,
       path: string,
-      iModelName: string
+      iModelName?: string,
+      iTwinId?: string,
+      iModelId?: string
     ) => {
-      const updatedSettings = await addRecentOfflineClient(
-        iTwinId,
-        iModelId,
+      const updatedSettings = await addRecentClient(
         path,
-        iModelName
+        iModelName,
+        iTwinId,
+        iModelId
       );
       setSettings(updatedSettings);
       return updatedSettings;
@@ -74,16 +47,13 @@ const App = () => {
   );
 
   return initialized && settings ? (
-    <SettingsContext.Provider
-      value={{ settings, addRecentOnline, addRecentSnapshot, addRecentOffline }}
-    >
+    <SettingsContext.Provider value={{ settings, addRecent }}>
       <div style={{ height: "100%" }}>
         <Router style={{ height: "100%" }}>
           <HomeRoute path="/" />
-          <DownloadRoute path="itwins/:iTwinId/:iModelId" />
           <IModelsRoute path="/itwins/:iTwinId" />
           <ITwinsRoute path="/itwins" />
-          <SnapshotRoute path="/snapshot" />
+          <ViewerRoute path="/viewer" />
         </Router>
       </div>
     </SettingsContext.Provider>

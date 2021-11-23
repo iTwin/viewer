@@ -10,19 +10,27 @@ import {
   StandardViewId,
 } from "@bentley/imodeljs-frontend";
 import { Viewer } from "@itwin/desktop-viewer-react";
-import React, { useCallback, useMemo } from "react";
+import { RouteComponentProps } from "@reach/router";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-interface ModelViewerParams {
-  iTwinId?: string;
-  iModelId?: string;
-  snapshotPath?: string;
+interface ViewerRouteProps extends RouteComponentProps {
+  children?: any;
 }
 
-export const ModelViewer = ({
-  iTwinId,
-  iModelId,
-  snapshotPath,
-}: ModelViewerParams) => {
+interface ViewerRouteState {
+  filePath?: string;
+}
+
+export const ViewerRoute = ({ location }: ViewerRouteProps) => {
+  const [filePath, setFilePath] = useState<string>();
+
+  useEffect(() => {
+    const routeState = location?.state as ViewerRouteState | undefined;
+    if (routeState?.filePath) {
+      setFilePath(routeState?.filePath);
+    }
+  }, [location?.state]);
+
   const viewConfiguration = useCallback((viewPort: ScreenViewport) => {
     // default execute the fitview tool and use the iso standard view after tile trees are loaded
     const tileTreesLoaded = () => {
@@ -52,16 +60,14 @@ export const ModelViewer = ({
     console.log("Initialized!!");
   }, []);
 
-  return (
+  return filePath ? (
     <Viewer
-      contextId={iTwinId}
-      iModelId={iModelId}
-      snapshotPath={snapshotPath}
+      snapshotPath={filePath}
       onIModelAppInit={onIModelAppInitialized as any}
       viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
       defaultUiConfig={{
         contentManipulationTools: { cornerItem: { hideDefault: true } },
       }}
     />
-  );
+  ) : null;
 };

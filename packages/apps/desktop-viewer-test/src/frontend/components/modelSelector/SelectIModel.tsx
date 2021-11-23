@@ -31,7 +31,6 @@ import React, {
   useState,
 } from "react";
 
-import { ViewerFileType } from "../../../common/ViewerConfig";
 import { useDownload } from "../../hooks/useDownload";
 import { SettingsContext } from "../../services/SettingsClient";
 import { IModelContext } from "../routes";
@@ -65,9 +64,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
     if (recents) {
       return recents.find((recent) => {
         return (
-          recent.iTwinId === iModel.projectId &&
-          recent.iModelId === iModel.id &&
-          recent.type === ViewerFileType.LOCAL
+          recent.iTwinId === iModel.projectId && recent.iModelId === iModel.id
         );
       });
     }
@@ -120,7 +117,11 @@ const useProgressIndicator = (iModel: IModelFull) => {
     try {
       setStatus(ModelStatus.DOWNLOADING);
       const fileName = await doDownload();
-      setStatus(ModelStatus.UPTODATE);
+      if (fileName) {
+        setStatus(ModelStatus.UPTODATE);
+      } else {
+        setStatus(ModelStatus.ONLINE);
+      }
       return fileName;
     } catch {
       setStatus(ModelStatus.ERROR);
@@ -157,9 +158,11 @@ const useProgressIndicator = (iModel: IModelFull) => {
 
   useEffect(() => {
     if (modelContext.pendingIModel === iModel.id) {
-      void startDownload().then((snapshotPath) => {
+      void startDownload().then((filePath) => {
         modelContext.setPendingIModel(undefined);
-        void navigate("/snapshot", { state: { snapshotPath } });
+        if (filePath) {
+          void navigate("/viewer", { state: { filePath } });
+        }
       });
     }
   }, [modelContext.pendingIModel]);
@@ -223,14 +226,12 @@ export const SelectIModel = ({
     if (recents) {
       const local = recents.find((recent) => {
         return (
-          recent.iTwinId === iModel.projectId &&
-          recent.iModelId === iModel.id &&
-          recent.type === ViewerFileType.LOCAL
+          recent.iTwinId === iModel.projectId && recent.iModelId === iModel.id
         );
       });
       if (local?.path) {
         // already downloaded, navigate
-        void navigate("/snapshot", { state: { snapshotPath: local.path } });
+        void navigate("/viewer", { state: { filePath: local.path } });
         return;
       }
     }

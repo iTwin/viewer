@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { IModelVersion, SyncMode } from "@bentley/imodeljs-common";
 import { NativeApp } from "@bentley/imodeljs-frontend";
 import { ProgressInfo } from "@bentley/itwin-client";
@@ -19,12 +20,7 @@ export const useDownload = (
   const userSettings = useContext(SettingsContext);
 
   const addRecent = useCallback(async (fileName: string) => {
-    await userSettings.addRecentOffline(
-      iTwinId,
-      iModelId,
-      fileName,
-      iModelName
-    );
+    await userSettings.addRecent(fileName, iModelName, iTwinId, iModelId);
   }, []);
 
   const doDownload = useCallback(async () => {

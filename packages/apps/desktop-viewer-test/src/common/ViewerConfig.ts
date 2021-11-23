@@ -42,15 +42,8 @@ export const viewerRpcs = [
   SnapshotIModelRpcInterface,
 ];
 
-export enum ViewerFileType {
-  ONLINE,
-  SNAPSHOT,
-  LOCAL,
-}
-
 export interface ViewerFile {
   displayName: string;
-  type: ViewerFileType;
   path?: string;
   iTwinId?: string;
   iModelId?: string;
