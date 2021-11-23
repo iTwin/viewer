@@ -5,13 +5,11 @@
 
 import "./SelectIModel.scss";
 
-import { IModelVersion, SyncMode } from "@bentley/imodeljs-common";
+import { IModelVersion } from "@bentley/imodeljs-common";
 import {
   BriefcaseConnection,
   CheckpointConnection,
-  NativeApp,
 } from "@bentley/imodeljs-frontend";
-import { ProgressInfo } from "@bentley/itwin-client";
 import {
   IModelFull,
   IModelGrid,
@@ -34,8 +32,10 @@ import React, {
 } from "react";
 
 import { ViewerFileType } from "../../../common/ViewerConfig";
-import { ITwinViewerApp } from "../../app/ITwinViewerApp";
+import { useDownload } from "../../hooks/useDownload";
 import { SettingsContext } from "../../services/SettingsClient";
+import { IModelContext } from "../routes";
+
 interface SelectIModelProps extends IModelGridProps {
   projectName?: string;
 }
@@ -49,75 +49,40 @@ enum ModelStatus {
   UPTODATE,
 }
 
-const useDownload = (iModelId: string, iModelName: string, iTwinId: string) => {
-  const [progress, setProgress] = useState<number>();
-  const userSettings = useContext(SettingsContext);
-
-  const addRecent = useCallback(async (fileName: string) => {
-    await userSettings.addRecentOffline(
-      iTwinId,
-      iModelId,
-      fileName,
-      iModelName
-    );
-  }, []);
-
-  const doDownload = useCallback(async () => {
-    const fileName = await ITwinViewerApp.saveBriefcase(iModelName);
-    if (fileName) {
-      const req = await NativeApp.requestDownloadBriefcase(
-        iTwinId as string,
-        iModelId,
-        { syncMode: SyncMode.PullOnly, fileName },
-        IModelVersion.latest(),
-        async (progress: ProgressInfo) => {
-          setProgress(
-            progress.total
-              ? (progress.loaded / progress.total) * 100
-              : progress.percent
-          );
-
-          console.log(
-            `Progress (${progress.loaded}/${progress.total}) -> ${
-              progress.total
-                ? ((progress.loaded / progress.total) * 100).toPrecision(2)
-                : progress.percent
-            }%`
-          );
-        }
-      );
-      await req.downloadPromise;
-      await addRecent(fileName);
-    }
-  }, [iModelId, iModelName, iTwinId]);
-
-  return { progress, doDownload };
-};
-
 const useProgressIndicator = (iModel: IModelFull) => {
   const userSettings = useContext(SettingsContext);
-  const [status, setStatus] = useState<ModelStatus>(ModelStatus.ONLINE); //TODO check for downloads first
+  const [status, setStatus] = useState<ModelStatus>(ModelStatus.ONLINE);
   const [briefcase, setBriefcase] = useState<BriefcaseConnection>();
+  const modelContext = useContext(IModelContext);
+  const navigate = useNavigate();
 
-  const getBriefcase = useCallback(async () => {
-    // if there is a local file, open a briefcase connection and store it in state
+  /**
+   * Get the local file from settings
+   * @returns
+   */
+  const getLocal = useCallback(() => {
     const recents = userSettings.settings.recents;
     if (recents) {
-      const local = recents.find((recent) => {
+      return recents.find((recent) => {
         return (
           recent.iTwinId === iModel.projectId &&
           recent.iModelId === iModel.id &&
           recent.type === ViewerFileType.LOCAL
         );
       });
-      if (local?.path) {
-        const connection = await BriefcaseConnection.openFile({
-          fileName: local.path,
-        });
-        setBriefcase(connection);
-      }
     }
   }, [userSettings]);
+
+  const getBriefcase = useCallback(async () => {
+    // if there is a local file, open a briefcase connection and store it in state
+    const local = getLocal();
+    if (local?.path) {
+      const connection = await BriefcaseConnection.openFile({
+        fileName: local.path,
+      });
+      setBriefcase(connection);
+    }
+  }, []);
 
   const isBriefcaseUpToDate = useCallback(async () => {
     // get the online version
@@ -154,11 +119,16 @@ const useProgressIndicator = (iModel: IModelFull) => {
   const startDownload = useCallback(async () => {
     try {
       setStatus(ModelStatus.DOWNLOADING);
-      await doDownload();
+      const fileName = await doDownload();
       setStatus(ModelStatus.UPTODATE);
+      return fileName;
     } catch {
       setStatus(ModelStatus.ERROR);
     }
+  }, []);
+
+  const mergeChanges = useCallback(() => {
+    setStatus(ModelStatus.MERGING);
   }, []);
 
   useEffect(() => {
@@ -175,7 +145,9 @@ const useProgressIndicator = (iModel: IModelFull) => {
   }, [status]);
 
   useEffect(() => {
-    void getBriefcase();
+    if (!briefcase) {
+      void getBriefcase();
+    }
     return () => {
       if (briefcase) {
         void briefcase.close();
@@ -184,14 +156,19 @@ const useProgressIndicator = (iModel: IModelFull) => {
   }, []);
 
   useEffect(() => {
+    if (modelContext.pendingIModel === iModel.id) {
+      void startDownload().then((snapshotPath) => {
+        modelContext.setPendingIModel(undefined);
+        void navigate("/snapshot", { state: { snapshotPath } });
+      });
+    }
+  }, [modelContext.pendingIModel]);
+
+  useEffect(() => {
     if (briefcase) {
       void isBriefcaseUpToDate();
     }
   }, [briefcase]);
-
-  const mergeChanges = useCallback(() => {
-    setStatus(ModelStatus.MERGING);
-  }, []);
 
   const tileProps = useMemo<Partial<TileProps>>(() => {
     return {
@@ -235,12 +212,30 @@ export const SelectIModel = ({
 }: SelectIModelProps) => {
   const navigate = useNavigate();
   const userSettings = useContext(SettingsContext);
+  const modelContext = useContext(IModelContext);
 
   const selectIModel = async (iModel: IModelFull) => {
-    if (projectId) {
-      void userSettings.addRecentOnline(projectId, iModel.id, iModel.name);
+    if (modelContext.pendingIModel) {
+      // there is already a pending selection. disallow
+      return;
     }
-    await navigate(`${projectId}/${iModel.id}`);
+    const recents = userSettings.settings.recents;
+    if (recents) {
+      const local = recents.find((recent) => {
+        return (
+          recent.iTwinId === iModel.projectId &&
+          recent.iModelId === iModel.id &&
+          recent.type === ViewerFileType.LOCAL
+        );
+      });
+      if (local?.path) {
+        // already downloaded, navigate
+        void navigate("/snapshot", { state: { snapshotPath: local.path } });
+        return;
+      }
+    }
+    // trigger a download/view
+    modelContext.setPendingIModel(iModel.id);
   };
 
   return (
