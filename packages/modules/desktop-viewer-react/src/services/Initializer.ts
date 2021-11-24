@@ -44,9 +44,15 @@ export class DesktopInitializer {
         const electronViewerOpts: ElectronAppOpts = {
           iModelApp: getIModelAppOptions(options),
         };
+        // this is a hack to workaround a bug in ITJS 2.x where browser connectivity events are not registered
+        // TODO verify and remove in 3.x
+        window.ononline = () => {
+          /* nop */
+        };
+        window.onoffline = () => {
+          /* nop */
+        };
         yield ElectronApp.startup(electronViewerOpts);
-
-        console.log("desktop viewer started");
       });
 
       DesktopInitializer._cancel = cancellable.cancel;

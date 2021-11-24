@@ -16,7 +16,7 @@ import * as path from "path";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";
 import { channelName, viewerRpcs } from "../common/ViewerConfig";
-import { appInfo, getAppEnvVar } from "./AppInfo";
+import { appInfo } from "./AppInfo";
 import ViewerHandler from "./ViewerHandler";
 
 require("dotenv-flow").config(); // eslint-disable-line @typescript-eslint/no-var-requires
@@ -31,23 +31,13 @@ const viewerMain = async () => {
   Logger.setLevelDefault(LogLevel.Warning);
   Logger.setLevel(AppLoggerCategory.Backend, LogLevel.Info);
 
-  const clientId = getAppEnvVar("CLIENT_ID") ?? "";
-  const scope = getAppEnvVar("SCOPE") ?? "";
-  const redirectUri = getAppEnvVar("REDIRECT_URI");
-  const issuerUrl = getAppEnvVar("ISSUER_URL");
-
   const electronHost: ElectronHostOptions = {
     webResourcesPath: path.join(__dirname, "..", "..", "build"),
     rpcInterfaces: viewerRpcs,
     developmentServer: process.env.NODE_ENV === "development",
     ipcHandlers: [ViewerHandler],
-    authConfig: {
-      clientId,
-      scope,
-      redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
-      issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
-    },
     iconName: "itwin-viewer.ico",
+    noInitializeAuthClient: true,
   };
 
   await ElectronHost.startup({ electronHost });
@@ -77,12 +67,14 @@ const createMenu = () => {
       label: "File",
       submenu: [
         {
+          id: "open-menu-item",
           label: "Open",
           click: () => {
             IpcHost.send(channelName, "open");
           },
         },
         {
+          id: "download-menu-item",
           label: "Download",
           click: () => {
             IpcHost.send(channelName, "download");
@@ -90,21 +82,19 @@ const createMenu = () => {
         },
         { type: "separator" },
         isMac
-          ? { label: "Close", role: "close" }
-          : { label: "Close", role: "quit" },
+          ? { id: "close-menu-item", label: "Close", role: "close" }
+          : { id: "close-menu-item", label: "Close", role: "quit" },
       ],
     },
     {
       label: "View",
       submenu: [
         {
+          id: "view-getting-started-menu-item",
           label: "Getting started",
           click: () => {
             IpcHost.send(channelName, "home");
           },
-        },
-        {
-          role: "reload", //TODO Kevin remove
         },
       ],
     },

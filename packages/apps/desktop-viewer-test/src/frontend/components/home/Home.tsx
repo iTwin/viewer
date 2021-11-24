@@ -5,6 +5,8 @@
 
 import "./Home.scss";
 
+import { InternetConnectivityStatus } from "@bentley/imodeljs-common";
+import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { SvgFolderOpened, SvgImodel } from "@itwin/itwinui-icons-react";
 import { Blockquote, Headline, Title } from "@itwin/itwinui-react";
 import { Link, useNavigate } from "@reach/router";
@@ -22,7 +24,9 @@ interface LearnLink {
 const Home = () => {
   const navigate = useNavigate();
   const [learnLinks, setLearnLinks] = useState<LearnLink[]>([]);
+  const [linkClass, setLinkClass] = useState<string>();
   const userSettings = useContext(SettingsContext);
+  const connectivityStatus = useConnectivity();
 
   useEffect(() => {
     void fetch("./links.json").then((response) => {
@@ -33,6 +37,14 @@ const Home = () => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    setLinkClass(
+      connectivityStatus === InternetConnectivityStatus.Offline
+        ? "disabled-link"
+        : ""
+    );
+  }, [connectivityStatus]);
 
   const openFile = async () => {
     const filePath = await ITwinViewerApp.getFile();
@@ -54,8 +66,10 @@ const Home = () => {
               <span onClick={openFile}>{ITwinViewerApp.translate("open")}</span>
             </div>
             <div>
-              <SvgImodel />
-              <Link to="itwins">{ITwinViewerApp.translate("download")}</Link>
+              <SvgImodel className={linkClass} />
+              <Link to="itwins" className={linkClass}>
+                {ITwinViewerApp.translate("download")}
+              </Link>
             </div>
           </nav>
         </div>
@@ -64,7 +78,12 @@ const Home = () => {
           {learnLinks.map((link) => {
             return (
               <Blockquote key={link.url}>
-                <a href={link.url} target="_blank" rel="noreferrer">
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={linkClass}
+                >
                   {ITwinViewerApp.translate(link.textKey)}
                 </a>
               </Blockquote>

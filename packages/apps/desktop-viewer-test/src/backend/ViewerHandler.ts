@@ -3,9 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IpcHandler } from "@bentley/imodeljs-backend";
+import { ElectronAuthorizationBackend } from "@bentley/electron-manager/lib/ElectronBackend";
+import { IModelHost, IpcHandler } from "@bentley/imodeljs-backend";
+import { InternetConnectivityStatus } from "@bentley/imodeljs-common";
 import {
   dialog,
+  Menu,
   OpenDialogOptions,
   OpenDialogReturnValue,
   SaveDialogOptions,
@@ -24,6 +27,8 @@ import { getAppEnvVar } from "./AppInfo";
 import UserSettings from "./UserSettings";
 
 class ViewerHandler extends IpcHandler implements ViewerIpc {
+  private static _authInitialized = false;
+
   public get channelName() {
     return channelName;
   }
@@ -76,6 +81,45 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
    */
   public async addRecentFile(file: ViewerFile): Promise<void> {
     UserSettings.addRecent(file);
+  }
+
+  /**
+   * Changes due to connectivity status
+   * @param connectivityStatus
+   */
+  public async setConnectivity(
+    connectivityStatus: InternetConnectivityStatus
+  ): Promise<void> {
+    const downloadMenuItem =
+      Menu.getApplicationMenu()?.getMenuItemById("download-menu-item");
+    if (connectivityStatus === InternetConnectivityStatus.Offline) {
+      // offline, disable the download menu item
+      if (downloadMenuItem) {
+        downloadMenuItem.enabled = false;
+      }
+    } else if (connectivityStatus === InternetConnectivityStatus.Online) {
+      if (!ViewerHandler._authInitialized) {
+        // we are online now and were not before so configure the auth backend
+        const clientId = getAppEnvVar("CLIENT_ID") ?? "";
+        const scope = getAppEnvVar("SCOPE") ?? "";
+        const redirectUri = getAppEnvVar("REDIRECT_URI");
+        const issuerUrl = getAppEnvVar("ISSUER_URL");
+
+        const authBackend = new ElectronAuthorizationBackend({
+          clientId,
+          scope,
+          redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+          issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+        });
+        await authBackend.initialize();
+        IModelHost.authorizationClient = authBackend;
+        ViewerHandler._authInitialized = true;
+      }
+      if (downloadMenuItem) {
+        // online so enable the download menu item
+        downloadMenuItem.enabled = true;
+      }
+    }
   }
 }
 

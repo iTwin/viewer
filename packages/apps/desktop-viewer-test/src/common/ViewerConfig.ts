@@ -6,6 +6,7 @@
 import {
   IModelReadRpcInterface,
   IModelTileRpcInterface,
+  InternetConnectivityStatus,
   iTwinChannel,
   SnapshotIModelRpcInterface,
 } from "@bentley/imodeljs-common";
@@ -25,6 +26,9 @@ export interface ViewerIpc {
   getSettings: () => Promise<ViewerSettings>;
   addRecentFile: (file: ViewerFile) => Promise<void>;
   saveFile: (options: SaveDialogOptions) => Promise<SaveDialogReturnValue>;
+  setConnectivity: (
+    connectivityStatus: InternetConnectivityStatus
+  ) => Promise<void>;
 }
 
 export interface ViewerConfig {
