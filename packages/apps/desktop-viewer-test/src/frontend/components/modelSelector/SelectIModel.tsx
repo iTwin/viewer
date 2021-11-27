@@ -76,6 +76,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
     if (local?.path) {
       const connection = await BriefcaseConnection.openFile({
         fileName: local.path,
+        readonly: true,
       });
       setBriefcase(connection);
     }

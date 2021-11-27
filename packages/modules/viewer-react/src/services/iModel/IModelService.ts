@@ -6,9 +6,11 @@
 import { VersionQuery } from "@bentley/imodelhub-client";
 import { IModelVersion } from "@bentley/imodeljs-common";
 import {
+  BriefcaseConnection,
   CheckpointConnection,
   IModelApp,
   IModelHubFrontend,
+  SnapshotConnection,
 } from "@bentley/imodeljs-frontend";
 import { AuthorizedClientRequestContext } from "@bentley/itwin-client";
 
@@ -59,5 +61,23 @@ export const openRemoteImodel = async (
   } catch (error) {
     console.log(`Error opening the iModel connection: ${error}`);
     throw error;
+  }
+};
+
+/**
+ * Attempt to open a local briefcase or snapshot
+ * @param fileName
+ * @returns
+ */
+export const openLocalImodel = async (fileName: string) => {
+  try {
+    // attempt to open as a briefcase
+    return await BriefcaseConnection.openFile({
+      fileName,
+      readonly: true,
+    });
+  } catch {
+    // if that fails, attempt to open as a snapshot
+    return SnapshotConnection.openFile(fileName);
   }
 };

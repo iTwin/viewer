@@ -30,7 +30,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
 import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
-import { openRemoteImodel } from "../../services/iModel";
+import { openLocalImodel, openRemoteImodel } from "../../services/iModel";
 import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
 import { ai } from "../../services/telemetry/TelemetryService";
 import {
@@ -213,7 +213,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         // create a new imodelConnection for the passed project and imodel ids
         // TODO add the ability to open a BriefcaseConnection for Electron apps
         if (snapshotPath) {
-          imodelConnection = await SnapshotConnection.openFile(snapshotPath);
+          imodelConnection = await openLocalImodel(snapshotPath);
         } else if (contextId && iModelId) {
           imodelConnection = await openRemoteImodel(
             contextId,
