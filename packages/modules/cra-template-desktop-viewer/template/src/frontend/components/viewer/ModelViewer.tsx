@@ -54,7 +54,7 @@ export const ModelViewer = ({
 
   return (
     <Viewer
-      contextId={iTwinId}
+      iTwinId={iTwinId}
       iModelId={iModelId}
       snapshotPath={snapshotPath}
       onIModelAppInit={onIModelAppInitialized as any}

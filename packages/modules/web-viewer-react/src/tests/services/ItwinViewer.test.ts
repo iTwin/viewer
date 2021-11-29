@@ -85,17 +85,17 @@ describe("iTwinViewer", () => {
     jest.clearAllMocks();
   });
 
-  it("renders the viewer for the proper contextId and iModelId on the element whose id is passed to the constructor", async () => {
+  it("renders the viewer for the proper iTwinId and iModelId on the element whose id is passed to the constructor", async () => {
     jest.spyOn(React, "createElement");
     jest.spyOn(ReactDOM, "render");
     const viewer = new ItwinViewer({
       elementId,
       authConfig,
     });
-    await viewer.load({ contextId: mockProjectId, iModelId: mockiModelId });
+    await viewer.load({ iTwinId: mockProjectId, iModelId: mockiModelId });
     await WebInitializer.initialized;
     expect(React.createElement).toHaveBeenCalledWith(Viewer, {
-      contextId: mockProjectId,
+      iTwinId: mockProjectId,
       iModelId: mockiModelId,
       authConfig: authConfig,
       changeSetId: undefined,

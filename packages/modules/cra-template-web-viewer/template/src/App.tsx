@@ -41,7 +41,7 @@ const App: React.FC = () => {
       false
   );
   const [oidcInitialized, setOidcInitialized] = useState(false);
-  const [contextId, setContextId] = useState(process.env.IMJS_CONTEXT_ID);
+  const [iTwinId, setContextId] = useState(process.env.IMJS_CONTEXT_ID);
   const [iModelId, setIModelId] = useState(process.env.IMJS_IMODEL_ID);
 
   useEffect(() => {
@@ -66,12 +66,12 @@ const App: React.FC = () => {
   useEffect(() => {
     if (isAuthorized) {
       const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.has("contextId")) {
-        setContextId(urlParams.get("contextId") as string);
+      if (urlParams.has("iTwinId")) {
+        setContextId(urlParams.get("iTwinId") as string);
       } else {
         if (!process.env.IMJS_CONTEXT_ID) {
           throw new Error(
-            "Please add a valid context ID in the .env file and restart the application or add it to the contextId query parameter in the url and refresh the page. See the README for more information."
+            "Please add a valid context ID in the .env file and restart the application or add it to the iTwinId query parameter in the url and refresh the page. See the README for more information."
           );
         }
       }
@@ -89,10 +89,10 @@ const App: React.FC = () => {
   }, [isAuthorized]);
 
   useEffect(() => {
-    if (contextId && iModelId && isAuthorized) {
-      history.push(`?contextId=${contextId}&iModelId=${iModelId}`);
+    if (iTwinId && iModelId && isAuthorized) {
+      history.push(`?iTwinId=${iTwinId}&iModelId=${iModelId}`);
     }
-  }, [contextId, iModelId, isAuthorized]);
+  }, [iTwinId, iModelId, isAuthorized]);
 
   const onLoginClick = async () => {
     await AuthorizationClient.signIn();
@@ -142,7 +142,7 @@ const App: React.FC = () => {
       />
       {oidcInitialized && (
         <Viewer
-          contextId={contextId}
+          iTwinId={iTwinId}
           iModelId={iModelId}
           authConfig={{ oidcClient: AuthorizationClient.oidcClient }}
           viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}

@@ -123,7 +123,7 @@ describe("Viewer", () => {
     const { getByTestId } = render(
       <Viewer
         authConfig={{ config: authConfig }}
-        contextId={mockProjectId}
+        iTwinId={mockProjectId}
         iModelId={mockIModelId}
         additionalRpcInterfaces={[DevToolsRpcInterface]}
       />
@@ -165,7 +165,7 @@ describe("Viewer", () => {
     const { getByTestId } = render(
       <Viewer
         authConfig={{ config: authConfig }}
-        contextId={mockProjectId}
+        iTwinId={mockProjectId}
         iModelId={mockIModelId}
         backend={backendConfig}
       />
@@ -176,7 +176,7 @@ describe("Viewer", () => {
     expect(WebInitializer.startWebViewer).toHaveBeenCalledWith({
       authConfig: { config: authConfig },
       backend: backendConfig,
-      contextId: mockProjectId,
+      iTwinId: mockProjectId,
       iModelId: mockIModelId,
     });
   });
