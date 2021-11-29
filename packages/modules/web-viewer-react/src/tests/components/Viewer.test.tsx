@@ -104,7 +104,7 @@ jest.mock("@itwin/core-frontend", () => {
   };
 });
 
-const mockProjectId = "123";
+const mockITwinId = "123";
 const mockIModelId = "456";
 
 const authConfig: BrowserAuthorizationClientConfiguration = {
@@ -123,7 +123,7 @@ describe("Viewer", () => {
     const { getByTestId } = render(
       <Viewer
         authConfig={{ config: authConfig }}
-        iTwinId={mockProjectId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         additionalRpcInterfaces={[DevToolsRpcInterface]}
       />
@@ -165,7 +165,7 @@ describe("Viewer", () => {
     const { getByTestId } = render(
       <Viewer
         authConfig={{ config: authConfig }}
-        iTwinId={mockProjectId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         backend={backendConfig}
       />
@@ -176,7 +176,7 @@ describe("Viewer", () => {
     expect(WebInitializer.startWebViewer).toHaveBeenCalledWith({
       authConfig: { config: authConfig },
       backend: backendConfig,
-      iTwinId: mockProjectId,
+      iTwinId: mockITwinId,
       iModelId: mockIModelId,
     });
   });

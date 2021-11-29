@@ -65,7 +65,7 @@ jest.mock("@itwin/core-frontend", () => {
 });
 
 const elementId = "viewerRoot";
-const mockProjectId = "mockProjectId";
+const mockITwinId = "mockITwinId";
 const mockiModelId = "mockImodelId";
 const authConfig: WebAuthorizationOptions = {
   config: {
@@ -92,10 +92,10 @@ describe("iTwinViewer", () => {
       elementId,
       authConfig,
     });
-    await viewer.load({ iTwinId: mockProjectId, iModelId: mockiModelId });
+    await viewer.load({ iTwinId: mockITwinId, iModelId: mockiModelId });
     await WebInitializer.initialized;
     expect(React.createElement).toHaveBeenCalledWith(Viewer, {
-      iTwinId: mockProjectId,
+      iTwinId: mockITwinId,
       iModelId: mockiModelId,
       authConfig: authConfig,
       changeSetId: undefined,

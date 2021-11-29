@@ -39,7 +39,7 @@ import React, { useState, useEffect } from "react";
 import { Viewer } from "@itwin/web-viewer-react";
 
 export const MyViewerComponent = () => {
-  const iTwinId = "myConnectProjectId";
+  const iTwinId = "myITwinId";
   const iModelId = "myIModelId";
 
   // authorization client configuration
@@ -131,7 +131,7 @@ export const MyViewerComponent = () => {
 ```javascript
 import { ItwinViewer } from "@itwin/web-viewer-react";
 
-const iTwinId = "myConnectProjectId";
+const iTwinId = "myITwinId";
 const iModelId = "myIModelId";
 
 // authorization client configuration

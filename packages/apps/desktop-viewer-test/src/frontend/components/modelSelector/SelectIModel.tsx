@@ -22,17 +22,17 @@ interface SelectIModelProps extends IModelGridProps {
 
 export const SelectIModel = ({
   accessToken,
-  projectId,
+  iTwinId,
   projectName,
 }: SelectIModelProps) => {
   const navigate = useNavigate();
   const userSettings = useContext(SettingsContext);
 
   const selectIModel = async (iModel: IModelFull) => {
-    if (projectId) {
-      void userSettings.addRecentOnline(projectId, iModel.id, iModel.name);
+    if (iTwinId) {
+      void userSettings.addRecentOnline(iTwinId, iModel.id, iModel.name);
     }
-    await navigate(`${projectId}/${iModel.id}`);
+    await navigate(`${iTwinId}/${iModel.id}`);
   };
 
   return (

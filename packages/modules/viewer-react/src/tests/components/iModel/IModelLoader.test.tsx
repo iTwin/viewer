@@ -157,7 +157,7 @@ class Frontstage2Provider extends FrontstageProvider {
   }
 }
 
-const mockItwinId = "mockItwinId";
+const mockITwinId = "mockITwinId";
 const mockIModelId = "mockIModelId";
 
 describe("IModelLoader", () => {
@@ -184,7 +184,7 @@ describe("IModelLoader", () => {
 
     const result = render(
       <IModelLoader
-        iTwinId={mockItwinId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         uiProviders={[new TestUiProvider()]}
       />
@@ -197,7 +197,7 @@ describe("IModelLoader", () => {
 
     result.rerender(
       <IModelLoader
-        iTwinId={mockItwinId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         uiProviders={[new TestUiProvider2()]}
       />
@@ -245,7 +245,7 @@ describe("IModelLoader", () => {
       <IModelLoader
         frontstages={frontstages}
         backstageItems={backstageItems}
-        iTwinId={mockItwinId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
       />
     );
@@ -295,7 +295,7 @@ describe("IModelLoader", () => {
   it("sets the theme to the provided theme", async () => {
     const { getByTestId } = render(
       <IModelLoader
-        iTwinId={mockItwinId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         theme={ColorTheme.Dark}
       />
@@ -309,7 +309,7 @@ describe("IModelLoader", () => {
   it("creates a default viewstate", async () => {
     jest.spyOn(UiFramework, "setDefaultViewState");
     const result = render(
-      <IModelLoader iTwinId={mockItwinId} iModelId={mockIModelId} />
+      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
     );
 
     await waitFor(() => result.getByTestId("loader-wrapper"));
@@ -328,7 +328,7 @@ describe("IModelLoader", () => {
     };
     const result = render(
       <IModelLoader
-        iTwinId={mockItwinId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         viewportOptions={viewportOptions}
       />
@@ -349,7 +349,7 @@ describe("IModelLoader", () => {
     };
     const result = render(
       <IModelLoader
-        iTwinId={mockItwinId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         viewportOptions={viewportOptions}
       />
@@ -372,7 +372,7 @@ describe("IModelLoader", () => {
     };
     const result = render(
       <IModelLoader
-        iTwinId={mockItwinId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         viewportOptions={viewportOptions}
       />
@@ -390,7 +390,7 @@ describe("IModelLoader", () => {
     };
     const result = render(
       <IModelLoader
-        iTwinId={mockItwinId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         viewportOptions={viewportOptions}
       />
@@ -408,7 +408,7 @@ describe("IModelLoader", () => {
     };
     const result = render(
       <IModelLoader
-        iTwinId={mockItwinId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         viewportOptions={viewportOptions}
       />
@@ -436,7 +436,7 @@ describe("IModelLoader", () => {
     };
     const result = render(
       <IModelLoader
-        iTwinId={mockItwinId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         viewportOptions={viewportOptions}
       />
@@ -456,7 +456,7 @@ describe("IModelLoader", () => {
     ];
     const result = render(
       <IModelLoader
-        iTwinId={mockItwinId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         frontstages={frontstages}
       />
@@ -478,7 +478,7 @@ describe("IModelLoader", () => {
       .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
     const result = render(
-      <IModelLoader iTwinId={mockItwinId} iModelId={mockIModelId} />
+      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
     );
     await waitFor(() => result.getByTestId("viewer"));
 
@@ -497,13 +497,13 @@ describe("IModelLoader", () => {
       .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
     const result = render(
-      <IModelLoader iTwinId={mockItwinId} iModelId={mockIModelId} />
+      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
     );
 
     await waitFor(() => result.getByTestId("viewer"));
 
     result.rerender(
-      <IModelLoader iTwinId={mockItwinId} iModelId={mockIModelId + "1"} />
+      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId + "1"} />
     );
 
     await waitFor(() => result.getByTestId("viewer"));
@@ -520,13 +520,13 @@ describe("IModelLoader", () => {
       .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
     const result = render(
-      <IModelLoader iTwinId={mockItwinId} iModelId={mockIModelId} />
+      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
     );
 
     await waitFor(() => result.getByTestId("viewer"));
 
     result.rerender(
-      <IModelLoader iTwinId={mockItwinId + "1"} iModelId={mockIModelId} />
+      <IModelLoader iTwinId={mockITwinId + "1"} iModelId={mockIModelId} />
     );
 
     await waitFor(() => result.getByTestId("viewer"));
@@ -555,7 +555,7 @@ describe("IModelLoader", () => {
     };
     const result = render(
       <IModelLoader
-        iTwinId={mockItwinId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         loadingComponent={<Loader />}
       />
