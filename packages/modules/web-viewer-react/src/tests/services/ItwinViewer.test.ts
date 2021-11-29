@@ -13,7 +13,7 @@ import { WebAuthorizationOptions } from "../../types";
 
 jest.mock("@itwin/viewer-react", () => {
   return {
-    BaseViewer: jest.fn(({ children }) => null),
+    BaseViewer: jest.fn(() => null),
     getIModelAppOptions: jest.fn(),
     useIsMounted: jest.fn().mockReturnValue(true),
     useBaseViewerInitializer: jest.fn().mockReturnValue(true),

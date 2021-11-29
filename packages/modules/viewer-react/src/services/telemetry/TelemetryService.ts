@@ -56,7 +56,7 @@ class TelemetryService implements TelemetryClient {
    * iModelJS Telemetry Client implementation
    */
   public postTelemetry = async (
-    requestContext: RpcActivity,
+    _requestContext: RpcActivity,
     telemetryEvent: TelemetryEvent
   ): Promise<void> => {
     const properties = telemetryEvent.getProperties();
@@ -77,6 +77,7 @@ class TelemetryService implements TelemetryClient {
       // Don't send any telemetry while running tests.
       return false;
     }
+    return true;
   };
 
   initialize(appInsightsKey?: string) {
