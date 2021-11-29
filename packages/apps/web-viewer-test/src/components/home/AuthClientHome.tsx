@@ -69,7 +69,7 @@ export const AuthClientHome: React.FC = () => {
       {oidcInitialized && (
         <Viewer
           authConfig={{ oidcClient: AuthorizationClient.oidcClient }}
-          iTwinId={process.env.IMJS_AUTH_CLIENT_CONTEXT_ID as string}
+          iTwinId={process.env.IMJS_AUTH_CLIENT_ITWIN_ID as string}
           iModelId={process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string}
           appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
           theme={ColorTheme.Dark}

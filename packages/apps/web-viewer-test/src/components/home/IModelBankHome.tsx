@@ -36,9 +36,7 @@ export const IModelBankHome: React.FC = () => {
   const [iModelId, setIModelId] = useState(
     process.env.IMJS_AUTH_CLIENT_IMODEL_ID
   );
-  const [iTwinId, setContextId] = useState(
-    process.env.IMJS_AUTH_CLIENT_CONTEXT_ID
-  );
+  const [iTwinId, setITwinId] = useState(process.env.IMJS_AUTH_CLIENT_ITWIN_ID);
 
   const authConfig: BrowserAuthorizationClientConfiguration = {
     scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
@@ -73,7 +71,7 @@ export const IModelBankHome: React.FC = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has("iTwinId")) {
-      setContextId(urlParams.get("iTwinId") as string);
+      setITwinId(urlParams.get("iTwinId") as string);
     }
 
     if (urlParams.has("iModelId")) {

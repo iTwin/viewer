@@ -41,7 +41,7 @@ const App: React.FC = () => {
       false
   );
   const [oidcInitialized, setOidcInitialized] = useState(false);
-  const [iTwinId, setContextId] = useState(process.env.IMJS_CONTEXT_ID);
+  const [iTwinId, setITwinId] = useState(process.env.IMJS_ITWIN_ID);
   const [iModelId, setIModelId] = useState(process.env.IMJS_IMODEL_ID);
 
   useEffect(() => {
@@ -67,11 +67,11 @@ const App: React.FC = () => {
     if (isAuthorized) {
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.has("iTwinId")) {
-        setContextId(urlParams.get("iTwinId") as string);
+        setITwinId(urlParams.get("iTwinId") as string);
       } else {
-        if (!process.env.IMJS_CONTEXT_ID) {
+        if (!process.env.IMJS_ITWIN_ID) {
           throw new Error(
-            "Please add a valid context ID in the .env file and restart the application or add it to the iTwinId query parameter in the url and refresh the page. See the README for more information."
+            "Please add a valid iTwin ID in the .env file and restart the application or add it to the iTwinId query parameter in the url and refresh the page. See the README for more information."
           );
         }
       }

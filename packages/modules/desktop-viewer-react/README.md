@@ -47,7 +47,7 @@ export const MyViewerComponent = () => {
 
 ### Props
 
-- `iTwinId` - GUID for the context (project, asset, etc.) that contains the iModel that you wish to view
+- `iTwinId` - GUID for the iTwin (project, asset, etc.) that contains the iModel that you wish to view
 - `iModelId` - GUID for the iModel that you wish to view. Must be specified with a iTwinId if a snapshotPath is not provided
 - `changeSetId` - optional changeset id to view if combined with the iTwinId and iModelId props
 - `snapshotPath` - path to a local snapshot to load in the viewer. If provided, it will take precedence over any iTwinId/iModelId that may also be provided
