@@ -13,7 +13,7 @@ import { ItwinViewerCommonParams } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
 export interface ViewerProps extends ItwinViewerCommonParams {
-  contextId?: string;
+  iTwinId?: string;
   iModelId?: string;
   changeSetId?: string;
   snapshotPath?: string;
@@ -22,7 +22,7 @@ export interface ViewerProps extends ItwinViewerCommonParams {
 
 export const BaseViewer: React.FC<ViewerProps> = ({
   iModelId,
-  contextId,
+  iTwinId,
   appInsightsKey,
   theme,
   changeSetId,
@@ -76,7 +76,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
       {authorized ? (
         viewerInitialized ? (
           <IModelLoader
-            contextId={contextId}
+            iTwinId={iTwinId}
             iModelId={iModelId}
             changeSetId={changeSetId}
             defaultUiConfig={defaultUiConfig}

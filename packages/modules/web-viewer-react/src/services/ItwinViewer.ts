@@ -23,7 +23,7 @@ import {
 import { WebInitializer } from "./Initializer";
 
 export interface LoadParameters {
-  contextId?: string;
+  iTwinId?: string;
   iModelId?: string;
   changeSetId?: string;
 }
@@ -60,15 +60,15 @@ export class ItwinViewer {
 
   /** load a model in the viewer once iTwinViewerApp is ready */
   load = async (args: LoadParameters): Promise<void> => {
-    if (!args?.contextId || !args?.iModelId) {
-      throw new Error("Please provide a valid contextId and iModelId");
+    if (!args?.iTwinId || !args?.iModelId) {
+      throw new Error("Please provide a valid iTwinId and iModelId");
     }
 
     // render the viewer for the given iModel on the given element
     ReactDOM.render(
       React.createElement(Viewer, {
         authConfig: this.authConfig,
-        contextId: args?.contextId,
+        iTwinId: args?.iTwinId,
         iModelId: args?.iModelId,
         changeSetId: args?.changeSetId,
         uiConfig: this.uiConfig,

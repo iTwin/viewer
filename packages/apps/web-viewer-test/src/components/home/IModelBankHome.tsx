@@ -36,9 +36,7 @@ export const IModelBankHome: React.FC = () => {
   const [iModelId, setIModelId] = useState(
     process.env.IMJS_AUTH_CLIENT_IMODEL_ID
   );
-  const [contextId, setContextId] = useState(
-    process.env.IMJS_AUTH_CLIENT_CONTEXT_ID
-  );
+  const [iTwinId, setITwinId] = useState(process.env.IMJS_AUTH_CLIENT_ITWIN_ID);
 
   const authConfig: BrowserAuthorizationClientConfiguration = {
     scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
@@ -72,8 +70,8 @@ export const IModelBankHome: React.FC = () => {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has("contextId")) {
-      setContextId(urlParams.get("contextId") as string);
+    if (urlParams.has("iTwinId")) {
+      setITwinId(urlParams.get("iTwinId") as string);
     }
 
     if (urlParams.has("iModelId")) {
@@ -82,8 +80,8 @@ export const IModelBankHome: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    history.push(`imodelbank?contextId=${contextId}&iModelId=${iModelId}`);
-  }, [contextId, iModelId]);
+    history.push(`imodelbank?iTwinId=${iTwinId}&iModelId=${iModelId}`);
+  }, [iTwinId, iModelId]);
 
   const toggleLogin = async () => {
     if (!loggedIn) {
@@ -146,7 +144,7 @@ export const IModelBankHome: React.FC = () => {
       />
       <Viewer
         authConfig={{ config: authConfig }}
-        contextId={contextId}
+        iTwinId={iTwinId}
         iModelId={iModelId}
         appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
         theme={ColorTheme.Dark}

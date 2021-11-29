@@ -44,7 +44,7 @@ import { DefaultFrontstage } from "../app-ui/frontstages/DefaultFrontstage";
 import { IModelBusy, IModelViewer } from ".";
 
 export interface ModelLoaderProps extends IModelLoaderParams {
-  contextId?: string;
+  iTwinId?: string;
   iModelId?: string;
   changeSetId?: string;
   appInsightsKey?: string;
@@ -57,7 +57,7 @@ export interface ModelLoaderProps extends IModelLoaderParams {
 const Loader: React.FC<ModelLoaderProps> = React.memo(
   ({
     iModelId,
-    contextId,
+    iTwinId,
     changeSetId,
     defaultUiConfig,
     onIModelConnected,
@@ -199,7 +199,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           return initBlankConnection(blankConnection, onIModelConnected);
         }
 
-        if (!(contextId && iModelId) && !snapshotPath) {
+        if (!(iTwinId && iModelId) && !snapshotPath) {
           throw new Error(
             IModelApp.localization.getLocalizedStringWithNamespace(
               "iTwinViewer",
@@ -213,9 +213,9 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         // TODO add the ability to open a BriefcaseConnection for Electron apps
         if (snapshotPath) {
           imodelConnection = await SnapshotConnection.openFile(snapshotPath);
-        } else if (contextId && iModelId) {
+        } else if (iTwinId && iModelId) {
           imodelConnection = await openRemoteIModel(
-            contextId,
+            iTwinId,
             iModelId,
             changeSetId
           );
@@ -249,7 +249,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         }
       };
     }, [
-      contextId,
+      iTwinId,
       iModelId,
       changeSetId,
       snapshotPath,
@@ -322,7 +322,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         const defaultFrontstageProvider = new DefaultFrontstage(
           viewState,
           defaultUiConfig,
-          viewportOptions,
+          viewportOptions
         );
 
         // add the default frontstage first so that it's default status can be overridden
@@ -333,12 +333,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       }
 
       setFinalFrontstages(allFrontstages);
-    }, [
-      frontstages,
-      viewportOptions,
-      viewState,
-      defaultUiConfig,
-    ]);
+    }, [frontstages, viewportOptions, viewState, defaultUiConfig]);
 
     if (error) {
       throw error;
@@ -346,9 +341,9 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       return (
         <div className="itwin-viewer-container">
           {finalFrontstages &&
-            finalBackstageItems &&
-            ((viewState && connection) || noConnection) &&
-            StateManager.store ? (
+          finalBackstageItems &&
+          ((viewState && connection) || noConnection) &&
+          StateManager.store ? (
             <Provider store={StateManager.store}>
               <IModelViewer
                 frontstages={finalFrontstages}
