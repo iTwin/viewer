@@ -10,7 +10,7 @@
     "synchronizerLink": "Please visit <a href={{bridgePortal}} rel=\"noopener noreferrer\" target=\"_blank\">the Synchronization Portal</a> to review the iModel's data connections and synchronize changes.",
     "iModelLoading": "Your iModel is loading"
   },
-  "missingConnectionProps": "Please provide a valid contextId and iModelId or a local snapshotPath",
+  "missingConnectionProps": "Please provide a valid iTwinId and iModelId or a local snapshotPath",
   "backstage": {
     "mainFrontstage": "Main Frontstage"
   },

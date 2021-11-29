@@ -43,7 +43,7 @@ import { DefaultFrontstage } from "../app-ui/frontstages/DefaultFrontstage";
 import { IModelBusy, IModelViewer } from ".";
 
 export interface ModelLoaderProps extends IModelLoaderParams {
-  contextId?: string;
+  iTwinId?: string;
   iModelId?: string;
   changeSetId?: string;
   appInsightsKey?: string;
@@ -56,7 +56,7 @@ export interface ModelLoaderProps extends IModelLoaderParams {
 const Loader: React.FC<ModelLoaderProps> = React.memo(
   ({
     iModelId,
-    contextId,
+    iTwinId,
     changeSetId,
     defaultUiConfig,
     onIModelConnected,
@@ -198,7 +198,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           return initBlankConnection(blankConnection, onIModelConnected);
         }
 
-        if (!(contextId && iModelId) && !snapshotPath) {
+        if (!(iTwinId && iModelId) && !snapshotPath) {
           throw new Error(
             IModelApp.localization.getLocalizedStringWithNamespace(
               "iTwinViewer",
@@ -212,9 +212,9 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         // TODO add the ability to open a BriefcaseConnection for Electron apps
         if (snapshotPath) {
           imodelConnection = await openLocalImodel(snapshotPath);
-        } else if (contextId && iModelId) {
+        } else if (iTwinId && iModelId) {
           imodelConnection = await openRemoteIModel(
-            contextId,
+            iTwinId,
             iModelId,
             changeSetId
           );
@@ -248,7 +248,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         }
       };
     }, [
-      contextId,
+      iTwinId,
       iModelId,
       changeSetId,
       snapshotPath,

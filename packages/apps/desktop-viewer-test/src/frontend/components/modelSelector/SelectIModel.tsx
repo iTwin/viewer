@@ -5,7 +5,7 @@
 
 import "./SelectIModel.scss";
 
-import { BriefcaseConnection } from "@bentley/imodeljs-frontend";
+import { BriefcaseConnection } from "@itwin/core-frontend";
 import { getBriefcaseStatus, ModelStatus } from "@itwin/desktop-viewer-react";
 import {
   IModelFull,
@@ -166,7 +166,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
 
 export const SelectIModel = ({
   accessToken,
-  projectId,
+  projectId: iTwinId,
   projectName,
 }: SelectIModelProps) => {
   const navigate = useNavigate();
@@ -203,7 +203,7 @@ export const SelectIModel = ({
       <div className="itv-scrolling-content">
         <IModelGrid
           accessToken={accessToken}
-          projectId={projectId}
+          projectId={iTwinId}
           onThumbnailClick={selectIModel}
           useIndividualState={useProgressIndicator}
         />

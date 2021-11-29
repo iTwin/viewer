@@ -39,7 +39,7 @@ import React, { useState, useEffect } from "react";
 import { Viewer } from "@itwin/web-viewer-react";
 
 export const MyViewerComponent = () => {
-  const contextId = "myConnectProjectId";
+  const iTwinId = "myITwinId";
   const iModelId = "myIModelId";
 
   // authorization client configuration
@@ -54,7 +54,7 @@ export const MyViewerComponent = () => {
   return (
     <Viewer
       authConfig={{ config: authConfig }}
-      contextId={contextId}
+      iTwinId={iTwinId}
       iModelId={iModelId}
     />
   );
@@ -65,13 +65,13 @@ export const MyViewerComponent = () => {
 
 #### Required
 
-- `contextId` - GUID for the context (project, asset, etc.) that contains the iModel that you wish to view
+- `iTwinId` - GUID for the iTwin (project, asset, etc.) that contains the iModel that you wish to view
 - `iModelId` - GUID for the iModel that you wish to view
 - `authConfig` - OIDC configuration or an instance of an iTwin.js [BrowserAuthorizationClient](https://www.itwinjs.org/reference/frontend-authorization-client/browserauthorization/browserauthorizationclient/)
 
 #### Optional
 
-- `changeSetId` - changeset id to view if combined with the contextId and iModelId props
+- `changeSetId` - changeset id to view if combined with the iTwinId and iModelId props
 - `backend` - backend connection info (defaults to the iTwin General Purpose backend)
 - `theme` - override the default theme
 - `defaultUiConfig` - hide or override default tooling and widgets
@@ -131,7 +131,7 @@ export const MyViewerComponent = () => {
 ```javascript
 import { ItwinViewer } from "@itwin/web-viewer-react";
 
-const contextId = "myConnectProjectId";
+const iTwinId = "myITwinId";
 const iModelId = "myIModelId";
 
 // authorization client configuration
@@ -151,7 +151,7 @@ const viewer = new iTwinViewer({
 });
 
 if (viewer) {
-  viewer.load({ contextId, iModelId });
+  viewer.load({ iTwinId, iModelId });
 }
 ```
 
@@ -201,7 +201,7 @@ It allows for most of the same optional props as the Viewer component, with a fe
 
 #### Required
 
-- `blankConnection` - Data to use to create the BlankConnection (name, location, extents, etc.). Note that no contextId or iModelId is required for this component
+- `blankConnection` - Data to use to create the BlankConnection (name, location, extents, etc.). Note that no iTwinId or iModelId is required for this component
 
 #### Optional
 

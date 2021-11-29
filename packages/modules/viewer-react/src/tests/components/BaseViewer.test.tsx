@@ -127,7 +127,7 @@ jest.mock("../../services/BaseInitializer", () => {
 //   };
 // });
 
-const mockProjectId = "123";
+const mockITwinId = "123";
 const mockIModelId = "456";
 
 describe("BaseViewer", () => {
@@ -138,9 +138,9 @@ describe("BaseViewer", () => {
     }
   });
 
-  it("loads the model loader for the specified contextId and iModelId", async () => {
+  it("loads the model loader for the specified iTwinId and iModelId", async () => {
     const { getByTestId } = render(
-      <BaseViewer contextId={mockProjectId} iModelId={mockIModelId} />
+      <BaseViewer iTwinId={mockITwinId} iModelId={mockIModelId} />
     );
 
     const viewerContainer = await waitFor(() => getByTestId("loader-wrapper"));
@@ -151,7 +151,7 @@ describe("BaseViewer", () => {
   it("queries the iModel with the provided changeSetId", async () => {
     const { getByTestId } = render(
       <BaseViewer
-        contextId={mockProjectId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         productId={"0000"}
         changeSetId={"123"}
@@ -161,13 +161,13 @@ describe("BaseViewer", () => {
     await waitFor(() => getByTestId("loader-wrapper"));
 
     expect(IModelService.openRemoteIModel).toHaveBeenCalledWith(
-      mockProjectId,
+      mockITwinId,
       mockIModelId,
       "123"
     );
   });
 
-  it("ensures that either a contextId/iModelId combination or a local snapshot is provided", async () => {
+  it("ensures that either a iTwinId/iModelId combination or a local snapshot is provided", async () => {
     const events = {
       onError: (event: ErrorEvent) => {
         event.preventDefault();
