@@ -35,7 +35,7 @@ export const IModelsRoute = ({
     return (
       <SelectIModel
         accessToken={accessToken}
-        iTwinId={iTwinId}
+        projectId={iTwinId}
         projectName={projectName}
       />
     );

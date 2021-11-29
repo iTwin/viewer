@@ -22,7 +22,7 @@ interface SelectIModelProps extends IModelGridProps {
 
 export const SelectIModel = ({
   accessToken,
-  iTwinId,
+  projectId: iTwinId,
   projectName,
 }: SelectIModelProps) => {
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ export const SelectIModel = ({
       <div className="itv-scrolling-content">
         <IModelGrid
           accessToken={accessToken}
-          iTwinId={iTwinId}
+          projectId={iTwinId}
           onThumbnailClick={selectIModel}
         />
       </div>
