@@ -10,6 +10,7 @@ import {
   ElectronHost,
   ElectronHostOptions,
 } from "@itwin/core-electron/lib/cjs/ElectronBackend";
+import { ElectronMainAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronMain";
 import { Presentation } from "@itwin/presentation-backend";
 import { Menu } from "electron";
 import { MenuItemConstructorOptions } from "electron/main";
@@ -42,17 +43,19 @@ const viewerMain = async () => {
     rpcInterfaces: viewerRpcs,
     developmentServer: process.env.NODE_ENV === "development",
     ipcHandlers: [ViewerHandler],
-    authConfig: {
-      clientId,
-      scope,
-      redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
-      issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
-    },
     iconName: "itwin-viewer.ico",
   };
 
+  const authClient = await ElectronMainAuthorization.create({
+    clientId,
+    scope,
+    redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+    issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+  });
+
   const iModelHost = new IModelHostConfiguration();
   iModelHost.hubAccess = new IModelHubBackend();
+  iModelHost.authorizationClient = authClient;
 
   await ElectronHost.startup({ electronHost, iModelHost });
 
