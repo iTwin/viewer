@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/error-handling-react",
       "comment": " use hackathon version of core",
-      "type": "patch"
+      "type": "none"
     }
   ],
   "packageName": "@itwin/error-handling-react",

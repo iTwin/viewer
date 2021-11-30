@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/cra-template-desktop-viewer",
       "comment": "use hackathon version of core",
-      "type": "patch"
+      "type": "none"
     }
   ],
   "packageName": "@itwin/cra-template-desktop-viewer",
