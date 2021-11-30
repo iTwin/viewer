@@ -31,8 +31,6 @@
   "devDependencies": {
     "@bentley/imodelhub-client": "rc",
     "@bentley/itwin-client": "rc",
-    "@bentley/product-settings-client": "rc",
-    "@bentley/telemetry-client": "rc",
     "@itwin/appui-abstract": "rc",
     "@itwin/appui-layout-react": "rc",
     "@itwin/appui-react": "rc",
@@ -47,6 +45,7 @@
     "@itwin/core-orbitgt": "rc",
     "@itwin/core-quantity": "rc",
     "@itwin/core-react": "rc",
+    "@itwin/core-telemetry": "rc",
     "@itwin/imodel-components-react": "rc",
     "@itwin/presentation-common": "rc",
     "@itwin/presentation-components": "rc",
@@ -73,8 +72,6 @@
   "peerDependencies": {
     "@bentley/imodelhub-client": "rc",
     "@bentley/itwin-client": "rc",
-    "@bentley/product-settings-client": "rc",
-    "@bentley/telemetry-client": "rc",
     "@itwin/appui-abstract": "rc",
     "@itwin/appui-layout-react": "rc",
     "@itwin/appui-react": "rc",
@@ -88,6 +85,7 @@
     "@itwin/core-orbitgt": "rc",
     "@itwin/core-quantity": "rc",
     "@itwin/core-react": "rc",
+    "@itwin/core-telemetry": "rc",
     "@itwin/imodel-components-react": "rc",
     "@itwin/presentation-common": "rc",
     "@itwin/presentation-components": "rc",

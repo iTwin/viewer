@@ -9,7 +9,6 @@ dependencies:
   '@bentley/itwin-client': 3.0.0-dev.135_2a526bb54deb5ab443bbedfaf1d28158
   '@bentley/product-settings-client': 2.19.0-dev.24_362c2756af7210ff1257e9fb6db3f70c
   '@bentley/react-scripts': 4.0.5_react@17.0.2+typescript@4.3.5
-  '@bentley/telemetry-client': 2.19.0-dev.24_362c2756af7210ff1257e9fb6db3f70c
   '@itwin/appui-abstract': 3.0.0-dev.135_2a526bb54deb5ab443bbedfaf1d28158
   '@itwin/appui-layout-react': 3.0.0-dev.135_296d3841be036e96af04ebebaaa3ee84
   '@itwin/appui-react': 3.0.0-dev.135_825c68e61f463ab30e2456e17abbe7f6
@@ -27,6 +26,7 @@ dependencies:
   '@itwin/core-orbitgt': 3.0.0-dev.135
   '@itwin/core-quantity': 3.0.0-dev.135_2a526bb54deb5ab443bbedfaf1d28158
   '@itwin/core-react': 3.0.0-dev.135_7d0f94a7ad9384f74b78e68f9349ebcd
+  '@itwin/core-telemetry': 3.0.0-dev.135_ef9fc0f0f766d4dff5b65cf62913f392
   '@itwin/ecschema-metadata': 3.0.0-dev.135_2a526bb54deb5ab443bbedfaf1d28158
   '@itwin/express-server': 3.0.0-dev.135
   '@itwin/imodel-browser-react': 0.11.0_react-dom@17.0.2+react@17.0.2
@@ -20384,6 +20384,7 @@ packages:
       '@itwin/core-orbitgt': 3.0.0-dev.135
       '@itwin/core-quantity': 3.0.0-dev.135_2a526bb54deb5ab443bbedfaf1d28158
       '@itwin/core-react': 3.0.0-dev.135_7d0f94a7ad9384f74b78e68f9349ebcd
+      '@itwin/core-telemetry': 3.0.0-dev.135_ef9fc0f0f766d4dff5b65cf62913f392
       '@itwin/presentation-common': 3.0.0-dev.135_1860a76f90932d859aaec89d3dbcb6ea
       '@itwin/presentation-frontend': 3.0.0-dev.135_bda325b6843379b0fc7563459014c290
       '@itwin/webgl-compatibility': 3.0.0-dev.135
@@ -20403,7 +20404,7 @@ packages:
       '@itwin/imodel-components-react': '*'
       redux: '*'
     resolution:
-      integrity: sha512-S0qX3+t0XPHbA2sLDO17J6rmae18WdKJk4Nck/TJkCA4H1PtU10MGhCW6LEyS6jFimwKlffU2VIBLxT1n389Bg==
+      integrity: sha512-W1idqYbJGEH8IfyPx//9Xd+09gaduaB8vpgCeM2CI04tN8CWBkfV1v2SxrdJjZ9Lg05vOyJ5J7LsCT8g418y0g==
       tarball: 'file:projects/cdn-viewer.tgz'
     version: 0.0.0
   'file:projects/cra-template-desktop-viewer.tgz':
@@ -20441,6 +20442,7 @@ packages:
       '@itwin/core-orbitgt': 3.0.0-dev.135
       '@itwin/core-quantity': 3.0.0-dev.135_2a526bb54deb5ab443bbedfaf1d28158
       '@itwin/core-react': 3.0.0-dev.135_7d0f94a7ad9384f74b78e68f9349ebcd
+      '@itwin/core-telemetry': 3.0.0-dev.135_ef9fc0f0f766d4dff5b65cf62913f392
       '@itwin/imodel-components-react': 3.0.0-dev.135_4b5d94830048d8c9f5dfa97579d73f62
       '@itwin/presentation-common': 3.0.0-dev.135_1860a76f90932d859aaec89d3dbcb6ea
       '@itwin/presentation-components': 3.0.0-dev.135_d330bf565e93c106fb3202a94a185c17
@@ -20472,7 +20474,7 @@ packages:
     peerDependencies:
       '@itwin/ecschema-metadata': '*'
     resolution:
-      integrity: sha512-OP0xj30COGFDl6WPvXg85/CrDlTi0pEKF7Z7OH+GAh1KOKmrOSCS9ZyG2nzbzVxFvmmQT4XkqlV5ay+/LKs0Uw==
+      integrity: sha512-RG07cj9GGK+UVig7IBCrTYSTcTrLGN5YC37z32V5ViqDDyzHNgb7avlqN6xECObEtG56oY3sM1mQSHED/Yte9Q==
       tarball: 'file:projects/desktop-viewer-react.tgz'
     version: 0.0.0
   'file:projects/desktop-viewer-test.tgz_5fbf738d2dfff1add923f438dba5958b':
@@ -20499,6 +20501,7 @@ packages:
       '@itwin/core-orbitgt': 3.0.0-dev.135
       '@itwin/core-quantity': 3.0.0-dev.135_2a526bb54deb5ab443bbedfaf1d28158
       '@itwin/core-react': 3.0.0-dev.135_7d0f94a7ad9384f74b78e68f9349ebcd
+      '@itwin/core-telemetry': 3.0.0-dev.135_ef9fc0f0f766d4dff5b65cf62913f392
       '@itwin/ecschema-metadata': 3.0.0-dev.135_2a526bb54deb5ab443bbedfaf1d28158
       '@itwin/express-server': 3.0.0-dev.135
       '@itwin/imodel-browser-react': 0.11.0_react-dom@17.0.2+react@17.0.2
@@ -20538,7 +20541,7 @@ packages:
       react-redux: '*'
       redux: '*'
     resolution:
-      integrity: sha512-tJldxExPkrWPRvpGsiGrKvcXULlOKWqnD6kgR9a6JCQ2Ni8+3Q9T61ycHbU7rRJIlSejSTiE9tqGbZmHPK8SSg==
+      integrity: sha512-VrBbaiNenf+AmvG/LXMX1wdtAFZVQjjraN6PK3S8QOzbdpHMGSYByUOVhhtQ8jxsaan3Xuh4f6KubK3plTOVOw==
       tarball: 'file:projects/desktop-viewer-test.tgz'
     version: 0.0.0
   'file:projects/error-handling-react.tgz_4bf8d6b27e7543a8a50b34e2c9a80c5d':
@@ -20612,6 +20615,7 @@ packages:
       '@itwin/core-orbitgt': 3.0.0-dev.135
       '@itwin/core-quantity': 3.0.0-dev.135_2a526bb54deb5ab443bbedfaf1d28158
       '@itwin/core-react': 3.0.0-dev.135_7d0f94a7ad9384f74b78e68f9349ebcd
+      '@itwin/core-telemetry': 3.0.0-dev.135_ef9fc0f0f766d4dff5b65cf62913f392
       '@itwin/imodel-components-react': 3.0.0-dev.135_4b5d94830048d8c9f5dfa97579d73f62
       '@itwin/itwinui-react': 1.22.0_react-dom@17.0.2+react@17.0.2
       '@itwin/presentation-common': 3.0.0-dev.135_1860a76f90932d859aaec89d3dbcb6ea
@@ -20645,7 +20649,7 @@ packages:
     dev: false
     name: '@rush-temp/viewer-react'
     resolution:
-      integrity: sha512-9U8Cx/T9FaG0tm1eOpZOidDzC0UjDPr6nofCnXyZBbSdLYvE2/Hs0jSkLwV2u+ILaNdXcxYKCeRBs9VNcyFumQ==
+      integrity: sha512-8fJYI/b1FOYNtiaWT6aIQoZXtPSzFQALVb/+djl31Q2Fok9/J+BoSnMX0+Tnut5WqFO2pUO6mLbI6j/hBvtyTQ==
       tarball: 'file:projects/viewer-react.tgz'
     version: 0.0.0
   'file:projects/viewer-scripts.tgz_typescript@4.3.5':
@@ -20701,6 +20705,7 @@ packages:
       '@itwin/core-orbitgt': 3.0.0-dev.135
       '@itwin/core-quantity': 3.0.0-dev.135_2a526bb54deb5ab443bbedfaf1d28158
       '@itwin/core-react': 3.0.0-dev.135_7d0f94a7ad9384f74b78e68f9349ebcd
+      '@itwin/core-telemetry': 3.0.0-dev.135_ef9fc0f0f766d4dff5b65cf62913f392
       '@itwin/imodel-components-react': 3.0.0-dev.135_4b5d94830048d8c9f5dfa97579d73f62
       '@itwin/presentation-common': 3.0.0-dev.135_1860a76f90932d859aaec89d3dbcb6ea
       '@itwin/presentation-components': 3.0.0-dev.135_d330bf565e93c106fb3202a94a185c17
@@ -20729,7 +20734,7 @@ packages:
     dev: false
     name: '@rush-temp/web-viewer-react'
     resolution:
-      integrity: sha512-2oi+6tlj/v4hNoqGqLrQfCxsESsAlbLVkYp4i/CjECl3eqnfVCxL0ZmBF9ejYBCgdxyqEySgQg06isozL/E4aw==
+      integrity: sha512-kYktP21p0t+Ry1avFINsM9zRE52XrH1VE/6e6VG/zPo56TI5Y9+ric1wMe7Qu8ESOiRdCWZc2HjQlNBiwnLTIA==
       tarball: 'file:projects/web-viewer-react.tgz'
     version: 0.0.0
   'file:projects/web-viewer-test.tgz_d338f393ae62352670a27e53271dd9d3':
@@ -20754,6 +20759,7 @@ packages:
       '@itwin/core-orbitgt': 3.0.0-dev.135
       '@itwin/core-quantity': 3.0.0-dev.135_2a526bb54deb5ab443bbedfaf1d28158
       '@itwin/core-react': 3.0.0-dev.135_7d0f94a7ad9384f74b78e68f9349ebcd
+      '@itwin/core-telemetry': 3.0.0-dev.135_ef9fc0f0f766d4dff5b65cf62913f392
       '@itwin/itwinui-react': 1.22.0_react-dom@17.0.2+react@17.0.2
       '@itwin/presentation-common': 3.0.0-dev.135_1860a76f90932d859aaec89d3dbcb6ea
       '@itwin/presentation-frontend': 3.0.0-dev.135_bda325b6843379b0fc7563459014c290
@@ -20779,7 +20785,7 @@ packages:
     peerDependencies:
       '@itwin/imodel-components-react': '*'
     resolution:
-      integrity: sha512-0pih5zF7fvZUsE+jEhKo/TNKvTwP7PPvI7+yi5TwMwt5ZaDAhzLwpydTo/LFKXsCryYl1sU4DS7NOoLXLyWICQ==
+      integrity: sha512-JEyvADJ0cM/Ml6IGKXCHXfVqZ276sbetqfFsDwyr4XySxbyWU9chpFsdm+Vtk5ry50dIhXg38UygPJs6FMzDoQ==
       tarball: 'file:projects/web-viewer-test.tgz'
     version: 0.0.0
 registry: ''
@@ -20794,7 +20800,6 @@ specifiers:
   '@bentley/itwin-client': rc
   '@bentley/product-settings-client': rc
   '@bentley/react-scripts': ^4.0.3
-  '@bentley/telemetry-client': rc
   '@itwin/appui-abstract': rc
   '@itwin/appui-layout-react': rc
   '@itwin/appui-react': rc
@@ -20812,6 +20817,7 @@ specifiers:
   '@itwin/core-orbitgt': rc
   '@itwin/core-quantity': rc
   '@itwin/core-react': rc
+  '@itwin/core-telemetry': rc
   '@itwin/ecschema-metadata': rc
   '@itwin/express-server': rc
   '@itwin/imodel-browser-react': ^0.11.0
