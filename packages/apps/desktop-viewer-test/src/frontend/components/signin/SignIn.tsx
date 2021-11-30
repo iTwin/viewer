@@ -5,7 +5,8 @@
 
 import "./SignIn.scss";
 
-import { IModelApp, NativeAppAuthorization } from "@itwin/core-frontend";
+import { IModelApp } from "@itwin/core-frontend";
+import { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
 import { SvgUser } from "@itwin/itwinui-icons-react";
 import { Button } from "@itwin/itwinui-react";
 import React, { useState } from "react";
@@ -14,7 +15,9 @@ export const SignIn = () => {
 
   const onSignInClick = () => {
     setSigningIn(true);
-    if (IModelApp.authorizationClient instanceof NativeAppAuthorization) {
+    if (
+      IModelApp.authorizationClient instanceof ElectronRendererAuthorization
+    ) {
       IModelApp.authorizationClient.signIn(); // eslint-disable-line @typescript-eslint/no-floating-promises
     }
   };

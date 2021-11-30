@@ -51,6 +51,7 @@
     "@itwin/core-react": "rc",
     "@itwin/core-telemetry": "rc",
     "@itwin/ecschema-metadata": "rc",
+    "@itwin/electron-authorization": "^0.5.0",
     "@itwin/express-server": "rc",
     "@itwin/desktop-viewer-react": "2.0.0-dev.16",
     "@itwin/imodel-browser-react": "^0.11.0",
