@@ -5,7 +5,8 @@
 
 import "./IModelBusy.scss";
 
-import { BodyText, LoadingSpinner } from "@itwin/core-react";
+import { IModelApp } from "@itwin/core-frontend";
+import { ProgressLinear } from "@itwin/itwinui-react";
 import React from "react";
 
 export const IModelBusy = (): JSX.Element => {
@@ -13,14 +14,14 @@ export const IModelBusy = (): JSX.Element => {
     // TODO localize text once i18n strategy is in place
     <div data-testid="loader-wrapper" className="imodelbusy__centered">
       <div className="imodelbusy__contents">
-        <LoadingSpinner
-          message={"Your iModel is loading"}
-          messageOnTop={true}
-          size={"large"}
+        <ProgressLinear
+          indeterminate={true}
+          labels={[
+            IModelApp.localization.getLocalizedString(
+              "iTwinViewer:iModels.iModelLoading"
+            ),
+          ]}
         />
-      </div>
-      <div className="imodelbusy__loadingText">
-        <BodyText>{"Rendering your iModel"}</BodyText>
       </div>
     </div>
   );
