@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-web-viewer",
+      "comment": "Pre-release with iTwin.js core 3.0.0-rc.1",
+      "type": "none"
+    }
+  ],
+  "packageName": "@itwin/cra-template-web-viewer",
+  "email": "aruniverse@users.noreply.github.com"
+}
