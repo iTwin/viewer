@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IModelHubBackend } from "@bentley/imodelhub-client/lib/cjs/imodelhub-node";
 import { IModelHostConfiguration, IpcHost } from "@itwin/core-backend";
 import { Logger, LogLevel } from "@itwin/core-bentley";
 import {
@@ -11,13 +10,15 @@ import {
   ElectronHostOptions,
 } from "@itwin/core-electron/lib/cjs/ElectronBackend";
 import { Menu, shell } from "electron";
+import { ElectronMainAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronMain";
+import { BackendIModelsAccess } from "@itwin/imodels-access-backend";
 import { Presentation } from "@itwin/presentation-backend";
 import { MenuItemConstructorOptions } from "electron/main";
 import * as path from "path";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";
 import { channelName, viewerRpcs } from "../common/ViewerConfig";
-import { appInfo } from "./AppInfo";
+import { appInfo, getAppEnvVar } from "./AppInfo";
 import ViewerHandler from "./ViewerHandler";
 
 require("dotenv-flow").config(); // eslint-disable-line @typescript-eslint/no-var-requires
@@ -32,17 +33,29 @@ const viewerMain = async () => {
   Logger.setLevelDefault(LogLevel.Trace);
   Logger.setLevel(AppLoggerCategory.Backend, LogLevel.Info);
 
+  const clientId = getAppEnvVar("CLIENT_ID") ?? "";
+  const scope = getAppEnvVar("SCOPE") ?? "";
+  const redirectUri = getAppEnvVar("REDIRECT_URI");
+  const issuerUrl = getAppEnvVar("ISSUER_URL");
+
   const electronHost: ElectronHostOptions = {
     webResourcesPath: path.join(__dirname, "..", "..", "build"),
     rpcInterfaces: viewerRpcs,
     developmentServer: process.env.NODE_ENV === "development",
     ipcHandlers: [ViewerHandler],
     iconName: "itwin-viewer.ico",
-    noInitializeAuthClient: true,
   };
 
+  const authClient = await ElectronMainAuthorization.create({
+    clientId,
+    scope,
+    redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+    issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+  });
+
   const iModelHost = new IModelHostConfiguration();
-  iModelHost.hubAccess = new IModelHubBackend();
+  iModelHost.hubAccess = new BackendIModelsAccess();
+  iModelHost.authorizationClient = authClient;
 
   await ElectronHost.startup({ electronHost, iModelHost });
 
