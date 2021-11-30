@@ -13,12 +13,12 @@ import React, { useState } from "react";
 export const SignIn = () => {
   const [signingIn, setSigningIn] = useState(false);
 
-  const onSignInClick = () => {
+  const onSignInClick = async () => {
     setSigningIn(true);
     if (
       IModelApp.authorizationClient instanceof ElectronRendererAuthorization
     ) {
-      IModelApp.authorizationClient.signIn(); // eslint-disable-line @typescript-eslint/no-floating-promises
+      await IModelApp.authorizationClient.signIn();
     }
   };
 

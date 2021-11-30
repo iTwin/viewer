@@ -26,6 +26,7 @@ import {
 } from "@itwin/core-common";
 import { IModelApp, IModelAppOptions } from "@itwin/core-frontend";
 import { UiCore } from "@itwin/core-react";
+import type { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
 
@@ -37,7 +38,7 @@ import { ai, trackEvent } from "./telemetry/TelemetryService";
 type AuthClient =
   | BrowserAuthorizationClient
   | ViewerAuthorizationClient
-  // | ElectronRendererAuthorization
+  | ElectronRendererAuthorization
   | undefined;
 
 // initialize required iTwin.js services
