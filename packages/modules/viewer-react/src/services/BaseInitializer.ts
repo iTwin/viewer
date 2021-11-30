@@ -16,7 +16,7 @@ import {
   StateManager,
   UiFramework,
 } from "@itwin/appui-react";
-import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
+import type { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import { UiComponents } from "@itwin/components-react";
 import {
   IModelReadRpcInterface,
@@ -26,6 +26,7 @@ import {
 } from "@itwin/core-common";
 import { IModelApp, IModelAppOptions } from "@itwin/core-frontend";
 import { UiCore } from "@itwin/core-react";
+import type { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
 
@@ -34,32 +35,30 @@ import { makeCancellable } from "../utilities/MakeCancellable";
 import { ViewerAuthorizationClient } from "./auth/ViewerAuthorizationClient";
 import { ai, trackEvent } from "./telemetry/TelemetryService";
 
+type AuthClient =
+  | BrowserAuthorizationClient
+  | ViewerAuthorizationClient
+  | ElectronRendererAuthorization
+  | undefined;
+
 // initialize required iTwin.js services
 export class BaseInitializer {
   private static _initialized: Promise<void>;
   private static _initializing = false;
   private static _cancel: (() => void) | undefined;
-  private static _authClient:
-    | BrowserAuthorizationClient
-    | ViewerAuthorizationClient
-    | undefined;
+  private static _authClient: AuthClient;
 
   /**
-   * Return the stored auth client    TODO 3.0 account for desktop client as well
+   * Return the stored auth client
    */
-  public static get authClient():
-    | BrowserAuthorizationClient
-    | ViewerAuthorizationClient
-    | undefined {
+  public static get authClient(): AuthClient {
     return this._authClient;
   }
 
   /**
    * Set the stored auth client
    */
-  public static set authClient(
-    client: BrowserAuthorizationClient | ViewerAuthorizationClient | undefined
-  ) {
+  public static set authClient(client: AuthClient) {
     this._authClient = client;
   }
 

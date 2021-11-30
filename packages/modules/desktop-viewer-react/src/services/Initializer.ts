@@ -8,8 +8,13 @@ import {
   ElectronApp,
   ElectronAppOpts,
 } from "@itwin/core-electron/lib/cjs/ElectronFrontend";
-import { IModelApp } from "@itwin/core-frontend";
-import { getIModelAppOptions, makeCancellable } from "@itwin/viewer-react";
+import { IModelApp, NativeAppLogger } from "@itwin/core-frontend";
+import { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
+import {
+  BaseInitializer,
+  getIModelAppOptions,
+  makeCancellable,
+} from "@itwin/viewer-react";
 
 import { DesktopViewerProps } from "../types";
 
@@ -45,13 +50,20 @@ export class DesktopInitializer {
         const additionalRpcInterfaces = options?.additionalRpcInterfaces ?? [];
         additionalRpcInterfaces.push(SnapshotIModelRpcInterface);
 
+        const iModelAppOpts = getIModelAppOptions({
+          ...options,
+          additionalRpcInterfaces,
+        });
+
+        const authClient = new ElectronRendererAuthorization();
+        iModelAppOpts.authorizationClient = authClient;
+        BaseInitializer.authClient = authClient;
+
         const electronViewerOpts: ElectronAppOpts = {
-          iModelApp: getIModelAppOptions({
-            ...options,
-            additionalRpcInterfaces,
-          }),
+          iModelApp: iModelAppOpts,
         };
         yield ElectronApp.startup(electronViewerOpts);
+        NativeAppLogger.initialize();
 
         console.log("desktop viewer started");
       });
