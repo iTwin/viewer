@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/viewer-react",
       "comment": " use hackathon version of core",
-      "type": "patch"
+      "type": "none"
     }
   ],
   "packageName": "@itwin/viewer-react",

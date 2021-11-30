@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/desktop-viewer-react",
       "comment": "Re-add SnapshotIModelRpcInterface only for Desktop. To use this in Web you need a custom backend.",
-      "type": "patch"
+      "type": "none"
     }
   ],
   "packageName": "@itwin/desktop-viewer-react",

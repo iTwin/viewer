@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/cra-template-web-viewer",
       "comment": "Add default npm registry",
-      "type": "patch"
+      "type": "none"
     }
   ],
   "packageName": "@itwin/cra-template-web-viewer",
