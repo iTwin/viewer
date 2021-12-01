@@ -91,5 +91,7 @@
 }
 
 .home {
-  height: calc(100vh - 50px);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }

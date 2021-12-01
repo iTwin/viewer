@@ -27,6 +27,7 @@ export const Home = ({ history }: RouteComponentProps) => {
             className={styles.homeButton}
             onClick={() => history.push("/authclient")}
             styleType={"high-visibility"}
+            size={"large"}
           >
             {"Use Auth Client"}
           </Button>
@@ -34,6 +35,7 @@ export const Home = ({ history }: RouteComponentProps) => {
             className={styles.homeButton}
             onClick={() => history.push("/authconfig")}
             styleType={"cta"}
+            size={"large"}
           >
             {"Use Auth Config"}
           </Button>
@@ -41,6 +43,7 @@ export const Home = ({ history }: RouteComponentProps) => {
             className={styles.homeButton}
             onClick={() => history.push("/blankconnection")}
             styleType={"default"}
+            size={"large"}
           >
             {"Blank Connection"}
           </Button>
@@ -48,6 +51,7 @@ export const Home = ({ history }: RouteComponentProps) => {
             className={styles.homeButton}
             onClick={() => history.push("/imodelbank")}
             styleType={"default"}
+            size={"large"}
           >
             {"iModel Bank"}
           </Button>

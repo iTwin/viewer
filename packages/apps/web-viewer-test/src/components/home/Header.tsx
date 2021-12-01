@@ -31,6 +31,7 @@ export const Header = ({
           className={styles.button}
           onClick={handleLoginToggle}
           styleType={"cta"}
+          size={"small"}
         >
           {loggedIn ? "Sign Out" : "Sign In"}
         </Button>
@@ -39,6 +40,7 @@ export const Header = ({
             className={styles.button}
             onClick={switchModel}
             styleType={"high-visibility"}
+            size={"small"}
           >
             {"Switch Model"}
           </Button>
