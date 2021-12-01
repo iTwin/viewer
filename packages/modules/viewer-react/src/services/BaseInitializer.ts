@@ -25,6 +25,7 @@ import {
   RpcInterfaceDefinition,
 } from "@itwin/core-common";
 import { IModelApp, IModelAppOptions } from "@itwin/core-frontend";
+import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
 import type { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
@@ -254,5 +255,10 @@ export const getIModelAppOptions = (
     rpcInterfaces: getSupportedRpcs(options?.additionalRpcInterfaces ?? []),
     toolAdmin: options?.toolAdmin,
     hubAccess: options?.hubAccess ?? new IModelHubFrontend(), // TODO 3.0
+    localization: new ITwinLocalization({
+      urlTemplate:
+        options?.i18nUrlTemplate ??
+        (viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`),
+    }),
   };
 };
