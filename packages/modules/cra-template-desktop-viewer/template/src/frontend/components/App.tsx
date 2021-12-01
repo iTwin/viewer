@@ -23,6 +23,8 @@ import {
 } from "./routes";
 
 const App = () => {
+  (window as any).ITWIN_VIEWER_HOME = window.location.origin;
+
   const initialized = useDesktopViewerInitializer();
   const [settings, setSettings] = useState<ViewerSettings>();
 

@@ -50,9 +50,14 @@ export class DesktopInitializer {
         const additionalRpcInterfaces = options?.additionalRpcInterfaces ?? [];
         additionalRpcInterfaces.push(SnapshotIModelRpcInterface);
 
+        const additionalI18nNamespaces =
+          options?.additionalI18nNamespaces ?? [];
+        additionalI18nNamespaces.push("iTwinDesktopViewer");
+
         const iModelAppOpts = getIModelAppOptions({
           ...options,
           additionalRpcInterfaces,
+          additionalI18nNamespaces,
         });
 
         const authClient = new ElectronRendererAuthorization();

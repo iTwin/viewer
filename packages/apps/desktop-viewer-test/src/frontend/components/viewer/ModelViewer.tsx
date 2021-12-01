@@ -23,8 +23,6 @@ export const ModelViewer = ({
   iModelId,
   snapshotPath,
 }: ModelViewerParams) => {
-  (window as any).ITWIN_VIEWER_HOME = window.location.origin;
-
   const viewConfiguration = useCallback((viewPort: ScreenViewport) => {
     // default execute the fitview tool and use the iso standard view after tile trees are loaded
     const tileTreesLoaded = () => {
