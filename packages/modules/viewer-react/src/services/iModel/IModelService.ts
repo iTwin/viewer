@@ -3,6 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { Guid } from "@bentley/bentleyjs-core";
 import { VersionQuery } from "@bentley/imodelhub-client";
 import { IModelVersion } from "@bentley/imodeljs-common";
 import {
@@ -72,12 +73,17 @@ export const openRemoteImodel = async (
 export const openLocalImodel = async (fileName: string) => {
   try {
     // attempt to open as a briefcase
-    return await BriefcaseConnection.openFile({
+    const connection = await BriefcaseConnection.openFile({
       fileName,
       readonly: true,
     });
+    if (connection.contextId === Guid.empty) {
+      // assume snapshot if there is no context id
+      return await SnapshotConnection.openFile(fileName);
+    }
+    return connection;
   } catch {
     // if that fails, attempt to open as a snapshot
-    return SnapshotConnection.openFile(fileName);
+    return await SnapshotConnection.openFile(fileName);
   }
 };

@@ -13,6 +13,8 @@ import { Viewer } from "@itwin/desktop-viewer-react";
 import { RouteComponentProps } from "@reach/router";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
+import { IModelMergeItemsProvider } from "../../extensions";
+
 interface ViewerRouteProps extends RouteComponentProps {
   children?: any;
 }
@@ -57,7 +59,7 @@ export const ViewerRoute = ({ location }: ViewerRouteProps) => {
   }, []);
 
   const onIModelAppInitialized = useMemo(() => {
-    console.log("Initialized!!");
+    console.log("iTwin.js Initialized!");
   }, []);
 
   return filePath ? (
@@ -68,6 +70,7 @@ export const ViewerRoute = ({ location }: ViewerRouteProps) => {
       defaultUiConfig={{
         contentManipulationTools: { cornerItem: { hideDefault: true } },
       }}
+      uiProviders={[new IModelMergeItemsProvider()]}
     />
   ) : null;
 };

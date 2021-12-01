@@ -10,6 +10,7 @@ import {
   BriefcaseConnection,
   CheckpointConnection,
 } from "@bentley/imodeljs-frontend";
+import { ModelStatus } from "@itwin/desktop-viewer-react";
 import {
   IModelFull,
   IModelGrid,
@@ -37,15 +38,6 @@ import { IModelContext } from "../routes";
 
 interface SelectIModelProps extends IModelGridProps {
   projectName?: string;
-}
-
-enum ModelStatus {
-  ONLINE,
-  OUTDATED,
-  DOWNLOADING,
-  MERGING,
-  ERROR,
-  UPTODATE,
 }
 
 const useProgressIndicator = (iModel: IModelFull) => {
@@ -140,7 +132,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
           setStatus(ModelStatus.UPTODATE);
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
           setStatus(ModelStatus.ERROR);
         });
     }
