@@ -10,7 +10,7 @@ import {
 } from "@bentley/electron-manager/lib/ElectronBackend";
 import { IpcHost } from "@bentley/imodeljs-backend";
 import { Presentation } from "@bentley/presentation-backend";
-import { Menu } from "electron";
+import { Menu, shell } from "electron";
 import { MenuItemConstructorOptions } from "electron/main";
 import * as path from "path";
 
@@ -57,6 +57,12 @@ const viewerMain = async () => {
   }
   // add the menu
   ElectronHost.mainWindow?.on("ready-to-show", createMenu);
+  // open links in the system browser instead of Electron
+  // remove this if you desire the default behavior instead
+  ElectronHost.mainWindow?.webContents.on("new-window", function (e, url) {
+    e.preventDefault();
+    void shell.openExternal(url);
+  });
 };
 
 const createMenu = () => {
