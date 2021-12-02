@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import "./BriefcaseStatus.scss";
 
 import { ModelStatus } from "@itwin/desktop-viewer-react";
@@ -102,7 +103,7 @@ export const BriefcaseStatus = ({
         // no UI if the status isn't handled
         return null;
     }
-  }, [mergeStatus]);
+  }, [mergeStatus, mergeProgress, onMergeClick, onDownloadClick]);
 
   return (
     <div title={title} className={classNames}>
