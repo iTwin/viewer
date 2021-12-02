@@ -5,24 +5,14 @@
 
 import "./SelectIModel.scss";
 
-import { IModelVersion } from "@bentley/imodeljs-common";
-import {
-  BriefcaseConnection,
-  CheckpointConnection,
-} from "@bentley/imodeljs-frontend";
-import { ModelStatus } from "@itwin/desktop-viewer-react";
+import { BriefcaseConnection } from "@bentley/imodeljs-frontend";
+import { getBriefcaseStatus, ModelStatus } from "@itwin/desktop-viewer-react";
 import {
   IModelFull,
   IModelGrid,
   IModelGridProps,
 } from "@itwin/imodel-browser-react";
-import {
-  SvgDownload,
-  SvgStatusError,
-  SvgStatusSuccess,
-  SvgSync,
-} from "@itwin/itwinui-icons-react";
-import { ProgressRadial, TileProps, Title } from "@itwin/itwinui-react";
+import { TileProps, Title } from "@itwin/itwinui-react";
 import { useNavigate } from "@reach/router";
 import React, {
   useCallback,
@@ -35,6 +25,7 @@ import React, {
 import { useDownload } from "../../hooks/useDownload";
 import { SettingsContext } from "../../services/SettingsClient";
 import { IModelContext } from "../routes";
+import { BriefcaseStatus } from "./BriefcaseStatus";
 
 interface SelectIModelProps extends IModelGridProps {
   projectName?: string;
@@ -42,7 +33,7 @@ interface SelectIModelProps extends IModelGridProps {
 
 const useProgressIndicator = (iModel: IModelFull) => {
   const userSettings = useContext(SettingsContext);
-  const [status, setStatus] = useState<ModelStatus>(ModelStatus.ONLINE);
+  const [status, setStatus] = useState<ModelStatus>();
   const [briefcase, setBriefcase] = useState<BriefcaseConnection>();
   const modelContext = useContext(IModelContext);
   const navigate = useNavigate();
@@ -71,28 +62,10 @@ const useProgressIndicator = (iModel: IModelFull) => {
         readonly: true,
       });
       setBriefcase(connection);
+    } else {
+      setStatus(ModelStatus.ONLINE);
     }
   }, []);
-
-  const isBriefcaseUpToDate = useCallback(async () => {
-    // get the online version
-    let hasChanges = false;
-    if (iModel.projectId && briefcase) {
-      const remoteConnection = await CheckpointConnection.openRemote(
-        iModel.projectId,
-        iModel.id,
-        IModelVersion.latest()
-      );
-      // compare latest changeset
-      hasChanges = briefcase.changeset.id !== remoteConnection.changeset.id;
-      await remoteConnection.close();
-    }
-    if (hasChanges) {
-      setStatus(ModelStatus.OUTDATED);
-    } else {
-      setStatus(ModelStatus.UPTODATE);
-    }
-  }, [briefcase]);
 
   const { progress, doDownload } = useDownload(
     iModel.id,
@@ -162,7 +135,9 @@ const useProgressIndicator = (iModel: IModelFull) => {
 
   useEffect(() => {
     if (briefcase) {
-      void isBriefcaseUpToDate();
+      void getBriefcaseStatus(briefcase).then((briefcaseStatus) => {
+        setStatus(briefcaseStatus);
+      });
     }
   }, [briefcase]);
 
@@ -176,24 +151,12 @@ const useProgressIndicator = (iModel: IModelFull) => {
             display: "flex",
           }}
         >
-          {status === ModelStatus.OUTDATED ? (
-            <SvgSync className="model-status" onClick={mergeChanges} />
-          ) : status === ModelStatus.DOWNLOADING ||
-            status === ModelStatus.MERGING ? (
-            <ProgressRadial
-              indeterminate={status === ModelStatus.MERGING}
-              value={progress}
-              style={{
-                height: "20px",
-              }}
-            />
-          ) : status === ModelStatus.ERROR ? (
-            <SvgStatusError className="model-status" />
-          ) : status === ModelStatus.UPTODATE ? (
-            <SvgStatusSuccess className="model-status" />
-          ) : (
-            <SvgDownload className="model-status" onClick={startDownload} />
-          )}
+          <BriefcaseStatus
+            mergeStatus={status}
+            mergeProgress={progress}
+            onMergeClick={mergeChanges}
+            onDownloadClick={startDownload}
+          />
         </div>
       ),
     };

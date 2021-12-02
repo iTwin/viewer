@@ -13,7 +13,7 @@ import React, {
   useState,
 } from "react";
 
-import { SelectIModel } from "../modelSelector/SelectIModel";
+import { SelectIModel } from "../modelSelector";
 import { SignIn } from "../signin/SignIn";
 
 interface IModelsRouteParams {

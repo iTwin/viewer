@@ -2,17 +2,11 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import "./IModelMergeStatusBarItem.scss";
 
-import {
-  IModelVersion,
-  InternetConnectivityStatus,
-} from "@bentley/imodeljs-common";
-import {
-  BriefcaseConnection,
-  CheckpointConnection,
-  IModelApp,
-} from "@bentley/imodeljs-frontend";
+import { InternetConnectivityStatus } from "@bentley/imodeljs-common";
+import { BriefcaseConnection, IModelApp } from "@bentley/imodeljs-frontend";
 import {
   CommonStatusBarItem,
   StageUsage,
@@ -20,16 +14,16 @@ import {
   UiItemsProvider,
 } from "@bentley/ui-abstract";
 import { StatusBarItemUtilities, UiFramework } from "@bentley/ui-framework";
-import { ModelStatus, useConnectivity } from "@itwin/desktop-viewer-react";
-import { useAccessToken } from "@itwin/desktop-viewer-react";
 import {
-  SvgStatusError,
-  SvgStatusSuccess,
-  SvgSync,
-  SvgUser,
-} from "@itwin/itwinui-icons-react";
-import { ProgressRadial } from "@itwin/itwinui-react";
+  getBriefcaseStatus,
+  ModelStatus,
+  useAccessToken,
+  useConnectivity,
+} from "@itwin/desktop-viewer-react";
+import { SvgUser } from "@itwin/itwinui-icons-react";
 import React, { useCallback, useEffect, useState } from "react";
+
+import { BriefcaseStatus } from "../components/modelSelector";
 
 const MergeStatusBarItem = () => {
   const [mergeStatus, setMergeStatus] = useState<ModelStatus>();
@@ -77,26 +71,11 @@ const MergeStatusBarItem = () => {
         setConnection(iModel as BriefcaseConnection);
         // temporarily show a spinner while querying
         setMergeStatus(ModelStatus.COMPARING);
-        void CheckpointConnection.openRemote(
-          iModel.contextId,
-          iModel.iModelId,
-          IModelVersion.latest()
-        )
-          .then((remoteConnection) => {
-            // compare latest changeset
-            const hasChanges =
-              iModel.changeset.id !== remoteConnection.changeset.id;
-            if (hasChanges) {
-              setMergeStatus(ModelStatus.OUTDATED);
-            } else {
-              setMergeStatus(ModelStatus.UPTODATE);
-            }
-            void remoteConnection.close();
-          })
-          .catch((err) => {
-            console.error(err);
-            setMergeStatus(ModelStatus.ERROR);
-          });
+        void getBriefcaseStatus(iModel as BriefcaseConnection).then(
+          (status) => {
+            setMergeStatus(status);
+          }
+        );
       }
     }
   }, [accessToken, connectivityStatus]);
@@ -104,41 +83,20 @@ const MergeStatusBarItem = () => {
   if (!accessToken) {
     return (
       <div title="Click to login and view the model's status">
-        <SvgUser onClick={onLoginClick} className="model-status actionable" />
+        <SvgUser
+          onClick={onLoginClick}
+          className="model-status actionable status-bar-status"
+        />
       </div>
     );
   }
-  switch (mergeStatus) {
-    case ModelStatus.COMPARING:
-      return (
-        <div title="Checking for changes...">
-          <ProgressRadial indeterminate={true} className="model-status" />;
-        </div>
-      );
-    case ModelStatus.MERGING:
-      return (
-        <div title="Pulling changes...">
-          <ProgressRadial indeterminate={true} className="model-status" />;
-        </div>
-      );
-    case ModelStatus.OUTDATED:
-      return (
-        <div title="Click to pull upstream changes">
-          <SvgSync onClick={onMergeClick} className="model-status actionable" />
-        </div>
-      );
-    case ModelStatus.UPTODATE:
-      return (
-        <div title="Up to date">
-          <SvgStatusSuccess className="model-status" />
-        </div>
-      );
-    case ModelStatus.ERROR:
-      return <SvgStatusError className="model-status" />;
-    default:
-      // should only be snapshots, in which case we don't want to show the item
-      return null;
-  }
+  return (
+    <BriefcaseStatus
+      mergeStatus={mergeStatus}
+      onMergeClick={onMergeClick}
+      className={"status-bar-status"}
+    />
+  );
 };
 
 export class IModelMergeItemsProvider implements UiItemsProvider {

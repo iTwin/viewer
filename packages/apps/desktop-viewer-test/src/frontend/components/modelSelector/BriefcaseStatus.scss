@@ -4,6 +4,13 @@
 *--------------------------------------------------------------------------------------------*/
 @import "@itwin/itwinui-css/scss/variables";
 
-.status-bar-status {
-  padding: 15px;
+.model-status {
+  height: 20px;
+  fill: t(iui-color-foreground-primary);
+  &.actionable {
+    cursor: pointer;
+  }
+  svg {
+    height: 100%;
+  }
 }
