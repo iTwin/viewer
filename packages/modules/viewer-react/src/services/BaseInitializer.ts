@@ -30,6 +30,7 @@ import { UiCore } from "@itwin/core-react";
 import type { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
+import { RealityDataAccessClient } from "@itwin/reality-data-client";
 
 import { ItwinViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
@@ -260,5 +261,6 @@ export const getIModelAppOptions = (
         options?.i18nUrlTemplate ??
         (viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`),
     }),
+    realityDataAccess: new RealityDataAccessClient(),
   };
 };

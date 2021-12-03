@@ -38,6 +38,7 @@ dependencies:
   '@itwin/presentation-common': 3.0.0-dev.135_1860a76f90932d859aaec89d3dbcb6ea
   '@itwin/presentation-components': 3.0.0-dev.135_d330bf565e93c106fb3202a94a185c17
   '@itwin/presentation-frontend': 3.0.0-dev.135_bda325b6843379b0fc7563459014c290
+  '@itwin/reality-data-client': 0.2.2_b054586828d396b030d72d257b889d41
   '@itwin/webgl-compatibility': 3.0.0-dev.135
   '@microsoft/applicationinsights-react-js': 2.3.1
   '@microsoft/applicationinsights-web': 2.3.1
@@ -4330,6 +4331,16 @@ packages:
       '@itwin/presentation-common': ^3.0.0-dev.135
     resolution:
       integrity: sha512-am8Yv9+cP6ZgpfS+zMhOg/J4NfRgmtl5QpjNDFlbm4CDuv/UDfHjIHI6WsiP0Rwl1iTkpOzCWqqG1ASNDNIDtA==
+  /@itwin/reality-data-client/0.2.2_b054586828d396b030d72d257b889d41:
+    dependencies:
+      '@bentley/itwin-client': 3.0.0-dev.135_2a526bb54deb5ab443bbedfaf1d28158
+      '@itwin/core-common': 3.0.0-dev.135_0c2c169ed0e8f7904e9bbe06df29dc83
+    dev: false
+    peerDependencies:
+      '@itwin/core-bentley': '*'
+      '@itwin/core-common': rc
+    resolution:
+      integrity: sha512-NOOLRyLvHjngAKQfGpL8LmOyk4jzCm2B4QOrqeoMLisqF2MHfBQz5Po06cHUBP4bOgPpt2Uur+pE5bwLbJvKXg==
   /@itwin/webgl-compatibility/3.0.0-dev.135:
     dependencies:
       '@itwin/core-bentley': 3.0.0-dev.135
@@ -6618,7 +6629,7 @@ packages:
       integrity: sha512-PO9t0697lNTmcEHH69mdtYiOIkkOlj9fySqfO3K1eCcdISevLAE0xY59VLLUj0SoiPiTX/JU2CYFpILydUa5Lw==
   /babel-plugin-macros/2.8.0:
     dependencies:
-      '@babel/runtime': 7.12.1
+      '@babel/runtime': 7.16.3
       cosmiconfig: 6.0.0
       resolve: 1.20.0
     dev: false
@@ -20659,7 +20670,7 @@ packages:
       '@itwin/imodel-components-react': '*'
       redux: '*'
     resolution:
-      integrity: sha512-5PGE3uS/Mfcdj7o0dmYGk1iFbqpi5ESDxMbaH2et4Za6vUruPq05C8nsGTcGP8xrU5O0OZxb1ZDeFn4gz26hEg==
+      integrity: sha512-jg5+wiRRbhZJpsJ/e3Q6RYhBnHufRSIYzCyn3YI+kdiIbHpjrLBW35FNlpXjOzMN584uNS++yTnPXeWghT9REA==
       tarball: 'file:projects/cdn-viewer.tgz'
     version: 0.0.0
   'file:projects/cra-template-desktop-viewer.tgz':
@@ -20696,6 +20707,7 @@ packages:
       '@itwin/core-quantity': 3.0.0-dev.135_2a526bb54deb5ab443bbedfaf1d28158
       '@itwin/core-react': 3.0.0-dev.135_7d0f94a7ad9384f74b78e68f9349ebcd
       '@itwin/core-telemetry': 3.0.0-dev.135_ef9fc0f0f766d4dff5b65cf62913f392
+      '@itwin/electron-authorization': 0.5.0
       '@itwin/imodel-components-react': 3.0.0-dev.135_4b5d94830048d8c9f5dfa97579d73f62
       '@itwin/presentation-common': 3.0.0-dev.135_1860a76f90932d859aaec89d3dbcb6ea
       '@itwin/presentation-components': 3.0.0-dev.135_d330bf565e93c106fb3202a94a185c17
@@ -20727,7 +20739,7 @@ packages:
     peerDependencies:
       '@itwin/ecschema-metadata': '*'
     resolution:
-      integrity: sha512-nL8m6hLFCD4waauyVx7LA1AaHbhnaHs3vlwfUktDUW1vO+xQ4C1Hnom9uQPai8OphXvtevXCS/9eZLK279nI0Q==
+      integrity: sha512-6HT4Neh/c2QqlWaqL9KVmhSoSSn1csc196CCM4SECEkEUCqV6YVZtZjRCxrGMhO0M9GFvw6hfSXqXZBCyAKJFw==
       tarball: 'file:projects/desktop-viewer-react.tgz'
     version: 0.0.0
   'file:projects/desktop-viewer-test.tgz_6ba46b573f6855288eda34dff55594ad':
@@ -20764,6 +20776,7 @@ packages:
       '@itwin/presentation-common': 3.0.0-dev.135_1860a76f90932d859aaec89d3dbcb6ea
       '@itwin/presentation-components': 3.0.0-dev.135_d330bf565e93c106fb3202a94a185c17
       '@itwin/presentation-frontend': 3.0.0-dev.135_bda325b6843379b0fc7563459014c290
+      '@itwin/reality-data-client': 0.2.2_b054586828d396b030d72d257b889d41
       '@itwin/webgl-compatibility': 3.0.0-dev.135
       '@reach/router': 1.3.4_react-dom@17.0.2+react@17.0.2
       '@types/electron-devtools-installer': 2.2.0
@@ -20793,7 +20806,7 @@ packages:
       react-redux: '*'
       redux: '*'
     resolution:
-      integrity: sha512-k2POIKy1lxC3icDZDtZ7mYzbv7/q5WvTfZ7hFsGu+nHICbEuSAtz2+iDXDpVq27+kjSpsB+bYgBdNhWaQZpvPw==
+      integrity: sha512-Kpc6iNyUTJB0SJi5Gtj3hV73asgCFJRqSREsqDKgYKi8JcejKvkfKyaMlWVpnNXnlcZiuLXRARWCLONjwmfMYg==
       tarball: 'file:projects/desktop-viewer-test.tgz'
     version: 0.0.0
   'file:projects/error-handling-react.tgz':
@@ -20861,11 +20874,13 @@ packages:
       '@itwin/core-quantity': 3.0.0-dev.135_2a526bb54deb5ab443bbedfaf1d28158
       '@itwin/core-react': 3.0.0-dev.135_7d0f94a7ad9384f74b78e68f9349ebcd
       '@itwin/core-telemetry': 3.0.0-dev.135_ef9fc0f0f766d4dff5b65cf62913f392
+      '@itwin/electron-authorization': 0.5.0
       '@itwin/imodel-components-react': 3.0.0-dev.135_4b5d94830048d8c9f5dfa97579d73f62
       '@itwin/itwinui-react': 1.26.0_react-dom@17.0.2+react@17.0.2
       '@itwin/presentation-common': 3.0.0-dev.135_1860a76f90932d859aaec89d3dbcb6ea
       '@itwin/presentation-components': 3.0.0-dev.135_d330bf565e93c106fb3202a94a185c17
       '@itwin/presentation-frontend': 3.0.0-dev.135_bda325b6843379b0fc7563459014c290
+      '@itwin/reality-data-client': 0.2.2_b054586828d396b030d72d257b889d41
       '@itwin/webgl-compatibility': 3.0.0-dev.135
       '@microsoft/applicationinsights-react-js': 2.3.1
       '@microsoft/applicationinsights-web': 2.3.1
@@ -20894,7 +20909,7 @@ packages:
     dev: false
     name: '@rush-temp/viewer-react'
     resolution:
-      integrity: sha512-uAjC4R8wHqfwDRYJh8YWN5s2peG5nHkD34pe1Css/opJpwhLSRf+L/aoJry5je3us9cnyudyr3DS6yFWg5SzLw==
+      integrity: sha512-gj2UGUf5PHFaC9V49LDYPWtQM1iLijEf4CkKxeWSj2zlufCQhH7+115PTwTckzA0NvamxG5lmnJLUQw3vC7kkQ==
       tarball: 'file:projects/viewer-react.tgz'
     version: 0.0.0
   'file:projects/viewer-scripts.tgz_typescript@4.3.5':
@@ -20977,7 +20992,7 @@ packages:
     dev: false
     name: '@rush-temp/web-viewer-react'
     resolution:
-      integrity: sha512-FYMORFNBUcfRsE4aSw8ee0/kKX0fqFBlTwhoiYkmTb/CvvOgKRsTKUZkIDESrBzIMmpoXccmOGakFuDOAnGVqw==
+      integrity: sha512-d/KZcwBLAyeVPl2XpU0m0KaDm0e6fq3amFe8KamItdw6U6wHo+IJ3OvJptKOKY/UuaSJU3LtU9LqDHwXgnTcRA==
       tarball: 'file:projects/web-viewer-react.tgz'
     version: 0.0.0
   'file:projects/web-viewer-test.tgz_d338f393ae62352670a27e53271dd9d3':
@@ -21004,6 +21019,7 @@ packages:
       '@itwin/itwinui-react': 1.26.0_react-dom@17.0.2+react@17.0.2
       '@itwin/presentation-common': 3.0.0-dev.135_1860a76f90932d859aaec89d3dbcb6ea
       '@itwin/presentation-frontend': 3.0.0-dev.135_bda325b6843379b0fc7563459014c290
+      '@itwin/reality-data-client': 0.2.2_b054586828d396b030d72d257b889d41
       '@itwin/webgl-compatibility': 3.0.0-dev.135
       '@svgr/webpack': 5.5.0
       '@types/history': 4.7.9
@@ -21026,7 +21042,7 @@ packages:
     peerDependencies:
       '@itwin/imodel-components-react': '*'
     resolution:
-      integrity: sha512-cPKp40letjMDvaQCk9vNl5pRy2nxqpFeZj2GCUkfZvyVhBll9UQcNhSckFtaJ320Pt7vzS2vHh3uXncIRJoJUA==
+      integrity: sha512-9CzTA76q/NOoXnDxPsY/lWrGQlHTsFbjkTS4scyFbDQpL45PZMw2Y4xIWfgEHpGaR42DUEhWw28Lws2C0SrF7A==
       tarball: 'file:projects/web-viewer-test.tgz'
     version: 0.0.0
 registry: ''
@@ -21070,6 +21086,7 @@ specifiers:
   '@itwin/presentation-common': rc
   '@itwin/presentation-components': rc
   '@itwin/presentation-frontend': rc
+  '@itwin/reality-data-client': latest
   '@itwin/webgl-compatibility': rc
   '@microsoft/applicationinsights-react-js': 2.3.1
   '@microsoft/applicationinsights-web': 2.3.1
