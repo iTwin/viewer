@@ -3,5 +3,7 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 .viewer-container {
-  height: calc(100vh - 50px);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
