@@ -120,7 +120,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
         void briefcase.close();
       }
     };
-  }, []);
+  }, [briefcase]);
 
   useEffect(() => {
     if (modelContext.pendingIModel === iModel.id) {

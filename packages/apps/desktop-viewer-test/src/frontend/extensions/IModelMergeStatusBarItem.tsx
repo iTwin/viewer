@@ -6,22 +6,28 @@
 import "./IModelMergeStatusBarItem.scss";
 
 import { InternetConnectivityStatus } from "@bentley/imodeljs-common";
-import { BriefcaseConnection, IModelApp } from "@bentley/imodeljs-frontend";
+import {
+  BriefcaseConnection,
+  IModelApp,
+  IModelConnection,
+} from "@bentley/imodeljs-frontend";
 import {
   CommonStatusBarItem,
   StageUsage,
   StatusBarSection,
   UiItemsProvider,
 } from "@bentley/ui-abstract";
-import { StatusBarItemUtilities, UiFramework } from "@bentley/ui-framework";
+import { StatusBarItemUtilities } from "@bentley/ui-framework";
 import {
   getBriefcaseStatus,
   ModelStatus,
   useAccessToken,
   useConnectivity,
+  useIsMounted,
 } from "@itwin/desktop-viewer-react";
 import { SvgUser } from "@itwin/itwinui-icons-react";
 import React, { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import { BriefcaseStatus } from "../components/modelSelector";
 
@@ -30,6 +36,10 @@ const MergeStatusBarItem = () => {
   const [connection, setConnection] = useState<BriefcaseConnection>();
   const accessToken = useAccessToken();
   const connectivityStatus = useConnectivity();
+  const iModelConnection = useSelector((state: any) => {
+    return state?.frameworkState?.sessionState?.iModelConnection;
+  }) as IModelConnection | undefined;
+  const isMounted = useIsMounted();
 
   const onMergeClick = async () => {
     setMergeStatus(ModelStatus.MERGING);
@@ -43,14 +53,16 @@ const MergeStatusBarItem = () => {
     if (connection) {
       try {
         await connection.pullAndMergeChanges();
-        setMergeStatus(ModelStatus.UPTODATE);
-        IModelApp.viewManager.refreshForModifiedModels(undefined);
+        if (isMounted.current) {
+          setMergeStatus(ModelStatus.UPTODATE);
+          IModelApp.viewManager.refreshForModifiedModels(undefined);
+        }
       } catch (error) {
         console.error(error);
         setMergeStatus(ModelStatus.ERROR);
       }
     }
-  }, [connection]);
+  }, [connection, isMounted]);
 
   useEffect(() => {
     if (mergeStatus === ModelStatus.MERGING) {
@@ -62,25 +74,34 @@ const MergeStatusBarItem = () => {
     if (connectivityStatus === InternetConnectivityStatus.Offline) {
       return;
     }
-    const iModel = UiFramework.getIModelConnection();
-    if (iModel?.isSnapshot) {
-      setMergeStatus(ModelStatus.SNAPSHOT);
-      return;
-    } else if (iModel?.isBriefcase && iModel?.contextId && iModel.iModelId) {
-      if (accessToken) {
-        setConnection(iModel as BriefcaseConnection);
-        // temporarily show a spinner while querying
-        setMergeStatus(ModelStatus.COMPARING);
-        void getBriefcaseStatus(iModel as BriefcaseConnection).then(
-          (status) => {
-            setMergeStatus(status);
-          }
-        );
+
+    if (accessToken && connection) {
+      // temporarily show a spinner while querying
+      setMergeStatus(ModelStatus.COMPARING);
+      void getBriefcaseStatus(connection).then((status) => {
+        if (isMounted.current) {
+          setMergeStatus(status);
+        }
+      });
+    }
+  }, [accessToken, connectivityStatus, connection, isMounted]);
+
+  useEffect(() => {
+    if (isMounted.current) {
+      if (iModelConnection?.isSnapshot) {
+        setConnection(undefined);
+        setMergeStatus(ModelStatus.SNAPSHOT);
+      } else if (
+        iModelConnection?.isBriefcase &&
+        iModelConnection?.contextId &&
+        iModelConnection.iModelId
+      ) {
+        setConnection(iModelConnection as BriefcaseConnection);
       }
     }
-  }, [accessToken, connectivityStatus]);
+  }, [iModelConnection, isMounted]);
 
-  if (!accessToken) {
+  if (!accessToken && mergeStatus !== ModelStatus.SNAPSHOT) {
     return (
       <div title="Click to login and view the model's status">
         <SvgUser

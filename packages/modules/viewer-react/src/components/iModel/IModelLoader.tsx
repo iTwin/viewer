@@ -11,7 +11,6 @@ import {
   BlankConnectionProps,
   IModelApp,
   IModelConnection,
-  SnapshotConnection,
   ViewState,
 } from "@bentley/imodeljs-frontend";
 import {
@@ -110,7 +109,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     };
 
     const getViewState = useCallback(async () => {
-      if (!connection) {
+      if (!connection || connection.isClosed) {
         setViewState(undefined);
         return;
       }
