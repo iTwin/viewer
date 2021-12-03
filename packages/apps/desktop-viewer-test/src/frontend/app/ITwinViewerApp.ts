@@ -32,7 +32,7 @@ export class ITwinViewerApp {
 
   public static translate(key: string | string[], options?: any): string {
     return IModelApp.localization.getLocalizedString(
-      `iTwinViewer:${key}`,
+      `iTwinDesktopViewer:${key}`,
       options
     );
   }
