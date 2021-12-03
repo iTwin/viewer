@@ -23,7 +23,12 @@ import {
 } from "./routes";
 
 const App = () => {
-  const initialized = useDesktopViewerInitializer();
+  (window as any).ITWIN_VIEWER_HOME = window.location.origin;
+
+  const initialized = useDesktopViewerInitializer({
+    additionalI18nNamespaces: ["iTwinDesktopViewer"],
+  });
+
   const [settings, setSettings] = useState<ViewerSettings>();
 
   useEffect(() => {
