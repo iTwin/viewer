@@ -48,7 +48,7 @@ export const viewerRpcs = [
 
 export interface ViewerFile {
   displayName: string;
-  path?: string;
+  path: string;
   iTwinId?: string;
   iModelId?: string;
 }
