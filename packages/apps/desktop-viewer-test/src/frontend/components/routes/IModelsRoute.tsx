@@ -47,7 +47,7 @@ export const IModelsRoute = ({
 
   return (
     <IModelContext.Provider
-      value={{ pendingIModel: pendingIModel, setPendingIModel }}
+value={{ pendingIModel, setPendingIModel }}
     >
       {accessToken ? (
         <SelectIModel
