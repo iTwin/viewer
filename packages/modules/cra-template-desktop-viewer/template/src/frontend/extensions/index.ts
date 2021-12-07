@@ -3,6 +3,4 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-export * from "./SelectProject";
-export * from "./SelectIModel";
-export * from "./BriefcaseStatus";
+export * from "./IModelMergeStatusBarItem";

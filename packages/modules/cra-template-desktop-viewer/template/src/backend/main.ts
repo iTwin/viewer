@@ -10,13 +10,13 @@ import {
 } from "@bentley/electron-manager/lib/ElectronBackend";
 import { IpcHost } from "@bentley/imodeljs-backend";
 import { Presentation } from "@bentley/presentation-backend";
-import { Menu } from "electron";
+import { Menu, shell } from "electron";
 import { MenuItemConstructorOptions } from "electron/main";
 import * as path from "path";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";
 import { channelName, viewerRpcs } from "../common/ViewerConfig";
-import { appInfo, getAppEnvVar } from "./AppInfo";
+import { appInfo } from "./AppInfo";
 import ViewerHandler from "./ViewerHandler";
 
 require("dotenv-flow").config(); // eslint-disable-line @typescript-eslint/no-var-requires
@@ -31,23 +31,13 @@ const viewerMain = async () => {
   Logger.setLevelDefault(LogLevel.Warning);
   Logger.setLevel(AppLoggerCategory.Backend, LogLevel.Info);
 
-  const clientId = getAppEnvVar("CLIENT_ID") ?? "";
-  const scope = getAppEnvVar("SCOPE") ?? "";
-  const redirectUri = getAppEnvVar("REDIRECT_URI");
-  const issuerUrl = getAppEnvVar("ISSUER_URL");
-
   const electronHost: ElectronHostOptions = {
     webResourcesPath: path.join(__dirname, "..", "..", "build"),
     rpcInterfaces: viewerRpcs,
     developmentServer: process.env.NODE_ENV === "development",
     ipcHandlers: [ViewerHandler],
-    authConfig: {
-      clientId,
-      scope,
-      redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
-      issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
-    },
     iconName: "itwin-viewer.ico",
+    noInitializeAuthClient: true,
   };
 
   await ElectronHost.startup({ electronHost });
@@ -67,6 +57,12 @@ const viewerMain = async () => {
   }
   // add the menu
   ElectronHost.mainWindow?.on("ready-to-show", createMenu);
+  // open links in the system browser instead of Electron
+  // remove this if you desire the default behavior instead
+  ElectronHost.mainWindow?.webContents.on("new-window", function (e, url) {
+    e.preventDefault();
+    void shell.openExternal(url);
+  });
 };
 
 const createMenu = () => {
@@ -77,27 +73,30 @@ const createMenu = () => {
       label: "File",
       submenu: [
         {
-          label: "Open snapshot file",
+          id: "open-menu-item",
+          label: "Open",
           click: () => {
-            IpcHost.send(channelName, "snapshot");
+            IpcHost.send(channelName, "open");
           },
         },
         {
-          label: "View remote iModel",
+          id: "download-menu-item",
+          label: "Download",
           click: () => {
-            IpcHost.send(channelName, "remote");
+            IpcHost.send(channelName, "download");
           },
         },
         { type: "separator" },
         isMac
-          ? { label: "Close", role: "close" }
-          : { label: "Close", role: "quit" },
+          ? { id: "close-menu-item", label: "Close", role: "close" }
+          : { id: "close-menu-item", label: "Close", role: "quit" },
       ],
     },
     {
       label: "View",
       submenu: [
         {
+          id: "view-getting-started-menu-item",
           label: "Getting started",
           click: () => {
             IpcHost.send(channelName, "home");
@@ -119,6 +118,11 @@ const createMenu = () => {
           label: "Zoom",
           role: "zoom",
         },
+        // TODO uncomment for dev as needed
+        // {
+        //   label: "Reload",
+        //   role: "reload",
+        // },
       ],
     });
     template.unshift({
