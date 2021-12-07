@@ -36,6 +36,7 @@ const viewerMain = async () => {
     developmentServer: process.env.NODE_ENV === "development",
     ipcHandlers: [ViewerHandler],
     iconName: "itwin-viewer.ico",
+    noInitializeAuthClient: true,
   };
 
   const iModelHost = new IModelHostConfiguration();
