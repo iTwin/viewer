@@ -42,7 +42,6 @@ dependencies:
   '@bentley/webgl-compatibility': 2.19.2_@bentley+bentleyjs-core@2.19.2
   '@itwin/imodel-browser-react': 0.11.0
   '@itwin/itwinui-css': 0.18.1
-  '@itwin/itwinui-icons': 1.3.0
   '@itwin/itwinui-icons-react': 1.3.0
   '@itwin/itwinui-react': 1.14.1
   '@microsoft/applicationinsights-react-js': 2.3.1
@@ -52,9 +51,9 @@ dependencies:
   '@rush-temp/cra-template-desktop-viewer': 'file:projects/cra-template-desktop-viewer.tgz'
   '@rush-temp/cra-template-web-viewer': 'file:projects/cra-template-web-viewer.tgz'
   '@rush-temp/desktop-viewer-react': 'file:projects/desktop-viewer-react.tgz_4cab3a48501524aaaa8652ba0509cef7'
-  '@rush-temp/desktop-viewer-test': 'file:projects/desktop-viewer-test.tgz_react-redux@7.2.4+redux@4.1.1'
+  '@rush-temp/desktop-viewer-test': 'file:projects/desktop-viewer-test.tgz'
   '@rush-temp/error-handling-react': 'file:projects/error-handling-react.tgz_4835f297079c1a82c861799bf873e2ab'
-  '@rush-temp/viewer-react': 'file:projects/viewer-react.tgz_cd6f4d821b2ee4242db6a9a02261d084'
+  '@rush-temp/viewer-react': 'file:projects/viewer-react.tgz_894b548f51d06fa05a983da29610087d'
   '@rush-temp/viewer-scripts': 'file:projects/viewer-scripts.tgz_typescript@4.3.5'
   '@rush-temp/web-viewer-react': 'file:projects/web-viewer-react.tgz_webpack@4.42.0'
   '@rush-temp/web-viewer-test': 'file:projects/web-viewer-test.tgz_webpack@4.42.0'
@@ -106,6 +105,7 @@ dependencies:
   i18next: 19.9.2
   i18next-browser-languagedetector: 4.3.1
   identity-obj-proxy: 3.0.0
+  immer: 9.0.7
   jest: 26.6.3
   jest-mock-console: 1.1.0_jest@26.6.3
   lint-staged: 10.5.4
@@ -4929,10 +4929,6 @@ packages:
       react-dom: ^16.8.6 || ^17.0.0
     resolution:
       integrity: sha512-XNk9a7LaMlWwiB+l/TidSHOMDt/nnJnrSBkRU0Gg+44cATKcSZySX2B2B4Y6uKoECqtWr+qghCe9Bw5TwQ1bKQ==
-  /@itwin/itwinui-icons/1.3.0:
-    dev: false
-    resolution:
-      integrity: sha512-zMx77g97O0MJScd66as38094t0f/h/MDbOeP5L7OdaULfuvh/39kofydElDiQf4ouVlhh0nhzi7ERWBADnuTeQ==
   /@itwin/itwinui-illustrations-react/1.0.2:
     dev: false
     peerDependencies:
@@ -12365,6 +12361,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-2WuIehr2y4lmYz9gaQzetPR2ECniCifk4ORaQbU3g5EalLt+0IVTosEPJ5BoYl/75ky2mivzdRzV8wWgQGOSYQ==
+  /immer/9.0.7:
+    dev: false
+    resolution:
+      integrity: sha512-KGllzpbamZDvOIxnmJ0jI840g7Oikx58lBPWV0hUh7dtAyZpFqqrBZdKka5GlTwMTZ1Tjc/bKKW4VSFAt6BqMA==
   /immutable/3.8.2:
     dev: false
     engines:
@@ -21824,7 +21824,7 @@ packages:
       redux: '*'
       webpack: '*'
     resolution:
-      integrity: sha512-uva+P5rTsPiuhYlapOeRtcASgzt9sfEGXwbyS1yReiae+Ntk7hByRRJayAOhMdRICfakaTWwIWKWpbM5WQKhIQ==
+      integrity: sha512-d4w90HYB3VEViaRd9f4++1eVfmVlhUCvAgW5330wOyWVY13g3sPYgNuT31knBduZAxWIZ5vmso4ZRNvYzLAVYw==
       tarball: 'file:projects/cdn-viewer.tgz'
     version: 0.0.0
   'file:projects/cra-template-desktop-viewer.tgz':
@@ -21895,10 +21895,10 @@ packages:
       '@bentley/ecschema-metadata': '*'
       webpack: '*'
     resolution:
-      integrity: sha512-I0xxsZJ5U8QxrtECtgZzYtzRTCb6DZlVzRoZp4p7oqHR11I8OsI1LHitXUnDTBAJbIGEOEYnzhEVw7TEEeeIiA==
+      integrity: sha512-EWlSbmmg8ILkn4xxgHosay2gK55LotiIQLzRvenGx5dJk2P2Zjro88mxchsPck2D4BMac0KhGwIx9d+FHhPw0Q==
       tarball: 'file:projects/desktop-viewer-react.tgz'
     version: 0.0.0
-  'file:projects/desktop-viewer-test.tgz_react-redux@7.2.4+redux@4.1.1':
+  'file:projects/desktop-viewer-test.tgz':
     dependencies:
       '@bentley/backend-itwin-client': 2.19.2_575a0797116ea96f21d51e86513a2de5
       '@bentley/bentleyjs-core': 2.19.2
@@ -21935,7 +21935,6 @@ packages:
       '@bentley/webgl-compatibility': 2.19.2_@bentley+bentleyjs-core@2.19.2
       '@itwin/imodel-browser-react': 0.11.0_react-dom@16.13.1+react@16.13.1
       '@itwin/itwinui-css': 0.18.1
-      '@itwin/itwinui-icons': 1.3.0
       '@itwin/itwinui-icons-react': 1.3.0_react-dom@16.13.1+react@16.13.1
       '@itwin/itwinui-react': 1.14.1_react-dom@16.13.1+react@16.13.1
       '@reach/router': 1.3.4_react-dom@16.13.1+react@16.13.1
@@ -21945,6 +21944,7 @@ packages:
       '@types/reach__router': 1.3.9
       '@types/react': 16.14.11
       '@types/react-dom': 16.9.14
+      '@types/react-redux': 7.1.18
       cpx: 1.5.0
       cross-env: 5.2.1
       dotenv-flow: 3.2.0
@@ -21954,18 +21954,16 @@ packages:
       npm-run-all: 4.1.5
       react: 16.13.1
       react-dom: 16.13.1_react@16.13.1
+      react-redux: 7.2.4_react-dom@16.13.1+react@16.13.1
+      redux: 4.1.1
       rimraf: 3.0.2
       sass: 1.37.5
       typescript: 4.3.5
       webpack: 4.42.0_webpack@4.42.0
     dev: false
-    id: 'file:projects/desktop-viewer-test.tgz'
     name: '@rush-temp/desktop-viewer-test'
-    peerDependencies:
-      react-redux: '*'
-      redux: '*'
     resolution:
-      integrity: sha512-YW/AfxOCuctQy0cOVhR8xZvvSPNWOItnou7y9YsOQ6NcvYHGHCF5aGkq/0J8MASNa3GKW+nNmaoO5aQthTexFA==
+      integrity: sha512-c0ZkQ5EgzZgFLXx9/cUaa5aoHYQy/r7hbkUiUUU+9dGo5aXIg7fzdpT9aOFdNXmmsb8s0Loh5bXIbWAhA3HWsg==
       tarball: 'file:projects/desktop-viewer-test.tgz'
     version: 0.0.0
   'file:projects/error-handling-react.tgz_4835f297079c1a82c861799bf873e2ab':
@@ -22019,14 +22017,13 @@ packages:
       integrity: sha512-oe9z/h/SB5L51eQNZeIwAyz+WG+zOijekyfYqsf68o4TPT+SU9Yk49BmBuaY0ibQ7oMUEH7MS5d9OYKWz6BzZw==
       tarball: 'file:projects/error-handling-react.tgz'
     version: 0.0.0
-  'file:projects/viewer-react.tgz_cd6f4d821b2ee4242db6a9a02261d084':
+  'file:projects/viewer-react.tgz_894b548f51d06fa05a983da29610087d':
     dependencies:
       '@bentley/bentleyjs-core': 2.19.2
       '@bentley/frontend-authorization-client': 2.19.2_538e3326b409b38505bacf1f6599ae6e
       '@bentley/geometry-core': 2.19.2_@bentley+bentleyjs-core@2.19.2
       '@bentley/icons-generic-webfont': 1.0.34
       '@bentley/imodelhub-client': 2.19.2_cbc52448367548535c0655a58675118c
-      '@bentley/imodeljs-backend': 2.19.2_b3993d421cc5185a89b12d7cc99b2a8f
       '@bentley/imodeljs-common': 2.19.2_e29042b08ded28fc6d7bd170a85965f4
       '@bentley/imodeljs-frontend': 2.19.2_56d12145817896c164dc46cc2b7d6527
       '@bentley/imodeljs-i18n': 2.19.2_@bentley+bentleyjs-core@2.19.2
@@ -22074,12 +22071,10 @@ packages:
     id: 'file:projects/viewer-react.tgz'
     name: '@rush-temp/viewer-react'
     peerDependencies:
-      '@bentley/backend-itwin-client': '*'
       '@bentley/context-registry-client': '*'
-      '@bentley/ecschema-metadata': '*'
       webpack: '*'
     resolution:
-      integrity: sha512-AuHeGxYDIzqqnQfcUJpEYX+6kppoPPghLmN1Pp0MOSOm8niPiJ+4oYs/Y+V/lhB+GTVbDV+o4v8nx+4cf3eJIg==
+      integrity: sha512-yJLDbTpt+5JbJAJK3276uLaRZbj1tASzdpfYgKXGkZrwMhUO3sm+iT042v6NDDbLhZAk6et0XGwVZR4jAGsYhw==
       tarball: 'file:projects/viewer-react.tgz'
     version: 0.0.0
   'file:projects/viewer-scripts.tgz_typescript@4.3.5':
@@ -22165,7 +22160,7 @@ packages:
     peerDependencies:
       webpack: '*'
     resolution:
-      integrity: sha512-2HTLKUg0wcS9L4mHbxNYxcZHJBmI//Ya79ADXHg0Hacn5Kb8CNJs8leEUew5yFi/ee+nB5HIwGES9fu1n/IOKQ==
+      integrity: sha512-+hHTBDC/n3g9egrg+cqg8OXWFwAIDpP0gN/PRM3ftkKjuxb/cCD02K0hNCSv/8XH5wsDTYBVfXDS4mXNhUt60Q==
       tarball: 'file:projects/web-viewer-react.tgz'
     version: 0.0.0
   'file:projects/web-viewer-test.tgz_webpack@4.42.0':
@@ -22216,7 +22211,7 @@ packages:
     peerDependencies:
       webpack: '*'
     resolution:
-      integrity: sha512-C0qzEwY+h6s47O0R1N0rhSzcbaGmsYSK/ts0akhech5nYS50Tc6qNe/Y+unZHGSlB0gswL31kW8jUEGjVfb1sw==
+      integrity: sha512-EoI1F4fuN9CTunUY7hWrP0dH9KvekBi4NbMJic7CrIGOvbNkRO5N7vqkHOhHXDFbwW6NF0Nmg8GAIP6stai0PQ==
       tarball: 'file:projects/web-viewer-test.tgz'
     version: 0.0.0
 registry: ''
@@ -22264,7 +22259,6 @@ specifiers:
   '@bentley/webgl-compatibility': ^2.14.0
   '@itwin/imodel-browser-react': ~0.11.0
   '@itwin/itwinui-css': ^0.18.1
-  '@itwin/itwinui-icons': ^1.3.0
   '@itwin/itwinui-icons-react': ^1.3.0
   '@itwin/itwinui-react': ~1.14.1
   '@microsoft/applicationinsights-react-js': 2.3.1
@@ -22328,6 +22322,7 @@ specifiers:
   i18next: ^19.3.2
   i18next-browser-languagedetector: ^4.0.2
   identity-obj-proxy: ^3.0.0
+  immer: ^9.0.6
   jest: ^26.1.0
   jest-mock-console: ^1.0.0
   lint-staged: ^10.2.11
