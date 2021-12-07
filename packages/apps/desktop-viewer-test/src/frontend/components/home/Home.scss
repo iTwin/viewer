@@ -30,6 +30,11 @@
       margin: 4px 8px 0 0;
       fill: t(iui-color-foreground-primary);
     }
+    .disabled-link {
+      pointer-events: none;
+      color: t(iui-icons-color-actionable-disabled);
+      fill: t(iui-icons-color-actionable-disabled);
+    }
   }
   .start {
     grid-row: 1;

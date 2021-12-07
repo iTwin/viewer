@@ -16,7 +16,7 @@ export interface ViewerProps extends ItwinViewerCommonParams {
   contextId?: string;
   iModelId?: string;
   changeSetId?: string;
-  snapshotPath?: string;
+  snapshotPath?: string; // TODO 3.0 rename (filePath?) as this can be a briefcase or a snapshot
   loadingComponent?: React.ReactNode;
 }
 
