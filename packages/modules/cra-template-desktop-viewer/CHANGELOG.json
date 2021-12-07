@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-desktop-viewer",
   "entries": [
     {
+      "version": "1.4.0",
+      "tag": "@itwin/cra-template-desktop-viewer_v1.4.0",
+      "date": "Tue, 07 Dec 2021 19:40:48 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add support for local briefcases"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.3.2",
       "tag": "@itwin/cra-template-desktop-viewer_v1.3.2",
       "date": "Wed, 29 Sep 2021 17:19:00 GMT",
