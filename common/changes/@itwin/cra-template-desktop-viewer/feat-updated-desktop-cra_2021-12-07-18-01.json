@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-desktop-viewer",
+      "comment": "Add support for local briefcases",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/cra-template-desktop-viewer",
+  "email": "6283674+kckst8@users.noreply.github.com"
+}
