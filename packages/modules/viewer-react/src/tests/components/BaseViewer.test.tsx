@@ -5,7 +5,6 @@
 
 import "@testing-library/jest-dom/extend-expect";
 
-import { SnapshotConnection } from "@bentley/imodeljs-frontend";
 import { UiCore } from "@bentley/ui-core";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
@@ -95,6 +94,9 @@ jest.mock("@bentley/imodeljs-frontend", () => {
     RotationMode: {},
     AccuDraw: class {},
     ToolAdmin: class {},
+    BriefcaseConnection: {
+      openFile: jest.fn(),
+    },
   };
 });
 
@@ -171,15 +173,15 @@ describe("BaseViewer", () => {
     window.removeEventListener("error", events.onError);
   });
 
-  it("renders and establishes a SnapshotConnection if a local snapshot is provided", async () => {
-    const snapshotPath = "/path/to/snapshot";
+  it("renders and attempts to create a briefcase connection or snapshot connection if a local path is provided", async () => {
+    const fileName = "/path/to/snapshot";
 
-    const { getByTestId } = render(<BaseViewer snapshotPath={snapshotPath} />);
+    const { getByTestId } = render(<BaseViewer snapshotPath={fileName} />);
 
     const loader = await waitFor(() => getByTestId("loader-wrapper"));
 
     expect(loader).toBeInTheDocument();
-    expect(SnapshotConnection.openFile).toHaveBeenCalledWith(snapshotPath);
+    expect(IModelService.openLocalImodel).toHaveBeenCalledWith(fileName);
   });
 
   it("executes a callback after IModelApp is initialized", async () => {
