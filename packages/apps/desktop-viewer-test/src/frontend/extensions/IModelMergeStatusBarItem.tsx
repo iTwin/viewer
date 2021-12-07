@@ -6,18 +6,17 @@
 import "./IModelMergeStatusBarItem.scss";
 
 import { InternetConnectivityStatus } from "@bentley/imodeljs-common";
-import {
-  BriefcaseConnection,
-  IModelApp,
-  IModelConnection,
-} from "@bentley/imodeljs-frontend";
+import { BriefcaseConnection, IModelApp } from "@bentley/imodeljs-frontend";
 import {
   CommonStatusBarItem,
   StageUsage,
   StatusBarSection,
   UiItemsProvider,
 } from "@bentley/ui-abstract";
-import { StatusBarItemUtilities } from "@bentley/ui-framework";
+import {
+  StatusBarItemUtilities,
+  useActiveIModelConnection,
+} from "@bentley/ui-framework";
 import {
   getBriefcaseStatus,
   ModelStatus,
@@ -27,7 +26,6 @@ import {
 } from "@itwin/desktop-viewer-react";
 import { SvgUser } from "@itwin/itwinui-icons-react";
 import React, { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 import { BriefcaseStatus } from "../components/modelSelector";
 
@@ -36,9 +34,7 @@ const MergeStatusBarItem = () => {
   const [connection, setConnection] = useState<BriefcaseConnection>();
   const accessToken = useAccessToken();
   const connectivityStatus = useConnectivity();
-  const iModelConnection = useSelector((state: any) => {
-    return state?.frameworkState?.sessionState?.iModelConnection;
-  }) as IModelConnection | undefined;
+  const iModelConnection = useActiveIModelConnection();
   const isMounted = useIsMounted();
 
   const onMergeClick = async () => {
