@@ -11,7 +11,7 @@ import {
   PromiseReturnType,
 } from "@bentley/imodeljs-frontend";
 import { NavigateFn } from "@reach/router";
-import { OpenDialogOptions } from "electron";
+import { OpenDialogOptions, SaveDialogOptions } from "electron";
 
 import {
   channelName,
@@ -29,6 +29,10 @@ type IpcMethods = PickAsyncMethods<ViewerIpc>;
 export class ITwinViewerApp {
   private static _config: ViewerConfig;
   private static _menuListener: IpcListener | undefined;
+
+  private static _getFileName(iModelName?: string) {
+    return iModelName ? iModelName.replace(/\s/g, "") : "Untitled";
+  }
 
   public static translate(key: string | string[], options?: any): string {
     return IModelApp.i18n.translate(`iTwinViewer:${key}`, options);
@@ -58,9 +62,9 @@ export class ITwinViewerApp {
     },
   });
 
-  public static async getSnapshotFile(): Promise<string | undefined> {
+  public static async getFile(): Promise<string | undefined> {
     const options: OpenDialogOptions = {
-      title: ITwinViewerApp.translate("openSnapshot"),
+      title: ITwinViewerApp.translate("open"),
       properties: ["openFile"],
       filters: [{ name: "iModels", extensions: ["ibim", "bim"] }],
     };
@@ -81,14 +85,14 @@ export class ITwinViewerApp {
     }
     this._menuListener = async (sender, arg) => {
       switch (arg) {
-        case "snapshot":
-          const snapshotPath = await ITwinViewerApp.getSnapshotFile();
-          if (snapshotPath) {
-            void userSettings.addRecentSnapshot(snapshotPath);
-            await navigate(`/snapshot`, { state: { snapshotPath } });
+        case "open":
+          const filePath = await ITwinViewerApp.getFile();
+          if (filePath) {
+            void userSettings.addRecent(filePath);
+            await navigate(`/viewer`, { state: { filePath } });
           }
           break;
-        case "remote":
+        case "download":
           await navigate("/itwins");
           break;
         case "home":
@@ -100,5 +104,18 @@ export class ITwinViewerApp {
       }
     };
     IpcApp.addListener(channelName, this._menuListener);
+  }
+
+  public static async saveBriefcase(
+    iModelName?: string
+  ): Promise<string | undefined> {
+    const options: SaveDialogOptions = {
+      title: ITwinViewerApp.translate("saveBriefcase"), //TODO
+      defaultPath: `${this._getFileName(iModelName)}.bim`,
+      filters: [{ name: "iModels", extensions: ["ibim", "bim"] }],
+    };
+    const val = await ITwinViewerApp.ipcCall.saveFile(options);
+
+    return val.canceled || !val.filePath ? undefined : val.filePath;
   }
 }

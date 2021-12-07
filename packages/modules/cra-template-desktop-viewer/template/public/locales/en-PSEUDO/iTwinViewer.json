@@ -1,8 +1,7 @@
 {
   "downloadBriefcase": "Ðówñlõäd ßrîëf¢ãsê",
-  "openSnapshot": "Òpéñ sñäpshøt fîlë",
-  "openLocalBriefcase": "Òpéñ lõ¢ål ßrïèfçäsë",
-  "viewRemoteIModel": "Vìéw rêmõtè íMòdël",
+  "open": "Òpéñ",
+  "download": "Ðówñlõäd",
   "home": {
     "start": "$tárt",
     "learn": "£éârñ",
@@ -11,5 +10,15 @@
       "viewerComponent": "£éârñ möré àbóût thé Vîëwèr çômpõñéñt",
       "customizeViewer": "£éârñ höw tø ¢ústômízê ÿòûr îTwïñ Víêwër"
     }
+  },
+  "saveBriefcase": "$ávê ßrìéf¢ásè",
+  "briefcaseStatusTitle": {
+    "comparing": "Çhé¢kïñg før ¢háñgés...",
+    "merging": "Pµllíñg çhäñgês...",
+    "downloading": "Ðówñlõädíñg...",
+    "outdated": "Çlí¢k tõ püll µpstrêám ¢hãñgës",
+    "upToDate": "Ùp tó dâtë",
+    "error": "Àñ êrrõr öç¢úrrèd whílê rëtrìévîñg thè ståtûs",
+    "online": "Çlí¢k tõ döwñlòád thè íMödël"
   }
 }

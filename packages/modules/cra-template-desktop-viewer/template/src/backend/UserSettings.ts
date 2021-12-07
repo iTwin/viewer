@@ -70,10 +70,6 @@ class UserSettings {
     if (!this.settings.recents) {
       this._settings.recents = [file];
     } else {
-      // max out at 50 (currently displaying 5, but this can be adjusted)
-      if (this.settings.recents.length === 50) {
-        this.settings.recents.splice(49, 1);
-      }
       // remove if it already exists to keep recents unique
       const existing = this.settings.recents.findIndex(
         (existingFile) =>
