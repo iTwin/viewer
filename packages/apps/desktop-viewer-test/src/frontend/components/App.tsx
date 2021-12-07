@@ -33,6 +33,8 @@ const App = () => {
   const connectivityStatus = useConnectivity();
 
   const [settings, setSettings] = useState<ViewerSettings>();
+  const [connectivityListener, setConnectivityListener] =
+    useState<() => void>();
 
   useEffect(() => {
     if (initialized) {
