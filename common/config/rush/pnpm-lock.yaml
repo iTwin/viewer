@@ -4341,6 +4341,15 @@ packages:
       '@itwin/core-common': rc
     resolution:
       integrity: sha512-NOOLRyLvHjngAKQfGpL8LmOyk4jzCm2B4QOrqeoMLisqF2MHfBQz5Po06cHUBP4bOgPpt2Uur+pE5bwLbJvKXg==
+  /@itwin/reality-data-client/0.2.4_@itwin+core-common@3.0.0-dev.135:
+    dependencies:
+      '@itwin/core-common': 3.0.0-dev.135_0c2c169ed0e8f7904e9bbe06df29dc83
+    dev: false
+    peerDependencies:
+      '@itwin/core-common': rc
+      axios: ^0.24.0
+    resolution:
+      integrity: sha512-O+GLL+FXqsAIv22YL8NDhak9hr1DiI9R4X87aQ67LFdnK6yB7oSUWYbMqr8P00wD0whlBSYbWu96q9nvGu4wLg==
   /@itwin/webgl-compatibility/3.0.0-dev.135:
     dependencies:
       '@itwin/core-bentley': 3.0.0-dev.135
@@ -20712,6 +20721,7 @@ packages:
       '@itwin/presentation-common': 3.0.0-dev.135_1860a76f90932d859aaec89d3dbcb6ea
       '@itwin/presentation-components': 3.0.0-dev.135_d330bf565e93c106fb3202a94a185c17
       '@itwin/presentation-frontend': 3.0.0-dev.135_bda325b6843379b0fc7563459014c290
+      '@itwin/reality-data-client': 0.2.4_@itwin+core-common@3.0.0-dev.135
       '@itwin/webgl-compatibility': 3.0.0-dev.135
       '@testing-library/jest-dom': 4.2.4
       '@testing-library/react': 10.4.9_react-dom@17.0.2+react@17.0.2
@@ -20739,7 +20749,7 @@ packages:
     peerDependencies:
       '@itwin/ecschema-metadata': '*'
     resolution:
-      integrity: sha512-6HT4Neh/c2QqlWaqL9KVmhSoSSn1csc196CCM4SECEkEUCqV6YVZtZjRCxrGMhO0M9GFvw6hfSXqXZBCyAKJFw==
+      integrity: sha512-gTbZHbHsVqLox+pDZ0tduewroXsGWF+EVE/dFhiVzNcpqmbkiyPX2VA8EXfipqsDhzw0N8xbHIGiapCZkG3GIw==
       tarball: 'file:projects/desktop-viewer-react.tgz'
     version: 0.0.0
   'file:projects/desktop-viewer-test.tgz_6ba46b573f6855288eda34dff55594ad':
@@ -20968,6 +20978,7 @@ packages:
       '@itwin/presentation-common': 3.0.0-dev.135_1860a76f90932d859aaec89d3dbcb6ea
       '@itwin/presentation-components': 3.0.0-dev.135_d330bf565e93c106fb3202a94a185c17
       '@itwin/presentation-frontend': 3.0.0-dev.135_bda325b6843379b0fc7563459014c290
+      '@itwin/reality-data-client': 0.2.4_@itwin+core-common@3.0.0-dev.135
       '@itwin/webgl-compatibility': 3.0.0-dev.135
       '@testing-library/jest-dom': 4.2.4
       '@testing-library/react': 10.4.9_react-dom@17.0.2+react@17.0.2
@@ -20992,7 +21003,7 @@ packages:
     dev: false
     name: '@rush-temp/web-viewer-react'
     resolution:
-      integrity: sha512-d/KZcwBLAyeVPl2XpU0m0KaDm0e6fq3amFe8KamItdw6U6wHo+IJ3OvJptKOKY/UuaSJU3LtU9LqDHwXgnTcRA==
+      integrity: sha512-Dsh4yXPuVCOXQ/gYYz3co6l9AOzJLOCOMJw1Qz/kfXePHxae0Je99OYl2sCyuOEBR+T+C+rsHtdPkCvk56XdYA==
       tarball: 'file:projects/web-viewer-react.tgz'
     version: 0.0.0
   'file:projects/web-viewer-test.tgz_d338f393ae62352670a27e53271dd9d3':
