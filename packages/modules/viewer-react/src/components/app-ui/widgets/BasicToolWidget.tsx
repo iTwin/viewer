@@ -5,11 +5,9 @@
 
 /** Clone of core BasicToolWidget with conditional tooling
  */
-import {
-  CommonToolbarItem,
-  ToolbarOrientation,
-  ToolbarUsage,
-} from "@itwin/appui-abstract";
+import type { CommonToolbarItem } from "@itwin/appui-abstract";
+import { ToolbarOrientation, ToolbarUsage } from "@itwin/appui-abstract";
+import type { UiVisibilityEventArgs } from "@itwin/appui-react";
 import {
   BackstageAppButton,
   CoreTools,
@@ -18,11 +16,10 @@ import {
   ToolbarHelper,
   ToolWidgetComposer,
   UiFramework,
-  UiVisibilityEventArgs,
 } from "@itwin/appui-react";
 import * as React from "react";
 
-import { ContentManipulationTools } from "../../../types";
+import type { ContentManipulationTools } from "../../../types";
 
 export function useUiVisibility(): boolean {
   const [uiIsVisible, setUiIsVisible] = React.useState(

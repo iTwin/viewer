@@ -7,12 +7,10 @@ import "./SelectIModel.scss";
 
 import { BriefcaseConnection } from "@itwin/core-frontend";
 import { getBriefcaseStatus, ModelStatus } from "@itwin/desktop-viewer-react";
-import {
-  IModelFull,
-  IModelGrid,
-  IModelGridProps,
-} from "@itwin/imodel-browser-react";
-import { TileProps, Title } from "@itwin/itwinui-react";
+import type { TileProps } from "@itwin/itwinui-react";
+import type { IModelFull, IModelGridProps } from "@itwin/imodel-browser-react";
+import { IModelGrid } from "@itwin/imodel-browser-react";
+import { Title } from "@itwin/itwinui-react";
 import { useNavigate } from "@reach/router";
 import React, {
   useCallback,

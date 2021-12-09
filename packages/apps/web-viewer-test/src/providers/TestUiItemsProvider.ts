@@ -3,10 +3,13 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  AbstractStatusBarItemUtilities,
+import type {
   CommonStatusBarItem,
   CommonToolbarItem,
+  UiItemsProvider,
+} from "@itwin/appui-abstract";
+import {
+  AbstractStatusBarItemUtilities,
   ConditionalBooleanValue,
   ConditionalStringValue,
   StageUsage,
@@ -14,7 +17,6 @@ import {
   ToolbarItemUtilities,
   ToolbarOrientation,
   ToolbarUsage,
-  UiItemsProvider,
 } from "@itwin/appui-abstract";
 import { SyncUiEventDispatcher } from "@itwin/appui-react";
 

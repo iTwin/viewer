@@ -6,23 +6,22 @@
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
-import {
+import type {
   BackstageActionItem,
-  BackstageItemUtilities,
   BackstageStageLauncher,
 } from "@itwin/appui-abstract";
+import { BackstageItemUtilities } from "@itwin/appui-abstract";
 import {
   StateManager,
   SyncUiEventDispatcher,
   UiFramework,
 } from "@itwin/appui-react";
-import {
-  BlankConnection,
+import type {
   BlankConnectionProps,
-  IModelApp,
   IModelConnection,
   ViewState,
 } from "@itwin/core-frontend";
+import { BlankConnection, IModelApp } from "@itwin/core-frontend";
 import { useErrorManager } from "@itwin/error-handling-react";
 import { withAITracking } from "@microsoft/applicationinsights-react-js";
 import React, { useCallback, useEffect, useState } from "react";
@@ -32,7 +31,7 @@ import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
 import { openLocalImodel, openRemoteIModel } from "../../services/iModel";
 import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
 import { ai } from "../../services/telemetry/TelemetryService";
-import {
+import type {
   BlankConnectionViewState,
   IModelLoaderParams,
   ViewCreator3dOptions,

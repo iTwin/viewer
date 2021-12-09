@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 
 import { BaseInitializer } from "..";
 import { useBaseViewerInitializer } from "../hooks";
-import { ItwinViewerCommonParams } from "../types";
+import type { ItwinViewerCommonParams } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
 export interface ViewerProps extends ItwinViewerCommonParams {

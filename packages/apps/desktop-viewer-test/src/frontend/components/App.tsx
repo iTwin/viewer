@@ -3,12 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { NativeApp } from "@bentley/imodeljs-frontend";
+import { NativeApp } from "@itwin/core-frontend";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
 import { Router } from "@reach/router";
 import React, { useCallback, useEffect, useState } from "react";
 
-import { ViewerSettings } from "../../common/ViewerConfig";
+import type { ViewerSettings } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import {
   addRecent as addRecentClient,

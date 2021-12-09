@@ -3,16 +3,13 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  FrontstageManager,
-  FrontstageProps,
-  FrontstageProvider,
-} from "@itwin/appui-react";
+import type { FrontstageProps } from "@itwin/appui-react";
+import { FrontstageManager, FrontstageProvider } from "@itwin/appui-react";
 import { render } from "@testing-library/react";
 import React from "react";
 
 import { IModelViewer } from "../../../components/iModel/IModelViewer";
-import { ViewerFrontstage } from "../../../types";
+import type { ViewerFrontstage } from "../../../types";
 
 class Frontstage1Provider extends FrontstageProvider {
   public id = "Frontstage1";

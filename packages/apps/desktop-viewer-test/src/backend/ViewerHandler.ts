@@ -16,13 +16,13 @@ import {
 import { IpcHandler, IModelHost } from "@itwin/core-backend";
 import * as minimist from "minimist";
 
-import {
-  channelName,
+import type {
   ViewerConfig,
   ViewerFile,
   ViewerIpc,
   ViewerSettings,
 } from "../common/ViewerConfig";
+import { channelName } from "../common/ViewerConfig";
 import { getAppEnvVar } from "./AppInfo";
 import UserSettings from "./UserSettings";
 

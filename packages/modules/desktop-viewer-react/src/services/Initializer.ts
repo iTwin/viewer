@@ -4,10 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { SnapshotIModelRpcInterface } from "@itwin/core-common";
-import {
-  ElectronApp,
-  ElectronAppOpts,
-} from "@itwin/core-electron/lib/cjs/ElectronFrontend";
+import type { ElectronAppOpts } from "@itwin/core-electron/lib/cjs/ElectronFrontend";
+import { ElectronApp } from "@itwin/core-electron/lib/cjs/ElectronFrontend";
 import { IModelApp, NativeAppLogger } from "@itwin/core-frontend";
 import { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
 import {
@@ -16,7 +14,7 @@ import {
   makeCancellable,
 } from "@itwin/viewer-react";
 
-import { DesktopViewerProps } from "../types";
+import type { DesktopViewerProps } from "../types";
 
 export class DesktopInitializer {
   private static _initialized: Promise<void>;
