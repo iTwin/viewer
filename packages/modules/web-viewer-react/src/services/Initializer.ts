@@ -86,7 +86,7 @@ export class WebInitializer {
       console.log("starting web viewer");
       this._initializing = true;
       const cancellable = makeCancellable(function* () {
-        Performance.addPerformanceMark("WebViewerStarting");
+        Performance.addMark("WebViewerStarting");
         const iModelAppOptions = getIModelAppOptions(options);
         const authClient = options.authConfig;
         iModelAppOptions.authorizationClient = authClient;
@@ -94,10 +94,10 @@ export class WebInitializer {
         const rpcParams: BentleyCloudRpcParams = yield initializeRpcParams(
           options?.backend
         );
-        Performance.addPerformanceMark("IModelAppStarting");
+        Performance.addMark("IModelAppStarting");
         yield IModelApp.startup(iModelAppOptions);
-        Performance.addPerformanceMark("IModelAppStarted");
-        void Performance.addAndLogPerformanceMeasure(
+        Performance.addMark("IModelAppStarted");
+        void Performance.addAndLogMeasure(
           "IModelAppStartup",
           "IModelAppStarting",
           "IModelAppStarted"
@@ -107,8 +107,8 @@ export class WebInitializer {
           iModelAppOptions.rpcInterfaces ?? []
         );
         console.log("web viewer started");
-        Performance.addPerformanceMark("WebViewerStarted");
-        void Performance.addAndLogPerformanceMeasure(
+        Performance.addMark("WebViewerStarted");
+        void Performance.addAndLogMeasure(
           "WebViewerStartup",
           "WebViewerStarting",
           "WebViewerStarted"

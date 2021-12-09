@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { trackViewerMetric, viewerAI } from "./TelemetryService";
 
 export type PerformanceMeasures =
@@ -28,14 +29,14 @@ export class Performance {
     this._enabled = enable ?? false;
   }
 
-  static addPerformanceMark(markName: PerformanceMarks) {
+  static addMark(markName: PerformanceMarks) {
     if (!this.enabled) {
       return;
     }
     performance.mark(markName);
   }
 
-  static addPerformanceMeasure(
+  static addMeasure(
     measureName: PerformanceMeasures,
     startMark: PerformanceMarks,
     endMark: PerformanceMarks
@@ -46,7 +47,7 @@ export class Performance {
     performance.measure(measureName, startMark, endMark);
   }
 
-  static async logPerformanceMetric(measureName: PerformanceMeasures) {
+  static async logMetric(measureName: PerformanceMeasures) {
     if (!viewerAI.initialized) {
       await viewerAI.initialize("76ebaa63-f57e-4955-aedf-43e2741724ec");
     }
@@ -56,7 +57,7 @@ export class Performance {
     }
   }
 
-  static async addAndLogPerformanceMeasure(
+  static async addAndLogMeasure(
     measureName: PerformanceMeasures,
     startMark: PerformanceMarks,
     endMark: PerformanceMarks
@@ -64,7 +65,7 @@ export class Performance {
     if (!this.enabled) {
       return;
     }
-    this.addPerformanceMeasure(measureName, startMark, endMark);
-    await this.logPerformanceMetric(measureName);
+    this.addMeasure(measureName, startMark, endMark);
+    await this.logMetric(measureName);
   }
 }

@@ -110,7 +110,7 @@ export class BaseInitializer {
 
     const cancellable = makeCancellable(function* () {
       Performance.enable(viewerOptions?.enablePerformanceMonitors);
-      Performance.addPerformanceMark("BaseViewerStarting");
+      Performance.addMark("BaseViewerStarting");
       // Initialize state manager
       // This will setup a singleton store inside the StoreManager class.
       new StateManager({
@@ -183,8 +183,8 @@ export class BaseInitializer {
         trackUserEvent("iTwinViewer.Viewer.Initialized");
       }
 
-      Performance.addPerformanceMark("BaseViewerStarted");
-      void Performance.addAndLogPerformanceMeasure(
+      Performance.addMark("BaseViewerStarted");
+      void Performance.addAndLogMeasure(
         "BaseViewerStartup",
         "BaseViewerStarting",
         "BaseViewerStarted"

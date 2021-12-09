@@ -20,8 +20,8 @@ jest.mock("@itwin/viewer-react", () => {
     getInitializationOptions: jest.fn().mockReturnValue({}),
     isEqual: jest.fn().mockReturnValue(true),
     Performance: {
-      addPerformanceMark: jest.fn(),
-      addAndLogPerformanceMeasure: jest.fn(),
+      addMark: jest.fn(),
+      addAndLogMeasure: jest.fn(),
     },
   };
 });
