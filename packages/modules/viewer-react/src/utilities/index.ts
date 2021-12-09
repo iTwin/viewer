@@ -63,7 +63,7 @@ export const isEqual = (a?: any, b?: any) => {
  * @returns
  */
 export const getInitializationOptions = (options?: ViewerProps) => {
-  const initOptions: ItwinViewerInitializerParams = {};
+  const initOptions = {};
   if (options) {
     for (const key of iTwinViewerInitializerParamList) {
       if ((options as any)[key]) {
@@ -71,5 +71,5 @@ export const getInitializationOptions = (options?: ViewerProps) => {
       }
     }
   }
-  return initOptions;
+  return initOptions as ItwinViewerInitializerParams;
 };

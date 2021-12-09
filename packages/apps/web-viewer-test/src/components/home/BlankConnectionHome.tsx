@@ -77,6 +77,7 @@ export const BlankConnectionHome: React.FC = () => {
         productId={productId}
         onIModelAppInit={iModelAppInit}
         uiProviders={[new TestUiProvider2()]}
+        enablePerformanceMonitors={true}
       />
     </div>
   );

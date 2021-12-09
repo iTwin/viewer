@@ -30,7 +30,7 @@ import { Provider } from "react-redux";
 import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
 import { openLocalImodel, openRemoteIModel } from "../../services/iModel";
 import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
-import { ai } from "../../services/telemetry/TelemetryService";
+import { userAI } from "../../services/telemetry/TelemetryService";
 import type {
   BlankConnectionViewState,
   IModelLoaderParams,
@@ -237,12 +237,13 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         errorManager.throwFatalError(error);
       });
 
+      const mounted = isMounted.current;
       return () => {
         if (prevConnection) {
           void prevConnection.close();
           prevConnection = undefined;
         }
-        if (isMounted.current) {
+        if (mounted) {
           setConnection(undefined);
         }
       };
@@ -254,6 +255,8 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       blankConnection,
       blankConnectionViewState,
       isMounted,
+      errorManager,
+      onIModelConnected,
     ]);
 
     useEffect(() => {
@@ -360,7 +363,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
 );
 
 const TrackedLoader = withAITracking(
-  ai.reactPlugin,
+  userAI.reactPlugin,
   Loader,
   "IModelLoader",
   "tracked-loader"

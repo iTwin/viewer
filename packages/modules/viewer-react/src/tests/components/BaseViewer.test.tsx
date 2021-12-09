@@ -37,10 +37,10 @@ jest.mock("react-i18next");
 jest.mock("@microsoft/applicationinsights-react-js", () => ({
   ReactPlugin: jest.fn(),
   withAITracking: (
-    _reactPlugin: any | undefined, // eslint-disable-line no-unused-vars
+    _reactPlugin: any | undefined, // eslint-disable-line @typescript-eslint/no-unused-vars
     component: any,
-    _componentName?: string, // eslint-disable-line no-unused-vars
-    _className?: string // eslint-disable-line no-unused-vars
+    _componentName?: string, // eslint-disable-line @typescript-eslint/no-unused-vars
+    _className?: string // eslint-disable-line @typescript-eslint/no-unused-vars
   ) => component,
 }));
 
@@ -140,7 +140,11 @@ describe("BaseViewer", () => {
 
   it("loads the model loader for the specified iTwinId and iModelId", async () => {
     const { getByTestId } = render(
-      <BaseViewer iTwinId={mockITwinId} iModelId={mockIModelId} />
+      <BaseViewer
+        iTwinId={mockITwinId}
+        iModelId={mockIModelId}
+        enablePerformanceMonitors={false}
+      />
     );
 
     const viewerContainer = await waitFor(() => getByTestId("loader-wrapper"));
@@ -155,6 +159,7 @@ describe("BaseViewer", () => {
         iModelId={mockIModelId}
         productId={"0000"}
         changeSetId={"123"}
+        enablePerformanceMonitors={false}
       />
     );
 
@@ -178,7 +183,9 @@ describe("BaseViewer", () => {
 
     window.addEventListener("error", events.onError);
 
-    const { getByTestId } = render(<BaseViewer />);
+    const { getByTestId } = render(
+      <BaseViewer enablePerformanceMonitors={false} />
+    );
 
     const loader = await waitFor(() => getByTestId("loader-wrapper"));
 
@@ -191,7 +198,9 @@ describe("BaseViewer", () => {
   it("renders and attempts to create a briefcase connection or snapshot connection if a local path is provided", async () => {
     const fileName = "/path/to/snapshot";
 
-    const { getByTestId } = render(<BaseViewer snapshotPath={fileName} />);
+    const { getByTestId } = render(
+      <BaseViewer snapshotPath={fileName} enablePerformanceMonitors={false} />
+    );
 
     const loader = await waitFor(() => getByTestId("loader-wrapper"));
 

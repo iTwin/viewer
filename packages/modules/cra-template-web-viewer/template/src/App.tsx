@@ -131,6 +131,7 @@ const App: React.FC = () => {
           iModelId={iModelId}
           authConfig={authClient}
           viewCreatorOptions={viewCreatorOptions}
+          enablePerformanceMonitors={true} // TODO Kevin link README
         />
       )}
     </div>

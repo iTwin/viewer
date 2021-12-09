@@ -37,6 +37,7 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
   onIModelAppInit,
   additionalI18nNamespaces,
   additionalRpcInterfaces,
+  enablePerformanceMonitors,
 }: BlankViewerProps) => {
   const viewerInitialized = useBaseViewerInitializer({
     appInsightsKey,
@@ -45,6 +46,7 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
     onIModelAppInit,
     additionalI18nNamespaces,
     additionalRpcInterfaces,
+    enablePerformanceMonitors,
   });
 
   const uiConfig = useMemo<ItwinViewerUi>(() => {

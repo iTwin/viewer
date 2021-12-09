@@ -19,6 +19,10 @@ jest.mock("@itwin/viewer-react", () => {
     useBaseViewerInitializer: jest.fn().mockReturnValue(true),
     getInitializationOptions: jest.fn().mockReturnValue({}),
     isEqual: jest.fn().mockReturnValue(true),
+    Performance: {
+      addPerformanceMark: jest.fn(),
+      addAndLogPerformanceMeasure: jest.fn(),
+    },
   };
 });
 
@@ -85,6 +89,7 @@ describe("iTwinViewer", () => {
     const viewer = new ItwinViewer({
       elementId,
       authConfig,
+      enablePerformanceMonitors: false,
     });
     await viewer.load({ iTwinId: mockITwinId, iModelId: mockiModelId });
     await WebInitializer.initialized;
@@ -100,6 +105,7 @@ describe("iTwinViewer", () => {
       viewportOptions: undefined,
       uiProviders: undefined,
       theme: undefined,
+      enablePerformanceMonitors: false,
     });
     expect(ReactDOM.render).toHaveBeenCalledWith(
       expect.anything(),

@@ -39,6 +39,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   additionalRpcInterfaces,
   viewCreatorOptions,
   loadingComponent,
+  enablePerformanceMonitors,
 }: ViewerProps) => {
   const viewerInitialized = useBaseViewerInitializer({
     appInsightsKey,
@@ -47,6 +48,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
     onIModelAppInit,
     additionalI18nNamespaces,
     additionalRpcInterfaces,
+    enablePerformanceMonitors,
   });
 
   const accessToken = useAccessToken();

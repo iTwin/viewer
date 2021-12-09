@@ -34,6 +34,7 @@ export class ItwinViewer {
   viewportOptions: ViewerViewportControlOptions | undefined;
   uiProviders: UiItemsProvider[] | undefined;
   authConfig: ViewerAuthorizationClient;
+  enablePerformanceMonitors: boolean;
 
   onIModelConnected: ((iModel: CheckpointConnection) => void) | undefined;
 
@@ -51,6 +52,7 @@ export class ItwinViewer {
     this.viewportOptions = options.viewportOptions;
     this.uiProviders = options.uiProviders;
     this.authConfig = options.authConfig;
+    this.enablePerformanceMonitors = options.enablePerformanceMonitors;
 
     void WebInitializer.startWebViewer(options);
   }
@@ -75,6 +77,7 @@ export class ItwinViewer {
         viewportOptions: this.viewportOptions,
         uiProviders: this.uiProviders,
         theme: this.theme,
+        enablePerformanceMonitors: this.enablePerformanceMonitors,
       } as WebViewerProps),
       document.getElementById(this.elementId)
     );

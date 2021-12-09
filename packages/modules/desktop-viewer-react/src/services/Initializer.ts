@@ -48,6 +48,10 @@ export class DesktopInitializer {
         const additionalRpcInterfaces = options?.additionalRpcInterfaces ?? [];
         additionalRpcInterfaces.push(SnapshotIModelRpcInterface);
 
+        if (!options) {
+          options = { enablePerformanceMonitors: false };
+        }
+
         const iModelAppOpts = getIModelAppOptions({
           ...options,
           additionalRpcInterfaces,
