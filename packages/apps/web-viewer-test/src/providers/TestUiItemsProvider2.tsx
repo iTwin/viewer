@@ -3,11 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
+import type {
   AbstractWidgetProps,
-  StagePanelLocation,
   UiItemsProvider,
 } from "@itwin/appui-abstract";
+import { StagePanelLocation } from "@itwin/appui-abstract";
 import { FillCentered } from "@itwin/core-react";
 import React from "react";
 

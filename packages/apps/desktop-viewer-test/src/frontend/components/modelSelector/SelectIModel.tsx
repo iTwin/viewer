@@ -5,11 +5,8 @@
 
 import "./SelectIModel.scss";
 
-import {
-  IModelFull,
-  IModelGrid,
-  IModelGridProps,
-} from "@itwin/imodel-browser-react";
+import type { IModelFull, IModelGridProps } from "@itwin/imodel-browser-react";
+import { IModelGrid } from "@itwin/imodel-browser-react";
 import { Title } from "@itwin/itwinui-react";
 import { useNavigate } from "@reach/router";
 import React, { useContext } from "react";

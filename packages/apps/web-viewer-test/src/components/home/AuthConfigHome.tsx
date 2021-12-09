@@ -4,13 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ColorTheme } from "@itwin/appui-react";
-import { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
-import {
-  FitViewTool,
-  IModelApp,
-  ScreenViewport,
-  StandardViewId,
-} from "@itwin/core-frontend";
+import type { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
+import type { ScreenViewport } from "@itwin/core-frontend";
+import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
 import { BaseInitializer, Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 

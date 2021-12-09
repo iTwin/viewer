@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { RouteComponentProps } from "@reach/router";
+import type { RouteComponentProps } from "@reach/router";
 import React, { useEffect, useState } from "react";
 
 import { ModelViewer } from "../viewer/ModelViewer";

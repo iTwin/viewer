@@ -3,7 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { RouteComponentProps, useNavigate } from "@reach/router";
+import type { RouteComponentProps } from "@reach/router";
+import { useNavigate } from "@reach/router";
 import React, { useContext, useEffect } from "react";
 
 import { ITwinViewerApp } from "../../app/ITwinViewerApp";

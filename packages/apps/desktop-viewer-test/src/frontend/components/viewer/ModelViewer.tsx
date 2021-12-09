@@ -3,12 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  FitViewTool,
-  IModelApp,
-  ScreenViewport,
-  StandardViewId,
-} from "@itwin/core-frontend";
+import type { ScreenViewport } from "@itwin/core-frontend";
+import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
 import { Viewer } from "@itwin/desktop-viewer-react";
 import React, { useCallback, useMemo } from "react";
 
