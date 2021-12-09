@@ -5,11 +5,8 @@
 
 /** Clone of core BasicNavigationWidget with conditional tooling
  */
-import {
-  CommonToolbarItem,
-  ToolbarOrientation,
-  ToolbarUsage,
-} from "@itwin/appui-abstract";
+import type { CommonToolbarItem } from "@itwin/appui-abstract";
+import { ToolbarOrientation, ToolbarUsage } from "@itwin/appui-abstract";
 import {
   CoreTools,
   NavigationWidgetComposer,
@@ -20,7 +17,7 @@ import {
 import { IModelApp } from "@itwin/core-frontend";
 import * as React from "react";
 
-import { ViewNavigationTools } from "../../../types";
+import type { ViewNavigationTools } from "../../../types";
 import { useUiVisibility } from "./BasicToolWidget";
 
 export interface BasicNavigationWidgetProps {

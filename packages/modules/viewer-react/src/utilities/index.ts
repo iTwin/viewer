@@ -3,11 +3,9 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ViewerProps } from "../components/BaseViewer";
-import {
-  iTwinViewerInitializerParamList,
-  ItwinViewerInitializerParams,
-} from "../types";
+import type { ViewerProps } from "../components/BaseViewer";
+import type { ItwinViewerInitializerParams } from "../types";
+import { iTwinViewerInitializerParamList } from "../types";
 
 export * from "./MakeCancellable";
 

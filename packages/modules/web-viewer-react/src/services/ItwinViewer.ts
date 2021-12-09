@@ -3,19 +3,19 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { UiItemsProvider } from "@itwin/appui-abstract";
-import { ColorTheme } from "@itwin/appui-react";
-import { CheckpointConnection } from "@itwin/core-frontend";
-import {
+import type { UiItemsProvider } from "@itwin/appui-abstract";
+import type { ColorTheme } from "@itwin/appui-react";
+import type { CheckpointConnection } from "@itwin/core-frontend";
+import type {
   ItwinViewerUi,
   ViewerViewportControlOptions,
 } from "@itwin/viewer-react";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { ViewerFrontstage } from "..";
+import type { ViewerFrontstage } from "..";
 import { Viewer } from "../components/Viewer";
-import {
+import type {
   ItwinViewerParams,
   WebAuthorizationOptions,
   WebViewerProps,

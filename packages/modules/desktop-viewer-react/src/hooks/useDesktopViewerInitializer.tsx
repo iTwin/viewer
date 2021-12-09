@@ -3,16 +3,16 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import type { ItwinViewerInitializerParams } from "@itwin/viewer-react";
 import {
   getInitializationOptions,
   isEqual,
-  ItwinViewerInitializerParams,
   useBaseViewerInitializer,
 } from "@itwin/viewer-react";
 import { useEffect, useMemo, useState } from "react";
 
 import { DesktopInitializer } from "../services/Initializer";
-import { DesktopViewerProps } from "../types";
+import type { DesktopViewerProps } from "../types";
 
 export const useDesktopViewerInitializer = (options?: DesktopViewerProps) => {
   const [desktopViewerInitOptions, setDesktopViewerInitOptions] =

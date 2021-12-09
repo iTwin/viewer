@@ -7,7 +7,7 @@ import { BaseBlankViewer } from "@itwin/viewer-react";
 import React, { useEffect, useMemo, useState } from "react";
 
 import { WebInitializer } from "../services/Initializer";
-import { WebBlankViewerProps } from "../types";
+import type { WebBlankViewerProps } from "../types";
 
 export const BlankViewer = (props: WebBlankViewerProps) => {
   const [initialized, setInitialized] = useState<boolean>(false);

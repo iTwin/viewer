@@ -5,15 +5,14 @@
 
 import { StatusBarSection } from "@itwin/appui-abstract";
 import { FooterSeparator } from "@itwin/appui-layout-react";
+import type { ConfigurableCreateInfo, StatusBarItem } from "@itwin/appui-react";
 import {
-  ConfigurableCreateInfo,
   FooterModeField,
   MessageCenterField,
   SelectionInfoField,
   SelectionScopeField,
   SnapModeField,
   StatusBarComposer,
-  StatusBarItem,
   StatusBarItemUtilities,
   StatusBarWidgetControl,
   TileLoadingIndicator,

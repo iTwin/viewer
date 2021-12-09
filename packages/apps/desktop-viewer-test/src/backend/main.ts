@@ -6,14 +6,12 @@
 import { IModelHubBackend } from "@bentley/imodelhub-client/lib/cjs/imodelhub-node";
 import { IModelHostConfiguration, IpcHost } from "@itwin/core-backend";
 import { Logger, LogLevel } from "@itwin/core-bentley";
-import {
-  ElectronHost,
-  ElectronHostOptions,
-} from "@itwin/core-electron/lib/cjs/ElectronBackend";
+import type { ElectronHostOptions } from "@itwin/core-electron/lib/cjs/ElectronBackend";
+import { ElectronHost } from "@itwin/core-electron/lib/cjs/ElectronBackend";
 import { ElectronMainAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronMain";
 import { Presentation } from "@itwin/presentation-backend";
 import { Menu } from "electron";
-import { MenuItemConstructorOptions } from "electron/main";
+import type { MenuItemConstructorOptions } from "electron/main";
 import * as path from "path";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";

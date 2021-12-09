@@ -3,22 +3,23 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
+import type { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
 import {
   DevToolsRpcInterface,
   IModelReadRpcInterface,
   IModelTileRpcInterface,
   SnapshotIModelRpcInterface,
 } from "@itwin/core-common";
-import { IModelApp, IModelAppOptions } from "@itwin/core-frontend";
+import type { IModelAppOptions } from "@itwin/core-frontend";
+import { IModelApp } from "@itwin/core-frontend";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
-import { ItwinViewerInitializerParams } from "@itwin/viewer-react";
+import type { ItwinViewerInitializerParams } from "@itwin/viewer-react";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
 import { Viewer } from "../../components/Viewer";
 import { WebInitializer } from "../../services/Initializer";
-import { IModelBackendOptions } from "../../types";
+import type { IModelBackendOptions } from "../../types";
 
 jest.mock("@itwin/viewer-react", () => {
   return {

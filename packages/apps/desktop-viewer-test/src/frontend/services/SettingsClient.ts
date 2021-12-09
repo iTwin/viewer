@@ -5,7 +5,8 @@
 
 import { createContext } from "react";
 
-import { ViewerFileType, ViewerSettings } from "../../common/ViewerConfig";
+import type { ViewerSettings } from "../../common/ViewerConfig";
+import { ViewerFileType } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 
 export const getUserSettings = async () => {

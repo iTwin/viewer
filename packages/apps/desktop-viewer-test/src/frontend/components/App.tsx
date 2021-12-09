@@ -7,7 +7,7 @@ import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
 import { Router } from "@reach/router";
 import React, { useCallback, useEffect, useState } from "react";
 
-import { ViewerSettings } from "../../common/ViewerConfig";
+import type { ViewerSettings } from "../../common/ViewerConfig";
 import {
   addRecentOnline as addRecentOnlineClient,
   addRecentSnapshot as addRecentSnapshotClient,

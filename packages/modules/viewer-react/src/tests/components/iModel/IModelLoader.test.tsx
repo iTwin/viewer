@@ -6,18 +6,20 @@
 import "@testing-library/jest-dom/extend-expect";
 
 import { BackstageItemUtilities, UiItemsManager } from "@itwin/appui-abstract";
+import type { FrontstageProps } from "@itwin/appui-react";
 import {
   ColorTheme,
-  FrontstageProps,
   FrontstageProvider,
   UiFramework,
 } from "@itwin/appui-react";
 import { Cartographic, ColorDef } from "@itwin/core-common";
+import type {
+  BlankConnectionProps,
+  IModelConnection,
+} from "@itwin/core-frontend";
 import {
   BlankConnection,
-  BlankConnectionProps,
   IModelApp,
-  IModelConnection,
   SnapshotConnection,
 } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
@@ -28,7 +30,7 @@ import { IModelViewer } from "../../../components/iModel";
 import IModelLoader from "../../../components/iModel/IModelLoader";
 import * as IModelServices from "../../../services/iModel/IModelService";
 import { createBlankViewState } from "../../../services/iModel/ViewCreatorBlank";
-import {
+import type {
   BlankConnectionViewState,
   ViewerBackstageItem,
   ViewerFrontstage,

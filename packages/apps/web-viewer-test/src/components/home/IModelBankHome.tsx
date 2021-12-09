@@ -4,18 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ColorTheme } from "@itwin/appui-react";
-import { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
-import {
-  FitViewTool,
-  IModelApp,
-  ScreenViewport,
-  StandardViewId,
-} from "@itwin/core-frontend";
-import {
-  BaseInitializer,
-  IModelBackendOptions,
-  Viewer,
-} from "@itwin/web-viewer-react";
+import type { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
+import type { ScreenViewport } from "@itwin/core-frontend";
+import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
+import type { IModelBackendOptions } from "@itwin/web-viewer-react";
+import { BaseInitializer, Viewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 
 import { IModelBankFrontend } from "../../services/IModelBankFrontendHubAccess";

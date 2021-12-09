@@ -7,10 +7,11 @@
 // import { MeasureToolsUiItemsProvider } from "@bentley/measure-tools-react";
 // import { PropertyGridUiItemsProvider } from "@bentley/property-grid-react";
 // import { TreeWidgetUiItemsProvider } from "@bentley/tree-widget-react";
-import { UiItemsManager, UiItemsProvider } from "@itwin/appui-abstract";
+import type { UiItemsProvider } from "@itwin/appui-abstract";
+import { UiItemsManager } from "@itwin/appui-abstract";
 import { useEffect } from "react";
 
-import { ItwinViewerUi } from "../types";
+import type { ItwinViewerUi } from "../types";
 
 export function useUiProviders(
   customUiProviders?: UiItemsProvider[],

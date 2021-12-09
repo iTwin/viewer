@@ -3,19 +3,19 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BackstageItem, UiItemsProvider } from "@itwin/appui-abstract";
-import {
+import type { BackstageItem, UiItemsProvider } from "@itwin/appui-abstract";
+import type {
   ColorTheme,
   FrontstageProvider,
   IModelViewportControlOptions,
 } from "@itwin/appui-react";
-import {
+import type {
   ColorDef,
   RenderMode,
   RpcInterface,
   RpcInterfaceDefinition,
 } from "@itwin/core-common";
-import {
+import type {
   // BuiltInExtensionLoaderProps,
   FrontendHubAccess,
   IModelConnection,
@@ -25,7 +25,7 @@ import {
   ViewChangeOptions,
   ViewState,
 } from "@itwin/core-frontend";
-import { Vector3d, XAndY, XYAndZ } from "@itwin/core-geometry";
+import type { Vector3d, XAndY, XYAndZ } from "@itwin/core-geometry";
 
 /**
  * options for configuration of 3D view
