@@ -4,10 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
-import {
-  BentleyCloudRpcManager,
-  BentleyCloudRpcParams,
-} from "@itwin/core-common";
+import type { BentleyCloudRpcParams } from "@itwin/core-common";
+import { BentleyCloudRpcManager } from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import {
   BaseInitializer,
@@ -16,7 +14,7 @@ import {
   ViewerAuthorizationClient,
 } from "@itwin/viewer-react";
 
-import {
+import type {
   IModelBackendOptions,
   WebAuthorizationOptions,
   WebViewerProps,

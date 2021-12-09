@@ -9,16 +9,15 @@ Either takes in a list of modelIds, or displays all 3D models by default.
 */
 
 import { Id64 } from "@itwin/core-bentley";
+import type { ScreenViewport, ViewState } from "@itwin/core-frontend";
 import {
   FitViewTool,
   IModelApp,
-  ScreenViewport,
   StandardViewId,
   ViewCreator3d as ViewCreator,
-  ViewState,
 } from "@itwin/core-frontend";
 
-import { ViewCreator3dOptions } from "../../types";
+import type { ViewCreator3dOptions } from "../../types";
 
 /**
  * API for creating a 3D default [[ViewState3d]] for an iModel. @see [[ViewCreator2d]] to create a view for a 2d model.

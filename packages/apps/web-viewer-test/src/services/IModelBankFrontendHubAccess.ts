@@ -3,19 +3,15 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import type { ChangeSet } from "@bentley/imodelhub-client";
 import {
-  ChangeSet,
   ChangeSetQuery,
   IModelBankClient,
   VersionQuery,
 } from "@bentley/imodelhub-client";
-import {
-  BentleyError,
-  BentleyStatus,
-  ChangesetId,
-  IModelVersion,
-} from "@itwin/core-common";
-import { FrontendHubAccess, IModelIdArg } from "@itwin/core-frontend";
+import type { ChangesetId, IModelVersion } from "@itwin/core-common";
+import { BentleyError, BentleyStatus } from "@itwin/core-common";
+import type { FrontendHubAccess, IModelIdArg } from "@itwin/core-frontend";
 
 export class IModelBankFrontend implements FrontendHubAccess {
   private _hubClient: IModelBankClient;
