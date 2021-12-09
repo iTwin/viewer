@@ -3,18 +3,18 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BackstageItem } from "@itwin/appui-abstract";
+import type { BackstageItem } from "@itwin/appui-abstract";
+import type { FrontstageProvider } from "@itwin/appui-react";
 import {
   BackstageComposer,
   ConfigurableUiContent,
   FrameworkVersion,
   FrontstageManager,
-  FrontstageProvider,
   ThemeManager,
 } from "@itwin/appui-react";
 import React, { useEffect } from "react";
 
-import { ViewerFrontstage } from "../../types";
+import type { ViewerFrontstage } from "../../types";
 interface ModelProps {
   frontstages: ViewerFrontstage[];
   backstageItems: BackstageItem[];

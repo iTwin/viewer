@@ -3,14 +3,14 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BlankConnectionProps } from "@itwin/core-frontend";
+import type { BlankConnectionProps } from "@itwin/core-frontend";
 import { FillCentered } from "@itwin/core-react";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
 import { BaseInitializer } from "..";
 import { useBaseViewerInitializer } from "../hooks";
-import {
+import type {
   BlankConnectionViewState,
   ItwinViewerCommonParams,
   ItwinViewerUi,
