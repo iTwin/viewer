@@ -16,7 +16,7 @@ import type { WebViewerProps } from "../types";
 
 export const useWebViewerInitializer = (options?: WebViewerProps) => {
   const [webViewerInitOptions, setWebViewerInitOptions] =
-    useState<ItwinViewerInitializerParams>();
+    useState<Partial<ItwinViewerInitializerParams>>();
   const [webViewerInitalized, setWebViewerInitalized] = useState(false);
   const baseViewerInitialized = useBaseViewerInitializer(
     options,
