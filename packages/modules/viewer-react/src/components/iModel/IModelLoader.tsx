@@ -109,7 +109,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     };
 
     const getViewState = useCallback(async () => {
-      if (!connection || connection.isClosed) {
+      if (!connection || (!connection.isBlank && connection.isClosed)) {
         setViewState(undefined);
         return;
       }
