@@ -121,6 +121,9 @@ export class BaseInitializer {
       );
     }
     if (UiCore.initialized && !this._initializing) {
+      if (viewerOptions?.onIModelAppInit) {
+        viewerOptions.onIModelAppInit();
+      }
       return (this._initialized = Promise.resolve());
     } else if (this._initializing) {
       // in the process of initializing, so return

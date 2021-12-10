@@ -16,7 +16,7 @@ export const useBaseViewerInitializer = (
   delay?: boolean
 ) => {
   const [baseViewerInitOptions, setBaseViewerInitOptions] =
-    useState<Partial<ItwinViewerInitializerParams>>();
+    useState<ItwinViewerInitializerParams>();
   const [baseViewerInitalized, setBaseViewerInitalized] = useState(false);
   const isMounted = useIsMounted();
 

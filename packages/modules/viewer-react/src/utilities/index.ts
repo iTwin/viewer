@@ -15,7 +15,7 @@ export * from "./MakeCancellable";
  * @returns
  */
 export const isObject = (item: any) => {
-  return item !== null && typeof item === "object";
+  return item !== null && item !== [] && typeof item === "object";
 };
 
 /**
@@ -73,6 +73,5 @@ export const getInitializationOptions = (
       }
     }
   }
-  console.log("iTwin.js initialization options: ", initOptions);
   return initOptions;
 };
