@@ -9,7 +9,7 @@ import {
   IModelBankClient,
   VersionQuery,
 } from "@bentley/imodelhub-client";
-import type { ChangesetId, IModelVersion } from "@itwin/core-common";
+import type { ChangesetIndexAndId, IModelVersion } from "@itwin/core-common";
 import { BentleyError, BentleyStatus } from "@itwin/core-common";
 import type { FrontendHubAccess, IModelIdArg } from "@itwin/core-frontend";
 
@@ -19,52 +19,79 @@ export class IModelBankFrontend implements FrontendHubAccess {
     this._hubClient = new IModelBankClient(orchestratorUrl, undefined);
   }
 
-  public async getLatestChangesetId(arg: IModelIdArg): Promise<ChangesetId> {
+  private async _getChangesetFromId(
+    arg: IModelIdArg & { changeSetId: string }
+  ): Promise<ChangesetIndexAndId> {
+    const changeSets: ChangeSet[] = await this._hubClient.changeSets.get(
+      arg.accessToken,
+      arg.iModelId,
+      new ChangeSetQuery().byId(arg.changeSetId)
+    );
+    if (!changeSets[0] || !changeSets[0].index || !changeSets[0].id) {
+      throw new BentleyError(
+        BentleyStatus.ERROR,
+        `Changeset ${arg.changeSetId} not found`
+      );
+    }
+    return { index: +changeSets[0].index, id: changeSets[0].id };
+  }
+
+  public async getLatestChangeset(
+    arg: IModelIdArg
+  ): Promise<ChangesetIndexAndId> {
     const changeSets: ChangeSet[] = await this._hubClient.changeSets.get(
       arg.accessToken,
       arg.iModelId,
       new ChangeSetQuery().top(1).latest()
     );
-    return changeSets.length === 0
-      ? ""
-      : changeSets[changeSets.length - 1].wsgId;
+    if (!changeSets[0] || !changeSets[0].index || !changeSets[0].id) {
+      return { index: 0, id: "" };
+    }
+    return { index: +changeSets[0].index, id: changeSets[0].id };
   }
 
-  public async getChangesetIdFromVersion(
+  public async getChangesetFromVersion(
     arg: IModelIdArg & { version: IModelVersion }
-  ): Promise<ChangesetId> {
+  ): Promise<ChangesetIndexAndId> {
     const version = arg.version;
     if (version.isFirst) {
-      return "";
+      return { index: 0, id: "" };
     }
 
-    const asOf = version.getAsOfChangeSet();
-    if (asOf) {
-      return asOf;
+    const asOfChangeSetId = version.getAsOfChangeSet();
+    if (asOfChangeSetId) {
+      return this._getChangesetFromId({ ...arg, changeSetId: asOfChangeSetId });
     }
 
     const versionName = version.getName();
     if (versionName) {
-      return this.getChangesetIdFromNamedVersion({ ...arg, versionName });
+      return this.getChangesetFromNamedVersion({ ...arg, versionName });
     }
 
-    return this.getLatestChangesetId(arg);
+    return this.getLatestChangeset(arg);
   }
 
-  public async getChangesetIdFromNamedVersion(
-    arg: IModelIdArg & { versionName: string }
-  ): Promise<ChangesetId> {
+  public async getChangesetFromNamedVersion(
+    arg: IModelIdArg & { versionName?: string }
+  ): Promise<ChangesetIndexAndId> {
+    const versionQuery = arg.versionName
+      ? new VersionQuery().select("ChangeSetId").byName(arg.versionName)
+      : new VersionQuery().top(1);
     const versions = await this._hubClient.versions.get(
       arg.accessToken,
       arg.iModelId,
-      new VersionQuery().select("ChangeSetId").byName(arg.versionName)
+      versionQuery
     );
-    if (!versions?.length || !versions[0]?.changeSetId) {
+    if (
+      !versions[0] ||
+      !versions[0].changeSetIndex ||
+      !versions[0].changeSetId
+    ) {
       throw new BentleyError(
         BentleyStatus.ERROR,
-        `Named version ${arg.versionName} not found`
+        `Named version ${arg.versionName ?? ""} not found`
       );
     }
-    return versions[0].changeSetId;
+    return { index: versions[0].changeSetIndex, id: versions[0].changeSetId };
   }
 }
