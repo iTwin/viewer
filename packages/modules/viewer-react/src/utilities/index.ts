@@ -15,7 +15,7 @@ export * from "./MakeCancellable";
  * @returns
  */
 export const isObject = (item: any) => {
-  return Object.prototype.toString.call(item) === "[object Object]";
+  return item !== null && typeof item === "object";
 };
 
 /**
@@ -62,12 +62,17 @@ export const isEqual = (a?: any, b?: any) => {
  * @param options
  * @returns
  */
-export const getInitializationOptions = (options?: ViewerProps) => {
+export const getInitializationOptions = (
+  options?: ViewerProps
+): Partial<ItwinViewerInitializerParams> => {
   const initOptions: ItwinViewerInitializerParams = {};
   if (options) {
-    for (const key in iTwinViewerInitializerParamList) {
-      (initOptions as any)[key] = (options as any)[key];
+    for (const key of iTwinViewerInitializerParamList) {
+      if ((options as any)[key]) {
+        (initOptions as any)[key] = (options as any)[key];
+      }
     }
   }
+  console.log("iTwin.js initialization options: ", initOptions);
   return initOptions;
 };

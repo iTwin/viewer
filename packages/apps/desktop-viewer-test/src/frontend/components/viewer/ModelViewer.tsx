@@ -6,7 +6,8 @@
 import type { ScreenViewport } from "@itwin/core-frontend";
 import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
 import { Viewer } from "@itwin/desktop-viewer-react";
-import React, { useCallback, useMemo } from "react";
+import { FrontendDevTools } from "@itwin/frontend-devtools";
+import React, { useCallback } from "react";
 
 interface ModelViewerParams {
   iTwinId?: string;
@@ -44,8 +45,9 @@ export const ModelViewer = ({
     });
   }, []);
 
-  const onIModelAppInitialized = useMemo(() => {
-    console.log("Initialized!!");
+  const onIModelAppInitialized = useCallback(async () => {
+    await FrontendDevTools.initialize();
+    console.log("Initialized!");
   }, []);
 
   return (
@@ -53,7 +55,7 @@ export const ModelViewer = ({
       iTwinId={iTwinId}
       iModelId={iModelId}
       snapshotPath={snapshotPath}
-      onIModelAppInit={onIModelAppInitialized as any}
+      onIModelAppInit={onIModelAppInitialized}
       viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
       defaultUiConfig={{
         contentManipulationTools: { cornerItem: { hideDefault: true } },

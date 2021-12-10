@@ -16,7 +16,7 @@ import type { DesktopViewerProps } from "../types";
 
 export const useDesktopViewerInitializer = (options?: DesktopViewerProps) => {
   const [desktopViewerInitOptions, setDesktopViewerInitOptions] =
-    useState<ItwinViewerInitializerParams>();
+    useState<Partial<ItwinViewerInitializerParams>>();
   const [desktopViewerInitalized, setDesktopViewerInitalized] = useState(false);
   const baseViewerInitialized = useBaseViewerInitializer(
     options,
