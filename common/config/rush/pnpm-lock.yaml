@@ -31,6 +31,8 @@ dependencies:
   '@itwin/express-server': 3.0.0-dev.148_6da018f4be71ce4badf380c026a46bdc
   '@itwin/imodel-browser-react': 0.11.0_react-dom@17.0.2+react@17.0.2
   '@itwin/imodel-components-react': 3.0.0-dev.148_3cb3e12d4eaed95ce5b0afcf10666a8d
+  '@itwin/imodels-access-frontend': 0.2.0_a1653ec8629346392a3ac5f7630027b3
+  '@itwin/imodels-client-management': 0.2.0
   '@itwin/itwinui-css': 0.18.1
   '@itwin/itwinui-icons-react': 1.3.0_react-dom@17.0.2+react@17.0.2
   '@itwin/itwinui-react': 1.26.1_react-dom@17.0.2+react@17.0.2
@@ -49,10 +51,10 @@ dependencies:
   '@rush-temp/desktop-viewer-react': 'file:projects/desktop-viewer-react.tgz_a1355fb37b3a07da22807b9488cfa9ad'
   '@rush-temp/desktop-viewer-test': 'file:projects/desktop-viewer-test.tgz_60aae3a18e87f090a632d0bb87223ae0'
   '@rush-temp/error-handling-react': 'file:projects/error-handling-react.tgz'
-  '@rush-temp/viewer-react': 'file:projects/viewer-react.tgz_axios@0.24.0'
+  '@rush-temp/viewer-react': 'file:projects/viewer-react.tgz'
   '@rush-temp/viewer-scripts': 'file:projects/viewer-scripts.tgz_typescript@4.3.5'
   '@rush-temp/web-viewer-react': 'file:projects/web-viewer-react.tgz_axios@0.24.0'
-  '@rush-temp/web-viewer-test': 'file:projects/web-viewer-test.tgz_6ac80fe8b6c263ab71297a5b34382c6c'
+  '@rush-temp/web-viewer-test': 'file:projects/web-viewer-test.tgz_725a1a134ae3237f5b508936aac0b1c8'
   '@svgr/cli': 5.5.0
   '@svgr/webpack': 5.5.0
   '@testing-library/jest-dom': 4.2.4
@@ -4207,6 +4209,25 @@ packages:
       react-dom: ^17.0.0
     resolution:
       integrity: sha512-+qS4S/+FNX7jdRdqLJHlDEV0FV02FvVRigIXO6t0GO7EA/5GIn12ohr54pjgI/taS3bhaKxlN1Dw0wf/fg3qow==
+  /@itwin/imodels-access-frontend/0.2.0_a1653ec8629346392a3ac5f7630027b3:
+    dependencies:
+      '@itwin/core-bentley': 3.0.0-dev.148
+      '@itwin/core-common': 3.0.0-dev.148_2cea9fa5747d2125eec0388ef83db838
+      '@itwin/core-frontend': 3.0.0-dev.148_54235d032abb96d437206068bf58c49f
+      '@itwin/imodels-client-management': 0.2.0
+    dev: false
+    peerDependencies:
+      '@itwin/core-bentley': rc
+      '@itwin/core-common': rc
+      '@itwin/core-frontend': rc
+    resolution:
+      integrity: sha512-PjMr14rJGRhBw9r/YEwbr+WVDOd5XG7oUJ123ucX5QWBbKAxxsfveeQ83TwcRFgVM66+KvDfDnjj8w7jUNmZmQ==
+  /@itwin/imodels-client-management/0.2.0:
+    dependencies:
+      axios: 0.21.4
+    dev: false
+    resolution:
+      integrity: sha512-uM4WFcbr/+tKrCv1YnNQqrxqBPPUcX/UqeHbFgNHsMFjfl3R88PTp5VgbbUAfslpf93JZ00zuDi1p1XzDui2gA==
   /@itwin/itwinui-css/0.18.1:
     dev: false
     resolution:
@@ -6476,6 +6497,12 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-WKTW1+xAzhMS5dJsxWkliixlO/PqC4VhmO9T4juNYcaTg9jzWiJsou6m5pxWYGfigWbwzJWeFY6z47a+4neRXA==
+  /axios/0.21.4:
+    dependencies:
+      follow-redirects: 1.14.6
+    dev: false
+    resolution:
+      integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
   /axios/0.24.0:
     dependencies:
       follow-redirects: 1.14.6
@@ -6641,7 +6668,7 @@ packages:
       integrity: sha512-PO9t0697lNTmcEHH69mdtYiOIkkOlj9fySqfO3K1eCcdISevLAE0xY59VLLUj0SoiPiTX/JU2CYFpILydUa5Lw==
   /babel-plugin-macros/2.8.0:
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.12.1
       cosmiconfig: 6.0.0
       resolve: 1.20.0
     dev: false
@@ -7115,7 +7142,7 @@ packages:
   /browserslist/4.14.2:
     dependencies:
       caniuse-lite: 1.0.30001286
-      electron-to-chromium: 1.4.16
+      electron-to-chromium: 1.4.17
       escalade: 3.1.1
       node-releases: 1.1.77
     dev: false
@@ -7127,7 +7154,7 @@ packages:
   /browserslist/4.18.1:
     dependencies:
       caniuse-lite: 1.0.30001286
-      electron-to-chromium: 1.4.16
+      electron-to-chromium: 1.4.17
       escalade: 3.1.1
       node-releases: 2.0.1
       picocolors: 1.0.0
@@ -9099,10 +9126,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-b5kcM3hmUqn64+RUcHjjr8ZMpHS2WJ5YO0pnG9+P/RTdx46of/JrEjuciHWux6pE+On6ynWhHJF53j/EDJN0PA==
-  /electron-to-chromium/1.4.16:
+  /electron-to-chromium/1.4.17:
     dev: false
     resolution:
-      integrity: sha512-BQb7FgYwnu6haWLU63/CdVW+9xhmHls3RCQUFiV4lvw3wimEHTVcUk2hkuZo76QhR8nnDdfZE7evJIZqijwPdA==
+      integrity: sha512-zhk1MravPtq/KBhmGB7TLBILmXTgRG9TFSI3qS3DbgyfHzIl72iiTE37r/BHIbPCJJlWIo5rySyxiH4vWhu2ZA==
   /electron/11.5.0:
     dependencies:
       '@electron/get': 1.13.1
@@ -9693,7 +9720,7 @@ packages:
       '@types/eslint': 7.29.0
       arrify: 2.0.1
       eslint: 7.32.0
-      jest-worker: 27.4.4
+      jest-worker: 27.4.5
       micromatch: 4.0.4
       normalize-path: 3.0.0
       schema-utils: 3.1.1
@@ -13017,7 +13044,7 @@ packages:
       node: '>= 10.13.0'
     resolution:
       integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==
-  /jest-worker/27.4.4:
+  /jest-worker/27.4.5:
     dependencies:
       '@types/node': 14.18.0
       merge-stream: 2.0.0
@@ -13026,7 +13053,7 @@ packages:
     engines:
       node: '>= 10.13.0'
     resolution:
-      integrity: sha512-jfwxYJvfua1b1XkyuyPh01ATmgg4e5fPM/muLmhy9Qc6dmiwacQB0MLHaU6IjEsv/+nAixHGxTn8WllA27Pn0w==
+      integrity: sha512-f2s8kEdy15cv9r7q4KkzGXvlY0JTcmCbMHZBfSQDwW77REr45IDWwd0lksDFeVHH2jJ5pqb90T77XscrjeGzzg==
   /jest/26.6.0:
     dependencies:
       '@jest/core': 26.6.3
@@ -20749,7 +20776,6 @@ packages:
   'file:projects/desktop-viewer-test.tgz_60aae3a18e87f090a632d0bb87223ae0':
     dependencies:
       '@bentley/icons-generic-webfont': 1.0.34
-      '@bentley/imodelhub-client': 3.0.0-dev.148_937e0e27f9a9bf5c035fb0e96c08400f
       '@bentley/itwin-client': 3.0.0-dev.135_1f1133e0683841193b047e5518caa238
       '@bentley/react-scripts': 4.0.5_react@17.0.2+typescript@4.3.5
       '@itwin/appui-abstract': 3.0.0-dev.148_1f1133e0683841193b047e5518caa238
@@ -20811,7 +20837,7 @@ packages:
       react-redux: '*'
       redux: '*'
     resolution:
-      integrity: sha512-QJkvqtzTWGTjS+hjrMUsZNbJGzOzqKZPBh1n5l1Et0yFzQO4Vsfhxgn35zpNLSufTFlvPFWt3SB1GE8lWGgrig==
+      integrity: sha512-d+9zTxP+I1ffCFApB+hV7NmklFmAfcZ0jyYNWkaO/+cCmOUpjE/oWW0zi7ngTf77DwfvegNGLGCmUCnVb8TGMw==
       tarball: 'file:projects/desktop-viewer-test.tgz'
     version: 0.0.0
   'file:projects/error-handling-react.tgz':
@@ -20858,10 +20884,9 @@ packages:
       integrity: sha512-7yO1FX/dNN59AehJd4aund6ojrcz5ym6n+bR5YX71+jEZiyoInjq0K1RX54eAv2aP3cqSuzOvHAZ6H7GYQbGsg==
       tarball: 'file:projects/error-handling-react.tgz'
     version: 0.0.0
-  'file:projects/viewer-react.tgz_axios@0.24.0':
+  'file:projects/viewer-react.tgz':
     dependencies:
       '@bentley/icons-generic-webfont': 1.0.34
-      '@bentley/imodelhub-client': 3.0.0-dev.148_937e0e27f9a9bf5c035fb0e96c08400f
       '@bentley/itwin-client': 3.0.0-dev.135_1f1133e0683841193b047e5518caa238
       '@itwin/appui-abstract': 3.0.0-dev.148_1f1133e0683841193b047e5518caa238
       '@itwin/appui-layout-react': 3.0.0-dev.148_56314966d0d1823e7812d77fdbeb6b02
@@ -20881,6 +20906,8 @@ packages:
       '@itwin/core-telemetry': 3.0.0-dev.148_d828cc9f6ea6a49ebfcae53f8213ec20
       '@itwin/electron-authorization': 0.5.1
       '@itwin/imodel-components-react': 3.0.0-dev.148_3cb3e12d4eaed95ce5b0afcf10666a8d
+      '@itwin/imodels-access-frontend': 0.2.0_a1653ec8629346392a3ac5f7630027b3
+      '@itwin/imodels-client-management': 0.2.0
       '@itwin/itwinui-react': 1.26.1_react-dom@17.0.2+react@17.0.2
       '@itwin/presentation-common': 3.0.0-dev.148_721cc021f4857e70ec77c1ced00d0bb9
       '@itwin/presentation-components': 3.0.0-dev.148_58681420b3bb70051e9e9e994449fbe7
@@ -20897,6 +20924,7 @@ packages:
       '@types/react': 17.0.37
       '@types/react-dom': 17.0.11
       '@types/react-redux': 7.1.20
+      axios: 0.24.0
       concurrently: 5.3.0
       copyfiles: 2.4.1
       history: 4.10.1
@@ -20912,12 +20940,9 @@ packages:
       ts-jest: 26.5.6_jest@26.6.3+typescript@4.3.5
       typescript: 4.3.5
     dev: false
-    id: 'file:projects/viewer-react.tgz'
     name: '@rush-temp/viewer-react'
-    peerDependencies:
-      axios: '*'
     resolution:
-      integrity: sha512-jF/1ULhA1YTifNqO26zBNvfWdaa2JzrAkplmYPUylU1DpoFRCvSIO6J0L/Ssrp462dPjKLIHIXHDMRVx9p1qww==
+      integrity: sha512-A0mCs3iHZAdqqi+2KM/+EivF37SaLsNfvZJJeH8X+PP7cxG7eyWffosRV7KcXvQKKs74UcYOMxok0dNkwJJ24Q==
       tarball: 'file:projects/viewer-react.tgz'
     version: 0.0.0
   'file:projects/viewer-scripts.tgz_typescript@4.3.5':
@@ -20955,7 +20980,6 @@ packages:
     version: 0.0.0
   'file:projects/web-viewer-react.tgz_axios@0.24.0':
     dependencies:
-      '@bentley/imodelhub-client': 3.0.0-dev.148_937e0e27f9a9bf5c035fb0e96c08400f
       '@bentley/itwin-client': 3.0.0-dev.135_1f1133e0683841193b047e5518caa238
       '@itwin/appui-abstract': 3.0.0-dev.148_1f1133e0683841193b047e5518caa238
       '@itwin/appui-layout-react': 3.0.0-dev.148_56314966d0d1823e7812d77fdbeb6b02
@@ -21004,10 +21028,10 @@ packages:
     peerDependencies:
       axios: '*'
     resolution:
-      integrity: sha512-ze+11vpYBkWtCIwC+ipTY399mlzXbMRsUQp0Ag3LXemgVGPI15lKjBmoCxlVzFVdlJPbg8K4zDgRSphxycNRpw==
+      integrity: sha512-3nFPrB2QFH/S7Ef4nNWsHfm3amJ9Rzoex4tHfVALdJKByjswNfHwYeTciY9sE2LvBb5d0Tzgxk2k6tYWyLf6mg==
       tarball: 'file:projects/web-viewer-react.tgz'
     version: 0.0.0
-  'file:projects/web-viewer-test.tgz_6ac80fe8b6c263ab71297a5b34382c6c':
+  'file:projects/web-viewer-test.tgz_725a1a134ae3237f5b508936aac0b1c8':
     dependencies:
       '@bentley/icons-generic': 1.0.34
       '@bentley/imodelhub-client': 3.0.0-dev.148_937e0e27f9a9bf5c035fb0e96c08400f
@@ -21028,6 +21052,7 @@ packages:
       '@itwin/core-quantity': 3.0.0-dev.148_1f1133e0683841193b047e5518caa238
       '@itwin/core-react': 3.0.0-dev.148_891163709d5e3b8a8ca41d1a7541b3b5
       '@itwin/core-telemetry': 3.0.0-dev.148_d828cc9f6ea6a49ebfcae53f8213ec20
+      '@itwin/imodels-access-frontend': 0.2.0_a1653ec8629346392a3ac5f7630027b3
       '@itwin/itwinui-react': 1.26.1_react-dom@17.0.2+react@17.0.2
       '@itwin/presentation-common': 3.0.0-dev.148_721cc021f4857e70ec77c1ced00d0bb9
       '@itwin/presentation-frontend': 3.0.0-dev.148_57213be64242a8f605f8541cfc9a98a4
@@ -21040,7 +21065,6 @@ packages:
       '@types/react-dom': 17.0.11
       '@types/react-router': 5.1.17
       '@types/react-router-dom': 5.3.2
-      axios: 0.24.0
       history: 4.10.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -21054,11 +21078,11 @@ packages:
     name: '@rush-temp/web-viewer-test'
     peerDependencies:
       '@itwin/imodel-components-react': '*'
+      axios: '*'
     resolution:
-      integrity: sha512-lBAVmi5eMW2QTADHSwoEC5TsYrGMXTKTUT9TiSuuE/dytta1XA7fcrif8v/NdQ2V2vHVYZ/3Z0/lDMQysMN8uA==
+      integrity: sha512-RJAzQL+YRMknm/O/HPHbFBmmFOlN/PyZffKP263Mx4og6atx2GwzmdAr1y5LttLOhNY36JMFwhtG/t8xsMFWEw==
       tarball: 'file:projects/web-viewer-test.tgz'
     version: 0.0.0
-registry: ''
 specifiers:
   '@babel/plugin-proposal-class-properties': ^7.8.3
   '@babel/plugin-transform-runtime': ^7.9.6
@@ -21092,6 +21116,8 @@ specifiers:
   '@itwin/express-server': rc
   '@itwin/imodel-browser-react': ^0.11.0
   '@itwin/imodel-components-react': rc
+  '@itwin/imodels-access-frontend': latest
+  '@itwin/imodels-client-management': latest
   '@itwin/itwinui-css': ^0.18.1
   '@itwin/itwinui-icons-react': ^1.2.0
   '@itwin/itwinui-react': ^1.16.2

@@ -7,7 +7,6 @@
 // import { MeasureTools } from "@bentley/measure-tools-react";
 // import { PropertyGridManager } from "@bentley/property-grid-react";
 // import { TreeWidget } from "@bentley/tree-widget-react";
-import { IModelHubFrontend } from "@bentley/imodelhub-client";
 import {
   AppNotificationManager,
   ConfigurableUiManager,
@@ -28,6 +27,8 @@ import { IModelApp } from "@itwin/core-frontend";
 import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
 import type { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
+import { FrontendIModelsAccess } from "@itwin/imodels-access-frontend";
+import { IModelsClient } from "@itwin/imodels-client-management";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
@@ -249,13 +250,21 @@ export const getIModelAppOptions = (
     console.log(`resources served from: ${viewerHome}`);
   }
 
+  const iModelsClient = new IModelsClient({
+    api: {
+      baseUrl: `https://${
+        process.env.IMJS_URL_PREFIX ?? ""
+      }api.bentley.com/imodels`,
+    },
+  });
+
   return {
     applicationId: options?.productId ?? "3098",
     notifications: new AppNotificationManager(),
     uiAdmin: new FrameworkUiAdmin(),
     rpcInterfaces: getSupportedRpcs(options?.additionalRpcInterfaces ?? []),
     toolAdmin: options?.toolAdmin,
-    hubAccess: options?.hubAccess ?? new IModelHubFrontend(), // TODO 3.0
+    hubAccess: options?.hubAccess ?? new FrontendIModelsAccess(iModelsClient),
     localization: new ITwinLocalization({
       urlTemplate:
         options?.i18nUrlTemplate ??

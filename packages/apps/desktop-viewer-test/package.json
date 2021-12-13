@@ -32,7 +32,6 @@
   ],
   "dependencies": {
     "@bentley/icons-generic-webfont": "^1.0.15",
-    "@bentley/imodelhub-client": "rc",
     "@bentley/itwin-client": "rc",
     "@itwin/appui-abstract": "rc",
     "@itwin/appui-layout-react": "rc",
