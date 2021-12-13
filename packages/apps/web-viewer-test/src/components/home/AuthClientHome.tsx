@@ -73,6 +73,12 @@ export const AuthClientHome: React.FC = () => {
           iModelId={process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string}
           appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
           theme={ColorTheme.Dark}
+          mapLayerOptions={{
+            MapBoxImagery: {
+              key: "access_token",
+              value: process.env.IMJS_MAPBOX_KEY ?? "",
+            },
+          }}
         />
       )}
     </div>
