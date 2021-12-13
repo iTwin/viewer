@@ -31,6 +31,7 @@ dependencies:
   '@itwin/express-server': 3.0.0-dev.148_6da018f4be71ce4badf380c026a46bdc
   '@itwin/imodel-browser-react': 0.11.0_react-dom@17.0.2+react@17.0.2
   '@itwin/imodel-components-react': 3.0.0-dev.148_3cb3e12d4eaed95ce5b0afcf10666a8d
+  '@itwin/imodels-access-backend': 0.2.0_21d9e97700adcb3da679a4c9d8ce41d8
   '@itwin/imodels-access-frontend': 0.2.0_a1653ec8629346392a3ac5f7630027b3
   '@itwin/imodels-client-management': 0.2.0
   '@itwin/itwinui-css': 0.18.1
@@ -49,7 +50,7 @@ dependencies:
   '@rush-temp/cra-template-desktop-viewer': 'file:projects/cra-template-desktop-viewer.tgz'
   '@rush-temp/cra-template-web-viewer': 'file:projects/cra-template-web-viewer.tgz'
   '@rush-temp/desktop-viewer-react': 'file:projects/desktop-viewer-react.tgz_a1355fb37b3a07da22807b9488cfa9ad'
-  '@rush-temp/desktop-viewer-test': 'file:projects/desktop-viewer-test.tgz_60aae3a18e87f090a632d0bb87223ae0'
+  '@rush-temp/desktop-viewer-test': 'file:projects/desktop-viewer-test.tgz_c58daf93f9adcf023f48966a2fb14d1a'
   '@rush-temp/error-handling-react': 'file:projects/error-handling-react.tgz'
   '@rush-temp/viewer-react': 'file:projects/viewer-react.tgz'
   '@rush-temp/viewer-scripts': 'file:projects/viewer-scripts.tgz_typescript@4.3.5'
@@ -223,6 +224,21 @@ packages:
       node: '>=12.0.0'
     resolution:
       integrity: sha512-aK4s3Xxjrx3daZr3VylxejK3vG5ExXck5WOHDJ8in/k9AqlfIyFMMT1uG7u8mNjX+QRILTIn0/Xgschfh/dQ9g==
+  /@azure/storage-blob/12.7.0:
+    dependencies:
+      '@azure/abort-controller': 1.0.4
+      '@azure/core-http': 2.2.2
+      '@azure/core-lro': 2.2.2
+      '@azure/core-paging': 1.2.0
+      '@azure/core-tracing': 1.0.0-preview.13
+      '@azure/logger': 1.0.3
+      events: 3.3.0
+      tslib: 2.3.1
+    dev: false
+    engines:
+      node: '>=8.0.0'
+    resolution:
+      integrity: sha512-7YEWEx03Us/YBxthzBv788R7jokwpCD5KcIsvtE5xRaijNX9o80KXpabhEwLR9DD9nmt/AlU/c1R+aXydgCduQ==
   /@azure/storage-blob/12.8.0:
     dependencies:
       '@azure/abort-controller': 1.0.4
@@ -4209,6 +4225,19 @@ packages:
       react-dom: ^17.0.0
     resolution:
       integrity: sha512-+qS4S/+FNX7jdRdqLJHlDEV0FV02FvVRigIXO6t0GO7EA/5GIn12ohr54pjgI/taS3bhaKxlN1Dw0wf/fg3qow==
+  /@itwin/imodels-access-backend/0.2.0_21d9e97700adcb3da679a4c9d8ce41d8:
+    dependencies:
+      '@itwin/core-backend': 3.0.0-dev.148_29276b61277a7cedb96595da2e2a4ac9
+      '@itwin/core-bentley': 3.0.0-dev.148
+      '@itwin/core-common': 3.0.0-dev.148_2cea9fa5747d2125eec0388ef83db838
+      '@itwin/imodels-client-authoring': 0.2.0
+    dev: false
+    peerDependencies:
+      '@itwin/core-backend': rc
+      '@itwin/core-bentley': rc
+      '@itwin/core-common': rc
+    resolution:
+      integrity: sha512-hqujQHtUwnKrmDha4o4pYO5UBkFsCXRsqS9gQZbwd+rXEh5ug34g+Fe/ZTIaETW2Jbp8tRKh5IbZRzy7HOCStg==
   /@itwin/imodels-access-frontend/0.2.0_a1653ec8629346392a3ac5f7630027b3:
     dependencies:
       '@itwin/core-bentley': 3.0.0-dev.148
@@ -4222,6 +4251,13 @@ packages:
       '@itwin/core-frontend': rc
     resolution:
       integrity: sha512-PjMr14rJGRhBw9r/YEwbr+WVDOd5XG7oUJ123ucX5QWBbKAxxsfveeQ83TwcRFgVM66+KvDfDnjj8w7jUNmZmQ==
+  /@itwin/imodels-client-authoring/0.2.0:
+    dependencies:
+      '@azure/storage-blob': 12.7.0
+      '@itwin/imodels-client-management': 0.2.0
+    dev: false
+    resolution:
+      integrity: sha512-VUS1jAFwvVm15Ee3hdAKvGltqYs7NHh7mlcMOZYkzF6iOjHYE527xnTeEosC7iYMO8qlzIdZgLP2vpCYuOLDJw==
   /@itwin/imodels-client-management/0.2.0:
     dependencies:
       axios: 0.21.4
@@ -4366,6 +4402,15 @@ packages:
       axios: ^0.24.0
     resolution:
       integrity: sha512-O+GLL+FXqsAIv22YL8NDhak9hr1DiI9R4X87aQ67LFdnK6yB7oSUWYbMqr8P00wD0whlBSYbWu96q9nvGu4wLg==
+  /@itwin/reality-data-client/0.3.0_@itwin+core-common@3.0.0-dev.148:
+    dependencies:
+      '@itwin/core-common': 3.0.0-dev.148_2cea9fa5747d2125eec0388ef83db838
+      axios: 0.24.0
+    dev: false
+    peerDependencies:
+      '@itwin/core-common': rc
+    resolution:
+      integrity: sha512-isCHodhooDlM8Sb7DZlXjrsLos8aBaT5ThLGeABzm45D9njtRTbfe/ZO/krIehL5PNijJtbxG22tce7N1BAVGQ==
   /@itwin/webgl-compatibility/3.0.0-dev.148:
     dependencies:
       '@itwin/core-bentley': 3.0.0-dev.148
@@ -6668,7 +6713,7 @@ packages:
       integrity: sha512-PO9t0697lNTmcEHH69mdtYiOIkkOlj9fySqfO3K1eCcdISevLAE0xY59VLLUj0SoiPiTX/JU2CYFpILydUa5Lw==
   /babel-plugin-macros/2.8.0:
     dependencies:
-      '@babel/runtime': 7.12.1
+      '@babel/runtime': 7.16.3
       cosmiconfig: 6.0.0
       resolve: 1.20.0
     dev: false
@@ -20773,7 +20818,7 @@ packages:
       integrity: sha512-bcGMGe3+nMrmCOapxWWmniaumbgEs2+pNPoNoFx47oWeByFROnxptDjoBGhoE9obrosm5Vzzajy1TOx1Nd81DA==
       tarball: 'file:projects/desktop-viewer-react.tgz'
     version: 0.0.0
-  'file:projects/desktop-viewer-test.tgz_60aae3a18e87f090a632d0bb87223ae0':
+  'file:projects/desktop-viewer-test.tgz_c58daf93f9adcf023f48966a2fb14d1a':
     dependencies:
       '@bentley/icons-generic-webfont': 1.0.34
       '@bentley/itwin-client': 3.0.0-dev.135_1f1133e0683841193b047e5518caa238
@@ -20799,6 +20844,7 @@ packages:
       '@itwin/electron-authorization': 0.5.1
       '@itwin/express-server': 3.0.0-dev.148_6da018f4be71ce4badf380c026a46bdc
       '@itwin/imodel-browser-react': 0.11.0_react-dom@17.0.2+react@17.0.2
+      '@itwin/imodels-access-backend': 0.2.0_21d9e97700adcb3da679a4c9d8ce41d8
       '@itwin/itwinui-css': 0.18.1
       '@itwin/itwinui-icons-react': 1.3.0_react-dom@17.0.2+react@17.0.2
       '@itwin/itwinui-react': 1.26.1_react-dom@17.0.2+react@17.0.2
@@ -20806,7 +20852,7 @@ packages:
       '@itwin/presentation-common': 3.0.0-dev.148_721cc021f4857e70ec77c1ced00d0bb9
       '@itwin/presentation-components': 3.0.0-dev.148_58681420b3bb70051e9e9e994449fbe7
       '@itwin/presentation-frontend': 3.0.0-dev.148_57213be64242a8f605f8541cfc9a98a4
-      '@itwin/reality-data-client': 0.2.4_16f03f48af3397f11e2d3adc1b8d953d
+      '@itwin/reality-data-client': 0.3.0_@itwin+core-common@3.0.0-dev.148
       '@itwin/webgl-compatibility': 3.0.0-dev.148
       '@reach/router': 1.3.4_react-dom@17.0.2+react@17.0.2
       '@types/electron-devtools-installer': 2.2.0
@@ -20833,11 +20879,10 @@ packages:
     name: '@rush-temp/desktop-viewer-test'
     peerDependencies:
       '@itwin/imodel-components-react': '*'
-      axios: '*'
       react-redux: '*'
       redux: '*'
     resolution:
-      integrity: sha512-d+9zTxP+I1ffCFApB+hV7NmklFmAfcZ0jyYNWkaO/+cCmOUpjE/oWW0zi7ngTf77DwfvegNGLGCmUCnVb8TGMw==
+      integrity: sha512-9APuaNOCoIjtRab2kQ9emAv0VP5R2sUBuu5rudgNY7DapFd6JnD1GJUrgddPTuCH8OyaP32sqZwtZdoXAcRhAw==
       tarball: 'file:projects/desktop-viewer-test.tgz'
     version: 0.0.0
   'file:projects/error-handling-react.tgz':
@@ -21083,6 +21128,7 @@ packages:
       integrity: sha512-RJAzQL+YRMknm/O/HPHbFBmmFOlN/PyZffKP263Mx4og6atx2GwzmdAr1y5LttLOhNY36JMFwhtG/t8xsMFWEw==
       tarball: 'file:projects/web-viewer-test.tgz'
     version: 0.0.0
+registry: ''
 specifiers:
   '@babel/plugin-proposal-class-properties': ^7.8.3
   '@babel/plugin-transform-runtime': ^7.9.6
@@ -21116,6 +21162,7 @@ specifiers:
   '@itwin/express-server': rc
   '@itwin/imodel-browser-react': ^0.11.0
   '@itwin/imodel-components-react': rc
+  '@itwin/imodels-access-backend': latest
   '@itwin/imodels-access-frontend': latest
   '@itwin/imodels-client-management': latest
   '@itwin/itwinui-css': ^0.18.1

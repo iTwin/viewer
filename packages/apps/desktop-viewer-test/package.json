@@ -54,6 +54,7 @@
     "@itwin/express-server": "rc",
     "@itwin/desktop-viewer-react": "2.0.0-dev.18",
     "@itwin/imodel-browser-react": "^0.11.0",
+    "@itwin/imodels-access-backend": "latest",
     "@itwin/itwinui-css": "^0.18.1",
     "@itwin/itwinui-icons-react": "^1.2.0",
     "@itwin/itwinui-react": "^1.16.2",
