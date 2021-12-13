@@ -12,6 +12,7 @@ import {
   getIModelAppOptions,
   makeCancellable,
   ViewerAuthorization,
+  ViewerPerformance,
 } from "@itwin/viewer-react";
 
 import type { DesktopViewerProps } from "../types";
@@ -35,6 +36,7 @@ export class DesktopInitializer {
       ElectronApp.shutdown().catch(() => {
         // Do nothing, its possible that we never started.
       });
+      ViewerPerformance.clear();
     }
   };
 
@@ -45,6 +47,8 @@ export class DesktopInitializer {
       this._initializing = true;
 
       const cancellable = makeCancellable(function* () {
+        ViewerPerformance.enable(options?.enablePerformanceMonitors);
+        ViewerPerformance.addMark("ViewerStarting");
         const additionalRpcInterfaces = options?.additionalRpcInterfaces ?? [];
         additionalRpcInterfaces.push(SnapshotIModelRpcInterface);
 
@@ -74,7 +78,12 @@ export class DesktopInitializer {
         };
         yield ElectronApp.startup(electronViewerOpts);
         NativeAppLogger.initialize();
-
+        ViewerPerformance.addMark("ViewerStarted");
+        void ViewerPerformance.addAndLogMeasure(
+          "ViewerInitialized",
+          "ViewerStarting",
+          "ViewerStarted"
+        );
         console.log("desktop viewer started");
       });
 

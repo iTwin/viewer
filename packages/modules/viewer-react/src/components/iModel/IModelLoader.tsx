@@ -27,6 +27,7 @@ import { withAITracking } from "@microsoft/applicationinsights-react-js";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
+import { ViewerPerformance } from "../..";
 import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
 import { openLocalImodel, openRemoteIModel } from "../../services/iModel";
 import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
@@ -218,6 +219,12 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             changeSetId
           );
         }
+        ViewerPerformance.addMark("IModelConnection");
+        void ViewerPerformance.addAndLogMeasure(
+          "IModelConnected",
+          "ViewerStarting",
+          "IModelConnection"
+        );
         if (imodelConnection && isMounted.current) {
           // Tell the SyncUiEventDispatcher and StateManager about the iModelConnection
           UiFramework.setIModelConnection(imodelConnection, true);

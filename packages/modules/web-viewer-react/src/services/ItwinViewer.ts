@@ -12,6 +12,7 @@ import type {
   ViewerFrontstage,
   ViewerViewportControlOptions,
 } from "@itwin/viewer-react";
+import { ViewerPerformance } from "@itwin/viewer-react";
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -43,6 +44,8 @@ export class ItwinViewer {
       //TODO localize
       throw new Error("Please supply a root elementId as the first parameter"); //TODO localize
     }
+    ViewerPerformance.enable(options.enablePerformanceMonitors);
+    ViewerPerformance.addMark("ViewerStarting");
     this.elementId = options.elementId;
     this.theme = options.theme;
     this.uiConfig = options.defaultUiConfig;

@@ -18,6 +18,7 @@ import {
 } from "@itwin/core-frontend";
 
 import type { ViewCreator3dOptions } from "../../types";
+import { ViewerPerformance } from "../telemetry";
 
 /**
  * API for creating a 3D default [[ViewState3d]] for an iModel. @see [[ViewCreator2d]] to create a view for a 2d model.
@@ -72,6 +73,12 @@ export class ViewCreator3d extends ViewCreator {
               const start = new Date();
               const intvl = setInterval(() => {
                 if (viewPort.areAllTileTreesLoaded) {
+                  ViewerPerformance.addMark("TilesLoaded");
+                  void ViewerPerformance.addAndLogMeasure(
+                    "TileTreesLoaded",
+                    "ViewerStarting",
+                    "TilesLoaded"
+                  );
                   clearInterval(intvl);
                   resolve(true);
                 }
@@ -94,6 +101,12 @@ export class ViewCreator3d extends ViewCreator {
       });
     }
 
+    ViewerPerformance.addMark("ViewStateCreation");
+    void ViewerPerformance.addAndLogMeasure(
+      "ViewStateCreated",
+      "ViewerStarting",
+      "ViewStateCreation"
+    );
     return viewState;
   }
 }

@@ -6,20 +6,33 @@
 import { trackViewerMetric, viewerAI } from "./TelemetryService";
 
 export type PerformanceMeasures =
-  | "WebViewerStartup"
-  | "BaseViewerStartup"
-  | "IModelAppStartup";
+  | "ViewerInitialized"
+  | "BaseViewerInitialized"
+  | "IModelConnected"
+  | "ViewStateCreated"
+  | "TileTreesLoaded";
 
 export type PerformanceMarks =
-  | "WebViewerStarting"
-  | "WebViewerStarted"
-  | "BaseViewerStarting"
+  | "ViewerStarting"
+  | "ViewerStarted"
   | "BaseViewerStarted"
-  | "IModelAppStarting"
-  | "IModelAppStarted";
+  | "IModelConnection"
+  | "ViewStateCreation"
+  | "TilesLoaded";
 
-export class Performance {
+export class ViewerPerformance {
   private static _enabled: boolean;
+
+  private static _getAiKey(): string {
+    switch (process.env.IMJS_URL_PREFIX) {
+      case "dev-":
+        return "202e4e19-0357-4b93-abb4-52d9c345384d";
+      case "qa-":
+        return "bc9fee8c-d537-4892-b760-750392c531be";
+      default:
+        return "76ebaa63-f57e-4955-aedf-43e2741724ec";
+    }
+  }
 
   static get enabled() {
     return this._enabled && window.performance;
@@ -44,12 +57,17 @@ export class Performance {
     if (!this.enabled) {
       return;
     }
-    performance.measure(measureName, startMark, endMark);
+    if (
+      performance.getEntriesByName(startMark).length > 0 &&
+      performance.getEntriesByName(endMark).length > 0
+    ) {
+      performance.measure(measureName, startMark, endMark);
+    }
   }
 
   static async logMetric(measureName: PerformanceMeasures) {
     if (!viewerAI.initialized) {
-      await viewerAI.initialize("76ebaa63-f57e-4955-aedf-43e2741724ec");
+      await viewerAI.initialize(this._getAiKey());
     }
     const measure = performance.getEntriesByName(measureName);
     if (measure && measure.length > 0) {
@@ -65,7 +83,13 @@ export class Performance {
     if (!this.enabled) {
       return;
     }
+
     this.addMeasure(measureName, startMark, endMark);
     await this.logMetric(measureName);
+  }
+
+  static clear() {
+    performance.clearMarks();
+    performance.clearMeasures();
   }
 }
