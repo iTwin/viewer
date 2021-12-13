@@ -43,8 +43,7 @@
     "not dead",
     "not edge > 0",
     "not ie > 0",
-    "not op_mini all",
-    "chrome 45"
+    "not op_mini all"
   ],
   "scripts": {
     "build": "",

@@ -24,6 +24,7 @@
       "@itwin/itwinui-react": "^1.16.2",
       "@itwin/presentation-common": "rc",
       "@itwin/presentation-frontend": "rc",
+      "@itwin/reality-data-client": "latest",
       "@itwin/web-viewer-react": "next",
       "@itwin/webgl-compatibility": "rc",
       "@types/history": "^4.7.6",

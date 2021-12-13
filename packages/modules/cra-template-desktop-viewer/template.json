@@ -35,6 +35,7 @@
       "@itwin/presentation-common": "rc",
       "@itwin/presentation-components": "rc",
       "@itwin/presentation-frontend": "rc",
+      "@itwin/reality-data-client": "latest",
       "@itwin/webgl-compatibility": "rc",
       "@reach/router": "^1.3.4",
       "@types/electron-devtools-installer": "^2.2.0",
