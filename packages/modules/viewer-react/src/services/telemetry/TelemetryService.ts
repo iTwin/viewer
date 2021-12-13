@@ -3,8 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { RpcActivity } from "@itwin/core-common";
-import { TelemetryClient, TelemetryEvent } from "@itwin/core-telemetry";
+import type { RpcActivity } from "@itwin/core-common";
+import type { TelemetryClient, TelemetryEvent } from "@itwin/core-telemetry";
 import { ReactPlugin } from "@microsoft/applicationinsights-react-js";
 import { ApplicationInsights } from "@microsoft/applicationinsights-web";
 

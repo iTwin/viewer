@@ -9,7 +9,7 @@ import ReactDOM from "react-dom";
 import { Viewer } from "../../components/Viewer";
 import { WebInitializer } from "../../services/Initializer";
 import { ItwinViewer } from "../../services/ItwinViewer";
-import { WebAuthorizationOptions } from "../../types";
+import type { WebAuthorizationOptions } from "../../types";
 
 jest.mock("@itwin/viewer-react", () => {
   return {

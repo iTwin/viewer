@@ -7,13 +7,13 @@ import { IpcHandler } from "@itwin/core-backend";
 import { dialog } from "electron";
 import * as minimist from "minimist";
 
-import {
-  channelName,
+import type {
   ViewerConfig,
   ViewerFile,
   ViewerIpc,
   ViewerSettings,
 } from "../common/ViewerConfig";
+import { channelName } from "../common/ViewerConfig";
 import { getAppEnvVar } from "./AppInfo";
 import UserSettings from "./UserSettings";
 

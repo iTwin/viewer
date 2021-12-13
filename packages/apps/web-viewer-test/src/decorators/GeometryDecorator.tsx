@@ -3,26 +3,20 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  ColorDef,
-  LinePixels,
-  TextString,
-  ViewFlagOverrides,
-} from "@itwin/core-common";
-import {
+import type { TextString, ViewFlagOverrides } from "@itwin/core-common";
+import { ColorDef, LinePixels } from "@itwin/core-common";
+import type {
   DecorateContext,
   Decorator,
-  GraphicBranch,
   GraphicBuilder,
-  GraphicType,
-  IModelApp,
   Marker,
   RenderGraphic,
 } from "@itwin/core-frontend";
+import { GraphicBranch, GraphicType, IModelApp } from "@itwin/core-frontend";
+import type { GeometryQuery } from "@itwin/core-geometry";
 import {
   Arc3d,
   CurveChainWithDistanceIndex,
-  GeometryQuery,
   IndexedPolyface,
   IndexedPolyfaceVisitor,
   LineSegment3d,

@@ -8,10 +8,11 @@ import {
   IModelTileRpcInterface,
   SnapshotIModelRpcInterface,
 } from "@itwin/core-common";
-import { IModelApp, IModelAppOptions } from "@itwin/core-frontend";
+import type { IModelAppOptions } from "@itwin/core-frontend";
+import { IModelApp } from "@itwin/core-frontend";
 import { UiCore } from "@itwin/core-react";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
-import { ItwinViewerInitializerParams } from "@itwin/viewer-react";
+import type { ItwinViewerInitializerParams } from "@itwin/viewer-react";
 
 import { WebInitializer } from "../../services/Initializer";
 

@@ -6,7 +6,7 @@
 import modelImg from "@bentley/icons-generic/icons/imodeljs.svg";
 import { Button } from "@itwin/itwinui-react";
 import React from "react";
-import { RouteComponentProps } from "react-router";
+import type { RouteComponentProps } from "react-router";
 
 import { ReactComponent as Itwin } from "../../images/itwin.svg";
 import styles from "./Home.module.scss";

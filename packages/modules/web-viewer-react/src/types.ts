@@ -3,12 +3,15 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
+import type {
   BrowserAuthorizationClient,
   BrowserAuthorizationClientConfiguration,
 } from "@itwin/browser-authorization";
-import { BentleyCloudRpcParams, RpcRoutingToken } from "@itwin/core-common";
-import {
+import type {
+  BentleyCloudRpcParams,
+  RpcRoutingToken,
+} from "@itwin/core-common";
+import type {
   BlankViewerProps,
   ItwinViewerCommonParams,
   UserManager,

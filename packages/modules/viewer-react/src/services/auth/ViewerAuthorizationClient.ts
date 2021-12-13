@@ -3,9 +3,10 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { AccessToken, BeEvent } from "@itwin/core-bentley";
-import { AuthorizationClient } from "@itwin/core-common";
-import { UserManager } from "oidc-client";
+import type { AccessToken } from "@itwin/core-bentley";
+import { BeEvent } from "@itwin/core-bentley";
+import type { AuthorizationClient } from "@itwin/core-common";
+import type { UserManager } from "oidc-client";
 
 export class ViewerAuthorizationClient implements AuthorizationClient {
   getUserManager: () => UserManager;

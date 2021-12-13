@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { useAccessToken } from "@itwin/desktop-viewer-react";
-import { RouteComponentProps } from "@reach/router";
+import type { RouteComponentProps } from "@reach/router";
 import React, { useEffect, useState } from "react";
 
 import { SelectIModel } from "../modelSelector/SelectIModel";
