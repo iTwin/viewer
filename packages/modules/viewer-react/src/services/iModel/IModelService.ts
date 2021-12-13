@@ -17,14 +17,13 @@ const getVersion = async (
   if (changeSetId) {
     return IModelVersion.asOfChangeSet(changeSetId);
   }
-  const { authorizationClient, hubAccess } = IModelApp;
-  const token = await authorizationClient?.getAccessToken();
 
-  if (token && hubAccess) {
+  const accessToken = await IModelApp.authorizationClient?.getAccessToken();
+  if (accessToken && IModelApp.hubAccess) {
     try {
-      const changeset = await hubAccess.getChangesetFromNamedVersion({
+      const changeset = await IModelApp.hubAccess.getChangesetFromNamedVersion({
         iModelId,
-        accessToken: token,
+        accessToken,
       });
       return IModelVersion.asOfChangeSet(changeset.id);
     } catch {
