@@ -19,6 +19,7 @@ import type {
   // BuiltInExtensionLoaderProps,
   FrontendHubAccess,
   IModelConnection,
+  MapLayerOptions,
   ScreenViewport,
   StandardViewId,
   ToolAdmin,
@@ -107,6 +108,7 @@ export interface ItwinViewerInitializerParams {
   toolAdmin?: ToolAdmin;
   /** option hubAccess (defaults to iTwin Platform's iModels) */
   hubAccess?: FrontendHubAccess;
+  mapLayerOptions?: MapLayerOptions;
   // TODO: 3.0 w/ extensions
   // /** List of Extensions */
   // extensions?: BuiltInExtensionLoaderProps[];
@@ -125,6 +127,7 @@ const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
   additionalRpcInterfaces: undefined,
   toolAdmin: undefined,
   hubAccess: undefined,
+  mapLayerOptions: undefined,
   // extensions: undefined,
 };
 export const iTwinViewerInitializerParamList = Object.keys(

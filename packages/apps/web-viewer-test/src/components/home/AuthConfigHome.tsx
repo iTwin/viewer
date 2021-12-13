@@ -138,6 +138,12 @@ export const AuthConfigHome: React.FC = () => {
         onIModelAppInit={onIModelAppInit}
         viewCreatorOptions={viewCreatorOptions}
         loadingComponent={<Loader />}
+        mapLayerOptions={{
+          BingMaps: {
+            key: "key",
+            value: process.env.IMJS_BING_MAPS_KEY ?? "",
+          },
+        }}
       />
     </div>
   );

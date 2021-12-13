@@ -263,5 +263,6 @@ export const getIModelAppOptions = (
     }),
     publicPath: viewerHome ? `${viewerHome}/` : "",
     realityDataAccess: new RealityDataAccessClient(),
+    mapLayerOptions: options?.mapLayerOptions,
   };
 };
