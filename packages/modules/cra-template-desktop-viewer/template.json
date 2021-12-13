@@ -28,6 +28,8 @@
       "@itwin/imodel-browser-react": "^0.11.0",
       "@itwin/imodel-components-react": "rc",
       "@itwin/imodels-access-backend": "latest",
+      "@itwin/imodels-access-frontend": "latest",
+      "@itwin/imodels-client-management": "latest",
       "@itwin/itwinui-css": "^0.18.1",
       "@itwin/itwinui-icons-react": "^1.2.0",
       "@itwin/itwinui-react": "^1.16.2",
