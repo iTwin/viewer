@@ -258,6 +258,12 @@ export const getIModelAppOptions = (
     },
   });
 
+  const realityDataClient = new RealityDataAccessClient({
+    baseUrl: `https://${
+      process.env.IMJS_URL_PREFIX ?? ""
+    }api.bentley.com/realitydata`,
+  });
+
   return {
     applicationId: options?.productId ?? "3098",
     notifications: new AppNotificationManager(),
@@ -271,7 +277,7 @@ export const getIModelAppOptions = (
         (viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`),
     }),
     publicPath: viewerHome ? `${viewerHome}/` : "",
-    realityDataAccess: new RealityDataAccessClient(),
+    realityDataAccess: realityDataClient,
     mapLayerOptions: options?.mapLayerOptions,
   };
 };
