@@ -27,11 +27,10 @@ import { withAITracking } from "@microsoft/applicationinsights-react-js";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
-import { ViewerPerformance } from "../..";
 import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
 import { openLocalImodel, openRemoteIModel } from "../../services/iModel";
 import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
-import { userAI } from "../../services/telemetry/TelemetryService";
+import { userAI, ViewerPerformance } from "../../services/telemetry";
 import type {
   BlankConnectionViewState,
   IModelLoaderParams,
@@ -262,7 +261,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       blankConnection,
       blankConnectionViewState,
       isMounted,
-      errorManager,
       onIModelConnected,
     ]);
 

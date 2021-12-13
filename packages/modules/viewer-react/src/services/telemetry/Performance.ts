@@ -34,6 +34,16 @@ export class ViewerPerformance {
     }
   }
 
+  private static async _logMetric(measureName: PerformanceMeasures) {
+    if (!viewerAI.initialized) {
+      await viewerAI.initialize(this._getAiKey());
+    }
+    const measure = performance.getEntriesByName(measureName);
+    if (measure && measure.length > 0) {
+      trackViewerMetric(`iTwinViewer.${measureName}`, measure[0].duration);
+    }
+  }
+
   static get enabled() {
     return this._enabled && window.performance;
   }
@@ -65,16 +75,6 @@ export class ViewerPerformance {
     }
   }
 
-  static async logMetric(measureName: PerformanceMeasures) {
-    if (!viewerAI.initialized) {
-      await viewerAI.initialize(this._getAiKey());
-    }
-    const measure = performance.getEntriesByName(measureName);
-    if (measure && measure.length > 0) {
-      trackViewerMetric(`iTwinViewer.${measureName}`, measure[0].duration);
-    }
-  }
-
   static async addAndLogMeasure(
     measureName: PerformanceMeasures,
     startMark: PerformanceMarks,
@@ -85,7 +85,7 @@ export class ViewerPerformance {
     }
 
     this.addMeasure(measureName, startMark, endMark);
-    await this.logMetric(measureName);
+    await this._logMetric(measureName);
   }
 
   static clear() {

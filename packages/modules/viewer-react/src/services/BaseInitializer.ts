@@ -31,7 +31,7 @@ import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
 
-import { ViewerPerformance } from "..";
+import { ViewerPerformance } from "../services/telemetry";
 import type { ItwinViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
 import { trackUserEvent, userAI } from "./telemetry/TelemetryService";
