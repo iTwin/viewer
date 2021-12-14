@@ -106,7 +106,7 @@ export interface ItwinViewerInitializerParams {
   additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
   /** optional ToolAdmin to initialize */
   toolAdmin?: ToolAdmin;
-  /** option hubAccess (defaults to iTwin Platform's iModels) */
+  /** optional hubAccess (defaults to iTwin Platform's iModels) */
   hubAccess?: FrontendHubAccess;
   mapLayerOptions?: MapLayerOptions;
   // TODO: 3.0 w/ extensions

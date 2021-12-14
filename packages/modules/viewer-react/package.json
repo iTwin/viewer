@@ -39,13 +39,11 @@
     "@itwin/itwinui-react": "^1.16.2",
     "@microsoft/applicationinsights-react-js": "2.3.1",
     "@microsoft/applicationinsights-web": "2.3.1",
-    "axios": "^0.24.0",
     "history": "^4.10.1",
     "oidc-client": "^1.10.1",
     "react-spring": "^8.0.27"
   },
   "devDependencies": {
-    "@bentley/imodelhub-client": "rc",
     "@bentley/itwin-client": "rc",
     "@itwin/appui-abstract": "rc",
     "@itwin/appui-layout-react": "rc",
@@ -62,6 +60,8 @@
     "@itwin/core-quantity": "rc",
     "@itwin/core-react": "rc",
     "@itwin/core-telemetry": "rc",
+    "@itwin/imodels-access-frontend": "latest",
+    "@itwin/imodels-client-management": "latest",
     "@itwin/imodel-components-react": "rc",
     "@itwin/presentation-common": "rc",
     "@itwin/presentation-components": "rc",
@@ -89,7 +89,6 @@
     "typescript": "~4.3.0"
   },
   "peerDependencies": {
-    "@bentley/imodelhub-client": "rc",
     "@bentley/itwin-client": "rc",
     "@itwin/appui-abstract": "rc",
     "@itwin/appui-layout-react": "rc",
@@ -104,6 +103,7 @@
     "@itwin/core-quantity": "rc",
     "@itwin/core-react": "rc",
     "@itwin/core-telemetry": "rc",
+    "@itwin/imodels-access-frontend": "latest",
     "@itwin/imodel-components-react": "rc",
     "@itwin/presentation-common": "rc",
     "@itwin/presentation-components": "rc",
