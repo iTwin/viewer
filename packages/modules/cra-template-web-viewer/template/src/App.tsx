@@ -5,62 +5,36 @@
 
 import "./App.scss";
 
-import {
-  FitViewTool,
-  IModelApp,
-  ScreenViewport,
-  StandardViewId,
-} from "@itwin/core-frontend";
-import { Viewer } from "@itwin/web-viewer-react";
-import React, { useEffect, useState } from "react";
+import type { ScreenViewport } from "@itwin/core-frontend";
+import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
+import type { WebAuthorizationOptions } from "@itwin/web-viewer-react";
+import { BaseInitializer, Viewer } from "@itwin/web-viewer-react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-import { AuthorizationClient } from "./AuthClient";
 import { Header } from "./Header";
 import { history } from "./history";
 
 const App: React.FC = () => {
-  if (!process.env.IMJS_AUTH_CLIENT_CLIENT_ID) {
-    throw new Error(
-      "Please add a valid OIDC client id to the .env file and restart the application. See the README for more information."
-    );
-  }
-  if (!process.env.IMJS_AUTH_CLIENT_SCOPES) {
-    throw new Error(
-      "Please add valid scopes for your OIDC client to the .env file and restart the application. See the README for more information."
-    );
-  }
-  if (!process.env.IMJS_AUTH_CLIENT_REDIRECT_URI) {
-    throw new Error(
-      "Please add a valid redirect URI to the .env file and restart the application. See the README for more information."
-    );
-  }
-
   const [isAuthorized, setIsAuthorized] = useState(
-    (AuthorizationClient.oidcClient?.hasSignedIn &&
-      AuthorizationClient.oidcClient?.isAuthorized) ||
+    (BaseInitializer.authClient?.hasSignedIn &&
+      BaseInitializer.authClient?.isAuthorized) ||
       false
   );
-  const [oidcInitialized, setOidcInitialized] = useState(false);
-  const [iTwinId, setITwinId] = useState(process.env.IMJS_ITWIN_ID);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [iModelId, setIModelId] = useState(process.env.IMJS_IMODEL_ID);
+  const [iTwinId, setITwinId] = useState(process.env.IMJS_ITWIN_ID);
 
-  useEffect(() => {
-    if (!AuthorizationClient.oidcClient) {
-      AuthorizationClient.initializeOidc()
-        .then(() => {
-          setOidcInitialized(true);
-          setIsAuthorized(
-            (AuthorizationClient.oidcClient.hasSignedIn &&
-              AuthorizationClient.oidcClient.isAuthorized) ||
-              false
-          );
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else {
-      setOidcInitialized(true);
-    }
+  const authConfig = useMemo<WebAuthorizationOptions>(() => {
+    return {
+      config: {
+        scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
+        clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
+        redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
+        postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
+        responseType: "code",
+        authority: process.env.IMJS_AUTH_AUTHORITY,
+      },
+    };
   }, []);
 
   useEffect(() => {
@@ -71,7 +45,7 @@ const App: React.FC = () => {
       } else {
         if (!process.env.IMJS_ITWIN_ID) {
           throw new Error(
-            "Please add a valid iTwin ID in the .env file and restart the application or add it to the iTwinId query parameter in the url and refresh the page. See the README for more information."
+            "Please add a valid context ID in the .env file and restart the application or add it to the iTwinId query parameter in the url and refresh the page. See the README for more information."
           );
         }
       }
@@ -89,19 +63,37 @@ const App: React.FC = () => {
   }, [isAuthorized]);
 
   useEffect(() => {
-    if (iTwinId && iModelId && isAuthorized) {
+    if (isAuthorized && iTwinId && iModelId) {
       history.push(`?iTwinId=${iTwinId}&iModelId=${iModelId}`);
     }
-  }, [iTwinId, iModelId, isAuthorized]);
+  }, [isAuthorized, iTwinId, iModelId]);
+
+  useEffect(() => {
+    if (isLoggingIn && isAuthorized) {
+      setIsLoggingIn(false);
+    }
+  }, [isAuthorized, isLoggingIn]);
 
   const onLoginClick = async () => {
-    await AuthorizationClient.signIn();
-    setOidcInitialized(true);
+    setIsLoggingIn(true);
+    await BaseInitializer.authClient?.signIn();
   };
 
   const onLogoutClick = async () => {
-    await AuthorizationClient.signOut();
-    setOidcInitialized(false);
+    setIsLoggingIn(false);
+    await BaseInitializer.authClient?.signOut();
+    setIsAuthorized(false);
+  };
+
+  const onIModelAppInit = () => {
+    setIsAuthorized(BaseInitializer.authClient?.isAuthorized ?? false);
+    BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
+      setIsAuthorized(
+        (BaseInitializer.authClient?.hasSignedIn &&
+          BaseInitializer.authClient?.isAuthorized) ||
+          false
+      );
+    });
   };
 
   /** NOTE: This function will execute the "Fit View" tool after the iModel is loaded into the Viewer.
@@ -109,7 +101,8 @@ const App: React.FC = () => {
    * stored in the iModel. Delete this function and the prop that it is passed to if you prefer
    * to honor default views when they are present instead (the Viewer will still apply a similar function to iModels that do not have a default view).
    */
-  const viewConfiguration = (viewPort: ScreenViewport) => {
+  const viewConfiguration = useCallback((viewPort: ScreenViewport) => {
+    // default execute the fitview tool and use the iso standard view after tile trees are loaded
     const tileTreesLoaded = () => {
       return new Promise((resolve, reject) => {
         const start = new Date();
@@ -128,10 +121,15 @@ const App: React.FC = () => {
     };
 
     tileTreesLoaded().finally(() => {
-      IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
+      void IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
       viewPort.view.setStandardRotation(StandardViewId.Iso);
     });
-  };
+  }, []);
+
+  const viewCreatorOptions = useMemo(
+    () => ({ viewportConfigurer: viewConfiguration }),
+    [viewConfiguration]
+  );
 
   return (
     <div className="viewer-container">
@@ -140,12 +138,15 @@ const App: React.FC = () => {
         handleLogin={onLoginClick}
         handleLogout={onLogoutClick}
       />
-      {oidcInitialized && (
+      {isLoggingIn ? (
+        <span>"Logging in...."</span>
+      ) : (
         <Viewer
           iTwinId={iTwinId}
           iModelId={iModelId}
-          authConfig={{ oidcClient: AuthorizationClient.oidcClient }}
-          viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
+          authConfig={authConfig}
+          onIModelAppInit={onIModelAppInit}
+          viewCreatorOptions={viewCreatorOptions}
         />
       )}
     </div>
