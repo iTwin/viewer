@@ -5,10 +5,11 @@
 
 import "./App.scss";
 
+import type { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import type { ScreenViewport } from "@itwin/core-frontend";
 import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
 import type { WebAuthorizationOptions } from "@itwin/web-viewer-react";
-import { BaseInitializer, Viewer } from "@itwin/web-viewer-react";
+import { Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Header } from "./Header";
@@ -16,8 +17,10 @@ import { history } from "./history";
 
 const App: React.FC = () => {
   const [isAuthorized, setIsAuthorized] = useState(
-    (BaseInitializer.authClient?.hasSignedIn &&
-      BaseInitializer.authClient?.isAuthorized) ||
+    ((IModelApp.authorizationClient as BrowserAuthorizationClient)
+      ?.hasSignedIn &&
+      (IModelApp.authorizationClient as BrowserAuthorizationClient)
+        ?.isAuthorized) ||
       false
   );
   const [isLoggingIn, setIsLoggingIn] = useState(false);
@@ -45,7 +48,7 @@ const App: React.FC = () => {
       } else {
         if (!process.env.IMJS_ITWIN_ID) {
           throw new Error(
-            "Please add a valid context ID in the .env file and restart the application or add it to the iTwinId query parameter in the url and refresh the page. See the README for more information."
+            "Please add a valid iTwin ID in the .env file and restart the application or add it to the iTwinId query parameter in the url and refresh the page. See the README for more information."
           );
         }
       }
@@ -74,27 +77,40 @@ const App: React.FC = () => {
     }
   }, [isAuthorized, isLoggingIn]);
 
-  const onLoginClick = async () => {
+  const onLoginClick = useCallback(async () => {
     setIsLoggingIn(true);
-    await BaseInitializer.authClient?.signIn();
-  };
+    await (
+      IModelApp.authorizationClient as BrowserAuthorizationClient
+    )?.signIn();
+  }, []);
 
-  const onLogoutClick = async () => {
+  const onLogoutClick = useCallback(async () => {
     setIsLoggingIn(false);
-    await BaseInitializer.authClient?.signOut();
+    await (
+      IModelApp.authorizationClient as BrowserAuthorizationClient
+    )?.signOut();
     setIsAuthorized(false);
-  };
+  }, []);
 
-  const onIModelAppInit = () => {
-    setIsAuthorized(BaseInitializer.authClient?.isAuthorized ?? false);
-    BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
+  const onIModelAppInit = useCallback(() => {
+    const updateIsAuthorized = () => {
       setIsAuthorized(
-        (BaseInitializer.authClient?.hasSignedIn &&
-          BaseInitializer.authClient?.isAuthorized) ||
+        ((IModelApp.authorizationClient as BrowserAuthorizationClient)
+          ?.hasSignedIn &&
+          (IModelApp.authorizationClient as BrowserAuthorizationClient)
+            ?.isAuthorized) ||
           false
       );
-    });
-  };
+    };
+
+    setIsAuthorized(
+      (IModelApp.authorizationClient as BrowserAuthorizationClient)
+        ?.isAuthorized ?? false
+    );
+    (
+      IModelApp.authorizationClient as BrowserAuthorizationClient
+    )?.onAccessTokenChanged.addListener(updateIsAuthorized);
+  }, []);
 
   /** NOTE: This function will execute the "Fit View" tool after the iModel is loaded into the Viewer.
    * This will provide an "optimal" view of the model. However, it will override any default views that are
