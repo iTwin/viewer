@@ -47,6 +47,16 @@ export const MyViewerComponent = () => {
 
 ### Props
 
+#### Required
+
+- `enablePerformanceMonitors` - Enable reporting of data from timed events in the iTwin Viewer in order to aid in future performance optimizations. These are the metrics that will be collected and logged to the browser's performance timeline as well as to Azure Application Insights:
+  - Duration of startup to the initialization of iTwin.js services
+  - Duration of startup to the establishment of a connection to the iModel
+  - Duration of startup to the creation of a view state for the iModel
+  - Duration of startup until the last tile is loaded and rendered for the iModel view
+
+#### Optional
+
 - `iTwinId` - GUID for the iTwin (project, asset, etc.) that contains the iModel that you wish to view
 - `iModelId` - GUID for the iModel that you wish to view. Must be specified with a iTwinId if a snapshotPath is not provided
 - `changeSetId` - optional changeset id to view if combined with the iTwinId and iModelId props

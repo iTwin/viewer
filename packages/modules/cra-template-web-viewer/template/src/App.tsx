@@ -131,7 +131,7 @@ const App: React.FC = () => {
           iModelId={iModelId}
           authConfig={authClient}
           viewCreatorOptions={viewCreatorOptions}
-          enablePerformanceMonitors={true} // TODO Kevin link README
+          enablePerformanceMonitors={true} // see description in the README (https://www.npmjs.com/package/@itwin/desktop-viewer-react)
         />
       )}
     </div>

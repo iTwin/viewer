@@ -115,7 +115,7 @@ export interface ItwinViewerInitializerParams {
   /**
    * Enable reporting data from timed events in the iTwin Viewer.
    * The data is anonynmous numerics and will help to increase Viewer performance in future releases.
-   * See the package README for additional details. TODO Kevin add link
+   * See the Web or Desktop Viewer package README for additional details (https://www.npmjs.com/package/@itwin/web-viewer-react).
    */
   enablePerformanceMonitors: boolean;
 }
