@@ -2,7 +2,6 @@
   "package": {
     "dependencies": {
       "@bentley/icons-generic-webfont": "^1.0.15",
-      "@bentley/imodelhub-client": "rc",
       "@bentley/itwin-client": "rc",
       "@bentley/react-scripts": "^4.0.3",
       "@itwin/appui-abstract": "rc",
@@ -28,6 +27,9 @@
       "@itwin/express-server": "rc",
       "@itwin/imodel-browser-react": "^0.11.0",
       "@itwin/imodel-components-react": "rc",
+      "@itwin/imodels-access-backend": "latest",
+      "@itwin/imodels-access-frontend": "latest",
+      "@itwin/imodels-client-management": "latest",
       "@itwin/itwinui-css": "^0.18.1",
       "@itwin/itwinui-icons-react": "^1.2.0",
       "@itwin/itwinui-react": "^1.16.2",

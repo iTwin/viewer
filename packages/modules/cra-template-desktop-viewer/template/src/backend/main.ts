@@ -5,15 +5,13 @@
 
 import { IModelHostConfiguration, IpcHost } from "@itwin/core-backend";
 import { Logger, LogLevel } from "@itwin/core-bentley";
-import {
-  ElectronHost,
-  ElectronHostOptions,
-} from "@itwin/core-electron/lib/cjs/ElectronBackend";
 import { Menu, shell } from "electron";
 import { ElectronMainAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronMain";
 import { BackendIModelsAccess } from "@itwin/imodels-access-backend";
 import { Presentation } from "@itwin/presentation-backend";
-import { MenuItemConstructorOptions } from "electron/main";
+import type { ElectronHostOptions } from "@itwin/core-electron/lib/cjs/ElectronBackend";
+import { ElectronHost } from "@itwin/core-electron/lib/cjs/ElectronBackend";
+import type { MenuItemConstructorOptions } from "electron/main";
 import * as path from "path";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";
