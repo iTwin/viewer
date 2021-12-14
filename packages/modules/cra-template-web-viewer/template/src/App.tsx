@@ -9,7 +9,7 @@ import type { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import type { ScreenViewport } from "@itwin/core-frontend";
 import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
 import type { WebAuthorizationOptions } from "@itwin/web-viewer-react";
-import { Viewer } from "@itwin/web-viewer-react";
+import { Viewer, ViewerAuthorization } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Header } from "./Header";
@@ -17,10 +17,8 @@ import { history } from "./history";
 
 const App: React.FC = () => {
   const [isAuthorized, setIsAuthorized] = useState(
-    ((IModelApp.authorizationClient as BrowserAuthorizationClient)
-      ?.hasSignedIn &&
-      (IModelApp.authorizationClient as BrowserAuthorizationClient)
-        ?.isAuthorized) ||
+    (ViewerAuthorization.client?.hasSignedIn &&
+      ViewerAuthorization.client?.isAuthorized) ||
       false
   );
   const [isLoggingIn, setIsLoggingIn] = useState(false);
@@ -79,34 +77,25 @@ const App: React.FC = () => {
 
   const onLoginClick = useCallback(async () => {
     setIsLoggingIn(true);
-    await (
-      IModelApp.authorizationClient as BrowserAuthorizationClient
-    )?.signIn();
+    await ViewerAuthorization.client?.signIn();
   }, []);
 
   const onLogoutClick = useCallback(async () => {
     setIsLoggingIn(false);
-    await (
-      IModelApp.authorizationClient as BrowserAuthorizationClient
-    )?.signOut();
+    await ViewerAuthorization.client?.signOut();
     setIsAuthorized(false);
   }, []);
 
   const onIModelAppInit = useCallback(() => {
     const updateIsAuthorized = () => {
       setIsAuthorized(
-        ((IModelApp.authorizationClient as BrowserAuthorizationClient)
-          ?.hasSignedIn &&
-          (IModelApp.authorizationClient as BrowserAuthorizationClient)
-            ?.isAuthorized) ||
+        (ViewerAuthorization.client?.hasSignedIn &&
+          ViewerAuthorization.client?.isAuthorized) ||
           false
       );
     };
 
-    setIsAuthorized(
-      (IModelApp.authorizationClient as BrowserAuthorizationClient)
-        ?.isAuthorized ?? false
-    );
+    setIsAuthorized(ViewerAuthorization.client?.isAuthorized ?? false);
     (
       IModelApp.authorizationClient as BrowserAuthorizationClient
     )?.onAccessTokenChanged.addListener(updateIsAuthorized);
