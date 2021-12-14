@@ -7,7 +7,7 @@ import { ColorTheme } from "@itwin/appui-react";
 import type { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
 import type { ScreenViewport } from "@itwin/core-frontend";
 import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
-import { BaseInitializer, Viewer } from "@itwin/web-viewer-react";
+import { Viewer, ViewerAuthorization } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";
@@ -20,8 +20,8 @@ import styles from "./Home.module.scss";
  */
 export const AuthConfigHome: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(
-    (BaseInitializer.authClient?.hasSignedIn &&
-      BaseInitializer.authClient?.isAuthorized) ||
+    (ViewerAuthorization.client?.hasSignedIn &&
+      ViewerAuthorization.client?.isAuthorized) ||
       false
   );
   const [iModelId, setIModelId] = useState(
@@ -40,8 +40,8 @@ export const AuthConfigHome: React.FC = () => {
 
   useEffect(() => {
     setLoggedIn(
-      (BaseInitializer.authClient?.hasSignedIn &&
-        BaseInitializer.authClient?.isAuthorized) ||
+      (ViewerAuthorization.client?.hasSignedIn &&
+        ViewerAuthorization.client?.isAuthorized) ||
         false
     );
   }, []);
@@ -63,18 +63,18 @@ export const AuthConfigHome: React.FC = () => {
 
   const toggleLogin = async () => {
     if (!loggedIn) {
-      await BaseInitializer.authClient?.signIn();
+      await ViewerAuthorization.client?.signIn();
     } else {
-      await BaseInitializer.authClient?.signOut();
+      await ViewerAuthorization.client?.signOut();
     }
   };
 
   const onIModelAppInit = () => {
-    setLoggedIn(BaseInitializer.authClient?.isAuthorized ?? false);
-    BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
+    setLoggedIn(ViewerAuthorization.client?.isAuthorized ?? false);
+    ViewerAuthorization.client?.onAccessTokenChanged.addListener(() => {
       setLoggedIn(
-        (BaseInitializer.authClient?.hasSignedIn &&
-          BaseInitializer.authClient?.isAuthorized) ||
+        (ViewerAuthorization.client?.hasSignedIn &&
+          ViewerAuthorization.client?.isAuthorized) ||
           false
       );
     });

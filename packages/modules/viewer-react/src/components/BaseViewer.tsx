@@ -7,8 +7,8 @@ import { FillCentered } from "@itwin/core-react";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
-import { BaseInitializer } from "..";
 import { useBaseViewerInitializer } from "../hooks";
+import { ViewerAuthorization } from "../services/auth";
 import type { ItwinViewerCommonParams } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
@@ -55,20 +55,20 @@ export const BaseViewer: React.FC<ViewerProps> = ({
     let removeIsAuthorizedListener: (() => void) | undefined = undefined;
     const isAuthorizedListener = () => {
       setAuthorized(
-        (BaseInitializer.authClient?.hasSignedIn &&
-          BaseInitializer.authClient?.isAuthorized) ||
+        (ViewerAuthorization.client?.hasSignedIn &&
+          ViewerAuthorization.client?.isAuthorized) ||
           false
       );
     };
 
     isAuthorizedListener();
     removeIsAuthorizedListener =
-      BaseInitializer.authClient?.onAccessTokenChanged.addListener(
+      ViewerAuthorization.client?.onAccessTokenChanged.addListener(
         isAuthorizedListener
       );
     return () => {
       if (removeIsAuthorizedListener) {
-        BaseInitializer.authClient?.onAccessTokenChanged.removeListener(
+        ViewerAuthorization.client?.onAccessTokenChanged.removeListener(
           removeIsAuthorizedListener
         );
       }

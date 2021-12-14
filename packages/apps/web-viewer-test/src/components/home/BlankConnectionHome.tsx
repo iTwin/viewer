@@ -7,7 +7,7 @@ import type { BrowserAuthorizationClientConfiguration } from "@itwin/browser-aut
 import { Cartographic, ColorDef, RenderMode } from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
-import { BaseInitializer, BlankViewer } from "@itwin/web-viewer-react";
+import { BlankViewer, ViewerAuthorization } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 
 import { GeometryDecorator } from "../../decorators/GeometryDecorator";
@@ -21,8 +21,8 @@ import styles from "./Home.module.scss";
  */
 export const BlankConnectionHome: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(
-    (BaseInitializer.authClient?.hasSignedIn &&
-      BaseInitializer.authClient?.isAuthorized) ||
+    (ViewerAuthorization.client?.hasSignedIn &&
+      ViewerAuthorization.client?.isAuthorized) ||
       false
   );
 
@@ -37,17 +37,17 @@ export const BlankConnectionHome: React.FC = () => {
 
   useEffect(() => {
     setLoggedIn(
-      (BaseInitializer.authClient?.hasSignedIn &&
-        BaseInitializer.authClient?.isAuthorized) ||
+      (ViewerAuthorization.client?.hasSignedIn &&
+        ViewerAuthorization.client?.isAuthorized) ||
         false
     );
   }, []);
 
   const toggleLogin = async () => {
     if (!loggedIn) {
-      await BaseInitializer.authClient?.signIn();
+      await ViewerAuthorization.client?.signIn();
     } else {
-      await BaseInitializer.authClient?.signOut();
+      await ViewerAuthorization.client?.signOut();
     }
   };
 
