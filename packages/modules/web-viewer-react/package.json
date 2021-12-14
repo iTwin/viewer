@@ -1,6 +1,6 @@
 {
   "name": "@itwin/web-viewer-react",
-  "version": "2.0.0-dev.18",
+  "version": "2.0.0-dev.19",
   "description": "Configurable iTwin.js viewer for web applications",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
@@ -25,11 +25,10 @@
     "lib/**/*"
   ],
   "dependencies": {
-    "@itwin/viewer-react": "2.0.0-dev.18",
+    "@itwin/viewer-react": "2.0.0-dev.19",
     "oidc-client": "^1.10.1"
   },
   "devDependencies": {
-    "@bentley/imodelhub-client": "rc",
     "@bentley/itwin-client": "rc",
     "@itwin/appui-abstract": "rc",
     "@itwin/appui-layout-react": "rc",
@@ -71,7 +70,6 @@
     "typescript": "~4.3.0"
   },
   "peerDependencies": {
-    "@bentley/imodelhub-client": "rc",
     "@bentley/itwin-client": "rc",
     "@itwin/appui-abstract": "rc",
     "@itwin/appui-layout-react": "rc",

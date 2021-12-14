@@ -2,7 +2,6 @@
   "package": {
     "dependencies": {
       "@bentley/icons-generic": "^1.0.13",
-      "@bentley/imodelhub-client": "rc",
       "@bentley/itwin-client": "rc",
       "@bentley/react-scripts": "^4.0.3",
       "@itwin/core-telemetry": "rc",
@@ -21,6 +20,8 @@
       "@itwin/core-quantity": "rc",
       "@itwin/core-react": "rc",
       "@itwin/imodel-components-react": "rc",
+      "@itwin/imodels-access-frontend": "latest",
+      "@itwin/imodels-client-management": "latest",
       "@itwin/itwinui-react": "^1.16.2",
       "@itwin/presentation-common": "rc",
       "@itwin/presentation-frontend": "rc",

@@ -3,8 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { VersionQuery } from "@bentley/imodelhub-client";
-import { IModelHubClient } from "@bentley/imodelhub-client";
 import { IModelVersion } from "@itwin/core-common";
 import { CheckpointConnection, IModelApp } from "@itwin/core-frontend";
 
@@ -19,20 +17,15 @@ const getVersion = async (
   if (changeSetId) {
     return IModelVersion.asOfChangeSet(changeSetId);
   }
-  const token = await IModelApp.authorizationClient?.getAccessToken();
-  if (token) {
+
+  const accessToken = await IModelApp.authorizationClient?.getAccessToken();
+  if (accessToken && IModelApp.hubAccess) {
     try {
-      const hubClient = new IModelHubClient(); // TODO 3.0 - this needs to be configurable to support iTwin Stack
-      const namedVersions = await hubClient.versions.get(
-        token,
+      const changeset = await IModelApp.hubAccess.getChangesetFromNamedVersion({
         iModelId,
-        new VersionQuery().top(1)
-      );
-      // if there is a named version (version with the latest changeset "should" be at the top), return the version as of its changeset
-      // otherwise return the version as of the latest changeset
-      return namedVersions.length === 1 && namedVersions[0].changeSetId
-        ? IModelVersion.asOfChangeSet(namedVersions[0].changeSetId)
-        : IModelVersion.latest();
+        accessToken,
+      });
+      return IModelVersion.asOfChangeSet(changeset.id);
     } catch {
       // default to the latest version
       return IModelVersion.latest();
