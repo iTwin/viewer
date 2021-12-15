@@ -6,7 +6,7 @@
 import type { BlankConnectionProps } from "@itwin/core-frontend";
 import { FillCentered } from "@itwin/core-react";
 import { ErrorBoundary } from "@itwin/error-handling-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import { useBaseViewerInitializer } from "../hooks";
 import { ViewerAuthorization } from "../services/auth";
@@ -39,7 +39,6 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
   additionalI18nNamespaces,
   additionalRpcInterfaces,
 }: BlankViewerProps) => {
-  const [uiConfig, setUiConfig] = useState<ItwinViewerUi>();
   const [authorized, setAuthorized] = useState(false);
   const viewerInitialized = useBaseViewerInitializer({
     appInsightsKey,
@@ -51,31 +50,23 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
   });
 
   useEffect(() => {
-    setAuthorized(
-      (ViewerAuthorization.client?.hasSignedIn &&
-        ViewerAuthorization.client?.isAuthorized) ||
-        false
-    );
-    ViewerAuthorization.client?.onAccessTokenChanged.addListener(() => {
-      setAuthorized(
-        (ViewerAuthorization.client?.hasSignedIn &&
-          ViewerAuthorization.client?.isAuthorized) ||
-          false
-      );
-    });
+    const removeListener =
+      ViewerAuthorization.client.onAccessTokenChanged.addListener((token) => {
+        setAuthorized(!!token);
+      });
+    return () => removeListener();
   }, []);
 
-  useEffect(() => {
+  const uiConfig = useMemo<ItwinViewerUi>(() => {
     // hide the property grid and treeview by default, but allow to be overridden via props
     const defaultBlankViewerUiConfig: ItwinViewerUi = {
       hidePropertyGrid: true,
       hideTreeView: true,
     };
-    const blankViewerUiConfig = {
+    return {
       ...defaultBlankViewerUiConfig,
       ...defaultUiConfig,
     };
-    setUiConfig(blankViewerUiConfig);
   }, [defaultUiConfig]);
 
   return (

@@ -51,28 +51,13 @@ export const BaseViewer: React.FC<ViewerProps> = ({
     additionalI18nNamespaces,
     additionalRpcInterfaces,
   });
-  useEffect(() => {
-    let removeIsAuthorizedListener: (() => void) | undefined = undefined;
-    const isAuthorizedListener = () => {
-      setAuthorized(
-        (ViewerAuthorization.client?.hasSignedIn &&
-          ViewerAuthorization.client?.isAuthorized) ||
-          false
-      );
-    };
 
-    isAuthorizedListener();
-    removeIsAuthorizedListener =
-      ViewerAuthorization.client?.onAccessTokenChanged.addListener(
-        isAuthorizedListener
-      );
-    return () => {
-      if (removeIsAuthorizedListener) {
-        ViewerAuthorization.client?.onAccessTokenChanged.removeListener(
-          removeIsAuthorizedListener
-        );
-      }
-    };
+  useEffect(() => {
+    const removeListener =
+      ViewerAuthorization.client.onAccessTokenChanged.addListener((token) => {
+        setAuthorized(!!token);
+      });
+    return () => removeListener();
   }, []);
 
   return (
