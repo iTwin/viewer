@@ -8,8 +8,8 @@ import { FillCentered } from "@itwin/core-react";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
-import { BaseInitializer } from "..";
 import { useBaseViewerInitializer } from "../hooks";
+import { ViewerAuthorization } from "../services/auth";
 import type {
   BlankConnectionViewState,
   ItwinViewerCommonParams,
@@ -52,14 +52,14 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
 
   useEffect(() => {
     setAuthorized(
-      (BaseInitializer.authClient?.hasSignedIn &&
-        BaseInitializer.authClient?.isAuthorized) ||
+      (ViewerAuthorization.client?.hasSignedIn &&
+        ViewerAuthorization.client?.isAuthorized) ||
         false
     );
-    BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
+    ViewerAuthorization.client?.onAccessTokenChanged.addListener(() => {
       setAuthorized(
-        (BaseInitializer.authClient?.hasSignedIn &&
-          BaseInitializer.authClient?.isAuthorized) ||
+        (ViewerAuthorization.client?.hasSignedIn &&
+          ViewerAuthorization.client?.isAuthorized) ||
           false
       );
     });

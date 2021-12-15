@@ -9,9 +9,9 @@ import { ElectronApp } from "@itwin/core-electron/lib/cjs/ElectronFrontend";
 import { IModelApp, NativeAppLogger } from "@itwin/core-frontend";
 import { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
 import {
-  BaseInitializer,
   getIModelAppOptions,
   makeCancellable,
+  ViewerAuthorization,
 } from "@itwin/viewer-react";
 
 import type { DesktopViewerProps } from "../types";
@@ -55,7 +55,7 @@ export class DesktopInitializer {
 
         const authClient = new ElectronRendererAuthorization();
         iModelAppOpts.authorizationClient = authClient;
-        BaseInitializer.authClient = authClient;
+        ViewerAuthorization.client = authClient;
 
         const electronViewerOpts: ElectronAppOpts = {
           iModelApp: iModelAppOpts,
