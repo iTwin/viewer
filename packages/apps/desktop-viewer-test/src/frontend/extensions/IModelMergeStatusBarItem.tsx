@@ -83,7 +83,7 @@ const MergeStatusBarItem = () => {
     if (mergeStatus === ModelStatus.MERGING) {
       void getLatestChangesets();
     }
-  }, [mergeStatus]);
+  }, [mergeStatus, getLatestChangesets]);
 
   useEffect(() => {
     if (connectivityStatus === InternetConnectivityStatus.Offline) {
