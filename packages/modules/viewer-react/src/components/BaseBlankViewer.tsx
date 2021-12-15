@@ -6,10 +6,9 @@
 import type { BlankConnectionProps } from "@itwin/core-frontend";
 import { FillCentered } from "@itwin/core-react";
 import { ErrorBoundary } from "@itwin/error-handling-react";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 
 import { useAccessToken, useBaseViewerInitializer } from "../hooks";
-import { ViewerAuthorization } from "../services/auth";
 import type {
   BlankConnectionViewState,
   ItwinViewerCommonParams,
