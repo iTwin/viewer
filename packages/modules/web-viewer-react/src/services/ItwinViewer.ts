@@ -9,13 +9,13 @@ import type { CheckpointConnection } from "@itwin/core-frontend";
 import type {
   ItwinViewerUi,
   ViewerAuthorizationClient,
+  ViewerFrontstage,
   ViewerViewportControlOptions,
 } from "@itwin/viewer-react";
 import React from "react";
 import ReactDOM from "react-dom";
 
 import { Viewer } from "../components/Viewer";
-import type { ViewerFrontstage } from "../types";
 import type { ItwinViewerParams, WebViewerProps } from "../types";
 import { WebInitializer } from "./Initializer";
 

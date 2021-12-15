@@ -8,7 +8,7 @@ import { FillCentered } from "@itwin/core-react";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useMemo, useState } from "react";
 
-import { useBaseViewerInitializer } from "../hooks";
+import { useAccessToken, useBaseViewerInitializer } from "../hooks";
 import { ViewerAuthorization } from "../services/auth";
 import type {
   BlankConnectionViewState,
@@ -39,7 +39,6 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
   additionalI18nNamespaces,
   additionalRpcInterfaces,
 }: BlankViewerProps) => {
-  const [authorized, setAuthorized] = useState(false);
   const viewerInitialized = useBaseViewerInitializer({
     appInsightsKey,
     productId,
@@ -48,14 +47,6 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
     additionalI18nNamespaces,
     additionalRpcInterfaces,
   });
-
-  useEffect(() => {
-    const removeListener =
-      ViewerAuthorization.client.onAccessTokenChanged.addListener((token) => {
-        setAuthorized(!!token);
-      });
-    return () => removeListener();
-  }, []);
 
   const uiConfig = useMemo<ItwinViewerUi>(() => {
     // hide the property grid and treeview by default, but allow to be overridden via props
@@ -69,9 +60,11 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
     };
   }, [defaultUiConfig]);
 
+  const accessToken = useAccessToken();
+
   return (
     <ErrorBoundary>
-      {authorized ? (
+      {!!accessToken ? (
         viewerInitialized ? (
           <IModelLoader
             defaultUiConfig={uiConfig}
