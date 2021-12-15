@@ -33,14 +33,13 @@
   ],
   "dependencies": {
     "@bentley/icons-generic-webfont": "^1.0.15",
-    "@itwin/browser-authorization": "^0.3.0",
-    "@itwin/electron-authorization": "^0.5.0",
+    "@itwin/browser-authorization": "latest",
+    "@itwin/electron-authorization": "latest",
     "@itwin/error-handling-react": "2.0.0-dev.19",
     "@itwin/itwinui-react": "^1.16.2",
     "@microsoft/applicationinsights-react-js": "2.3.1",
     "@microsoft/applicationinsights-web": "2.3.1",
     "history": "^4.10.1",
-    "oidc-client": "^1.10.1",
     "react-spring": "^8.0.27"
   },
   "devDependencies": {
