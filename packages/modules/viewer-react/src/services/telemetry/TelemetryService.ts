@@ -8,7 +8,7 @@ import type { TelemetryClient, TelemetryEvent } from "@itwin/core-telemetry";
 import { ReactPlugin } from "@microsoft/applicationinsights-react-js";
 import { ApplicationInsights } from "@microsoft/applicationinsights-web";
 
-import { BaseInitializer } from "../BaseInitializer";
+import { ViewerAuthorization } from "../auth";
 
 class TelemetryService implements TelemetryClient {
   private _reactPlugin: ReactPlugin;
@@ -21,9 +21,9 @@ class TelemetryService implements TelemetryClient {
 
     try {
       // TODO 3.0 how to get user info?
-      // const token = await BaseInitializer.authClient?.
+      // const token = await ViewerAuthorization.client?.
       // const accessToken =
-      //   (await BaseInitializer.authClient?.getAccessToken()) as AccessToken;
+      //   (await ViewerAuthorization.client?.getAccessToken()) as AccessToken;
       // const user = accessToken?.getAccessToken().getUserInfo();
       // if (user && accessToken) {
       //   this._appInsights.setAuthenticatedUserContext(
@@ -41,7 +41,7 @@ class TelemetryService implements TelemetryClient {
   };
 
   private _addAuthListeners = () => {
-    BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
+    ViewerAuthorization.client?.onAccessTokenChanged.addListener(() => {
       this._configureUserContext().catch((err) => {
         throw err;
       });
