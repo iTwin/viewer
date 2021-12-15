@@ -8,10 +8,10 @@ import type { BentleyCloudRpcParams } from "@itwin/core-common";
 import { BentleyCloudRpcManager } from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import {
-  BaseInitializer,
   getIModelAppOptions,
   makeCancellable,
-  ViewerAuthorizationClient,
+  ViewerAuthorization,
+  ViewerOidcClient,
 } from "@itwin/viewer-react";
 
 import type {
@@ -70,7 +70,7 @@ export class WebInitializer {
 
   private static getAuthorizationClient(
     authConfig?: WebAuthorizationOptions
-  ): BrowserAuthorizationClient | ViewerAuthorizationClient | undefined {
+  ): BrowserAuthorizationClient | ViewerOidcClient | undefined {
     if (!authConfig) {
       return;
     }
@@ -79,7 +79,7 @@ export class WebInitializer {
     } else if (authConfig.oidcClient) {
       return authConfig.oidcClient;
     } else if (authConfig.getUserManagerFunction) {
-      return new ViewerAuthorizationClient(authConfig.getUserManagerFunction);
+      return new ViewerOidcClient(authConfig.getUserManagerFunction);
     }
     return undefined;
   }
@@ -112,7 +112,7 @@ export class WebInitializer {
           options?.authConfig
         );
         iModelAppOptions.authorizationClient = authClient;
-        BaseInitializer.authClient = authClient;
+        ViewerAuthorization.client = authClient;
         const rpcParams: BentleyCloudRpcParams = yield initializeRpcParams(
           options?.backend
         );

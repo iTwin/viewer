@@ -7,8 +7,8 @@ import { FillCentered } from "@itwin/core-react";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React, { useEffect, useState } from "react";
 
-import { BaseInitializer } from "..";
 import { useBaseViewerInitializer } from "../hooks";
+import { ViewerAuthorization } from "../services/auth";
 import type { ItwinViewerCommonParams } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
@@ -52,24 +52,28 @@ export const BaseViewer: React.FC<ViewerProps> = ({
     additionalRpcInterfaces,
   });
   useEffect(() => {
-    // assume authorized when using a local snapshot
-    if (snapshotPath) {
-      setAuthorized(true);
-    } else {
+    let removeIsAuthorizedListener: (() => void) | undefined = undefined;
+    const isAuthorizedListener = () => {
       setAuthorized(
-        (BaseInitializer.authClient?.hasSignedIn &&
-          BaseInitializer.authClient?.isAuthorized) ||
+        (ViewerAuthorization.client?.hasSignedIn &&
+          ViewerAuthorization.client?.isAuthorized) ||
           false
       );
-      BaseInitializer.authClient?.onAccessTokenChanged.addListener(() => {
-        setAuthorized(
-          (BaseInitializer.authClient?.hasSignedIn &&
-            BaseInitializer.authClient?.isAuthorized) ||
-            false
+    };
+
+    isAuthorizedListener();
+    removeIsAuthorizedListener =
+      ViewerAuthorization.client?.onAccessTokenChanged.addListener(
+        isAuthorizedListener
+      );
+    return () => {
+      if (removeIsAuthorizedListener) {
+        ViewerAuthorization.client?.onAccessTokenChanged.removeListener(
+          removeIsAuthorizedListener
         );
-      });
-    }
-  }, [snapshotPath]);
+      }
+    };
+  }, []);
 
   return (
     <ErrorBoundary>

@@ -15,7 +15,6 @@ import {
   StateManager,
   UiFramework,
 } from "@itwin/appui-react";
-import type { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import { UiComponents } from "@itwin/components-react";
 import type { RpcInterface, RpcInterfaceDefinition } from "@itwin/core-common";
 import {
@@ -26,7 +25,6 @@ import type { IModelAppOptions } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
-import type { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
 import { FrontendIModelsAccess } from "@itwin/imodels-access-frontend";
 import { IModelsClient } from "@itwin/imodels-client-management";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
@@ -35,35 +33,13 @@ import { RealityDataAccessClient } from "@itwin/reality-data-client";
 
 import type { ItwinViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
-import type { ViewerAuthorizationClient } from "./auth/ViewerAuthorizationClient";
 import { ai, trackEvent } from "./telemetry/TelemetryService";
-
-type AuthClient =
-  | BrowserAuthorizationClient
-  | ViewerAuthorizationClient
-  | ElectronRendererAuthorization
-  | undefined;
 
 // initialize required iTwin.js services
 export class BaseInitializer {
   private static _initialized: Promise<void>;
   private static _initializing = false;
   private static _cancel: (() => void) | undefined;
-  private static _authClient: AuthClient;
-
-  /**
-   * Return the stored auth client
-   */
-  public static get authClient(): AuthClient {
-    return this._authClient;
-  }
-
-  /**
-   * Set the stored auth client
-   */
-  public static set authClient(client: AuthClient) {
-    this._authClient = client;
-  }
 
   /** expose initialized promise */
   public static get initialized(): Promise<void> {

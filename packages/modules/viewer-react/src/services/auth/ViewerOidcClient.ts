@@ -8,7 +8,7 @@ import { BeEvent } from "@itwin/core-bentley";
 import type { AuthorizationClient } from "@itwin/core-common";
 import type { UserManager } from "oidc-client";
 
-export class ViewerAuthorizationClient implements AuthorizationClient {
+export class ViewerOidcClient implements AuthorizationClient {
   getUserManager: () => UserManager;
   /** Set to true if there's a current authorized user or client (in the case of agent applications).
    * Set to true if signed in and the access token has not expired, and false otherwise.
