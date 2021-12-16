@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Tue, 07 Dec 2021 19:40:48 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Dec 2021 21:14:32 GMT and should not be manually modified.
+
+## 1.4.1
+Thu, 16 Dec 2021 21:14:32 GMT
+
+### Patches
+
+- Update the status bar item UX
 
 ## 1.4.0
 Tue, 07 Dec 2021 19:40:48 GMT

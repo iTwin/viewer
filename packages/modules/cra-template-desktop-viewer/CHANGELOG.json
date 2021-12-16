@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-desktop-viewer",
   "entries": [
     {
+      "version": "1.4.1",
+      "tag": "@itwin/cra-template-desktop-viewer_v1.4.1",
+      "date": "Thu, 16 Dec 2021 21:14:32 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update the status bar item UX"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.4.0",
       "tag": "@itwin/cra-template-desktop-viewer_v1.4.0",
       "date": "Tue, 07 Dec 2021 19:40:48 GMT",
