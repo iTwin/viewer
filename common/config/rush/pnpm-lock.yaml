@@ -6418,7 +6418,7 @@ packages:
   /browserslist/4.14.2:
     dependencies:
       caniuse-lite: 1.0.30001287
-      electron-to-chromium: 1.4.20
+      electron-to-chromium: 1.4.21
       escalade: 3.1.1
       node-releases: 1.1.77
     dev: false
@@ -6430,7 +6430,7 @@ packages:
   /browserslist/4.19.1:
     dependencies:
       caniuse-lite: 1.0.30001287
-      electron-to-chromium: 1.4.20
+      electron-to-chromium: 1.4.21
       escalade: 3.1.1
       node-releases: 2.0.1
       picocolors: 1.0.0
@@ -8402,10 +8402,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-b5kcM3hmUqn64+RUcHjjr8ZMpHS2WJ5YO0pnG9+P/RTdx46of/JrEjuciHWux6pE+On6ynWhHJF53j/EDJN0PA==
-  /electron-to-chromium/1.4.20:
+  /electron-to-chromium/1.4.21:
     dev: false
     resolution:
-      integrity: sha512-N7ZVNrdzX8NE90OXEFBMsBf3fp8P/vVDUER3WCUZjzC7OkNTXHVoF6W9qVhq8+dA8tGnbDajzUpj2ISNVVyj+Q==
+      integrity: sha512-T04U2ciApGbm+dESFEBbewi2Xt0Dgyww8M4n4sOt9lnmFuYbaHEDWCROkx4jvAZDUWWry9YOdnAs+7468q80Qg==
   /electron/11.5.0:
     dependencies:
       '@electron/get': 1.13.1
@@ -12095,7 +12095,7 @@ packages:
       jest-pnp-resolver: 1.2.2_jest-resolve@26.6.0
       jest-util: 26.6.2
       read-pkg-up: 7.0.1
-      resolve: 1.19.0
+      resolve: 1.18.1
       slash: 3.0.0
     dev: false
     engines:

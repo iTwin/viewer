@@ -5,41 +5,35 @@
 
 import "./App.scss";
 
-import type { BrowserAuthorizationClient } from "@itwin/browser-authorization";
+import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import type { ScreenViewport } from "@itwin/core-frontend";
 import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
-import type { WebAuthorizationOptions } from "@itwin/web-viewer-react";
-import { Viewer, ViewerAuthorization } from "@itwin/web-viewer-react";
+import { useAccessToken, Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Header } from "./Header";
 import { history } from "./history";
 
 const App: React.FC = () => {
-  const [isAuthorized, setIsAuthorized] = useState(
-    (ViewerAuthorization.client?.hasSignedIn &&
-      ViewerAuthorization.client?.isAuthorized) ||
-      false
-  );
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [iModelId, setIModelId] = useState(process.env.IMJS_IMODEL_ID);
   const [iTwinId, setITwinId] = useState(process.env.IMJS_ITWIN_ID);
 
-  const authConfig = useMemo<WebAuthorizationOptions>(() => {
-    return {
-      config: {
-        scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
-        clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
-        redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
-        postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
-        responseType: "code",
-        authority: process.env.IMJS_AUTH_AUTHORITY,
-      },
-    };
+  const accessToken = useAccessToken();
+
+  const authClient = useMemo(() => {
+    return new BrowserAuthorizationClient({
+      scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
+      clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
+      redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
+      postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
+      responseType: "code",
+      authority: process.env.IMJS_AUTH_AUTHORITY,
+    });
   }, []);
 
   useEffect(() => {
-    if (isAuthorized) {
+    if (accessToken) {
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.has("iTwinId")) {
         setITwinId(urlParams.get("iTwinId") as string);
@@ -61,45 +55,29 @@ const App: React.FC = () => {
         }
       }
     }
-  }, [isAuthorized]);
+  }, [accessToken]);
 
   useEffect(() => {
-    if (isAuthorized && iTwinId && iModelId) {
+    if (accessToken && iTwinId && iModelId) {
       history.push(`?iTwinId=${iTwinId}&iModelId=${iModelId}`);
     }
-  }, [isAuthorized, iTwinId, iModelId]);
+  }, [accessToken, iTwinId, iModelId]);
 
   useEffect(() => {
-    if (isLoggingIn && isAuthorized) {
+    if (isLoggingIn && accessToken) {
       setIsLoggingIn(false);
     }
-  }, [isAuthorized, isLoggingIn]);
+  }, [accessToken, isLoggingIn]);
 
   const onLoginClick = useCallback(async () => {
     setIsLoggingIn(true);
-    await ViewerAuthorization.client?.signIn();
-  }, []);
+    await authClient.signIn();
+  }, [authClient]);
 
   const onLogoutClick = useCallback(async () => {
     setIsLoggingIn(false);
-    await ViewerAuthorization.client?.signOut();
-    setIsAuthorized(false);
-  }, []);
-
-  const onIModelAppInit = useCallback(() => {
-    const updateIsAuthorized = () => {
-      setIsAuthorized(
-        (ViewerAuthorization.client?.hasSignedIn &&
-          ViewerAuthorization.client?.isAuthorized) ||
-          false
-      );
-    };
-
-    setIsAuthorized(ViewerAuthorization.client?.isAuthorized ?? false);
-    (
-      IModelApp.authorizationClient as BrowserAuthorizationClient
-    )?.onAccessTokenChanged.addListener(updateIsAuthorized);
-  }, []);
+    await authClient.signOut();
+  }, [authClient]);
 
   /** NOTE: This function will execute the "Fit View" tool after the iModel is loaded into the Viewer.
    * This will provide an "optimal" view of the model. However, it will override any default views that are
@@ -139,7 +117,7 @@ const App: React.FC = () => {
   return (
     <div className="viewer-container">
       <Header
-        loggedIn={isAuthorized}
+        loggedIn={!!accessToken}
         handleLogin={onLoginClick}
         handleLogout={onLogoutClick}
       />
@@ -149,8 +127,7 @@ const App: React.FC = () => {
         <Viewer
           iTwinId={iTwinId}
           iModelId={iModelId}
-          authConfig={authConfig}
-          onIModelAppInit={onIModelAppInit}
+          authConfig={authClient}
           viewCreatorOptions={viewCreatorOptions}
         />
       )}
