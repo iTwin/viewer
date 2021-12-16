@@ -16,24 +16,27 @@ export const useAccessToken = () => {
   useEffect(() => {
     const getAccessToken = async () => {
       try {
-        const token = await ViewerAuthorization.client.getAccessToken();
+        const token = await ViewerAuthorization.client?.getAccessToken();
         setAccessToken(token);
       } catch {}
     };
-
     void getAccessToken();
   }, []);
 
   useEffect(() => {
     const removeListener =
-      ViewerAuthorization.client.onAccessTokenChanged.addListener(
-        (token: any) => {
+      ViewerAuthorization.client?.onAccessTokenChanged.addListener(
+        (token: AccessToken) => {
           if (isMounted.current) {
             setAccessToken(token);
           }
         }
       );
-    return () => removeListener();
+    return () => {
+      if (removeListener) {
+        removeListener();
+      }
+    };
   }, [isMounted]);
 
   return accessToken;

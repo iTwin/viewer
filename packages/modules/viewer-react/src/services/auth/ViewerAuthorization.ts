@@ -11,19 +11,5 @@ export interface ViewerAuthorizationClient extends AuthorizationClient {
 }
 
 export class ViewerAuthorization {
-  private static _client: ViewerAuthorizationClient;
-
-  /**
-   * Return the stored auth client
-   */
-  public static get client(): ViewerAuthorizationClient {
-    return this._client;
-  }
-
-  /**
-   * Set the stored auth client
-   */
-  public static set client(client: ViewerAuthorizationClient) {
-    this._client = client;
-  }
+  public static client?: ViewerAuthorizationClient;
 }

@@ -41,7 +41,7 @@ class TelemetryService implements TelemetryClient {
   };
 
   private _addAuthListeners = () => {
-    ViewerAuthorization.client.onAccessTokenChanged.addListener(() => {
+    ViewerAuthorization.client?.onAccessTokenChanged.addListener(() => {
       this._configureUserContext().catch((err) => {
         throw err;
       });
