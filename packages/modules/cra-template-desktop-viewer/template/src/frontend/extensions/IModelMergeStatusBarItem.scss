@@ -5,5 +5,21 @@
 @import "@itwin/itwinui-css/scss/variables";
 
 .status-bar-status {
-  padding: 15px;
+  display: flex;
+}
+
+.status-label {
+  margin: 0 10px 0 10px;
+}
+
+.connection-status-icon {
+  height: 20px;
+  fill: t(iui-color-foreground-primary);
+  &.actionable {
+    cursor: pointer;
+  }
+  svg {
+    height: 100%;
+  }
+  margin-right: 10px;
 }

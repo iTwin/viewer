@@ -11,6 +11,7 @@ import {
   SvgStatusError,
   SvgStatusSuccess,
   SvgSync,
+  SvgSyncDisabled,
 } from "@itwin/itwinui-icons-react";
 import { ProgressRadial } from "@itwin/itwinui-react";
 import React, { useCallback, useEffect, useState } from "react";
@@ -100,8 +101,7 @@ export const BriefcaseStatus = ({
       case ModelStatus.ONLINE:
         return <SvgDownload onClick={onDownloadClick} />;
       default:
-        // no UI if the status isn't handled
-        return null;
+        return <SvgSyncDisabled />;
     }
   }, [mergeStatus, mergeProgress, onMergeClick, onDownloadClick]);
 

@@ -17,6 +17,7 @@ import {
   StatusBarItemUtilities,
   useActiveIModelConnection,
 } from "@bentley/ui-framework";
+import { FooterSeparator } from "@bentley/ui-ninezone";
 import {
   getBriefcaseStatus,
   ModelStatus,
@@ -24,10 +25,36 @@ import {
   useConnectivity,
   useIsMounted,
 } from "@itwin/desktop-viewer-react";
-import { SvgUser } from "@itwin/itwinui-icons-react";
+import { SvgCloud, SvgOffline } from "@itwin/itwinui-icons-react";
 import React, { useCallback, useEffect, useState } from "react";
 
+import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import { BriefcaseStatus } from "../components/modelSelector";
+
+const ConnectionStatusBarItem = () => {
+  const accessToken = useAccessToken();
+  const connectivityStatus = useConnectivity();
+  const onLoginClick = async () => {
+    await IModelApp.authorizationClient?.signIn();
+  };
+  return (
+    <div className="status-bar-status">
+      <span className="status-label">
+        {" "}
+        {ITwinViewerApp.translate("briefcaseStatusTitle.connection")}
+      </span>
+      {accessToken &&
+      connectivityStatus === InternetConnectivityStatus.Online ? (
+        <SvgCloud className="connection-status-icon" />
+      ) : (
+        <SvgOffline
+          className="connection-status-icon actionable"
+          onClick={onLoginClick}
+        />
+      )}
+    </div>
+  );
+};
 
 const MergeStatusBarItem = () => {
   const [mergeStatus, setMergeStatus] = useState<ModelStatus>();
@@ -39,10 +66,6 @@ const MergeStatusBarItem = () => {
 
   const onMergeClick = async () => {
     setMergeStatus(ModelStatus.MERGING);
-  };
-
-  const onLoginClick = async () => {
-    await IModelApp.authorizationClient?.signIn();
   };
 
   const getLatestChangesets = useCallback(async () => {
@@ -64,7 +87,7 @@ const MergeStatusBarItem = () => {
     if (mergeStatus === ModelStatus.MERGING) {
       void getLatestChangesets();
     }
-  }, [mergeStatus]);
+  }, [mergeStatus, getLatestChangesets]);
 
   useEffect(() => {
     if (connectivityStatus === InternetConnectivityStatus.Offline) {
@@ -97,22 +120,17 @@ const MergeStatusBarItem = () => {
     }
   }, [iModelConnection, isMounted]);
 
-  if (!accessToken && mergeStatus !== ModelStatus.SNAPSHOT) {
-    return (
-      <div title="Click to login and view the model's status">
-        <SvgUser
-          onClick={onLoginClick}
-          className="model-status actionable status-bar-status"
-        />
-      </div>
-    );
-  }
-  return (
-    <BriefcaseStatus
-      mergeStatus={mergeStatus}
-      onMergeClick={onMergeClick}
-      className={"status-bar-status"}
-    />
+  return mergeStatus === ModelStatus.SNAPSHOT ? null : (
+    <div className="status-bar-status">
+      <span className="status-label">
+        {ITwinViewerApp.translate("briefcaseStatusTitle.changes")}
+      </span>
+      <BriefcaseStatus
+        mergeStatus={mergeStatus}
+        onMergeClick={onMergeClick}
+        className={"status-bar-status"}
+      />
+    </div>
   );
 };
 
@@ -127,9 +145,25 @@ export class IModelMergeItemsProvider implements UiItemsProvider {
     if (stageUsage === StageUsage.General) {
       statusBarItems.push(
         StatusBarItemUtilities.createStatusBarItem(
+          "IModelMergeItemsProvider:ConnectionStatusBarItem",
+          StatusBarSection.Center,
+          1,
+          <ConnectionStatusBarItem />
+        )
+      );
+      statusBarItems.push(
+        StatusBarItemUtilities.createStatusBarItem(
+          "IModelMergeItemsProvider:PostIModelMergeStatusBarItem",
+          StatusBarSection.Center,
+          2,
+          <FooterSeparator />
+        )
+      );
+      statusBarItems.push(
+        StatusBarItemUtilities.createStatusBarItem(
           "IModelMergeItemsProvider:IModelMergeStatusBarItem",
-          StatusBarSection.Right,
-          10000,
+          StatusBarSection.Center,
+          3,
           <MergeStatusBarItem />
         )
       );
