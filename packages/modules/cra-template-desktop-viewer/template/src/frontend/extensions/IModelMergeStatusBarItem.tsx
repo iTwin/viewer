@@ -25,7 +25,7 @@ import {
   useConnectivity,
   useIsMounted,
 } from "@itwin/desktop-viewer-react";
-import { SvgCloud, SvgDisconnect } from "@itwin/itwinui-icons-react";
+import { SvgCloud, SvgOffline } from "@itwin/itwinui-icons-react";
 import React, { useCallback, useEffect, useState } from "react";
 
 import { BriefcaseStatus } from "../components/modelSelector";
@@ -43,7 +43,7 @@ const ConnectionStatusBarItem = () => {
       connectivityStatus === InternetConnectivityStatus.Online ? (
         <SvgCloud className="connection-status-icon" />
       ) : (
-        <SvgDisconnect
+        <SvgOffline
           className="connection-status-icon actionable"
           onClick={onLoginClick}
         />

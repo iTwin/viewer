@@ -42,7 +42,7 @@ dependencies:
   '@bentley/webgl-compatibility': 2.19.2_@bentley+bentleyjs-core@2.19.2
   '@itwin/imodel-browser-react': 0.11.0
   '@itwin/itwinui-css': 0.18.1
-  '@itwin/itwinui-icons-react': 1.3.0
+  '@itwin/itwinui-icons-react': 1.4.0
   '@itwin/itwinui-react': 1.14.1
   '@microsoft/applicationinsights-react-js': 2.3.1
   '@microsoft/applicationinsights-web': 2.3.1
@@ -4912,14 +4912,14 @@ packages:
       react-dom: ^16.8.6 || ^17.0.0
     resolution:
       integrity: sha512-yeBIJPWli/iLKaTLmhsd7ZOn9bMRouN3dGHggJjBjAsgJNNtahbfB/NfOS17DcN6Ejt4Z70VAzMdpwzJ/34CKA==
-  /@itwin/itwinui-icons-react/1.3.0:
+  /@itwin/itwinui-icons-react/1.4.0:
     dev: false
     peerDependencies:
       react: ^16.8.6 || ^17.0.0
       react-dom: ^16.8.6 || ^17.0.0
     resolution:
-      integrity: sha512-XNk9a7LaMlWwiB+l/TidSHOMDt/nnJnrSBkRU0Gg+44cATKcSZySX2B2B4Y6uKoECqtWr+qghCe9Bw5TwQ1bKQ==
-  /@itwin/itwinui-icons-react/1.3.0_react-dom@16.13.1+react@16.13.1:
+      integrity: sha512-+Y22jOeXb2sWh+O+8c0/HeAYS1XiDE+3zg27MYoTr+3sRgrarpVEiGIm2h2JjKXp7+GM5TX8mVlMW1Cy8FYIhA==
+  /@itwin/itwinui-icons-react/1.4.0_react-dom@16.13.1+react@16.13.1:
     dependencies:
       react: 16.13.1
       react-dom: 16.13.1_react@16.13.1
@@ -4928,7 +4928,7 @@ packages:
       react: ^16.8.6 || ^17.0.0
       react-dom: ^16.8.6 || ^17.0.0
     resolution:
-      integrity: sha512-XNk9a7LaMlWwiB+l/TidSHOMDt/nnJnrSBkRU0Gg+44cATKcSZySX2B2B4Y6uKoECqtWr+qghCe9Bw5TwQ1bKQ==
+      integrity: sha512-+Y22jOeXb2sWh+O+8c0/HeAYS1XiDE+3zg27MYoTr+3sRgrarpVEiGIm2h2JjKXp7+GM5TX8mVlMW1Cy8FYIhA==
   /@itwin/itwinui-illustrations-react/1.0.2:
     dev: false
     peerDependencies:
@@ -21824,7 +21824,7 @@ packages:
       redux: '*'
       webpack: '*'
     resolution:
-      integrity: sha512-d4w90HYB3VEViaRd9f4++1eVfmVlhUCvAgW5330wOyWVY13g3sPYgNuT31knBduZAxWIZ5vmso4ZRNvYzLAVYw==
+      integrity: sha512-PQ3cmkbXyYq6BEKrd7akAlAW8wljY7+JRtEBY+HJ1kshCnsq4PWsckJPjaoaECJ+AWdBNG0QdTCyuuiKQBzksw==
       tarball: 'file:projects/cdn-viewer.tgz'
     version: 0.0.0
   'file:projects/cra-template-desktop-viewer.tgz':
@@ -21895,7 +21895,7 @@ packages:
       '@bentley/ecschema-metadata': '*'
       webpack: '*'
     resolution:
-      integrity: sha512-EWlSbmmg8ILkn4xxgHosay2gK55LotiIQLzRvenGx5dJk2P2Zjro88mxchsPck2D4BMac0KhGwIx9d+FHhPw0Q==
+      integrity: sha512-3rZ5WgH02YFZz0YOPcJ4TX4LXiguboQfzV96/D8FSWJo+YPqDps7mAROG+r7YMNf9Fn/qUNJfVM3XdxkCbhIiQ==
       tarball: 'file:projects/desktop-viewer-react.tgz'
     version: 0.0.0
   'file:projects/desktop-viewer-test.tgz':
@@ -21935,7 +21935,7 @@ packages:
       '@bentley/webgl-compatibility': 2.19.2_@bentley+bentleyjs-core@2.19.2
       '@itwin/imodel-browser-react': 0.11.0_react-dom@16.13.1+react@16.13.1
       '@itwin/itwinui-css': 0.18.1
-      '@itwin/itwinui-icons-react': 1.3.0_react-dom@16.13.1+react@16.13.1
+      '@itwin/itwinui-icons-react': 1.4.0_react-dom@16.13.1+react@16.13.1
       '@itwin/itwinui-react': 1.14.1_react-dom@16.13.1+react@16.13.1
       '@reach/router': 1.3.4_react-dom@16.13.1+react@16.13.1
       '@types/electron-devtools-installer': 2.2.0
@@ -21963,7 +21963,7 @@ packages:
     dev: false
     name: '@rush-temp/desktop-viewer-test'
     resolution:
-      integrity: sha512-c0ZkQ5EgzZgFLXx9/cUaa5aoHYQy/r7hbkUiUUU+9dGo5aXIg7fzdpT9aOFdNXmmsb8s0Loh5bXIbWAhA3HWsg==
+      integrity: sha512-no2yd8tb8/wcKH+FUD36peSctFXy39OG0tKvDIDPFmeqD8HNDtcCOKQMdE7VzebXrjT+bQtSh6yAzBRaA6F9Uw==
       tarball: 'file:projects/desktop-viewer-test.tgz'
     version: 0.0.0
   'file:projects/error-handling-react.tgz_4835f297079c1a82c861799bf873e2ab':
@@ -22160,7 +22160,7 @@ packages:
     peerDependencies:
       webpack: '*'
     resolution:
-      integrity: sha512-+hHTBDC/n3g9egrg+cqg8OXWFwAIDpP0gN/PRM3ftkKjuxb/cCD02K0hNCSv/8XH5wsDTYBVfXDS4mXNhUt60Q==
+      integrity: sha512-3ed4p6UwLRWiqUZznJqdNeevDsK+TNM+0nB8KM0gF/j2m5YQRRnsZ19qmzZSj8Vigr9gIFlkFOAGIbOITgXFSw==
       tarball: 'file:projects/web-viewer-react.tgz'
     version: 0.0.0
   'file:projects/web-viewer-test.tgz_webpack@4.42.0':
@@ -22211,7 +22211,7 @@ packages:
     peerDependencies:
       webpack: '*'
     resolution:
-      integrity: sha512-EoI1F4fuN9CTunUY7hWrP0dH9KvekBi4NbMJic7CrIGOvbNkRO5N7vqkHOhHXDFbwW6NF0Nmg8GAIP6stai0PQ==
+      integrity: sha512-VmD05v56SmKa1GypD87s1Ml0vQO2+dG3wNmTyG9BUYM5tYIJ7NgmS1OLmCvqp6PtTt7zuKFItM1PvsQFHrMB6Q==
       tarball: 'file:projects/web-viewer-test.tgz'
     version: 0.0.0
 registry: ''
@@ -22259,7 +22259,7 @@ specifiers:
   '@bentley/webgl-compatibility': ^2.14.0
   '@itwin/imodel-browser-react': ~0.11.0
   '@itwin/itwinui-css': ^0.18.1
-  '@itwin/itwinui-icons-react': ^1.3.0
+  '@itwin/itwinui-icons-react': ^1.4.0
   '@itwin/itwinui-react': ~1.14.1
   '@microsoft/applicationinsights-react-js': 2.3.1
   '@microsoft/applicationinsights-web': 2.3.1

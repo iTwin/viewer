@@ -25,9 +25,10 @@ import {
   useConnectivity,
   useIsMounted,
 } from "@itwin/desktop-viewer-react";
-import { SvgCloud, SvgDisconnect } from "@itwin/itwinui-icons-react";
+import { SvgCloud, SvgOffline } from "@itwin/itwinui-icons-react";
 import React, { useCallback, useEffect, useState } from "react";
 
+import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import { BriefcaseStatus } from "../components/modelSelector";
 
 const ConnectionStatusBarItem = () => {
@@ -38,12 +39,14 @@ const ConnectionStatusBarItem = () => {
   };
   return (
     <div className="status-bar-status">
-      <span className="status-label">Connection: </span>
+      <span className="status-label">
+        {ITwinViewerApp.translate("briefcaseStatusTitle.connection")}
+      </span>
       {accessToken &&
       connectivityStatus === InternetConnectivityStatus.Online ? (
         <SvgCloud className="connection-status-icon" />
       ) : (
-        <SvgDisconnect
+        <SvgOffline
           className="connection-status-icon actionable"
           onClick={onLoginClick}
         />
@@ -118,7 +121,9 @@ const MergeStatusBarItem = () => {
 
   return mergeStatus === ModelStatus.SNAPSHOT ? null : (
     <div className="status-bar-status">
-      <span className="status-label">Changes: </span>
+      <span className="status-label">
+        {ITwinViewerApp.translate("briefcaseStatusTitle.changes")}
+      </span>
       <BriefcaseStatus
         mergeStatus={mergeStatus}
         onMergeClick={onMergeClick}
