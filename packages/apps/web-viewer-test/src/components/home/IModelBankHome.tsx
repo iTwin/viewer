@@ -74,7 +74,7 @@ export const IModelBankHome: React.FC = () => {
     } else {
       await authClient.signOut();
     }
-  }, [authClient]);
+  }, [accessToken, authClient]);
 
   const switchModel = () => {
     if (iModelId === (process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string)) {

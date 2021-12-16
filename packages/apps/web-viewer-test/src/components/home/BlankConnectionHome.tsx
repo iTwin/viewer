@@ -39,7 +39,7 @@ export const BlankConnectionHome: React.FC = () => {
     } else {
       await authClient.signOut();
     }
-  }, [authClient]);
+  }, [accessToken, authClient]);
 
   /**
    * This value is for the iTwin Viewer and will be the default if the productId prop is not provided.
