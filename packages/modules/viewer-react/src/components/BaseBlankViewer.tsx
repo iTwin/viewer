@@ -63,7 +63,7 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
 
   return (
     <ErrorBoundary>
-      {!!accessToken ? (
+      {accessToken ? (
         viewerInitialized ? (
           <IModelLoader
             defaultUiConfig={uiConfig}

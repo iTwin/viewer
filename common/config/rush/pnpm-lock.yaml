@@ -35,7 +35,7 @@ dependencies:
   '@itwin/imodels-access-frontend': 0.2.0_a1653ec8629346392a3ac5f7630027b3
   '@itwin/imodels-client-management': 0.2.0
   '@itwin/itwinui-css': 0.18.1
-  '@itwin/itwinui-icons-react': 1.3.0_react-dom@17.0.2+react@17.0.2
+  '@itwin/itwinui-icons-react': 1.4.0_react-dom@17.0.2+react@17.0.2
   '@itwin/itwinui-react': 1.27.0_react-dom@17.0.2+react@17.0.2
   '@itwin/presentation-backend': 3.0.0-dev.148_d27161e5e84d3b87c1662589122ea147
   '@itwin/presentation-common': 3.0.0-dev.148_721cc021f4857e70ec77c1ced00d0bb9
@@ -3122,7 +3122,7 @@ packages:
       integrity: sha512-1HLOtF/6V0Jqsj9aamUnrnsQMoPdyKnE0jlE0sm+NLzCTtGxn61vnWLydYASq6OXNRp5pUVdcmbAcat5UWaSlQ==
   /@itwin/browser-authorization/0.3.2:
     dependencies:
-      '@itwin/core-bentley': 3.0.0-dev.153
+      '@itwin/core-bentley': 3.0.0-dev.154
       oidc-client: 1.11.5
     dev: false
     resolution:
@@ -3225,10 +3225,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-OVNmxpb7/AAd4pm/cBdE1I+p1lBoiXI3EBaRN1hAPZzqLDk7AbWgTegfQBPXAnyP5FxX9MyeU+lplvsl2aWjXg==
-  /@itwin/core-bentley/3.0.0-dev.153:
+  /@itwin/core-bentley/3.0.0-dev.154:
     dev: false
     resolution:
-      integrity: sha512-UGAOpcl1HzXyuOIL5t8aE6+b8so1xLtiQM86AzDQu2/ivER7mY/260NQmvzoLCFIwEpcpiFB8r2AAV7xYqzYMg==
+      integrity: sha512-6XRIPY0lgRQihC8vldlEXQpeOShDmpcT4AdpwULChyGw8gXcuGwxGIrkE20gSh/7OSsopb4MAjicnnWX8rLkow==
   /@itwin/core-common/3.0.0-dev.148_2cea9fa5747d2125eec0388ef83db838:
     dependencies:
       '@itwin/core-bentley': 3.0.0-dev.148
@@ -3304,7 +3304,7 @@ packages:
   /@itwin/core-i18n/3.0.0-dev.148_1f1133e0683841193b047e5518caa238:
     dependencies:
       '@itwin/core-bentley': 3.0.0-dev.148
-      i18next: 21.6.0
+      i18next: 21.6.2
       i18next-browser-languagedetector: 6.1.2
       i18next-http-backend: 1.3.1
       i18next-xhr-backend: 3.2.2
@@ -3411,7 +3411,7 @@ packages:
       classnames: 2.3.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      react-intersection-observer: 8.33.0_react@17.0.2
+      react-intersection-observer: 8.33.1_react@17.0.2
     dev: false
     peerDependencies:
       react: ^16.13.0
@@ -3504,7 +3504,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-wfjgtqdynCt3vTXRxv0uodkvzu9A2nTCkpScxA8SjkPAYDiNvTFr8urmxb9/6XPEOJnrO9izhOpHzy7+4eL6Hw==
-  /@itwin/itwinui-icons-react/1.3.0_react-dom@17.0.2+react@17.0.2:
+  /@itwin/itwinui-icons-react/1.4.0_react-dom@17.0.2+react@17.0.2:
     dependencies:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -3513,8 +3513,8 @@ packages:
       react: ^16.8.6 || ^17.0.0
       react-dom: ^16.8.6 || ^17.0.0
     resolution:
-      integrity: sha512-XNk9a7LaMlWwiB+l/TidSHOMDt/nnJnrSBkRU0Gg+44cATKcSZySX2B2B4Y6uKoECqtWr+qghCe9Bw5TwQ1bKQ==
-  /@itwin/itwinui-illustrations-react/1.1.0_react-dom@17.0.2+react@17.0.2:
+      integrity: sha512-+Y22jOeXb2sWh+O+8c0/HeAYS1XiDE+3zg27MYoTr+3sRgrarpVEiGIm2h2JjKXp7+GM5TX8mVlMW1Cy8FYIhA==
+  /@itwin/itwinui-illustrations-react/1.2.0_react-dom@17.0.2+react@17.0.2:
     dependencies:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -3523,12 +3523,12 @@ packages:
       react: ^16.8.6 || ^17.0.0
       react-dom: ^16.8.6 || ^17.0.0
     resolution:
-      integrity: sha512-JJzOs6p6p+oGawHka5uEmW001tOt2+jBrhJV7m7h1RmJNugC7INwXZUTtfJ94FftigbROjiRbe3GbzEvm92spQ==
+      integrity: sha512-uGX7PVyGuMexLFlVxU/qi1Bzv14RJcv0MwHB43harqUjWOOSvy7l7eXIwEmjuwlfmXDnUULJ88gmgvcnEJGXCA==
   /@itwin/itwinui-react/1.27.0_react-dom@17.0.2+react@17.0.2:
     dependencies:
       '@itwin/itwinui-css': 0.41.1
-      '@itwin/itwinui-icons-react': 1.3.0_react-dom@17.0.2+react@17.0.2
-      '@itwin/itwinui-illustrations-react': 1.1.0_react-dom@17.0.2+react@17.0.2
+      '@itwin/itwinui-icons-react': 1.4.0_react-dom@17.0.2+react@17.0.2
+      '@itwin/itwinui-illustrations-react': 1.2.0_react-dom@17.0.2+react@17.0.2
       '@tippyjs/react': 4.2.6_react-dom@17.0.2+react@17.0.2
       '@types/react-table': 7.7.9
       classnames: 2.3.1
@@ -5745,7 +5745,7 @@ packages:
   /autoprefixer/9.8.8:
     dependencies:
       browserslist: 4.19.1
-      caniuse-lite: 1.0.30001286
+      caniuse-lite: 1.0.30001287
       normalize-range: 0.1.2
       num2fraction: 1.2.2
       picocolors: 0.2.1
@@ -6417,8 +6417,8 @@ packages:
       integrity: sha512-Z942RysHXmJrhqk88FmKBVq/v5tqmSkDz7p54G/MGyjMnCFFnC79XWNbg+Vta8W6Wb2qtSZTSxIGkJrRpCFEiA==
   /browserslist/4.14.2:
     dependencies:
-      caniuse-lite: 1.0.30001286
-      electron-to-chromium: 1.4.19
+      caniuse-lite: 1.0.30001287
+      electron-to-chromium: 1.4.20
       escalade: 3.1.1
       node-releases: 1.1.77
     dev: false
@@ -6429,8 +6429,8 @@ packages:
       integrity: sha512-HI4lPveGKUR0x2StIz+2FXfDk9SfVMrxn6PLh1JeGUwcuoDkdKZebWiyLRJ68iIPDpMI4JLVDf7S7XzslgWOhw==
   /browserslist/4.19.1:
     dependencies:
-      caniuse-lite: 1.0.30001286
-      electron-to-chromium: 1.4.19
+      caniuse-lite: 1.0.30001287
+      electron-to-chromium: 1.4.20
       escalade: 3.1.1
       node-releases: 2.0.1
       picocolors: 1.0.0
@@ -6686,16 +6686,16 @@ packages:
   /caniuse-api/3.0.0:
     dependencies:
       browserslist: 4.19.1
-      caniuse-lite: 1.0.30001286
+      caniuse-lite: 1.0.30001287
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: false
     resolution:
       integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==
-  /caniuse-lite/1.0.30001286:
+  /caniuse-lite/1.0.30001287:
     dev: false
     resolution:
-      integrity: sha512-zaEMRH6xg8ESMi2eQ3R4eZ5qw/hJiVsO/HlLwniIwErij0JDr9P+8V4dtx1l+kLq6j3yy8l8W4fst1lBnat5wQ==
+      integrity: sha512-4udbs9bc0hfNrcje++AxBuc6PfLNHwh3PO9kbwnfCQWyqtlzg3py0YgFu8jyRTTo85VAz4U+VLxSlID09vNtWA==
   /capture-exit/2.0.0:
     dependencies:
       rsvp: 4.8.5
@@ -8402,10 +8402,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-b5kcM3hmUqn64+RUcHjjr8ZMpHS2WJ5YO0pnG9+P/RTdx46of/JrEjuciHWux6pE+On6ynWhHJF53j/EDJN0PA==
-  /electron-to-chromium/1.4.19:
+  /electron-to-chromium/1.4.20:
     dev: false
     resolution:
-      integrity: sha512-TeAjwsC/vhvxEtX/xN1JQUMkl+UrwKXlB4rwLyuLYVuBuRtqJJrU4Jy5pCVihMQg4m1ceZ3MEJ0yYuxHj8vC+w==
+      integrity: sha512-N7ZVNrdzX8NE90OXEFBMsBf3fp8P/vVDUER3WCUZjzC7OkNTXHVoF6W9qVhq8+dA8tGnbDajzUpj2ISNVVyj+Q==
   /electron/11.5.0:
     dependencies:
       '@electron/get': 1.13.1
@@ -10838,12 +10838,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-0i6cuo6ER6usEOtKajUUDj92zlG+KArFia0857xxiEHAQcUwh/RtOQocui1LPJwunSYT574Pk64aNva1kwtxZg==
-  /i18next/21.6.0:
+  /i18next/21.6.2:
     dependencies:
       '@babel/runtime': 7.16.5
     dev: false
     resolution:
-      integrity: sha512-RjNuACL35wWZgtkyMcjcCmK7R72u3P6jTNbGKzrvHGI9M0iK5Vn1DsBIwOByppaXLIbe0viJ79Nz2h8w1UwPoQ==
+      integrity: sha512-S1zSTrs2lgPH8iG68pMWh3P7OzQMcs3+Qr5F39JTyGbe/xl5cW4cF8MTPKSy6F25tFTcKBq915IoEZUWewkldg==
   /iconv-lite/0.4.24:
     dependencies:
       safer-buffer: 2.1.2
@@ -12095,7 +12095,7 @@ packages:
       jest-pnp-resolver: 1.2.2_jest-resolve@26.6.0
       jest-util: 26.6.2
       read-pkg-up: 7.0.1
-      resolve: 1.18.1
+      resolve: 1.19.0
       slash: 3.0.0
     dev: false
     engines:
@@ -15198,7 +15198,7 @@ packages:
     dependencies:
       autoprefixer: 9.8.8
       browserslist: 4.19.1
-      caniuse-lite: 1.0.30001286
+      caniuse-lite: 1.0.30001287
       css-blank-pseudo: 0.1.4
       css-has-pseudo: 0.10.0
       css-prefers-color-scheme: 3.1.1
@@ -16001,14 +16001,14 @@ packages:
       react: ^16.3.0 || ^17.0.0
     resolution:
       integrity: sha512-nL9uS7jEs/zu8sqwFE5MAPx6pPkNAriACQ2rGLlqmKr2sPGtN7TXTyDdQt4lbNXVx7Uzadb40x8qotIuru6Rhg==
-  /react-intersection-observer/8.33.0_react@17.0.2:
+  /react-intersection-observer/8.33.1_react@17.0.2:
     dependencies:
       react: 17.0.2
     dev: false
     peerDependencies:
       react: ^15.0.0 || ^16.0.0 || ^17.0.0|| ^18.0.0
     resolution:
-      integrity: sha512-slsqrtsUhHT01aySxAcY0JcjLRdVJOwatKeyk5r4IQ9c8SU+x1mKr1kPxwElYHRCIbHS7t2KD15/4/FzNJGUNg==
+      integrity: sha512-3v+qaJvp3D1MlGHyM+KISVg/CMhPiOlO6FgPHcluqHkx4YFCLuyXNlQ/LE6UkbODXlQcLOppfX6UMxCEkUhDLw==
   /react-is/16.13.1:
     dev: false
     resolution:
@@ -20077,7 +20077,7 @@ packages:
       '@itwin/imodels-access-frontend': 0.2.0_a1653ec8629346392a3ac5f7630027b3
       '@itwin/imodels-client-management': 0.2.0
       '@itwin/itwinui-css': 0.18.1
-      '@itwin/itwinui-icons-react': 1.3.0_react-dom@17.0.2+react@17.0.2
+      '@itwin/itwinui-icons-react': 1.4.0_react-dom@17.0.2+react@17.0.2
       '@itwin/itwinui-react': 1.27.0_react-dom@17.0.2+react@17.0.2
       '@itwin/presentation-backend': 3.0.0-dev.148_d27161e5e84d3b87c1662589122ea147
       '@itwin/presentation-common': 3.0.0-dev.148_721cc021f4857e70ec77c1ced00d0bb9

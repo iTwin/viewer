@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ColorTheme } from "@itwin/appui-react";
-import { Viewer } from "@itwin/web-viewer-react";
+import { useAccessToken, Viewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
@@ -17,6 +17,7 @@ import styles from "./Home.module.scss";
  * @returns
  */
 export const AuthClientHome: React.FC = () => {
+  const accessToken = useAccessToken();
   const [loggedIn, setLoggedIn] = useState(
     (AuthorizationClient.oidcClient?.hasSignedIn &&
       AuthorizationClient.oidcClient?.isAuthorized) ||
@@ -68,7 +69,7 @@ export const AuthClientHome: React.FC = () => {
       <Header handleLoginToggle={toggleLogin} loggedIn={loggedIn} />
       {oidcInitialized && (
         <Viewer
-          authConfig={{ oidcClient: AuthorizationClient.oidcClient }}
+          authConfig={AuthorizationClient.oidcClient}
           iTwinId={process.env.IMJS_AUTH_CLIENT_ITWIN_ID as string}
           iModelId={process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string}
           appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}

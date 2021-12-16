@@ -3,16 +3,16 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
+import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import { Cartographic, ColorDef, RenderMode } from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
-import { BlankViewer, ViewerAuthorization } from "@itwin/web-viewer-react";
-import React, { useEffect, useState } from "react";
+import { BlankViewer, useAccessToken } from "@itwin/web-viewer-react";
+import React, { useCallback, useMemo } from "react";
 
 import { GeometryDecorator } from "../../decorators/GeometryDecorator";
 import { TestUiProvider2 } from "../../providers";
-import { Header } from "./";
+import { Header } from "./Header";
 import styles from "./Home.module.scss";
 
 /**
@@ -20,36 +20,26 @@ import styles from "./Home.module.scss";
  * @returns
  */
 export const BlankConnectionHome: React.FC = () => {
-  const [loggedIn, setLoggedIn] = useState(
-    (ViewerAuthorization.client?.hasSignedIn &&
-      ViewerAuthorization.client?.isAuthorized) ||
-      false
-  );
+  const accessToken = useAccessToken();
 
-  const authConfig: BrowserAuthorizationClientConfiguration = {
-    scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
-    clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
-    redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
-    postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
-    responseType: "code",
-    authority: process.env.IMJS_AUTH_AUTHORITY,
-  };
-
-  useEffect(() => {
-    setLoggedIn(
-      (ViewerAuthorization.client?.hasSignedIn &&
-        ViewerAuthorization.client?.isAuthorized) ||
-        false
-    );
+  const authClient = useMemo(() => {
+    return new BrowserAuthorizationClient({
+      scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
+      clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
+      redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
+      postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
+      responseType: "code",
+      authority: process.env.IMJS_AUTH_AUTHORITY,
+    });
   }, []);
 
-  const toggleLogin = async () => {
-    if (!loggedIn) {
-      await ViewerAuthorization.client?.signIn();
+  const toggleLogin = useCallback(async () => {
+    if (!accessToken) {
+      await authClient.signIn();
     } else {
-      await ViewerAuthorization.client?.signOut();
+      await authClient.signOut();
     }
-  };
+  }, [authClient]);
 
   /**
    * This value is for the iTwin Viewer and will be the default if the productId prop is not provided.
@@ -65,9 +55,9 @@ export const BlankConnectionHome: React.FC = () => {
 
   return (
     <div className={styles.home}>
-      <Header handleLoginToggle={toggleLogin} loggedIn={loggedIn} />
+      <Header handleLoginToggle={toggleLogin} loggedIn={!!accessToken} />
       <BlankViewer
-        authConfig={{ config: authConfig }}
+        authConfig={authClient}
         blankConnection={{
           name: "GeometryConnection",
           location: Cartographic.fromDegrees({

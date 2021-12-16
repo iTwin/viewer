@@ -15,8 +15,10 @@ export const useAccessToken = () => {
 
   useEffect(() => {
     const getAccessToken = async () => {
-      const token = await ViewerAuthorization.client.getAccessToken();
-      setAccessToken(token);
+      try {
+        const token = await ViewerAuthorization.client.getAccessToken();
+        setAccessToken(token);
+      } catch {}
     };
 
     void getAccessToken();

@@ -53,7 +53,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   // assume authorized when using a local snapshot TODO poor assumption
   return (
     <ErrorBoundary>
-      {!!snapshotPath && !!accessToken ? (
+      {snapshotPath || accessToken ? (
         viewerInitialized ? (
           <IModelLoader
             iTwinId={iTwinId}
