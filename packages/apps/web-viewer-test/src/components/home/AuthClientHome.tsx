@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ColorTheme } from "@itwin/appui-react";
-import { useAccessToken, Viewer } from "@itwin/web-viewer-react";
+import { Viewer } from "@itwin/web-viewer-react";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
@@ -17,7 +17,6 @@ import styles from "./Home.module.scss";
  * @returns
  */
 export const AuthClientHome: React.FC = () => {
-  const accessToken = useAccessToken();
   const [loggedIn, setLoggedIn] = useState(
     (AuthorizationClient.oidcClient?.hasSignedIn &&
       AuthorizationClient.oidcClient?.isAuthorized) ||
