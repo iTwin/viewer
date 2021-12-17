@@ -3,32 +3,13 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type {
-  BrowserAuthorizationClient,
-  BrowserAuthorizationClientConfiguration,
-} from "@itwin/browser-authorization";
-import type {
-  BentleyCloudRpcParams,
-  RpcRoutingToken,
-} from "@itwin/core-common";
+import type { BentleyCloudRpcParams } from "@itwin/core-common";
 import type {
   BlankViewerProps,
   ItwinViewerCommonParams,
-  UserManager,
+  ViewerAuthorizationClient,
   ViewerProps,
 } from "@itwin/viewer-react";
-
-/**
- * Authorization options. Must provide one.
- */
-export interface WebAuthorizationOptions {
-  /** provide an existing iTwin.js authorization client */
-  oidcClient?: BrowserAuthorizationClient;
-  /** provide configuration for an oidc client to be managed within the Viewer */
-  config?: BrowserAuthorizationClientConfiguration;
-  /** reference to a function that returns a pre-configured oidc UserManager */
-  getUserManagerFunction?: () => UserManager;
-}
 
 /**
  * Hosted backend configuration
@@ -57,7 +38,7 @@ export interface IModelBackendOptions {
 
 export interface WebViewerPropsFull extends ViewerProps {
   /** authorization configuration */
-  authConfig: WebAuthorizationOptions;
+  authConfig: ViewerAuthorizationClient;
   /** options to override the default backend from iTwin Platform */
   backend?: IModelBackendOptions;
 }
@@ -67,14 +48,12 @@ export type WebViewerProps = Omit<WebViewerPropsFull, "snapshotPath">;
 
 export interface WebBlankViewerProps extends BlankViewerProps {
   /** authorization configuration */
-  authConfig: WebAuthorizationOptions;
+  authConfig: ViewerAuthorizationClient;
 }
 
 export interface ItwinViewerParams extends ItwinViewerCommonParams {
   /** id of the html element where the viewer should be rendered */
   elementId: string;
-  /** routing token for rpcs */
-  rpcRoutingToken?: RpcRoutingToken;
   /** authorization configuration */
-  authConfig: WebAuthorizationOptions;
+  authConfig: ViewerAuthorizationClient;
 }

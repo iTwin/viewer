@@ -47,8 +47,8 @@
   ],
   "scripts": {
     "build": "",
+    "build comments": "For now, don't use the build script as it adds unnecessary overhead to rush build",
     "build-prod": "cross-env SKIP_PREFLIGHT_CHECK=true node --max_old_space_size=4096 ./scripts/customBuild.js",
-    "build-dev": "cross-env SKIP_PREFLIGHT_CHECK=true node --max_old_space_size=4096 SKIP_PREFLIGHT_CHECK=true ./scripts/customBuild.js",
     "test": ""
   },
   "eslintConfig": {

@@ -15,6 +15,7 @@ import { PresentationRpcInterface } from "@itwin/presentation-common";
 import type { ItwinViewerInitializerParams } from "@itwin/viewer-react";
 
 import { WebInitializer } from "../../services/Initializer";
+import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
 
 jest.mock("@itwin/core-frontend", () => {
   const noMock = jest.requireActual("@itwin/core-frontend");
@@ -110,7 +111,9 @@ describe("Initializer", () => {
   });
 
   it("initializes iModelApp", async () => {
-    await WebInitializer.startWebViewer();
+    await WebInitializer.startWebViewer({
+      authConfig: new MockAuthorizationClient(),
+    });
     await WebInitializer.initialized;
     expect(IModelApp.startup).toHaveBeenCalled();
   });

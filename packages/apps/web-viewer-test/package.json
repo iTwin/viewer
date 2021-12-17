@@ -9,7 +9,7 @@
     "@itwin/appui-abstract": "rc",
     "@itwin/appui-react": "rc",
     "@itwin/appui-layout-react": "rc",
-    "@itwin/browser-authorization": "^0.3.0",
+    "@itwin/browser-authorization": "latest",
     "@itwin/components-react": "rc",
     "@itwin/core-bentley": "rc",
     "@itwin/core-geometry": "rc",

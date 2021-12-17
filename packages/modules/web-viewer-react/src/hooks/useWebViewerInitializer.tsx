@@ -14,7 +14,7 @@ import { useEffect, useMemo, useState } from "react";
 import { WebInitializer } from "../services/Initializer";
 import type { WebViewerProps } from "../types";
 
-export const useWebViewerInitializer = (options?: WebViewerProps) => {
+export const useWebViewerInitializer = (options: WebViewerProps) => {
   const [webViewerInitOptions, setWebViewerInitOptions] =
     useState<ItwinViewerInitializerParams>();
   const [webViewerInitalized, setWebViewerInitalized] = useState(false);

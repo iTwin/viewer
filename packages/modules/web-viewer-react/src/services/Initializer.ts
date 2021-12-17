@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import type { BentleyCloudRpcParams } from "@itwin/core-common";
 import { BentleyCloudRpcManager } from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
@@ -11,14 +10,9 @@ import {
   getIModelAppOptions,
   makeCancellable,
   ViewerAuthorization,
-  ViewerOidcClient,
 } from "@itwin/viewer-react";
 
-import type {
-  IModelBackendOptions,
-  WebAuthorizationOptions,
-  WebViewerProps,
-} from "../types";
+import type { IModelBackendOptions, WebViewerProps } from "../types";
 
 const getHostedConnectionInfo = async (
   backendOptions?: IModelBackendOptions
@@ -68,22 +62,6 @@ export class WebInitializer {
   private static _initializing = false;
   private static _cancel: (() => void) | undefined;
 
-  private static getAuthorizationClient(
-    authConfig?: WebAuthorizationOptions
-  ): BrowserAuthorizationClient | ViewerOidcClient | undefined {
-    if (!authConfig) {
-      return;
-    }
-    if (authConfig.config) {
-      return new BrowserAuthorizationClient(authConfig.config);
-    } else if (authConfig.oidcClient) {
-      return authConfig.oidcClient;
-    } else if (authConfig.getUserManagerFunction) {
-      return new ViewerOidcClient(authConfig.getUserManagerFunction);
-    }
-    return undefined;
-  }
-
   /** expose initialized promise */
   public static get initialized(): Promise<void> {
     return this._initialized;
@@ -102,15 +80,13 @@ export class WebInitializer {
   };
 
   /** Web viewer startup */
-  public static async startWebViewer(options?: WebViewerProps) {
+  public static async startWebViewer(options: WebViewerProps) {
     if (!IModelApp.initialized && !this._initializing) {
       console.log("starting web viewer");
       this._initializing = true;
       const cancellable = makeCancellable(function* () {
         const iModelAppOptions = getIModelAppOptions(options);
-        const authClient = WebInitializer.getAuthorizationClient(
-          options?.authConfig
-        );
+        const authClient = options.authConfig;
         iModelAppOptions.authorizationClient = authClient;
         ViewerAuthorization.client = authClient;
         const rpcParams: BentleyCloudRpcParams = yield initializeRpcParams(
