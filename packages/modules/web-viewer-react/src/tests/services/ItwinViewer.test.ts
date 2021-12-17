@@ -9,7 +9,7 @@ import ReactDOM from "react-dom";
 import { Viewer } from "../../components/Viewer";
 import { WebInitializer } from "../../services/Initializer";
 import { ItwinViewer } from "../../services/ItwinViewer";
-import type { WebAuthorizationOptions } from "../../types";
+import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
 
 jest.mock("@itwin/viewer-react", () => {
   return {
@@ -67,13 +67,7 @@ jest.mock("@itwin/core-frontend", () => {
 const elementId = "viewerRoot";
 const mockITwinId = "mockITwinId";
 const mockiModelId = "mockImodelId";
-const authConfig: WebAuthorizationOptions = {
-  config: {
-    clientId: "test-client",
-    redirectUri: "http://localhost:3000",
-    scope: "test-scope",
-  },
-};
+const authConfig = new MockAuthorizationClient();
 
 describe("iTwinViewer", () => {
   beforeAll(() => {
