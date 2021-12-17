@@ -52,7 +52,7 @@
     "@itwin/ecschema-metadata": "rc",
     "@itwin/electron-authorization": "latest",
     "@itwin/express-server": "rc",
-    "@itwin/desktop-viewer-react": "2.0.0-dev.19",
+    "@itwin/desktop-viewer-react": "2.0.0-dev.20",
     "@itwin/imodel-browser-react": "^0.11.0",
     "@itwin/imodels-access-backend": "latest",
     "@itwin/imodels-access-frontend": "latest",
