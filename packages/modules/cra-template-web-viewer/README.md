@@ -2,16 +2,12 @@
 
 This is a template for web applications that are based on the [iTwin Viewer](https://github.com/itwin/viewer/tree/main/packages/modules/web-viewer-react) for [Create React App](https://github.com/facebook/create-react-app).
 
-To use this template, add `--template @itwin/web-viewer` when creating a new app. You should also use the @bentley/react-scripts scripts version to compile your application.
+To use this template, add `--template @itwin/web-viewer` when creating a new app. You should also use the `@bentley/react-scripts` scripts version to compile your application.
 
 For example:
 
 ```sh
-npx create-react-app my-app-name --template @itwin/web-viewer --scripts-version @bentley/react-scripts
-
-# or
-
-yarn create react-app my-app-name --template @itwin/web-viewer --scripts-version @bentley/react-scripts
+npx create-react-app@latest my-app-name --template @itwin/web-viewer@next --scripts-version @bentley/react-scripts
 ```
 
 For more information, please refer to:
