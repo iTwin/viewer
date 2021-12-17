@@ -68,7 +68,7 @@ export const AuthClientHome: React.FC = () => {
       <Header handleLoginToggle={toggleLogin} loggedIn={loggedIn} />
       {oidcInitialized && (
         <Viewer
-          authConfig={{ oidcClient: AuthorizationClient.oidcClient }}
+          authConfig={AuthorizationClient.oidcClient}
           iTwinId={process.env.IMJS_AUTH_CLIENT_ITWIN_ID as string}
           iModelId={process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string}
           appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}

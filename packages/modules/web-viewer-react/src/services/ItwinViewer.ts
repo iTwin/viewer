@@ -8,18 +8,15 @@ import type { ColorTheme } from "@itwin/appui-react";
 import type { CheckpointConnection } from "@itwin/core-frontend";
 import type {
   ItwinViewerUi,
+  ViewerAuthorizationClient,
+  ViewerFrontstage,
   ViewerViewportControlOptions,
 } from "@itwin/viewer-react";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import type { ViewerFrontstage } from "..";
 import { Viewer } from "../components/Viewer";
-import type {
-  ItwinViewerParams,
-  WebAuthorizationOptions,
-  WebViewerProps,
-} from "../types";
+import type { ItwinViewerParams, WebViewerProps } from "../types";
 import { WebInitializer } from "./Initializer";
 
 export interface LoadParameters {
@@ -36,7 +33,7 @@ export class ItwinViewer {
   frontstages: ViewerFrontstage[] | undefined;
   viewportOptions: ViewerViewportControlOptions | undefined;
   uiProviders: UiItemsProvider[] | undefined;
-  authConfig: WebAuthorizationOptions;
+  authConfig: ViewerAuthorizationClient;
 
   onIModelConnected: ((iModel: CheckpointConnection) => void) | undefined;
 

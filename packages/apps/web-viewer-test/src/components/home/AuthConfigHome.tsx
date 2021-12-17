@@ -4,10 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ColorTheme } from "@itwin/appui-react";
-import type { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
+import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import type { ScreenViewport } from "@itwin/core-frontend";
 import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
-import { Viewer, ViewerAuthorization } from "@itwin/web-viewer-react";
+import { useAccessToken, Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";
@@ -19,32 +19,25 @@ import styles from "./Home.module.scss";
  * @returns
  */
 export const AuthConfigHome: React.FC = () => {
-  const [loggedIn, setLoggedIn] = useState(
-    (ViewerAuthorization.client?.hasSignedIn &&
-      ViewerAuthorization.client?.isAuthorized) ||
-      false
-  );
   const [iModelId, setIModelId] = useState(
     process.env.IMJS_AUTH_CLIENT_IMODEL_ID
   );
   const [iTwinId, setITwinId] = useState(process.env.IMJS_AUTH_CLIENT_ITWIN_ID);
 
-  const authConfig: BrowserAuthorizationClientConfiguration = {
-    scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
-    clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
-    redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
-    postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
-    responseType: "code",
-    authority: process.env.IMJS_AUTH_AUTHORITY,
-  };
+  const accessToken = useAccessToken();
 
-  useEffect(() => {
-    setLoggedIn(
-      (ViewerAuthorization.client?.hasSignedIn &&
-        ViewerAuthorization.client?.isAuthorized) ||
-        false
-    );
-  }, []);
+  const authClient = useMemo(
+    () =>
+      new BrowserAuthorizationClient({
+        scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
+        clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
+        redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
+        postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
+        responseType: "code",
+        authority: process.env.IMJS_AUTH_AUTHORITY,
+      }),
+    []
+  );
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -61,24 +54,13 @@ export const AuthConfigHome: React.FC = () => {
     history.push(`authconfig?iTwinId=${iTwinId}&iModelId=${iModelId}`);
   }, [iTwinId, iModelId]);
 
-  const toggleLogin = async () => {
-    if (!loggedIn) {
-      await ViewerAuthorization.client?.signIn();
+  const toggleLogin = useCallback(async () => {
+    if (!accessToken) {
+      await authClient.signIn();
     } else {
-      await ViewerAuthorization.client?.signOut();
+      await authClient.signOut();
     }
-  };
-
-  const onIModelAppInit = () => {
-    setLoggedIn(ViewerAuthorization.client?.isAuthorized ?? false);
-    ViewerAuthorization.client?.onAccessTokenChanged.addListener(() => {
-      setLoggedIn(
-        (ViewerAuthorization.client?.hasSignedIn &&
-          ViewerAuthorization.client?.isAuthorized) ||
-          false
-      );
-    });
-  };
+  }, [accessToken, authClient]);
 
   const switchModel = () => {
     if (iModelId === (process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string)) {
@@ -126,16 +108,15 @@ export const AuthConfigHome: React.FC = () => {
     <div className={styles.home}>
       <Header
         handleLoginToggle={toggleLogin}
-        loggedIn={loggedIn}
+        loggedIn={!!accessToken}
         switchModel={switchModel}
       />
       <Viewer
-        authConfig={{ config: authConfig }}
+        authConfig={authClient}
         iTwinId={iTwinId}
         iModelId={iModelId}
         appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
         theme={ColorTheme.Dark}
-        onIModelAppInit={onIModelAppInit}
         viewCreatorOptions={viewCreatorOptions}
         loadingComponent={<Loader />}
         mapLayerOptions={{

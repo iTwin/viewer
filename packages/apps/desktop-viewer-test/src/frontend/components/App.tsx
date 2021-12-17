@@ -3,9 +3,10 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import type { DesktopViewerProps } from "@itwin/desktop-viewer-react";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
 import { Router } from "@reach/router";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import type { ViewerSettings } from "../../common/ViewerConfig";
 import {
@@ -25,9 +26,12 @@ import {
 const App = () => {
   (window as any).ITWIN_VIEWER_HOME = window.location.origin;
 
-  const initialized = useDesktopViewerInitializer({
-    additionalI18nNamespaces: ["iTwinDesktopViewer"],
-  });
+  const desktopInitializerProps = useMemo<DesktopViewerProps>(
+    () => ({ additionalI18nNamespaces: ["iTwinDesktopViewer"] }),
+    []
+  );
+
+  const initialized = useDesktopViewerInitializer(desktopInitializerProps);
 
   const [settings, setSettings] = useState<ViewerSettings>();
 

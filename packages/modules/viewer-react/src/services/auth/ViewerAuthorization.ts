@@ -2,31 +2,14 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-import type { BrowserAuthorizationClient } from "@itwin/browser-authorization";
-import type { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
 
-import type { ViewerOidcClient } from "./ViewerOidcClient";
+import type { AccessToken, BeEvent } from "@itwin/core-bentley";
+import type { AuthorizationClient } from "@itwin/core-common";
 
-type ViewerAuthClient =
-  | BrowserAuthorizationClient
-  | ViewerOidcClient
-  | ElectronRendererAuthorization
-  | undefined;
+export interface ViewerAuthorizationClient extends AuthorizationClient {
+  readonly onAccessTokenChanged: BeEvent<(token: AccessToken) => void>;
+}
 
 export class ViewerAuthorization {
-  private static _client: ViewerAuthClient;
-
-  /**
-   * Return the stored auth client
-   */
-  public static get client(): ViewerAuthClient {
-    return this._client;
-  }
-
-  /**
-   * Set the stored auth client
-   */
-  public static set client(client: ViewerAuthClient) {
-    this._client = client;
-  }
+  public static client?: ViewerAuthorizationClient;
 }
