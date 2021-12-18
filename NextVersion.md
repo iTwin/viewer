@@ -73,8 +73,8 @@ In your [iTwin App registration](https://developer.bentley.com/my-apps/), you'll
 
 - As of `create-react-app@5`, many users have reported a fatal runtime error, __Uncaught ReferenceError: process is not defined__. This can be resolved by pinning down the version of `react-error-overlay` to `6.0.9`. Please see the following issue for more information, [create-react-app/issues/11773](https://github.com/facebook/create-react-app/issues/11773).
 
-- Missing feature:
-  - The following features/widget that are apart of the default iTwin Viewer are still under development, and will be added back as they're ready.
+- Missing features:
+  - The following features/widgets that are part of the default iTwin Viewer are still under development, and will be added back as they're ready.
 
     - [] - Tree Widget
 
