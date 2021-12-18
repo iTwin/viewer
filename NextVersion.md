@@ -8,7 +8,7 @@ A comprehensive list of breaking changes in __3.0__ can be found here, [NextVers
 
 #### Authentication
 
-Authentication has been greatly simplified. Previously the `authConfig` prop in the `<Viewer />` component would accept a few different options, you could pass in your own AuthClient or config and we'd create one for you. We will no longer create an AuthClient for you, as that should be the responisibility of the App, not the Viewer. Instead, you need to provide your own AuthClient that implements a simpler interface.
+Authentication has been greatly simplified. Previously the `authConfig` prop in the `<Viewer />` component would accept a few different options, you could pass in your own AuthClient or config and we'd create one for you. We will no longer create an AuthClient for you, as that should be the responsibility of the App, not the Viewer. Instead, you need to provide your own AuthClient that implements a simpler interface.
 
 ```tsx
 interface ViewerAuthorizationClient {
