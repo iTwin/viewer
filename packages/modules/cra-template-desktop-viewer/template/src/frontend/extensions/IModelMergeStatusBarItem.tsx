@@ -5,19 +5,19 @@
 
 import "./IModelMergeStatusBarItem.scss";
 
-import { InternetConnectivityStatus } from "@bentley/imodeljs-common";
-import { BriefcaseConnection, IModelApp } from "@bentley/imodeljs-frontend";
-import {
+import type {
   CommonStatusBarItem,
-  StageUsage,
-  StatusBarSection,
   UiItemsProvider,
-} from "@bentley/ui-abstract";
+} from "@itwin/appui-abstract";
+import { StageUsage, StatusBarSection } from "@itwin/appui-abstract";
+import { FooterSeparator } from "@itwin/appui-layout-react";
 import {
   StatusBarItemUtilities,
   useActiveIModelConnection,
-} from "@bentley/ui-framework";
-import { FooterSeparator } from "@bentley/ui-ninezone";
+} from "@itwin/appui-react";
+import { InternetConnectivityStatus } from "@itwin/core-common";
+import type { BriefcaseConnection } from "@itwin/core-frontend";
+import { IModelApp } from "@itwin/core-frontend";
 import {
   getBriefcaseStatus,
   ModelStatus,
@@ -25,6 +25,7 @@ import {
   useConnectivity,
   useIsMounted,
 } from "@itwin/desktop-viewer-react";
+import { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
 import { SvgCloud, SvgOffline } from "@itwin/itwinui-icons-react";
 import React, { useCallback, useEffect, useState } from "react";
 
@@ -35,7 +36,11 @@ const ConnectionStatusBarItem = () => {
   const accessToken = useAccessToken();
   const connectivityStatus = useConnectivity();
   const onLoginClick = async () => {
-    await IModelApp.authorizationClient?.signIn();
+    if (
+      IModelApp.authorizationClient instanceof ElectronRendererAuthorization
+    ) {
+      await IModelApp.authorizationClient?.signIn();
+    }
   };
   return (
     <div className="status-bar-status">
@@ -71,7 +76,7 @@ const MergeStatusBarItem = () => {
   const getLatestChangesets = useCallback(async () => {
     if (connection) {
       try {
-        await connection.pullAndMergeChanges();
+        await connection.pullChanges();
         if (isMounted.current) {
           setMergeStatus(ModelStatus.UPTODATE);
           IModelApp.viewManager.refreshForModifiedModels(undefined);
@@ -112,7 +117,7 @@ const MergeStatusBarItem = () => {
         setMergeStatus(ModelStatus.SNAPSHOT);
       } else if (
         iModelConnection?.isBriefcase &&
-        iModelConnection?.contextId &&
+        iModelConnection?.iTwinId &&
         iModelConnection.iModelId
       ) {
         setConnection(iModelConnection as BriefcaseConnection);

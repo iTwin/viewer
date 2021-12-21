@@ -3,26 +3,25 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ElectronAuthorizationBackend } from "@bentley/electron-manager/lib/ElectronBackend";
+import { IModelHost, IpcHandler } from "@itwin/core-backend";
 import { InternetConnectivityStatus } from "@itwin/core-common";
-import {
-  dialog,
-  Menu,
+import { ElectronMainAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronMain";
+import type {
   OpenDialogOptions,
   OpenDialogReturnValue,
   SaveDialogOptions,
   SaveDialogReturnValue,
 } from "electron";
-import { IpcHandler, IModelHost } from "@itwin/core-backend";
+import { dialog, Menu } from "electron";
 import * as minimist from "minimist";
 
-import {
-  channelName,
+import type {
   ViewerConfig,
   ViewerFile,
   ViewerIpc,
   ViewerSettings,
 } from "../common/ViewerConfig";
+import { channelName } from "../common/ViewerConfig";
 import { getAppEnvVar } from "./AppInfo";
 import UserSettings from "./UserSettings";
 
@@ -105,14 +104,13 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
         const redirectUri = getAppEnvVar("REDIRECT_URI");
         const issuerUrl = getAppEnvVar("ISSUER_URL");
 
-        const authBackend = new ElectronAuthorizationBackend({
+        const authClient = await ElectronMainAuthorization.create({
           clientId,
           scope,
           redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
           issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
         });
-        await authBackend.initialize();
-        IModelHost.authorizationClient = authBackend;
+        IModelHost.authorizationClient = authClient;
         ViewerHandler._authInitialized = true;
       }
       if (downloadMenuItem) {

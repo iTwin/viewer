@@ -5,7 +5,7 @@
 
 import "./Home.scss";
 
-import { InternetConnectivityStatus } from "@bentley/imodeljs-common";
+import { InternetConnectivityStatus } from "@itwin/core-common";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { SvgFolderOpened, SvgImodel } from "@itwin/itwinui-icons-react";
 import { Blockquote, Headline, Title } from "@itwin/itwinui-react";

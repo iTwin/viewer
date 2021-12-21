@@ -7,7 +7,6 @@ import { IModelHostConfiguration, IpcHost } from "@itwin/core-backend";
 import { Logger, LogLevel } from "@itwin/core-bentley";
 import type { ElectronHostOptions } from "@itwin/core-electron/lib/cjs/ElectronBackend";
 import { ElectronHost } from "@itwin/core-electron/lib/cjs/ElectronBackend";
-import { ElectronMainAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronMain";
 import { BackendIModelsAccess } from "@itwin/imodels-access-backend";
 import { Presentation } from "@itwin/presentation-backend";
 import { Menu, shell } from "electron";
@@ -16,7 +15,7 @@ import * as path from "path";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";
 import { channelName, viewerRpcs } from "../common/ViewerConfig";
-import { appInfo, getAppEnvVar } from "./AppInfo";
+import { appInfo } from "./AppInfo";
 import ViewerHandler from "./ViewerHandler";
 
 require("dotenv-flow").config(); // eslint-disable-line @typescript-eslint/no-var-requires
@@ -31,11 +30,6 @@ const viewerMain = async () => {
   Logger.setLevelDefault(LogLevel.Trace);
   Logger.setLevel(AppLoggerCategory.Backend, LogLevel.Info);
 
-  const clientId = getAppEnvVar("CLIENT_ID") ?? "";
-  const scope = getAppEnvVar("SCOPE") ?? "";
-  const redirectUri = getAppEnvVar("REDIRECT_URI");
-  const issuerUrl = getAppEnvVar("ISSUER_URL");
-
   const electronHost: ElectronHostOptions = {
     webResourcesPath: path.join(__dirname, "..", "..", "build"),
     rpcInterfaces: viewerRpcs,
@@ -44,16 +38,8 @@ const viewerMain = async () => {
     iconName: "itwin-viewer.ico",
   };
 
-  const authClient = await ElectronMainAuthorization.create({
-    clientId,
-    scope,
-    redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
-    issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
-  });
-
   const iModelHost = new IModelHostConfiguration();
   iModelHost.hubAccess = new BackendIModelsAccess();
-  iModelHost.authorizationClient = authClient;
 
   await ElectronHost.startup({ electronHost, iModelHost });
 
@@ -134,10 +120,10 @@ const createMenu = () => {
           role: "zoom",
         },
         // TODO uncomment for dev as needed
-        // {
-        //   label: "Reload",
-        //   role: "reload",
-        // },
+        {
+          label: "Reload",
+          role: "reload",
+        },
       ],
     });
     template.unshift({
