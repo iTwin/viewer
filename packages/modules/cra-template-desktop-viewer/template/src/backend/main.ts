@@ -120,10 +120,10 @@ const createMenu = () => {
           role: "zoom",
         },
         // TODO uncomment for dev as needed
-        {
-          label: "Reload",
-          role: "reload",
-        },
+        // {
+        //   label: "Reload",
+        //   role: "reload",
+        // },
       ],
     });
     template.unshift({
