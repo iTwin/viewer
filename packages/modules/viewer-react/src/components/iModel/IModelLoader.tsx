@@ -21,18 +21,14 @@ import type {
   IModelConnection,
   ViewState,
 } from "@itwin/core-frontend";
-import {
-  BlankConnection,
-  IModelApp,
-  SnapshotConnection,
-} from "@itwin/core-frontend";
+import { BlankConnection, IModelApp } from "@itwin/core-frontend";
 import { useErrorManager } from "@itwin/error-handling-react";
 import { withAITracking } from "@microsoft/applicationinsights-react-js";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
 import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
-import { openRemoteIModel } from "../../services/iModel";
+import { openLocalImodel, openRemoteIModel } from "../../services/iModel";
 import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
 import { ai } from "../../services/telemetry/TelemetryService";
 import type {
@@ -111,7 +107,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     };
 
     const getViewState = useCallback(async () => {
-      if (!connection) {
+      if (!connection || (!connection.isBlank && connection.isClosed)) {
         setViewState(undefined);
         return;
       }
@@ -214,7 +210,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         // create a new imodelConnection for the passed project and imodel ids
         // TODO add the ability to open a BriefcaseConnection for Electron apps
         if (snapshotPath) {
-          imodelConnection = await SnapshotConnection.openFile(snapshotPath);
+          imodelConnection = await openLocalImodel(snapshotPath);
         } else if (iTwinId && iModelId) {
           imodelConnection = await openRemoteIModel(
             iTwinId,

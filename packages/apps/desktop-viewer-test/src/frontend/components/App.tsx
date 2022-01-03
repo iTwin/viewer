@@ -4,24 +4,19 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { DesktopViewerProps } from "@itwin/desktop-viewer-react";
+import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
 import { Router } from "@reach/router";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import type { ViewerSettings } from "../../common/ViewerConfig";
+import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import {
-  addRecentOnline as addRecentOnlineClient,
-  addRecentSnapshot as addRecentSnapshotClient,
+  addRecent as addRecentClient,
   getUserSettings,
   SettingsContext,
 } from "../services/SettingsClient";
-import {
-  DownloadRoute,
-  HomeRoute,
-  IModelsRoute,
-  ITwinsRoute,
-  SnapshotRoute,
-} from "./routes";
+import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
 
 const App = () => {
   (window as any).ITWIN_VIEWER_HOME = window.location.origin;
@@ -32,29 +27,32 @@ const App = () => {
   );
 
   const initialized = useDesktopViewerInitializer(desktopInitializerProps);
+  const connectivityStatus = useConnectivity();
 
   const [settings, setSettings] = useState<ViewerSettings>();
 
   useEffect(() => {
     if (initialized) {
+      // setup connectivity events to let the backend know the status
+      void ITwinViewerApp.ipcCall.setConnectivity(connectivityStatus);
       void getUserSettings().then((userSettings) => {
         setSettings(userSettings);
       });
     }
-  }, [initialized]);
+  }, [initialized, connectivityStatus]);
 
-  const addRecentSnapshot = useCallback(async (path: string) => {
-    const updatedSettings = await addRecentSnapshotClient(path);
-    setSettings(updatedSettings);
-    return updatedSettings;
-  }, []);
-
-  const addRecentOnline = useCallback(
-    async (iTwinId: string, iModelId: string, iModelName?: string) => {
-      const updatedSettings = await addRecentOnlineClient(
+  const addRecent = useCallback(
+    async (
+      path: string,
+      iModelName?: string,
+      iTwinId?: string,
+      iModelId?: string
+    ) => {
+      const updatedSettings = await addRecentClient(
+        path,
+        iModelName,
         iTwinId,
-        iModelId,
-        iModelName
+        iModelId
       );
       setSettings(updatedSettings);
       return updatedSettings;
@@ -63,16 +61,13 @@ const App = () => {
   );
 
   return initialized && settings ? (
-    <SettingsContext.Provider
-      value={{ settings, addRecentOnline, addRecentSnapshot }}
-    >
+    <SettingsContext.Provider value={{ settings, addRecent }}>
       <div style={{ height: "100%" }}>
         <Router style={{ height: "100%" }}>
           <HomeRoute path="/" />
-          <DownloadRoute path="itwins/:iTwinId/:iModelId" />
           <IModelsRoute path="/itwins/:iTwinId" />
           <ITwinsRoute path="/itwins" />
-          <SnapshotRoute path="/snapshot" />
+          <ViewerRoute path="/viewer" />
         </Router>
       </div>
     </SettingsContext.Provider>

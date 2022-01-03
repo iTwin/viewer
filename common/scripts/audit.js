@@ -54,6 +54,8 @@ const rushCommonDir = path.join(__dirname, "../");
     "GHSA-c36v-fmgq-m8hx", // https://github.com/advisories/GHSA-c36v-fmgq-m8hx.
     "GHSA-4jqc-8m5r-9rpr", // https://github.com/advisories/GHSA-4jqc-8m5r-9rpr.
     "GHSA-whgm-jr23-g3j9", // https://github.com/advisories/GHSA-whgm-jr23-g3j9.
+    "GHSA-qq89-hq3f-393p", // https://github.com/advisories/GHSA-qq89-hq3f-393p.,
+    "GHSA-5955-9wpr-37jh", // https://github.com/advisories/GHSA-5955-9wpr-37jh
   ];
 
   let shouldFailBuild = false;
@@ -67,10 +69,17 @@ const rushCommonDir = path.join(__dirname, "../");
       const message = `${severity} Security Vulnerability: ${advisory.title} in ${advisory.module_name} (from ${mpath}).  See ${advisory.url} for more info.`;
 
       // For now, we'll only treat CRITICAL and HIGH vulnerabilities as errors in CI builds.
-      if (!excludedAdvisories.includes(advisory.github_advisory_id) && (severity === "HIGH" || severity === "CRITICAL")) {
+      if (
+        !excludedAdvisories.includes(advisory.github_advisory_id) &&
+        (severity === "HIGH" || severity === "CRITICAL")
+      ) {
         logBuildError(message);
         shouldFailBuild = true;
-      } else if (excludedAdvisories.includes(advisory.github_advisory_id) || severity === "MODERATE") // Only warn on MODERATE severity items
+      } else if (
+        excludedAdvisories.includes(advisory.github_advisory_id) ||
+        severity === "MODERATE"
+      )
+        // Only warn on MODERATE severity items
         // Only warn on MODERATE severity items
         logBuildWarning(message);
     }

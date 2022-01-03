@@ -3,8 +3,14 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { Guid } from "@itwin/core-bentley";
 import { IModelVersion } from "@itwin/core-common";
-import { CheckpointConnection, IModelApp } from "@itwin/core-frontend";
+import {
+  BriefcaseConnection,
+  CheckpointConnection,
+  IModelApp,
+  SnapshotConnection,
+} from "@itwin/core-frontend";
 
 /** determine the proper version of the iModel to open
  * 1. If named versions exist, get the named version that contains the latest changeset
@@ -48,5 +54,28 @@ export const openRemoteIModel = async (
   } catch (error) {
     console.log(`Error opening the iModel connection: ${error}`);
     throw error;
+  }
+};
+
+/**
+ * Attempt to open a local briefcase or snapshot
+ * @param fileName
+ * @returns
+ */
+export const openLocalImodel = async (fileName: string) => {
+  try {
+    // attempt to open as a briefcase
+    const connection = await BriefcaseConnection.openFile({
+      fileName,
+      readonly: true,
+    });
+    if (connection.iTwinId === Guid.empty) {
+      // assume snapshot if there is no context id
+      return await SnapshotConnection.openFile(fileName);
+    }
+    return connection;
+  } catch {
+    // if that fails, attempt to open as a snapshot
+    return await SnapshotConnection.openFile(fileName);
   }
 };

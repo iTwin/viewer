@@ -2,6 +2,30 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "1.9.1",
+      "tag": "@itwin/viewer-react_v1.9.1",
+      "date": "Fri, 10 Dec 2021 14:41:02 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add check for BlankConnections when creating viewState as they are always closed"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.9.0",
+      "tag": "@itwin/viewer-react_v1.9.0",
+      "date": "Tue, 07 Dec 2021 15:48:19 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add support for local briefcases"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.8.4",
       "tag": "@itwin/viewer-react_v1.8.4",
       "date": "Fri, 19 Nov 2021 19:48:35 GMT",
