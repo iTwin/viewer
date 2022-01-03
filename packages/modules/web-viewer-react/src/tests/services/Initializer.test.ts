@@ -117,6 +117,7 @@ describe("Initializer", () => {
   it("initializes iModelApp", async () => {
     await WebInitializer.startWebViewer({
       authConfig: new MockAuthorizationClient(),
+      enablePerformanceMonitors: false,
     });
     await WebInitializer.initialized;
     expect(IModelApp.startup).toHaveBeenCalled();
