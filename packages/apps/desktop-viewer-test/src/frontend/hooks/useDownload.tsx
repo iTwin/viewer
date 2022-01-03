@@ -27,7 +27,7 @@ export const useDownload = (
     const fileName = await ITwinViewerApp.saveBriefcase(iModelName);
     if (fileName) {
       const req = await NativeApp.requestDownloadBriefcase(
-        iTwinId as string,
+        iTwinId,
         iModelId,
         { syncMode: SyncMode.PullOnly, fileName },
         IModelVersion.latest(),

@@ -8,7 +8,7 @@ import { IModelVersion } from "@itwin/core-common";
 import type { BriefcaseConnection } from "@itwin/core-frontend";
 import { CheckpointConnection } from "@itwin/core-frontend";
 
-import { ModelStatus } from "..";
+import { ModelStatus } from "../types";
 
 export const getBriefcaseStatus = async (
   briefcase: BriefcaseConnection
