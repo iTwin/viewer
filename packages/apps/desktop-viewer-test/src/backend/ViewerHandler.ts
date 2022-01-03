@@ -3,8 +3,16 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IpcHandler } from "@itwin/core-backend";
-import { dialog } from "electron";
+import { IModelHost, IpcHandler } from "@itwin/core-backend";
+import { InternetConnectivityStatus } from "@itwin/core-common";
+import { ElectronMainAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronMain";
+import type {
+  OpenDialogOptions,
+  OpenDialogReturnValue,
+  SaveDialogOptions,
+  SaveDialogReturnValue,
+} from "electron";
+import { dialog, Menu } from "electron";
 import * as minimist from "minimist";
 
 import type {
@@ -18,6 +26,8 @@ import { getAppEnvVar } from "./AppInfo";
 import UserSettings from "./UserSettings";
 
 class ViewerHandler extends IpcHandler implements ViewerIpc {
+  private static _authInitialized = false;
+
   public get channelName() {
     return channelName;
   }
@@ -39,8 +49,21 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
    * @param options
    * @returns
    */
-  public async openFile(options: any): Promise<Electron.OpenDialogReturnValue> {
+  public async openFile(
+    options: OpenDialogOptions
+  ): Promise<OpenDialogReturnValue> {
     return dialog.showOpenDialog(options);
+  }
+
+  /**
+   * Save file dialog
+   * @param options
+   * @returns
+   */
+  public async saveFile(
+    options: SaveDialogOptions
+  ): Promise<SaveDialogReturnValue> {
+    return dialog.showSaveDialog(options);
   }
 
   /**
@@ -57,6 +80,44 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
    */
   public async addRecentFile(file: ViewerFile): Promise<void> {
     UserSettings.addRecent(file);
+  }
+
+  /**
+   * Changes due to connectivity status
+   * @param connectivityStatus
+   */
+  public async setConnectivity(
+    connectivityStatus: InternetConnectivityStatus
+  ): Promise<void> {
+    const downloadMenuItem =
+      Menu.getApplicationMenu()?.getMenuItemById("download-menu-item");
+    if (connectivityStatus === InternetConnectivityStatus.Offline) {
+      // offline, disable the download menu item
+      if (downloadMenuItem) {
+        downloadMenuItem.enabled = false;
+      }
+    } else if (connectivityStatus === InternetConnectivityStatus.Online) {
+      if (!ViewerHandler._authInitialized) {
+        // we are online now and were not before so configure the auth backend
+        const clientId = getAppEnvVar("CLIENT_ID") ?? "";
+        const scope = getAppEnvVar("SCOPE") ?? "";
+        const redirectUri = getAppEnvVar("REDIRECT_URI");
+        const issuerUrl = getAppEnvVar("ISSUER_URL");
+
+        const authClient = await ElectronMainAuthorization.create({
+          clientId,
+          scope,
+          redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+          issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+        });
+        IModelHost.authorizationClient = authClient;
+        ViewerHandler._authInitialized = true;
+      }
+      if (downloadMenuItem) {
+        // online so enable the download menu item
+        downloadMenuItem.enabled = true;
+      }
+    }
   }
 }
 

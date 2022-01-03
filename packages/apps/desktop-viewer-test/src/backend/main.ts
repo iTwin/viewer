@@ -7,16 +7,15 @@ import { IModelHostConfiguration, IpcHost } from "@itwin/core-backend";
 import { Logger, LogLevel } from "@itwin/core-bentley";
 import type { ElectronHostOptions } from "@itwin/core-electron/lib/cjs/ElectronBackend";
 import { ElectronHost } from "@itwin/core-electron/lib/cjs/ElectronBackend";
-import { ElectronMainAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronMain";
 import { BackendIModelsAccess } from "@itwin/imodels-access-backend";
 import { Presentation } from "@itwin/presentation-backend";
-import { Menu } from "electron";
+import { Menu, shell } from "electron";
 import type { MenuItemConstructorOptions } from "electron/main";
 import * as path from "path";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";
 import { channelName, viewerRpcs } from "../common/ViewerConfig";
-import { appInfo, getAppEnvVar } from "./AppInfo";
+import { appInfo } from "./AppInfo";
 import ViewerHandler from "./ViewerHandler";
 
 require("dotenv-flow").config(); // eslint-disable-line @typescript-eslint/no-var-requires
@@ -31,11 +30,6 @@ const viewerMain = async () => {
   Logger.setLevelDefault(LogLevel.Trace);
   Logger.setLevel(AppLoggerCategory.Backend, LogLevel.Info);
 
-  const clientId = getAppEnvVar("CLIENT_ID") ?? "";
-  const scope = getAppEnvVar("SCOPE") ?? "";
-  const redirectUri = getAppEnvVar("REDIRECT_URI");
-  const issuerUrl = getAppEnvVar("ISSUER_URL");
-
   const electronHost: ElectronHostOptions = {
     webResourcesPath: path.join(__dirname, "..", "..", "build"),
     rpcInterfaces: viewerRpcs,
@@ -44,16 +38,8 @@ const viewerMain = async () => {
     iconName: "itwin-viewer.ico",
   };
 
-  const authClient = await ElectronMainAuthorization.create({
-    clientId,
-    scope,
-    redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
-    issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
-  });
-
   const iModelHost = new IModelHostConfiguration();
   iModelHost.hubAccess = new BackendIModelsAccess();
-  iModelHost.authorizationClient = authClient;
 
   await ElectronHost.startup({ electronHost, iModelHost });
 
@@ -72,6 +58,12 @@ const viewerMain = async () => {
   }
   // add the menu
   ElectronHost.mainWindow?.on("ready-to-show", createMenu);
+  // open links in the system browser instead of Electron
+  // remove this if you desire the default behavior instead
+  ElectronHost.mainWindow?.webContents.on("new-window", function (e, url) {
+    e.preventDefault();
+    void shell.openExternal(url);
+  });
 };
 
 const createMenu = () => {
@@ -82,27 +74,30 @@ const createMenu = () => {
       label: "File",
       submenu: [
         {
-          label: "Open snapshot file",
+          id: "open-menu-item",
+          label: "Open",
           click: () => {
-            IpcHost.send(channelName, "snapshot");
+            IpcHost.send(channelName, "open");
           },
         },
         {
-          label: "View remote iModel",
+          id: "download-menu-item",
+          label: "Download",
           click: () => {
-            IpcHost.send(channelName, "remote");
+            IpcHost.send(channelName, "download");
           },
         },
         { type: "separator" },
         isMac
-          ? { label: "Close", role: "close" }
-          : { label: "Close", role: "quit" },
+          ? { id: "close-menu-item", label: "Close", role: "close" }
+          : { id: "close-menu-item", label: "Close", role: "quit" },
       ],
     },
     {
       label: "View",
       submenu: [
         {
+          id: "view-getting-started-menu-item",
           label: "Getting started",
           click: () => {
             IpcHost.send(channelName, "home");
@@ -124,6 +119,11 @@ const createMenu = () => {
           label: "Zoom",
           role: "zoom",
         },
+        // TODO uncomment for dev as needed
+        // {
+        //   label: "Reload",
+        //   role: "reload",
+        // },
       ],
     });
     template.unshift({

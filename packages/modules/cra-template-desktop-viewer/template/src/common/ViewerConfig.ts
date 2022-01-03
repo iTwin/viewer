@@ -6,11 +6,17 @@
 import {
   IModelReadRpcInterface,
   IModelTileRpcInterface,
+  InternetConnectivityStatus,
   iTwinChannel,
   SnapshotIModelRpcInterface,
 } from "@itwin/core-common";
+import type {
+  OpenDialogOptions,
+  OpenDialogReturnValue,
+  SaveDialogOptions,
+  SaveDialogReturnValue,
+} from "electron";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
-import type { OpenDialogOptions, OpenDialogReturnValue } from "electron";
 
 export const channelName = iTwinChannel("desktop-viewer");
 
@@ -19,6 +25,10 @@ export interface ViewerIpc {
   openFile: (options: OpenDialogOptions) => Promise<OpenDialogReturnValue>;
   getSettings: () => Promise<ViewerSettings>;
   addRecentFile: (file: ViewerFile) => Promise<void>;
+  saveFile: (options: SaveDialogOptions) => Promise<SaveDialogReturnValue>;
+  setConnectivity: (
+    connectivityStatus: InternetConnectivityStatus
+  ) => Promise<void>;
 }
 
 export interface ViewerConfig {
@@ -36,16 +46,9 @@ export const viewerRpcs = [
   SnapshotIModelRpcInterface,
 ];
 
-export enum ViewerFileType {
-  ONLINE,
-  SNAPSHOT,
-  LOCAL,
-}
-
 export interface ViewerFile {
   displayName: string;
-  type: ViewerFileType;
-  path?: string;
+  path: string;
   iTwinId?: string;
   iModelId?: string;
 }

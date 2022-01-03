@@ -18,7 +18,7 @@ export const SignIn = () => {
     if (
       IModelApp.authorizationClient instanceof ElectronRendererAuthorization
     ) {
-      await IModelApp.authorizationClient.signIn();
+      await IModelApp.authorizationClient?.signIn();
     }
   };
 

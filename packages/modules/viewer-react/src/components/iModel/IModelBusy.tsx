@@ -11,7 +11,6 @@ import React from "react";
 
 export const IModelBusy = (): JSX.Element => {
   return (
-    // TODO localize text once i18n strategy is in place
     <div data-testid="loader-wrapper" className="imodelbusy__centered">
       <div className="imodelbusy__contents">
         <ProgressLinear

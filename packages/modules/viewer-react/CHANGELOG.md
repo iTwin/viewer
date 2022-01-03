@@ -1,6 +1,20 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Fri, 19 Nov 2021 19:48:35 GMT and should not be manually modified.
+This log was last generated on Fri, 10 Dec 2021 14:41:02 GMT and should not be manually modified.
+
+## 1.9.1
+Fri, 10 Dec 2021 14:41:02 GMT
+
+### Patches
+
+- Add check for BlankConnections when creating viewState as they are always closed
+
+## 1.9.0
+Tue, 07 Dec 2021 15:48:19 GMT
+
+### Minor changes
+
+- Add support for local briefcases
 
 ## 1.8.4
 Fri, 19 Nov 2021 19:48:35 GMT

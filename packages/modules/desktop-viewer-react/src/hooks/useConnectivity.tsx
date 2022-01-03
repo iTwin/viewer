@@ -12,6 +12,9 @@ export const useConnectivity = () => {
     useState<InternetConnectivityStatus>(InternetConnectivityStatus.Online);
 
   const checkStatus = useCallback(async () => {
+    await NativeApp.overrideInternetConnectivity(
+      window.navigator.onLine ? 0 : 1
+    );
     const status = await NativeApp.checkInternetConnectivity();
     setConnectivityStatus(status);
     NativeApp.onInternetConnectivityChanged.addListener((status) => {

@@ -6,5 +6,4 @@
 export * from "./HomeRoute";
 export * from "./IModelsRoute";
 export * from "./ITwinsRoute";
-export * from "./DownloadRoute";
-export * from "./SnapshotRoute";
+export * from "./ViewerRoute";
