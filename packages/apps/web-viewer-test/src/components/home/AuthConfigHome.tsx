@@ -125,6 +125,7 @@ export const AuthConfigHome: React.FC = () => {
             value: process.env.IMJS_BING_MAPS_KEY ?? "",
           },
         }}
+        enablePerformanceMonitors={true}
       />
     </div>
   );

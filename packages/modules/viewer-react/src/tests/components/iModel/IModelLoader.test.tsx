@@ -56,10 +56,10 @@ jest.mock("@itwin/appui-abstract");
 jest.mock("@microsoft/applicationinsights-react-js", () => ({
   ReactPlugin: jest.fn(),
   withAITracking: (
-    reactPlugin: any | undefined, // eslint-disable-line no-unused-vars
+    reactPlugin: any | undefined, // eslint-disable-line @typescript-eslint/no-unused-vars
     component: any,
-    componentName?: string, // eslint-disable-line no-unused-vars
-    className?: string // eslint-disable-line no-unused-vars
+    componentName?: string, // eslint-disable-line @typescript-eslint/no-unused-vars
+    className?: string // eslint-disable-line @typescript-eslint/no-unused-vars
   ) => component,
 }));
 jest.mock("@itwin/core-frontend", () => {
@@ -257,7 +257,12 @@ describe("IModelLoader", () => {
     // these calls will be doubled. items will be set first without a viewState and reset with one additional translation for the default frontstage once we have a viewState
     expect(BackstageItemUtilities.createStageLauncher).toHaveBeenCalledTimes(2);
     expect(BackstageItemUtilities.createActionItem).toHaveBeenCalledTimes(2);
-    expect(IModelApp.localization.getLocalizedString).toHaveBeenCalledTimes(5);
+    expect(IModelApp.localization.getLocalizedString).toHaveBeenCalledWith(
+      actionItem.labeli18nKey
+    );
+    expect(IModelApp.localization.getLocalizedString).toHaveBeenCalledWith(
+      stageLauncher.labeli18nKey
+    );
   });
 
   it("creates a blank connection and a blank ViewState", async () => {

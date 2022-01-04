@@ -91,13 +91,21 @@ jest.mock("@itwin/viewer-react", () => {
     },
     useIsMounted: jest.fn().mockReturnValue(true),
     makeCancellable: jest.requireActual(
-      "@itwin/viewer-react/lib/utilities/MakeCancellable"
+      "@itwin/viewer-react/lib/cjs/utilities/MakeCancellable"
     ).makeCancellable,
     useBaseViewerInitializer: jest.fn().mockReturnValue(true),
     getInitializationOptions: jest.fn().mockReturnValue({}),
     isEqual: jest.fn().mockReturnValue(true),
     BaseInitializer: {
       initialize: jest.fn(),
+    },
+    ViewerPerformance: {
+      addMark: jest.fn(),
+      addAndLogMeasure: jest.fn(),
+      enable: jest.fn(),
+    },
+    ViewerAuthorization: {
+      client: jest.fn(),
     },
   };
 });
@@ -113,6 +121,7 @@ describe("Initializer", () => {
   it("initializes iModelApp", async () => {
     await WebInitializer.startWebViewer({
       authConfig: new MockAuthorizationClient(),
+      enablePerformanceMonitors: false,
     });
     await WebInitializer.initialized;
     expect(IModelApp.startup).toHaveBeenCalled();

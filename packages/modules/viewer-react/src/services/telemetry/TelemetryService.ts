@@ -13,6 +13,7 @@ import { ViewerAuthorization } from "../auth";
 class TelemetryService implements TelemetryClient {
   private _reactPlugin: ReactPlugin;
   private _appInsights?: ApplicationInsights;
+  private _initialized: boolean;
 
   private _configureUserContext = async (): Promise<void> => {
     if (!this._appInsights) {
@@ -50,6 +51,7 @@ class TelemetryService implements TelemetryClient {
 
   constructor() {
     this._reactPlugin = new ReactPlugin();
+    this._initialized = false;
   }
 
   /**
@@ -96,6 +98,7 @@ class TelemetryService implements TelemetryClient {
     this._appInsights.loadAppInsights();
     this._appInsights.addTelemetryInitializer(this._telemetryInitializer);
     this._addAuthListeners();
+    this._initialized = true;
   }
 
   get appInsights() {
@@ -105,11 +108,14 @@ class TelemetryService implements TelemetryClient {
   get reactPlugin() {
     return this._reactPlugin;
   }
+
+  get initialized() {
+    return this._initialized;
+  }
 }
 
-export const ai = new TelemetryService();
-
-export type TelemetryMetricName = ""; // Add metric names here.
+export const userAI = new TelemetryService();
+export const viewerAI = new TelemetryService();
 
 export type TelemetryEventName =
   | "iTwinViewer.Viewer.Initialized"
@@ -122,11 +128,11 @@ export type TelemetryEventName =
  * Properties can be defined by the event.  Any values set will be visible in the
  * telemetry data in Azure.
  */
-export const trackEvent = (
+export const trackUserEvent = (
   name: TelemetryEventName,
   properties?: { [key: string]: any }
 ): void => {
-  ai.appInsights?.trackEvent({
+  userAI.appInsights?.trackEvent({
     name: name,
     properties: properties,
   });
@@ -137,14 +143,52 @@ export const trackEvent = (
  *
  * @param name Required - The name of the metric to track.
  */
-export const trackMetric = (
-  name: TelemetryMetricName, // The identifier of the metric
+export const trackUserMetric = (
+  name: string, // The identifier of the metric
   average: number, // The average value of the metric
   sampleCount?: number, // The number of samples in the average - Default: 1
   min?: number, // The minimum value in the average - Default: average
   max?: number // The maximum value in the average - Default: average
 ): void => {
-  ai.appInsights?.trackMetric({
+  userAI.appInsights?.trackMetric({
+    name: name,
+    average: average,
+    sampleCount: sampleCount,
+    min: min,
+    max: max,
+  });
+};
+
+/**
+ * Track event named `name` in ApplicationInsights.
+ * `name` should be defined in @ref TelemetryEvent.
+ *
+ * Properties can be defined by the event.  Any values set will be visible in the
+ * telemetry data in Azure.
+ */
+export const trackViewerEvent = (
+  name: TelemetryEventName,
+  properties?: { [key: string]: any }
+): void => {
+  viewerAI.appInsights?.trackEvent({
+    name: name,
+    properties: properties,
+  });
+};
+
+/**
+ * Use to log a metric that is not related to any particular event.
+ *
+ * @param name Required - The name of the metric to track.
+ */
+export const trackViewerMetric = (
+  name: string, // The identifier of the metric
+  average: number, // The average value of the metric
+  sampleCount?: number, // The number of samples in the average - Default: 1
+  min?: number, // The minimum value in the average - Default: average
+  max?: number // The maximum value in the average - Default: average
+): void => {
+  viewerAI.appInsights?.trackMetric({
     name: name,
     average: average,
     sampleCount: sampleCount,

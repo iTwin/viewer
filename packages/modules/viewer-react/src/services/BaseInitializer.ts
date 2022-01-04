@@ -31,9 +31,10 @@ import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
 
+import { ViewerPerformance } from "../services/telemetry";
 import type { ItwinViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
-import { ai, trackEvent } from "./telemetry/TelemetryService";
+import { trackUserEvent, userAI } from "./telemetry/TelemetryService";
 
 // initialize required iTwin.js services
 export class BaseInitializer {
@@ -122,8 +123,10 @@ export class BaseInitializer {
 
       // Add the app's telemetry client if a key was provided
       if (viewerOptions?.appInsightsKey) {
-        ai.initialize(viewerOptions?.appInsightsKey);
-        IModelApp.telemetry.addClient(ai);
+        if (!userAI.initialized) {
+          userAI.initialize(viewerOptions?.appInsightsKey);
+        }
+        IModelApp.telemetry.addClient(userAI);
       }
 
       // initialize localization for the app
@@ -162,10 +165,6 @@ export class BaseInitializer {
 
       ConfigurableUiManager.initialize();
 
-      if (viewerOptions?.appInsightsKey) {
-        trackEvent("iTwinViewer.Viewer.Initialized");
-      }
-
       // TODO 3.0 re-add
       // if (viewerOptions?.extensions) {
       //   for (const extension of viewerOptions.extensions) {
@@ -179,6 +178,16 @@ export class BaseInitializer {
       // yield TreeWidget.initialize(IModelApp.i18n);
       // yield MeasureTools.startup();
 
+      if (viewerOptions?.appInsightsKey) {
+        trackUserEvent("iTwinViewer.Viewer.Initialized");
+      }
+
+      ViewerPerformance.addMark("BaseViewerStarted");
+      void ViewerPerformance.addAndLogMeasure(
+        "BaseViewerInitialized",
+        "ViewerStarting",
+        "BaseViewerStarted"
+      );
       console.log("iTwin.js initialized");
     });
 

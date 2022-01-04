@@ -112,6 +112,12 @@ export interface ItwinViewerInitializerParams {
   // TODO: 3.0 w/ extensions
   // /** List of Extensions */
   // extensions?: BuiltInExtensionLoaderProps[];
+  /**
+   * Enable reporting data from timed events in the iTwin Viewer.
+   * The data is anonynmous numerics and will help to increase Viewer performance in future releases.
+   * See the Web or Desktop Viewer package README for additional details (https://www.npmjs.com/package/@itwin/web-viewer-react).
+   */
+  enablePerformanceMonitors: boolean;
 }
 
 /**
@@ -129,7 +135,9 @@ const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
   hubAccess: undefined,
   mapLayerOptions: undefined,
   // extensions: undefined,
+  enablePerformanceMonitors: false,
 };
+
 export const iTwinViewerInitializerParamList = Object.keys(
   iTwinViewerInitializerParamSample
 );
