@@ -127,6 +127,7 @@ export const IModelBankHome: React.FC = () => {
         viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
         backend={backend}
         hubAccess={imodelBankClient}
+        enablePerformanceMonitors={true}
       />
     </div>
   );

@@ -14,11 +14,22 @@ import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
 jest.mock("@itwin/viewer-react", () => {
   return {
     BaseViewer: jest.fn(() => null),
-    getIModelAppOptions: jest.fn(),
+    getIModelAppOptions: jest.fn().mockReturnValue({}),
     useIsMounted: jest.fn().mockReturnValue(true),
     useBaseViewerInitializer: jest.fn().mockReturnValue(true),
     getInitializationOptions: jest.fn().mockReturnValue({}),
     isEqual: jest.fn().mockReturnValue(true),
+    ViewerPerformance: {
+      addMark: jest.fn(),
+      addAndLogMeasure: jest.fn(),
+      enable: jest.fn(),
+    },
+    makeCancellable: jest.requireActual(
+      "@itwin/viewer-react/lib/cjs/utilities/MakeCancellable"
+    ).makeCancellable,
+    ViewerAuthorization: {
+      client: {},
+    },
   };
 });
 
@@ -85,6 +96,7 @@ describe("iTwinViewer", () => {
     const viewer = new ItwinViewer({
       elementId,
       authConfig,
+      enablePerformanceMonitors: false,
     });
     await viewer.load({ iTwinId: mockITwinId, iModelId: mockiModelId });
     await WebInitializer.initialized;
@@ -100,6 +112,7 @@ describe("iTwinViewer", () => {
       viewportOptions: undefined,
       uiProviders: undefined,
       theme: undefined,
+      enablePerformanceMonitors: false,
     });
     expect(ReactDOM.render).toHaveBeenCalledWith(
       expect.anything(),

@@ -36,20 +36,6 @@ export class IModelBankFrontend implements FrontendHubAccess {
     return { index: +changeSets[0].index, id: changeSets[0].id };
   }
 
-  public async getLatestChangeset(
-    arg: IModelIdArg
-  ): Promise<ChangesetIndexAndId> {
-    const changeSets: ChangeSet[] = await this._hubClient.changeSets.get(
-      arg.accessToken,
-      arg.iModelId,
-      new ChangeSetQuery().top(1).latest()
-    );
-    if (!changeSets[0] || !changeSets[0].index || !changeSets[0].id) {
-      return { index: 0, id: "" };
-    }
-    return { index: +changeSets[0].index, id: changeSets[0].id };
-  }
-
   public async getChangesetFromVersion(
     arg: IModelIdArg & { version: IModelVersion }
   ): Promise<ChangesetIndexAndId> {
@@ -93,5 +79,19 @@ export class IModelBankFrontend implements FrontendHubAccess {
       );
     }
     return { index: versions[0].changeSetIndex, id: versions[0].changeSetId };
+  }
+
+  public async getLatestChangeset(
+    arg: IModelIdArg
+  ): Promise<ChangesetIndexAndId> {
+    const changeSets: ChangeSet[] = await this._hubClient.changeSets.get(
+      arg.accessToken,
+      arg.iModelId,
+      new ChangeSetQuery().top(1).latest()
+    );
+    if (!changeSets[0] || !changeSets[0].index || !changeSets[0].id) {
+      return { index: 0, id: "" };
+    }
+    return { index: +changeSets[0].index, id: changeSets[0].id };
   }
 }

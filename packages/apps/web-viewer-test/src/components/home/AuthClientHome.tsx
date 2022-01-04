@@ -79,6 +79,7 @@ export const AuthClientHome: React.FC = () => {
               value: process.env.IMJS_MAPBOX_KEY ?? "",
             },
           }}
+          enablePerformanceMonitors={true}
         />
       )}
     </div>
