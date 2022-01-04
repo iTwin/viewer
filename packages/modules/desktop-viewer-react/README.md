@@ -53,7 +53,7 @@ export const MyViewerComponent = () => {
   - Duration of startup to the initialization of iTwin.js services
   - Duration of startup to the establishment of a connection to the iModel
   - Duration of startup to the creation of a view state for the iModel
-  - Duration of startup until the last tile is loaded and rendered for the iModel view
+  - Duration of startup until the last tile is loaded and rendered for the initial iModel view
 
 #### Optional
 
