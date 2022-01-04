@@ -133,6 +133,9 @@ describe("BaseInitializer", () => {
       localization: expect.anything(),
       toolAdmin: undefined,
       hubAccess: expect.anything(),
+      mapLayerOptions: undefined,
+      publicPath: "",
+      realityDataAccess: expect.anything(),
     });
   });
   it("sets the applicationId", () => {

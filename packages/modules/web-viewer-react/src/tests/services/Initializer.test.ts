@@ -99,9 +99,13 @@ jest.mock("@itwin/viewer-react", () => {
     BaseInitializer: {
       initialize: jest.fn(),
     },
-    Performance: {
+    ViewerPerformance: {
       addMark: jest.fn(),
       addAndLogMeasure: jest.fn(),
+      enable: jest.fn(),
+    },
+    ViewerAuthorization: {
+      client: jest.fn(),
     },
   };
 });
@@ -117,6 +121,7 @@ describe("Initializer", () => {
   it("initializes iModelApp", async () => {
     await WebInitializer.startWebViewer({
       authConfig: new MockAuthorizationClient(),
+      enablePerformanceMonitors: false,
     });
     await WebInitializer.initialized;
     expect(IModelApp.startup).toHaveBeenCalled();

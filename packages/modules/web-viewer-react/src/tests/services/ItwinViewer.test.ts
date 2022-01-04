@@ -14,14 +14,21 @@ import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
 jest.mock("@itwin/viewer-react", () => {
   return {
     BaseViewer: jest.fn(() => null),
-    getIModelAppOptions: jest.fn(),
+    getIModelAppOptions: jest.fn().mockReturnValue({}),
     useIsMounted: jest.fn().mockReturnValue(true),
     useBaseViewerInitializer: jest.fn().mockReturnValue(true),
     getInitializationOptions: jest.fn().mockReturnValue({}),
     isEqual: jest.fn().mockReturnValue(true),
-    Performance: {
+    ViewerPerformance: {
       addMark: jest.fn(),
       addAndLogMeasure: jest.fn(),
+      enable: jest.fn(),
+    },
+    makeCancellable: jest.requireActual(
+      "@itwin/viewer-react/lib/cjs/utilities/MakeCancellable"
+    ).makeCancellable,
+    ViewerAuthorization: {
+      client: {},
     },
   };
 });

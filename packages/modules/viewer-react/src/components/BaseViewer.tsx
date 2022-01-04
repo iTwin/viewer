@@ -7,7 +7,8 @@ import { FillCentered } from "@itwin/core-react";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React from "react";
 
-import { useAccessToken, useBaseViewerInitializer } from "../hooks";
+import { useAccessToken } from "../hooks/useAccessToken";
+import { useBaseViewerInitializer } from "../hooks/useBaseViewerInitializer";
 import type { ItwinViewerCommonParams } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
