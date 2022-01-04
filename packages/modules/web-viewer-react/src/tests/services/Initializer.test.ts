@@ -99,9 +99,13 @@ jest.mock("@itwin/viewer-react", () => {
     BaseInitializer: {
       initialize: jest.fn(),
     },
-    Performance: {
+    ViewerPerformance: {
       addMark: jest.fn(),
       addAndLogMeasure: jest.fn(),
+      enable: jest.fn(),
+    },
+    ViewerAuthorization: {
+      client: jest.fn(),
     },
   };
 });

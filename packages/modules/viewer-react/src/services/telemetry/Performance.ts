@@ -34,9 +34,9 @@ export class ViewerPerformance {
     }
   }
 
-  private static async _logMetric(measureName: PerformanceMeasures) {
+  private static _logMetric(measureName: PerformanceMeasures) {
     if (!viewerAI.initialized) {
-      await viewerAI.initialize(this._getAiKey());
+      viewerAI.initialize(this._getAiKey());
     }
     const measure = performance.getEntriesByName(measureName);
     if (measure && measure.length > 0) {
@@ -85,7 +85,7 @@ export class ViewerPerformance {
     }
 
     this.addMeasure(measureName, startMark, endMark);
-    await this._logMetric(measureName);
+    this._logMetric(measureName);
   }
 
   static clear() {

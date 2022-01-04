@@ -115,6 +115,9 @@ jest.mock("../../services/BaseInitializer", () => {
     },
   };
 });
+jest.mock("../../hooks/useAccessToken", () => {
+  return { useAccessToken: () => "mockToken" };
+});
 // TODO 3.0
 // jest.mock("@bentley/property-grid-react", () => {
 //   return {

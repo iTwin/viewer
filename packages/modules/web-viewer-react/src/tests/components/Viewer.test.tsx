@@ -20,6 +20,7 @@ import React from "react";
 import { Viewer } from "../../components/Viewer";
 import { WebInitializer } from "../../services/Initializer";
 import type { IModelBackendOptions } from "../../types";
+import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
 
 jest.mock("@itwin/viewer-react", () => {
   return {
@@ -53,9 +54,13 @@ jest.mock("@itwin/viewer-react", () => {
     BaseInitializer: {
       initialize: jest.fn(),
     },
-    Performance: {
+    ViewerPerformance: {
       addMark: jest.fn(),
       addAndLogMeasure: jest.fn(),
+      enable: jest.fn(),
+    },
+    ViewerAuthorization: {
+      client: {},
     },
   };
 });
@@ -112,12 +117,7 @@ jest.mock("@itwin/core-frontend", () => {
 const mockITwinId = "123";
 const mockIModelId = "456";
 
-const authConfig: BrowserAuthorizationClientConfiguration = {
-  clientId: "test-client",
-  scope: "test-scope",
-  responseType: "code",
-  redirectUri: "http://localhost",
-};
+const authClient = new MockAuthorizationClient();
 
 describe("Viewer", () => {
   beforeEach(() => {
@@ -127,7 +127,7 @@ describe("Viewer", () => {
   it("starts the WebViewerApp", async () => {
     const { getByTestId } = render(
       <Viewer
-        authConfig={{ config: authConfig }}
+        authConfig={authClient}
         iTwinId={mockITwinId}
         iModelId={mockIModelId}
         additionalRpcInterfaces={[DevToolsRpcInterface]}
@@ -170,7 +170,7 @@ describe("Viewer", () => {
 
     const { getByTestId } = render(
       <Viewer
-        authConfig={{ config: authConfig }}
+        authConfig={authClient}
         iTwinId={mockITwinId}
         iModelId={mockIModelId}
         backend={backendConfig}
@@ -181,7 +181,7 @@ describe("Viewer", () => {
     await waitFor(() => getByTestId("mock-div"));
 
     expect(WebInitializer.startWebViewer).toHaveBeenCalledWith({
-      authConfig: { config: authConfig },
+      authConfig: authClient,
       backend: backendConfig,
       iTwinId: mockITwinId,
       iModelId: mockIModelId,
