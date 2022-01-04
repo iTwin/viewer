@@ -34,13 +34,20 @@ export class ViewerPerformance {
     }
   }
 
-  private static _logMetric(measureName: PerformanceMeasures) {
+  private static _logMetric(
+    measureName: PerformanceMeasures,
+    sampleCount?: number
+  ) {
     if (!viewerAI.initialized) {
       viewerAI.initialize(this._getAiKey());
     }
     const measure = performance.getEntriesByName(measureName);
     if (measure && measure.length > 0) {
-      trackViewerMetric(`iTwinViewer.${measureName}`, measure[0].duration);
+      trackViewerMetric(
+        `iTwinViewer.${measureName}`,
+        measure[0].duration,
+        sampleCount
+      );
     }
   }
 
@@ -78,14 +85,15 @@ export class ViewerPerformance {
   static async addAndLogMeasure(
     measureName: PerformanceMeasures,
     startMark: PerformanceMarks,
-    endMark: PerformanceMarks
+    endMark: PerformanceMarks,
+    sampleCount?: number
   ) {
     if (!this.enabled) {
       return;
     }
 
     this.addMeasure(measureName, startMark, endMark);
-    this._logMetric(measureName);
+    this._logMetric(measureName, sampleCount);
   }
 
   static clear() {

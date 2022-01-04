@@ -77,7 +77,8 @@ export class ViewCreator3d extends ViewCreator {
                   void ViewerPerformance.addAndLogMeasure(
                     "TileTreesLoaded",
                     "ViewerStarting",
-                    "TilesLoaded"
+                    "TilesLoaded",
+                    viewPort.numReadyTiles
                   );
                   clearInterval(intvl);
                   resolve(true);
