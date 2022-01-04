@@ -14,7 +14,7 @@ import { useEffect, useMemo, useState } from "react";
 import { DesktopInitializer } from "../services/Initializer";
 import type { DesktopViewerProps } from "../types";
 
-export const useDesktopViewerInitializer = (options?: DesktopViewerProps) => {
+export const useDesktopViewerInitializer = (options: DesktopViewerProps) => {
   const [desktopViewerInitOptions, setDesktopViewerInitOptions] =
     useState<ItwinViewerInitializerParams>();
   const [desktopViewerInitalized, setDesktopViewerInitalized] = useState(false);

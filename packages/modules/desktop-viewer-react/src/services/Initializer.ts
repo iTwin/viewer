@@ -41,7 +41,7 @@ export class DesktopInitializer {
   };
 
   /** Desktop viewer startup */
-  public static async startDesktopViewer(options?: DesktopViewerProps) {
+  public static async startDesktopViewer(options: DesktopViewerProps) {
     if (!IModelApp.initialized && !this._initializing) {
       console.log("starting desktop viewer");
       this._initializing = true;
@@ -51,10 +51,6 @@ export class DesktopInitializer {
         ViewerPerformance.addMark("ViewerStarting");
         const additionalRpcInterfaces = options?.additionalRpcInterfaces ?? [];
         additionalRpcInterfaces.push(SnapshotIModelRpcInterface);
-
-        if (!options) {
-          options = { enablePerformanceMonitors: false };
-        }
 
         const iModelAppOpts = getIModelAppOptions({
           ...options,
