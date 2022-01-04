@@ -87,7 +87,7 @@ export class WebInitializer {
       console.log("starting web viewer");
       this._initializing = true;
       const cancellable = makeCancellable(function* () {
-        ViewerPerformance.enable(options?.enablePerformanceMonitors);
+        ViewerPerformance.enable(options.enablePerformanceMonitors);
         ViewerPerformance.addMark("ViewerStarting");
         const iModelAppOptions = getIModelAppOptions(options);
         const authClient = options.authConfig;
