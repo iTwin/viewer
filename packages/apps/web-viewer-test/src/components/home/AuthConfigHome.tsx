@@ -11,7 +11,7 @@ import { useAccessToken, Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";
-import { Header } from ".";
+import { Header } from "./Header";
 import styles from "./Home.module.scss";
 
 /**
