@@ -90,9 +90,8 @@ export class WebInitializer {
         ViewerPerformance.enable(options.enablePerformanceMonitors);
         ViewerPerformance.addMark("ViewerStarting");
         const iModelAppOptions = getIModelAppOptions(options);
-        const authClient = options.authConfig;
-        iModelAppOptions.authorizationClient = authClient;
-        ViewerAuthorization.client = authClient;
+        iModelAppOptions.authorizationClient = options.authClient;
+        ViewerAuthorization.client = options.authClient;
         const rpcParams: BentleyCloudRpcParams = yield initializeRpcParams(
           options?.backend
         );

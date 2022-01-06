@@ -120,7 +120,7 @@ describe("Initializer", () => {
 
   it("initializes iModelApp", async () => {
     await WebInitializer.startWebViewer({
-      authConfig: new MockAuthorizationClient(),
+      authClient: new MockAuthorizationClient(),
       enablePerformanceMonitors: false,
     });
     await WebInitializer.initialized;
