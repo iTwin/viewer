@@ -59,7 +59,7 @@ export const BlankConnectionHome: React.FC = () => {
     <div className={styles.home}>
       <Header handleLoginToggle={toggleLogin} loggedIn={!!accessToken} />
       <BlankViewer
-        authConfig={authClient}
+        authClient={authClient}
         blankConnection={{
           name: "GeometryConnection",
           location: Cartographic.fromDegrees({
