@@ -34,7 +34,7 @@ export class ItwinViewer {
   frontstages: ViewerFrontstage[] | undefined;
   viewportOptions: ViewerViewportControlOptions | undefined;
   uiProviders: UiItemsProvider[] | undefined;
-  authConfig: ViewerAuthorizationClient;
+  authClient: ViewerAuthorizationClient;
   enablePerformanceMonitors: boolean;
 
   onIModelConnected: ((iModel: CheckpointConnection) => void) | undefined;
@@ -54,7 +54,7 @@ export class ItwinViewer {
     this.frontstages = options.frontstages;
     this.viewportOptions = options.viewportOptions;
     this.uiProviders = options.uiProviders;
-    this.authConfig = options.authConfig;
+    this.authClient = options.authClient;
     this.enablePerformanceMonitors = options.enablePerformanceMonitors;
 
     void WebInitializer.startWebViewer(options);
@@ -69,7 +69,7 @@ export class ItwinViewer {
     // render the viewer for the given iModel on the given element
     ReactDOM.render(
       React.createElement(Viewer, {
-        authConfig: this.authConfig,
+        authClient: this.authClient,
         iTwinId: args?.iTwinId,
         iModelId: args?.iModelId,
         changeSetId: args?.changeSetId,

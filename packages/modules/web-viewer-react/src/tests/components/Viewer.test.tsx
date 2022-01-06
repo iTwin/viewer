@@ -127,7 +127,7 @@ describe("Viewer", () => {
   it("starts the WebViewerApp", async () => {
     const { getByTestId } = render(
       <Viewer
-        authConfig={authClient}
+        authClient={authClient}
         iTwinId={mockITwinId}
         iModelId={mockIModelId}
         additionalRpcInterfaces={[DevToolsRpcInterface]}
@@ -170,7 +170,7 @@ describe("Viewer", () => {
 
     const { getByTestId } = render(
       <Viewer
-        authConfig={authClient}
+        authClient={authClient}
         iTwinId={mockITwinId}
         iModelId={mockIModelId}
         backend={backendConfig}
@@ -181,7 +181,7 @@ describe("Viewer", () => {
     await waitFor(() => getByTestId("mock-div"));
 
     expect(WebInitializer.startWebViewer).toHaveBeenCalledWith({
-      authConfig: authClient,
+      authClient: authClient,
       backend: backendConfig,
       iTwinId: mockITwinId,
       iModelId: mockIModelId,

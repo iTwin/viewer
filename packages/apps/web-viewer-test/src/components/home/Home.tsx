@@ -25,24 +25,16 @@ export const Home = ({ history }: RouteComponentProps) => {
         <div className={styles.signIn}>
           <Button
             className={styles.homeButton}
-            onClick={() => history.push("/authclient")}
+            onClick={() => history.push("/viewer")}
             styleType={"high-visibility"}
             size={"large"}
           >
-            {"Use Auth Client"}
-          </Button>
-          <Button
-            className={styles.homeButton}
-            onClick={() => history.push("/authconfig")}
-            styleType={"cta"}
-            size={"large"}
-          >
-            {"Use Auth Config"}
+            {"Remote Connection"}
           </Button>
           <Button
             className={styles.homeButton}
             onClick={() => history.push("/blankconnection")}
-            styleType={"default"}
+            styleType={"cta"}
             size={"large"}
           >
             {"Blank Connection"}

@@ -98,7 +98,7 @@ function getAccessToken() {
 async function viewModel() {
   const viewer = new iTwinViewer({
     elementId: "viewerRoot",
-    authConfig: {
+    authClient: {
       getAccessToken: getAccessToken,
       onAccessTokenChanged: {
         addListener: (fn) => {
