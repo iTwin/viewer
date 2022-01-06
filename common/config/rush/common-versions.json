@@ -3,6 +3,7 @@
 
   "preferredVersions": {
     "lint-staged": "^10.2.11",
-    "immer": "^9.0.6"
+    "immer": "^9.0.6",
+    "react-error-overlay": "6.0.9"
   }
 }

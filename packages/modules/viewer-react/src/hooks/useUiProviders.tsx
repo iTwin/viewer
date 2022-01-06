@@ -5,10 +5,10 @@
 
 // TODO 3.0 re-add
 // import { MeasureToolsUiItemsProvider } from "@bentley/measure-tools-react";
-// import { PropertyGridUiItemsProvider } from "@bentley/property-grid-react";
 // import { TreeWidgetUiItemsProvider } from "@bentley/tree-widget-react";
 import type { UiItemsProvider } from "@itwin/appui-abstract";
 import { UiItemsManager } from "@itwin/appui-abstract";
+import { PropertyGridUiItemsProvider } from "@itwin/property-grid-react";
 import { useEffect } from "react";
 
 import type { ItwinViewerUi } from "../types";
@@ -24,9 +24,14 @@ export function useUiProviders(
     // if (!defaultUiConfig?.hideTreeView) {
     //   defaultProviders.push(new TreeWidgetUiItemsProvider());
     // }
-    // if (!defaultUiConfig?.hidePropertyGrid) {
-    //   defaultProviders.push(new PropertyGridUiItemsProvider());
-    // }
+    if (!defaultUiConfig?.hidePropertyGrid) {
+      defaultProviders.push(
+        new PropertyGridUiItemsProvider({
+          enableCopyingPropertyText: true,
+          enableFavoriteProperties: true,
+        })
+      );
+    }
     // if (
     //   !defaultUiConfig?.contentManipulationTools?.verticalItems?.measureTools
     // ) {
