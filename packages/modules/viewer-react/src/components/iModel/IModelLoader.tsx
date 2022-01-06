@@ -39,8 +39,8 @@ import type {
   ViewerFrontstage,
 } from "../../types";
 import { DefaultFrontstage } from "../app-ui/frontstages/DefaultFrontstage";
-import { IModelBusy, IModelViewer } from ".";
-
+import { IModelBusy } from "./IModelBusy";
+import { IModelViewer } from "./IModelViewer";
 export interface ModelLoaderProps extends IModelLoaderParams {
   iTwinId?: string;
   iModelId?: string;
