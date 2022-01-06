@@ -38,7 +38,7 @@ export interface IModelBackendOptions {
 
 export interface WebViewerPropsFull extends ViewerProps {
   /** authorization configuration */
-  authConfig: ViewerAuthorizationClient;
+  authClient: ViewerAuthorizationClient;
   /** options to override the default backend from iTwin Platform */
   backend?: IModelBackendOptions;
 }
@@ -48,12 +48,12 @@ export type WebViewerProps = Omit<WebViewerPropsFull, "snapshotPath">;
 
 export interface WebBlankViewerProps extends BlankViewerProps {
   /** authorization configuration */
-  authConfig: ViewerAuthorizationClient;
+  authClient: ViewerAuthorizationClient;
 }
 
 export interface ItwinViewerParams extends ItwinViewerCommonParams {
   /** id of the html element where the viewer should be rendered */
   elementId: string;
   /** authorization configuration */
-  authConfig: ViewerAuthorizationClient;
+  authClient: ViewerAuthorizationClient;
 }
