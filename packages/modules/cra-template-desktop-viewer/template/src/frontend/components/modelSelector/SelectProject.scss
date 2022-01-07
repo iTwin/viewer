@@ -23,6 +23,10 @@
         padding-right: 61px;
       }
 
+      .iui-input-container {
+        grid-template: "label inputs icon" / auto minmax(50px, 290px) auto;
+      }
+
       .iui-button {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
