@@ -40,7 +40,7 @@ const getHostedConnectionInfo = async (
     };
   } else {
     return {
-      info: { title: "visualization", version: "v3.0" },
+      info: { title: "imodel-backend", version: "v3.0" },
       uriPrefix: orchestratorUrl,
     };
   }
