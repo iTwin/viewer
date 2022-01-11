@@ -19,8 +19,7 @@ let accessTokenChangedListeners = [];
 
 // initialize an oidc user manager
 const authConfig = {
-  scope:
-    "openid profile organization email itwinjs imodels:read realitydata:read",
+  scope: "itwinjs imodels:read realitydata:read",
   client_id: "your-client-id",
   redirect_uri: "http://localhost:3000/signin-callback",
   post_logout_redirect_uri: "http://localhost:3000/",

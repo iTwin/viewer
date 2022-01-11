@@ -44,6 +44,13 @@ In your [iTwin App registration](https://developer.bentley.com/my-apps/), you'll
 - `imodels:read`
 - `realitydata:read`
 
+These scopes are no longer required:
+
+- `openid`
+- `email`
+- `profile`
+- `organization`
+
 ### How to upgrade an exisiting application
 
 - A [codemod](https://github.com/iTwin/codemods) has been developed to help you upgrade your exisitng code from iModel.js@2.x to iTwin.js@3.0.
