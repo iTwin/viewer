@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/error-handling-react",
+      "comment": "Remove unneeded scopes",
+      "type": "none"
+    }
+  ],
+  "packageName": "@itwin/error-handling-react",
+  "email": "6283674+kckst8@users.noreply.github.com"
+}
