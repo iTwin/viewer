@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 // TODO 3.0 re-add
-// import { MeasureTools } from "@bentley/measure-tools-react";
 // import { PropertyGridManager } from "@bentley/property-grid-react";
 // import { TreeWidget } from "@bentley/tree-widget-react";
 import {
@@ -27,6 +26,7 @@ import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
 import { FrontendIModelsAccess } from "@itwin/imodels-access-frontend";
 import { IModelsClient } from "@itwin/imodels-client-management";
+import { MeasureTools } from "@itwin/measure-tools-react";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";

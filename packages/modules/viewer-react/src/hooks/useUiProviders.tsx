@@ -4,11 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 // TODO 3.0 re-add
-// import { MeasureToolsUiItemsProvider } from "@bentley/measure-tools-react";
 // import { PropertyGridUiItemsProvider } from "@bentley/property-grid-react";
 // import { TreeWidgetUiItemsProvider } from "@bentley/tree-widget-react";
 import type { UiItemsProvider } from "@itwin/appui-abstract";
 import { UiItemsManager } from "@itwin/appui-abstract";
+import { MeasureToolsUiItemsProvider } from "@itwin/measure-tools-react";
 import { useEffect } from "react";
 
 import type { ItwinViewerUi } from "../types";
@@ -27,11 +27,11 @@ export function useUiProviders(
     // if (!defaultUiConfig?.hidePropertyGrid) {
     //   defaultProviders.push(new PropertyGridUiItemsProvider());
     // }
-    // if (
-    //   !defaultUiConfig?.contentManipulationTools?.verticalItems?.measureTools
-    // ) {
-    //   defaultProviders.push(new MeasureToolsUiItemsProvider());
-    // }
+    if (
+      !defaultUiConfig?.contentManipulationTools?.verticalItems?.measureTools
+    ) {
+      defaultProviders.push(new MeasureToolsUiItemsProvider());
+    }
 
     const uiProviders = customUiProviders
       ? customUiProviders.concat(defaultProviders)
