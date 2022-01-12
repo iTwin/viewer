@@ -41,6 +41,7 @@ dependencies:
   '@itwin/presentation-common': 3.0.0-dev.178_98e46b1eb2d45de9d4e44ff1b9fc772e
   '@itwin/presentation-components': 3.0.0-dev.178_2bac5921f69b7691bd0bf640344b1db0
   '@itwin/presentation-frontend': 3.0.0-dev.178_60a916b50e2aa5f92fc6609f425550ca
+  '@itwin/property-grid-react': 0.1.1_b07543b428a21a024632858d69e58601
   '@itwin/reality-data-client': 0.5.0_@itwin+core-common@3.0.0-dev.178
   '@itwin/tree-widget-react': 0.1.1_aacba0c7869206a741f6178d7c2bee53
   '@itwin/webgl-compatibility': 3.0.0-dev.178
@@ -3613,6 +3614,58 @@ packages:
       '@itwin/presentation-common': ^3.0.0-dev.178
     resolution:
       integrity: sha512-LUqvoqTPgWvXs7do0dXziPMwlov3bkfOAYNThckLmq5yWoL33mP12o/quNdGqhScbY7Ya34wkr81x7fvy1rnsg==
+  /@itwin/property-grid-react/0.1.1_b07543b428a21a024632858d69e58601:
+    dependencies:
+      '@bentley/itwin-client': 3.0.0-dev.148_061f4cf0864554505984cff340919d13
+      '@itwin/appui-abstract': 3.0.0-dev.178_061f4cf0864554505984cff340919d13
+      '@itwin/appui-layout-react': 3.0.0-dev.178_299aab28f00556196104ff880d9c8ab2
+      '@itwin/appui-react': 3.0.0-dev.178_ceda71a7ebbb1de6d90ddf3b9979fcf9
+      '@itwin/components-react': 3.0.0-dev.178_299aab28f00556196104ff880d9c8ab2
+      '@itwin/core-bentley': 3.0.0-dev.178
+      '@itwin/core-common': 3.0.0-dev.178_578ddd166db269dd57f13afe9393db49
+      '@itwin/core-frontend': 3.0.0-dev.178_9ba4844324c90909550def445f40cad4
+      '@itwin/core-geometry': 3.0.0-dev.178
+      '@itwin/core-i18n': 3.0.0-dev.178_061f4cf0864554505984cff340919d13
+      '@itwin/core-markup': 3.0.0-dev.178_71d14783afb01a849e44b27b4365a0f8
+      '@itwin/core-orbitgt': 3.0.0-dev.178
+      '@itwin/core-quantity': 3.0.0-dev.178_061f4cf0864554505984cff340919d13
+      '@itwin/core-react': 3.0.0-dev.178_658f4c463cec2951d5c2b54a504ac441
+      '@itwin/presentation-common': 3.0.0-dev.178_98e46b1eb2d45de9d4e44ff1b9fc772e
+      '@itwin/presentation-components': 3.0.0-dev.178_2bac5921f69b7691bd0bf640344b1db0
+      '@itwin/presentation-frontend': 3.0.0-dev.178_60a916b50e2aa5f92fc6609f425550ca
+      '@itwin/webgl-compatibility': 3.0.0-dev.178
+      classnames: 2.3.1
+      i18next: 10.6.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-redux: 7.2.6_react-dom@17.0.2+react@17.0.2
+      react-spring: 8.0.27_react-dom@17.0.2+react@17.0.2
+      redux: 4.1.2
+    dev: false
+    peerDependencies:
+      '@bentley/itwin-client': rc
+      '@itwin/appui-abstract': rc
+      '@itwin/appui-layout-react': rc
+      '@itwin/appui-react': rc
+      '@itwin/components-react': rc
+      '@itwin/core-bentley': rc
+      '@itwin/core-common': rc
+      '@itwin/core-frontend': rc
+      '@itwin/core-geometry': rc
+      '@itwin/core-i18n': rc
+      '@itwin/core-markup': rc
+      '@itwin/core-orbitgt': rc
+      '@itwin/core-quantity': rc
+      '@itwin/core-react': rc
+      '@itwin/presentation-common': rc
+      '@itwin/presentation-components': rc
+      '@itwin/presentation-frontend': rc
+      '@itwin/webgl-compatibility': rc
+      react: ^17.0.2
+      react-dom: ^17.0.2
+      react-redux: ^7.2.0
+    resolution:
+      integrity: sha512-YEtZLhCxW+uItIlZBxbuW5hIv2oMwS4jRXKGZbRfoyjCSr6Rai/C3LVMg4x1zc0TkvFJ2nQ6wIGFj9tC/ioHCw==
   /@itwin/reality-data-client/0.5.0_@itwin+core-common@3.0.0-dev.178:
     dependencies:
       '@itwin/core-common': 3.0.0-dev.178_578ddd166db269dd57f13afe9393db49
@@ -20180,6 +20233,7 @@ packages:
       '@itwin/presentation-common': 3.0.0-dev.178_98e46b1eb2d45de9d4e44ff1b9fc772e
       '@itwin/presentation-components': 3.0.0-dev.178_2bac5921f69b7691bd0bf640344b1db0
       '@itwin/presentation-frontend': 3.0.0-dev.178_60a916b50e2aa5f92fc6609f425550ca
+      '@itwin/property-grid-react': 0.1.1_b07543b428a21a024632858d69e58601
       '@itwin/reality-data-client': 0.5.0_@itwin+core-common@3.0.0-dev.178
       '@itwin/tree-widget-react': 0.1.1_aacba0c7869206a741f6178d7c2bee53
       '@itwin/webgl-compatibility': 3.0.0-dev.178
@@ -20209,7 +20263,7 @@ packages:
     dev: false
     name: '@rush-temp/viewer-react'
     resolution:
-      integrity: sha512-CWI9Cue/cDSuNacGeiWPE/ujpDkAvmoIbtnqHyc1blZggxgCvO7hpKL766VgJ+u9mCYcBYyEhPBmN6Hkqs5DnA==
+      integrity: sha512-NYiM5qRia23ik3By35W2s9kP/+zoDtXmsyIZP0L8XgUhPTvs81NpcCQ8QEEVfE24xWiLlFG8vMgHnI5DobA0PA==
       tarball: 'file:projects/viewer-react.tgz'
     version: 0.0.0
   'file:projects/viewer-scripts.tgz_typescript@4.3.5':
@@ -20347,6 +20401,7 @@ packages:
       integrity: sha512-u40Mrc2fEnbo3YCodxu1zSF4NdSVxuVCA45XSoHoEjPJer17i5EbUd1zFyyrhE72TZVKnrAy+4M3dCu1wGR8fg==
       tarball: 'file:projects/web-viewer-test.tgz'
     version: 0.0.0
+registry: ''
 specifiers:
   '@babel/plugin-proposal-class-properties': ^7.8.3
   '@babel/plugin-transform-runtime': ^7.9.6
@@ -20390,6 +20445,7 @@ specifiers:
   '@itwin/presentation-common': rc
   '@itwin/presentation-components': rc
   '@itwin/presentation-frontend': rc
+  '@itwin/property-grid-react': latest
   '@itwin/reality-data-client': latest
   '@itwin/tree-widget-react': latest
   '@itwin/webgl-compatibility': rc
