@@ -6,6 +6,7 @@
 import { StatusBarSection } from "@itwin/appui-abstract";
 import { FooterSeparator } from "@itwin/appui-layout-react";
 import type { ConfigurableCreateInfo, StatusBarItem } from "@itwin/appui-react";
+import { SectionsStatusField } from "@itwin/appui-react";
 import {
   FooterModeField,
   MessageCenterField,
@@ -39,6 +40,7 @@ export class AppStatusBarWidget extends StatusBarWidgetControl {
     const FooterOnlyDisplay = withStatusFieldProps(FooterModeField);
     const SnapMode = withStatusFieldProps(SnapModeField);
     const SelectionInfo = withStatusFieldProps(SelectionInfoField);
+    const Sections = withStatusFieldProps(SectionsStatusField);
 
     this._footerModeOnlySeparator = (): React.ReactNode => {
       return (
@@ -78,6 +80,14 @@ export class AppStatusBarWidget extends StatusBarWidgetControl {
         StatusBarSection.Left,
         25,
         this._footerModeOnlySeparator()
+      )
+    );
+    this._statusBarItems.push(
+      StatusBarItemUtilities.createStatusBarItem(
+        "Sections",
+        StatusBarSection.Left,
+        30,
+        <Sections hideWhenUnused={true} />
       )
     );
 
