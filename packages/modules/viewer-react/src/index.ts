@@ -11,3 +11,4 @@ export * from "./utilities";
 export * from "./types";
 export * from "./hooks";
 export * from "./services/auth";
+export * from "./services/telemetry";

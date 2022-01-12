@@ -7,7 +7,8 @@ import { FillCentered } from "@itwin/core-react";
 import { ErrorBoundary } from "@itwin/error-handling-react";
 import React from "react";
 
-import { useAccessToken, useBaseViewerInitializer } from "../hooks";
+import { useAccessToken } from "../hooks/useAccessToken";
+import { useBaseViewerInitializer } from "../hooks/useBaseViewerInitializer";
 import type { ItwinViewerCommonParams } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
@@ -39,6 +40,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   additionalRpcInterfaces,
   viewCreatorOptions,
   loadingComponent,
+  enablePerformanceMonitors,
 }: ViewerProps) => {
   const viewerInitialized = useBaseViewerInitializer({
     appInsightsKey,
@@ -47,6 +49,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
     onIModelAppInit,
     additionalI18nNamespaces,
     additionalRpcInterfaces,
+    enablePerformanceMonitors,
   });
 
   const accessToken = useAccessToken();

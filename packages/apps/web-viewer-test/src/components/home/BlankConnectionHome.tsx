@@ -59,7 +59,7 @@ export const BlankConnectionHome: React.FC = () => {
     <div className={styles.home}>
       <Header handleLoginToggle={toggleLogin} loggedIn={!!accessToken} />
       <BlankViewer
-        authConfig={authClient}
+        authClient={authClient}
         blankConnection={{
           name: "GeometryConnection",
           location: Cartographic.fromDegrees({
@@ -77,6 +77,7 @@ export const BlankConnectionHome: React.FC = () => {
         productId={productId}
         onIModelAppInit={iModelAppInit}
         uiProviders={[new TestUiProvider2()]}
+        enablePerformanceMonitors={true}
       />
     </div>
   );

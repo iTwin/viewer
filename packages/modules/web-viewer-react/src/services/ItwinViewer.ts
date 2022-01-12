@@ -12,6 +12,7 @@ import type {
   ViewerFrontstage,
   ViewerViewportControlOptions,
 } from "@itwin/viewer-react";
+import { ViewerPerformance } from "@itwin/viewer-react";
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -33,7 +34,8 @@ export class ItwinViewer {
   frontstages: ViewerFrontstage[] | undefined;
   viewportOptions: ViewerViewportControlOptions | undefined;
   uiProviders: UiItemsProvider[] | undefined;
-  authConfig: ViewerAuthorizationClient;
+  authClient: ViewerAuthorizationClient;
+  enablePerformanceMonitors: boolean;
 
   onIModelConnected: ((iModel: CheckpointConnection) => void) | undefined;
 
@@ -42,6 +44,8 @@ export class ItwinViewer {
       //TODO localize
       throw new Error("Please supply a root elementId as the first parameter"); //TODO localize
     }
+    ViewerPerformance.enable(options.enablePerformanceMonitors);
+    ViewerPerformance.addMark("ViewerStarting");
     this.elementId = options.elementId;
     this.theme = options.theme;
     this.uiConfig = options.defaultUiConfig;
@@ -50,7 +54,8 @@ export class ItwinViewer {
     this.frontstages = options.frontstages;
     this.viewportOptions = options.viewportOptions;
     this.uiProviders = options.uiProviders;
-    this.authConfig = options.authConfig;
+    this.authClient = options.authClient;
+    this.enablePerformanceMonitors = options.enablePerformanceMonitors;
 
     void WebInitializer.startWebViewer(options);
   }
@@ -64,7 +69,7 @@ export class ItwinViewer {
     // render the viewer for the given iModel on the given element
     ReactDOM.render(
       React.createElement(Viewer, {
-        authConfig: this.authConfig,
+        authClient: this.authClient,
         iTwinId: args?.iTwinId,
         iModelId: args?.iModelId,
         changeSetId: args?.changeSetId,
@@ -75,6 +80,7 @@ export class ItwinViewer {
         viewportOptions: this.viewportOptions,
         uiProviders: this.uiProviders,
         theme: this.theme,
+        enablePerformanceMonitors: this.enablePerformanceMonitors,
       } as WebViewerProps),
       document.getElementById(this.elementId)
     );

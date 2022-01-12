@@ -39,3 +39,5 @@ common/temp/
 **/*.db-journal
 **/*.Tiles
 **/*.Tiles-journal
+
+**/tsconfig.tsbuildinfo

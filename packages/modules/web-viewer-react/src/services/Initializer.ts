@@ -10,6 +10,7 @@ import {
   getIModelAppOptions,
   makeCancellable,
   ViewerAuthorization,
+  ViewerPerformance,
 } from "@itwin/viewer-react";
 
 import type { IModelBackendOptions, WebViewerProps } from "../types";
@@ -76,6 +77,7 @@ export class WebInitializer {
       IModelApp.shutdown().catch(() => {
         // Do nothing, its possible that we never started.
       });
+      ViewerPerformance.clear();
     }
   };
 
@@ -85,20 +87,26 @@ export class WebInitializer {
       console.log("starting web viewer");
       this._initializing = true;
       const cancellable = makeCancellable(function* () {
+        ViewerPerformance.enable(options.enablePerformanceMonitors);
+        ViewerPerformance.addMark("ViewerStarting");
         const iModelAppOptions = getIModelAppOptions(options);
-        const authClient = options.authConfig;
-        iModelAppOptions.authorizationClient = authClient;
-        ViewerAuthorization.client = authClient;
+        iModelAppOptions.authorizationClient = options.authClient;
+        ViewerAuthorization.client = options.authClient;
         const rpcParams: BentleyCloudRpcParams = yield initializeRpcParams(
           options?.backend
         );
-
         yield IModelApp.startup(iModelAppOptions);
         BentleyCloudRpcManager.initializeClient(
           rpcParams,
           iModelAppOptions.rpcInterfaces ?? []
         );
         console.log("web viewer started");
+        ViewerPerformance.addMark("ViewerStarted");
+        void ViewerPerformance.addAndLogMeasure(
+          "ViewerInitialized",
+          "ViewerStarting",
+          "ViewerStarted"
+        );
       });
 
       WebInitializer._cancel = cancellable.cancel;

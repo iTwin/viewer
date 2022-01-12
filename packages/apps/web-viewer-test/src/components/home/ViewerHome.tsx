@@ -11,14 +11,14 @@ import { useAccessToken, Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";
-import { Header } from ".";
+import { Header } from "./Header";
 import styles from "./Home.module.scss";
 
 /**
  * Test a viewer that uses auth configuration provided at startup
  * @returns
  */
-export const AuthConfigHome: React.FC = () => {
+export const ViewerHome: React.FC = () => {
   const [iModelId, setIModelId] = useState(
     process.env.IMJS_AUTH_CLIENT_IMODEL_ID
   );
@@ -51,7 +51,7 @@ export const AuthConfigHome: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    history.push(`authconfig?iTwinId=${iTwinId}&iModelId=${iModelId}`);
+    history.push(`viewer?iTwinId=${iTwinId}&iModelId=${iModelId}`);
   }, [iTwinId, iModelId]);
 
   const toggleLogin = useCallback(async () => {
@@ -112,7 +112,7 @@ export const AuthConfigHome: React.FC = () => {
         switchModel={switchModel}
       />
       <Viewer
-        authConfig={authClient}
+        authClient={authClient}
         iTwinId={iTwinId}
         iModelId={iModelId}
         appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
@@ -125,6 +125,7 @@ export const AuthConfigHome: React.FC = () => {
             value: process.env.IMJS_BING_MAPS_KEY ?? "",
           },
         }}
+        enablePerformanceMonitors={true}
       />
     </div>
   );

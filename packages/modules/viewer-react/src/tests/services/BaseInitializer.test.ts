@@ -7,7 +7,6 @@ import {
   DevToolsRpcInterface,
   IModelReadRpcInterface,
   IModelTileRpcInterface,
-  SnapshotIModelRpcInterface,
 } from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import { ITwinLocalization } from "@itwin/core-i18n";
@@ -18,8 +17,18 @@ import {
   BaseInitializer,
   getIModelAppOptions,
 } from "../../services/BaseInitializer";
-import { ai } from "../../services/telemetry/TelemetryService";
+import { userAI } from "../../services/telemetry/TelemetryService";
 import { MockToolAdmin } from "../mocks/MockToolAdmin";
+
+jest.mock("../../services/iModel/ViewCreator3d", () => {
+  return {
+    ViewCreator3d: jest.fn().mockImplementation(() => {
+      return {
+        createDefaultView: jest.fn().mockResolvedValue({}),
+      };
+    }),
+  };
+});
 
 jest.mock("@itwin/core-i18n");
 jest.mock("@itwin/appui-react", () => {
@@ -97,7 +106,6 @@ jest.mock("../../services/telemetry/TelemetryService");
 
 describe("BaseInitializer", () => {
   beforeEach(() => {
-    BaseInitializer.cancel();
     jest.clearAllMocks();
     jest.resetModules();
     if (UiCore.initialized) {
@@ -111,7 +119,6 @@ describe("BaseInitializer", () => {
       configurable: true,
     });
   });
-
   it("gets default iModelApp options", () => {
     const appOptions = getIModelAppOptions();
     expect(appOptions).toEqual({
@@ -122,68 +129,60 @@ describe("BaseInitializer", () => {
         IModelReadRpcInterface,
         IModelTileRpcInterface,
         PresentationRpcInterface,
-        SnapshotIModelRpcInterface,
       ],
       localization: expect.anything(),
       toolAdmin: undefined,
       hubAccess: expect.anything(),
+      mapLayerOptions: undefined,
+      publicPath: "",
+      realityDataAccess: expect.anything(),
     });
   });
-
   it("sets the applicationId", () => {
     const productId = "1234";
-
     const appOptions = getIModelAppOptions({
       productId: productId,
+      enablePerformanceMonitors: false,
     });
-
     expect(appOptions.applicationId).toEqual(productId);
   });
-
   it("registers additional rpcInterfaces", () => {
     const additionalRpcInterfaces = [DevToolsRpcInterface];
-
     const appOptions = getIModelAppOptions({
       additionalRpcInterfaces: additionalRpcInterfaces,
+      enablePerformanceMonitors: false,
     });
-
     expect(appOptions.rpcInterfaces).toEqual([
       IModelReadRpcInterface,
       IModelTileRpcInterface,
       PresentationRpcInterface,
-      SnapshotIModelRpcInterface,
       DevToolsRpcInterface,
     ]);
   });
-
   it("registers a toolAdmin", () => {
     const toolAdmin = new MockToolAdmin();
     const appOptions = getIModelAppOptions({
       toolAdmin: toolAdmin,
+      enablePerformanceMonitors: false,
     });
-
     expect(appOptions.toolAdmin).toEqual(toolAdmin);
   });
-
   it("overrides the i18n url template", () => {
     const i18nUrlTemplate = "host/route";
-
     getIModelAppOptions({
       i18nUrlTemplate: i18nUrlTemplate,
+      enablePerformanceMonitors: false,
     });
-
     expect(ITwinLocalization).toHaveBeenCalledWith({
       urlTemplate: i18nUrlTemplate,
     });
   });
-
   it("registers additional i18n namespaces", async () => {
     await BaseInitializer.initialize({
       additionalI18nNamespaces: ["test1", "test2"],
+      enablePerformanceMonitors: false,
     });
-
     await BaseInitializer.initialized;
-
     expect(IModelApp.localization.registerNamespace).toHaveBeenCalledWith(
       "test1"
     );
@@ -191,26 +190,20 @@ describe("BaseInitializer", () => {
       "test2"
     );
   });
-
   it("instantiates an instance of the Telemetry Service when an app insights key is provided", async () => {
     const appInsightsKey = "123";
     await BaseInitializer.initialize({
       appInsightsKey: appInsightsKey,
+      enablePerformanceMonitors: false,
     });
-
     await BaseInitializer.initialized;
-
-    expect(ai.initialize).toHaveBeenCalledWith(appInsightsKey);
+    expect(userAI.initialize).toHaveBeenCalledWith(appInsightsKey);
   });
-
   it("does not instantiate an instance of the Telemetry Service when an app insights key is not provided", async () => {
     await BaseInitializer.initialize();
-
     await BaseInitializer.initialized;
-
-    expect(ai.initialize).not.toHaveBeenCalled();
+    expect(userAI.initialize).not.toHaveBeenCalled();
   });
-
   it("fails to initialize if iModelApp has not been initialized", async () => {
     // override the return value of the getter function
     Object.defineProperty(IModelApp, "initialized", {
@@ -229,17 +222,15 @@ describe("BaseInitializer", () => {
       );
     }
   });
-
   it("executes a callback after IModelApp is initialized", async () => {
     const callbacks = {
       onIModelAppInit: jest.fn(),
     };
     await BaseInitializer.initialize({
       onIModelAppInit: callbacks.onIModelAppInit,
+      enablePerformanceMonitors: false,
     });
-
     await BaseInitializer.initialized;
-
     expect(callbacks.onIModelAppInit).toHaveBeenCalled();
   });
 });

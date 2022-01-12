@@ -104,12 +104,13 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
         const redirectUri = getAppEnvVar("REDIRECT_URI");
         const issuerUrl = getAppEnvVar("ISSUER_URL");
 
-        const authClient = await ElectronMainAuthorization.create({
+        const authClient = new ElectronMainAuthorization({
           clientId,
           scope,
           redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
           issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
         });
+        await authClient.signInSilent();
         IModelHost.authorizationClient = authClient;
         ViewerHandler._authInitialized = true;
       }

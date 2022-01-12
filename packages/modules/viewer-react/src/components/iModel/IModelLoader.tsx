@@ -30,7 +30,7 @@ import { Provider } from "react-redux";
 import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
 import { openLocalImodel, openRemoteIModel } from "../../services/iModel";
 import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
-import { ai } from "../../services/telemetry/TelemetryService";
+import { userAI, ViewerPerformance } from "../../services/telemetry";
 import type {
   BlankConnectionViewState,
   IModelLoaderParams,
@@ -39,8 +39,8 @@ import type {
   ViewerFrontstage,
 } from "../../types";
 import { DefaultFrontstage } from "../app-ui/frontstages/DefaultFrontstage";
-import { IModelBusy, IModelViewer } from ".";
-
+import { IModelBusy } from "./IModelBusy";
+import { IModelViewer } from "./IModelViewer";
 export interface ModelLoaderProps extends IModelLoaderParams {
   iTwinId?: string;
   iModelId?: string;
@@ -218,6 +218,12 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             changeSetId
           );
         }
+        ViewerPerformance.addMark("IModelConnection");
+        void ViewerPerformance.addAndLogMeasure(
+          "IModelConnected",
+          "ViewerStarting",
+          "IModelConnection"
+        );
         if (imodelConnection && isMounted.current) {
           // Tell the SyncUiEventDispatcher and StateManager about the iModelConnection
           UiFramework.setIModelConnection(imodelConnection, true);
@@ -237,12 +243,13 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         errorManager.throwFatalError(error);
       });
 
+      const mounted = isMounted.current;
       return () => {
         if (prevConnection) {
           void prevConnection.close();
           prevConnection = undefined;
         }
-        if (isMounted.current) {
+        if (mounted) {
           setConnection(undefined);
         }
       };
@@ -254,6 +261,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       blankConnection,
       blankConnectionViewState,
       isMounted,
+      onIModelConnected,
     ]);
 
     useEffect(() => {
@@ -360,7 +368,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
 );
 
 const TrackedLoader = withAITracking(
-  ai.reactPlugin,
+  userAI.reactPlugin,
   Loader,
   "IModelLoader",
   "tracked-loader"

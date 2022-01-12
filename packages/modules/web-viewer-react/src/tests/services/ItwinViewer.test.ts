@@ -14,11 +14,22 @@ import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
 jest.mock("@itwin/viewer-react", () => {
   return {
     BaseViewer: jest.fn(() => null),
-    getIModelAppOptions: jest.fn(),
+    getIModelAppOptions: jest.fn().mockReturnValue({}),
     useIsMounted: jest.fn().mockReturnValue(true),
     useBaseViewerInitializer: jest.fn().mockReturnValue(true),
     getInitializationOptions: jest.fn().mockReturnValue({}),
     isEqual: jest.fn().mockReturnValue(true),
+    ViewerPerformance: {
+      addMark: jest.fn(),
+      addAndLogMeasure: jest.fn(),
+      enable: jest.fn(),
+    },
+    makeCancellable: jest.requireActual(
+      "@itwin/viewer-react/lib/cjs/utilities/MakeCancellable"
+    ).makeCancellable,
+    ViewerAuthorization: {
+      client: {},
+    },
   };
 });
 
@@ -67,7 +78,7 @@ jest.mock("@itwin/core-frontend", () => {
 const elementId = "viewerRoot";
 const mockITwinId = "mockITwinId";
 const mockiModelId = "mockImodelId";
-const authConfig = new MockAuthorizationClient();
+const authClient = new MockAuthorizationClient();
 
 describe("iTwinViewer", () => {
   beforeAll(() => {
@@ -84,14 +95,15 @@ describe("iTwinViewer", () => {
     jest.spyOn(ReactDOM, "render");
     const viewer = new ItwinViewer({
       elementId,
-      authConfig,
+      authClient,
+      enablePerformanceMonitors: false,
     });
     await viewer.load({ iTwinId: mockITwinId, iModelId: mockiModelId });
     await WebInitializer.initialized;
     expect(React.createElement).toHaveBeenCalledWith(Viewer, {
       iTwinId: mockITwinId,
       iModelId: mockiModelId,
-      authConfig: authConfig,
+      authClient: authClient,
       changeSetId: undefined,
       uiConfig: undefined,
       appInsightsKey: undefined,
@@ -100,6 +112,7 @@ describe("iTwinViewer", () => {
       viewportOptions: undefined,
       uiProviders: undefined,
       theme: undefined,
+      enablePerformanceMonitors: false,
     });
     expect(ReactDOM.render).toHaveBeenCalledWith(
       expect.anything(),

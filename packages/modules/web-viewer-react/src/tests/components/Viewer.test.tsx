@@ -20,6 +20,7 @@ import React from "react";
 import { Viewer } from "../../components/Viewer";
 import { WebInitializer } from "../../services/Initializer";
 import type { IModelBackendOptions } from "../../types";
+import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
 
 jest.mock("@itwin/viewer-react", () => {
   return {
@@ -45,13 +46,21 @@ jest.mock("@itwin/viewer-react", () => {
     },
     useIsMounted: jest.fn().mockReturnValue(true),
     makeCancellable: jest.requireActual(
-      "@itwin/viewer-react/lib/utilities/MakeCancellable"
+      "@itwin/viewer-react/lib/cjs/utilities/MakeCancellable"
     ).makeCancellable,
     useBaseViewerInitializer: jest.fn().mockReturnValue(true),
     getInitializationOptions: jest.fn().mockReturnValue({}),
     isEqual: jest.fn().mockReturnValue(true),
     BaseInitializer: {
       initialize: jest.fn(),
+    },
+    ViewerPerformance: {
+      addMark: jest.fn(),
+      addAndLogMeasure: jest.fn(),
+      enable: jest.fn(),
+    },
+    ViewerAuthorization: {
+      client: {},
     },
   };
 });
@@ -108,12 +117,7 @@ jest.mock("@itwin/core-frontend", () => {
 const mockITwinId = "123";
 const mockIModelId = "456";
 
-const authConfig: BrowserAuthorizationClientConfiguration = {
-  clientId: "test-client",
-  scope: "test-scope",
-  responseType: "code",
-  redirectUri: "http://localhost",
-};
+const authClient = new MockAuthorizationClient();
 
 describe("Viewer", () => {
   beforeEach(() => {
@@ -123,10 +127,11 @@ describe("Viewer", () => {
   it("starts the WebViewerApp", async () => {
     const { getByTestId } = render(
       <Viewer
-        authConfig={{ config: authConfig }}
+        authClient={authClient}
         iTwinId={mockITwinId}
         iModelId={mockIModelId}
         additionalRpcInterfaces={[DevToolsRpcInterface]}
+        enablePerformanceMonitors={false}
       />
     );
 
@@ -165,20 +170,22 @@ describe("Viewer", () => {
 
     const { getByTestId } = render(
       <Viewer
-        authConfig={{ config: authConfig }}
+        authClient={authClient}
         iTwinId={mockITwinId}
         iModelId={mockIModelId}
         backend={backendConfig}
+        enablePerformanceMonitors={false}
       />
     );
 
     await waitFor(() => getByTestId("mock-div"));
 
     expect(WebInitializer.startWebViewer).toHaveBeenCalledWith({
-      authConfig: { config: authConfig },
+      authClient: authClient,
       backend: backendConfig,
       iTwinId: mockITwinId,
       iModelId: mockIModelId,
+      enablePerformanceMonitors: false,
     });
   });
 });

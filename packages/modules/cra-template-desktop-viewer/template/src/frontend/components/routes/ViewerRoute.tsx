@@ -39,6 +39,7 @@ export const ViewerRoute = ({ location }: ViewerRouteProps) => {
         contentManipulationTools: { cornerItem: { hideDefault: true } },
       }}
       uiProviders={[new IModelMergeItemsProvider()]}
+      enablePerformanceMonitors={true}
     />
   ) : null;
 };
