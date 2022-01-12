@@ -5,7 +5,7 @@
 
 import React, { Component, Fragment } from "react";
 
-import { EventTrackerFunction } from "..";
+import type { EventTrackerFunction } from "../types";
 import { Fallback } from "./Fallback";
 
 interface Props {
@@ -29,9 +29,10 @@ export class ErrorBoundary extends Component<
     };
   }
 
-  static getDerivedStateFromError(
-    e: Error
-  ): { fallback: boolean; error: Error } {
+  static getDerivedStateFromError(e: Error): {
+    fallback: boolean;
+    error: Error;
+  } {
     return {
       fallback: true,
       error: e,

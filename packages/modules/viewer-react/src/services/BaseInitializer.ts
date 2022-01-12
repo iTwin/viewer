@@ -5,7 +5,6 @@
 
 // TODO 3.0 re-add
 // import { MeasureTools } from "@bentley/measure-tools-react";
-// import { TreeWidget } from "@bentley/tree-widget-react";
 import {
   AppNotificationManager,
   ConfigurableUiManager,
@@ -30,6 +29,7 @@ import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
 import { PropertyGridManager } from "@itwin/property-grid-react";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
+import { TreeWidget } from "@itwin/tree-widget-react";
 
 import { ViewerPerformance } from "../services/telemetry";
 import type { ItwinViewerInitializerParams } from "../types";
@@ -174,8 +174,8 @@ export class BaseInitializer {
       // yield IModelApp.extensionAdmin.onStartup();
 
       // TODO 3.0 re-add
+      yield TreeWidget.initialize(IModelApp.localization);
       yield PropertyGridManager.initialize(IModelApp.localization);
-      // yield TreeWidget.initialize(IModelApp.i18n);
       // yield MeasureTools.startup();
 
       if (viewerOptions?.appInsightsKey) {

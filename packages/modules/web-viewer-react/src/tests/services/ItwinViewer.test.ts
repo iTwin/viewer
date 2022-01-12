@@ -78,7 +78,7 @@ jest.mock("@itwin/core-frontend", () => {
 const elementId = "viewerRoot";
 const mockITwinId = "mockITwinId";
 const mockiModelId = "mockImodelId";
-const authConfig = new MockAuthorizationClient();
+const authClient = new MockAuthorizationClient();
 
 describe("iTwinViewer", () => {
   beforeAll(() => {
@@ -95,7 +95,7 @@ describe("iTwinViewer", () => {
     jest.spyOn(ReactDOM, "render");
     const viewer = new ItwinViewer({
       elementId,
-      authConfig,
+      authClient,
       enablePerformanceMonitors: false,
     });
     await viewer.load({ iTwinId: mockITwinId, iModelId: mockiModelId });
@@ -103,7 +103,7 @@ describe("iTwinViewer", () => {
     expect(React.createElement).toHaveBeenCalledWith(Viewer, {
       iTwinId: mockITwinId,
       iModelId: mockiModelId,
-      authConfig: authConfig,
+      authClient: authClient,
       changeSetId: undefined,
       uiConfig: undefined,
       appInsightsKey: undefined,

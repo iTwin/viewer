@@ -5,10 +5,10 @@
 
 // TODO 3.0 re-add
 // import { MeasureToolsUiItemsProvider } from "@bentley/measure-tools-react";
-// import { TreeWidgetUiItemsProvider } from "@bentley/tree-widget-react";
 import type { UiItemsProvider } from "@itwin/appui-abstract";
 import { UiItemsManager } from "@itwin/appui-abstract";
 import { PropertyGridUiItemsProvider } from "@itwin/property-grid-react";
+import { TreeWidgetUiItemsProvider } from "@itwin/tree-widget-react";
 import { useEffect } from "react";
 
 import type { ItwinViewerUi } from "../types";
@@ -21,9 +21,9 @@ export function useUiProviders(
     const defaultProviders: UiItemsProvider[] = [];
 
     // TODO 3.0 re-add
-    // if (!defaultUiConfig?.hideTreeView) {
-    //   defaultProviders.push(new TreeWidgetUiItemsProvider());
-    // }
+    if (!defaultUiConfig?.hideTreeView) {
+      defaultProviders.push(new TreeWidgetUiItemsProvider());
+    }
     if (!defaultUiConfig?.hidePropertyGrid) {
       defaultProviders.push(
         new PropertyGridUiItemsProvider({
