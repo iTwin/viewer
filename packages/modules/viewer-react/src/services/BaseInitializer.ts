@@ -176,7 +176,7 @@ export class BaseInitializer {
       // TODO 3.0 re-add
       // yield PropertyGridManager.initialize(IModelApp.i18n);
       // yield TreeWidget.initialize(IModelApp.i18n);
-      // yield MeasureTools.startup();
+      yield MeasureTools.startup();
 
       if (viewerOptions?.appInsightsKey) {
         trackUserEvent("iTwinViewer.Viewer.Initialized");

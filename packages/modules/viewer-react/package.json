@@ -37,7 +37,7 @@
     "@itwin/electron-authorization": "latest",
     "@itwin/error-handling-react": "2.0.0-dev.20",
     "@itwin/itwinui-react": "^1.16.2",
-    "@itwin/measure-tools-react": "2.0.0-dev.20",
+    "@itwin/measure-tools-react": "latest",
     "@microsoft/applicationinsights-react-js": "2.3.1",
     "@microsoft/applicationinsights-web": "2.3.1",
     "history": "^4.10.1",
