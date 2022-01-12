@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-/* eslint-disable */
 import { StageUsage, StandardContentLayouts } from "@itwin/appui-abstract";
 import {
   ContentGroup,
@@ -16,47 +15,15 @@ import {
   Widget,
   Zone,
 } from "@itwin/appui-react";
-import { ViewState } from "@itwin/core-frontend";
+import type { ViewState } from "@itwin/core-frontend";
 import * as React from "react";
 
-import { ItwinViewerUi, ViewerViewportControlOptions } from "../../../types";
+import type {
+  ItwinViewerUi,
+  ViewerViewportControlOptions,
+} from "../../../types";
 import { AppStatusBarWidget } from "../statusbars/AppStatusBar";
 import { BasicNavigationWidget, BasicToolWidget } from "../widgets";
-
-// TODO 3.0 refactor?
-// const getContentGroup = (viewState: ViewState, viewportOptions: IModelViewportControlOptions): ContentGroupProps =>{
-//  return {id: "main", contents: [
-
-//  new ContentGroup({
-//    id: "viewport-content-group",
-//    layout: StandardContentLayouts.singleView,
-//   contents: [
-//     {
-//       id: "viewport",
-//       classId: IModelViewportControl,
-//       applicationData: {
-//         iModelConnection: UiFramework.getIModelConnection(),
-//         ...viewportOptions,
-//         viewState: viewState
-//       },
-//     },
-//   ],
-// })];
-// };
-
-// export const getDefaultFrontstage = (
-//   viewState: ViewState,
-//   uiConfig?: ItwinViewerUi,
-//   viewportOptions?: IModelViewportControlOptions
-// ) => {
-//   const frontstageProps: StandardFrontstageProps = {
-//     id: "DefaultFrontstage",
-//     usage: StageUsage.General,
-//     contentGroupProps: getContentGroup(viewState, viewportOptions)
-//   };
-
-//   return new StandardFrontstageProvider(frontstageProps);
-// };
 
 /**
  * Default Frontstage for the iTwinViewer
@@ -109,7 +76,7 @@ export class DefaultFrontstage extends FrontstageProvider {
     return (
       <Frontstage
         id="DefaultFrontstage"
-        version={1} // this value should be increased when changes are made to Frontstage
+        version={2} // this value should be increased when changes are made to Frontstage
         usage={StageUsage.General}
         defaultTool={CoreTools.selectElementCommand}
         contentGroup={this._contentGroup}

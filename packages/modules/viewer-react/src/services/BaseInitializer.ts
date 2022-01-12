@@ -3,9 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-// TODO 3.0 re-add
-// import { PropertyGridManager } from "@bentley/property-grid-react";
-// import { TreeWidget } from "@bentley/tree-widget-react";
 import {
   AppNotificationManager,
   ConfigurableUiManager,
@@ -29,7 +26,9 @@ import { IModelsClient } from "@itwin/imodels-client-management";
 import { MeasureTools } from "@itwin/measure-tools-react";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
+import { PropertyGridManager } from "@itwin/property-grid-react";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
+import { TreeWidget } from "@itwin/tree-widget-react";
 
 import { ViewerPerformance } from "../services/telemetry";
 import type { ItwinViewerInitializerParams } from "../types";
@@ -173,9 +172,8 @@ export class BaseInitializer {
       // }
       // yield IModelApp.extensionAdmin.onStartup();
 
-      // TODO 3.0 re-add
-      // yield PropertyGridManager.initialize(IModelApp.i18n);
-      // yield TreeWidget.initialize(IModelApp.i18n);
+      yield TreeWidget.initialize(IModelApp.localization);
+      yield PropertyGridManager.initialize(IModelApp.localization);
       yield MeasureTools.startup();
 
       if (viewerOptions?.appInsightsKey) {
