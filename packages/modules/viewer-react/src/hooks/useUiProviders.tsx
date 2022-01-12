@@ -28,7 +28,6 @@ export function useUiProviders(
       defaultProviders.push(
         new PropertyGridUiItemsProvider({
           enableCopyingPropertyText: true,
-          enableFavoriteProperties: true,
         })
       );
     }
