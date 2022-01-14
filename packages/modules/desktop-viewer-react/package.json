@@ -29,7 +29,6 @@
     "@itwin/viewer-react": "2.0.0-dev.20"
   },
   "devDependencies": {
-    "@bentley/itwin-client": "rc",
     "@itwin/appui-abstract": "rc",
     "@itwin/appui-layout-react": "rc",
     "@itwin/appui-react": "rc",
@@ -73,7 +72,6 @@
     "typescript": "~4.3.0"
   },
   "peerDependencies": {
-    "@bentley/itwin-client": "rc",
     "@itwin/appui-abstract": "rc",
     "@itwin/appui-layout-react": "rc",
     "@itwin/appui-react": "rc",

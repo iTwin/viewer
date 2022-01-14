@@ -2,7 +2,6 @@
   "package": {
     "dependencies": {
       "@bentley/icons-generic-webfont": "^1.0.15",
-      "@bentley/itwin-client": "rc",
       "@bentley/react-scripts": "^4.0.3",
       "@itwin/appui-abstract": "rc",
       "@itwin/appui-layout-react": "rc",

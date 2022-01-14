@@ -5,7 +5,6 @@
   "dependencies": {
     "@bentley/icons-generic": "^1.0.13",
     "@bentley/imodelhub-client": "rc",
-    "@bentley/itwin-client": "rc",
     "@itwin/appui-abstract": "rc",
     "@itwin/appui-react": "rc",
     "@itwin/appui-layout-react": "rc",
