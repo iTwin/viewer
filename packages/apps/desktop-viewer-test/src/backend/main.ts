@@ -79,6 +79,7 @@ const createMenu = () => {
           click: () => {
             IpcHost.send(channelName, "open");
           },
+          accelerator: "CommandOrControl+O",
         },
         {
           id: "download-menu-item",
@@ -86,6 +87,7 @@ const createMenu = () => {
           click: () => {
             IpcHost.send(channelName, "download");
           },
+          accelerator: "CommandOrControl+D",
         },
         { type: "separator" },
         isMac
@@ -102,6 +104,7 @@ const createMenu = () => {
           click: () => {
             IpcHost.send(channelName, "home");
           },
+          accelerator: "CommandOrControl+G",
         },
       ],
     },
@@ -118,6 +121,7 @@ const createMenu = () => {
         {
           label: "Zoom",
           role: "zoom",
+          accelerator: "CommandOrControl+Alt+Z",
         },
         // TODO uncomment for dev as needed
         // {
