@@ -51,7 +51,7 @@
     "@itwin/ecschema-metadata": "rc",
     "@itwin/electron-authorization": "latest",
     "@itwin/express-server": "rc",
-    "@itwin/desktop-viewer-react": "2.0.0-dev.20",
+    "@itwin/desktop-viewer-react": "2.0.0-dev.21",
     "@itwin/imodel-browser-react": "^0.11.0",
     "@itwin/imodels-access-backend": "latest",
     "@itwin/imodels-access-frontend": "latest",
@@ -67,7 +67,7 @@
     "@itwin/webgl-compatibility": "rc",
     "@reach/router": "~1.3.4",
     "dotenv-flow": "^3.2.0",
-    "electron": "^11.1.0",
+    "electron": "^14.0.0",
     "minimist": "^1.2.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
