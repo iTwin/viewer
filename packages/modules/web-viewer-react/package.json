@@ -67,6 +67,7 @@
     "typescript": "~4.3.0"
   },
   "peerDependencies": {
+    "@itwin/core-bentley": "rc",
     "@itwin/core-common": "rc",
     "@itwin/core-frontend": "rc",
     "@itwin/core-react": "rc",
