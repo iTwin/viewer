@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
 import {
   DevToolsRpcInterface,
   IModelReadRpcInterface,

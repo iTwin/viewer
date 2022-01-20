@@ -5,8 +5,7 @@ dependencies:
   '@babel/preset-react': 7.16.7
   '@bentley/icons-generic': 1.0.34
   '@bentley/icons-generic-webfont': 1.0.34
-  '@bentley/imodelhub-client': 3.0.0-dev.148_478bdec4a3e98cb9752f06c050a1d6cc
-  '@bentley/itwin-client': 3.0.0-dev.148_672459f70795e85f63fd29f79bac8341
+  '@bentley/imodelhub-client': 3.0.0-dev.148_672459f70795e85f63fd29f79bac8341
   '@bentley/react-scripts': 4.0.5_react@17.0.2+typescript@4.3.5
   '@itwin/appui-abstract': 3.0.0-dev.185_672459f70795e85f63fd29f79bac8341
   '@itwin/appui-layout-react': 3.0.0-dev.185_b845fa2849eca0e88e8d4951a3531782
@@ -115,7 +114,6 @@ dependencies:
   minimist: 1.2.5
   nodemon: 1.19.4
   npm-run-all: 4.1.5
-  oidc-client: 1.11.5
   prettier: 2.5.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -2709,9 +2707,8 @@ packages:
     dev: false
     resolution:
       integrity: sha512-IIs1wDcY2oZ8tJ3EZRw0U51M+0ZL3MvwoDYYmhUXaa9/UZqpFoOyLBGaxjirQteWXqTIMm3mFvmC+Nbn1ok4Iw==
-  /@bentley/imodelhub-client/3.0.0-dev.148_478bdec4a3e98cb9752f06c050a1d6cc:
+  /@bentley/imodelhub-client/3.0.0-dev.148_672459f70795e85f63fd29f79bac8341:
     dependencies:
-      '@bentley/itwin-client': 3.0.0-dev.148_672459f70795e85f63fd29f79bac8341
       '@itwin/core-bentley': 3.0.0-dev.185
       agentkeepalive: 4.2.0
       deep-assign: 2.0.0
@@ -3532,7 +3529,7 @@ packages:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-table: 7.7.0_react@17.0.2
-      react-transition-group: 4.4.2_react-dom@17.0.2+react@17.0.2
+      react-transition-group: 4.1.1_react-dom@17.0.2+react@17.0.2
     dev: false
     peerDependencies:
       react: ^16.8.6 || ^17.0.0
@@ -20039,8 +20036,7 @@ packages:
   'file:projects/cdn-viewer.tgz_15bddb08566322d1aa5085c76786e951':
     dependencies:
       '@bentley/icons-generic': 1.0.34
-      '@bentley/imodelhub-client': 3.0.0-dev.148_478bdec4a3e98cb9752f06c050a1d6cc
-      '@bentley/itwin-client': 3.0.0-dev.148_672459f70795e85f63fd29f79bac8341
+      '@bentley/imodelhub-client': 3.0.0-dev.148_672459f70795e85f63fd29f79bac8341
       '@bentley/react-scripts': 4.0.5_react@17.0.2+typescript@4.3.5
       '@itwin/appui-abstract': 3.0.0-dev.185_672459f70795e85f63fd29f79bac8341
       '@itwin/appui-layout-react': 3.0.0-dev.185_b845fa2849eca0e88e8d4951a3531782
@@ -20075,7 +20071,7 @@ packages:
       '@itwin/imodel-components-react': '*'
       redux: '*'
     resolution:
-      integrity: sha512-+ND/rrHpQCfXqSvS4t0U4I/Kqmx0iS6sc3VLR+NIXOAkaNIbbkyUckos+4Z3rl3kNCB1j/USVlkgH0qEM1cB4A==
+      integrity: sha512-EtdIdODOquESRufVzu+HFxoZiRbh75xmfS+t0D4G8yzf/E3C0JyQWLpc2rCW6nCB1lFpALscPQxS12PgczHTdQ==
       tarball: 'file:projects/cdn-viewer.tgz'
     version: 0.0.0
   'file:projects/cra-template-desktop-viewer.tgz':
@@ -20094,7 +20090,6 @@ packages:
     version: 0.0.0
   'file:projects/desktop-viewer-react.tgz_fa4d97537a7338094d234c096fc2d804':
     dependencies:
-      '@bentley/itwin-client': 3.0.0-dev.148_672459f70795e85f63fd29f79bac8341
       '@itwin/appui-abstract': 3.0.0-dev.185_672459f70795e85f63fd29f79bac8341
       '@itwin/appui-layout-react': 3.0.0-dev.185_b845fa2849eca0e88e8d4951a3531782
       '@itwin/appui-react': 3.0.0-dev.185_84ffd32d9d53397166fc51060f30c4ad
@@ -20144,13 +20139,12 @@ packages:
     peerDependencies:
       '@itwin/ecschema-metadata': '*'
     resolution:
-      integrity: sha512-O058DlytBVAlZFsx+4siWHyhjiBrWCnveVF8IOhDdURYKf333Lj13bSZXHyU41+9ZoFTmBp72qUhSzFsEoqONg==
+      integrity: sha512-OaQ7UvD5tDl/f7HaPxDCLagsJXz3ijv4qlkYzs7sKNlhKgvfuSNud3L+BXeHYaMT8IyKBA7z3LkSJDCL/DqVvg==
       tarball: 'file:projects/desktop-viewer-react.tgz'
     version: 0.0.0
   'file:projects/desktop-viewer-test.tgz_20c194fc48118bc191ac00b979841b97':
     dependencies:
       '@bentley/icons-generic-webfont': 1.0.34
-      '@bentley/itwin-client': 3.0.0-dev.148_672459f70795e85f63fd29f79bac8341
       '@bentley/react-scripts': 4.0.5_react@17.0.2+typescript@4.3.5
       '@itwin/appui-abstract': 3.0.0-dev.185_672459f70795e85f63fd29f79bac8341
       '@itwin/appui-layout-react': 3.0.0-dev.185_b845fa2849eca0e88e8d4951a3531782
@@ -20213,7 +20207,7 @@ packages:
       react-redux: '*'
       redux: '*'
     resolution:
-      integrity: sha512-ihi1PK8L09MKk2kCZnO/Jskawg/NORpdIOh/LO3MyubvQklry4HVmbBKEb4Gg5Ay1fJhSnzKcBHwMoKQBCvXTw==
+      integrity: sha512-HEyJWRTdDZTJrNMzeFgaDXCyxnh3JdEsetW8p/BXsPTWnymr1HPUKAsvkn3zph9GfvHwnjqIjZbC8Qny/B3plQ==
       tarball: 'file:projects/desktop-viewer-test.tgz'
     version: 0.0.0
   'file:projects/error-handling-react.tgz':
@@ -20263,11 +20257,9 @@ packages:
   'file:projects/viewer-react.tgz':
     dependencies:
       '@bentley/icons-generic-webfont': 1.0.34
-      '@bentley/itwin-client': 3.0.0-dev.148_672459f70795e85f63fd29f79bac8341
       '@itwin/appui-abstract': 3.0.0-dev.185_672459f70795e85f63fd29f79bac8341
       '@itwin/appui-layout-react': 3.0.0-dev.185_b845fa2849eca0e88e8d4951a3531782
       '@itwin/appui-react': 3.0.0-dev.185_84ffd32d9d53397166fc51060f30c4ad
-      '@itwin/browser-authorization': 0.4.0
       '@itwin/build-tools': 3.0.0-dev.185
       '@itwin/components-react': 3.0.0-dev.185_b845fa2849eca0e88e8d4951a3531782
       '@itwin/core-bentley': 3.0.0-dev.185
@@ -20280,7 +20272,6 @@ packages:
       '@itwin/core-quantity': 3.0.0-dev.185_672459f70795e85f63fd29f79bac8341
       '@itwin/core-react': 3.0.0-dev.185_32c10532cb50ca55e641495fdddea5c8
       '@itwin/core-telemetry': 3.0.0-dev.185_4b6cd25750efe48889a1029ea63e36fa
-      '@itwin/electron-authorization': 0.7.0
       '@itwin/imodel-components-react': 3.0.0-dev.185_faf7c5fff02fef3f99c681cc047b0015
       '@itwin/imodels-access-frontend': 1.0.0_6aea12305ce80ad19a2a12138f05eb4d
       '@itwin/imodels-client-management': 1.0.0
@@ -20305,7 +20296,6 @@ packages:
       '@types/react-redux': 7.1.22
       concurrently: 5.3.0
       copyfiles: 2.4.1
-      history: 4.10.1
       identity-obj-proxy: 3.0.0
       jest: 26.6.3
       react: 17.0.2
@@ -20319,7 +20309,7 @@ packages:
     dev: false
     name: '@rush-temp/viewer-react'
     resolution:
-      integrity: sha512-CuWmRb6PJ9+e4p0Mf2ySquoAW/yc5/wthiTns0Y1IFZ5UJMj0RITscbDxn9pK6bXcVtFSI4oWIE2qP/ArCExZw==
+      integrity: sha512-Bqe6nkOCI/bc9lHl2IElrgvkBkw2xrLhogvAZC2gjK4abxBO/cTP1WRVon3YA5qHjl79qQCRWnxOdWpK9DiA1w==
       tarball: 'file:projects/viewer-react.tgz'
     version: 0.0.0
   'file:projects/viewer-scripts.tgz_typescript@4.3.5':
@@ -20357,11 +20347,9 @@ packages:
     version: 0.0.0
   'file:projects/web-viewer-react.tgz':
     dependencies:
-      '@bentley/itwin-client': 3.0.0-dev.148_672459f70795e85f63fd29f79bac8341
       '@itwin/appui-abstract': 3.0.0-dev.185_672459f70795e85f63fd29f79bac8341
       '@itwin/appui-layout-react': 3.0.0-dev.185_b845fa2849eca0e88e8d4951a3531782
       '@itwin/appui-react': 3.0.0-dev.185_84ffd32d9d53397166fc51060f30c4ad
-      '@itwin/browser-authorization': 0.4.0
       '@itwin/build-tools': 3.0.0-dev.185
       '@itwin/components-react': 3.0.0-dev.185_b845fa2849eca0e88e8d4951a3531782
       '@itwin/core-bentley': 3.0.0-dev.185
@@ -20391,7 +20379,6 @@ packages:
       copyfiles: 2.4.1
       identity-obj-proxy: 3.0.0
       jest: 26.6.3
-      oidc-client: 1.11.5
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-redux: 7.2.6_react-dom@17.0.2+react@17.0.2
@@ -20402,14 +20389,13 @@ packages:
     dev: false
     name: '@rush-temp/web-viewer-react'
     resolution:
-      integrity: sha512-adFaNmxH8Osc8tx5z6UsoDjZxeDJJh8z6G/YyQplEwE60am1yp4M1DzJWpiKqFdnc4NZ6rlWRiAvxvf4fA0pzg==
+      integrity: sha512-GiyOAJ03QrWvOgt+wTh1pC0FB7yDvCSQofV/fwKjrrZtPklhdHrV8my+0J9pUAq7dtPDpaf+Arxg99cLEbZUMA==
       tarball: 'file:projects/web-viewer-react.tgz'
     version: 0.0.0
   'file:projects/web-viewer-test.tgz_553741adeba0a49bf218f7a728afe36e':
     dependencies:
       '@bentley/icons-generic': 1.0.34
-      '@bentley/imodelhub-client': 3.0.0-dev.148_478bdec4a3e98cb9752f06c050a1d6cc
-      '@bentley/itwin-client': 3.0.0-dev.148_672459f70795e85f63fd29f79bac8341
+      '@bentley/imodelhub-client': 3.0.0-dev.148_672459f70795e85f63fd29f79bac8341
       '@bentley/react-scripts': 4.0.5_react@17.0.2+typescript@4.3.5
       '@itwin/appui-abstract': 3.0.0-dev.185_672459f70795e85f63fd29f79bac8341
       '@itwin/appui-layout-react': 3.0.0-dev.185_b845fa2849eca0e88e8d4951a3531782
@@ -20454,7 +20440,7 @@ packages:
     peerDependencies:
       '@itwin/imodel-components-react': '*'
     resolution:
-      integrity: sha512-uMK7OrXF1se2I94y4FeDUJPnJL9rEYNaRPU3IHGp0TKiO67XaH3RHwwwHxKl8EHQSU5DLmxujFisI/mB5CxxsA==
+      integrity: sha512-pO4YgGs6dhcJWbWSz3mQgNENqm9gy6B4syCWn7Qg3S2a8x97YUxHuijgiB22GwrSmptJPSwVjt6Sr3rgAcWL4Q==
       tarball: 'file:projects/web-viewer-test.tgz'
     version: 0.0.0
 specifiers:
@@ -20465,7 +20451,6 @@ specifiers:
   '@bentley/icons-generic': ^1.0.13
   '@bentley/icons-generic-webfont': ^1.0.15
   '@bentley/imodelhub-client': rc
-  '@bentley/itwin-client': rc
   '@bentley/react-scripts': ^4.0.3
   '@itwin/appui-abstract': rc
   '@itwin/appui-layout-react': rc
@@ -20574,7 +20559,6 @@ specifiers:
   minimist: ^1.2.5
   nodemon: ^1.19.1
   npm-run-all: ^4.1.5
-  oidc-client: ^1.10.1
   prettier: ^2.0.5
   react: ^17.0.2
   react-dom: ^17.0.2

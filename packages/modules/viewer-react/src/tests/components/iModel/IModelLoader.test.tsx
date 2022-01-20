@@ -124,7 +124,6 @@ jest.mock("@itwin/core-frontend", () => {
   };
 });
 jest.mock("../../../services/iModel/IModelService");
-jest.mock("@bentley/itwin-client");
 jest.mock("../../../services/iModel/ViewCreatorBlank", () => {
   return {
     createBlankViewState: jest.fn().mockResolvedValue({}),

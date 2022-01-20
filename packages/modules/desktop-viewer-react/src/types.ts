@@ -17,3 +17,9 @@ export enum ModelStatus {
   SNAPSHOT,
   COMPARING,
 }
+
+export interface ProgressInfo {
+  percent?: number;
+  total?: number;
+  loaded: number;
+}

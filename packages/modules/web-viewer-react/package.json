@@ -25,15 +25,12 @@
     "lib/**/*"
   ],
   "dependencies": {
-    "@itwin/viewer-react": "2.0.0-dev.21",
-    "oidc-client": "^1.10.1"
+    "@itwin/viewer-react": "2.0.0-dev.21"
   },
   "devDependencies": {
-    "@bentley/itwin-client": "rc",
     "@itwin/appui-abstract": "rc",
     "@itwin/appui-layout-react": "rc",
     "@itwin/appui-react": "rc",
-    "@itwin/browser-authorization": "latest",
     "@itwin/build-tools": "rc",
     "@itwin/components-react": "rc",
     "@itwin/core-bentley": "rc",
@@ -70,27 +67,11 @@
     "typescript": "~4.3.0"
   },
   "peerDependencies": {
-    "@bentley/itwin-client": "rc",
-    "@itwin/appui-abstract": "rc",
-    "@itwin/appui-layout-react": "rc",
-    "@itwin/appui-react": "rc",
-    "@itwin/browser-authorization": "latest",
-    "@itwin/components-react": "rc",
     "@itwin/core-bentley": "rc",
     "@itwin/core-common": "rc",
     "@itwin/core-frontend": "rc",
-    "@itwin/core-geometry": "rc",
-    "@itwin/core-markup": "rc",
-    "@itwin/core-orbitgt": "rc",
-    "@itwin/core-quantity": "rc",
     "@itwin/core-react": "rc",
-    "@itwin/core-telemetry": "rc",
-    "@itwin/imodel-components-react": "rc",
     "@itwin/presentation-common": "rc",
-    "@itwin/presentation-components": "rc",
-    "@itwin/presentation-frontend": "rc",
-    "@itwin/reality-data-client": "latest",
-    "@itwin/webgl-compatibility": "rc",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.0",

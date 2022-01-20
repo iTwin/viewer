@@ -3,9 +3,9 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ProgressInfo } from "@bentley/itwin-client";
 import { IModelVersion, SyncMode } from "@itwin/core-common";
 import { NativeApp } from "@itwin/core-frontend";
+import type { ProgressInfo } from "@itwin/desktop-viewer-react";
 import { useCallback, useContext, useState } from "react";
 
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
