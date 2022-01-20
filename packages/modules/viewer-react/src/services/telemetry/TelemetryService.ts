@@ -11,20 +11,17 @@ import { ApplicationInsights } from "@microsoft/applicationinsights-web";
 import { ViewerAuthorization } from "../auth";
 
 interface UserInfo {
-  user: {
-    displayName: string;
-    givenName: string;
-    surname: string;
-    email: string;
-    alternateEmail: string;
-    phone: string;
-    organizationName: string;
-    city: string;
-    country: string;
-    language: string;
-    createdDateTime: string;
-  };
+  sub?: string; // user id
+  org?: string; // org id
 }
+
+const introspectJwtToken = (token: string) => {
+  try {
+    return JSON.parse(atob(token.split(".")[1])) as UserInfo;
+  } catch (e) {
+    return null;
+  }
+};
 
 class TelemetryService implements TelemetryClient {
   private _reactPlugin: ReactPlugin;
@@ -36,35 +33,21 @@ class TelemetryService implements TelemetryClient {
       return;
     }
 
+    this._appInsights.clearAuthenticatedUserContext();
+
     try {
       const accessToken = await ViewerAuthorization.client?.getAccessToken();
       if (accessToken) {
-        // https://developer.bentley.com/apis/users/operations/me/
-        const url = `https://${
-          process.env.IMJS_URL_PREFIX ?? ""
-        }api.bentley.com/users/me`;
-        const resp = await fetch(url, {
-          headers: {
-            Authorization: accessToken,
-          },
-        });
-        if (resp.ok) {
-          const { user }: UserInfo = await resp.json();
+        const userInfo = introspectJwtToken(accessToken);
+        if (userInfo?.sub) {
           this._appInsights.setAuthenticatedUserContext(
-            user.email,
-            user.organizationName,
+            userInfo.sub,
+            userInfo.org,
             true
           );
-        } else {
-          this._appInsights.clearAuthenticatedUserContext();
         }
-      } else {
-        this._appInsights.clearAuthenticatedUserContext();
       }
-    } catch {
-      // Having no accessToken throws an error, but we just treat it as an unauthorized user
-      this._appInsights.clearAuthenticatedUserContext();
-    }
+    } catch {}
   };
 
   private _addAuthListeners = () => {

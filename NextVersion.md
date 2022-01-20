@@ -44,25 +44,20 @@ The following props are now required.
 - [@itwin/imodels-client-management](https://www.npmjs.com/package/@itwin/imodels-client-management)
 - [@itwin/reality-data-client](https://www.npmjs.com/package/@itwin/reality-data-client)
 
-#### OIDC Scopes
-
-##### Required
+#### New scopes required
 
 In your [iTwin App registration](https://developer.bentley.com/my-apps/), you'll need update your app to add the following scopes:
 
 - `imodels:read`
 - `realitydata:read`
 
-##### Removed
+These scopes are no longer required:
 
 - `openid`
 - `email`
 - `profile`
 - `organization`
 
-##### Optional
-
-- `users:read`
 
 ## New Features
 
@@ -99,3 +94,4 @@ We've replaced the default measure-tools provided in the Viewer from itwinjs-cor
 - As of `create-react-app@4`, global installations of `create-react-app` are discouraged and can cause issues when bootstrapping a new app from a template. We recommend you uninstall the package using `npm uninstall -g create-react-app` or `yarn global remove create-react-app` to ensure that npx always uses the latest version.
 
 - As of `create-react-app@5`, many users have reported a fatal runtime error, **Uncaught ReferenceError: process is not defined**. This can be resolved by pinning down the version of `react-error-overlay` to `6.0.9`. Please see the following issue for more information, [create-react-app/issues/11773](https://github.com/facebook/create-react-app/issues/11773).
+
