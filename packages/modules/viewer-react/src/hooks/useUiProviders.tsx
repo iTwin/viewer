@@ -30,6 +30,7 @@ export function useUiProviders(
       );
     }
     if (
+      !defaultUiConfig?.contentManipulationTools?.hideDefaultVerticalItems ||
       defaultUiConfig?.contentManipulationTools?.verticalItems?.measureTools ===
         undefined ||
       defaultUiConfig?.contentManipulationTools?.verticalItems?.measureTools ===

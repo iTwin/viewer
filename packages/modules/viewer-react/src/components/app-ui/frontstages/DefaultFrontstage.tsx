@@ -76,7 +76,7 @@ export class DefaultFrontstage extends FrontstageProvider {
     return (
       <Frontstage
         id="DefaultFrontstage"
-        version={2} // this value should be increased when changes are made to Frontstage
+        version={3} // this value should be increased when changes are made to Frontstage
         usage={StageUsage.General}
         defaultTool={CoreTools.selectElementCommand}
         contentGroup={this._contentGroup}
