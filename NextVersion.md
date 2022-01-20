@@ -2,7 +2,7 @@
 
 ### iTwin.js
 
-A comprehensive list of breaking changes in **3.0** can be found here, [NextVersion.md](https://github.com/iTwin/itwinjs-core/blob/master/docs/changehistory/NextVersion.md).
+A comprehensive list of breaking changes in **3.0** can be found here, [NextVersion.md](https://github.com/iTwin/itwinjs-core/blob/release/3.0.x/docs/changehistory/NextVersion.md).
 
 ### iTwin Viewer
 
@@ -29,7 +29,14 @@ The following props have been removed.
 - `uiFrameworkVersion`
 - `imjsAppInsightsKey`
 - `backend.buddiRegion`
-- `buddiRegion.buddiServer`
+- `backend.buddiServer`
+
+#### Required
+
+The following props are now required.
+
+- `authClient`
+- `enablePerformanceMonitors`
 
 #### New peer dependencies
 
@@ -51,7 +58,14 @@ These scopes are no longer required:
 - `profile`
 - `organization`
 
-### How to upgrade an exisiting application
+
+## New Features
+
+### Measure Tools
+
+We've replaced the default measure-tools provided in the Viewer from itwinjs-core with the [@itwin/measure-tools-react](https://www.npmjs.com/package/@itwin/measure-tools-react) package.
+
+## How to upgrade an exisiting application
 
 - A [codemod](https://github.com/iTwin/codemods) has been developed to help you upgrade your exisitng code from iModel.js@2.x to iTwin.js@3.0.
 
@@ -67,7 +81,7 @@ These scopes are no longer required:
 
 - React to the [breaking changes](#breaking-changes) above.
 
-### Quick start a new application
+## Quick start a new application
 
 - iTwin Viewer for Web
 
@@ -75,16 +89,9 @@ These scopes are no longer required:
   npx create-react-app@latest web-viewer-3 --template @itwin/web-viewer@next --scripts-version @bentley/react-scripts
   ```
 
-### Known issues
+## Known issues
 
 - As of `create-react-app@4`, global installations of `create-react-app` are discouraged and can cause issues when bootstrapping a new app from a template. We recommend you uninstall the package using `npm uninstall -g create-react-app` or `yarn global remove create-react-app` to ensure that npx always uses the latest version.
 
 - As of `create-react-app@5`, many users have reported a fatal runtime error, **Uncaught ReferenceError: process is not defined**. This can be resolved by pinning down the version of `react-error-overlay` to `6.0.9`. Please see the following issue for more information, [create-react-app/issues/11773](https://github.com/facebook/create-react-app/issues/11773).
 
-- Missing features:
-
-  - The following features/widgets that are part of the default iTwin Viewer are still under development, and will be added back as they're ready.
-
-    - [] - Tree Widget
-
-    - [] - Property Grid
