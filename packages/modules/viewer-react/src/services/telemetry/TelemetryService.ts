@@ -10,6 +10,22 @@ import { ApplicationInsights } from "@microsoft/applicationinsights-web";
 
 import { ViewerAuthorization } from "../auth";
 
+interface UserInfo {
+  user: {
+    displayName: string;
+    givenName: string;
+    surname: string;
+    email: string;
+    alternateEmail: string;
+    phone: string;
+    organizationName: string;
+    city: string;
+    country: string;
+    language: string;
+    createdDateTime: string;
+  };
+}
+
 class TelemetryService implements TelemetryClient {
   private _reactPlugin: ReactPlugin;
   private _appInsights?: ApplicationInsights;
@@ -21,20 +37,30 @@ class TelemetryService implements TelemetryClient {
     }
 
     try {
-      // TODO 3.0 how to get user info?
-      // const token = await ViewerAuthorization.client.
-      // const accessToken =
-      //   (await ViewerAuthorization.client.getAccessToken()) as AccessToken;
-      // const user = accessToken?.getAccessToken().getUserInfo();
-      // if (user && accessToken) {
-      //   this._appInsights.setAuthenticatedUserContext(
-      //     user.id,
-      //     user.organization?.id,
-      //     true
-      //   );
-      // } else {
-      //   this._appInsights.clearAuthenticatedUserContext();
-      // }
+      const accessToken = await ViewerAuthorization.client?.getAccessToken();
+      if (accessToken) {
+        // https://developer.bentley.com/apis/users/operations/me/
+        const url = `https://${
+          process.env.IMJS_URL_PREFIX ?? ""
+        }api.bentley.com/users/me`;
+        const resp = await fetch(url, {
+          headers: {
+            Authorization: accessToken,
+          },
+        });
+        if (resp.ok) {
+          const { user }: UserInfo = await resp.json();
+          this._appInsights.setAuthenticatedUserContext(
+            user.email,
+            user.organizationName,
+            true
+          );
+        } else {
+          this._appInsights.clearAuthenticatedUserContext();
+        }
+      } else {
+        this._appInsights.clearAuthenticatedUserContext();
+      }
     } catch {
       // Having no accessToken throws an error, but we just treat it as an unauthorized user
       this._appInsights.clearAuthenticatedUserContext();
