@@ -1,7 +1,7 @@
 dependencies:
   '@babel/plugin-proposal-class-properties': 7.16.7
   '@babel/plugin-transform-runtime': 7.16.10
-  '@babel/preset-env': 7.16.10
+  '@babel/preset-env': 7.16.11
   '@babel/preset-react': 7.16.7
   '@bentley/icons-generic': 1.0.34
   '@bentley/icons-generic-webfont': 1.0.34
@@ -36,6 +36,7 @@ dependencies:
   '@itwin/itwinui-css': 0.18.1
   '@itwin/itwinui-icons-react': 1.5.0_react-dom@17.0.2+react@17.0.2
   '@itwin/itwinui-react': 1.29.1_react-dom@17.0.2+react@17.0.2
+  '@itwin/measure-tools-react': 0.1.2_8068cf38b6ba6623bae9a77472f87c38
   '@itwin/presentation-backend': 3.0.0-dev.185_70b99d77c19157d89224ad0546f68f93
   '@itwin/presentation-common': 3.0.0-dev.185_f812673f4fadb3bedeaaa9994dcd1c5b
   '@itwin/presentation-components': 3.0.0-dev.185_25ecb69c2ea3aa2d56c289e1912d1329
@@ -999,7 +1000,7 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-eC3xy+ZrUcBtP7x+sq62Q/HYd674pPTb/77XZMb5wbDPGWIdUbSr4Agr052+zaUPSb+gGRnjxXfKFvx5iMJ+DA==
-  /@babel/plugin-proposal-private-methods/7.16.7:
+  /@babel/plugin-proposal-private-methods/7.16.11:
     dependencies:
       '@babel/helper-create-class-features-plugin': 7.16.10
       '@babel/helper-plugin-utils': 7.16.7
@@ -1009,8 +1010,8 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     resolution:
-      integrity: sha512-7twV3pzhrRxSwHeIvFE6coPgvo+exNDOiGUMg39o2LiLo1Y+4aKpfkcLGcg1UHonzorCt7SNXnoMyCnnIOA8Sw==
-  /@babel/plugin-proposal-private-methods/7.16.7_@babel+core@7.16.10:
+      integrity: sha512-F/2uAkPlXDr8+BHpZvo19w3hLFKge+k75XUprE6jaqKxjGkSYcK+4c+bup5PdW/7W/Rpjwql7FTVEDW+fRAQsw==
+  /@babel/plugin-proposal-private-methods/7.16.11_@babel+core@7.16.10:
     dependencies:
       '@babel/core': 7.16.10_@babel+core@7.16.10
       '@babel/helper-create-class-features-plugin': 7.16.10_@babel+core@7.16.10
@@ -1021,7 +1022,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     resolution:
-      integrity: sha512-7twV3pzhrRxSwHeIvFE6coPgvo+exNDOiGUMg39o2LiLo1Y+4aKpfkcLGcg1UHonzorCt7SNXnoMyCnnIOA8Sw==
+      integrity: sha512-F/2uAkPlXDr8+BHpZvo19w3hLFKge+k75XUprE6jaqKxjGkSYcK+4c+bup5PdW/7W/Rpjwql7FTVEDW+fRAQsw==
   /@babel/plugin-proposal-private-property-in-object/7.16.7:
     dependencies:
       '@babel/helper-annotate-as-pure': 7.16.7
@@ -2405,7 +2406,7 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-oC5tYYKw56HO75KZVLQ+R/Nl3Hro9kf8iG0hXoaHP7tjAyCpvqBiSNe6vGrZni1Z6MggmUOC6A7VP7AVmw225Q==
-  /@babel/preset-env/7.16.10:
+  /@babel/preset-env/7.16.11:
     dependencies:
       '@babel/compat-data': 7.16.8
       '@babel/helper-compilation-targets': 7.16.7
@@ -2425,7 +2426,7 @@ packages:
       '@babel/plugin-proposal-object-rest-spread': 7.16.7
       '@babel/plugin-proposal-optional-catch-binding': 7.16.7
       '@babel/plugin-proposal-optional-chaining': 7.16.7
-      '@babel/plugin-proposal-private-methods': 7.16.7
+      '@babel/plugin-proposal-private-methods': 7.16.11
       '@babel/plugin-proposal-private-property-in-object': 7.16.7
       '@babel/plugin-proposal-unicode-property-regex': 7.16.7
       '@babel/plugin-syntax-async-generators': 7.8.4
@@ -2487,8 +2488,8 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     resolution:
-      integrity: sha512-iCac3fZn9oOcLqc1N2/copPiX7aoxzsvjeDdXoZobrlbQ6YGgS3bL9HyldOJ8V8AY5P7pFynCATrn7M4dMw0Yg==
-  /@babel/preset-env/7.16.10_@babel+core@7.16.10:
+      integrity: sha512-qcmWG8R7ZW6WBRPZK//y+E3Cli151B20W1Rv7ln27vuPaXU/8TKms6jFdiJtF7UDTxcrb7mZd88tAeK9LjdT8g==
+  /@babel/preset-env/7.16.11_@babel+core@7.16.10:
     dependencies:
       '@babel/compat-data': 7.16.8
       '@babel/core': 7.16.10_@babel+core@7.16.10
@@ -2509,7 +2510,7 @@ packages:
       '@babel/plugin-proposal-object-rest-spread': 7.16.7_@babel+core@7.16.10
       '@babel/plugin-proposal-optional-catch-binding': 7.16.7_@babel+core@7.16.10
       '@babel/plugin-proposal-optional-chaining': 7.16.7_@babel+core@7.16.10
-      '@babel/plugin-proposal-private-methods': 7.16.7_@babel+core@7.16.10
+      '@babel/plugin-proposal-private-methods': 7.16.11_@babel+core@7.16.10
       '@babel/plugin-proposal-private-property-in-object': 7.16.7_@babel+core@7.16.10
       '@babel/plugin-proposal-unicode-property-regex': 7.16.7_@babel+core@7.16.10
       '@babel/plugin-syntax-async-generators': 7.8.4_@babel+core@7.16.10
@@ -2571,7 +2572,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     resolution:
-      integrity: sha512-iCac3fZn9oOcLqc1N2/copPiX7aoxzsvjeDdXoZobrlbQ6YGgS3bL9HyldOJ8V8AY5P7pFynCATrn7M4dMw0Yg==
+      integrity: sha512-qcmWG8R7ZW6WBRPZK//y+E3Cli151B20W1Rv7ln27vuPaXU/8TKms6jFdiJtF7UDTxcrb7mZd88tAeK9LjdT8g==
   /@babel/preset-modules/0.1.5:
     dependencies:
       '@babel/helper-plugin-utils': 7.16.7
@@ -3553,6 +3554,37 @@ packages:
       react-dom: ^16.8.6 || ^17.0.0
     resolution:
       integrity: sha512-XXkv9dbs6xU1p2U9q2xivt2/uNP4Qva6y+9MTbncZajiNcbhnzlWz2Zc2tCu/yuPczcJAFvkY0EB/qBay9KOXQ==
+  /@itwin/measure-tools-react/0.1.2_8068cf38b6ba6623bae9a77472f87c38:
+    dependencies:
+      '@bentley/icons-generic-webfont': 1.0.34
+      '@itwin/appui-abstract': 3.0.0-dev.185_672459f70795e85f63fd29f79bac8341
+      '@itwin/appui-layout-react': 3.0.0-dev.185_b845fa2849eca0e88e8d4951a3531782
+      '@itwin/appui-react': 3.0.0-dev.185_84ffd32d9d53397166fc51060f30c4ad
+      '@itwin/components-react': 3.0.0-dev.185_b845fa2849eca0e88e8d4951a3531782
+      '@itwin/core-bentley': 3.0.0-dev.185
+      '@itwin/core-common': 3.0.0-dev.185_aff561cb670a0499bc8d93a53e631a3b
+      '@itwin/core-frontend': 3.0.0-dev.185_cecb470b9a6be6daf9d744f2974ebc43
+      '@itwin/core-geometry': 3.0.0-dev.185
+      '@itwin/core-react': 3.0.0-dev.185_32c10532cb50ca55e641495fdddea5c8
+      '@itwin/core-telemetry': 3.0.0-dev.185_4b6cd25750efe48889a1029ea63e36fa
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: false
+    peerDependencies:
+      '@itwin/appui-abstract': rc
+      '@itwin/appui-layout-react': rc
+      '@itwin/appui-react': rc
+      '@itwin/components-react': rc
+      '@itwin/core-bentley': rc
+      '@itwin/core-common': rc
+      '@itwin/core-frontend': rc
+      '@itwin/core-geometry': rc
+      '@itwin/core-react': rc
+      '@itwin/core-telemetry': rc
+      react: ^17.0.0
+      react-dom: ^17.0.0
+    resolution:
+      integrity: sha512-iz39RRaoEIFm9jVRw8JndOSJ1eZ2+Siri3VgWfIICrzOr9g2B8lp1A4eD4KrHbzWzdu8PwNBMIvAfPFYS6txXw==
   /@itwin/presentation-backend/3.0.0-dev.185_70b99d77c19157d89224ad0546f68f93:
     dependencies:
       '@itwin/core-backend': 3.0.0-dev.185_f32cc0119bd3f25339b430c4f74e18c9
@@ -4404,7 +4436,7 @@ packages:
     dependencies:
       '@babel/core': 7.16.10_@babel+core@7.16.10
       '@babel/plugin-transform-react-constant-elements': 7.16.7_@babel+core@7.16.10
-      '@babel/preset-env': 7.16.10_@babel+core@7.16.10
+      '@babel/preset-env': 7.16.11_@babel+core@7.16.10
       '@babel/preset-react': 7.16.7_@babel+core@7.16.10
       '@svgr/core': 5.5.0
       '@svgr/plugin-jsx': 5.5.0
@@ -6203,11 +6235,11 @@ packages:
       '@babel/plugin-proposal-nullish-coalescing-operator': 7.16.7_@babel+core@7.16.10
       '@babel/plugin-proposal-numeric-separator': 7.16.7_@babel+core@7.16.10
       '@babel/plugin-proposal-optional-chaining': 7.16.7_@babel+core@7.16.10
-      '@babel/plugin-proposal-private-methods': 7.16.7_@babel+core@7.16.10
+      '@babel/plugin-proposal-private-methods': 7.16.11_@babel+core@7.16.10
       '@babel/plugin-transform-flow-strip-types': 7.16.7_@babel+core@7.16.10
       '@babel/plugin-transform-react-display-name': 7.16.7_@babel+core@7.16.10
       '@babel/plugin-transform-runtime': 7.16.10_@babel+core@7.16.10
-      '@babel/preset-env': 7.16.10_@babel+core@7.16.10
+      '@babel/preset-env': 7.16.11_@babel+core@7.16.10
       '@babel/preset-react': 7.16.7_@babel+core@7.16.10
       '@babel/preset-typescript': 7.16.7_@babel+core@7.16.10
       '@babel/runtime': 7.16.7
@@ -14707,7 +14739,7 @@ packages:
   /postcss-attribute-case-insensitive/4.0.2:
     dependencies:
       postcss: 7.0.39
-      postcss-selector-parser: 6.0.8
+      postcss-selector-parser: 6.0.9
     dev: false
     resolution:
       integrity: sha512-clkFxk/9pcdb4Vkn0hAHq3YnxBQ2p0CGD1dy24jN+reBck+EWxMbxSUqN4Yj7t0w8csl87K6p0gxBe1utkJsYA==
@@ -14725,7 +14757,7 @@ packages:
   /postcss-calc/7.0.5:
     dependencies:
       postcss: 7.0.39
-      postcss-selector-parser: 6.0.8
+      postcss-selector-parser: 6.0.9
       postcss-value-parser: 4.2.0
     dev: false
     resolution:
@@ -15083,7 +15115,7 @@ packages:
     dependencies:
       icss-utils: 4.1.1
       postcss: 7.0.39
-      postcss-selector-parser: 6.0.8
+      postcss-selector-parser: 6.0.9
       postcss-value-parser: 4.2.0
     dev: false
     engines:
@@ -15093,7 +15125,7 @@ packages:
   /postcss-modules-scope/2.2.0:
     dependencies:
       postcss: 7.0.39
-      postcss-selector-parser: 6.0.8
+      postcss-selector-parser: 6.0.9
     dev: false
     engines:
       node: '>= 6'
@@ -15407,7 +15439,7 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-w+zLE5Jhg6Liz8+rQOWEAwtwkyqpfnmsinXjXg6cY7YIONZZtgvE0v2O0uhQBs0peNomOJwWRKt6JBfTdTd3OQ==
-  /postcss-selector-parser/6.0.8:
+  /postcss-selector-parser/6.0.9:
     dependencies:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
@@ -15415,7 +15447,7 @@ packages:
     engines:
       node: '>=4'
     resolution:
-      integrity: sha512-D5PG53d209Z1Uhcc0qAZ5U3t5HagH3cxu+WLZ22jt3gLUpXM4eXXfiO14jiDWST3NNooX/E8wISfOhZ9eIjGTQ==
+      integrity: sha512-UO3SgnZOVTwu4kyLR22UQ1xZh086RyNZppb7lLAKBFK8a32ttG5i87Y/P3+2bRSjZNyJ1B7hfFNo273tKe9YxQ==
   /postcss-sorting/5.0.1:
     dependencies:
       lodash: 4.17.21
@@ -17895,7 +17927,7 @@ packages:
       lodash: 4.17.21
       postcss-media-query-parser: 0.2.3
       postcss-resolve-nested-selector: 0.1.1
-      postcss-selector-parser: 6.0.8
+      postcss-selector-parser: 6.0.9
       postcss-value-parser: 4.2.0
       stylelint: 13.13.1
     dev: false
@@ -17941,7 +17973,7 @@ packages:
       postcss-safe-parser: 4.0.2
       postcss-sass: 0.4.4
       postcss-scss: 2.1.1
-      postcss-selector-parser: 6.0.8
+      postcss-selector-parser: 6.0.9
       postcss-syntax: 0.36.2_postcss@7.0.39
       postcss-value-parser: 4.2.0
       resolve-from: 5.0.0
@@ -19567,7 +19599,7 @@ packages:
   /workbox-build/5.1.4:
     dependencies:
       '@babel/core': 7.16.10_@babel+core@7.16.10
-      '@babel/preset-env': 7.16.10_@babel+core@7.16.10
+      '@babel/preset-env': 7.16.11_@babel+core@7.16.10
       '@babel/runtime': 7.16.7
       '@hapi/joi': 15.1.1
       '@rollup/plugin-node-resolve': 7.1.3_rollup@1.32.1
@@ -20182,7 +20214,7 @@ packages:
     dependencies:
       '@babel/plugin-proposal-class-properties': 7.16.7
       '@babel/plugin-transform-runtime': 7.16.10
-      '@babel/preset-env': 7.16.10
+      '@babel/preset-env': 7.16.11
       '@babel/preset-react': 7.16.7
       '@itwin/itwinui-react': 1.29.1_react-dom@17.0.2+react@17.0.2
       '@svgr/cli': 5.5.0
@@ -20244,6 +20276,7 @@ packages:
       '@itwin/imodels-access-frontend': 1.0.0_6aea12305ce80ad19a2a12138f05eb4d
       '@itwin/imodels-client-management': 1.0.0
       '@itwin/itwinui-react': 1.29.1_react-dom@17.0.2+react@17.0.2
+      '@itwin/measure-tools-react': 0.1.2_8068cf38b6ba6623bae9a77472f87c38
       '@itwin/presentation-common': 3.0.0-dev.185_f812673f4fadb3bedeaaa9994dcd1c5b
       '@itwin/presentation-components': 3.0.0-dev.185_25ecb69c2ea3aa2d56c289e1912d1329
       '@itwin/presentation-frontend': 3.0.0-dev.185_018a97169bb3f0046f83d0cf4f7aee1c
@@ -20276,7 +20309,7 @@ packages:
     dev: false
     name: '@rush-temp/viewer-react'
     resolution:
-      integrity: sha512-5Em6GrPIrMffcJtFRqLVOEJ7dgd2IC0R6Y5azYgudZ27epANimnZeI/zXNOW34mc0xekdoWh8/DZ2LGW42oJUw==
+      integrity: sha512-Bqe6nkOCI/bc9lHl2IElrgvkBkw2xrLhogvAZC2gjK4abxBO/cTP1WRVon3YA5qHjl79qQCRWnxOdWpK9DiA1w==
       tarball: 'file:projects/viewer-react.tgz'
     version: 0.0.0
   'file:projects/viewer-scripts.tgz_typescript@4.3.5':
@@ -20448,6 +20481,7 @@ specifiers:
   '@itwin/itwinui-css': ^0.18.1
   '@itwin/itwinui-icons-react': ^1.2.0
   '@itwin/itwinui-react': ^1.16.2
+  '@itwin/measure-tools-react': latest
   '@itwin/presentation-backend': rc
   '@itwin/presentation-common': rc
   '@itwin/presentation-components': rc
