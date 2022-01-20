@@ -10,6 +10,19 @@ import { ApplicationInsights } from "@microsoft/applicationinsights-web";
 
 import { ViewerAuthorization } from "../auth";
 
+interface UserInfo {
+  sub?: string; // user id
+  org?: string; // org id
+}
+
+const introspectJwtToken = (token: string) => {
+  try {
+    return JSON.parse(atob(token.split(".")[1])) as UserInfo;
+  } catch (e) {
+    return null;
+  }
+};
+
 class TelemetryService implements TelemetryClient {
   private _reactPlugin: ReactPlugin;
   private _appInsights?: ApplicationInsights;
@@ -20,25 +33,21 @@ class TelemetryService implements TelemetryClient {
       return;
     }
 
+    this._appInsights.clearAuthenticatedUserContext();
+
     try {
-      // TODO 3.0 how to get user info?
-      // const token = await ViewerAuthorization.client.
-      // const accessToken =
-      //   (await ViewerAuthorization.client.getAccessToken()) as AccessToken;
-      // const user = accessToken?.getAccessToken().getUserInfo();
-      // if (user && accessToken) {
-      //   this._appInsights.setAuthenticatedUserContext(
-      //     user.id,
-      //     user.organization?.id,
-      //     true
-      //   );
-      // } else {
-      //   this._appInsights.clearAuthenticatedUserContext();
-      // }
-    } catch {
-      // Having no accessToken throws an error, but we just treat it as an unauthorized user
-      this._appInsights.clearAuthenticatedUserContext();
-    }
+      const accessToken = await ViewerAuthorization.client?.getAccessToken();
+      if (accessToken) {
+        const userInfo = introspectJwtToken(accessToken);
+        if (userInfo?.sub) {
+          this._appInsights.setAuthenticatedUserContext(
+            userInfo.sub,
+            userInfo.org,
+            true
+          );
+        }
+      }
+    } catch {}
   };
 
   private _addAuthListeners = () => {
