@@ -30,11 +30,11 @@ export function useUiProviders(
       );
     }
     if (
-      !defaultUiConfig?.contentManipulationTools?.hideDefaultVerticalItems ||
-      defaultUiConfig?.contentManipulationTools?.verticalItems?.measureTools ===
-        undefined ||
-      defaultUiConfig?.contentManipulationTools?.verticalItems?.measureTools ===
-        true
+      !defaultUiConfig?.contentManipulationTools?.hideDefaultVerticalItems &&
+      (defaultUiConfig?.contentManipulationTools?.verticalItems
+        ?.measureTools === undefined ||
+        defaultUiConfig?.contentManipulationTools?.verticalItems
+          ?.measureTools === true)
     ) {
       defaultProviders.push(new MeasureToolsUiItemsProvider());
     }
