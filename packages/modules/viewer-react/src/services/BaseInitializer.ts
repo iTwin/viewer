@@ -3,8 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-// TODO 3.0 re-add
-// import { MeasureTools } from "@bentley/measure-tools-react";
 import {
   AppNotificationManager,
   ConfigurableUiManager,
@@ -25,6 +23,7 @@ import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
 import { FrontendIModelsAccess } from "@itwin/imodels-access-frontend";
 import { IModelsClient } from "@itwin/imodels-client-management";
+import { MeasureTools } from "@itwin/measure-tools-react";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
 import { PropertyGridManager } from "@itwin/property-grid-react";
@@ -173,10 +172,9 @@ export class BaseInitializer {
       // }
       // yield IModelApp.extensionAdmin.onStartup();
 
-      // TODO 3.0 re-add
       yield TreeWidget.initialize(IModelApp.localization);
       yield PropertyGridManager.initialize(IModelApp.localization);
-      // yield MeasureTools.startup();
+      yield MeasureTools.startup();
 
       if (viewerOptions?.appInsightsKey) {
         trackUserEvent("iTwinViewer.Viewer.Initialized");
