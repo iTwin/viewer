@@ -60,9 +60,9 @@ const viewerMain = async () => {
   ElectronHost.mainWindow?.on("ready-to-show", createMenu);
   // open links in the system browser instead of Electron
   // remove this if you desire the default behavior instead
-  ElectronHost.mainWindow?.webContents.on("new-window", function (e, url) {
-    e.preventDefault();
+  ElectronHost.mainWindow?.webContents.setWindowOpenHandler(({ url }) => {
     void shell.openExternal(url);
+    return { action: "deny" };
   });
 };
 
