@@ -121,6 +121,15 @@ jest.mock("@itwin/core-frontend", () => {
         createDefaultView: jest.fn().mockResolvedValue({}),
       };
     }),
+    SpatialViewState: {
+      className: "",
+    },
+    DrawingViewState: {
+      className: "",
+    },
+    SheetViewState: {
+      className: "",
+    },
   };
 });
 jest.mock("../../../services/iModel/IModelService");
@@ -192,9 +201,7 @@ describe("IModelLoader", () => {
     );
 
     await waitFor(() => result.getByTestId("loader-wrapper"));
-
-    // TODO 3.0 - update called times as default providers are re-added
-    expect(UiItemsManager.register).toHaveBeenCalledTimes(1);
+    expect(UiItemsManager.register).toHaveBeenCalledTimes(4);
 
     result.rerender(
       <IModelLoader
@@ -205,9 +212,7 @@ describe("IModelLoader", () => {
     );
 
     await waitFor(() => result.getByTestId("viewer"));
-
-    // TODO 3.0 - update called times as default providers are re-added
-    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(1);
+    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(4);
   });
 
   it("adds backstage items and translates their labels", async () => {

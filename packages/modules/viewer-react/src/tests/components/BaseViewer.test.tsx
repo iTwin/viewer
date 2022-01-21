@@ -118,17 +118,6 @@ jest.mock("../../services/BaseInitializer", () => {
 jest.mock("../../hooks/useAccessToken", () => {
   return { useAccessToken: () => "mockToken" };
 });
-// TODO 3.0
-// jest.mock("@bentley/property-grid-react", () => {
-//   return {
-//     ...jest.createMockFromModule<any>("@bentley/property-grid-react"),
-//     PropertyGridManager: {
-//       ...jest.createMockFromModule<any>("@bentley/property-grid-react")
-//         .PropertyGridManager,
-//       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
-//     },
-//   };
-// });
 
 const mockITwinId = "123";
 const mockIModelId = "456";
