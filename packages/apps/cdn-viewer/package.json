@@ -23,7 +23,7 @@
     "@itwin/presentation-common": "rc",
     "@itwin/presentation-frontend": "rc",
     "@itwin/webgl-compatibility": "rc",
-    "@itwin/web-viewer-react": "2.0.0-dev.21",
+    "@itwin/web-viewer-react": "2.0.0-dev.22",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.0"
