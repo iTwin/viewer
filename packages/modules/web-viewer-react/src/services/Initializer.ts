@@ -15,12 +15,12 @@ import {
 
 import type { IModelBackendOptions, WebViewerProps } from "../types";
 
-const getHostedConnectionInfo = async (
+const getHostedConnectionInfo = (
   backendOptions?: IModelBackendOptions
-): Promise<BentleyCloudRpcParams> => {
+): BentleyCloudRpcParams => {
   const orchestratorUrl = `https://${
     process.env.IMJS_URL_PREFIX ?? ""
-  }api.bentley.com/imodeljs`;
+  }api.bentley.com`;
 
   if (backendOptions?.hostedBackend) {
     if (!backendOptions.hostedBackend.title) {
@@ -40,21 +40,21 @@ const getHostedConnectionInfo = async (
     };
   } else {
     return {
-      info: { title: "visualization", version: "v3.0" },
+      info: { title: "imodel/rpc", version: "" },
       uriPrefix: orchestratorUrl,
     };
   }
 };
 
-const initializeRpcParams = async (
+const initializeRpcParams = (
   backendOptions?: IModelBackendOptions
-): Promise<BentleyCloudRpcParams> => {
+): BentleyCloudRpcParams => {
   // if rpc params for a custom backend are provided, use those
   if (backendOptions?.customBackend && backendOptions.customBackend.rpcParams) {
     return backendOptions.customBackend.rpcParams;
   } else {
     // otherwise construct params for a hosted connection
-    return await getHostedConnectionInfo(backendOptions);
+    return getHostedConnectionInfo(backendOptions);
   }
 };
 
@@ -92,7 +92,7 @@ export class WebInitializer {
         const iModelAppOptions = getIModelAppOptions(options);
         iModelAppOptions.authorizationClient = options.authClient;
         ViewerAuthorization.client = options.authClient;
-        const rpcParams: BentleyCloudRpcParams = yield initializeRpcParams(
+        const rpcParams: BentleyCloudRpcParams = initializeRpcParams(
           options?.backend
         );
         yield IModelApp.startup(iModelAppOptions);
