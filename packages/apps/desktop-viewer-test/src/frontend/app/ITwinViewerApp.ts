@@ -6,8 +6,8 @@
 import type { AsyncFunction, PromiseReturnType } from "@itwin/core-bentley";
 import type { IpcListener } from "@itwin/core-common";
 import { IModelApp, IpcApp } from "@itwin/core-frontend";
-import { NavigateFn } from "@reach/router";
-import { OpenDialogOptions, SaveDialogOptions } from "electron";
+import type { NavigateFn } from "@reach/router";
+import type { OpenDialogOptions, SaveDialogOptions } from "electron";
 
 import type { ViewerConfig, ViewerIpc } from "../../common/ViewerConfig";
 import { channelName } from "../../common/ViewerConfig";
@@ -106,7 +106,7 @@ export class ITwinViewerApp {
     iModelName?: string
   ): Promise<string | undefined> {
     const options: SaveDialogOptions = {
-      title: ITwinViewerApp.translate("saveBriefcase"), //TODO
+      title: ITwinViewerApp.translate("saveBriefcase"),
       defaultPath: `${this._getFileName(iModelName)}.bim`,
       filters: [{ name: "iModels", extensions: ["ibim", "bim"] }],
     };

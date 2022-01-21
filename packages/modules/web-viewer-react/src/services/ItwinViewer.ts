@@ -42,7 +42,7 @@ export class ItwinViewer {
   constructor(options: ItwinViewerParams) {
     if (!options.elementId) {
       //TODO localize
-      throw new Error("Please supply a root elementId as the first parameter"); //TODO localize
+      throw new Error("Please supply a root elementId as the first parameter");
     }
     ViewerPerformance.enable(options.enablePerformanceMonitors);
     ViewerPerformance.addMark("ViewerStarting");
