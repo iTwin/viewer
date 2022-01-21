@@ -3,18 +3,15 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { AsyncFunction, PromiseReturnType } from "@itwin/core-bentley";
-import { IpcListener } from "@itwin/core-common";
+import type { AsyncFunction, PromiseReturnType } from "@itwin/core-bentley";
+import type { IpcListener } from "@itwin/core-common";
 import { IModelApp, IpcApp } from "@itwin/core-frontend";
-import { NavigateFn } from "@reach/router";
-import { OpenDialogOptions, SaveDialogOptions } from "electron";
+import type { NavigateFn } from "@reach/router";
+import type { OpenDialogOptions, SaveDialogOptions } from "electron";
 
-import {
-  channelName,
-  ViewerConfig,
-  ViewerIpc,
-} from "../../common/ViewerConfig";
-import { Settings } from "../services/SettingsClient";
+import type { ViewerConfig, ViewerIpc } from "../../common/ViewerConfig";
+import { channelName } from "../../common/ViewerConfig";
+import type { Settings } from "../services/SettingsClient";
 
 export declare type PickAsyncMethods<T> = {
   [P in keyof T]: T[P] extends AsyncFunction ? T[P] : never;
@@ -109,7 +106,7 @@ export class ITwinViewerApp {
     iModelName?: string
   ): Promise<string | undefined> {
     const options: SaveDialogOptions = {
-      title: ITwinViewerApp.translate("saveBriefcase"), //TODO
+      title: ITwinViewerApp.translate("saveBriefcase"),
       defaultPath: `${this._getFileName(iModelName)}.bim`,
       filters: [{ name: "iModels", extensions: ["ibim", "bim"] }],
     };

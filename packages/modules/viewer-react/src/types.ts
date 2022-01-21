@@ -16,7 +16,6 @@ import type {
   RpcInterfaceDefinition,
 } from "@itwin/core-common";
 import type {
-  // BuiltInExtensionLoaderProps,
   FrontendHubAccess,
   IModelConnection,
   MapLayerOptions,
@@ -109,9 +108,6 @@ export interface ItwinViewerInitializerParams {
   /** optional hubAccess (defaults to iTwin Platform's iModels) */
   hubAccess?: FrontendHubAccess;
   mapLayerOptions?: MapLayerOptions;
-  // TODO: 3.0 w/ extensions
-  // /** List of Extensions */
-  // extensions?: BuiltInExtensionLoaderProps[];
   /**
    * Enable reporting data from timed events in the iTwin Viewer.
    * The data is anonynmous numerics and will help to increase Viewer performance in future releases.

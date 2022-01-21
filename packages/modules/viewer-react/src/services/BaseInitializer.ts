@@ -164,14 +164,6 @@ export class BaseInitializer {
 
       ConfigurableUiManager.initialize();
 
-      // TODO 3.0 re-add
-      // if (viewerOptions?.extensions) {
-      //   for (const extension of viewerOptions.extensions) {
-      //     yield IModelApp.extensionAdmin.addBuildExtension(extension.manifest, extension.loader);
-      //   }
-      // }
-      // yield IModelApp.extensionAdmin.onStartup();
-
       yield TreeWidget.initialize(IModelApp.localization);
       yield PropertyGridManager.initialize(IModelApp.localization);
       yield MeasureTools.startup();
