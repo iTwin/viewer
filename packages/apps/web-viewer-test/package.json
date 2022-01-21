@@ -27,7 +27,7 @@
     "@itwin/presentation-frontend": "rc",
     "@itwin/reality-data-client": "latest",
     "@itwin/webgl-compatibility": "rc",
-    "@itwin/web-viewer-react": "2.0.0-dev.22",
+    "@itwin/web-viewer-react": "2.0.0-dev.23",
     "history": "^4.10.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

@@ -1,6 +1,6 @@
 {
   "name": "@itwin/viewer-react",
-  "version": "2.0.0-dev.22",
+  "version": "2.0.0-dev.23",
   "description": "Configurable iTwin.js viewer",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
@@ -33,7 +33,7 @@
   ],
   "dependencies": {
     "@bentley/icons-generic-webfont": "^1.0.15",
-    "@itwin/error-handling-react": "2.0.0-dev.22",
+    "@itwin/error-handling-react": "2.0.0-dev.23",
     "@itwin/itwinui-react": "^1.16.2",
     "@itwin/measure-tools-react": "latest",
     "@itwin/property-grid-react": "latest",
