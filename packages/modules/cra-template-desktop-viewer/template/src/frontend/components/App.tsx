@@ -22,7 +22,10 @@ const App = () => {
   (window as any).ITWIN_VIEWER_HOME = window.location.origin;
 
   const desktopInitializerProps = useMemo<DesktopViewerProps>(
-    () => ({ additionalI18nNamespaces: ["iTwinDesktopViewer"] }),
+    () => ({
+      additionalI18nNamespaces: ["iTwinDesktopViewer"],
+      enablePerformanceMonitors: true,
+    }),
     []
   );
 
