@@ -11,11 +11,9 @@ import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
 import { useAccessToken, Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-import { Header } from "./Header";
 import { history } from "./history";
 
 const App: React.FC = () => {
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [iModelId, setIModelId] = useState(process.env.IMJS_IMODEL_ID);
   const [iTwinId, setITwinId] = useState(process.env.IMJS_ITWIN_ID);
 
@@ -33,6 +31,18 @@ const App: React.FC = () => {
       }),
     []
   );
+
+  const login = useCallback(async () => {
+    try {
+      await authClient.signInSilent();
+    } catch {
+      await authClient.signIn();
+    }
+  }, [authClient]);
+
+  useEffect(() => {
+    void login();
+  }, [login]);
 
   useEffect(() => {
     if (accessToken) {
@@ -64,22 +74,6 @@ const App: React.FC = () => {
       history.push(`?iTwinId=${iTwinId}&iModelId=${iModelId}`);
     }
   }, [accessToken, iTwinId, iModelId]);
-
-  useEffect(() => {
-    if (isLoggingIn && accessToken) {
-      setIsLoggingIn(false);
-    }
-  }, [accessToken, isLoggingIn]);
-
-  const onLoginClick = useCallback(async () => {
-    setIsLoggingIn(true);
-    await authClient.signIn();
-  }, [authClient]);
-
-  const onLogoutClick = useCallback(async () => {
-    setIsLoggingIn(false);
-    await authClient.signOut();
-  }, [authClient]);
 
   /** NOTE: This function will execute the "Fit View" tool after the iModel is loaded into the Viewer.
    * This will provide an "optimal" view of the model. However, it will override any default views that are
@@ -118,22 +112,13 @@ const App: React.FC = () => {
 
   return (
     <div className="viewer-container">
-      <Header
-        loggedIn={!!accessToken}
-        handleLogin={onLoginClick}
-        handleLogout={onLogoutClick}
+      <Viewer
+        iTwinId={iTwinId}
+        iModelId={iModelId}
+        authClient={authClient}
+        viewCreatorOptions={viewCreatorOptions}
+        enablePerformanceMonitors={true} // see description in the README (https://www.npmjs.com/package/@itwin/desktop-viewer-react)
       />
-      {isLoggingIn ? (
-        <span>"Logging in...."</span>
-      ) : (
-        <Viewer
-          iTwinId={iTwinId}
-          iModelId={iModelId}
-          authClient={authClient}
-          viewCreatorOptions={viewCreatorOptions}
-          enablePerformanceMonitors={true} // see description in the README (https://www.npmjs.com/package/@itwin/desktop-viewer-react)
-        />
-      )}
     </div>
   );
 };

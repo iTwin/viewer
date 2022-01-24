@@ -8,14 +8,11 @@ import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import type { ScreenViewport } from "@itwin/core-frontend";
 import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
 import type { IModelBackendOptions } from "@itwin/web-viewer-react";
-import { useAccessToken } from "@itwin/web-viewer-react";
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { IModelBankFrontend } from "../../services/IModelBankFrontendHubAccess";
 import { history } from "../routing";
-import { Header } from "./Header";
-import styles from "./Home.module.scss";
 
 /**
  * Test a viewer that is connected to an iModelBank
@@ -26,8 +23,6 @@ export const IModelBankHome: React.FC = () => {
     process.env.IMJS_AUTH_CLIENT_IMODEL_ID
   );
   const [iTwinId, setITwinId] = useState(process.env.IMJS_AUTH_CLIENT_ITWIN_ID);
-
-  const accessToken = useAccessToken();
 
   const authClient = useMemo(
     () =>
@@ -41,6 +36,18 @@ export const IModelBankHome: React.FC = () => {
       }),
     []
   );
+
+  const login = useCallback(async () => {
+    try {
+      await authClient.signInSilent();
+    } catch {
+      await authClient.signIn();
+    }
+  }, [authClient]);
+
+  useEffect(() => {
+    void login();
+  }, [login]);
 
   const backend: IModelBackendOptions = {
     customBackend: {
@@ -70,22 +77,6 @@ export const IModelBankHome: React.FC = () => {
     history.push(`imodelbank?iTwinId=${iTwinId}&iModelId=${iModelId}`);
   }, [iTwinId, iModelId]);
 
-  const toggleLogin = useCallback(async () => {
-    if (!accessToken) {
-      await authClient.signIn();
-    } else {
-      await authClient.signOut();
-    }
-  }, [accessToken, authClient]);
-
-  const switchModel = () => {
-    if (iModelId === (process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string)) {
-      setIModelId(process.env.IMJS_AUTH_CLIENT_IMODEL_ID2 as string);
-    } else {
-      setIModelId(process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string);
-    }
-  };
-
   const viewConfiguration = (viewPort: ScreenViewport) => {
     // default execute the fitview tool and use the iso standard view after tile trees are loaded
     const tileTreesLoaded = () => {
@@ -112,12 +103,7 @@ export const IModelBankHome: React.FC = () => {
   };
 
   return (
-    <div className={styles.home}>
-      <Header
-        handleLoginToggle={toggleLogin}
-        loggedIn={!!accessToken}
-        switchModel={switchModel}
-      />
+    <div style={{ height: "100vh" }}>
       <Viewer
         authClient={authClient}
         iTwinId={iTwinId}

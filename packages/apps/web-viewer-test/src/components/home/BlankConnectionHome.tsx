@@ -7,21 +7,17 @@ import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import { Cartographic, ColorDef, RenderMode } from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
-import { BlankViewer, useAccessToken } from "@itwin/web-viewer-react";
-import React, { useCallback, useMemo } from "react";
+import { BlankViewer } from "@itwin/web-viewer-react";
+import React, { useCallback, useEffect, useMemo } from "react";
 
 import { GeometryDecorator } from "../../decorators/GeometryDecorator";
 import { TestUiProvider2 } from "../../providers";
-import { Header } from "./Header";
-import styles from "./Home.module.scss";
 
 /**
  * Test blank connection viewer
  * @returns
  */
 export const BlankConnectionHome: React.FC = () => {
-  const accessToken = useAccessToken();
-
   const authClient = useMemo(
     () =>
       new BrowserAuthorizationClient({
@@ -35,13 +31,17 @@ export const BlankConnectionHome: React.FC = () => {
     []
   );
 
-  const toggleLogin = useCallback(async () => {
-    if (!accessToken) {
+  const login = useCallback(async () => {
+    try {
+      await authClient.signInSilent();
+    } catch {
       await authClient.signIn();
-    } else {
-      await authClient.signOut();
     }
-  }, [accessToken, authClient]);
+  }, [authClient]);
+
+  useEffect(() => {
+    void login();
+  }, [login]);
 
   /**
    * This value is for the iTwin Viewer and will be the default if the productId prop is not provided.
@@ -56,8 +56,7 @@ export const BlankConnectionHome: React.FC = () => {
   };
 
   return (
-    <div className={styles.home}>
-      <Header handleLoginToggle={toggleLogin} loggedIn={!!accessToken} />
+    <div style={{ height: "100vh" }}>
       <BlankViewer
         authClient={authClient}
         blankConnection={{
