@@ -46,7 +46,7 @@
     "@itwin/presentation-common": "^3.0.0",
     "@itwin/presentation-components": "^3.0.0",
     "@itwin/presentation-frontend": "^3.0.0",
-    "@itwin/reality-data-client": "latest",
+    "@itwin/reality-data-client": "^0.6.0",
     "@itwin/webgl-compatibility": "^3.0.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^10.4.4",
