@@ -4,6 +4,5 @@
  *--------------------------------------------------------------------------------------------*/
 
 export * from "./Home";
-export * from "./Header";
 export * from "./BlankConnectionHome";
 export * from "./ViewerHome";
