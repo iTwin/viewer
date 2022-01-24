@@ -17,6 +17,8 @@ interface ViewerAuthorizationClient {
 }
 ```
 
+In addition, we have removed the header and login/logout buttons from the Create React App web application template in favor of auto-login.
+
 #### Renamed
 
 - The `contextId` prop has been renamed to `iTwinId`
@@ -58,7 +60,6 @@ These scopes are no longer required:
 - `profile`
 - `organization`
 
-
 ## New Features
 
 ### Measure Tools
@@ -94,4 +95,3 @@ We've replaced the default measure-tools provided in the Viewer from itwinjs-cor
 - As of `create-react-app@4`, global installations of `create-react-app` are discouraged and can cause issues when bootstrapping a new app from a template. We recommend you uninstall the package using `npm uninstall -g create-react-app` or `yarn global remove create-react-app` to ensure that npx always uses the latest version.
 
 - As of `create-react-app@5`, many users have reported a fatal runtime error, **Uncaught ReferenceError: process is not defined**. This can be resolved by pinning down the version of `react-error-overlay` to `6.0.9`. Please see the following issue for more information, [create-react-app/issues/11773](https://github.com/facebook/create-react-app/issues/11773).
-
