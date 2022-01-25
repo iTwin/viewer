@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Tue, 12 Oct 2021 16:52:48 GMT and should not be manually modified.
+This log was last generated on Tue, 25 Jan 2022 20:14:40 GMT and should not be manually modified.
+
+## 2.0.0
+Tue, 25 Jan 2022 20:14:40 GMT
+
+### Breaking changes
+
+- Upgrade to iTwin.js 3.0
 
 ## 1.3.0
 Tue, 12 Oct 2021 16:52:48 GMT

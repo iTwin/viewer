@@ -2,6 +2,23 @@
   "name": "@itwin/desktop-viewer-react",
   "entries": [
     {
+      "version": "2.0.0",
+      "tag": "@itwin/desktop-viewer-react_v2.0.0",
+      "date": "Tue, 25 Jan 2022 20:14:40 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "Upgrade to iTwin.js 3.0"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" from `2.0.0-dev.25` to `2.0.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.1",
       "tag": "@itwin/desktop-viewer-react_v1.2.1",
       "date": "Fri, 10 Dec 2021 14:41:02 GMT",

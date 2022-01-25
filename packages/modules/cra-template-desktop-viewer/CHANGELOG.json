@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-desktop-viewer",
   "entries": [
     {
+      "version": "2.0.0",
+      "tag": "@itwin/cra-template-desktop-viewer_v2.0.0",
+      "date": "Tue, 25 Jan 2022 20:14:40 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "Upgrade to iTwin.js 3.0"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.4.1",
       "tag": "@itwin/cra-template-desktop-viewer_v1.4.1",
       "date": "Thu, 16 Dec 2021 21:14:32 GMT",

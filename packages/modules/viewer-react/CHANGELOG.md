@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Fri, 10 Dec 2021 14:41:02 GMT and should not be manually modified.
+This log was last generated on Tue, 25 Jan 2022 20:14:40 GMT and should not be manually modified.
+
+## 2.0.0
+Tue, 25 Jan 2022 20:14:40 GMT
+
+### Breaking changes
+
+- Upgrade to iTwin.js 3.0
 
 ## 1.9.1
 Fri, 10 Dec 2021 14:41:02 GMT
