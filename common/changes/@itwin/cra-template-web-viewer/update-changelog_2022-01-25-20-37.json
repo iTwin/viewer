@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-web-viewer",
+      "comment": "Update to always pull in latest version of viewer",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/cra-template-web-viewer",
+  "email": "aruniverse@users.noreply.github.com"
+}
