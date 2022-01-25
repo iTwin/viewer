@@ -13,10 +13,12 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -26,8 +28,8 @@ jobs:
           echo 'Installing...'
           node common/scripts/install-run-rush.js install
 
-          # echo 'Checking Rush Change...'
-          # node common/scripts/install-run-rush.js change -v -b origin/master
+          echo 'Checking Rush Change...'
+          node common/scripts/install-run-rush.js change -v
 
           echo 'Verifying Dependency Versions...'
           node common/scripts/install-run-rush.js check

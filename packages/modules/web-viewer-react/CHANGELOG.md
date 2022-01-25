@@ -9,6 +9,74 @@ Tue, 25 Jan 2022 20:14:40 GMT
 
 - Upgrade to iTwin.js 3.0
 
+#### iTwin.js
+
+A comprehensive list of breaking changes in **3.0** can be found here, [iTwin.js 3.0 Changelog](https://www.itwinjs.org/changehistory/3.0.0/).
+
+#### iTwin Viewer
+
+##### Authorization
+
+Authorization has been greatly simplified. Previously the `authConfig` prop in the `<Viewer />` component would accept a few different options, you could pass in your own AuthClient or config and we'd create one for you. We will no longer create an AuthClient for you, as that should be the responsibility of the App, not the Viewer. Instead, you need to provide your own AuthClient that implements a simpler interface.
+
+```tsx
+interface ViewerAuthorizationClient {
+  getAccessToken(): Promise<AccessToken>;
+  readonly onAccessTokenChanged: BeEvent<(token: AccessToken) => void>;
+}
+```
+
+In addition, we have removed the header and login/logout buttons from the Create React App web application template in favor of auto-login.
+
+##### Renamed
+
+- The `contextId` prop has been renamed to `iTwinId`
+- The `authConfig` prop has been renamed to `authClient` (see [Authorization](#authorization))
+
+##### Removed
+
+The following props have been removed.
+
+- `uiFrameworkVersion`
+- `imjsAppInsightsKey`
+- `backend.buddiRegion`
+- `backend.buddiServer`
+
+##### Required
+
+The following props are now required.
+
+- `authClient`
+- `enablePerformanceMonitors`
+
+##### New peer dependencies
+
+- [@itwin/imodels-access-frontend](https://www.npmjs.com/package/@itwin/imodels-access-frontend)
+- [@itwin/imodels-client-management](https://www.npmjs.com/package/@itwin/imodels-client-management)
+- [@itwin/reality-data-client](https://www.npmjs.com/package/@itwin/reality-data-client)
+
+##### New scopes required
+
+In your [iTwin App registration](https://developer.bentley.com/my-apps/), you'll need update your app to add the following scopes:
+
+- `imodelaccess:read` (Visualization)
+- `imodels:read` (Digital Twin Management > iModels)
+- `realitydata:read` (Digital Twin Management > Reality Data)
+
+These scopes are no longer required:
+
+- `itwinjs`
+- `openid`
+- `email`
+- `profile`
+- `organization`
+
+### New Features
+
+#### Measure Tools
+
+We've replaced the default measure-tools provided in the Viewer from itwinjs-core with the [@itwin/measure-tools-react](https://www.npmjs.com/package/@itwin/measure-tools-react) package.
+
 ## 1.3.6
 Fri, 10 Dec 2021 14:41:02 GMT
 

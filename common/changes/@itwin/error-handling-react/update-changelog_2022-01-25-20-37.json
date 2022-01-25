@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/error-handling-react",
+      "comment": "Updated Changelog",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/error-handling-react",
+  "email": "aruniverse@users.noreply.github.com"
+}

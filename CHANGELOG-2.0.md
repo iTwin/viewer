@@ -2,7 +2,7 @@
 
 ### iTwin.js
 
-A comprehensive list of breaking changes in **3.0** can be found here, [NextVersion.md](https://github.com/iTwin/itwinjs-core/blob/release/3.0.x/docs/changehistory/NextVersion.md).
+A comprehensive list of breaking changes in **3.0** can be found here, [iTwin.js 3.0 Changelog](https://www.itwinjs.org/changehistory/3.0.0/).
 
 ### iTwin Viewer
 
@@ -72,12 +72,12 @@ We've replaced the default measure-tools provided in the Viewer from itwinjs-cor
 
 - A [codemod](https://github.com/iTwin/codemods) has been developed to help you upgrade your exisitng code from iModel.js@2.x to iTwin.js@3.0.
 
-- Change the version of `@itwin/web-viewer-react` in your package.json to use the `"next"` dist tag, eg:
+- Change the version of `@itwin/web-viewer-react` in your package.json to the following:
 
   ```
     "dependencies": {
       ...
-      "@itwin/web-viewer-react": "next",
+      "@itwin/web-viewer-react": "^2.0.0",
       ...
     },
   ```

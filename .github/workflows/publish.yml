@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -35,6 +35,6 @@ jobs:
           git config user.name "iTwinViewerWorkflow"
           git config user.email "itwinviewer@users.noreply.github.com"
           node common/scripts/install-run-rush.js version --bump --target-branch master
-          node common/scripts/install-run-rush.js publish --include-all --set-access-level public --apply --publish --npm-auth-token $NPM_TOKEN --target-branch master --suffix alpha
+          node common/scripts/install-run-rush.js publish --include-all --set-access-level public --apply --publish --npm-auth-token $NPM_TOKEN --target-branch master
         env:
           NPM_TOKEN: ${{ secrets.NPMJS_PUBLISH_ITWIN }}

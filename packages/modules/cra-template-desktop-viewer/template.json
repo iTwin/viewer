@@ -20,7 +20,7 @@
       "@itwin/core-quantity": "^3.0.0",
       "@itwin/core-react": "^3.0.0",
       "@itwin/core-telemetry": "^3.0.0",
-      "@itwin/desktop-viewer-react": "next",
+      "@itwin/desktop-viewer-react": "^2.0.0",
       "@itwin/ecschema-metadata": "^3.0.0",
       "@itwin/electron-authorization": "^0.8.1",
       "@itwin/express-server": "^3.0.0",
