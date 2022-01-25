@@ -2,5 +2,11 @@
   {
     "policyName": "independentModule",
     "definitionName": "individualVersion"
+  },
+  {
+    "policyName": "prerelease-monorepo-lockStep",
+    "definitionName": "lockStepVersion",
+    "version": "2.0.0-dev.25",
+    "nextBump": "prerelease"
   }
 ]

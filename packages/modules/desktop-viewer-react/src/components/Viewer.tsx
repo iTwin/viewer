@@ -7,7 +7,7 @@ import { BaseViewer } from "@itwin/viewer-react";
 import React, { useMemo } from "react";
 
 import { useDesktopViewerInitializer } from "../hooks";
-import { DesktopViewerProps } from "../types";
+import type { DesktopViewerProps } from "../types";
 
 export const Viewer = (props: DesktopViewerProps) => {
   const memoizedProps = useMemo(() => {

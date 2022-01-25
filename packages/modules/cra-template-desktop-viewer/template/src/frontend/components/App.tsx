@@ -3,12 +3,13 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { NativeApp } from "@bentley/imodeljs-frontend";
+import type { DesktopViewerProps } from "@itwin/desktop-viewer-react";
+import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
 import { Router } from "@reach/router";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-import { ViewerSettings } from "../../common/ViewerConfig";
+import type { ViewerSettings } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import {
   addRecent as addRecentClient,
@@ -18,33 +19,30 @@ import {
 import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
 
 const App = () => {
-  const initialized = useDesktopViewerInitializer();
+  (window as any).ITWIN_VIEWER_HOME = window.location.origin;
+
+  const desktopInitializerProps = useMemo<DesktopViewerProps>(
+    () => ({
+      additionalI18nNamespaces: ["iTwinDesktopViewer"],
+      enablePerformanceMonitors: true,
+    }),
+    []
+  );
+
+  const initialized = useDesktopViewerInitializer(desktopInitializerProps);
+  const connectivityStatus = useConnectivity();
+
   const [settings, setSettings] = useState<ViewerSettings>();
-  const [connectivityListener, setConnectivityListener] =
-    useState<() => void>();
 
   useEffect(() => {
     if (initialized) {
       // setup connectivity events to let the backend know the status
-      void NativeApp.checkInternetConnectivity().then((status) => {
-        void ITwinViewerApp.ipcCall.setConnectivity(status);
-        const listener = NativeApp.onInternetConnectivityChanged.addListener(
-          (status) => {
-            void ITwinViewerApp.ipcCall.setConnectivity(status);
-          }
-        );
-        setConnectivityListener(listener);
-      });
+      void ITwinViewerApp.ipcCall.setConnectivity(connectivityStatus);
       void getUserSettings().then((userSettings) => {
         setSettings(userSettings);
       });
     }
-    return () => {
-      if (connectivityListener) {
-        connectivityListener();
-      }
-    };
-  }, [initialized]);
+  }, [initialized, connectivityStatus]);
 
   const addRecent = useCallback(
     async (

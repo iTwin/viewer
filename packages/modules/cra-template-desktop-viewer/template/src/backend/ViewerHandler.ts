@@ -3,26 +3,25 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ElectronAuthorizationBackend } from "@bentley/electron-manager/lib/ElectronBackend";
-import { IModelHost, IpcHandler } from "@bentley/imodeljs-backend";
-import { InternetConnectivityStatus } from "@bentley/imodeljs-common";
-import {
-  dialog,
-  Menu,
+import { IModelHost, IpcHandler } from "@itwin/core-backend";
+import { InternetConnectivityStatus } from "@itwin/core-common";
+import { ElectronMainAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronMain";
+import type {
   OpenDialogOptions,
   OpenDialogReturnValue,
   SaveDialogOptions,
   SaveDialogReturnValue,
 } from "electron";
+import { dialog, Menu } from "electron";
 import * as minimist from "minimist";
 
-import {
-  channelName,
+import type {
   ViewerConfig,
   ViewerFile,
   ViewerIpc,
   ViewerSettings,
 } from "../common/ViewerConfig";
+import { channelName } from "../common/ViewerConfig";
 import { getAppEnvVar } from "./AppInfo";
 import UserSettings from "./UserSettings";
 
@@ -105,14 +104,14 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
         const redirectUri = getAppEnvVar("REDIRECT_URI");
         const issuerUrl = getAppEnvVar("ISSUER_URL");
 
-        const authBackend = new ElectronAuthorizationBackend({
+        const authClient = new ElectronMainAuthorization({
           clientId,
           scope,
           redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
           issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
         });
-        await authBackend.initialize();
-        IModelHost.authorizationClient = authBackend;
+        await authClient.signInSilent();
+        IModelHost.authorizationClient = authClient;
         ViewerHandler._authInitialized = true;
       }
       if (downloadMenuItem) {

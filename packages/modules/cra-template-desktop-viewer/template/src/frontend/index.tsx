@@ -5,7 +5,7 @@
 
 import "./index.scss";
 
-import { Logger, LogLevel } from "@bentley/bentleyjs-core";
+import { Logger, LogLevel } from "@itwin/core-bentley";
 import React from "react";
 import * as ReactDOM from "react-dom";
 
@@ -15,7 +15,7 @@ import App from "./components/App";
 const viewerFrontendMain = async () => {
   // Setup logging immediately to pick up any logging during App.startup()
   Logger.initializeToConsole();
-  Logger.setLevelDefault(LogLevel.Warning);
+  Logger.setLevelDefault(LogLevel.Trace);
   Logger.setLevel(AppLoggerCategory.Frontend, LogLevel.Info);
 
   // TODO add theme toggle

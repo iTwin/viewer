@@ -2,23 +2,22 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-import { Guid } from "@bentley/bentleyjs-core";
-import { IModelVersion } from "@bentley/imodeljs-common";
-import {
-  BriefcaseConnection,
-  CheckpointConnection,
-} from "@bentley/imodeljs-frontend";
 
-import { ModelStatus } from "..";
+import { Guid } from "@itwin/core-bentley";
+import { IModelVersion } from "@itwin/core-common";
+import type { BriefcaseConnection } from "@itwin/core-frontend";
+import { CheckpointConnection } from "@itwin/core-frontend";
+
+import { ModelStatus } from "../types";
 
 export const getBriefcaseStatus = async (
   briefcase: BriefcaseConnection
 ): Promise<ModelStatus> => {
-  if (briefcase && briefcase.contextId && briefcase.contextId !== Guid.empty) {
+  if (briefcase && briefcase.iTwinId && briefcase.iTwinId !== Guid.empty) {
     try {
       // get the online version
       const remoteConnection = await CheckpointConnection.openRemote(
-        briefcase.contextId,
+        briefcase.iTwinId,
         briefcase.iModelId,
         IModelVersion.latest()
       );
@@ -29,7 +28,8 @@ export const getBriefcaseStatus = async (
       } else {
         return ModelStatus.UPTODATE;
       }
-    } catch {
+    } catch (error) {
+      console.error(error);
       return ModelStatus.ERROR;
     }
   } else {

@@ -3,12 +3,14 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { PropertyGridUiItemsProvider } from "@bentley/property-grid-react";
-import { TreeWidgetUiItemsProvider } from "@bentley/tree-widget-react";
-import { UiItemsManager, UiItemsProvider } from "@bentley/ui-abstract";
+import type { UiItemsProvider } from "@itwin/appui-abstract";
+import { UiItemsManager } from "@itwin/appui-abstract";
+import { MeasureToolsUiItemsProvider } from "@itwin/measure-tools-react";
+import { PropertyGridUiItemsProvider } from "@itwin/property-grid-react";
+import { TreeWidgetUiItemsProvider } from "@itwin/tree-widget-react";
 import { useEffect } from "react";
 
-import { ItwinViewerUi } from "../types";
+import type { ItwinViewerUi } from "../types";
 
 export function useUiProviders(
   customUiProviders?: UiItemsProvider[],
@@ -21,7 +23,20 @@ export function useUiProviders(
       defaultProviders.push(new TreeWidgetUiItemsProvider());
     }
     if (!defaultUiConfig?.hidePropertyGrid) {
-      defaultProviders.push(new PropertyGridUiItemsProvider());
+      defaultProviders.push(
+        new PropertyGridUiItemsProvider({
+          enableCopyingPropertyText: true,
+        })
+      );
+    }
+    if (
+      !defaultUiConfig?.contentManipulationTools?.hideDefaultVerticalItems &&
+      (defaultUiConfig?.contentManipulationTools?.verticalItems
+        ?.measureTools === undefined ||
+        defaultUiConfig?.contentManipulationTools?.verticalItems
+          ?.measureTools === true)
+    ) {
+      defaultProviders.push(new MeasureToolsUiItemsProvider());
     }
 
     const uiProviders = customUiProviders

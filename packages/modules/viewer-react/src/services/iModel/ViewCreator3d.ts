@@ -8,17 +8,17 @@ API for creating a 3D default view for an iModel.
 Either takes in a list of modelIds, or displays all 3D models by default.
 */
 
-import { Id64 } from "@bentley/bentleyjs-core";
+import { Id64 } from "@itwin/core-bentley";
+import type { ScreenViewport, ViewState } from "@itwin/core-frontend";
 import {
   FitViewTool,
   IModelApp,
-  ScreenViewport,
   StandardViewId,
   ViewCreator3d as ViewCreator,
-  ViewState,
-} from "@bentley/imodeljs-frontend";
+} from "@itwin/core-frontend";
 
-import { ViewCreator3dOptions } from "../../types";
+import type { ViewCreator3dOptions } from "../../types";
+import { ViewerPerformance } from "../telemetry";
 
 /**
  * API for creating a 3D default [[ViewState3d]] for an iModel. @see [[ViewCreator2d]] to create a view for a 2d model.
@@ -36,7 +36,7 @@ export class ViewCreator3d extends ViewCreator {
    * @param [modelIds] Ids of models to display in the view.
    * @throws [IModelError]($common) If no 3d models are found in the iModel.
    */
-  public async createDefaultView(
+  public override async createDefaultView(
     options?: ViewCreator3dOptions,
     modelIds?: string[]
   ): Promise<ViewState> {
@@ -47,7 +47,7 @@ export class ViewCreator3d extends ViewCreator {
       IModelApp.viewManager.onViewOpen.addOnce((viewPort: ScreenViewport) => {
         if (viewState.iModel.isOpen) {
           // Always start with the standard rotation to ISO, it can be adjusted using any of the other methods after.
-          IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
+          void IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
           viewPort.view.setStandardRotation(StandardViewId.Iso);
 
           // check for a custom configurer and execute
@@ -73,6 +73,13 @@ export class ViewCreator3d extends ViewCreator {
               const start = new Date();
               const intvl = setInterval(() => {
                 if (viewPort.areAllTileTreesLoaded) {
+                  ViewerPerformance.addMark("TilesLoaded");
+                  void ViewerPerformance.addAndLogMeasure(
+                    "TileTreesLoaded",
+                    "ViewerStarting",
+                    "TilesLoaded",
+                    viewPort.numReadyTiles
+                  );
                   clearInterval(intvl);
                   resolve(true);
                 }
@@ -86,7 +93,7 @@ export class ViewCreator3d extends ViewCreator {
           };
 
           tileTreesLoaded().finally(() => {
-            IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
+            void IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
             viewPort.view.setStandardRotation(
               options?.standardViewId ?? StandardViewId.Iso
             );
@@ -95,6 +102,12 @@ export class ViewCreator3d extends ViewCreator {
       });
     }
 
+    ViewerPerformance.addMark("ViewStateCreation");
+    void ViewerPerformance.addAndLogMeasure(
+      "ViewStateCreated",
+      "ViewerStarting",
+      "ViewStateCreation"
+    );
     return viewState;
   }
 }

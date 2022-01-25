@@ -2,10 +2,10 @@
   "changes": [
     {
       "packageName": "@itwin/web-viewer-react",
-      "comment": "",
-      "type": "none"
+      "comment": "Upgrade to iTwin.js 3.0",
+      "type": "major"
     }
   ],
   "packageName": "@itwin/web-viewer-react",
-  "email": "aruniverse@users.noreply.github.com"
+  "email": "6283674+kckst8@users.noreply.github.com"
 }

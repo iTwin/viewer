@@ -47,10 +47,20 @@ export const MyViewerComponent = () => {
 
 ### Props
 
-- `contextId` - GUID for the context (project, asset, etc.) that contains the iModel that you wish to view
-- `iModelId` - GUID for the iModel that you wish to view. Must be specified with a contextId if a snapshotPath is not provided
-- `changeSetId` - optional changeset id to view if combined with the contextId and iModelId props
-- `snapshotPath` - path to a local snapshot to load in the viewer. If provided, it will take precedence over any contextId/iModelId that may also be provided
+#### Required
+
+- `enablePerformanceMonitors` - Enable reporting of data from timed events in the iTwin Viewer in order to aid in future performance optimizations. These are the metrics that will be collected and logged to the browser's performance timeline as well as to Azure Application Insights:
+  - Duration of startup to the initialization of iTwin.js services
+  - Duration of startup to the establishment of a connection to the iModel
+  - Duration of startup to the creation of a view state for the iModel
+  - Duration of startup until the last tile is loaded and rendered for the initial iModel view
+
+#### Optional
+
+- `iTwinId` - GUID for the iTwin (project, asset, etc.) that contains the iModel that you wish to view
+- `iModelId` - GUID for the iModel that you wish to view. Must be specified with a iTwinId if a snapshotPath is not provided
+- `changeSetId` - optional changeset id to view if combined with the iTwinId and iModelId props
+- `snapshotPath` - path to a local snapshot to load in the viewer. If provided, it will take precedence over any iTwinId/iModelId that may also be provided
 - `theme` - override the default theme
 - `defaultUiConfig` - hide or override default tooling and widgets
   - `contentManipulationTools` - options for the content manipulation section (top left)
@@ -92,7 +102,6 @@ export const MyViewerComponent = () => {
 - `onIModelAppInit` - Callback function that executes after IModelApp.startup completes
 - `viewportOptions` - Additional options for the default frontstage's IModelViewportControl
 - `additionalI18nNamespaces` - Additional i18n namespaces to register
-- `iModelDataErrorMessage` - Override the default message that sends users to the iTwin Synchronization Portal when there are data-related errors with an iModel. Pass empty string to override with no message.
 - `toolAdmin` - Optional `ToolAdmin` to register
 - `loadingComponent` - provide a custom React component to override the spinner and text that displays when an iModel is loading
 

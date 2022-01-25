@@ -3,13 +3,13 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BlankConnectionProps, IModelApp } from "@bentley/imodeljs-frontend";
-import { FillCentered } from "@bentley/ui-core/lib/ui-core";
+import type { BlankConnectionProps } from "@itwin/core-frontend";
+import { FillCentered } from "@itwin/core-react";
 import { ErrorBoundary } from "@itwin/error-handling-react";
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 
-import { useBaseViewerInitializer } from "../hooks";
-import {
+import { useAccessToken, useBaseViewerInitializer } from "../hooks";
+import type {
   BlankConnectionViewState,
   ItwinViewerCommonParams,
   ItwinViewerUi,
@@ -28,61 +28,44 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
   onIModelConnected,
   frontstages,
   backstageItems,
-  uiFrameworkVersion,
   viewportOptions,
   uiProviders,
   blankConnection,
   viewStateOptions,
   productId,
-  imjsAppInsightsKey,
   i18nUrlTemplate,
   onIModelAppInit,
   additionalI18nNamespaces,
   additionalRpcInterfaces,
+  enablePerformanceMonitors,
 }: BlankViewerProps) => {
-  const [uiConfig, setUiConfig] = useState<ItwinViewerUi>();
-  const [authorized, setAuthorized] = useState(false);
   const viewerInitialized = useBaseViewerInitializer({
     appInsightsKey,
     productId,
-    imjsAppInsightsKey,
     i18nUrlTemplate,
     onIModelAppInit,
     additionalI18nNamespaces,
     additionalRpcInterfaces,
+    enablePerformanceMonitors,
   });
 
-  useEffect(() => {
-    setAuthorized(
-      (IModelApp.authorizationClient?.hasSignedIn &&
-        IModelApp.authorizationClient?.isAuthorized) ||
-        false
-    );
-    IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
-      setAuthorized(
-        (IModelApp.authorizationClient?.hasSignedIn &&
-          IModelApp.authorizationClient?.isAuthorized) ||
-          false
-      );
-    });
-  }, []);
-
-  useEffect(() => {
+  const uiConfig = useMemo<ItwinViewerUi>(() => {
     // hide the property grid and treeview by default, but allow to be overridden via props
     const defaultBlankViewerUiConfig: ItwinViewerUi = {
       hidePropertyGrid: true,
       hideTreeView: true,
     };
-    const blankViewerUiConfig = {
+    return {
       ...defaultBlankViewerUiConfig,
       ...defaultUiConfig,
     };
-    setUiConfig(blankViewerUiConfig);
   }, [defaultUiConfig]);
+
+  const accessToken = useAccessToken();
 
   return (
     <ErrorBoundary>
-      {authorized ? (
+      {accessToken ? (
         viewerInitialized ? (
           <IModelLoader
             defaultUiConfig={uiConfig}
@@ -90,7 +73,6 @@ export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
             onIModelConnected={onIModelConnected}
             frontstages={frontstages}
             backstageItems={backstageItems}
-            uiFrameworkVersion={uiFrameworkVersion}
             viewportOptions={viewportOptions}
             blankConnection={blankConnection}
             blankConnectionViewState={viewStateOptions}

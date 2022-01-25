@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { FrontendRequestContext } from "@bentley/imodeljs-frontend";
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 
@@ -19,7 +18,7 @@ export const LoginRedirect = () => {
     AuthorizationClient.initializeOidc()
       .then(() => {
         AuthorizationClient.oidcClient
-          .signInSilent(new FrontendRequestContext())
+          .signInSilent()
           .then(() => {
             setRedirectPath(sessionStorage.getItem(RedirectKey) ?? "/");
             setIsAuthVerified(true);

@@ -3,11 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ElectronHost } from "@bentley/electron-manager/lib/ElectronBackend";
+import { ElectronHost } from "@itwin/core-electron/lib/cjs/ElectronBackend";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 
-import { ViewerFile, ViewerSettings } from "../common/ViewerConfig";
+import type { ViewerFile, ViewerSettings } from "../common/ViewerConfig";
 
 class UserSettings {
   private _settings: ViewerSettings;

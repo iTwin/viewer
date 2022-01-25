@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { useAccessToken } from "@itwin/desktop-viewer-react";
-import { RouteComponentProps } from "@reach/router";
 import React, {
   createContext,
   Dispatch,
@@ -12,6 +11,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import type { RouteComponentProps } from "@reach/router";
 
 import { SelectIModel } from "../modelSelector";
 import { SignIn } from "../signin/SignIn";
@@ -46,12 +46,10 @@ export const IModelsRoute = ({
   }, [location?.state]);
 
   return (
-    <IModelContext.Provider
-value={{ pendingIModel, setPendingIModel }}
-    >
+    <IModelContext.Provider value={{ pendingIModel, setPendingIModel }}>
       {accessToken ? (
         <SelectIModel
-          accessToken={accessToken.toTokenString()}
+          accessToken={accessToken}
           projectId={iTwinId}
           projectName={projectName}
         />

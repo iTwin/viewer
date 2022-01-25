@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Viewer } from "@itwin/desktop-viewer-react";
-import { RouteComponentProps } from "@reach/router";
-import React, { useEffect, useMemo, useState } from "react";
+import type { RouteComponentProps } from "@reach/router";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { IModelMergeItemsProvider } from "../../extensions";
 
@@ -27,18 +27,19 @@ export const ViewerRoute = ({ location }: ViewerRouteProps) => {
     }
   }, [location?.state]);
 
-  const onIModelAppInitialized = useMemo(() => {
+  const onIModelAppInitialized = useCallback(() => {
     console.log("iTwin.js Initialized!");
   }, []);
 
   return filePath ? (
     <Viewer
       snapshotPath={filePath}
-      onIModelAppInit={onIModelAppInitialized as any}
+      onIModelAppInit={onIModelAppInitialized}
       defaultUiConfig={{
         contentManipulationTools: { cornerItem: { hideDefault: true } },
       }}
       uiProviders={[new IModelMergeItemsProvider()]}
+      enablePerformanceMonitors={true}
     />
   ) : null;
 };

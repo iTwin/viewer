@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ViewerProps } from "@itwin/viewer-react";
+import type { ViewerProps } from "@itwin/viewer-react";
 
 export type DesktopViewerProps = Omit<ViewerProps, "appInsightsKey">;
 
@@ -16,4 +16,10 @@ export enum ModelStatus {
   UPTODATE,
   SNAPSHOT,
   COMPARING,
+}
+
+export interface ProgressInfo {
+  percent?: number;
+  total?: number;
+  loaded: number;
 }

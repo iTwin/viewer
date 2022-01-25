@@ -6,33 +6,32 @@
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
-import {
-  BlankConnection,
-  BlankConnectionProps,
-  IModelApp,
-  IModelConnection,
-  ViewState,
-} from "@bentley/imodeljs-frontend";
-import {
+import type {
   BackstageActionItem,
-  BackstageItemUtilities,
   BackstageStageLauncher,
-} from "@bentley/ui-abstract";
+} from "@itwin/appui-abstract";
+import { BackstageItemUtilities } from "@itwin/appui-abstract";
 import {
   StateManager,
   SyncUiEventDispatcher,
   UiFramework,
-} from "@bentley/ui-framework";
+} from "@itwin/appui-react";
+import type {
+  BlankConnectionProps,
+  IModelConnection,
+  ViewState,
+} from "@itwin/core-frontend";
+import { BlankConnection, IModelApp } from "@itwin/core-frontend";
 import { useErrorManager } from "@itwin/error-handling-react";
 import { withAITracking } from "@microsoft/applicationinsights-react-js";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
 import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
-import { openLocalImodel, openRemoteImodel } from "../../services/iModel";
+import { openLocalImodel, openRemoteIModel } from "../../services/iModel";
 import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
-import { ai } from "../../services/telemetry/TelemetryService";
-import {
+import { userAI, ViewerPerformance } from "../../services/telemetry";
+import type {
   BlankConnectionViewState,
   IModelLoaderParams,
   ViewCreator3dOptions,
@@ -40,10 +39,10 @@ import {
   ViewerFrontstage,
 } from "../../types";
 import { DefaultFrontstage } from "../app-ui/frontstages/DefaultFrontstage";
-import { IModelBusy, IModelViewer } from ".";
-
+import { IModelBusy } from "./IModelBusy";
+import { IModelViewer } from "./IModelViewer";
 export interface ModelLoaderProps extends IModelLoaderParams {
-  contextId?: string;
+  iTwinId?: string;
   iModelId?: string;
   changeSetId?: string;
   appInsightsKey?: string;
@@ -56,14 +55,13 @@ export interface ModelLoaderProps extends IModelLoaderParams {
 const Loader: React.FC<ModelLoaderProps> = React.memo(
   ({
     iModelId,
-    contextId,
+    iTwinId,
     changeSetId,
     defaultUiConfig,
     onIModelConnected,
     snapshotPath,
     frontstages,
     backstageItems,
-    uiFrameworkVersion,
     viewportOptions,
     blankConnection,
     blankConnectionViewState,
@@ -199,9 +197,9 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           return initBlankConnection(blankConnection, onIModelConnected);
         }
 
-        if (!(contextId && iModelId) && !snapshotPath) {
+        if (!(iTwinId && iModelId) && !snapshotPath) {
           throw new Error(
-            IModelApp.i18n.translateWithNamespace(
+            IModelApp.localization.getLocalizedStringWithNamespace(
               "iTwinViewer",
               "missingConnectionProps"
             )
@@ -213,13 +211,19 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         // TODO add the ability to open a BriefcaseConnection for Electron apps
         if (snapshotPath) {
           imodelConnection = await openLocalImodel(snapshotPath);
-        } else if (contextId && iModelId) {
-          imodelConnection = await openRemoteImodel(
-            contextId,
+        } else if (iTwinId && iModelId) {
+          imodelConnection = await openRemoteIModel(
+            iTwinId,
             iModelId,
             changeSetId
           );
         }
+        ViewerPerformance.addMark("IModelConnection");
+        void ViewerPerformance.addAndLogMeasure(
+          "IModelConnected",
+          "ViewerStarting",
+          "IModelConnection"
+        );
         if (imodelConnection && isMounted.current) {
           // Tell the SyncUiEventDispatcher and StateManager about the iModelConnection
           UiFramework.setIModelConnection(imodelConnection, true);
@@ -239,23 +243,25 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         errorManager.throwFatalError(error);
       });
 
+      const mounted = isMounted.current;
       return () => {
         if (prevConnection) {
           void prevConnection.close();
           prevConnection = undefined;
         }
-        if (isMounted.current) {
+        if (mounted) {
           setConnection(undefined);
         }
       };
     }, [
-      contextId,
+      iTwinId,
       iModelId,
       changeSetId,
       snapshotPath,
       blankConnection,
       blankConnectionViewState,
       isMounted,
+      onIModelConnected,
     ]);
 
     useEffect(() => {
@@ -270,7 +276,9 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
                 (backstageItem as BackstageStageLauncher).stageId,
                 backstageItem.groupPriority,
                 backstageItem.itemPriority,
-                IModelApp.i18n.translate(backstageItem.labeli18nKey),
+                IModelApp.localization.getLocalizedString(
+                  backstageItem.labeli18nKey
+                ),
                 backstageItem.subtitle,
                 backstageItem.icon
               );
@@ -280,7 +288,9 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
                 backstageItem.groupPriority,
                 backstageItem.itemPriority,
                 (backstageItem as BackstageActionItem).execute,
-                IModelApp.i18n.translate(backstageItem.labeli18nKey),
+                IModelApp.localization.getLocalizedString(
+                  backstageItem.labeli18nKey
+                ),
                 backstageItem.subtitle,
                 backstageItem.icon
               );
@@ -298,7 +308,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           id: "DefaultFrontstage",
           groupPriority: 100,
           itemPriority: 10,
-          label: IModelApp.i18n.translate(
+          label: IModelApp.localization.getLocalizedString(
             "iTwinViewer:backstage.mainFrontstage"
           ),
         });
@@ -318,8 +328,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         const defaultFrontstageProvider = new DefaultFrontstage(
           viewState,
           defaultUiConfig,
-          viewportOptions,
-          uiFrameworkVersion
+          viewportOptions
         );
 
         // add the default frontstage first so that it's default status can be overridden
@@ -330,13 +339,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       }
 
       setFinalFrontstages(allFrontstages);
-    }, [
-      frontstages,
-      viewportOptions,
-      viewState,
-      defaultUiConfig,
-      uiFrameworkVersion,
-    ]);
+    }, [frontstages, viewportOptions, viewState, defaultUiConfig]);
 
     if (error) {
       throw error;
@@ -351,7 +354,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
               <IModelViewer
                 frontstages={finalFrontstages}
                 backstageItems={finalBackstageItems}
-                uiFrameworkVersion={uiFrameworkVersion}
               />
             </Provider>
           ) : (
@@ -366,7 +368,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
 );
 
 const TrackedLoader = withAITracking(
-  ai.reactPlugin,
+  userAI.reactPlugin,
   Loader,
   "IModelLoader",
   "tracked-loader"

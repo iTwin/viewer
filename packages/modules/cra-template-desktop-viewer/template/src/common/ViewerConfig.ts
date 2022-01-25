@@ -9,14 +9,14 @@ import {
   InternetConnectivityStatus,
   iTwinChannel,
   SnapshotIModelRpcInterface,
-} from "@bentley/imodeljs-common";
-import { PresentationRpcInterface } from "@bentley/presentation-common";
+} from "@itwin/core-common";
 import type {
   OpenDialogOptions,
   OpenDialogReturnValue,
   SaveDialogOptions,
   SaveDialogReturnValue,
 } from "electron";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
 
 export const channelName = iTwinChannel("desktop-viewer");
 

@@ -9,20 +9,31 @@ import ReactDOM from "react-dom";
 import { Viewer } from "../../components/Viewer";
 import { WebInitializer } from "../../services/Initializer";
 import { ItwinViewer } from "../../services/ItwinViewer";
-import { WebAuthorizationOptions } from "../../types";
+import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
 
 jest.mock("@itwin/viewer-react", () => {
   return {
-    BaseViewer: jest.fn(({ children }) => null),
-    getIModelAppOptions: jest.fn(),
+    BaseViewer: jest.fn(() => null),
+    getIModelAppOptions: jest.fn().mockReturnValue({}),
     useIsMounted: jest.fn().mockReturnValue(true),
     useBaseViewerInitializer: jest.fn().mockReturnValue(true),
     getInitializationOptions: jest.fn().mockReturnValue({}),
     isEqual: jest.fn().mockReturnValue(true),
+    ViewerPerformance: {
+      addMark: jest.fn(),
+      addAndLogMeasure: jest.fn(),
+      enable: jest.fn(),
+    },
+    makeCancellable: jest.requireActual(
+      "@itwin/viewer-react/lib/cjs/utilities/MakeCancellable"
+    ).makeCancellable,
+    ViewerAuthorization: {
+      client: {},
+    },
   };
 });
 
-jest.mock("@bentley/imodeljs-frontend", () => {
+jest.mock("@itwin/core-frontend", () => {
   return {
     IModelApp: {
       startup: jest.fn().mockResolvedValue(true),
@@ -65,15 +76,9 @@ jest.mock("@bentley/imodeljs-frontend", () => {
 });
 
 const elementId = "viewerRoot";
-const mockProjectId = "mockProjectId";
+const mockITwinId = "mockITwinId";
 const mockiModelId = "mockImodelId";
-const authConfig: WebAuthorizationOptions = {
-  config: {
-    clientId: "test-client",
-    redirectUri: "http://localhost:3000",
-    scope: "test-scope",
-  },
-};
+const authClient = new MockAuthorizationClient();
 
 describe("iTwinViewer", () => {
   beforeAll(() => {
@@ -85,28 +90,29 @@ describe("iTwinViewer", () => {
     jest.clearAllMocks();
   });
 
-  it("renders the viewer for the proper contextId and iModelId on the element whose id is passed to the constructor", async () => {
+  it("renders the viewer for the proper iTwinId and iModelId on the element whose id is passed to the constructor", async () => {
     jest.spyOn(React, "createElement");
     jest.spyOn(ReactDOM, "render");
     const viewer = new ItwinViewer({
       elementId,
-      authConfig,
+      authClient,
+      enablePerformanceMonitors: false,
     });
-    await viewer.load({ contextId: mockProjectId, iModelId: mockiModelId });
+    await viewer.load({ iTwinId: mockITwinId, iModelId: mockiModelId });
     await WebInitializer.initialized;
     expect(React.createElement).toHaveBeenCalledWith(Viewer, {
-      contextId: mockProjectId,
+      iTwinId: mockITwinId,
       iModelId: mockiModelId,
-      authConfig: authConfig,
+      authClient: authClient,
       changeSetId: undefined,
       uiConfig: undefined,
       appInsightsKey: undefined,
       onIModelConnected: undefined,
       frontstages: undefined,
-      uiFrameworkVersion: undefined,
       viewportOptions: undefined,
       uiProviders: undefined,
       theme: undefined,
+      enablePerformanceMonitors: false,
     });
     expect(ReactDOM.render).toHaveBeenCalledWith(
       expect.anything(),

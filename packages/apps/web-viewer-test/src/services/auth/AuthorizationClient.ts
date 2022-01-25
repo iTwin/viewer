@@ -3,12 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import type { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
 import {
   BrowserAuthorizationCallbackHandler,
   BrowserAuthorizationClient,
-  BrowserAuthorizationClientConfiguration,
-} from "@bentley/frontend-authorization-client";
-import { FrontendRequestContext } from "@bentley/imodeljs-frontend";
+} from "@itwin/browser-authorization";
 
 import { RedirectKey } from "./";
 
@@ -51,13 +50,13 @@ export class AuthorizationClient {
     if (redirectPath) {
       sessionStorage.setItem(RedirectKey, redirectPath);
     }
-    await this.oidcClient.signIn(new FrontendRequestContext());
+    await this.oidcClient.signIn();
   }
 
   public static async signOut(redirectPath?: string): Promise<void> {
     if (redirectPath) {
       sessionStorage.setItem(RedirectKey, redirectPath);
     }
-    await this.oidcClient.signOut(new FrontendRequestContext());
+    await this.oidcClient.signOut();
   }
 }

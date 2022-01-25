@@ -3,8 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { InternetConnectivityStatus } from "@bentley/imodeljs-common";
-import { NativeApp } from "@bentley/imodeljs-frontend";
+import { InternetConnectivityStatus } from "@itwin/core-common";
+import { NativeApp } from "@itwin/core-frontend";
 import { useCallback, useEffect, useState } from "react";
 
 export const useConnectivity = () => {
@@ -24,7 +24,7 @@ export const useConnectivity = () => {
 
   useEffect(() => {
     void checkStatus();
-  }, []);
+  }, [checkStatus]);
 
   return connectivityStatus;
 };

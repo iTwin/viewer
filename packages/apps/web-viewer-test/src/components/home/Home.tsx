@@ -4,9 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import modelImg from "@bentley/icons-generic/icons/imodeljs.svg";
-import { Button, ButtonType } from "@bentley/ui-core";
+import { Button } from "@itwin/itwinui-react";
 import React from "react";
-import { RouteComponentProps } from "react-router";
+import type { RouteComponentProps } from "react-router";
 
 import { ReactComponent as Itwin } from "../../images/itwin.svg";
 import styles from "./Home.module.scss";
@@ -25,29 +25,25 @@ export const Home = ({ history }: RouteComponentProps) => {
         <div className={styles.signIn}>
           <Button
             className={styles.homeButton}
-            onClick={() => history.push("/authclient")}
-            buttonType={ButtonType.Blue}
+            onClick={() => history.push("/viewer")}
+            styleType={"high-visibility"}
+            size={"large"}
           >
-            {"Use Auth Client"}
-          </Button>
-          <Button
-            className={styles.homeButton}
-            onClick={() => history.push("/authconfig")}
-            buttonType={ButtonType.Primary}
-          >
-            {"Use Auth Config"}
+            {"Remote Connection"}
           </Button>
           <Button
             className={styles.homeButton}
             onClick={() => history.push("/blankconnection")}
-            buttonType={ButtonType.Hollow}
+            styleType={"cta"}
+            size={"large"}
           >
             {"Blank Connection"}
           </Button>
           <Button
             className={styles.homeButton}
             onClick={() => history.push("/imodelbank")}
-            buttonType={ButtonType.Hollow}
+            styleType={"default"}
+            size={"large"}
           >
             {"iModel Bank"}
           </Button>

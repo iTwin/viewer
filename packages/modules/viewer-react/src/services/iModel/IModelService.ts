@@ -3,17 +3,14 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Guid } from "@bentley/bentleyjs-core";
-import { VersionQuery } from "@bentley/imodelhub-client";
-import { IModelVersion } from "@bentley/imodeljs-common";
+import { Guid } from "@itwin/core-bentley";
+import { IModelVersion } from "@itwin/core-common";
 import {
   BriefcaseConnection,
   CheckpointConnection,
   IModelApp,
-  IModelHubFrontend,
   SnapshotConnection,
-} from "@bentley/imodeljs-frontend";
-import { AuthorizedClientRequestContext } from "@bentley/itwin-client";
+} from "@itwin/core-frontend";
 
 /** determine the proper version of the iModel to open
  * 1. If named versions exist, get the named version that contains the latest changeset
@@ -26,20 +23,15 @@ const getVersion = async (
   if (changeSetId) {
     return IModelVersion.asOfChangeSet(changeSetId);
   }
-  const token = await IModelApp.authorizationClient?.getAccessToken();
-  if (token) {
+
+  const accessToken = await IModelApp.authorizationClient?.getAccessToken();
+  if (accessToken && IModelApp.hubAccess) {
     try {
-      const requestContext = new AuthorizedClientRequestContext(token);
-      const namedVersions = await IModelHubFrontend.iModelClient.versions.get(
-        requestContext,
+      const changeset = await IModelApp.hubAccess.getChangesetFromNamedVersion({
         iModelId,
-        new VersionQuery().top(1)
-      );
-      // if there is a named version (version with the latest changeset "should" be at the top), return the version as of its changeset
-      // otherwise return the version as of the latest changeset
-      return namedVersions.length === 1 && namedVersions[0].changeSetId
-        ? IModelVersion.asOfChangeSet(namedVersions[0].changeSetId)
-        : IModelVersion.latest();
+        accessToken,
+      });
+      return IModelVersion.asOfChangeSet(changeset.id);
     } catch {
       // default to the latest version
       return IModelVersion.latest();
@@ -49,16 +41,16 @@ const getVersion = async (
 };
 
 /** open and return an IModelConnection from a project's wsgId and an imodel's wsgId */
-export const openRemoteImodel = async (
-  contextId: string,
-  imodelId: string,
+export const openRemoteIModel = async (
+  iTwinId: string,
+  iModelId: string,
   changeSetId?: string
 ): Promise<CheckpointConnection | undefined> => {
   try {
     // get the version to query
-    const version = await getVersion(imodelId, changeSetId);
+    const version = await getVersion(iModelId, changeSetId);
     // create a new connection
-    return await CheckpointConnection.openRemote(contextId, imodelId, version);
+    return await CheckpointConnection.openRemote(iTwinId, iModelId, version);
   } catch (error) {
     console.log(`Error opening the iModel connection: ${error}`);
     throw error;
@@ -77,7 +69,7 @@ export const openLocalImodel = async (fileName: string) => {
       fileName,
       readonly: true,
     });
-    if (connection.contextId === Guid.empty) {
+    if (connection.iTwinId === Guid.empty) {
       // assume snapshot if there is no context id
       return await SnapshotConnection.openFile(fileName);
     }

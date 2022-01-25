@@ -2,24 +2,22 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 /** Clone of core BasicNavigationWidget with conditional tooling
  */
-import { IModelApp } from "@bentley/imodeljs-frontend";
-import {
-  CommonToolbarItem,
-  ToolbarOrientation,
-  ToolbarUsage,
-} from "@bentley/ui-abstract";
+import type { CommonToolbarItem } from "@itwin/appui-abstract";
+import { ToolbarOrientation, ToolbarUsage } from "@itwin/appui-abstract";
 import {
   CoreTools,
   NavigationWidgetComposer,
   ToolbarComposer,
   ToolbarHelper,
   ToolItemDef,
-} from "@bentley/ui-framework";
+} from "@itwin/appui-react";
+import { IModelApp } from "@itwin/core-frontend";
 import * as React from "react";
 
-import { ViewNavigationTools } from "../../../types";
+import type { ViewNavigationTools } from "../../../types";
 import { useUiVisibility } from "./BasicToolWidget";
 
 export interface BasicNavigationWidgetProps {

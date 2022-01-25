@@ -3,15 +3,15 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IModelApp } from "@bentley/imodeljs-frontend";
-import { CoreTools, ToolbarHelper, ToolItemDef } from "@bentley/ui-framework";
+import { CoreTools, ToolbarHelper, ToolItemDef } from "@itwin/appui-react";
+import { IModelApp } from "@itwin/core-frontend";
 import { render } from "@testing-library/react";
 import React from "react";
 
 import { BasicNavigationWidget } from "../../../../components/app-ui/widgets/BasicNavigationWidget";
 
-jest.mock("@bentley/ui-abstract");
-jest.mock("@bentley/ui-framework", () => {
+jest.mock("@itwin/appui-abstract");
+jest.mock("@itwin/appui-react", () => {
   return {
     BackstageAppButton: jest.fn(),
     NavigationWidgetComposer: () => null,

@@ -18,21 +18,21 @@ IMJS_AUTH_CLIENT_SCOPES =""
 
 - When you are ready to build a production application, [register here](https://developer.bentley.com/register/).
 
-You should also add a valid contextId and iModelId for your user in the this file:
+You should also add a valid iTwinId and iModelId for your user in the this file:
 
 ```
 # ---- Test ids ----
-IMJS_CONTEXT_ID = ""
+IMJS_ITWIN_ID = ""
 IMJS_IMODEL_ID = ""
 ```
 
-- For the IMJS_CONTEXT_ID variable, you can use the id of one of your existing Projects or Assets. You can obtain their ids via the [Administration REST APIs](https://developer.bentley.com/api-groups/administration/api-reference/).
+- For the IMJS_ITWIN_ID variable, you can use the id of one of your existing Projects or Assets. You can obtain their ids via the [Administration REST APIs](https://developer.bentley.com/api-groups/administration/api-reference/).
 
-- For the IMJS_IMODEL_ID variable, use the id of an iModel that belongs to the context that you specified in the IMJS_CONTEXT_ID variable. You can obtain iModel ids via the [Data Management REST APIs](https://developer.bentley.com/api-groups/data-management/apis/imodels/operations/get-project-or-asset-imodels/).
+- For the IMJS_IMODEL_ID variable, use the id of an iModel that belongs to the iTwin that you specified in the IMJS_ITWIN_ID variable. You can obtain iModel ids via the [Data Management REST APIs](https://developer.bentley.com/api-groups/data-management/apis/imodels/operations/get-project-or-asset-imodels/).
 
 - Alternatively, you can [generate a test iModel](https://developer.bentley.com/tutorials/web-application-quick-start/#3-create-an-imodel) to get started without an existing iModel.
 
-- If at any time you wish to change the iModel that you are viewing, you can change the values of the contextId or iModelId query parameters in the url (i.e. localhost:3000?contextId=myNewContextId&iModelId=myNewIModelId)
+- If at any time you wish to change the iModel that you are viewing, you can change the values of the iTwinId or iModelId query parameters in the url (i.e. localhost:3000?iTwinId=myNewITwinId&iModelId=myNewIModelId)
 
 ## Available Scripts
 

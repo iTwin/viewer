@@ -5,11 +5,9 @@
 
 /** Clone of core BasicToolWidget with conditional tooling
  */
-import {
-  CommonToolbarItem,
-  ToolbarOrientation,
-  ToolbarUsage,
-} from "@bentley/ui-abstract";
+import type { CommonToolbarItem } from "@itwin/appui-abstract";
+import { ToolbarOrientation, ToolbarUsage } from "@itwin/appui-abstract";
+import type { UiVisibilityEventArgs } from "@itwin/appui-react";
 import {
   BackstageAppButton,
   CoreTools,
@@ -18,11 +16,10 @@ import {
   ToolbarHelper,
   ToolWidgetComposer,
   UiFramework,
-  UiVisibilityEventArgs,
-} from "@bentley/ui-framework";
+} from "@itwin/appui-react";
 import * as React from "react";
 
-import { ContentManipulationTools } from "../../../types";
+import type { ContentManipulationTools } from "../../../types";
 
 export function useUiVisibility(): boolean {
   const [uiIsVisible, setUiIsVisible] = React.useState(
@@ -49,71 +46,72 @@ interface BasicToolWidgetProps {
  * This definition will also show a overflow button if there is not enough room to display all the toolbar buttons.
  */
 export function BasicToolWidget({ config }: BasicToolWidgetProps): JSX.Element {
-  const getHorizontalToolbarItems = React.useCallback((): CommonToolbarItem[] => {
-    if (config?.hideDefaultHorizontalItems) {
-      return [];
-    }
-    const items: CommonToolbarItem[] = [];
+  const getHorizontalToolbarItems =
+    React.useCallback((): CommonToolbarItem[] => {
+      if (config?.hideDefaultHorizontalItems) {
+        return [];
+      }
+      const items: CommonToolbarItem[] = [];
 
-    if (
-      config?.horizontalItems?.clearSelection === undefined ||
-      config?.horizontalItems?.clearSelection === true
-    ) {
-      items.push(
-        ToolbarHelper.createToolbarItemFromItemDef(
-          10,
-          CoreTools.clearSelectionItemDef
-        )
-      );
-    }
-    if (
-      config?.horizontalItems?.clearHideIsolateEmphasizeElements ===
-        undefined ||
-      config?.horizontalItems?.clearHideIsolateEmphasizeElements === true
-    ) {
-      items.push(
-        ToolbarHelper.createToolbarItemFromItemDef(
-          20,
-          SelectionContextToolDefinitions.clearHideIsolateEmphasizeElementsItemDef
-        )
-      );
-    }
-    if (
-      config?.horizontalItems?.hideElements === undefined ||
-      config?.horizontalItems?.hideElements === true
-    ) {
-      items.push(
-        ToolbarHelper.createToolbarItemFromItemDef(
-          30,
-          SelectionContextToolDefinitions.hideElementsItemDef
-        )
-      );
-    }
-    if (
-      config?.horizontalItems?.isolateElements === undefined ||
-      config?.horizontalItems?.isolateElements === true
-    ) {
-      items.push(
-        ToolbarHelper.createToolbarItemFromItemDef(
-          40,
-          SelectionContextToolDefinitions.isolateElementsItemDef
-        )
-      );
-    }
-    if (
-      config?.horizontalItems?.emphasizeElements === undefined ||
-      config?.horizontalItems?.emphasizeElements === true
-    ) {
-      items.push(
-        ToolbarHelper.createToolbarItemFromItemDef(
-          50,
-          SelectionContextToolDefinitions.emphasizeElementsItemDef
-        )
-      );
-    }
+      if (
+        config?.horizontalItems?.clearSelection === undefined ||
+        config?.horizontalItems?.clearSelection === true
+      ) {
+        items.push(
+          ToolbarHelper.createToolbarItemFromItemDef(
+            10,
+            CoreTools.clearSelectionItemDef
+          )
+        );
+      }
+      if (
+        config?.horizontalItems?.clearHideIsolateEmphasizeElements ===
+          undefined ||
+        config?.horizontalItems?.clearHideIsolateEmphasizeElements === true
+      ) {
+        items.push(
+          ToolbarHelper.createToolbarItemFromItemDef(
+            20,
+            SelectionContextToolDefinitions.clearHideIsolateEmphasizeElementsItemDef
+          )
+        );
+      }
+      if (
+        config?.horizontalItems?.hideElements === undefined ||
+        config?.horizontalItems?.hideElements === true
+      ) {
+        items.push(
+          ToolbarHelper.createToolbarItemFromItemDef(
+            30,
+            SelectionContextToolDefinitions.hideElementsItemDef
+          )
+        );
+      }
+      if (
+        config?.horizontalItems?.isolateElements === undefined ||
+        config?.horizontalItems?.isolateElements === true
+      ) {
+        items.push(
+          ToolbarHelper.createToolbarItemFromItemDef(
+            40,
+            SelectionContextToolDefinitions.isolateElementsItemDef
+          )
+        );
+      }
+      if (
+        config?.horizontalItems?.emphasizeElements === undefined ||
+        config?.horizontalItems?.emphasizeElements === true
+      ) {
+        items.push(
+          ToolbarHelper.createToolbarItemFromItemDef(
+            50,
+            SelectionContextToolDefinitions.emphasizeElementsItemDef
+          )
+        );
+      }
 
-    return items;
-  }, [config]);
+      return items;
+    }, [config]);
 
   const getVerticalToolbarItems = React.useCallback((): CommonToolbarItem[] => {
     if (config?.hideDefaultVerticalItems) {
@@ -133,23 +131,12 @@ export function BasicToolWidget({ config }: BasicToolWidgetProps): JSX.Element {
       );
     }
     if (
-      config?.verticalItems?.measureTools === undefined ||
-      config?.verticalItems?.measureTools === true
-    ) {
-      items.push(
-        ToolbarHelper.createToolbarItemFromItemDef(
-          20,
-          CoreTools.measureToolGroup
-        )
-      );
-    }
-    if (
       config?.verticalItems?.sectionTools === undefined ||
       config?.verticalItems?.sectionTools === true
     ) {
       items.push(
         ToolbarHelper.createToolbarItemFromItemDef(
-          30,
+          20,
           CoreTools.sectionToolGroup
         )
       );

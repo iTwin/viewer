@@ -5,16 +5,21 @@
 
 import "./SignIn.scss";
 
-import { IModelApp } from "@bentley/imodeljs-frontend";
+import { IModelApp } from "@itwin/core-frontend";
+import { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
 import { SvgUser } from "@itwin/itwinui-icons-react";
 import { Button } from "@itwin/itwinui-react";
 import React, { useState } from "react";
 export const SignIn = () => {
   const [signingIn, setSigningIn] = useState(false);
 
-  const onSignInClick = () => {
+  const onSignInClick = async () => {
     setSigningIn(true);
-    IModelApp.authorizationClient?.signIn();
+    if (
+      IModelApp.authorizationClient instanceof ElectronRendererAuthorization
+    ) {
+      await IModelApp.authorizationClient?.signIn();
+    }
   };
 
   return (

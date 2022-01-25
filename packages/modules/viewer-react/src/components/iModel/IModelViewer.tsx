@@ -1,32 +1,28 @@
 /*---------------------------------------------------------------------------------------------
-* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
-* See LICENSE.md in the project root for license terms and full copyright notice.
-*--------------------------------------------------------------------------------------------*/
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
-
-import { BackstageItem } from "@bentley/ui-abstract";
+import type { BackstageItem } from "@itwin/appui-abstract";
+import type { FrontstageProvider } from "@itwin/appui-react";
 import {
+  BackstageComposer,
   ConfigurableUiContent,
   FrameworkVersion,
   FrontstageManager,
-  FrontstageProvider,
   ThemeManager,
-} from "@bentley/ui-framework";
+} from "@itwin/appui-react";
 import React, { useEffect } from "react";
 
-import { ViewerFrontstage } from "../../types";
-import AppBackstageComposer from "../app-ui/backstage/AppBackstageComposer";
-
+import type { ViewerFrontstage } from "../../types";
 interface ModelProps {
   frontstages: ViewerFrontstage[];
   backstageItems: BackstageItem[];
-  uiFrameworkVersion?: FrameworkVersion;
 }
 
 export const IModelViewer: React.FC<ModelProps> = ({
   frontstages,
   backstageItems,
-  uiFrameworkVersion,
 }: ModelProps) => {
   useEffect(() => {
     let defaultFrontstage: FrontstageProvider | undefined;
@@ -41,7 +37,12 @@ export const IModelViewer: React.FC<ModelProps> = ({
     // set the active frontstage to the current default
     if (defaultFrontstage) {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      FrontstageManager.setActiveFrontstageDef(defaultFrontstage.frontstageDef);
+      void FrontstageManager.getFrontstageDef(defaultFrontstage.id).then(
+        (frontstageDef) => {
+          //TODO 3.0 test this
+          void FrontstageManager.setActiveFrontstageDef(frontstageDef);
+        }
+      );
     }
     return () => {
       FrontstageManager.clearFrontstageDefs();
@@ -51,9 +52,9 @@ export const IModelViewer: React.FC<ModelProps> = ({
   // there will always be at least one (for the default frontstage). Wait for it to be loaded into the list before rendering the content
   return backstageItems.length > 0 ? (
     <ThemeManager>
-      <FrameworkVersion version={uiFrameworkVersion || "2"}>
+      <FrameworkVersion>
         <ConfigurableUiContent
-          appBackstage={<AppBackstageComposer items={backstageItems} />}
+          appBackstage={<BackstageComposer items={backstageItems} />}
         />
       </FrameworkVersion>
     </ThemeManager>

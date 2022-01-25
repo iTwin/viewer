@@ -3,17 +3,17 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IModelApp } from "@bentley/imodeljs-frontend";
-import { FillCentered } from "@bentley/ui-core/lib/ui-core";
+import { FillCentered } from "@itwin/core-react";
 import { ErrorBoundary } from "@itwin/error-handling-react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { useBaseViewerInitializer } from "../hooks";
-import { ItwinViewerCommonParams } from "../types";
+import { useAccessToken } from "../hooks/useAccessToken";
+import { useBaseViewerInitializer } from "../hooks/useBaseViewerInitializer";
+import type { ItwinViewerCommonParams } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
 export interface ViewerProps extends ItwinViewerCommonParams {
-  contextId?: string;
+  iTwinId?: string;
   iModelId?: string;
   changeSetId?: string;
   snapshotPath?: string; // TODO 3.0 rename (filePath?) as this can be a briefcase or a snapshot
@@ -22,7 +22,7 @@ export interface ViewerProps extends ItwinViewerCommonParams {
 
 export const BaseViewer: React.FC<ViewerProps> = ({
   iModelId,
-  contextId,
+  iTwinId,
   appInsightsKey,
   theme,
   changeSetId,
@@ -32,54 +32,34 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   snapshotPath,
   frontstages,
   backstageItems,
-  uiFrameworkVersion,
   viewportOptions,
   uiProviders,
-  imjsAppInsightsKey,
   i18nUrlTemplate,
   onIModelAppInit,
   additionalI18nNamespaces,
   additionalRpcInterfaces,
   viewCreatorOptions,
   loadingComponent,
+  enablePerformanceMonitors,
 }: ViewerProps) => {
-  // assume authorized when using a local snapshot TODO poor assumption
-  const [authorized, setAuthorized] = useState(!!snapshotPath);
   const viewerInitialized = useBaseViewerInitializer({
     appInsightsKey,
     productId,
-    imjsAppInsightsKey,
     i18nUrlTemplate,
     onIModelAppInit,
     additionalI18nNamespaces,
     additionalRpcInterfaces,
+    enablePerformanceMonitors,
   });
-  useEffect(() => {
-    // assume authorized when using a local snapshot
-    if (snapshotPath) {
-      setAuthorized(true);
-    } else {
-      setAuthorized(
-        (IModelApp.authorizationClient?.hasSignedIn &&
-          IModelApp.authorizationClient?.isAuthorized) ||
-          false
-      );
-      IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
-        setAuthorized(
-          (IModelApp.authorizationClient?.hasSignedIn &&
-            IModelApp.authorizationClient?.isAuthorized) ||
-            false
-        );
-      });
-    }
-  }, [snapshotPath]);
 
+  const accessToken = useAccessToken();
+  // assume authorized when using a local snapshot TODO poor assumption
   return (
     <ErrorBoundary>
-      {authorized ? (
+      {snapshotPath || accessToken ? (
         viewerInitialized ? (
           <IModelLoader
-            contextId={contextId}
+            iTwinId={iTwinId}
             iModelId={iModelId}
             changeSetId={changeSetId}
             defaultUiConfig={defaultUiConfig}
@@ -88,7 +68,6 @@ export const BaseViewer: React.FC<ViewerProps> = ({
             snapshotPath={snapshotPath}
             frontstages={frontstages}
             backstageItems={backstageItems}
-            uiFrameworkVersion={uiFrameworkVersion}
             viewportOptions={viewportOptions}
             uiProviders={uiProviders}
             theme={theme}

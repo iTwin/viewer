@@ -3,33 +3,40 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IModelApp } from "@bentley/imodeljs-frontend";
-import { AccessToken } from "@bentley/itwin-client";
-import { useCallback, useEffect, useState } from "react";
+import type { AccessToken } from "@itwin/core-bentley";
+import { useEffect, useState } from "react";
 
+import { ViewerAuthorization } from "../services/auth";
 import { useIsMounted } from "./useIsMounted";
 
 export const useAccessToken = () => {
   const [accessToken, setAccessToken] = useState<AccessToken>();
   const isMounted = useIsMounted();
 
-  const getAccessToken = useCallback(async () => {
-    if (IModelApp.authorizationClient?.hasSignedIn) {
-      const token = await IModelApp.authorizationClient?.getAccessToken();
-      setAccessToken(token);
-    }
+  useEffect(() => {
+    const getAccessToken = async () => {
+      try {
+        const token = await ViewerAuthorization.client?.getAccessToken();
+        setAccessToken(token);
+      } catch {}
+    };
+    void getAccessToken();
   }, []);
 
   useEffect(() => {
-    void getAccessToken();
-  }, [getAccessToken]);
-
-  useEffect(() => {
-    IModelApp?.authorizationClient?.onUserStateChanged.addListener((token) => {
-      if (isMounted.current) {
-        setAccessToken(token);
+    const removeListener =
+      ViewerAuthorization.client?.onAccessTokenChanged.addListener(
+        (token: AccessToken) => {
+          if (isMounted.current) {
+            setAccessToken(token);
+          }
+        }
+      );
+    return () => {
+      if (removeListener) {
+        removeListener();
       }
-    });
+    };
   }, [isMounted]);
 
   return accessToken;

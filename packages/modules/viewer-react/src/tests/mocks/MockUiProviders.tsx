@@ -3,24 +3,26 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  AbstractStatusBarItemUtilities,
+import type {
   AbstractWidgetProps,
   CommonStatusBarItem,
   CommonToolbarItem,
+  StagePanelSection,
+  UiItemsProvider,
+} from "@itwin/appui-abstract";
+import {
+  AbstractStatusBarItemUtilities,
   ConditionalBooleanValue,
   ConditionalStringValue,
   StagePanelLocation,
-  StagePanelSection,
   StageUsage,
   StatusBarSection,
   ToolbarItemUtilities,
   ToolbarOrientation,
   ToolbarUsage,
-  UiItemsProvider,
-} from "@bentley/ui-abstract";
-import { FillCentered } from "@bentley/ui-core";
-import { SyncUiEventDispatcher } from "@bentley/ui-framework";
+} from "@itwin/appui-abstract";
+import { SyncUiEventDispatcher } from "@itwin/appui-react";
+import { FillCentered } from "@itwin/core-react";
 import React from "react";
 
 export class TestUiProvider implements UiItemsProvider {

@@ -5,14 +5,12 @@
 
 import "./SelectIModel.scss";
 
-import { BriefcaseConnection } from "@bentley/imodeljs-frontend";
+import { BriefcaseConnection } from "@itwin/core-frontend";
 import { getBriefcaseStatus, ModelStatus } from "@itwin/desktop-viewer-react";
-import {
-  IModelFull,
-  IModelGrid,
-  IModelGridProps,
-} from "@itwin/imodel-browser-react";
-import { TileProps, Title } from "@itwin/itwinui-react";
+import type { IModelFull, IModelGridProps } from "@itwin/imodel-browser-react";
+import { IModelGrid } from "@itwin/imodel-browser-react";
+import type { TileProps } from "@itwin/itwinui-react";
+import { Title } from "@itwin/itwinui-react";
 import { useNavigate } from "@reach/router";
 import React, {
   useCallback,
@@ -75,7 +73,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
 
   const getLatestChangesets = useCallback(async () => {
     if (briefcase) {
-      await briefcase.pullAndMergeChanges();
+      await briefcase.pullChanges();
     }
   }, [briefcase]);
 
@@ -89,7 +87,8 @@ const useProgressIndicator = (iModel: IModelFull) => {
         setStatus(ModelStatus.ONLINE);
       }
       return fileName;
-    } catch {
+    } catch (error) {
+      console.log(error);
       setStatus(ModelStatus.ERROR);
     }
   }, []);
@@ -166,7 +165,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
 
 export const SelectIModel = ({
   accessToken,
-  projectId,
+  projectId: iTwinId,
   projectName,
 }: SelectIModelProps) => {
   const navigate = useNavigate();
@@ -203,7 +202,7 @@ export const SelectIModel = ({
       <div className="itv-scrolling-content">
         <IModelGrid
           accessToken={accessToken}
-          projectId={projectId}
+          projectId={iTwinId}
           onThumbnailClick={selectIModel}
           useIndividualState={useProgressIndicator}
         />

@@ -6,7 +6,7 @@
 import { useNavigate } from "@reach/router";
 import React, { useContext, useEffect, useState } from "react";
 
-import { ViewerFile } from "../../../common/ViewerConfig";
+import type { ViewerFile } from "../../../common/ViewerConfig";
 import { SettingsContext } from "../../services/SettingsClient";
 
 export const Recents = () => {

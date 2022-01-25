@@ -3,24 +3,24 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { StatusBarSection } from "@bentley/ui-abstract";
+import { StatusBarSection } from "@itwin/appui-abstract";
+import { FooterSeparator } from "@itwin/appui-layout-react";
+import type { ConfigurableCreateInfo, StatusBarItem } from "@itwin/appui-react";
+import { SectionsStatusField } from "@itwin/appui-react";
 import {
-  ConfigurableCreateInfo,
   FooterModeField,
   MessageCenterField,
   SelectionInfoField,
   SelectionScopeField,
   SnapModeField,
   StatusBarComposer,
-  StatusBarItem,
   StatusBarItemUtilities,
   StatusBarWidgetControl,
   TileLoadingIndicator,
   ToolAssistanceField,
   withMessageCenterFieldProps,
   withStatusFieldProps,
-} from "@bentley/ui-framework";
-import { FooterSeparator } from "@bentley/ui-ninezone";
+} from "@itwin/appui-react";
 import * as React from "react";
 
 /**
@@ -40,6 +40,7 @@ export class AppStatusBarWidget extends StatusBarWidgetControl {
     const FooterOnlyDisplay = withStatusFieldProps(FooterModeField);
     const SnapMode = withStatusFieldProps(SnapModeField);
     const SelectionInfo = withStatusFieldProps(SelectionInfoField);
+    const Sections = withStatusFieldProps(SectionsStatusField);
 
     this._footerModeOnlySeparator = (): React.ReactNode => {
       return (
@@ -79,6 +80,14 @@ export class AppStatusBarWidget extends StatusBarWidgetControl {
         StatusBarSection.Left,
         25,
         this._footerModeOnlySeparator()
+      )
+    );
+    this._statusBarItems.push(
+      StatusBarItemUtilities.createStatusBarItem(
+        "Sections",
+        StatusBarSection.Left,
+        30,
+        <Sections hideWhenUnused={true} />
       )
     );
 

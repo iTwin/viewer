@@ -3,29 +3,29 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Vector3d, XAndY, XYAndZ } from "@bentley/geometry-core";
-import { IModelClient } from "@bentley/imodelhub-client";
-import {
+import type { BackstageItem, UiItemsProvider } from "@itwin/appui-abstract";
+import type {
+  ColorTheme,
+  FrontstageProvider,
+  IModelViewportControlOptions,
+} from "@itwin/appui-react";
+import type {
   ColorDef,
   RenderMode,
   RpcInterface,
   RpcInterfaceDefinition,
-} from "@bentley/imodeljs-common";
-import {
+} from "@itwin/core-common";
+import type {
+  FrontendHubAccess,
   IModelConnection,
+  MapLayerOptions,
   ScreenViewport,
   StandardViewId,
   ToolAdmin,
   ViewChangeOptions,
   ViewState,
-} from "@bentley/imodeljs-frontend";
-import { BackstageItem, UiItemsProvider } from "@bentley/ui-abstract";
-import {
-  ColorTheme,
-  FrameworkVersion,
-  FrontstageProvider,
-  IModelViewportControlOptions,
-} from "@bentley/ui-framework";
+} from "@itwin/core-frontend";
+import type { Vector3d, XAndY, XYAndZ } from "@itwin/core-geometry";
 
 /**
  * options for configuration of 3D view
@@ -78,8 +78,6 @@ export interface IModelLoaderParams {
   frontstages?: ViewerFrontstage[];
   /** menu items for the backstage */
   backstageItems?: ViewerBackstageItem[];
-  /** optionally override the UI framework version (defaults to 2) */
-  uiFrameworkVersion?: FrameworkVersion;
   /** additional viewport options for the default frontstage's viewport control */
   viewportOptions?: ViewerViewportControlOptions;
   /** UI Providers to register https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/ */
@@ -95,8 +93,6 @@ export interface ItwinViewerCommonParams
 export interface ItwinViewerInitializerParams {
   /** optional Azure Application Insights key for telemetry */
   appInsightsKey?: string;
-  /** optional iTwin.js Application Insights key for telemetry within iTwin.js */
-  imjsAppInsightsKey?: string;
   /** GPRID for the consuming application. Will default to the iTwin Viewer GPRID */
   productId?: string;
   /** urlTemplate for querying i18n json files */
@@ -107,12 +103,17 @@ export interface ItwinViewerInitializerParams {
   additionalI18nNamespaces?: string[];
   /** custom rpc interfaces (assumes that they are supported in your backend) */
   additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
-  /** override the default message that sends users to the iTwin Synchronizer when there are data-related errors with an iModel. Pass empty string to override with no message. */
-  iModelDataErrorMessage?: string;
   /** optional ToolAdmin to initialize */
   toolAdmin?: ToolAdmin;
-  /** option imodelClient (defaults to iModelHubClient) */
-  imodelClient?: IModelClient;
+  /** optional hubAccess (defaults to iTwin Platform's iModels) */
+  hubAccess?: FrontendHubAccess;
+  mapLayerOptions?: MapLayerOptions;
+  /**
+   * Enable reporting data from timed events in the iTwin Viewer.
+   * The data is anonynmous numerics and will help to increase Viewer performance in future releases.
+   * See the Web or Desktop Viewer package README for additional details (https://www.npmjs.com/package/@itwin/web-viewer-react).
+   */
+  enablePerformanceMonitors: boolean;
 }
 
 /**
@@ -121,16 +122,18 @@ export interface ItwinViewerInitializerParams {
  */
 const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
   appInsightsKey: undefined,
-  imjsAppInsightsKey: undefined,
   productId: undefined,
   i18nUrlTemplate: undefined,
   onIModelAppInit: undefined,
   additionalI18nNamespaces: undefined,
   additionalRpcInterfaces: undefined,
-  iModelDataErrorMessage: undefined,
   toolAdmin: undefined,
-  imodelClient: undefined,
+  hubAccess: undefined,
+  mapLayerOptions: undefined,
+  // extensions: undefined,
+  enablePerformanceMonitors: false,
 };
+
 export const iTwinViewerInitializerParamList = Object.keys(
   iTwinViewerInitializerParamSample
 );

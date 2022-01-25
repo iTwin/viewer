@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 export function makeCancellable(
   fn: (args?: any[]) => Generator<Promise<any> | Promise<void>, void, any>,
   ...args: any[]
@@ -46,7 +47,7 @@ export function makeCancellable(
       done,
       value,
     }: IteratorResult<Promise<void> | Promise<void[]>>) {
-      if (done) {
+      if (done || !value) {
         return resolve(value);
       }
       return value.then(onFulfilled, onRejected);

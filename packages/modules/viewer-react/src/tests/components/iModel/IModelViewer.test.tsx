@@ -3,34 +3,45 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  FrontstageManager,
-  FrontstageProps,
-  FrontstageProvider,
-} from "@bentley/ui-framework";
+import type { FrontstageProps } from "@itwin/appui-react";
+import { FrontstageManager, FrontstageProvider } from "@itwin/appui-react";
 import { render } from "@testing-library/react";
 import React from "react";
 
-import { IModelViewer } from "../../../components/iModel";
-import { ViewerFrontstage } from "../../../types";
-
-jest.mock("@bentley/ui-framework");
-jest.mock("@bentley/ui-abstract");
-jest.mock("@microsoft/applicationinsights-react-js");
-
-const flushPromises = () => new Promise((res) => setTimeout(res, 0));
+import { IModelViewer } from "../../../components/iModel/IModelViewer";
+import type { ViewerFrontstage } from "../../../types";
 
 class Frontstage1Provider extends FrontstageProvider {
+  public id = "Frontstage1";
   public get frontstage(): React.ReactElement<FrontstageProps> {
     return <div></div>;
   }
 }
 
 class Frontstage2Provider extends FrontstageProvider {
+  public id = "Frontstage2";
   public get frontstage(): React.ReactElement<FrontstageProps> {
     return <div></div>;
   }
 }
+
+jest.mock("@itwin/appui-react", () => {
+  return {
+    FrontstageManager: {
+      addFrontstageProvider: jest.fn(),
+      getFrontstageDef: jest
+        .fn()
+        .mockResolvedValue({ id: "Frontstage2", frontstage: jest.fn() }),
+      setActiveFrontstageDef: jest.fn().mockResolvedValue(true),
+      clearFrontstageDefs: jest.fn(),
+    },
+    FrontstageProvider: jest.fn(),
+  };
+});
+jest.mock("@itwin/appui-abstract");
+jest.mock("@microsoft/applicationinsights-react-js");
+
+const flushPromises = () => new Promise((res) => setTimeout(res, 0));
 
 describe("IModelViewer", () => {
   it("loads all frontstages", async () => {

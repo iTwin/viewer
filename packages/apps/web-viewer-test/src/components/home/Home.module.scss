@@ -4,11 +4,13 @@
 *--------------------------------------------------------------------------------------------*/
 
 @import "../../themefill.scss";
-@import "~@bentley/ui-core/lib/ui-core/colorthemes.scss";
+@import "~@itwin/core-react/lib/cjs/core-react/style/themecolors.scss";
 
 .homeButton {
-  width: 100px;
+  width: 120px;
   margin: 10px !important;
+  padding: 5px;
+  white-space: normal;
 }
 
 .container {
@@ -89,5 +91,7 @@
 }
 
 .home {
-  height: calc(100vh - 50px);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }

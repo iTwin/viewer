@@ -3,13 +3,10 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ViewState } from "@bentley/imodeljs-frontend";
-import { StageUsage } from "@bentley/ui-abstract";
+import { StageUsage, StandardContentLayouts } from "@itwin/appui-abstract";
 import {
   ContentGroup,
-  ContentLayoutDef,
   CoreTools,
-  FrameworkVersion,
   Frontstage,
   FrontstageProvider,
   IModelViewportControl,
@@ -17,12 +14,14 @@ import {
   UiFramework,
   Widget,
   Zone,
-  ZoneLocation,
-  ZoneState,
-} from "@bentley/ui-framework";
+} from "@itwin/appui-react";
+import type { ViewState } from "@itwin/core-frontend";
 import * as React from "react";
 
-import { ItwinViewerUi, ViewerViewportControlOptions } from "../../../types";
+import type {
+  ItwinViewerUi,
+  ViewerViewportControlOptions,
+} from "../../../types";
 import { AppStatusBarWidget } from "../statusbars/AppStatusBar";
 import { BasicNavigationWidget, BasicToolWidget } from "../widgets";
 
@@ -31,6 +30,7 @@ import { BasicNavigationWidget, BasicToolWidget } from "../widgets";
  */
 export class DefaultFrontstage extends FrontstageProvider {
   // constants
+  public id = "DefaultFrontstage";
   static MAIN_CONTENT_ID = "Main";
   static DEFAULT_TOOL_WIDGET_KEY = "DefaultToolWidget";
   static DEFAULT_TOOL_SETTINGS_KEY = "DefaultToolSettings";
@@ -39,35 +39,28 @@ export class DefaultFrontstage extends FrontstageProvider {
   static DEFAULT_STATUS_BAR_WIDGET_KEY = "DefaultStatusBarWidget";
   static DEFAULT_PROPERTIES_WIDGET_KEY = "DefaultPropertiesWidgetKey";
 
-  // Content layout for content views
-  private _contentLayoutDef: ContentLayoutDef;
-
   // Content group for all layouts
   private _contentGroup: ContentGroup;
 
   private _uiConfig?: ItwinViewerUi;
-  private _frameworkVersion?: FrameworkVersion;
 
   constructor(
     public viewState: ViewState,
     uiConfig?: ItwinViewerUi,
-    viewportOptions?: ViewerViewportControlOptions,
-    frameworkVersion?: FrameworkVersion
+    viewportOptions?: ViewerViewportControlOptions
   ) {
     super();
 
     this._uiConfig = uiConfig;
-    this._frameworkVersion = frameworkVersion || "2";
-
-    this._contentLayoutDef = new ContentLayoutDef({
-      id: DefaultFrontstage.MAIN_CONTENT_ID,
-    });
 
     // Create the content group.
     this._contentGroup = new ContentGroup({
+      id: DefaultFrontstage.MAIN_CONTENT_ID,
+      layout: StandardContentLayouts.singleView,
       contents: [
         {
-          classId: IModelViewportControl,
+          id: "viewport",
+          classId: IModelViewportControl.id,
           applicationData: {
             ...viewportOptions,
             iModelConnection: UiFramework.getIModelConnection(),
@@ -83,10 +76,9 @@ export class DefaultFrontstage extends FrontstageProvider {
     return (
       <Frontstage
         id="DefaultFrontstage"
-        version={1} // this value should be increased when changes are made to Frontstage
+        version={3} // this value should be increased when changes are made to Frontstage
         usage={StageUsage.General}
         defaultTool={CoreTools.selectElementCommand}
-        defaultLayout={this._contentLayoutDef}
         contentGroup={this._contentGroup}
         isInFooterMode={true}
         contentManipulationTools={
@@ -132,19 +124,6 @@ export class DefaultFrontstage extends FrontstageProvider {
               />,
             ]}
           />
-        }
-        centerRight={
-          this._frameworkVersion === "1" ? (
-            <Zone allowsMerging={true} defaultState={ZoneState.Minimized} />
-          ) : undefined
-        }
-        bottomRight={
-          this._frameworkVersion === "1" ? (
-            <Zone
-              allowsMerging={true}
-              mergeWithZone={ZoneLocation.CenterRight}
-            />
-          ) : undefined
         }
         statusBar={
           <Zone

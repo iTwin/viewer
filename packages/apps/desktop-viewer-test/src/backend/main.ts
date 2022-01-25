@@ -3,15 +3,14 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Logger, LogLevel } from "@bentley/bentleyjs-core";
-import {
-  ElectronHost,
-  ElectronHostOptions,
-} from "@bentley/electron-manager/lib/ElectronBackend";
-import { IpcHost } from "@bentley/imodeljs-backend";
-import { Presentation } from "@bentley/presentation-backend";
+import { IModelHostConfiguration, IpcHost } from "@itwin/core-backend";
+import { Logger, LogLevel } from "@itwin/core-bentley";
+import type { ElectronHostOptions } from "@itwin/core-electron/lib/cjs/ElectronBackend";
+import { ElectronHost } from "@itwin/core-electron/lib/cjs/ElectronBackend";
+import { BackendIModelsAccess } from "@itwin/imodels-access-backend";
+import { Presentation } from "@itwin/presentation-backend";
 import { Menu, shell } from "electron";
-import { MenuItemConstructorOptions } from "electron/main";
+import type { MenuItemConstructorOptions } from "electron/main";
 import * as path from "path";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";
@@ -28,7 +27,7 @@ require("dotenv-flow").config(); // eslint-disable-line @typescript-eslint/no-va
 const viewerMain = async () => {
   // Setup logging immediately to pick up any logging during IModelHost.startup()
   Logger.initializeToConsole();
-  Logger.setLevelDefault(LogLevel.Warning);
+  Logger.setLevelDefault(LogLevel.Trace);
   Logger.setLevel(AppLoggerCategory.Backend, LogLevel.Info);
 
   const electronHost: ElectronHostOptions = {
@@ -37,10 +36,12 @@ const viewerMain = async () => {
     developmentServer: process.env.NODE_ENV === "development",
     ipcHandlers: [ViewerHandler],
     iconName: "itwin-viewer.ico",
-    noInitializeAuthClient: true,
   };
 
-  await ElectronHost.startup({ electronHost });
+  const iModelHost = new IModelHostConfiguration();
+  iModelHost.hubAccess = new BackendIModelsAccess();
+
+  await ElectronHost.startup({ electronHost, iModelHost });
 
   Presentation.initialize();
 
@@ -59,9 +60,9 @@ const viewerMain = async () => {
   ElectronHost.mainWindow?.on("ready-to-show", createMenu);
   // open links in the system browser instead of Electron
   // remove this if you desire the default behavior instead
-  ElectronHost.mainWindow?.webContents.on("new-window", function (e, url) {
-    e.preventDefault();
+  ElectronHost.mainWindow?.webContents.setWindowOpenHandler(({ url }) => {
     void shell.openExternal(url);
+    return { action: "deny" };
   });
 };
 
@@ -78,6 +79,7 @@ const createMenu = () => {
           click: () => {
             IpcHost.send(channelName, "open");
           },
+          accelerator: "CommandOrControl+O",
         },
         {
           id: "download-menu-item",
@@ -85,6 +87,7 @@ const createMenu = () => {
           click: () => {
             IpcHost.send(channelName, "download");
           },
+          accelerator: "CommandOrControl+D",
         },
         { type: "separator" },
         isMac
@@ -101,6 +104,7 @@ const createMenu = () => {
           click: () => {
             IpcHost.send(channelName, "home");
           },
+          accelerator: "CommandOrControl+G",
         },
       ],
     },
@@ -117,6 +121,7 @@ const createMenu = () => {
         {
           label: "Zoom",
           role: "zoom",
+          accelerator: "CommandOrControl+Alt+Z",
         },
         // TODO uncomment for dev as needed
         // {
