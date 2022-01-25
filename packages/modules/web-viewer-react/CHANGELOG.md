@@ -11,7 +11,7 @@ Tue, 25 Jan 2022 20:14:40 GMT
 
 #### iTwin.js
 
-A comprehensive list of breaking changes in **3.0** can be found here, [NextVersion.md](https://github.com/iTwin/itwinjs-core/blob/release/3.0.x/docs/changehistory/NextVersion.md).
+A comprehensive list of breaking changes in **3.0** can be found here, [iTwin.js 3.0 Changelog](https://www.itwinjs.org/changehistory/3.0.0/).
 
 #### iTwin Viewer
 
