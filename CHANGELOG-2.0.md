@@ -77,7 +77,7 @@ We've replaced the default measure-tools provided in the Viewer from itwinjs-cor
   ```
     "dependencies": {
       ...
-      "@itwin/web-viewer-react": "2",
+      "@itwin/web-viewer-react": "^2.0.0",
       ...
     },
   ```
