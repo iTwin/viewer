@@ -26,8 +26,8 @@ jobs:
           echo 'Installing...'
           node common/scripts/install-run-rush.js install
 
-          echo 'Checking Rush Change...'
-          node common/scripts/install-run-rush.js change -v -b origin/master
+          # echo 'Checking Rush Change...'
+          # node common/scripts/install-run-rush.js change -v -b origin/master
 
           echo 'Verifying Dependency Versions...'
           node common/scripts/install-run-rush.js check
