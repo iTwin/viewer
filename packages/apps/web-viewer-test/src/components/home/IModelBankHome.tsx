@@ -11,7 +11,7 @@ import type { IModelBackendOptions } from "@itwin/web-viewer-react";
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-import { IModelBankFrontend } from "../../services/IModelBankFrontendHubAccess";
+// import { IModelBankFrontend } from "../../services/IModelBankFrontendHubAccess";
 import { history } from "../routing";
 
 /**
@@ -58,9 +58,9 @@ export const IModelBankHome: React.FC = () => {
     },
   };
 
-  const imodelBankClient = new IModelBankFrontend(
-    "https://dev-imodelbank.bentley.com"
-  );
+  // const imodelBankClient = new IModelBankFrontend(
+  //   "https://dev-imodelbank.bentley.com"
+  // );
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -112,7 +112,7 @@ export const IModelBankHome: React.FC = () => {
         theme={ColorTheme.Dark}
         viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
         backend={backend}
-        hubAccess={imodelBankClient}
+        // hubAccess={imodelBankClient}
         enablePerformanceMonitors={true}
       />
     </div>
