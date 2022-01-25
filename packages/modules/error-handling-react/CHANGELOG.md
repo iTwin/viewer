@@ -1,13 +1,20 @@
 # Change Log - @itwin/error-handling-react
 
-This log was last generated on Tue, 25 Jan 2022 20:14:40 GMT and should not be manually modified.
+This log was last generated on Tue, 25 Jan 2022 22:20:19 GMT and should not be manually modified.
+
+## 2.0.1
+Tue, 25 Jan 2022 22:20:19 GMT
+
+### Patches
+
+- Updated Changelog
 
 ## 2.0.0
 Tue, 25 Jan 2022 20:14:40 GMT
 
 ### Breaking changes
 
-- Decoupled this package from iTwin.js
+- Upgrade to iTwin.js 3.0
 
 ## 1.0.2
 Wed, 07 Jul 2021 21:58:42 GMT

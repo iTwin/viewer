@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-desktop-viewer",
   "entries": [
     {
+      "version": "2.0.1",
+      "tag": "@itwin/cra-template-desktop-viewer_v2.0.1",
+      "date": "Tue, 25 Jan 2022 22:20:19 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update to always pull in latest version of viewer"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.0.0",
       "tag": "@itwin/cra-template-desktop-viewer_v2.0.0",
       "date": "Tue, 25 Jan 2022 20:14:40 GMT",
