@@ -32,9 +32,8 @@ The following props have been removed.
 
 ##### Required
 
-The following props are now required.
+The following prop is now required.
 
-- `authClient`
 - `enablePerformanceMonitors`
 
 ##### New peer dependencies
