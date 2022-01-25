@@ -5,7 +5,6 @@
   "main": "src/index.js",
   "dependencies": {
     "@bentley/icons-generic": "^1.0.13",
-    "@bentley/imodelhub-client": "^3.0.0",
     "@itwin/appui-abstract": "^3.0.0",
     "@itwin/appui-layout-react": "^3.0.0",
     "@itwin/appui-react": "^3.0.0",
