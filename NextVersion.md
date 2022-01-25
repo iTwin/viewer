@@ -50,11 +50,13 @@ The following props are now required.
 
 In your [iTwin App registration](https://developer.bentley.com/my-apps/), you'll need update your app to add the following scopes:
 
-- `imodels:read`
-- `realitydata:read`
+- `imodelaccess:read` (Visualization)
+- `imodels:read` (Digital Twin Management > iModels)
+- `realitydata:read` (Digital Twin Management > Reality Data)
 
 These scopes are no longer required:
 
+- `itwinjs`
 - `openid`
 - `email`
 - `profile`
