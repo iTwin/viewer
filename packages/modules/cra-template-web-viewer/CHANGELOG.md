@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Tue, 25 Jan 2022 22:20:19 GMT and should not be manually modified.
+This log was last generated on Wed, 26 Jan 2022 03:31:33 GMT and should not be manually modified.
+
+## 2.0.2
+Wed, 26 Jan 2022 03:31:33 GMT
+
+### Patches
+
+- Add sign in loading bar indicator
 
 ## 2.0.1
 Tue, 25 Jan 2022 22:20:19 GMT
