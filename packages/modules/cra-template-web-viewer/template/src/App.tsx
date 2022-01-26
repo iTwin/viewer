@@ -8,6 +8,8 @@ import "./App.scss";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import type { ScreenViewport } from "@itwin/core-frontend";
 import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
+import { FillCentered } from "@itwin/core-react";
+import { ProgressLinear } from "@itwin/itwinui-react";
 import { useAccessToken, Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -112,6 +114,13 @@ const App: React.FC = () => {
 
   return (
     <div className="viewer-container">
+      {!accessToken && (
+        <FillCentered>
+          <div className="signin-content">
+            <ProgressLinear indeterminate={true} labels={["Signing in..."]} />
+          </div>
+        </FillCentered>
+      )}
       <Viewer
         iTwinId={iTwinId}
         iModelId={iModelId}
