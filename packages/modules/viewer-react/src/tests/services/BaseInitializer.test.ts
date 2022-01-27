@@ -251,4 +251,12 @@ describe("BaseInitializer", () => {
     await BaseInitializer.initialized;
     expect(callbacks.onIModelAppInit).toHaveBeenCalled();
   });
+  it("uses the TileAdmin options that are provided", () => {
+    const cesiumIonKey = "testKey";
+    const appOptions = getIModelAppOptions({
+      tileAdminOptions: { cesiumIonKey },
+      enablePerformanceMonitors: false,
+    });
+    expect(appOptions.tileAdmin).toEqual({ cesiumIonKey });
+  });
 });
