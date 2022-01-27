@@ -21,6 +21,7 @@ import type {
   MapLayerOptions,
   ScreenViewport,
   StandardViewId,
+  TileAdmin,
   ToolAdmin,
   ViewChangeOptions,
   ViewState,
@@ -114,6 +115,8 @@ export interface ItwinViewerInitializerParams {
    * See the Web or Desktop Viewer package README for additional details (https://www.npmjs.com/package/@itwin/web-viewer-react).
    */
   enablePerformanceMonitors: boolean;
+  /** options for TileAdmin initialization */
+  tileAdminOptions?: TileAdmin.Props;
 }
 
 /**
@@ -132,6 +135,7 @@ const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
   mapLayerOptions: undefined,
   // extensions: undefined,
   enablePerformanceMonitors: false,
+  tileAdminOptions: undefined,
 };
 
 export const iTwinViewerInitializerParamList = Object.keys(
