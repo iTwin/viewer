@@ -27,7 +27,7 @@ dependencies:
   '@itwin/ecschema-metadata': 3.0.0_@itwin+core-bentley@3.0.0
   '@itwin/electron-authorization': 0.8.1_@itwin+core-bentley@3.0.0
   '@itwin/express-server': 3.0.0_@itwin+core-backend@3.0.0
-  '@itwin/imodel-browser-react': 0.11.0_react-dom@17.0.2+react@17.0.2
+  '@itwin/imodel-browser-react': 0.12.2_react-dom@17.0.2+react@17.0.2
   '@itwin/imodel-components-react': 3.0.0_3495511dcf73a3fd234f639038aaecb4
   '@itwin/imodels-access-backend': 1.0.0_d82fda9358a7591ccd8e8b8a9b445952
   '@itwin/imodels-access-frontend': 1.0.1_4e555caea4abb8edb0c3ca7e7025199e
@@ -3393,9 +3393,9 @@ packages:
       '@itwin/core-backend': 3.0.0
     resolution:
       integrity: sha512-ZAUK+vgg0Tqaizp/cxTA8yW6qYbDqF9T9mX6TPfxDbZICnAi3ezDJnY7ZdMqFjWJ1ampydTpYgwF4G7HhZ8bAw==
-  /@itwin/imodel-browser-react/0.11.0_react-dom@17.0.2+react@17.0.2:
+  /@itwin/imodel-browser-react/0.12.2_react-dom@17.0.2+react@17.0.2:
     dependencies:
-      '@bentley/icons-generic-webfont': 1.0.34
+      '@itwin/itwinui-icons-react': 1.5.0_react-dom@17.0.2+react@17.0.2
       '@itwin/itwinui-react': 1.29.1_react-dom@17.0.2+react@17.0.2
       classnames: 2.3.1
       react: 17.0.2
@@ -3403,10 +3403,10 @@ packages:
       react-intersection-observer: 8.33.1_react@17.0.2
     dev: false
     peerDependencies:
-      react: ^16.13.0
-      react-dom: ^16.13.0
+      react: ^16.13.0 || ^17.0.2
+      react-dom: ^16.13.0 || ^17.0.2
     resolution:
-      integrity: sha512-7pwc00PFbdTJ89nxH/X+hLKrrIh+mgo7A3nzlE4UGiRCRl1dvh+z0imWj1Ey0Jr7735G3b6TQqyasTYsJUID1A==
+      integrity: sha512-iHdwpBsHPQHbl58k2z85UAUoKrF4qbXBsYHVMVZL0lQUeZSA20j3HsBGt++uxlUBT87j7OKXfHtFv4Wwuhj0wA==
   /@itwin/imodel-components-react/3.0.0_3495511dcf73a3fd234f639038aaecb4:
     dependencies:
       '@bentley/icons-generic-webfont': 1.0.34
@@ -20046,7 +20046,7 @@ packages:
       '@itwin/imodel-components-react': '*'
       redux: '*'
     resolution:
-      integrity: sha512-c24Ta5tKg3CFIsHGZ/ru6aH7FVQTpxqcBSqR8Gi7SmbwXtRPrBHOh+0t7Ii/SX5Vd/7FBdXc7lvgesgRlCw2hA==
+      integrity: sha512-FxQM1MM9zw26jJOKZPho4M7OwinPSyvpcC+LeuIvVTD3J6qNveJkc8aBzPNBd0TFDA64e+lYHvoEV+r3BxYOQQ==
       tarball: 'file:projects/cdn-viewer.tgz'
     version: 0.0.0
   'file:projects/cra-template-desktop-viewer.tgz':
@@ -20114,7 +20114,7 @@ packages:
     peerDependencies:
       '@itwin/ecschema-metadata': '*'
     resolution:
-      integrity: sha512-9WiedhDgi1R00EXjeKv4MLqXenJMhSZq9Qzu+j11SaodmNFFi1pZf0ec5s31MBSiULw4ojJ4z6V7JeCbp7/Z+Q==
+      integrity: sha512-ftiyP9ZCqFE8ziW1jyESMAN8v2agMUsDK/GfW8Z/CnP+lp2Ia6qM0mjrKOCiRLXHo/mPMmxkxH+x0ZtzC5U1wQ==
       tarball: 'file:projects/desktop-viewer-react.tgz'
     version: 0.0.0
   'file:projects/desktop-viewer-test.tgz_20a9ea953a18f617392d516461508510':
@@ -20141,7 +20141,7 @@ packages:
       '@itwin/ecschema-metadata': 3.0.0_@itwin+core-bentley@3.0.0
       '@itwin/electron-authorization': 0.8.1_@itwin+core-bentley@3.0.0
       '@itwin/express-server': 3.0.0_@itwin+core-backend@3.0.0
-      '@itwin/imodel-browser-react': 0.11.0_react-dom@17.0.2+react@17.0.2
+      '@itwin/imodel-browser-react': 0.12.2_react-dom@17.0.2+react@17.0.2
       '@itwin/imodels-access-backend': 1.0.0_d82fda9358a7591ccd8e8b8a9b445952
       '@itwin/imodels-access-frontend': 1.0.1_4e555caea4abb8edb0c3ca7e7025199e
       '@itwin/imodels-client-management': 1.0.1
@@ -20182,7 +20182,7 @@ packages:
       react-redux: '*'
       redux: '*'
     resolution:
-      integrity: sha512-ATkQoniBAnFthP/MYQEEE/pmQb+f427r3y1KviaFC3sAXr1pgMsrmxXIqYM5JHOucHSFOLNqZeAbBZubWfCnzg==
+      integrity: sha512-b4L8/Gug0l/SNTuFFKpd8OvMOMDw0MQTHAsuo1yuT2a/eZjHN7xRjdrg287PEdd1D9Wl0FnzMAcJHD0tbJBlzA==
       tarball: 'file:projects/desktop-viewer-test.tgz'
     version: 0.0.0
   'file:projects/error-handling-react.tgz':
@@ -20284,7 +20284,7 @@ packages:
     dev: false
     name: '@rush-temp/viewer-react'
     resolution:
-      integrity: sha512-zZMzObKzAVqCorOeVOFxyR2K5/kB2DdSN5jnpNTNGtQKUbDRgLR0jrvH3Q6r57DhzrhjFIWGsGFUsGiIyhegmQ==
+      integrity: sha512-u6EmvRd6RxrM0lM8+5RLYi7uJpT8hAweGRORtkqF2SKMPtHudOid6IrkYYHYL2La5oMVlcJnCS4J7jeUR6oPtA==
       tarball: 'file:projects/viewer-react.tgz'
     version: 0.0.0
   'file:projects/viewer-scripts.tgz_typescript@4.3.5':
@@ -20364,7 +20364,7 @@ packages:
     dev: false
     name: '@rush-temp/web-viewer-react'
     resolution:
-      integrity: sha512-x4rnFdoYUGqyLoSjARLYYrzRkY98jDGBzBqzNrgL0Odhm2Q8dPUbNJX47X0dTGs1YSe/ly+xxS55AqsLqouv2g==
+      integrity: sha512-4dfvTS1LEBZv65n08bxV2HInlmk467AF2duiwJM4CoGWT/RKcgINkBKf2eWuqO9eptK0ibJQv/SHnJrUf6q+Vg==
       tarball: 'file:projects/web-viewer-react.tgz'
     version: 0.0.0
   'file:projects/web-viewer-test.tgz_9767b8573e4bef8c27915fc3188040a5':
@@ -20415,7 +20415,7 @@ packages:
     peerDependencies:
       '@itwin/imodel-components-react': '*'
     resolution:
-      integrity: sha512-1+9H5I8Jat4a7OCfcqVr5wwfmaUCPEq45ZCsBaJuL6ixfLeJYYeU6IvHwmXfGHqKP2aOQaOKTxkJfvYBVe/yvw==
+      integrity: sha512-xJC8/RzOHaYkPPusCQgqGMQMwCrJoBcQgCtF1Ih6mE3IGhk8k0lHjYwL+niPcUYZBa4/Riho9NAH8NPAcpNhFA==
       tarball: 'file:projects/web-viewer-test.tgz'
     version: 0.0.0
 registry: ''
@@ -20448,7 +20448,7 @@ specifiers:
   '@itwin/ecschema-metadata': ^3.0.0
   '@itwin/electron-authorization': ^0.8.1
   '@itwin/express-server': ^3.0.0
-  '@itwin/imodel-browser-react': ^0.11.0
+  '@itwin/imodel-browser-react': ^0.12.2
   '@itwin/imodel-components-react': ^3.0.0
   '@itwin/imodels-access-backend': ^1.0.0
   '@itwin/imodels-access-frontend': ^1.0.1
