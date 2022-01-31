@@ -10,6 +10,7 @@ import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
+import { ViewportWidgetProvider } from "../../providers/ViewportAccessWidget";
 import { history } from "../routing";
 
 /**
@@ -92,6 +93,19 @@ export const ViewerHome: React.FC = () => {
     [viewConfiguration]
   );
 
+  const updateModelInfo = (iModelId: string, iTwinId: string) => {
+    console.log(
+      `About to pass iModelId of ${iModelId} into the Viewer Component`
+    );
+    setIModelId(iModelId);
+    setITwinId(iTwinId);
+  };
+
+  const uiProviders = useMemo(
+    () => [new ViewportWidgetProvider(updateModelInfo)],
+    []
+  );
+
   const Loader = () => {
     return <div>Things are happening...</div>;
   };
@@ -113,6 +127,11 @@ export const ViewerHome: React.FC = () => {
           },
         }}
         enablePerformanceMonitors={true}
+        uiProviders={uiProviders}
+        defaultUiConfig={{
+          hideTreeView: true,
+          hidePropertyGrid: true,
+        }}
       />
     </div>
   );
