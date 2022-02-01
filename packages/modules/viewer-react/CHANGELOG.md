@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Thu, 27 Jan 2022 18:31:31 GMT and should not be manually modified.
+This log was last generated on Tue, 01 Feb 2022 21:30:27 GMT and should not be manually modified.
+
+## 2.2.0
+Tue, 01 Feb 2022 21:30:27 GMT
+
+### Minor changes
+
+- Add option for backgroundMap in BlankConnectionViewState.viewFlags
 
 ## 2.1.0
 Thu, 27 Jan 2022 18:31:31 GMT
