@@ -52,6 +52,7 @@ export const createBlankViewState = (
     grid: viewStateOptions?.viewFlags?.grid ?? false,
     renderMode:
       viewStateOptions?.viewFlags?.renderMode ?? RenderMode.SmoothShade,
+    backgroundMap: viewStateOptions?.viewFlags?.backgroundMap ?? false,
   });
   viewState.displayStyle.viewFlags = flags;
 
