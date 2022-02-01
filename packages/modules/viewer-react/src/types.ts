@@ -243,6 +243,7 @@ export interface BlankConnectionViewStateDisplayStyle {
 export interface BlankConnectionViewStateViewFlags {
   grid?: boolean;
   renderMode?: RenderMode;
+  backgroundMap?: boolean;
 }
 
 export interface BlankConnectionViewState {
