@@ -21,7 +21,7 @@ const ViewportOnlyWidget: React.FunctionComponent<{
 
   /** Load the images on widget startup */
   useEffect(() => {
-    if (viewport?.iModel.iModelId) {
+    if (viewport?.iModel.isOpen && viewport?.iModel.iModelId) {
       // eslint-disable-next-line no-console
       console.log(
         `Setting up sample widget with iModelId: ${viewport.iModel.iModelId}`
