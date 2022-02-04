@@ -22,7 +22,7 @@
       "@itwin/core-telemetry": "^3.0.0",
       "@itwin/desktop-viewer-react": "^2.0.0",
       "@itwin/ecschema-metadata": "^3.0.0",
-      "@itwin/electron-authorization": "^0.8.1",
+      "@itwin/electron-authorization": "^0.8.3",
       "@itwin/express-server": "^3.0.0",
       "@itwin/imodel-browser-react": "^0.12.2",
       "@itwin/imodel-components-react": "^3.0.0",
