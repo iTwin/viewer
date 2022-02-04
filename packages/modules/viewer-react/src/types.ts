@@ -20,10 +20,10 @@ import type {
   IModelConnection,
   MapLayerOptions,
   ScreenViewport,
-  StandardViewId,
   TileAdmin,
   ToolAdmin,
   ViewChangeOptions,
+  ViewCreator3dOptions,
   ViewState,
 } from "@itwin/core-frontend";
 import type { Vector3d, XAndY, XYAndZ } from "@itwin/core-geometry";
@@ -31,17 +31,7 @@ import type { Vector3d, XAndY, XYAndZ } from "@itwin/core-geometry";
 /**
  * options for configuration of 3D view
  */
-export interface ViewCreator3dOptions {
-  /** Turn [[Camera]] on when generating the view. */
-  cameraOn?: boolean;
-  /** Turn [[SkyBox]] on when generating the view. */
-  skyboxOn?: boolean;
-  /** [[StandardViewId]] for the view state. */
-  standardViewId?: StandardViewId;
-  /** Merge in props from the seed view (default spatial view) of the iModel.  */
-  useSeedView?: boolean;
-  /** Aspect ratio of [[Viewport]]. Required to fit contents of the model(s) in the initial state of the view. */
-  vpAspect?: number;
+export interface ViewerViewCreator3dOptions extends ViewCreator3dOptions {
   /** optional function to configure the viewport on load */
   viewportConfigurer?: (viewport: ScreenViewport) => void;
 }
@@ -81,10 +71,10 @@ export interface IModelLoaderParams {
   backstageItems?: ViewerBackstageItem[];
   /** additional viewport options for the default frontstage's viewport control */
   viewportOptions?: ViewerViewportControlOptions;
-  /** UI Providers to register https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/ */
+  /** [UI Providers](https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/) to register */
   uiProviders?: UiItemsProvider[];
   /** options for creating the default viewState */
-  viewCreatorOptions?: ViewCreator3dOptions;
+  viewCreatorOptions?: ViewerViewCreator3dOptions;
 }
 
 export interface ItwinViewerCommonParams
@@ -108,11 +98,15 @@ export interface ItwinViewerInitializerParams {
   toolAdmin?: ToolAdmin;
   /** optional hubAccess (defaults to iTwin Platform's iModels) */
   hubAccess?: FrontendHubAccess;
+  /**
+   * options for MapLayers initialization
+   * Applications are required to provide their own keys. See [iTwin.js changelog](https://www.itwinjs.org/changehistory/3.0.0/#removed-default-api-keys) for additional details.
+   */
   mapLayerOptions?: MapLayerOptions;
   /**
    * Enable reporting data from timed events in the iTwin Viewer.
    * The data is anonynmous numerics and will help to increase Viewer performance in future releases.
-   * See the Web or Desktop Viewer package README for additional details (https://www.npmjs.com/package/@itwin/web-viewer-react).
+   * See the Web or Desktop Viewer package [README](https://www.npmjs.com/package/@itwin/web-viewer-react) for additional details.
    */
   enablePerformanceMonitors: boolean;
   /** options for TileAdmin initialization */

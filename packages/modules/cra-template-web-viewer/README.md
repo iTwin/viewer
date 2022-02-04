@@ -7,7 +7,7 @@ To use this template, add `--template @itwin/web-viewer` when creating a new app
 For example:
 
 ```sh
-npx create-react-app@latest my-app-name --template @itwin/web-viewer@next --scripts-version @bentley/react-scripts
+npx create-react-app@latest my-app-name --template @itwin/web-viewer --scripts-version @bentley/react-scripts
 ```
 
 For more information, please refer to:
