@@ -4,8 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { StageUsage, StandardContentLayouts } from "@itwin/appui-abstract";
+import type { FrontstageProps } from "@itwin/appui-react";
 import {
   ContentGroup,
+  ContentGroupProvider,
   CoreTools,
   Frontstage,
   FrontstageProvider,
@@ -26,6 +28,38 @@ import { AppStatusBarWidget } from "../statusbars/AppStatusBar";
 import { BasicNavigationWidget, BasicToolWidget } from "../widgets";
 
 /**
+ * Use a Provider to provide the content group
+ */
+class DefaultFrontstageContentGroupProvider extends ContentGroupProvider {
+  constructor(
+    public viewState: ViewState,
+    public viewportOptions?: ViewerViewportControlOptions
+  ) {
+    super();
+  }
+
+  public async provideContentGroup(
+    props: FrontstageProps
+  ): Promise<ContentGroup> {
+    return new ContentGroup({
+      id: "content-group",
+      layout: StandardContentLayouts.singleView,
+      contents: [
+        {
+          id: "viewport",
+          classId: IModelViewportControl,
+          applicationData: {
+            ...this.viewportOptions,
+            viewState: this.viewState,
+            iModelConnection: UiFramework.getIModelConnection,
+          },
+        },
+      ],
+    });
+  }
+}
+
+/**
  * Default Frontstage for the iTwinViewer
  */
 export class DefaultFrontstage extends FrontstageProvider {
@@ -40,12 +74,12 @@ export class DefaultFrontstage extends FrontstageProvider {
   static DEFAULT_PROPERTIES_WIDGET_KEY = "DefaultPropertiesWidgetKey";
 
   // Content group for all layouts
-  private _contentGroup: ContentGroup;
+  private _contentGroup: ContentGroupProvider;
 
   private _uiConfig?: ItwinViewerUi;
 
   constructor(
-    public viewState: ViewState,
+    viewState: ViewState,
     uiConfig?: ItwinViewerUi,
     viewportOptions?: ViewerViewportControlOptions
   ) {
@@ -54,21 +88,10 @@ export class DefaultFrontstage extends FrontstageProvider {
     this._uiConfig = uiConfig;
 
     // Create the content group.
-    this._contentGroup = new ContentGroup({
-      id: DefaultFrontstage.MAIN_CONTENT_ID,
-      layout: StandardContentLayouts.singleView,
-      contents: [
-        {
-          id: "viewport",
-          classId: IModelViewportControl.id,
-          applicationData: {
-            ...viewportOptions,
-            iModelConnection: UiFramework.getIModelConnection(),
-            viewState: this.viewState,
-          },
-        },
-      ],
-    });
+    this._contentGroup = new DefaultFrontstageContentGroupProvider(
+      viewState,
+      viewportOptions
+    );
   }
 
   /** Define the Frontstage properties */

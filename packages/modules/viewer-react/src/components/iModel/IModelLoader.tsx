@@ -234,8 +234,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           // Tell the SyncUiEventDispatcher and StateManager about the iModelConnection
           UiFramework.setIModelConnection(imodelConnection, true);
 
-          SyncUiEventDispatcher.initializeConnectionEvents(imodelConnection);
-
           if (onIModelConnected) {
             onIModelConnected(imodelConnection);
           }
@@ -256,6 +254,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           prevConnection = undefined;
         }
         if (mounted) {
+          setViewState(undefined);
           setConnection(undefined);
         }
       };
@@ -329,7 +328,8 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         allFrontstages = [...frontstages];
       }
 
-      if (viewState) {
+      // TODO Kevin fix so we don't need this
+      if (isMounted.current && viewState && viewState.iModel.isOpen) {
         // initialize the DefaultFrontstage that contains the views that we want
         const defaultFrontstageProvider = new DefaultFrontstage(
           viewState,
@@ -345,7 +345,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       }
 
       setFinalFrontstages(allFrontstages);
-    }, [frontstages, viewportOptions, viewState, defaultUiConfig]);
+    }, [frontstages, viewportOptions, viewState, defaultUiConfig, isMounted]);
 
     if (error) {
       throw error;
