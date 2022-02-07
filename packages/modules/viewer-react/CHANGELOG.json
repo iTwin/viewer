@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "2.2.1",
+      "tag": "@itwin/viewer-react_v2.2.1",
+      "date": "Mon, 07 Feb 2022 14:48:13 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add iModelConnecting performance measure"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.2.0",
       "tag": "@itwin/viewer-react_v2.2.0",
       "date": "Tue, 01 Feb 2022 21:30:27 GMT",

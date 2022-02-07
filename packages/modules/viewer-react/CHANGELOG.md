@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Tue, 01 Feb 2022 21:30:27 GMT and should not be manually modified.
+This log was last generated on Mon, 07 Feb 2022 14:48:13 GMT and should not be manually modified.
+
+## 2.2.1
+Mon, 07 Feb 2022 14:48:13 GMT
+
+### Patches
+
+- Add iModelConnecting performance measure
 
 ## 2.2.0
 Tue, 01 Feb 2022 21:30:27 GMT

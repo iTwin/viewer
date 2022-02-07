@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "2.0.3",
+      "tag": "@itwin/cra-template-web-viewer_v2.0.3",
+      "date": "Mon, 07 Feb 2022 14:48:13 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add TileTreesLoaded performance measure"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.0.2",
       "tag": "@itwin/cra-template-web-viewer_v2.0.2",
       "date": "Wed, 26 Jan 2022 03:31:33 GMT",

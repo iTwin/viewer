@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Wed, 26 Jan 2022 03:31:33 GMT and should not be manually modified.
+This log was last generated on Mon, 07 Feb 2022 14:48:13 GMT and should not be manually modified.
+
+## 2.0.3
+Mon, 07 Feb 2022 14:48:13 GMT
+
+### Patches
+
+- Add TileTreesLoaded performance measure
 
 ## 2.0.2
 Wed, 26 Jan 2022 03:31:33 GMT
