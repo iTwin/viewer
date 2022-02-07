@@ -206,6 +206,12 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           );
         }
 
+        ViewerPerformance.addMark("IModelConnectionStarted");
+        void ViewerPerformance.addAndLogMeasure(
+          "IModelConnecting",
+          "ViewerStarting",
+          "IModelConnectionStarted"
+        );
         let imodelConnection: IModelConnection | undefined;
         // create a new imodelConnection for the passed project and imodel ids
         // TODO add the ability to open a BriefcaseConnection for Electron apps

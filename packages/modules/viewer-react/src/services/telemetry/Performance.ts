@@ -8,6 +8,7 @@ import { trackViewerMetric, viewerAI } from "./TelemetryService";
 export type PerformanceMeasures =
   | "ViewerInitialized"
   | "BaseViewerInitialized"
+  | "IModelConnecting"
   | "IModelConnected"
   | "ViewStateCreated"
   | "TileTreesLoaded";
@@ -16,6 +17,7 @@ export type PerformanceMarks =
   | "ViewerStarting"
   | "ViewerStarted"
   | "BaseViewerStarted"
+  | "IModelConnectionStarted"
   | "IModelConnection"
   | "ViewStateCreation"
   | "TilesLoaded";

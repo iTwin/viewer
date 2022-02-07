@@ -10,7 +10,11 @@ import type { ScreenViewport } from "@itwin/core-frontend";
 import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
 import { FillCentered } from "@itwin/core-react";
 import { ProgressLinear } from "@itwin/itwinui-react";
-import { useAccessToken, Viewer } from "@itwin/web-viewer-react";
+import {
+  useAccessToken,
+  Viewer,
+  ViewerPerformance,
+} from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "./history";
@@ -89,6 +93,13 @@ const App: React.FC = () => {
         const start = new Date();
         const intvl = setInterval(() => {
           if (viewPort.areAllTileTreesLoaded) {
+            ViewerPerformance.addMark("TilesLoaded");
+            void ViewerPerformance.addAndLogMeasure(
+              "TileTreesLoaded",
+              "ViewerStarting",
+              "TilesLoaded",
+              viewPort.numReadyTiles
+            );
             clearInterval(intvl);
             resolve(true);
           }
