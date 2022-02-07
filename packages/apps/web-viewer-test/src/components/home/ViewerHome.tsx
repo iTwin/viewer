@@ -5,8 +5,6 @@
 
 import { ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
-import type { ScreenViewport } from "@itwin/core-frontend";
-import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -62,36 +60,6 @@ export const ViewerHome: React.FC = () => {
     history.push(`viewer?iTwinId=${iTwinId}&iModelId=${iModelId}`);
   }, [iTwinId, iModelId]);
 
-  const viewConfiguration = useCallback((viewPort: ScreenViewport) => {
-    // default execute the fitview tool and use the iso standard view after tile trees are loaded
-    const tileTreesLoaded = () => {
-      return new Promise((resolve, reject) => {
-        const start = new Date();
-        const intvl = setInterval(() => {
-          if (viewPort.areAllTileTreesLoaded) {
-            clearInterval(intvl);
-            resolve(true);
-          }
-          const now = new Date();
-          // after 20 seconds, stop waiting and fit the view
-          if (now.getTime() - start.getTime() > 20000) {
-            reject();
-          }
-        }, 100);
-      });
-    };
-
-    tileTreesLoaded().finally(() => {
-      void IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
-      viewPort.view.setStandardRotation(StandardViewId.Iso);
-    });
-  }, []);
-
-  const viewCreatorOptions = useMemo(
-    () => ({ viewportConfigurer: viewConfiguration }),
-    [viewConfiguration]
-  );
-
   const Loader = () => {
     return <div>Things are happening...</div>;
   };
@@ -104,7 +72,6 @@ export const ViewerHome: React.FC = () => {
         iModelId={iModelId}
         appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
         theme={ColorTheme.Dark}
-        viewCreatorOptions={viewCreatorOptions}
         loadingComponent={<Loader />}
         mapLayerOptions={{
           BingMaps: {
