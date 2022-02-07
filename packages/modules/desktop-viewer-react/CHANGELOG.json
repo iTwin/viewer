@@ -2,6 +2,18 @@
   "name": "@itwin/desktop-viewer-react",
   "entries": [
     {
+      "version": "2.0.4",
+      "tag": "@itwin/desktop-viewer-react_v2.0.4",
+      "date": "Mon, 07 Feb 2022 13:54:26 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Upgrade min auth package"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.0.3",
       "tag": "@itwin/desktop-viewer-react_v2.0.3",
       "date": "Tue, 01 Feb 2022 21:30:27 GMT",
