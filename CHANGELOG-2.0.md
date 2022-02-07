@@ -89,7 +89,7 @@ We've replaced the default measure-tools provided in the Viewer from itwinjs-cor
 - iTwin Viewer for Web
 
   ```sh
-  npx create-react-app@latest web-viewer-3 --template @itwin/web-viewer@next --scripts-version @bentley/react-scripts
+  npx create-react-app@latest web-viewer-3 --template @itwin/web-viewer --scripts-version @bentley/react-scripts
   ```
 
 ## Known issues

@@ -17,7 +17,7 @@ import {
   ViewCreator3d as ViewCreator,
 } from "@itwin/core-frontend";
 
-import type { ViewCreator3dOptions } from "../../types";
+import type { ViewerViewCreator3dOptions } from "../../types";
 import { ViewerPerformance } from "../telemetry";
 
 /**
@@ -37,7 +37,7 @@ export class ViewCreator3d extends ViewCreator {
    * @throws [IModelError]($common) If no 3d models are found in the iModel.
    */
   public override async createDefaultView(
-    options?: ViewCreator3dOptions,
+    options?: ViewerViewCreator3dOptions,
     modelIds?: string[]
   ): Promise<ViewState> {
     const viewState = await super.createDefaultView(options, modelIds);

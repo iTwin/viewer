@@ -34,9 +34,9 @@ import { userAI, ViewerPerformance } from "../../services/telemetry";
 import type {
   BlankConnectionViewState,
   IModelLoaderParams,
-  ViewCreator3dOptions,
   ViewerBackstageItem,
   ViewerFrontstage,
+  ViewerViewCreator3dOptions,
 } from "../../types";
 import { DefaultFrontstage } from "../app-ui/frontstages/DefaultFrontstage";
 import { IModelBusy } from "./IModelBusy";
@@ -131,7 +131,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           // attempt to construct a default viewState
           const viewCreator = new ViewCreator3d(connection);
 
-          const options: ViewCreator3dOptions = viewCreatorOptions
+          const options: ViewerViewCreator3dOptions = viewCreatorOptions
             ? { ...viewCreatorOptions }
             : { useSeedView: true };
 
