@@ -75,10 +75,12 @@ const MergeStatusBarItem = () => {
   const getLatestChangesets = useCallback(async () => {
     if (connection) {
       try {
+        connection.txns.onChangesPulled.addOnce(() => {
+          IModelApp.viewManager.refreshForModifiedModels(undefined);
+        });
         await connection.pullChanges();
         if (isMounted.current) {
           setMergeStatus(ModelStatus.UPTODATE);
-          IModelApp.viewManager.refreshForModifiedModels(undefined);
         }
       } catch (error) {
         console.error(error);
