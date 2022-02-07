@@ -7,7 +7,7 @@ import { ElectronHost } from "@itwin/core-electron/lib/cjs/ElectronBackend";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 
-import { ViewerFile, ViewerSettings } from "../common/ViewerConfig";
+import type { ViewerFile, ViewerSettings } from "../common/ViewerConfig";
 
 class UserSettings {
   private _settings: ViewerSettings;
@@ -78,13 +78,17 @@ class UserSettings {
             existingFile.iTwinId === file.iTwinId &&
             existingFile.iModelId === file.iModelId)
       );
+
+      let existingRecent: ViewerFile | undefined;
       if (existing > 0) {
+        existingRecent = this.settings.recents[existing];
         this.settings.recents.splice(existing, 1);
       }
 
       // add to the top (if not already there)
+      // use the existing file if one exists as it likely has the iTwin and iModel ids, whereas opening a local file would not
       if (existing !== 0) {
-        this.settings.recents.unshift(file);
+        this.settings.recents.unshift(existingRecent || file);
       }
     }
     this._writeSettings();
