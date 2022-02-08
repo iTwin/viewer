@@ -80,7 +80,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     const [connection, setConnection] = useState<IModelConnection>();
     const isMounted = useIsMounted();
 
-    useUiProviders(uiProviders, defaultUiConfig);
+    useUiProviders(uiProviders);
     useTheme(theme);
 
     // trigger error boundary when fatal error is thrown

@@ -100,26 +100,6 @@ jest.mock("@itwin/core-frontend", () => {
     },
   };
 });
-jest.mock("@itwin/property-grid-react", () => {
-  return {
-    ...jest.createMockFromModule<any>("@itwin/property-grid-react"),
-    PropertyGridManager: {
-      ...jest.createMockFromModule<any>("@itwin/property-grid-react")
-        .PropertyGridManager,
-      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
-    },
-  };
-});
-jest.mock("@itwin/measure-tools-react", () => {
-  return {
-    ...jest.createMockFromModule<any>("@itwin/measure-tools-react"),
-    MeasureTools: {
-      ...jest.createMockFromModule<any>("@itwin/measure-tools-react")
-        .MeasureTools,
-      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
-    },
-  };
-});
 jest.mock("../../services/telemetry/TelemetryService");
 
 describe("BaseInitializer", () => {
