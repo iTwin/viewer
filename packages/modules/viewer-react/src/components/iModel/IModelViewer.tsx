@@ -17,7 +17,7 @@ import React, { useEffect } from "react";
 import type { ViewerFrontstage } from "../../types";
 interface ModelProps {
   frontstages: ViewerFrontstage[];
-  backstageItems: BackstageItem[];
+  backstageItems?: BackstageItem[]; // TODO remove this and just use the UiItemsManager to get the items in the next major version
 }
 
 export const IModelViewer: React.FC<ModelProps> = ({
@@ -52,13 +52,18 @@ export const IModelViewer: React.FC<ModelProps> = ({
   }, [frontstages]);
 
   // there will always be at least one (for the default frontstage). Wait for it to be loaded into the list before rendering the content
-  return backstageItems.length > 0 ? (
+  return (
     <ThemeManager>
       <FrameworkVersion>
         <ConfigurableUiContent
-          appBackstage={<BackstageComposer items={backstageItems} />}
+          appBackstage={
+            backstageItems &&
+            backstageItems.length > 0 && (
+              <BackstageComposer items={backstageItems} />
+            )
+          }
         />
       </FrameworkVersion>
     </ThemeManager>
-  ) : null;
+  );
 };

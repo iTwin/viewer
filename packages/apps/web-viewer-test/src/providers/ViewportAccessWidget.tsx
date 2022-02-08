@@ -13,10 +13,8 @@ import { Button } from "@itwin/itwinui-react";
 import React, { useEffect } from "react";
 
 const ViewportOnlyWidget: React.FunctionComponent<{
-  onSampleIModelChange: (iModelId: string, iTwinId: string) => void;
-}> = (props: {
-  onSampleIModelChange: (iModelId: string, iTwinId: string) => void;
-}) => {
+  onSampleIModelChange: (iModelId: string) => void;
+}> = (props: { onSampleIModelChange: (iModelId: string) => void }) => {
   const viewport = useActiveViewport();
 
   /** Load the images on widget startup */
@@ -32,10 +30,15 @@ const ViewportOnlyWidget: React.FunctionComponent<{
   }, [viewport]);
 
   const toggleModel = () => {
-    props.onSampleIModelChange(
-      "435e704b-ae19-418c-a02e-fc75686e213c",
-      "1bff8c44-3196-4231-b8f6-66cf6dacd45b"
-    );
+    const iModelId1 = process.env.IMJS_AUTH_CLIENT_IMODEL_ID;
+    const iModelId2 = process.env.IMJS_AUTH_CLIENT_IMODEL_ID2;
+    let iModelId = iModelId1;
+    if (!iModelId || viewport?.iModel.iModelId === iModelId1) {
+      iModelId = iModelId2;
+    }
+    if (iModelId) {
+      props.onSampleIModelChange(iModelId);
+    }
   };
 
   // Display drawing and sheet options in separate sections.
@@ -48,13 +51,8 @@ const ViewportOnlyWidget: React.FunctionComponent<{
 
 export class ViewportWidgetProvider implements UiItemsProvider {
   public readonly id: string = "ViewportWidgetProvider";
-  private _onSampleiModelInfoChange: (
-    iModelId: string,
-    iTwinId: string
-  ) => void;
-  constructor(
-    onSampleiModelInfoChange: (iModelId: string, iTwinId: string) => void
-  ) {
+  private _onSampleiModelInfoChange: (iModelId: string) => void;
+  constructor(onSampleiModelInfoChange: (iModelId: string) => void) {
     this._onSampleiModelInfoChange = onSampleiModelInfoChange;
   }
 

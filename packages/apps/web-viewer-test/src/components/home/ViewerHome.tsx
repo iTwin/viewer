@@ -61,12 +61,11 @@ export const ViewerHome: React.FC = () => {
     history.push(`viewer?iTwinId=${iTwinId}&iModelId=${iModelId}`);
   }, [iTwinId, iModelId]);
 
-  const updateModelInfo = (iModelId: string, iTwinId: string) => {
+  const updateModelInfo = (iModelId: string) => {
     console.log(
       `About to pass iModelId of ${iModelId} into the Viewer Component`
     );
     setIModelId(iModelId);
-    setITwinId(iTwinId);
   };
 
   const uiProviders = useMemo(

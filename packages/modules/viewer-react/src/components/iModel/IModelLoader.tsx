@@ -6,11 +6,6 @@
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
-import type {
-  BackstageActionItem,
-  BackstageStageLauncher,
-} from "@itwin/appui-abstract";
-import { BackstageItemUtilities } from "@itwin/appui-abstract";
 import { StateManager, UiFramework } from "@itwin/appui-react";
 import type {
   BlankConnectionProps,
@@ -22,16 +17,15 @@ import { withAITracking } from "@microsoft/applicationinsights-react-js";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
-import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
+import {
+  useFrontstages,
+  useIsMounted,
+  useTheme,
+  useUiProviders,
+} from "../../hooks";
 import { openLocalImodel, openRemoteIModel } from "../../services/iModel";
 import { userAI, ViewerPerformance } from "../../services/telemetry";
-import type {
-  BlankConnectionViewState,
-  IModelLoaderParams,
-  ViewerBackstageItem,
-  ViewerFrontstage,
-} from "../../types";
-import { DefaultFrontstage } from "../app-ui/frontstages/DefaultFrontstage";
+import type { BlankConnectionViewState, IModelLoaderParams } from "../../types";
 import { IModelBusy } from "./IModelBusy";
 import { IModelViewer } from "./IModelViewer";
 export interface ModelLoaderProps extends IModelLoaderParams {
@@ -64,15 +58,17 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     loadingComponent,
   }: ModelLoaderProps) => {
     const [error, setError] = useState<Error>();
-    const [finalFrontstages, setFinalFrontstages] =
-      useState<ViewerFrontstage[]>();
-    const [finalBackstageItems, setFinalBackstageItems] =
-      useState<ViewerBackstageItem[]>();
-    const [noConnection, setNoConnection] = useState<boolean>(false);
     const [connection, setConnection] = useState<IModelConnection>();
     const isMounted = useIsMounted();
+    const { finalFrontstages, noConnectionRequired } = useFrontstages(
+      frontstages,
+      defaultUiConfig,
+      viewportOptions,
+      viewCreatorOptions,
+      blankConnectionViewState
+    );
 
-    useUiProviders(uiProviders, defaultUiConfig);
+    useUiProviders(uiProviders, defaultUiConfig, backstageItems);
     useTheme(theme);
 
     // trigger error boundary when fatal error is thrown
@@ -98,31 +94,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       setConnection(imodelConnection);
       return imodelConnection;
     };
-
-    useEffect(() => {
-      // first check to see if some other frontstage is defined as the default
-      // allow fronstages other than the default viewport to continue to render if so
-      if (frontstages) {
-        const defaultFrontstages = frontstages.filter(
-          (frontstage) => frontstage.default
-        );
-        if (defaultFrontstages.length > 0) {
-          // there should only be one, but check if any default frontstage requires an iModel connection
-          let requiresConnection = false;
-          for (let i = 0; i < defaultFrontstages.length; i++) {
-            if (defaultFrontstages[i].requiresIModelConnection) {
-              requiresConnection = true;
-              break;
-            }
-          }
-          if (!requiresConnection) {
-            // allow to continue to render
-            setNoConnection(true);
-            return;
-          }
-        }
-      }
-    }, [frontstages]);
 
     const getModelConnection = useCallback(async (): Promise<
       IModelConnection | undefined
@@ -206,101 +177,18 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       };
     }, [getModelConnection]);
 
-    useEffect(() => {
-      const allBackstageItems: ViewerBackstageItem[] = [];
-      if (backstageItems) {
-        backstageItems.forEach((backstageItem) => {
-          // check for label i18n key and translate if needed
-          if (backstageItem.labeli18nKey) {
-            let newItem;
-            if ((backstageItem as BackstageStageLauncher).stageId) {
-              newItem = BackstageItemUtilities.createStageLauncher(
-                (backstageItem as BackstageStageLauncher).stageId,
-                backstageItem.groupPriority,
-                backstageItem.itemPriority,
-                IModelApp.localization.getLocalizedString(
-                  backstageItem.labeli18nKey
-                ),
-                backstageItem.subtitle,
-                backstageItem.icon
-              );
-            } else {
-              newItem = BackstageItemUtilities.createActionItem(
-                backstageItem.id,
-                backstageItem.groupPriority,
-                backstageItem.itemPriority,
-                (backstageItem as BackstageActionItem).execute,
-                IModelApp.localization.getLocalizedString(
-                  backstageItem.labeli18nKey
-                ),
-                backstageItem.subtitle,
-                backstageItem.icon
-              );
-            }
-            allBackstageItems.push(newItem);
-          } else {
-            allBackstageItems.push(backstageItem);
-          }
-        });
-      }
-
-      if (connection) {
-        allBackstageItems.unshift({
-          stageId: "DefaultFrontstage",
-          id: "DefaultFrontstage",
-          groupPriority: 100,
-          itemPriority: 10,
-          label: IModelApp.localization.getLocalizedString(
-            "iTwinViewer:backstage.mainFrontstage"
-          ),
-        });
-      }
-
-      setFinalBackstageItems(allBackstageItems);
-    }, [backstageItems, connection]);
-
-    useEffect(() => {
-      let allFrontstages: ViewerFrontstage[] = [];
-      if (frontstages) {
-        allFrontstages = [...frontstages];
-      }
-
-      // initialize the DefaultFrontstage that contains the views that we want
-      const defaultFrontstageProvider = new DefaultFrontstage(
-        defaultUiConfig,
-        viewportOptions,
-        viewCreatorOptions,
-        blankConnectionViewState
-      );
-
-      // add the default frontstage first so that it's default status can be overridden
-      allFrontstages.unshift({
-        provider: defaultFrontstageProvider,
-        default: true,
-      });
-
-      setFinalFrontstages(allFrontstages);
-    }, [
-      frontstages,
-      viewportOptions,
-      defaultUiConfig,
-      viewCreatorOptions,
-      blankConnectionViewState,
-    ]);
-
     if (error) {
       throw error;
     } else {
       return (
         <div className="itwin-viewer-container">
           {finalFrontstages &&
-          finalBackstageItems &&
-          (connection || noConnection) &&
+          (connection || noConnectionRequired) &&
           StateManager.store ? (
             <Provider store={StateManager.store}>
               <IModelViewer
                 frontstages={finalFrontstages}
-                backstageItems={finalBackstageItems}
+                backstageItems={backstageItems}
               />
             </Provider>
           ) : (
