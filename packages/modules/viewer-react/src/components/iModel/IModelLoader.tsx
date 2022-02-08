@@ -77,32 +77,10 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       setError(errorManager.fatalError);
     }, [errorManager.fatalError]);
 
-    /**
-     * Initialize a blank connection and viewState
-     * @param blankConnection
-     */
-    const initBlankConnection = (
-      blankConnection: BlankConnectionProps,
-      onIModelConnected?: (iModel: IModelConnection) => void
-    ) => {
-      const imodelConnection = BlankConnection.create(blankConnection);
-      UiFramework.setIModelConnection(imodelConnection);
-
-      if (onIModelConnected) {
-        onIModelConnected(imodelConnection);
-      }
-      setConnection(imodelConnection);
-      return imodelConnection;
-    };
-
     const getModelConnection = useCallback(async (): Promise<
       IModelConnection | undefined
     > => {
-      if (blankConnection) {
-        return initBlankConnection(blankConnection, onIModelConnected);
-      }
-
-      if (!(iTwinId && iModelId) && !snapshotPath) {
+      if (!(iTwinId && iModelId) && !snapshotPath && !blankConnection) {
         throw new Error(
           IModelApp.localization.getLocalizedStringWithNamespace(
             "iTwinViewer",
@@ -118,9 +96,10 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         "IModelConnectionStarted"
       );
       let imodelConnection: IModelConnection | undefined;
-      // create a new imodelConnection for the passed project and imodel ids
-      // TODO add the ability to open a BriefcaseConnection for Electron apps
-      if (snapshotPath) {
+      // create a new imodelConnection for the passed project and imodel ids or local file
+      if (blankConnection) {
+        imodelConnection = BlankConnection.create(blankConnection);
+      } else if (snapshotPath) {
         imodelConnection = await openLocalImodel(snapshotPath);
       } else if (iTwinId && iModelId) {
         imodelConnection = await openRemoteIModel(
@@ -175,7 +154,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           setConnection(undefined);
         }
       };
-    }, [getModelConnection]);
+    }, [getModelConnection, isMounted, errorManager]);
 
     if (error) {
       throw error;
