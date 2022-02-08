@@ -46,6 +46,8 @@ export const IModelViewer: React.FC<ModelProps> = ({
     }
     return () => {
       FrontstageManager.clearFrontstageDefs();
+      // TODO replace the above with the below
+      // FrontstageManager.clearFrontstageProviders();
     };
   }, [frontstages]);
 

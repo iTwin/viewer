@@ -11,15 +11,10 @@ import type {
   BackstageStageLauncher,
 } from "@itwin/appui-abstract";
 import { BackstageItemUtilities } from "@itwin/appui-abstract";
-import {
-  StateManager,
-  SyncUiEventDispatcher,
-  UiFramework,
-} from "@itwin/appui-react";
+import { StateManager, UiFramework } from "@itwin/appui-react";
 import type {
   BlankConnectionProps,
   IModelConnection,
-  ViewState,
 } from "@itwin/core-frontend";
 import { BlankConnection, IModelApp } from "@itwin/core-frontend";
 import { useErrorManager } from "@itwin/error-handling-react";
@@ -29,14 +24,12 @@ import { Provider } from "react-redux";
 
 import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
 import { openLocalImodel, openRemoteIModel } from "../../services/iModel";
-import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
 import { userAI, ViewerPerformance } from "../../services/telemetry";
 import type {
   BlankConnectionViewState,
   IModelLoaderParams,
   ViewerBackstageItem,
   ViewerFrontstage,
-  ViewerViewCreator3dOptions,
 } from "../../types";
 import { DefaultFrontstage } from "../app-ui/frontstages/DefaultFrontstage";
 import { IModelBusy } from "./IModelBusy";
@@ -75,7 +68,6 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       useState<ViewerFrontstage[]>();
     const [finalBackstageItems, setFinalBackstageItems] =
       useState<ViewerBackstageItem[]>();
-    const [viewState, setViewState] = useState<ViewState>();
     const [noConnection, setNoConnection] = useState<boolean>(false);
     const [connection, setConnection] = useState<IModelConnection>();
     const isMounted = useIsMounted();
@@ -104,66 +96,8 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         onIModelConnected(imodelConnection);
       }
       setConnection(imodelConnection);
+      return imodelConnection;
     };
-
-    const getViewState = useCallback(async () => {
-      if (!connection || (!connection.isBlank && connection.isClosed)) {
-        setViewState(undefined);
-        return;
-      }
-
-      let view: ViewState | undefined;
-      if (viewportOptions?.viewState) {
-        if (typeof viewportOptions.viewState === "function") {
-          view = await viewportOptions.viewState(connection);
-        } else {
-          view = viewportOptions.viewState;
-        }
-      }
-      if (
-        !viewportOptions?.alwaysUseSuppliedViewState &&
-        (!view ||
-          (view.iModel.iModelId !== connection.iModelId && connection.isOpen))
-      ) {
-        if (connection.isBlankConnection()) {
-          view = createBlankViewState(connection, blankConnectionViewState);
-        } else {
-          // attempt to construct a default viewState
-          const viewCreator = new ViewCreator3d(connection);
-
-          const options: ViewerViewCreator3dOptions = viewCreatorOptions
-            ? { ...viewCreatorOptions }
-            : { useSeedView: true };
-
-          if (options.useSeedView === undefined) {
-            options.useSeedView = true;
-          }
-
-          view = await viewCreator.createDefaultView(options);
-          UiFramework.setActiveSelectionScope("top-assembly");
-        }
-
-        // Should not be undefined
-        if (!view) {
-          throw new Error("No default view state for the imodel!");
-        }
-        // Set default view state
-        UiFramework.setDefaultViewState(view);
-      }
-
-      setViewState(view);
-    }, [
-      connection,
-      viewportOptions,
-      blankConnectionViewState,
-      viewCreatorOptions,
-    ]);
-
-    useEffect(() => {
-      if (isMounted.current) {
-        void getViewState();
-      }
-    }, [getViewState, isMounted]);
 
     useEffect(() => {
       // first check to see if some other frontstage is defined as the default
@@ -190,62 +124,75 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       }
     }, [frontstages]);
 
+    const getModelConnection = useCallback(async (): Promise<
+      IModelConnection | undefined
+    > => {
+      if (blankConnection) {
+        return initBlankConnection(blankConnection, onIModelConnected);
+      }
+
+      if (!(iTwinId && iModelId) && !snapshotPath) {
+        throw new Error(
+          IModelApp.localization.getLocalizedStringWithNamespace(
+            "iTwinViewer",
+            "missingConnectionProps"
+          )
+        );
+      }
+
+      ViewerPerformance.addMark("IModelConnectionStarted");
+      void ViewerPerformance.addAndLogMeasure(
+        "IModelConnecting",
+        "ViewerStarting",
+        "IModelConnectionStarted"
+      );
+      let imodelConnection: IModelConnection | undefined;
+      // create a new imodelConnection for the passed project and imodel ids
+      // TODO add the ability to open a BriefcaseConnection for Electron apps
+      if (snapshotPath) {
+        imodelConnection = await openLocalImodel(snapshotPath);
+      } else if (iTwinId && iModelId) {
+        imodelConnection = await openRemoteIModel(
+          iTwinId,
+          iModelId,
+          changeSetId
+        );
+      }
+      ViewerPerformance.addMark("IModelConnection");
+      void ViewerPerformance.addAndLogMeasure(
+        "IModelConnected",
+        "ViewerStarting",
+        "IModelConnection"
+      );
+      if (imodelConnection && isMounted.current) {
+        // Tell the SyncUiEventDispatcher and StateManager about the iModelConnection
+        UiFramework.setIModelConnection(imodelConnection, true);
+
+        if (onIModelConnected) {
+          onIModelConnected(imodelConnection);
+        }
+        setConnection(imodelConnection);
+        return imodelConnection;
+      }
+      return;
+    }, [
+      iTwinId,
+      iModelId,
+      changeSetId,
+      snapshotPath,
+      blankConnection,
+      isMounted,
+      onIModelConnected,
+    ]);
+
     useEffect(() => {
       let prevConnection: IModelConnection | undefined;
-      const getModelConnection = async () => {
-        if (blankConnection) {
-          return initBlankConnection(blankConnection, onIModelConnected);
-        }
 
-        if (!(iTwinId && iModelId) && !snapshotPath) {
-          throw new Error(
-            IModelApp.localization.getLocalizedStringWithNamespace(
-              "iTwinViewer",
-              "missingConnectionProps"
-            )
-          );
-        }
-
-        ViewerPerformance.addMark("IModelConnectionStarted");
-        void ViewerPerformance.addAndLogMeasure(
-          "IModelConnecting",
-          "ViewerStarting",
-          "IModelConnectionStarted"
-        );
-        let imodelConnection: IModelConnection | undefined;
-        // create a new imodelConnection for the passed project and imodel ids
-        // TODO add the ability to open a BriefcaseConnection for Electron apps
-        if (snapshotPath) {
-          imodelConnection = await openLocalImodel(snapshotPath);
-        } else if (iTwinId && iModelId) {
-          imodelConnection = await openRemoteIModel(
-            iTwinId,
-            iModelId,
-            changeSetId
-          );
-        }
-        ViewerPerformance.addMark("IModelConnection");
-        void ViewerPerformance.addAndLogMeasure(
-          "IModelConnected",
-          "ViewerStarting",
-          "IModelConnection"
-        );
-        if (imodelConnection && isMounted.current) {
-          // Tell the SyncUiEventDispatcher and StateManager about the iModelConnection
-          UiFramework.setIModelConnection(imodelConnection, true);
-
-          if (onIModelConnected) {
-            onIModelConnected(imodelConnection);
-          }
-
-          prevConnection = imodelConnection;
-          setConnection(imodelConnection);
-        }
-      };
-
-      getModelConnection().catch((error) => {
-        errorManager.throwFatalError(error);
-      });
+      void getModelConnection()
+        .then((connection) => (prevConnection = connection))
+        .catch((error) => {
+          errorManager.throwFatalError(error);
+        });
 
       const mounted = isMounted.current;
       return () => {
@@ -254,20 +201,10 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           prevConnection = undefined;
         }
         if (mounted) {
-          setViewState(undefined);
           setConnection(undefined);
         }
       };
-    }, [
-      iTwinId,
-      iModelId,
-      changeSetId,
-      snapshotPath,
-      blankConnection,
-      blankConnectionViewState,
-      isMounted,
-      onIModelConnected,
-    ]);
+    }, [getModelConnection]);
 
     useEffect(() => {
       const allBackstageItems: ViewerBackstageItem[] = [];
@@ -307,7 +244,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         });
       }
 
-      if (viewState) {
+      if (connection) {
         allBackstageItems.unshift({
           stageId: "DefaultFrontstage",
           id: "DefaultFrontstage",
@@ -320,7 +257,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       }
 
       setFinalBackstageItems(allBackstageItems);
-    }, [backstageItems, viewState]);
+    }, [backstageItems, connection]);
 
     useEffect(() => {
       let allFrontstages: ViewerFrontstage[] = [];
@@ -328,24 +265,28 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         allFrontstages = [...frontstages];
       }
 
-      // TODO Kevin fix so we don't need this
-      if (isMounted.current && viewState && viewState.iModel.isOpen) {
-        // initialize the DefaultFrontstage that contains the views that we want
-        const defaultFrontstageProvider = new DefaultFrontstage(
-          viewState,
-          defaultUiConfig,
-          viewportOptions
-        );
+      // initialize the DefaultFrontstage that contains the views that we want
+      const defaultFrontstageProvider = new DefaultFrontstage(
+        defaultUiConfig,
+        viewportOptions,
+        viewCreatorOptions,
+        blankConnectionViewState
+      );
 
-        // add the default frontstage first so that it's default status can be overridden
-        allFrontstages.unshift({
-          provider: defaultFrontstageProvider,
-          default: true,
-        });
-      }
+      // add the default frontstage first so that it's default status can be overridden
+      allFrontstages.unshift({
+        provider: defaultFrontstageProvider,
+        default: true,
+      });
 
       setFinalFrontstages(allFrontstages);
-    }, [frontstages, viewportOptions, viewState, defaultUiConfig, isMounted]);
+    }, [
+      frontstages,
+      viewportOptions,
+      defaultUiConfig,
+      viewCreatorOptions,
+      blankConnectionViewState,
+    ]);
 
     if (error) {
       throw error;
@@ -354,7 +295,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         <div className="itwin-viewer-container">
           {finalFrontstages &&
           finalBackstageItems &&
-          ((viewState && connection) || noConnection) &&
+          (connection || noConnection) &&
           StateManager.store ? (
             <Provider store={StateManager.store}>
               <IModelViewer

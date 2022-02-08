@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { StageUsage, StandardContentLayouts } from "@itwin/appui-abstract";
-import type { FrontstageProps } from "@itwin/appui-react";
 import {
   ContentGroup,
   ContentGroupProvider,
@@ -17,11 +16,15 @@ import {
   Widget,
   Zone,
 } from "@itwin/appui-react";
-import type { ViewState } from "@itwin/core-frontend";
+import type { IModelConnection, ViewState } from "@itwin/core-frontend";
+import { ViewCreator3d } from "@itwin/core-frontend";
 import * as React from "react";
 
+import { createBlankViewState } from "../../../services/iModel/ViewCreatorBlank";
 import type {
+  BlankConnectionViewState,
   ItwinViewerUi,
+  ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
 } from "../../../types";
 import { AppStatusBarWidget } from "../statusbars/AppStatusBar";
@@ -31,16 +34,71 @@ import { BasicNavigationWidget, BasicToolWidget } from "../widgets";
  * Use a Provider to provide the content group
  */
 class DefaultFrontstageContentGroupProvider extends ContentGroupProvider {
+  private _viewportOptions: ViewerViewportControlOptions | undefined;
+  private _blankConnectionViewState: BlankConnectionViewState | undefined;
+  private _viewCreatorOptions: ViewerViewCreator3dOptions | undefined;
+
   constructor(
-    public viewState: ViewState,
-    public viewportOptions?: ViewerViewportControlOptions
+    viewportOptions?: ViewerViewportControlOptions,
+    viewCreatorOptions?: ViewerViewCreator3dOptions,
+    blankConnectionViewStateOptions?: BlankConnectionViewState
   ) {
     super();
+    this._viewportOptions = viewportOptions;
+    this._blankConnectionViewState = blankConnectionViewStateOptions;
+    this._viewCreatorOptions = viewCreatorOptions;
   }
 
-  public async provideContentGroup(
-    props: FrontstageProps
-  ): Promise<ContentGroup> {
+  async getViewState(
+    connection: IModelConnection | undefined
+  ): Promise<ViewState | undefined> {
+    if (!connection || (!connection.isBlank && connection.isClosed)) {
+      return;
+    }
+    let view: ViewState | undefined;
+    if (this._viewportOptions?.viewState) {
+      if (typeof this._viewportOptions?.viewState === "function") {
+        view = await this._viewportOptions?.viewState(connection);
+      } else {
+        view = this._viewportOptions?.viewState;
+      }
+    }
+    if (
+      !this._viewportOptions?.alwaysUseSuppliedViewState &&
+      (!view ||
+        (view.iModel.iModelId !== connection.iModelId && connection.isOpen))
+    ) {
+      if (connection.isBlankConnection()) {
+        view = createBlankViewState(connection, this._blankConnectionViewState);
+      } else {
+        // attempt to construct a default viewState
+        const viewCreator = new ViewCreator3d(connection);
+
+        const options: ViewerViewCreator3dOptions = this._viewCreatorOptions
+          ? { ...this._viewCreatorOptions }
+          : { useSeedView: true };
+
+        if (options.useSeedView === undefined) {
+          options.useSeedView = true;
+        }
+
+        view = await viewCreator.createDefaultView(options);
+        UiFramework.setActiveSelectionScope("top-assembly");
+      }
+
+      // Should not be undefined
+      if (!view) {
+        throw new Error("No default view state for the imodel!");
+      }
+      // Set default view state
+      UiFramework.setDefaultViewState(view);
+    }
+    return view;
+  }
+
+  public async provideContentGroup(): Promise<ContentGroup> {
+    const iModelConnection = UiFramework.getIModelConnection();
+    const viewState = await this.getViewState(iModelConnection);
     return new ContentGroup({
       id: "content-group",
       layout: StandardContentLayouts.singleView,
@@ -49,9 +107,9 @@ class DefaultFrontstageContentGroupProvider extends ContentGroupProvider {
           id: "viewport",
           classId: IModelViewportControl,
           applicationData: {
-            ...this.viewportOptions,
-            viewState: this.viewState,
-            iModelConnection: UiFramework.getIModelConnection,
+            ...this._viewportOptions,
+            viewState,
+            iModelConnection,
           },
         },
       ],
@@ -79,9 +137,10 @@ export class DefaultFrontstage extends FrontstageProvider {
   private _uiConfig?: ItwinViewerUi;
 
   constructor(
-    viewState: ViewState,
     uiConfig?: ItwinViewerUi,
-    viewportOptions?: ViewerViewportControlOptions
+    viewportOptions?: ViewerViewportControlOptions,
+    viewCreatorOptions?: ViewerViewCreator3dOptions,
+    blankConnectionViewState?: BlankConnectionViewState
   ) {
     super();
 
@@ -89,8 +148,9 @@ export class DefaultFrontstage extends FrontstageProvider {
 
     // Create the content group.
     this._contentGroup = new DefaultFrontstageContentGroupProvider(
-      viewState,
-      viewportOptions
+      viewportOptions,
+      viewCreatorOptions,
+      blankConnectionViewState
     );
   }
 
