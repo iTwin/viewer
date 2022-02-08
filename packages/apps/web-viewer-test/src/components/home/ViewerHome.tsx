@@ -5,6 +5,18 @@
 
 import { ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
+import {
+  MeasureTools,
+  MeasureToolsUiItemsProvider,
+} from "@itwin/measure-tools-react";
+import {
+  PropertyGridManager,
+  PropertyGridUiItemsProvider,
+} from "@itwin/property-grid-react";
+import {
+  TreeWidget,
+  TreeWidgetUiItemsProvider,
+} from "@itwin/tree-widget-react";
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -64,6 +76,12 @@ export const ViewerHome: React.FC = () => {
     return <div>Things are happening...</div>;
   };
 
+  const onIModelAppInit = useCallback(async () => {
+    await TreeWidget.initialize();
+    // await PropertyGridManager.initialize();
+    await MeasureTools.startup();
+  }, []);
+
   return (
     <div style={{ height: "100vh" }}>
       <Viewer
@@ -80,6 +98,14 @@ export const ViewerHome: React.FC = () => {
           },
         }}
         enablePerformanceMonitors={true}
+        onIModelAppInit={onIModelAppInit}
+        uiProviders={[
+          new TreeWidgetUiItemsProvider(),
+          // new PropertyGridUiItemsProvider({
+          //   enableCopyingPropertyText: true,
+          // }),
+          new MeasureToolsUiItemsProvider(),
+        ]}
       />
     </div>
   );
