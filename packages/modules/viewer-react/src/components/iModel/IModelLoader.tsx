@@ -154,7 +154,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
           setConnection(undefined);
         }
       };
-    }, [getModelConnection, isMounted, errorManager]);
+    }, [getModelConnection, isMounted]);
 
     if (error) {
       throw error;
