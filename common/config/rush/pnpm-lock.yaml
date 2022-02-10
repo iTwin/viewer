@@ -55,6 +55,7 @@ dependencies:
   '@rush-temp/error-handling-react': 'file:projects/error-handling-react.tgz'
   '@rush-temp/viewer-react': 'file:projects/viewer-react.tgz'
   '@rush-temp/viewer-scripts': 'file:projects/viewer-scripts.tgz_typescript@4.3.5'
+  '@rush-temp/web-viewer-frontstages-test': 'file:projects/web-viewer-frontstages-test.tgz_9767b8573e4bef8c27915fc3188040a5'
   '@rush-temp/web-viewer-react': 'file:projects/web-viewer-react.tgz'
   '@rush-temp/web-viewer-test': 'file:projects/web-viewer-test.tgz_9767b8573e4bef8c27915fc3188040a5'
   '@svgr/cli': 5.5.0
@@ -20033,7 +20034,7 @@ packages:
       '@itwin/imodel-components-react': '*'
       redux: '*'
     resolution:
-      integrity: sha512-FGAg691pF5kSzLlTyxshSB9ly54Z+Vy11qhW7wTZ8kY2W5oxxb5TxghYF13WrROsJm1C0OR3kfqwn5TsEH2KUw==
+      integrity: sha512-QL6Sr+yZmfyTH/hts9dyiebcSIxu/bii6UXrv9hGeSjsTUyBxbT+demFugHjEsj4nve29yKel4tBLKbSWvIcuA==
       tarball: 'file:projects/cdn-viewer.tgz'
     version: 0.0.0
   'file:projects/cra-template-desktop-viewer.tgz':
@@ -20101,7 +20102,7 @@ packages:
     peerDependencies:
       '@itwin/ecschema-metadata': '*'
     resolution:
-      integrity: sha512-Fl9B1+B+k0Wr1v/iP0VLZxxOi5izR1uvN5vU39OWLK3WKmiCivVPBlXhN5k1QlIgVDSVYjab1CPrwc4T62johQ==
+      integrity: sha512-09jsTQn8DtIWT7BScIkaLd2xQCVC6SOnEGqrNfXYkrgo245mqes/x7GbGRgsYnrQPuJc1aQ+tJnxuqDVGgVy7A==
       tarball: 'file:projects/desktop-viewer-react.tgz'
     version: 0.0.0
   'file:projects/desktop-viewer-test.tgz_20a9ea953a18f617392d516461508510':
@@ -20169,7 +20170,7 @@ packages:
       react-redux: '*'
       redux: '*'
     resolution:
-      integrity: sha512-gi4Zqxny3khiZFtkgoneNTAGNAnvtgf32nqbPtfi2T4rOgJurCh1fcQUHt+HBYHBTxFEmEYMIL22+kpfwi8Skg==
+      integrity: sha512-3CUdt1s6VDmJXAT1FPWux1fsPHXXn8QvBnKdmMNbmS9Ar4n2LxYf10wuRtv/WBW03WiM0jZGLLNXwzyas4g4Yg==
       tarball: 'file:projects/desktop-viewer-test.tgz'
     version: 0.0.0
   'file:projects/error-handling-react.tgz':
@@ -20307,6 +20308,56 @@ packages:
       integrity: sha512-q613emU6u0q1lbA0CcAqDdh4UgTeYNXc+BB8zjMdfwXoM4rpSq4KmV/i49lcSiDSEE+90A8foMAeM6GtRbcm3w==
       tarball: 'file:projects/viewer-scripts.tgz'
     version: 0.0.0
+  'file:projects/web-viewer-frontstages-test.tgz_9767b8573e4bef8c27915fc3188040a5':
+    dependencies:
+      '@bentley/icons-generic': 1.0.34
+      '@bentley/react-scripts': 4.0.5_react@17.0.2+typescript@4.3.5
+      '@itwin/appui-abstract': 3.0.0_@itwin+core-bentley@3.0.0
+      '@itwin/appui-layout-react': 3.0.0_75f4ab86421849646393af7bf69f6793
+      '@itwin/appui-react': 3.0.0_5af255a18430bb78de79ef05cddf4b44
+      '@itwin/browser-authorization': 0.5.1_@itwin+core-bentley@3.0.0
+      '@itwin/components-react': 3.0.0_75f4ab86421849646393af7bf69f6793
+      '@itwin/core-bentley': 3.0.0
+      '@itwin/core-common': 3.0.0_162f3d5152e7671a08a264c69178e997
+      '@itwin/core-frontend': 3.0.0_bad31fb21021ee30bb840e28431edfc9
+      '@itwin/core-geometry': 3.0.0
+      '@itwin/core-i18n': 3.0.0_@itwin+core-bentley@3.0.0
+      '@itwin/core-markup': 3.0.0_a4aa63643422ebfcb6913ef0c7cfcafa
+      '@itwin/core-orbitgt': 3.0.0
+      '@itwin/core-quantity': 3.0.0_@itwin+core-bentley@3.0.0
+      '@itwin/core-react': 3.0.0_a598e32a34486c4496492d3a33bbcfa2
+      '@itwin/core-telemetry': 3.0.0_@itwin+core-geometry@3.0.0
+      '@itwin/imodels-access-frontend': 1.0.1_4e555caea4abb8edb0c3ca7e7025199e
+      '@itwin/imodels-client-management': 1.0.1
+      '@itwin/itwinui-react': 1.29.1_react-dom@17.0.2+react@17.0.2
+      '@itwin/presentation-common': 3.0.0_a8cd2146224cbeff23caf02136468072
+      '@itwin/presentation-frontend': 3.0.0_0d2564a44167f7b3b5c98c0eeb3ec417
+      '@itwin/reality-data-client': 0.7.0_@itwin+core-common@3.0.0
+      '@itwin/webgl-compatibility': 3.0.0
+      '@svgr/webpack': 5.5.0
+      '@types/history': 4.7.11
+      '@types/node': 14.18.9
+      '@types/react': 17.0.38
+      '@types/react-dom': 17.0.11
+      '@types/react-router': 5.1.18
+      '@types/react-router-dom': 5.3.3
+      history: 4.10.1
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-redux: 7.2.6_react-dom@17.0.2+react@17.0.2
+      react-router: 5.2.1_react@17.0.2
+      react-router-dom: 5.3.0_react@17.0.2
+      redux: 4.1.2
+      typescript: 4.3.5
+    dev: false
+    id: 'file:projects/web-viewer-frontstages-test.tgz'
+    name: '@rush-temp/web-viewer-frontstages-test'
+    peerDependencies:
+      '@itwin/imodel-components-react': '*'
+    resolution:
+      integrity: sha512-hnaGfFQ3maoMhHjignLD2nsxpJDKK33efjv3CLUzwPBu78cj+nBfH0xY98eqFLfS8CelJqufN1uQY3MSgzzjJg==
+      tarball: 'file:projects/web-viewer-frontstages-test.tgz'
+    version: 0.0.0
   'file:projects/web-viewer-react.tgz':
     dependencies:
       '@itwin/appui-abstract': 3.0.0_@itwin+core-bentley@3.0.0
@@ -20351,7 +20402,7 @@ packages:
     dev: false
     name: '@rush-temp/web-viewer-react'
     resolution:
-      integrity: sha512-jfeMnWbTDqREE3xcIhB1KZmme1IZX+oZ5oEI0iUvVoQT4txhPhHDhhqUioiwLy/6ZT792mTsbjSxJGt44UCpQw==
+      integrity: sha512-Gr34Za/SCSx7skZFWNA2zmgGsvD7Z2q27XT2nwWb8nvGGf5+ppcybOSgmmNJYDXTaSd0gw1nOvIBQW4eTIf5sQ==
       tarball: 'file:projects/web-viewer-react.tgz'
     version: 0.0.0
   'file:projects/web-viewer-test.tgz_9767b8573e4bef8c27915fc3188040a5':
@@ -20402,7 +20453,7 @@ packages:
     peerDependencies:
       '@itwin/imodel-components-react': '*'
     resolution:
-      integrity: sha512-YdyW5oNRV59sa5ajxVpXZsAvPU68Su4e49rM/cnhbMKJqHTyo+dZFK/elAcm4y0r8yD/TXC+8aGwE/mOKQmUpw==
+      integrity: sha512-gWfPwiyyMsDlQ+54jQD/SUsm2Hdc4ioQav9xaLsMbHbp41RFQyRUC2j8UFFTtLFd5cbHDpLy06e9nMZErlgUwQ==
       tarball: 'file:projects/web-viewer-test.tgz'
     version: 0.0.0
 registry: ''
@@ -20463,6 +20514,7 @@ specifiers:
   '@rush-temp/error-handling-react': 'file:./projects/error-handling-react.tgz'
   '@rush-temp/viewer-react': 'file:./projects/viewer-react.tgz'
   '@rush-temp/viewer-scripts': 'file:./projects/viewer-scripts.tgz'
+  '@rush-temp/web-viewer-frontstages-test': 'file:./projects/web-viewer-frontstages-test.tgz'
   '@rush-temp/web-viewer-react': 'file:./projects/web-viewer-react.tgz'
   '@rush-temp/web-viewer-test': 'file:./projects/web-viewer-test.tgz'
   '@svgr/cli': ^5.3.1

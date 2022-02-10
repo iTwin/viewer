@@ -1,0 +1,101 @@
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
+@import "../../themefill.scss";
+@import "~@itwin/core-react/lib/cjs/core-react/style/themecolors.scss";
+
+.homeButton {
+  width: 120px;
+  margin: 10px !important;
+  padding: 5px;
+  white-space: normal;
+}
+
+.container {
+  align-items: center;
+  display: grid;
+  grid-area: content;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: $buic-background-1;
+  color: RGBA($buic-foreground-body-rgb, 0.85);
+}
+
+.content {
+  display: grid;
+  grid-template-areas:
+    "title title title title title"
+    "pic pic pic description description"
+    "pic pic pic sign-in sign-in";
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  justify-items: center;
+  max-width: 800px;
+}
+
+.title {
+  grid-area: title;
+  margin: 40px;
+  vertical-align: middle;
+  font-size: 30px;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  vertical-align: middle;
+  margin-right: 10px;
+  fill: RGBA($buic-foreground-body-rgb, 0.85);
+}
+
+.img {
+  grid-area: pic;
+  max-width: 100%;
+  padding-right: 40px;
+}
+
+.description {
+  grid-area: description;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  margin-left: 55px;
+  margin-right: 55px;
+}
+
+.signIn {
+  grid-area: sign-in;
+  padding-top: 10px;
+
+  .button {
+    margin-bottom: 5px;
+    width: 100%;
+    min-width: 234px;
+  }
+
+  .createAccountText {
+    font-size: 13px;
+  }
+
+  .createAccountLink {
+    margin-left: 3px;
+
+    &:visited {
+      color: RGBA($buic-foreground-primary-rgb, 0.85);
+    }
+  }
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}

@@ -56,6 +56,11 @@
       "shouldPublish": false
     },
     {
+      "packageName": "@itwin/web-viewer-frontstages-test",
+      "projectFolder": "packages/apps/web-viewer-frontstages-test",
+      "shouldPublish": false
+    },
+    {
       "packageName": "@itwin/cdn-viewer",
       "projectFolder": "packages/apps/cdn-viewer",
       "shouldPublish": false
