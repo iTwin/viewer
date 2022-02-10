@@ -54,9 +54,8 @@ export const useFrontstages = (
       }
     }
 
-    //TODO revisit this. what is the proper check here?
     if (!noConnectionRequired) {
-      // initialize the DefaultFrontstage that contains the views that we want
+      // we require a connection, so initialize the DefaultFrontstage that contains the views that we want
       const defaultFrontstageProvider = new DefaultFrontstage(
         defaultUiConfig,
         viewportOptions,
