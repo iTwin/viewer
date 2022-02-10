@@ -23,7 +23,11 @@ import {
   useTheme,
   useUiProviders,
 } from "../../hooks";
-import { openLocalImodel, openRemoteIModel } from "../../services/iModel";
+import {
+  getAndSetViewState,
+  openLocalImodel,
+  openRemoteIModel,
+} from "../../services/iModel";
 import { userAI, ViewerPerformance } from "../../services/telemetry";
 import type { BlankConnectionViewState, IModelLoaderParams } from "../../types";
 import { IModelBusy } from "./IModelBusy";
@@ -60,13 +64,14 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     const [error, setError] = useState<Error>();
     const [connection, setConnection] = useState<IModelConnection>();
     const isMounted = useIsMounted();
-    const { finalFrontstages, noConnectionRequired } = useFrontstages(
-      frontstages,
-      defaultUiConfig,
-      viewportOptions,
-      viewCreatorOptions,
-      blankConnectionViewState
-    );
+    const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
+      useFrontstages(
+        frontstages,
+        defaultUiConfig,
+        viewportOptions,
+        viewCreatorOptions,
+        blankConnectionViewState
+      );
 
     useUiProviders(uiProviders, defaultUiConfig, backstageItems);
     useTheme(theme);
@@ -155,6 +160,25 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         }
       };
     }, [getModelConnection, isMounted]);
+
+    useEffect(() => {
+      if (customDefaultFrontstage && connection) {
+        // there is a custom default frontstage so we need to generate a viewstate for backwards compatibility
+        // TODO revisit/remove in the next major release
+        void getAndSetViewState(
+          connection,
+          viewportOptions,
+          viewCreatorOptions,
+          blankConnectionViewState
+        );
+      }
+    }, [
+      customDefaultFrontstage,
+      connection,
+      viewportOptions,
+      viewCreatorOptions,
+      blankConnectionViewState,
+    ]);
 
     if (error) {
       throw error;

@@ -10,9 +10,8 @@ import {
   IModelViewportControl,
   UiFramework,
 } from "@itwin/appui-react";
-import type { IModelConnection, ViewState } from "@itwin/core-frontend";
 
-import { createBlankViewState, ViewCreator3d } from "../../../services/iModel";
+import { getAndSetViewState } from "../../../services/iModel";
 import type {
   BlankConnectionViewState,
   ViewerViewCreator3dOptions,
@@ -38,56 +37,17 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
     this._viewCreatorOptions = viewCreatorOptions;
   }
 
-  async getViewState(
-    connection: IModelConnection | undefined
-  ): Promise<ViewState | undefined> {
-    if (!connection || (!connection.isBlank && connection.isClosed)) {
-      return;
-    }
-    let view: ViewState | undefined;
-    if (this._viewportOptions?.viewState) {
-      if (typeof this._viewportOptions?.viewState === "function") {
-        view = await this._viewportOptions?.viewState(connection);
-      } else {
-        view = this._viewportOptions?.viewState;
-      }
-    }
-    if (
-      !this._viewportOptions?.alwaysUseSuppliedViewState &&
-      (!view ||
-        (view.iModel.iModelId !== connection.iModelId && connection.isOpen))
-    ) {
-      if (connection.isBlankConnection()) {
-        view = createBlankViewState(connection, this._blankConnectionViewState);
-      } else {
-        // attempt to construct a default viewState
-        const viewCreator = new ViewCreator3d(connection);
-
-        const options: ViewerViewCreator3dOptions = this._viewCreatorOptions
-          ? { ...this._viewCreatorOptions }
-          : { useSeedView: true };
-
-        if (options.useSeedView === undefined) {
-          options.useSeedView = true;
-        }
-
-        view = await viewCreator.createDefaultView(options);
-        UiFramework.setActiveSelectionScope("top-assembly");
-      }
-
-      // Should not be undefined
-      if (!view) {
-        throw new Error("No default view state for the imodel!");
-      }
-      // Set default view state
-      UiFramework.setDefaultViewState(view);
-    }
-    return view;
-  }
-
   public async provideContentGroup(): Promise<ContentGroup> {
     const iModelConnection = UiFramework.getIModelConnection();
-    const viewState = await this.getViewState(iModelConnection);
+    let viewState;
+    if (iModelConnection) {
+      viewState = await getAndSetViewState(
+        iModelConnection,
+        this._viewportOptions,
+        this._viewCreatorOptions,
+        this._blankConnectionViewState
+      );
+    }
     return new ContentGroup({
       id: "content-group",
       layout: StandardContentLayouts.singleView,

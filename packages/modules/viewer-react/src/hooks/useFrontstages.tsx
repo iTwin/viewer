@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { IModelConnection } from "@itwin/core-frontend";
 import { useEffect, useState } from "react";
 
 import { DefaultFrontstage } from "../components/app-ui/frontstages/DefaultFrontstage";
@@ -26,6 +25,8 @@ export const useFrontstages = (
     useState<ViewerFrontstage[]>();
   const [noConnectionRequired, setNoConnectionRequired] =
     useState<boolean>(false);
+  const [customDefaultFrontstage, setCustomDefaultFrontstage] =
+    useState<boolean>(false);
 
   useEffect(() => {
     let allFrontstages: ViewerFrontstage[] = [];
@@ -36,6 +37,7 @@ export const useFrontstages = (
         (frontstage) => frontstage.default
       );
       if (defaultFrontstages.length > 0) {
+        setCustomDefaultFrontstage(true);
         defaultExists = true;
         // there should only be one, but check if any default frontstage requires an iModel connection
         let requiresConnection = false;
@@ -79,5 +81,5 @@ export const useFrontstages = (
     noConnectionRequired,
   ]);
 
-  return { finalFrontstages, noConnectionRequired };
+  return { finalFrontstages, noConnectionRequired, customDefaultFrontstage };
 };

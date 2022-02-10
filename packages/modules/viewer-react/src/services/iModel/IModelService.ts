@@ -3,14 +3,23 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { UiFramework } from "@itwin/appui-react";
 import { Guid } from "@itwin/core-bentley";
 import { IModelVersion } from "@itwin/core-common";
+import type { IModelConnection, ViewState } from "@itwin/core-frontend";
 import {
   BriefcaseConnection,
   CheckpointConnection,
   IModelApp,
   SnapshotConnection,
 } from "@itwin/core-frontend";
+
+import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
+import type {
+  BlankConnectionViewState,
+  ViewerViewCreator3dOptions,
+  ViewerViewportControlOptions,
+} from "../../types";
 
 /** determine the proper version of the iModel to open
  * 1. If named versions exist, get the named version that contains the latest changeset
@@ -78,4 +87,81 @@ export const openLocalImodel = async (fileName: string) => {
     // if that fails, attempt to open as a snapshot
     return await SnapshotConnection.openFile(fileName);
   }
+};
+
+/**
+ * Generate a viewstate and set it in UiFramework
+ * @param connection \
+ * @param viewportOptions
+ * @param viewCreatorOptions
+ * @param blankConnectionViewState
+ * @returns
+ */
+export const getAndSetViewState = async (
+  connection: IModelConnection,
+  viewportOptions?: ViewerViewportControlOptions,
+  viewCreatorOptions?: ViewerViewCreator3dOptions,
+  blankConnectionViewState?: BlankConnectionViewState
+): Promise<ViewState | undefined> => {
+  const viewState = await getViewState(
+    connection,
+    viewportOptions,
+    viewCreatorOptions,
+    blankConnectionViewState
+  );
+  if (viewState) {
+    UiFramework.setDefaultViewState(viewState);
+  }
+  return viewState;
+};
+
+/**
+ * Generate a viewstate
+ * @param connection
+ * @param viewportOptions
+ * @param viewCreatorOptions
+ * @param blankConnectionViewState
+ * @returns
+ */
+export const getViewState = async (
+  connection: IModelConnection,
+  viewportOptions?: ViewerViewportControlOptions,
+  viewCreatorOptions?: ViewerViewCreator3dOptions,
+  blankConnectionViewState?: BlankConnectionViewState
+): Promise<ViewState | undefined> => {
+  if (!connection.isBlank && connection.isClosed) {
+    return;
+  }
+  let view: ViewState | undefined;
+  if (viewportOptions?.viewState) {
+    if (typeof viewportOptions?.viewState === "function") {
+      view = await viewportOptions?.viewState(connection);
+    } else {
+      view = viewportOptions?.viewState;
+    }
+  }
+  if (
+    !viewportOptions?.alwaysUseSuppliedViewState &&
+    (!view ||
+      (view.iModel.iModelId !== connection.iModelId && connection.isOpen))
+  ) {
+    if (connection.isBlankConnection()) {
+      view = createBlankViewState(connection, blankConnectionViewState);
+    } else {
+      // attempt to construct a default viewState
+      const viewCreator = new ViewCreator3d(connection);
+
+      const options: ViewerViewCreator3dOptions = viewCreatorOptions
+        ? { ...viewCreatorOptions }
+        : { useSeedView: true };
+
+      if (options.useSeedView === undefined) {
+        options.useSeedView = true;
+      }
+
+      view = await viewCreator.createDefaultView(options);
+      UiFramework.setActiveSelectionScope("top-assembly");
+    }
+  }
+  return view;
 };
