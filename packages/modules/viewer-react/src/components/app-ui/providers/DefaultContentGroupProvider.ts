@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { StandardContentLayouts } from "@itwin/appui-abstract";
 import {
   ContentGroup,
@@ -10,9 +11,8 @@ import {
   UiFramework,
 } from "@itwin/appui-react";
 import type { IModelConnection, ViewState } from "@itwin/core-frontend";
-import { ViewCreator3d } from "@itwin/core-frontend";
 
-import { createBlankViewState } from "../../../services/iModel/ViewCreatorBlank";
+import { createBlankViewState, ViewCreator3d } from "../../../services/iModel";
 import type {
   BlankConnectionViewState,
   ViewerViewCreator3dOptions,

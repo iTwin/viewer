@@ -153,20 +153,6 @@ jest.mock("../../../components/iModel/IModelViewer", () => ({
   IModelViewer: jest.fn(() => <div data-testid="viewer"></div>),
 }));
 
-class Frontstage1Provider extends FrontstageProvider {
-  public id = "Frontstage1";
-  public get frontstage(): React.ReactElement<FrontstageProps> {
-    return <div></div>;
-  }
-}
-
-class Frontstage2Provider extends FrontstageProvider {
-  public id = "Frontstage2";
-  public get frontstage(): React.ReactElement<FrontstageProps> {
-    return <div></div>;
-  }
-}
-
 const mockITwinId = "mockITwinId";
 const mockIModelId = "mockIModelId";
 
@@ -215,61 +201,7 @@ describe("IModelLoader", () => {
     expect(UiItemsManager.unregister).toHaveBeenCalledTimes(4);
   });
 
-  it("adds backstage items and translates their labels", async () => {
-    const fs1 = new Frontstage1Provider();
-    const fs2 = new Frontstage2Provider();
-    const frontstages: ViewerFrontstage[] = [
-      {
-        provider: fs1,
-      },
-      {
-        provider: fs2,
-      },
-    ];
-
-    const actionItem = {
-      id: "bs1",
-      execute: jest.fn(),
-      groupPriority: 100,
-      itemPriority: 1,
-      label: "",
-      labeli18nKey: "bs1Key",
-    };
-
-    const stageLauncher = {
-      id: "bs2",
-      stageId: "bs2",
-      groupPriority: 100,
-      itemPriority: 2,
-      label: "",
-      labeli18nKey: "bs2Key",
-    };
-
-    const backstageItems: ViewerBackstageItem[] = [actionItem, stageLauncher];
-
-    const { getByTestId } = render(
-      <IModelLoader
-        frontstages={frontstages}
-        backstageItems={backstageItems}
-        iTwinId={mockITwinId}
-        iModelId={mockIModelId}
-      />
-    );
-
-    await waitFor(() => getByTestId("loader-wrapper"));
-
-    // these calls will be doubled. items will be set first without a viewState and reset with one additional translation for the default frontstage once we have a viewState
-    expect(BackstageItemUtilities.createStageLauncher).toHaveBeenCalledTimes(2);
-    expect(BackstageItemUtilities.createActionItem).toHaveBeenCalledTimes(2);
-    expect(IModelApp.localization.getLocalizedString).toHaveBeenCalledWith(
-      actionItem.labeli18nKey
-    );
-    expect(IModelApp.localization.getLocalizedString).toHaveBeenCalledWith(
-      stageLauncher.labeli18nKey
-    );
-  });
-
-  it("creates a blank connection and a blank ViewState", async () => {
+  it("creates a blank connection", async () => {
     const blankConnection: BlankConnectionProps = {
       name: "GeometryConnection",
       location: Cartographic.fromDegrees({
@@ -297,10 +229,6 @@ describe("IModelLoader", () => {
     await waitFor(() => getByTestId("viewer"));
 
     expect(BlankConnection.create).toHaveBeenCalledWith(blankConnection);
-    expect(createBlankViewState).toHaveBeenCalledWith(
-      expect.anything(),
-      viewStateOptions
-    );
   });
 
   it("sets the theme to the provided theme", async () => {
