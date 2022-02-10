@@ -2,11 +2,14 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { UiFramework } from "@itwin/appui-react";
+import type { IModelConnection } from "@itwin/core-frontend";
 
 import { DefaultContentGroupProvider } from "../../../../components/app-ui/providers";
 import { ViewCreator3d } from "../../../../services/iModel";
 import { createBlankViewState } from "../../../../services/iModel";
+import type { ViewerViewportControlOptions } from "../../../../types";
 
 jest.mock("@itwin/core-frontend", () => {
   return {
@@ -95,26 +98,125 @@ jest.mock("../../../../services/iModel/ViewCreator3d", () => {
   };
 });
 
+jest.mock("@itwin/appui-react");
+
+const mockITwinId = "mockITwinId";
+const mockIModelId = "mockIModelId";
+
 describe("DefaultContentGroupProvider", () => {
-  it("creates a default ViewState for a connection", async () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+  it("generates a default viewstate for a connection", async () => {
     jest.spyOn(UiFramework, "getIModelConnection").mockReturnValue({
       isBlankConnection: () => false,
     } as any);
-    jest.spyOn(UiFramework, "setDefaultViewState").mockReturnValue();
 
     const contentGroupProvider = new DefaultContentGroupProvider();
     await contentGroupProvider.provideContentGroup();
     expect(ViewCreator3d).toHaveBeenCalled();
   });
 
-  it("creates a blank ViewState for a blank connection", async () => {
+  it("generates a blank viewstate for a blank connection", async () => {
     jest.spyOn(UiFramework, "getIModelConnection").mockReturnValue({
       isBlankConnection: () => true,
     } as any);
-    jest.spyOn(UiFramework, "setDefaultViewState").mockReturnValue();
 
     const contentGroupProvider = new DefaultContentGroupProvider();
     await contentGroupProvider.provideContentGroup();
     expect(createBlankViewState).toHaveBeenCalled();
+  });
+
+  it("uses the provided viewstate when connection imodelid matches viewstate imodelid", async () => {
+    jest.spyOn(UiFramework, "getIModelConnection").mockReturnValue({
+      isBlankConnection: () => false,
+      iModelId: mockIModelId,
+    } as any);
+
+    const viewportOptions: ViewerViewportControlOptions = {
+      viewState: {
+        iModel: {
+          iModelId: mockIModelId,
+        },
+      } as any,
+    };
+    const contentGroupProvider = new DefaultContentGroupProvider(
+      viewportOptions
+    );
+    await contentGroupProvider.provideContentGroup();
+    expect(ViewCreator3d).not.toHaveBeenCalled();
+  });
+
+  it("gets the viewstate from the provided function", async () => {
+    jest.spyOn(UiFramework, "getIModelConnection").mockReturnValue({
+      isBlankConnection: () => false,
+    } as any);
+
+    const mocks = {
+      viewState: (connection: IModelConnection) =>
+        ({
+          iModel: connection,
+        } as any),
+    };
+    jest.spyOn(mocks, "viewState");
+    const viewportOptions: ViewerViewportControlOptions = {
+      viewState: mocks.viewState,
+    };
+    const contentGroupProvider = new DefaultContentGroupProvider(
+      viewportOptions
+    );
+    await contentGroupProvider.provideContentGroup();
+    expect(mocks.viewState).toHaveBeenCalled();
+  });
+
+  it("will not generate a default viewState when alwaysUseSuppliedViewState is true", async () => {
+    jest.spyOn(UiFramework, "getIModelConnection").mockReturnValue({
+      isBlankConnection: () => false,
+    } as any);
+
+    const viewportOptions: ViewerViewportControlOptions = {
+      alwaysUseSuppliedViewState: true,
+    };
+    const contentGroupProvider = new DefaultContentGroupProvider(
+      viewportOptions
+    );
+    await contentGroupProvider.provideContentGroup();
+    expect(ViewCreator3d).not.toHaveBeenCalled();
+  });
+
+  it("generates a default viewstate alwaysUseSuppliedViewState is false and no viewstate is provided", async () => {
+    jest.spyOn(UiFramework, "getIModelConnection").mockReturnValue({
+      isBlankConnection: () => false,
+    } as any);
+
+    const viewportOptions: ViewerViewportControlOptions = {
+      alwaysUseSuppliedViewState: false,
+    };
+    const contentGroupProvider = new DefaultContentGroupProvider(
+      viewportOptions
+    );
+    await contentGroupProvider.provideContentGroup();
+    expect(ViewCreator3d).toHaveBeenCalled();
+  });
+
+  it("generates a default viewstate when connection imodelid does not match viewstate imodelid", async () => {
+    jest.spyOn(UiFramework, "getIModelConnection").mockReturnValue({
+      isBlankConnection: () => false,
+      iModelId: mockIModelId,
+      isOpen: true,
+    } as any);
+
+    const viewportOptions: ViewerViewportControlOptions = {
+      viewState: {
+        iModel: {
+          iModelId: `${mockIModelId}2`,
+        },
+      } as any,
+    };
+    const contentGroupProvider = new DefaultContentGroupProvider(
+      viewportOptions
+    );
+    await contentGroupProvider.provideContentGroup();
+    expect(ViewCreator3d).toHaveBeenCalled();
   });
 });
