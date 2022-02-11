@@ -129,7 +129,7 @@ export const getViewState = async (
   viewCreatorOptions?: ViewerViewCreator3dOptions,
   blankConnectionViewState?: BlankConnectionViewState
 ): Promise<ViewState | undefined> => {
-  if (!connection.isBlank && connection.isClosed) {
+  if (!connection.isBlankConnection() && connection.isClosed) {
     return;
   }
   let view: ViewState | undefined;

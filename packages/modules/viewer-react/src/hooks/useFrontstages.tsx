@@ -31,6 +31,7 @@ export const useFrontstages = (
   useEffect(() => {
     let allFrontstages: ViewerFrontstage[] = [];
     let defaultExists = false;
+    let requiresConnection = true;
     if (frontstages) {
       allFrontstages = [...frontstages];
       const defaultFrontstages = frontstages.filter(
@@ -39,14 +40,11 @@ export const useFrontstages = (
       if (defaultFrontstages.length > 0) {
         setCustomDefaultFrontstage(true);
         defaultExists = true;
-        // there should only be one, but check if any default frontstage requires an iModel connection
-        let requiresConnection = false;
-        for (let i = 0; i < defaultFrontstages.length; i++) {
-          if (defaultFrontstages[i].requiresIModelConnection) {
-            requiresConnection = true;
-            break;
-          }
-        }
+        // if there are multiple defaults (there should not be), the last wins to be consistent with the default that is used in IModelViewer
+        requiresConnection =
+          !defaultFrontstages[defaultFrontstages.length - 1]
+            .requiresIModelConnection;
+
         if (!requiresConnection) {
           // allow to continue to render
           setNoConnectionRequired(true);
@@ -54,7 +52,7 @@ export const useFrontstages = (
       }
     }
 
-    if (!noConnectionRequired) {
+    if (requiresConnection) {
       // we require a connection, so initialize the DefaultFrontstage that contains the views that we want
       const defaultFrontstageProvider = new DefaultFrontstage(
         defaultUiConfig,
@@ -77,7 +75,6 @@ export const useFrontstages = (
     viewCreatorOptions,
     viewportOptions,
     blankConnectionViewState,
-    noConnectionRequired,
   ]);
 
   return { finalFrontstages, noConnectionRequired, customDefaultFrontstage };
