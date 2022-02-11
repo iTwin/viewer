@@ -17,7 +17,7 @@ import React, { useEffect } from "react";
 import type { ViewerFrontstage } from "../../types";
 interface ModelProps {
   frontstages: ViewerFrontstage[];
-  backstageItems?: BackstageItem[]; // TODO remove this and just use the UiItemsManager to get the items in the next major version
+  backstageItems?: BackstageItem[]; // TODO next remove this and just use the UiItemsManager to get the items in the next major version
 }
 
 export const IModelViewer: React.FC<ModelProps> = ({
@@ -39,14 +39,13 @@ export const IModelViewer: React.FC<ModelProps> = ({
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       void FrontstageManager.getFrontstageDef(defaultFrontstage.id).then(
         (frontstageDef) => {
-          //TODO 3.0 test this
           void FrontstageManager.setActiveFrontstageDef(frontstageDef);
         }
       );
     }
     return () => {
       FrontstageManager.clearFrontstageDefs();
-      // TODO replace the above with the below
+      // TODO next replace the above with the below
       // FrontstageManager.clearFrontstageProviders();
     };
   }, [frontstages]);

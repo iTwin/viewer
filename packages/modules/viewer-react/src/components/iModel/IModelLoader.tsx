@@ -164,7 +164,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     useEffect(() => {
       if (customDefaultFrontstage && connection) {
         // there is a custom default frontstage so we need to generate a viewstate for backwards compatibility
-        // TODO revisit/remove in the next major release
+        // TODO next revisit/remove in the next major release
         void getAndSetViewState(
           connection,
           viewportOptions,

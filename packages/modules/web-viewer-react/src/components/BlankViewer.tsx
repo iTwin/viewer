@@ -24,5 +24,5 @@ export const BlankViewer = (props: WebBlankViewerProps) => {
     return WebInitializer.cancel;
   }, [memoizedProps]);
 
-  return initialized ? <BaseBlankViewer {...props} /> : null; //TODO loader?
+  return initialized ? <BaseBlankViewer {...props} /> : null;
 };
