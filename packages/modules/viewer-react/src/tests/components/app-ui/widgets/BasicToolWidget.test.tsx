@@ -41,6 +41,7 @@ jest.mock("@itwin/appui-react", () => {
         removeListener: jest.fn(),
       },
     },
+    useUiItemsProviderBackstageItems: () => [],
   };
 });
 

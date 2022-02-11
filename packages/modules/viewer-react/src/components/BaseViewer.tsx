@@ -16,7 +16,7 @@ export interface ViewerProps extends ItwinViewerCommonParams {
   iTwinId?: string;
   iModelId?: string;
   changeSetId?: string;
-  snapshotPath?: string; // TODO 3.0 rename (filePath?) as this can be a briefcase or a snapshot
+  snapshotPath?: string; // TODO next rename (filePath?) as this can be a briefcase or a snapshot
   loadingComponent?: React.ReactNode;
 }
 
@@ -53,7 +53,6 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   });
 
   const accessToken = useAccessToken();
-  // assume authorized when using a local snapshot TODO poor assumption
   return (
     <ErrorBoundary>
       {snapshotPath || accessToken ? (

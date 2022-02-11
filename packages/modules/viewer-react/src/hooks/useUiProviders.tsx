@@ -10,11 +10,14 @@ import { PropertyGridUiItemsProvider } from "@itwin/property-grid-react";
 import { TreeWidgetUiItemsProvider } from "@itwin/tree-widget-react";
 import { useEffect } from "react";
 
+import { BackstageItemsProvider } from "../components/app-ui/providers";
+import type { ViewerBackstageItem } from "../types";
 import type { ItwinViewerUi } from "../types";
 
 export function useUiProviders(
   customUiProviders?: UiItemsProvider[],
-  defaultUiConfig?: ItwinViewerUi
+  defaultUiConfig?: ItwinViewerUi,
+  backstageItems?: ViewerBackstageItem[]
 ): void {
   useEffect(() => {
     const defaultProviders: UiItemsProvider[] = [];
@@ -39,6 +42,10 @@ export function useUiProviders(
       defaultProviders.push(new MeasureToolsUiItemsProvider());
     }
 
+    if (backstageItems && backstageItems.length > 0) {
+      defaultProviders.push(new BackstageItemsProvider(backstageItems));
+    }
+
     const uiProviders = customUiProviders
       ? customUiProviders.concat(defaultProviders)
       : defaultProviders;
@@ -52,5 +59,5 @@ export function useUiProviders(
         UiItemsManager.unregister(uiProvider.id);
       });
     };
-  }, [customUiProviders, defaultUiConfig]);
+  }, [customUiProviders, defaultUiConfig, backstageItems]);
 }

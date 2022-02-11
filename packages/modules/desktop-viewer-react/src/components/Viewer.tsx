@@ -16,5 +16,5 @@ export const Viewer = (props: DesktopViewerProps) => {
 
   const initialized = useDesktopViewerInitializer(memoizedProps);
 
-  return initialized ? <BaseViewer {...memoizedProps} /> : null; //TODO loader?
+  return initialized ? <BaseViewer {...memoizedProps} /> : null;
 };

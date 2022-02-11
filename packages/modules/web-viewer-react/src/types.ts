@@ -43,7 +43,6 @@ export interface WebViewerPropsFull extends ViewerProps {
   backend?: IModelBackendOptions;
 }
 
-// TODO remove this once we support opening snapshots remotely
 export type WebViewerProps = Omit<WebViewerPropsFull, "snapshotPath">;
 
 export interface WebBlankViewerProps extends BlankViewerProps {

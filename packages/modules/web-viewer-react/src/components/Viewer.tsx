@@ -16,5 +16,5 @@ export const Viewer = (props: WebViewerProps) => {
 
   const initialized = useWebViewerInitializer(memoizedProps);
 
-  return initialized ? <BaseViewer {...props} /> : null; //TODO loader?
+  return initialized ? <BaseViewer {...props} /> : null;
 };

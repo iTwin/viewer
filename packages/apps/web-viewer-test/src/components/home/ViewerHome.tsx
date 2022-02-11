@@ -8,6 +8,7 @@ import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
+import { ViewportWidgetProvider } from "../../providers/ViewportAccessWidget";
 import { history } from "../routing";
 
 /**
@@ -60,6 +61,18 @@ export const ViewerHome: React.FC = () => {
     history.push(`viewer?iTwinId=${iTwinId}&iModelId=${iModelId}`);
   }, [iTwinId, iModelId]);
 
+  const updateModelInfo = (iModelId: string) => {
+    console.log(
+      `About to pass iModelId of ${iModelId} into the Viewer Component`
+    );
+    setIModelId(iModelId);
+  };
+
+  const uiProviders = useMemo(
+    () => [new ViewportWidgetProvider(updateModelInfo)],
+    []
+  );
+
   const Loader = () => {
     return <div>Things are happening...</div>;
   };
@@ -80,6 +93,11 @@ export const ViewerHome: React.FC = () => {
           },
         }}
         enablePerformanceMonitors={true}
+        uiProviders={uiProviders}
+        defaultUiConfig={{
+          hideTreeView: true,
+          hidePropertyGrid: true,
+        }}
       />
     </div>
   );

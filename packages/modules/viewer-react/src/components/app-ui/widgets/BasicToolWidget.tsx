@@ -6,8 +6,13 @@
 /** Clone of core BasicToolWidget with conditional tooling
  */
 import type { CommonToolbarItem } from "@itwin/appui-abstract";
-import { ToolbarOrientation, ToolbarUsage } from "@itwin/appui-abstract";
+import {
+  BackstageItemsManager,
+  ToolbarOrientation,
+  ToolbarUsage,
+} from "@itwin/appui-abstract";
 import type { UiVisibilityEventArgs } from "@itwin/appui-react";
+import { useUiItemsProviderBackstageItems } from "@itwin/appui-react";
 import {
   BackstageAppButton,
   CoreTools,
@@ -17,15 +22,13 @@ import {
   ToolWidgetComposer,
   UiFramework,
 } from "@itwin/appui-react";
-import * as React from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import type { ContentManipulationTools } from "../../../types";
 
 export function useUiVisibility(): boolean {
-  const [uiIsVisible, setUiIsVisible] = React.useState(
-    UiFramework.getIsUiVisible()
-  );
-  React.useEffect(() => {
+  const [uiIsVisible, setUiIsVisible] = useState(UiFramework.getIsUiVisible());
+  useEffect(() => {
     const handleUiVisibilityChanged = (args: UiVisibilityEventArgs): void =>
       setUiIsVisible(args.visible);
     UiFramework.onUiVisibilityChanged.addListener(handleUiVisibilityChanged);
@@ -46,74 +49,77 @@ interface BasicToolWidgetProps {
  * This definition will also show a overflow button if there is not enough room to display all the toolbar buttons.
  */
 export function BasicToolWidget({ config }: BasicToolWidgetProps): JSX.Element {
-  const getHorizontalToolbarItems =
-    React.useCallback((): CommonToolbarItem[] => {
-      if (config?.hideDefaultHorizontalItems) {
-        return [];
-      }
-      const items: CommonToolbarItem[] = [];
+  const backstageItems = useUiItemsProviderBackstageItems(
+    new BackstageItemsManager()
+  );
 
-      if (
-        config?.horizontalItems?.clearSelection === undefined ||
-        config?.horizontalItems?.clearSelection === true
-      ) {
-        items.push(
-          ToolbarHelper.createToolbarItemFromItemDef(
-            10,
-            CoreTools.clearSelectionItemDef
-          )
-        );
-      }
-      if (
-        config?.horizontalItems?.clearHideIsolateEmphasizeElements ===
-          undefined ||
-        config?.horizontalItems?.clearHideIsolateEmphasizeElements === true
-      ) {
-        items.push(
-          ToolbarHelper.createToolbarItemFromItemDef(
-            20,
-            SelectionContextToolDefinitions.clearHideIsolateEmphasizeElementsItemDef
-          )
-        );
-      }
-      if (
-        config?.horizontalItems?.hideElements === undefined ||
-        config?.horizontalItems?.hideElements === true
-      ) {
-        items.push(
-          ToolbarHelper.createToolbarItemFromItemDef(
-            30,
-            SelectionContextToolDefinitions.hideElementsItemDef
-          )
-        );
-      }
-      if (
-        config?.horizontalItems?.isolateElements === undefined ||
-        config?.horizontalItems?.isolateElements === true
-      ) {
-        items.push(
-          ToolbarHelper.createToolbarItemFromItemDef(
-            40,
-            SelectionContextToolDefinitions.isolateElementsItemDef
-          )
-        );
-      }
-      if (
-        config?.horizontalItems?.emphasizeElements === undefined ||
-        config?.horizontalItems?.emphasizeElements === true
-      ) {
-        items.push(
-          ToolbarHelper.createToolbarItemFromItemDef(
-            50,
-            SelectionContextToolDefinitions.emphasizeElementsItemDef
-          )
-        );
-      }
+  const getHorizontalToolbarItems = useCallback((): CommonToolbarItem[] => {
+    if (config?.hideDefaultHorizontalItems) {
+      return [];
+    }
+    const items: CommonToolbarItem[] = [];
 
-      return items;
-    }, [config]);
+    if (
+      config?.horizontalItems?.clearSelection === undefined ||
+      config?.horizontalItems?.clearSelection === true
+    ) {
+      items.push(
+        ToolbarHelper.createToolbarItemFromItemDef(
+          10,
+          CoreTools.clearSelectionItemDef
+        )
+      );
+    }
+    if (
+      config?.horizontalItems?.clearHideIsolateEmphasizeElements ===
+        undefined ||
+      config?.horizontalItems?.clearHideIsolateEmphasizeElements === true
+    ) {
+      items.push(
+        ToolbarHelper.createToolbarItemFromItemDef(
+          20,
+          SelectionContextToolDefinitions.clearHideIsolateEmphasizeElementsItemDef
+        )
+      );
+    }
+    if (
+      config?.horizontalItems?.hideElements === undefined ||
+      config?.horizontalItems?.hideElements === true
+    ) {
+      items.push(
+        ToolbarHelper.createToolbarItemFromItemDef(
+          30,
+          SelectionContextToolDefinitions.hideElementsItemDef
+        )
+      );
+    }
+    if (
+      config?.horizontalItems?.isolateElements === undefined ||
+      config?.horizontalItems?.isolateElements === true
+    ) {
+      items.push(
+        ToolbarHelper.createToolbarItemFromItemDef(
+          40,
+          SelectionContextToolDefinitions.isolateElementsItemDef
+        )
+      );
+    }
+    if (
+      config?.horizontalItems?.emphasizeElements === undefined ||
+      config?.horizontalItems?.emphasizeElements === true
+    ) {
+      items.push(
+        ToolbarHelper.createToolbarItemFromItemDef(
+          50,
+          SelectionContextToolDefinitions.emphasizeElementsItemDef
+        )
+      );
+    }
 
-  const getVerticalToolbarItems = React.useCallback((): CommonToolbarItem[] => {
+    return items;
+  }, [config]);
+
+  const getVerticalToolbarItems = useCallback((): CommonToolbarItem[] => {
     if (config?.hideDefaultVerticalItems) {
       return [];
     }
@@ -145,15 +151,16 @@ export function BasicToolWidget({ config }: BasicToolWidgetProps): JSX.Element {
     return items;
   }, [config]);
 
-  const [horizontalItems, setHorizontalItems] = React.useState(() =>
+  const [horizontalItems, setHorizontalItems] = useState(() =>
     getHorizontalToolbarItems()
   );
-  const [verticalItems, setVerticalItems] = React.useState(() =>
+  const [verticalItems, setVerticalItems] = useState(() =>
     getVerticalToolbarItems()
   );
 
-  const isInitialMount = React.useRef(true);
-  React.useEffect(() => {
+  const isInitialMount = useRef(true);
+
+  useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
@@ -171,7 +178,8 @@ export function BasicToolWidget({ config }: BasicToolWidgetProps): JSX.Element {
       cornerItem={
         config?.cornerItem?.item ? (
           config?.cornerItem?.item
-        ) : config?.cornerItem?.hideDefault ? undefined : (
+        ) : config?.cornerItem?.hideDefault ||
+          backstageItems.length <= 1 ? undefined : (
           <BackstageAppButton />
         )
       }
