@@ -44,6 +44,7 @@ export const IModelViewer: React.FC<ModelProps> = ({
       );
     }
     return () => {
+      void FrontstageManager.setActiveFrontstageDef(undefined);
       FrontstageManager.clearFrontstageDefs();
       // TODO next replace the above with the below
       // FrontstageManager.clearFrontstageProviders();
