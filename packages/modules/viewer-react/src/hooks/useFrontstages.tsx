@@ -42,7 +42,7 @@ export const useFrontstages = (
         defaultExists = true;
         // if there are multiple defaults (there should not be), the last wins to be consistent with the default that is used in IModelViewer
         requiresConnection =
-          !defaultFrontstages[defaultFrontstages.length - 1]
+          !!defaultFrontstages[defaultFrontstages.length - 1]
             .requiresIModelConnection;
 
         if (!requiresConnection) {
