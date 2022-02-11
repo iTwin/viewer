@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "2.2.2",
+      "tag": "@itwin/viewer-react_v2.2.2",
+      "date": "Fri, 11 Feb 2022 20:57:09 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Code optimization and refactoring"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.2.1",
       "tag": "@itwin/viewer-react_v2.2.1",
       "date": "Mon, 07 Feb 2022 14:48:13 GMT",
