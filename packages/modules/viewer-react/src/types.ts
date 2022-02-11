@@ -2,7 +2,6 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-
 import type { BackstageItem, UiItemsProvider } from "@itwin/appui-abstract";
 import type {
   ColorTheme,
@@ -64,7 +63,9 @@ export interface IModelLoaderParams {
   /** Default UI configuration */
   defaultUiConfig?: ItwinViewerUi;
   /** Optional callback function when iModel is connected */
-  onIModelConnected?: (iModel: IModelConnection) => void;
+  onIModelConnected?:
+    | ((iModel: IModelConnection) => void)
+    | ((iModel: IModelConnection) => Promise<void>);
   /** additional frontstages to register */
   frontstages?: ViewerFrontstage[];
   /** menu items for the backstage */

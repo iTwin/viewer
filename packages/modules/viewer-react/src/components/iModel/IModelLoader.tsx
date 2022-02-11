@@ -2,7 +2,6 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
@@ -124,7 +123,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
         UiFramework.setIModelConnection(imodelConnection, true);
 
         if (onIModelConnected) {
-          onIModelConnected(imodelConnection);
+          await onIModelConnected(imodelConnection);
         }
         setConnection(imodelConnection);
         return imodelConnection;
