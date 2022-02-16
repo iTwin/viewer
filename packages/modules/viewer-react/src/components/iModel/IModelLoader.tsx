@@ -15,6 +15,7 @@ import { useErrorManager } from "@itwin/error-handling-react";
 import { withAITracking } from "@microsoft/applicationinsights-react-js";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
+import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
 
 import {
   useFrontstages,
@@ -29,7 +30,6 @@ import {
 } from "../../services/iModel";
 import { userAI, ViewerPerformance } from "../../services/telemetry";
 import type { BlankConnectionViewState, IModelLoaderParams } from "../../types";
-import { IModelBusy } from "./IModelBusy";
 import { IModelViewer } from "./IModelViewer";
 export interface ModelLoaderProps extends IModelLoaderParams {
   iTwinId?: string;
@@ -185,8 +185,8 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       return (
         <div className="itwin-viewer-container">
           {finalFrontstages &&
-          (connection || noConnectionRequired) &&
-          StateManager.store ? (
+            (connection || noConnectionRequired) &&
+            StateManager.store ? (
             <Provider store={StateManager.store}>
               <IModelViewer
                 frontstages={finalFrontstages}
@@ -195,7 +195,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             </Provider>
           ) : (
             <div className="itwin-viewer-loading-container">
-              {loadingComponent ?? <IModelBusy />}
+              {loadingComponent ?? <SvgIModelLoader className="itwin-viewer-loading-icon" />}
             </div>
           )}
         </div>
