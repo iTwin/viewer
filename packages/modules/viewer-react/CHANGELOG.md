@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Fri, 11 Feb 2022 20:57:09 GMT and should not be manually modified.
+This log was last generated on Wed, 16 Feb 2022 18:52:55 GMT and should not be manually modified.
+
+## 2.3.0
+Wed, 16 Feb 2022 18:52:55 GMT
+
+### Minor changes
+
+- Update default IModel loader indicator
 
 ## 2.2.2
 Fri, 11 Feb 2022 20:57:09 GMT
