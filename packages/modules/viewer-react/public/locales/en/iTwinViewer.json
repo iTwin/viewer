@@ -7,8 +7,7 @@
     "emptyIModelError": "This iModel has no data.",
     "viewStateError": "This iModel has invalid or corrupt data.",
     "connectionError": "An error occurred while establishing a connection to the iModel.",
-    "synchronizerLink": "Please visit <a href={{bridgePortal}} rel=\"noopener noreferrer\" target=\"_blank\">the Synchronization Portal</a> to review the iModel's data connections and synchronize changes.",
-    "iModelLoading": "Your iModel is loading"
+    "synchronizerLink": "Please visit <a href={{bridgePortal}} rel=\"noopener noreferrer\" target=\"_blank\">the Synchronization Portal</a> to review the iModel's data connections and synchronize changes."
   },
   "missingConnectionProps": "Please provide a valid iTwinId and iModelId, a local snapshotPath, or Blank Connection configuration",
   "backstage": {

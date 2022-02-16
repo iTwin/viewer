@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
@@ -12,6 +13,7 @@ import type {
 } from "@itwin/core-frontend";
 import { BlankConnection, IModelApp } from "@itwin/core-frontend";
 import { useErrorManager } from "@itwin/error-handling-react";
+import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
 import { withAITracking } from "@microsoft/applicationinsights-react-js";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
@@ -29,7 +31,6 @@ import {
 } from "../../services/iModel";
 import { userAI, ViewerPerformance } from "../../services/telemetry";
 import type { BlankConnectionViewState, IModelLoaderParams } from "../../types";
-import { IModelBusy } from "./IModelBusy";
 import { IModelViewer } from "./IModelViewer";
 export interface ModelLoaderProps extends IModelLoaderParams {
   iTwinId?: string;
@@ -195,7 +196,12 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             </Provider>
           ) : (
             <div className="itwin-viewer-loading-container">
-              {loadingComponent ?? <IModelBusy />}
+              {loadingComponent ?? (
+                <SvgIModelLoader
+                  data-testid="loader-wrapper"
+                  className="itwin-viewer-loading-icon"
+                />
+              )}
             </div>
           )}
         </div>
