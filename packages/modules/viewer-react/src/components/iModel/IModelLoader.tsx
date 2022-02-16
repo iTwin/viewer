@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
@@ -12,10 +13,10 @@ import type {
 } from "@itwin/core-frontend";
 import { BlankConnection, IModelApp } from "@itwin/core-frontend";
 import { useErrorManager } from "@itwin/error-handling-react";
+import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
 import { withAITracking } from "@microsoft/applicationinsights-react-js";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
-import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
 
 import {
   useFrontstages,
@@ -185,8 +186,8 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       return (
         <div className="itwin-viewer-container">
           {finalFrontstages &&
-            (connection || noConnectionRequired) &&
-            StateManager.store ? (
+          (connection || noConnectionRequired) &&
+          StateManager.store ? (
             <Provider store={StateManager.store}>
               <IModelViewer
                 frontstages={finalFrontstages}
@@ -195,7 +196,12 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
             </Provider>
           ) : (
             <div className="itwin-viewer-loading-container">
-              {loadingComponent ?? <SvgIModelLoader className="itwin-viewer-loading-icon" />}
+              {loadingComponent ?? (
+                <SvgIModelLoader
+                  data-testid="loader-wrapper"
+                  className="itwin-viewer-loading-icon"
+                />
+              )}
             </div>
           )}
         </div>
