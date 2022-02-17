@@ -58,9 +58,7 @@ export const IModelViewer: React.FC<ModelProps> = ({
         <ConfigurableUiContent
           appBackstage={
             backstageItems &&
-            backstageItems.length > 0 && (
-              <BackstageComposer items={backstageItems} />
-            )
+            backstageItems.length > 0 && <BackstageComposer items={[]} />
           }
         />
       </FrameworkVersion>

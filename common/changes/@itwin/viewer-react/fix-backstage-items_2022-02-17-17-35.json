@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Do not use backstage items directly. Instead rely on the Provider",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react",
+  "email": "6283674+kckst8@users.noreply.github.com"
+}
