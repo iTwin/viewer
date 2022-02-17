@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Wed, 16 Feb 2022 18:52:55 GMT and should not be manually modified.
+This log was last generated on Thu, 17 Feb 2022 17:58:47 GMT and should not be manually modified.
+
+## 2.3.1
+Thu, 17 Feb 2022 17:58:47 GMT
+
+### Patches
+
+- Do not use backstage items directly. Instead rely on the Provider
 
 ## 2.3.0
 Wed, 16 Feb 2022 18:52:55 GMT
