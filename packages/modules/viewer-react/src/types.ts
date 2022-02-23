@@ -16,6 +16,7 @@ import type {
   RpcInterfaceDefinition,
 } from "@itwin/core-common";
 import type {
+  BuiltInExtensionLoaderProps,
   FrontendHubAccess,
   IModelConnection,
   MapLayerOptions,
@@ -111,6 +112,8 @@ export interface ItwinViewerInitializerParams {
   enablePerformanceMonitors: boolean;
   /** options for TileAdmin initialization */
   tileAdminOptions?: TileAdmin.Props;
+  /** TODO build time only for now */
+  extensions?: BuiltInExtensionLoaderProps[];
 }
 
 /**
@@ -127,7 +130,7 @@ const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
   toolAdmin: undefined,
   hubAccess: undefined,
   mapLayerOptions: undefined,
-  // extensions: undefined,
+  extensions: undefined,
   enablePerformanceMonitors: false,
   tileAdminOptions: undefined,
 };
