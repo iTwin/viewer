@@ -1,6 +1,13 @@
 # Change Log - @itwin/desktop-viewer-react
 
-This log was last generated on Thu, 17 Feb 2022 17:58:47 GMT and should not be manually modified.
+This log was last generated on Tue, 01 Mar 2022 21:57:06 GMT and should not be manually modified.
+
+## 2.0.9
+Tue, 01 Mar 2022 21:57:06 GMT
+
+### Patches
+
+- Removed unnecessary webpack plugin section from README
 
 ## 2.0.8
 Thu, 17 Feb 2022 17:58:47 GMT
