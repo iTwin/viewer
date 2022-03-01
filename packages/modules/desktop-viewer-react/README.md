@@ -16,16 +16,6 @@ npm install @itwin/desktop-viewer-react
 
 ## Dependencies
 
-Currently, in order to use the iTwin Viewer, the consuming application would need to be compiled using Webpack with the IModeljsLibraryExportsPlugin that is in the [@bentley/webpack-tools-core](https://www.npmjs.com/package/@bentley/webpack-tools-core) package:
-
-In your webpack.config file:
-
-```javascript
-    plugins: [
-      // NOTE: iTwin.js specific plugin to allow exposing iTwin.js shared libraries into the global scope.
-      new IModeljsLibraryExportsPlugin(),
-```
-
 If you are creating a new application and are using React, it is advised that you use create-react-app with @bentley/react-scripts, which already include this plugin, as well as some other optimizations. There is also a predefined template that includes the iTwin Viewer package:
 
 ```
