@@ -150,16 +150,7 @@ export const getViewState = async (
     } else {
       // attempt to construct a default viewState
       const viewCreator = new ViewCreator3d(connection);
-
-      const options: ViewerViewCreator3dOptions = viewCreatorOptions
-        ? { ...viewCreatorOptions }
-        : { useSeedView: true };
-
-      if (options.useSeedView === undefined) {
-        options.useSeedView = true;
-      }
-
-      view = await viewCreator.createDefaultView(options);
+      view = await viewCreator.createDefaultView(viewCreatorOptions);
       UiFramework.setActiveSelectionScope("top-assembly");
     }
   }

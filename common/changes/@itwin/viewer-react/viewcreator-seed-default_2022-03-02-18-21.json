@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "No longer uses the ViewCreator seed by default",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react",
+  "email": "19596966+johnnyd710@users.noreply.github.com"
+}
