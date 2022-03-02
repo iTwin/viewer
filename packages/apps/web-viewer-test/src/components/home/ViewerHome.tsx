@@ -5,7 +5,9 @@
 
 import { ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
+import type { IModelConnection } from "@itwin/core-frontend";
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
+import { getViewState, openRemoteIModel } from "@itwin/web-viewer-react";
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -97,6 +99,17 @@ export const ViewerHome: React.FC = () => {
     },
   ];
 
+  const getTempViewState = useCallback(async () => {
+    if (iTwinId && iModelId) {
+      const connection = await openRemoteIModel(iTwinId, iModelId);
+      const viewState = getViewState(connection as IModelConnection);
+      if (viewState) {
+        return viewState;
+      }
+    }
+    return {} as any;
+  }, [iTwinId, iModelId]);
+
   return (
     <div style={{ height: "100vh" }}>
       <Viewer
@@ -112,6 +125,7 @@ export const ViewerHome: React.FC = () => {
             value: process.env.IMJS_BING_MAPS_KEY ?? "",
           },
         }}
+        viewportOptions={{ viewState: getTempViewState }}
         enablePerformanceMonitors={true}
         uiProviders={uiProviders}
         defaultUiConfig={{
