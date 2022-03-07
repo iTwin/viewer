@@ -64,6 +64,12 @@
       "packageName": "@itwin/desktop-viewer-test",
       "projectFolder": "packages/apps/desktop-viewer-test",
       "shouldPublish": false
+    },
+    {
+      "packageName": "@itwin/test-extension",
+      "projectFolder": "packages/modules/test-extension",
+      "versionPolicyName": "prerelease-monorepo-lockStep",
+      "shouldPublish": false
     }
   ]
 }

@@ -7,6 +7,7 @@ import type { BentleyCloudRpcParams } from "@itwin/core-common";
 import { BentleyCloudRpcManager } from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import {
+  addExtensions,
   getIModelAppOptions,
   makeCancellable,
   ViewerAuthorization,
@@ -95,6 +96,11 @@ export class WebInitializer {
         const rpcParams: BentleyCloudRpcParams = initializeRpcParams(
           options?.backend
         );
+        // register extensions before startup
+        // TODO only build time ATM
+        if (options?.extensions) {
+          yield addExtensions(options.extensions);
+        }
         yield IModelApp.startup(iModelAppOptions);
         BentleyCloudRpcManager.initializeClient(
           rpcParams,

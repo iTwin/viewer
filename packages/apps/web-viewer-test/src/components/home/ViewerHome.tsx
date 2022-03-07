@@ -9,7 +9,7 @@ import { Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";
-
+import TestExtension from "@itwin/test-extension";
 /**
  * Test a viewer that uses auth configuration provided at startup
  * @returns
@@ -80,6 +80,7 @@ export const ViewerHome: React.FC = () => {
           },
         }}
         enablePerformanceMonitors={true}
+        extensions={[TestExtension]}
       />
     </div>
   );
