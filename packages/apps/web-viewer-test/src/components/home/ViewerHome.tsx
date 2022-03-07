@@ -13,6 +13,7 @@ import {
   PropertyGridManager,
   PropertyGridUiItemsProvider,
 } from "@itwin/property-grid-react";
+import TestExtension from "@itwin/test-extension";
 import {
   TreeWidget,
   TreeWidgetUiItemsProvider,
@@ -21,7 +22,6 @@ import { Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";
-
 /**
  * Test a viewer that uses auth configuration provided at startup
  * @returns
@@ -78,7 +78,7 @@ export const ViewerHome: React.FC = () => {
 
   const onIModelAppInit = useCallback(async () => {
     await TreeWidget.initialize();
-    // await PropertyGridManager.initialize();
+    await PropertyGridManager.initialize();
     await MeasureTools.startup();
   }, []);
 
@@ -101,11 +101,12 @@ export const ViewerHome: React.FC = () => {
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
           new TreeWidgetUiItemsProvider(),
-          // new PropertyGridUiItemsProvider({
-          //   enableCopyingPropertyText: true,
-          // }),
+          new PropertyGridUiItemsProvider({
+            enableCopyingPropertyText: true,
+          }),
           new MeasureToolsUiItemsProvider(),
         ]}
+        extensions={[TestExtension]}
       />
     </div>
   );

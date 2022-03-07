@@ -9,6 +9,7 @@ import { ElectronApp } from "@itwin/core-electron/lib/cjs/ElectronFrontend";
 import { IModelApp, NativeAppLogger } from "@itwin/core-frontend";
 import { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
 import {
+  addExtensions,
   getIModelAppOptions,
   makeCancellable,
   ViewerAuthorization,
@@ -72,6 +73,11 @@ export class DesktopInitializer {
         window.onoffline = () => {
           /* nop */
         };
+        // register extensions before startup
+        // TODO only build time ATM
+        if (options?.extensions) {
+          yield addExtensions(options.extensions);
+        }
         yield ElectronApp.startup(electronViewerOpts);
         NativeAppLogger.initialize();
         ViewerPerformance.addMark("ViewerStarted");
