@@ -33,14 +33,10 @@
   ],
   "dependencies": {
     "@bentley/icons-generic-webfont": "^1.0.15",
-    "@itwin/error-handling-react": "2.0.1",
+    "@itwin/error-handling-react": "3.0.0-dev.1",
     "@itwin/itwinui-react": "^1.16.2",
-    "@itwin/measure-tools-react": "^0.2.0",
-    "@itwin/property-grid-react": "^0.2.0",
-    "@itwin/tree-widget-react": "^0.2.0",
     "@microsoft/applicationinsights-react-js": "2.3.1",
-    "@microsoft/applicationinsights-web": "2.3.1",
-    "react-spring": "^8.0.27"
+    "@microsoft/applicationinsights-web": "2.3.1"
   },
   "devDependencies": {
     "@itwin/appui-abstract": "^3.1.0-dev.42",

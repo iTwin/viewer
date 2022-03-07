@@ -26,12 +26,9 @@ import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
 import { FrontendIModelsAccess } from "@itwin/imodels-access-frontend";
 import { IModelsClient } from "@itwin/imodels-client-management";
-import { MeasureTools } from "@itwin/measure-tools-react";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
-import { PropertyGridManager } from "@itwin/property-grid-react";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
-import { TreeWidget } from "@itwin/tree-widget-react";
 
 import { ViewerPerformance } from "../services/telemetry";
 import type { ItwinViewerInitializerParams } from "../types";
@@ -166,10 +163,6 @@ export class BaseInitializer {
       IModelApp.uiAdmin.updateFeatureFlags({ allowKeyinPalette: true });
 
       ConfigurableUiManager.initialize();
-
-      yield TreeWidget.initialize(IModelApp.localization);
-      yield PropertyGridManager.initialize(IModelApp.localization);
-      yield MeasureTools.startup();
 
       if (viewerOptions?.appInsightsKey) {
         trackUserEvent("iTwinViewer.Viewer.Initialized");
