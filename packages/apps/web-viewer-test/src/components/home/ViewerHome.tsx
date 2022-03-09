@@ -3,7 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ColorTheme } from "@itwin/appui-react";
+import {
+  ColorTheme,
+  StandardContentToolsProvider,
+  StandardNavigationToolsProvider,
+  StandardStatusbarItemsProvider,
+} from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import {
   MeasureTools,
@@ -120,6 +125,9 @@ export const ViewerHome: React.FC = () => {
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
+          new StandardNavigationToolsProvider("DefaultNavigationTools"),
+          new StandardContentToolsProvider("DefaultContentTools"),
+          new StandardStatusbarItemsProvider("DefaultStatusbar"),
           new TreeWidgetUiItemsProvider(),
           new PropertyGridUiItemsProvider({
             enableCopyingPropertyText: true,
