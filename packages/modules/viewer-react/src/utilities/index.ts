@@ -4,7 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 // import type { ViewerProps } from "../components/BaseViewer";
-import type { ItwinViewerInitializerParams, ViewerProps } from "../types";
+import type {
+  ItwinViewerCommonParams,
+  ItwinViewerInitializerParams,
+  ViewerProps,
+} from "../types";
 import { iTwinViewerInitializerParamList } from "../types";
 
 export * from "./MakeCancellable";
@@ -62,7 +66,7 @@ export const isEqual = (a?: any, b?: any) => {
  * @param options
  * @returns
  */
-export const getInitializationOptions = (options?: ViewerProps) => {
+export const getInitializationOptions = (options?: ItwinViewerCommonParams) => {
   const initOptions = {};
   if (options) {
     for (const key of iTwinViewerInitializerParamList) {

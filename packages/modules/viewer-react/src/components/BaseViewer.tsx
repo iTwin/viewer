@@ -12,27 +12,15 @@ import { useBaseViewerInitializer } from "../hooks/useBaseViewerInitializer";
 import type { ItwinViewerCommonParams, ViewerProps } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
-export const BaseViewer: React.FC<ViewerProps> = ({
-  iModelId,
-  iTwinId,
+export const BaseViewer = ({
   appInsightsKey,
-  theme,
-  changeSetId,
-  defaultUiConfig,
-  onIModelConnected,
   productId,
-  filePath,
-  frontstages,
-  backstageItems,
-  viewportOptions,
-  uiProviders,
   i18nUrlTemplate,
   onIModelAppInit,
   additionalI18nNamespaces,
   additionalRpcInterfaces,
-  viewCreatorOptions,
-  loadingComponent,
   enablePerformanceMonitors,
+  ...iModelLoaderProps
 }: ViewerProps) => {
   const viewerInitialized = useBaseViewerInitializer({
     appInsightsKey,
@@ -47,24 +35,10 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   const accessToken = useAccessToken();
   return (
     <ErrorBoundary>
-      {filePath || accessToken ? (
+      {("filePath" in iModelLoaderProps && iModelLoaderProps.filePath) ||
+      accessToken ? (
         viewerInitialized ? (
-          <IModelLoader
-            iTwinId={iTwinId}
-            iModelId={iModelId}
-            changeSetId={changeSetId}
-            defaultUiConfig={defaultUiConfig}
-            appInsightsKey={appInsightsKey}
-            onIModelConnected={onIModelConnected}
-            filePath={filePath}
-            frontstages={frontstages}
-            backstageItems={backstageItems}
-            viewportOptions={viewportOptions}
-            uiProviders={uiProviders}
-            theme={theme}
-            viewCreatorOptions={viewCreatorOptions}
-            loadingComponent={loadingComponent}
-          />
+          <IModelLoader {...iModelLoaderProps} />
         ) : (
           <FillCentered>initializing...</FillCentered>
         )

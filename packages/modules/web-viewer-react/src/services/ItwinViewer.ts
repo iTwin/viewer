@@ -57,7 +57,11 @@ export class ItwinViewer {
     this.authClient = options.authClient;
     this.enablePerformanceMonitors = options.enablePerformanceMonitors;
 
-    void WebInitializer.startWebViewer(options);
+    void WebInitializer.startWebViewer({
+      ...options,
+      iTwinId: "",
+      iModelId: "",
+    });
   }
 
   /** load a model in the viewer once iTwinViewerApp is ready */

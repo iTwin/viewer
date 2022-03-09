@@ -3,9 +3,9 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ViewerProps } from "@itwin/viewer-react";
+import type { FileViewerProps } from "@itwin/viewer-react";
 
-export type DesktopViewerProps = Omit<ViewerProps, "appInsightsKey">;
+export type DesktopViewerProps = Omit<FileViewerProps, "appInsightsKey">;
 
 export enum ModelStatus {
   ONLINE,

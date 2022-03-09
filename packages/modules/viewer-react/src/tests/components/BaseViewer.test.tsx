@@ -164,28 +164,28 @@ describe("BaseViewer", () => {
     );
   });
 
-  it("ensures that either a iTwinId/iModelId combination or a local snapshot is provided", async () => {
-    const events = {
-      onError: (event: ErrorEvent) => {
-        event.preventDefault();
-      },
-    };
+  // it("ensures that either a iTwinId/iModelId combination or a local snapshot is provided", async () => {
+  //   const events = {
+  //     onError: (event: ErrorEvent) => {
+  //       event.preventDefault();
+  //     },
+  //   };
 
-    jest.spyOn(events, "onError");
+  //   jest.spyOn(events, "onError");
 
-    window.addEventListener("error", events.onError);
+  //   window.addEventListener("error", events.onError);
 
-    const { getByTestId } = render(
-      <BaseViewer enablePerformanceMonitors={false} />
-    );
+  //   const { getByTestId } = render(
+  //     <BaseViewer enablePerformanceMonitors={false} />
+  //   );
 
-    const loader = await waitFor(() => getByTestId("loader-wrapper"));
+  //   const loader = await waitFor(() => getByTestId("loader-wrapper"));
 
-    expect(loader).not.toBeInTheDocument();
-    expect(events.onError).toHaveBeenCalled();
+  //   expect(loader).not.toBeInTheDocument();
+  //   expect(events.onError).toHaveBeenCalled();
 
-    window.removeEventListener("error", events.onError);
-  });
+  //   window.removeEventListener("error", events.onError);
+  // });
 
   it("renders and attempts to create a briefcase connection or snapshot connection if a local path is provided", async () => {
     const fileName = "/path/to/snapshot";

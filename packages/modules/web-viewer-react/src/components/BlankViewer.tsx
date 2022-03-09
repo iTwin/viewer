@@ -3,26 +3,16 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BaseBlankViewer } from "@itwin/viewer-react";
+import { BaseBlankViewer, BaseViewer } from "@itwin/viewer-react";
 import React, { useEffect, useMemo, useState } from "react";
 
+import { useWebViewerInitializer } from "../hooks";
 import { WebInitializer } from "../services/Initializer";
 import type { WebBlankViewerProps } from "../types";
 
 export const BlankViewer = (props: WebBlankViewerProps) => {
-  const [initialized, setInitialized] = useState<boolean>(false);
-  const memoizedProps = useMemo(() => {
-    return { ...props };
-  }, [props]);
+  const memoizedProps = useMemo(() => ({ ...props }), [props]);
+  const initialized = useWebViewerInitializer(memoizedProps);
 
-  useEffect(() => {
-    void WebInitializer.startWebViewer(memoizedProps).then(() => {
-      void WebInitializer.initialized.then(() => {
-        setInitialized(true);
-      });
-    });
-    return WebInitializer.cancel;
-  }, [memoizedProps]);
-
-  return initialized ? <BaseBlankViewer {...props} /> : null;
+  return initialized ? <BaseViewer {...memoizedProps} /> : null;
 };

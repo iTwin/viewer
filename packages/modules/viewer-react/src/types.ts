@@ -94,6 +94,12 @@ export type ViewerIModelAppOptions = Pick<
 >;
 
 export interface ItwinViewerInitializerParams extends ViewerIModelAppOptions {
+  /**
+   * Enable reporting data from timed events in the iTwin Viewer.
+   * The data is anonynmous numerics and will help to increase Viewer performance in future releases.
+   * See the Web or Desktop Viewer package [README](https://www.npmjs.com/package/@itwin/web-viewer-react) for additional details.
+   */
+  enablePerformanceMonitors: boolean;
   /** optional Azure Application Insights key for telemetry */
   appInsightsKey?: string;
   /** GPRID for the consuming application. Will default to the iTwin Viewer GPRID */
@@ -106,36 +112,30 @@ export interface ItwinViewerInitializerParams extends ViewerIModelAppOptions {
   additionalI18nNamespaces?: string[];
   /** custom rpc interfaces (assumes that they are supported in your backend) */
   additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
-  /**
-   * Enable reporting data from timed events in the iTwin Viewer.
-   * The data is anonynmous numerics and will help to increase Viewer performance in future releases.
-   * See the Web or Desktop Viewer package [README](https://www.npmjs.com/package/@itwin/web-viewer-react) for additional details.
-   */
-  enablePerformanceMonitors: boolean;
   /** TODO build time only for now */
   extensions?: BuiltInExtensionLoaderProps[];
 }
 
 export interface ConnectedViewerProps extends ItwinViewerCommonParams {
-  iTwinId?: string;
-  iModelId?: string;
+  iTwinId: string;
+  iModelId: string;
   changeSetId?: string;
 }
 
 export interface FileViewerProps extends ItwinViewerCommonParams {
   /** Path to local snapshot or briefcase */
-  filePath?: string;
+  filePath: string;
 }
 
 export interface BlankViewerProps extends ItwinViewerCommonParams {
-  blankConnection?: BlankConnectionProps;
+  blankConnection: BlankConnectionProps;
   viewStateOptions?: BlankConnectionViewState;
 }
 
-export interface ViewerProps
-  extends ConnectedViewerProps,
-    FileViewerProps,
-    BlankViewerProps {}
+export type ViewerProps =
+  | ConnectedViewerProps
+  | FileViewerProps
+  | BlankViewerProps;
 
 /**
  * Maintain a list of initilalizer params for use in useBaseViewerInitializer
