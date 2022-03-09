@@ -9,16 +9,8 @@ import React from "react";
 
 import { useAccessToken } from "../hooks/useAccessToken";
 import { useBaseViewerInitializer } from "../hooks/useBaseViewerInitializer";
-import type { ItwinViewerCommonParams } from "../types";
+import type { ItwinViewerCommonParams, ViewerProps } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
-
-export interface ViewerProps extends ItwinViewerCommonParams {
-  iTwinId?: string;
-  iModelId?: string;
-  changeSetId?: string;
-  snapshotPath?: string; // TODO next rename (filePath?) as this can be a briefcase or a snapshot
-  loadingComponent?: React.ReactNode;
-}
 
 export const BaseViewer: React.FC<ViewerProps> = ({
   iModelId,
@@ -29,7 +21,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   defaultUiConfig,
   onIModelConnected,
   productId,
-  snapshotPath,
+  filePath,
   frontstages,
   backstageItems,
   viewportOptions,
@@ -55,7 +47,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   const accessToken = useAccessToken();
   return (
     <ErrorBoundary>
-      {snapshotPath || accessToken ? (
+      {filePath || accessToken ? (
         viewerInitialized ? (
           <IModelLoader
             iTwinId={iTwinId}
@@ -64,7 +56,7 @@ export const BaseViewer: React.FC<ViewerProps> = ({
             defaultUiConfig={defaultUiConfig}
             appInsightsKey={appInsightsKey}
             onIModelConnected={onIModelConnected}
-            snapshotPath={snapshotPath}
+            filePath={filePath}
             frontstages={frontstages}
             backstageItems={backstageItems}
             viewportOptions={viewportOptions}

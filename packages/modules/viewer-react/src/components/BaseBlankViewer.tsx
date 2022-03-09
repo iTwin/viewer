@@ -11,15 +11,11 @@ import React, { useMemo } from "react";
 import { useAccessToken, useBaseViewerInitializer } from "../hooks";
 import type {
   BlankConnectionViewState,
+  BlankViewerProps,
   ItwinViewerCommonParams,
   ItwinViewerUi,
 } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
-
-export interface BlankViewerProps extends ItwinViewerCommonParams {
-  blankConnection: BlankConnectionProps;
-  viewStateOptions?: BlankConnectionViewState;
-}
 
 export const BaseBlankViewer: React.FC<BlankViewerProps> = ({
   appInsightsKey,

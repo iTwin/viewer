@@ -16,8 +16,10 @@ import type {
   RpcInterfaceDefinition,
 } from "@itwin/core-common";
 import type {
+  BlankConnectionProps,
   BuiltInExtensionLoaderProps,
   FrontendHubAccess,
+  IModelAppOptions,
   IModelConnection,
   MapLayerOptions,
   ScreenViewport,
@@ -78,13 +80,20 @@ export interface IModelLoaderParams {
   uiProviders?: UiItemsProvider[];
   /** options for creating the default viewState */
   viewCreatorOptions?: ViewerViewCreator3dOptions;
+  /** Component to show when loading iModel key */
+  loadingComponent?: React.ReactNode;
 }
 
 export interface ItwinViewerCommonParams
   extends ItwinViewerInitializerParams,
     IModelLoaderParams {}
 
-export interface ItwinViewerInitializerParams {
+export type ViewerIModelAppOptions = Pick<
+  IModelAppOptions,
+  "hubAccess" | "mapLayerOptions" | "tileAdmin" | "toolAdmin"
+>;
+
+export interface ItwinViewerInitializerParams extends ViewerIModelAppOptions {
   /** optional Azure Application Insights key for telemetry */
   appInsightsKey?: string;
   /** GPRID for the consuming application. Will default to the iTwin Viewer GPRID */
@@ -97,26 +106,36 @@ export interface ItwinViewerInitializerParams {
   additionalI18nNamespaces?: string[];
   /** custom rpc interfaces (assumes that they are supported in your backend) */
   additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
-  /** optional ToolAdmin to initialize */
-  toolAdmin?: ToolAdmin;
-  /** optional hubAccess (defaults to iTwin Platform's iModels) */
-  hubAccess?: FrontendHubAccess;
-  /**
-   * options for MapLayers initialization
-   * Applications are required to provide their own keys. See [iTwin.js changelog](https://www.itwinjs.org/changehistory/3.0.0/#removed-default-api-keys) for additional details.
-   */
-  mapLayerOptions?: MapLayerOptions;
   /**
    * Enable reporting data from timed events in the iTwin Viewer.
    * The data is anonynmous numerics and will help to increase Viewer performance in future releases.
    * See the Web or Desktop Viewer package [README](https://www.npmjs.com/package/@itwin/web-viewer-react) for additional details.
    */
   enablePerformanceMonitors: boolean;
-  /** options for TileAdmin initialization */
-  tileAdminOptions?: TileAdmin.Props;
   /** TODO build time only for now */
   extensions?: BuiltInExtensionLoaderProps[];
 }
+
+export interface ConnectedViewerProps extends ItwinViewerCommonParams {
+  iTwinId?: string;
+  iModelId?: string;
+  changeSetId?: string;
+}
+
+export interface FileViewerProps extends ItwinViewerCommonParams {
+  /** Path to local snapshot or briefcase */
+  filePath?: string;
+}
+
+export interface BlankViewerProps extends ItwinViewerCommonParams {
+  blankConnection?: BlankConnectionProps;
+  viewStateOptions?: BlankConnectionViewState;
+}
+
+export interface ViewerProps
+  extends ConnectedViewerProps,
+    FileViewerProps,
+    BlankViewerProps {}
 
 /**
  * Maintain a list of initilalizer params for use in useBaseViewerInitializer
@@ -134,7 +153,7 @@ const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
   mapLayerOptions: undefined,
   extensions: undefined,
   enablePerformanceMonitors: false,
-  tileAdminOptions: undefined,
+  tileAdmin: undefined,
 };
 
 export const iTwinViewerInitializerParamList = Object.keys(

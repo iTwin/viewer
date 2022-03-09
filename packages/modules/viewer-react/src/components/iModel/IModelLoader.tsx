@@ -37,7 +37,7 @@ export interface ModelLoaderProps extends IModelLoaderParams {
   iModelId?: string;
   changeSetId?: string;
   appInsightsKey?: string;
-  snapshotPath?: string;
+  filePath?: string;
   blankConnection?: BlankConnectionProps;
   blankConnectionViewState?: BlankConnectionViewState;
   loadingComponent?: React.ReactNode;
@@ -50,7 +50,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     changeSetId,
     defaultUiConfig,
     onIModelConnected,
-    snapshotPath,
+    filePath,
     frontstages,
     backstageItems,
     viewportOptions,
@@ -85,7 +85,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     const getModelConnection = useCallback(async (): Promise<
       IModelConnection | undefined
     > => {
-      if (!(iTwinId && iModelId) && !snapshotPath && !blankConnection) {
+      if (!(iTwinId && iModelId) && !filePath && !blankConnection) {
         throw new Error(
           IModelApp.localization.getLocalizedStringWithNamespace(
             "iTwinViewer",
@@ -104,8 +104,8 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       // create a new imodelConnection for the passed project and imodel ids or local file
       if (blankConnection) {
         imodelConnection = BlankConnection.create(blankConnection);
-      } else if (snapshotPath) {
-        imodelConnection = await openLocalImodel(snapshotPath);
+      } else if (filePath) {
+        imodelConnection = await openLocalImodel(filePath);
       } else if (iTwinId && iModelId) {
         imodelConnection = await openRemoteIModel(
           iTwinId,
@@ -134,7 +134,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       iTwinId,
       iModelId,
       changeSetId,
-      snapshotPath,
+      filePath,
       blankConnection,
       isMounted,
       onIModelConnected,

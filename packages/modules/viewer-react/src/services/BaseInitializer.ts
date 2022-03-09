@@ -250,7 +250,7 @@ export const getIModelAppOptions = (
     publicPath: viewerHome ? `${viewerHome}/` : "",
     realityDataAccess: realityDataClient,
     mapLayerOptions: options?.mapLayerOptions,
-    tileAdmin: options?.tileAdminOptions,
+    tileAdmin: options?.tileAdmin,
   };
 };
 

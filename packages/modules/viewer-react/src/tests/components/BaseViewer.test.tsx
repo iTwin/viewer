@@ -191,7 +191,7 @@ describe("BaseViewer", () => {
     const fileName = "/path/to/snapshot";
 
     const { getByTestId } = render(
-      <BaseViewer snapshotPath={fileName} enablePerformanceMonitors={false} />
+      <BaseViewer filePath={fileName} enablePerformanceMonitors={false} />
     );
 
     const loader = await waitFor(() => getByTestId("loader-wrapper"));

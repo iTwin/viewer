@@ -43,7 +43,7 @@ export interface WebViewerPropsFull extends ViewerProps {
   backend?: IModelBackendOptions;
 }
 
-export type WebViewerProps = Omit<WebViewerPropsFull, "snapshotPath">;
+export type WebViewerProps = Omit<WebViewerPropsFull, "filePath">;
 
 export interface WebBlankViewerProps extends BlankViewerProps {
   /** authorization configuration */

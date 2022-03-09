@@ -31,7 +31,7 @@ import { Viewer } from "@itwin/desktop-viewer-react";
 export const MyViewerComponent = () => {
   const snapshotPath = "./samples/house_model.bim";
 
-  return <Viewer snapshotPath={snapshotPath} />;
+  return <Viewer filePath={snapshotPath} />;
 };
 ```
 
@@ -48,9 +48,9 @@ export const MyViewerComponent = () => {
 #### Optional
 
 - `iTwinId` - GUID for the iTwin (project, asset, etc.) that contains the iModel that you wish to view
-- `iModelId` - GUID for the iModel that you wish to view. Must be specified with a iTwinId if a snapshotPath is not provided
+- `iModelId` - GUID for the iModel that you wish to view. Must be specified with a iTwinId if a filePath is not provided
 - `changeSetId` - optional changeset id to view if combined with the iTwinId and iModelId props
-- `snapshotPath` - path to a local snapshot to load in the viewer. If provided, it will take precedence over any iTwinId/iModelId that may also be provided
+- `filePath` - path to a local snapshot to load in the viewer. If provided, it will take precedence over any iTwinId/iModelId that may also be provided
 - `theme` - override the default theme
 - `defaultUiConfig` - hide or override default tooling and widgets
   - `contentManipulationTools` - options for the content manipulation section (top left)
