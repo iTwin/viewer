@@ -1,6 +1,34 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Mon, 07 Feb 2022 14:48:13 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Mar 2022 18:47:06 GMT and should not be manually modified.
+
+## 2.3.2
+Wed, 02 Mar 2022 18:47:06 GMT
+
+### Patches
+
+- No longer uses the ViewCreator seed by default
+
+## 2.3.1
+Thu, 17 Feb 2022 17:58:47 GMT
+
+### Patches
+
+- Do not use backstage items directly. Instead rely on the Provider
+
+## 2.3.0
+Wed, 16 Feb 2022 18:52:55 GMT
+
+### Minor changes
+
+- Update default IModel loader indicator
+
+## 2.2.2
+Fri, 11 Feb 2022 20:57:09 GMT
+
+### Patches
+
+- Code optimization and refactoring
 
 ## 2.2.1
 Mon, 07 Feb 2022 14:48:13 GMT

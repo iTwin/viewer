@@ -1,6 +1,35 @@
 # Change Log - @itwin/web-viewer-react
 
-This log was last generated on Mon, 07 Feb 2022 14:48:13 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Mar 2022 18:47:06 GMT and should not be manually modified.
+
+## 2.0.9
+Wed, 02 Mar 2022 18:47:06 GMT
+
+*Version update only*
+
+## 2.0.8
+Tue, 01 Mar 2022 21:57:06 GMT
+
+### Patches
+
+- Removed unnecessary webpack plugin section from README
+
+## 2.0.7
+Thu, 17 Feb 2022 17:58:47 GMT
+
+*Version update only*
+
+## 2.0.6
+Wed, 16 Feb 2022 18:52:55 GMT
+
+*Version update only*
+
+## 2.0.5
+Fri, 11 Feb 2022 20:57:09 GMT
+
+### Patches
+
+- Cleanup
 
 ## 2.0.4
 Mon, 07 Feb 2022 14:48:13 GMT

@@ -2,6 +2,54 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "2.3.2",
+      "tag": "@itwin/viewer-react_v2.3.2",
+      "date": "Wed, 02 Mar 2022 18:47:06 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "No longer uses the ViewCreator seed by default"
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.3.1",
+      "tag": "@itwin/viewer-react_v2.3.1",
+      "date": "Thu, 17 Feb 2022 17:58:47 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Do not use backstage items directly. Instead rely on the Provider"
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.3.0",
+      "tag": "@itwin/viewer-react_v2.3.0",
+      "date": "Wed, 16 Feb 2022 18:52:55 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update default IModel loader indicator"
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.2.2",
+      "tag": "@itwin/viewer-react_v2.2.2",
+      "date": "Fri, 11 Feb 2022 20:57:09 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Code optimization and refactoring"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.2.1",
       "tag": "@itwin/viewer-react_v2.2.1",
       "date": "Mon, 07 Feb 2022 14:48:13 GMT",

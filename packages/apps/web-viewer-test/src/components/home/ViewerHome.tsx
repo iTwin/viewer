@@ -18,6 +18,7 @@ import {
   TreeWidget,
   TreeWidgetUiItemsProvider,
 } from "@itwin/tree-widget-react";
+import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -82,6 +83,25 @@ export const ViewerHome: React.FC = () => {
     await MeasureTools.startup();
   }, []);
 
+  const backstageItems: ViewerBackstageItem[] = [
+    {
+      id: "BS1",
+      execute: () => console.log("BS1"),
+      groupPriority: 10,
+      itemPriority: 30,
+      labeli18nKey: "iTwinViewer:backstage.mainFrontstage",
+      label: "",
+    },
+    {
+      id: "BS2",
+      execute: () => console.log("BS2"),
+      groupPriority: 10,
+      itemPriority: 60,
+      labeli18nKey: "iTwinViewer:backstage.mainFrontstage",
+      label: "",
+    },
+  ];
+
   return (
     <div style={{ height: "100vh" }}>
       <Viewer
@@ -107,6 +127,7 @@ export const ViewerHome: React.FC = () => {
           new MeasureToolsUiItemsProvider(),
         ]}
         extensions={[TestExtension]}
+        backstageItems={backstageItems}
       />
     </div>
   );

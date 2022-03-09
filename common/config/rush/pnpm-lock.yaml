@@ -37,6 +37,7 @@ dependencies:
   '@itwin/imodels-client-management': 1.0.1
   '@itwin/itwinui-css': 0.18.1
   '@itwin/itwinui-icons-react': 1.5.0_react-dom@17.0.2+react@17.0.2
+  '@itwin/itwinui-illustrations-react': 1.2.0_react-dom@17.0.2+react@17.0.2
   '@itwin/itwinui-react': 1.29.1_react-dom@17.0.2+react@17.0.2
   '@itwin/measure-tools-react': 0.6.0_feeac41b88871f812cc6d023ebdb2c0f
   '@itwin/presentation-backend': 3.1.0-dev.42_3a8f14b8d2861a877dcd15c06a89e2a5
@@ -21038,6 +21039,7 @@ packages:
       '@itwin/imodel-components-react': 3.1.0-dev.42_4f9c842c84e30423e3d29940faa7abeb
       '@itwin/imodels-access-frontend': 1.0.1_b1f9f7b927954d6136bda185d8eefdad
       '@itwin/imodels-client-management': 1.0.1
+      '@itwin/itwinui-illustrations-react': 1.2.0_react-dom@17.0.2+react@17.0.2
       '@itwin/itwinui-react': 1.29.1_react-dom@17.0.2+react@17.0.2
       '@itwin/measure-tools-react': 0.2.0_7828f536a913e1a4a27b94add01333f6
       '@itwin/presentation-common': 3.1.0-dev.42_d7c100557246498a16fea88f426c978f
@@ -21072,7 +21074,7 @@ packages:
     dev: false
     name: '@rush-temp/viewer-react'
     resolution:
-      integrity: sha512-HA9Dp43ijBYwOwQTh2v2iPElaMpgew07Dvpu/YrvSDEQZGb5A5olKelYRqm1wYUL3LxE5zBPH40E6EwaTJ6wXw==
+      integrity: sha512-XV9oqOZ0KN87YwEymFOibiGtRlIOrDQ0THsVvztQ6guHHpUKA2yBo63NBAQXQh6hlwAj8dKD+Pbz2dfNM63irQ==
       tarball: 'file:projects/viewer-react.tgz'
     version: 0.0.0
   'file:projects/viewer-scripts.tgz_typescript@4.4.4':
@@ -21249,6 +21251,7 @@ specifiers:
   '@itwin/imodels-client-management': ^1.0.1
   '@itwin/itwinui-css': ^0.18.1
   '@itwin/itwinui-icons-react': ^1.2.0
+  '@itwin/itwinui-illustrations-react': ^1.2.0
   '@itwin/itwinui-react': ^1.16.2
   '@itwin/measure-tools-react': ^0.6.0
   '@itwin/presentation-backend': ^3.1.0-dev.42

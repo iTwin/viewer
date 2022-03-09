@@ -66,7 +66,7 @@ export class DesktopInitializer {
           iModelApp: iModelAppOpts,
         };
         // this is a hack to workaround a bug in ITJS 2.x where browser connectivity events are not registered
-        // TODO verify and remove in 3.x
+        // TODO next verify and remove if no longer needed
         window.ononline = () => {
           /* nop */
         };
