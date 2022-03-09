@@ -3,9 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { StageUsage } from "@itwin/appui-abstract";
+import { StandardFrontstageProvider } from "@itwin/appui-react";
 import { useEffect, useState } from "react";
 
 import { DefaultFrontstage } from "../components/app-ui/frontstages/DefaultFrontstage";
+import { DefaultContentGroupProvider } from "../components/app-ui/providers";
 import type {
   BlankConnectionViewState,
   ItwinViewerUi,
@@ -54,12 +57,24 @@ export const useFrontstages = (
 
     if (requiresConnection) {
       // we require a connection, so initialize the DefaultFrontstage that contains the views that we want
-      const defaultFrontstageProvider = new DefaultFrontstage(
-        defaultUiConfig,
+      // const defaultFrontstageProvider = new DefaultFrontstage(
+      //   defaultUiConfig,
+      //   viewportOptions,
+      //   viewCreatorOptions,
+      //   blankConnectionViewState
+      // );
+
+      const contentGroup = new DefaultContentGroupProvider(
         viewportOptions,
         viewCreatorOptions,
         blankConnectionViewState
       );
+
+      const defaultFrontstageProvider = new StandardFrontstageProvider({
+        id: "DefaultFrontstage",
+        usage: StageUsage.General,
+        contentGroupProps: contentGroup,
+      });
 
       // add the default frontstage first so that it's default status can be overridden
       allFrontstages.unshift({
