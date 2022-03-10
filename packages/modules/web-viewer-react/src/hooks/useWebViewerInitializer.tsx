@@ -12,7 +12,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 
 import { WebInitializer } from "../services/Initializer";
-import type { WebBlankViewerProps, WebProps, WebViewerProps } from "../types";
+import type { WebProps } from "../types";
 
 export const useWebViewerInitializer = (options: WebProps) => {
   const [webViewerInitOptions, setWebViewerInitOptions] =

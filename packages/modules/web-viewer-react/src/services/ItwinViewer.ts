@@ -17,7 +17,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { Viewer } from "../components/Viewer";
-import type { ItwinViewerParams, WebViewerProps } from "../types";
+import type { ItwinViewerParams, WebProps } from "../types";
 import { WebInitializer } from "./Initializer";
 
 export interface LoadParameters {
@@ -70,23 +70,25 @@ export class ItwinViewer {
       throw new Error("Please provide a valid iTwinId and iModelId");
     }
 
+    const viewerProps: WebProps = {
+      authClient: this.authClient,
+      iTwinId: args?.iTwinId ?? "",
+      iModelId: args?.iModelId ?? "",
+      changeSetId: args?.changeSetId,
+      uiConfig: this.uiConfig,
+      appInsightsKey: this.appInsightsKey,
+      onIModelConnected: this.onIModelConnected,
+      frontstages: this.frontstages,
+      viewportOptions: this.viewportOptions,
+      uiProviders: this.uiProviders,
+      theme: this.theme,
+      enablePerformanceMonitors: this.enablePerformanceMonitors,
+    } as WebProps;
+
     // render the viewer for the given iModel on the given element
-    ReactDOM.render(
-      React.createElement(Viewer, {
-        authClient: this.authClient,
-        iTwinId: args?.iTwinId,
-        iModelId: args?.iModelId,
-        changeSetId: args?.changeSetId,
-        uiConfig: this.uiConfig,
-        appInsightsKey: this.appInsightsKey,
-        onIModelConnected: this.onIModelConnected,
-        frontstages: this.frontstages,
-        viewportOptions: this.viewportOptions,
-        uiProviders: this.uiProviders,
-        theme: this.theme,
-        enablePerformanceMonitors: this.enablePerformanceMonitors,
-      } as WebViewerProps),
-      document.getElementById(this.elementId)
-    );
+    // ReactDOM.render(
+    //   React.createElement(Viewer, viewerProps),
+    //   document.getElementById(this.elementId)
+    // );
   };
 }

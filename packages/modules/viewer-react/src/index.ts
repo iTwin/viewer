@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 export * from "./components/BaseViewer";
-export * from "./components/BaseBlankViewer";
 export * from "./services/BaseInitializer";
 export * from "./services/iModel";
 export * from "./utilities";

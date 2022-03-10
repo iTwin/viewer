@@ -106,8 +106,8 @@ export const ViewerHome: React.FC = () => {
     <div style={{ height: "100vh" }}>
       <Viewer
         authClient={authClient}
-        iTwinId={iTwinId}
-        iModelId={iModelId}
+        iTwinId={iTwinId ?? ""}
+        iModelId={iModelId ?? ""}
         appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
         theme={ColorTheme.Dark}
         loadingComponent={<Loader />}

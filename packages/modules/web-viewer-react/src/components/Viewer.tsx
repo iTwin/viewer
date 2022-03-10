@@ -7,9 +7,9 @@ import { BaseViewer } from "@itwin/viewer-react";
 import React, { useMemo } from "react";
 
 import { useWebViewerInitializer } from "../hooks";
-import type { WebViewerProps } from "../types";
+import type { WebProps } from "../types";
 
-export const Viewer = (props: WebViewerProps) => {
+export const Viewer = (props: WebProps) => {
   const memoizedProps = useMemo(() => ({ ...props }), [props]);
   const initialized = useWebViewerInitializer(memoizedProps);
 

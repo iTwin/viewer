@@ -152,11 +152,11 @@ if (viewer) {
 
 ## Blank Viewer
 
-For cases where you would prefer to use a [Blank iModelConnection](https://www.itwinjs.org/learning/frontend/blankconnection/), you should use the BlankViewer React component.
+For cases where you would prefer to use a [Blank iModelConnection](https://www.itwinjs.org/learning/frontend/blankconnection/), you should use the Viewer React component.
 
 ```javascript
 import React, { useState, useEffect } from "react";
-import { BlankConnectionViewState, BlankViewer } from "@itwin/web-viewer-react";
+import { BlankConnectionViewState, Viewer } from "@itwin/web-viewer-react";
 import { Range3d } from "@itwin/core-geometry";
 import { Cartographic, ColorDef } from "@itwin/core-common";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
@@ -188,7 +188,7 @@ export const MyBlankViewerComponent = () => {
   );
 
   return (
-    <BlankViewer
+    <Viewer
       authClient={authClient}
       blankConnection={blankConnection}
       viewStateOptions={viewStateOptions}

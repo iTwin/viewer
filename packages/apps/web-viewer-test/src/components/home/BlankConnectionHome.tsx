@@ -7,7 +7,7 @@ import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import { Cartographic, ColorDef, RenderMode } from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
-import { BlankViewer } from "@itwin/web-viewer-react";
+import { Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo } from "react";
 
 import { GeometryDecorator } from "../../decorators/GeometryDecorator";
@@ -57,7 +57,7 @@ export const BlankConnectionHome: React.FC = () => {
 
   return (
     <div style={{ height: "100vh" }}>
-      <BlankViewer
+      <Viewer
         authClient={authClient}
         blankConnection={{
           name: "GeometryConnection",

@@ -9,6 +9,7 @@ import type {
   ConnectedViewerProps,
   ItwinViewerCommonParams,
   ViewerAuthorizationClient,
+  XOR,
 } from "@itwin/viewer-react";
 
 /**
@@ -36,19 +37,12 @@ export interface IModelBackendOptions {
   customBackend?: CustomBackendConfig;
 }
 
-export interface WebViewerProps extends ConnectedViewerProps {
+export type WebProps = XOR<ConnectedViewerProps, BlankViewerProps> & {
   /** authorization configuration */
   authClient: ViewerAuthorizationClient;
   /** options to override the default backend from iTwin Platform */
   backend?: IModelBackendOptions;
-}
-
-export interface WebBlankViewerProps extends BlankViewerProps {
-  /** authorization configuration */
-  authClient: ViewerAuthorizationClient;
-}
-
-export type WebProps = WebViewerProps | WebBlankViewerProps;
+};
 
 export interface ItwinViewerParams extends ItwinViewerCommonParams {
   /** id of the html element where the viewer should be rendered */

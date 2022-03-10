@@ -14,7 +14,7 @@ import {
   ViewerPerformance,
 } from "@itwin/viewer-react";
 
-import type { IModelBackendOptions, WebProps, WebViewerProps } from "../types";
+import type { IModelBackendOptions, WebProps } from "../types";
 
 const getHostedConnectionInfo = (
   backendOptions?: IModelBackendOptions
