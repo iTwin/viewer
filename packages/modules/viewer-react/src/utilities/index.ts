@@ -3,12 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-// import type { ViewerProps } from "../components/BaseViewer";
-import type {
-  ViewerCommonProps,
-  ViewerInitializerParams,
-  ViewerProps,
-} from "../types";
+import type { ViewerCommonProps, ViewerInitializerParams } from "../types";
 import { iTwinViewerInitializerParamList } from "../types";
 
 export * from "./MakeCancellable";

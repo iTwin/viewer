@@ -132,18 +132,6 @@ export interface BlankViewerProps {
   blankConnectionViewState?: BlankConnectionViewState;
 }
 
-export type ViewerProps = (
-  | ConnectedViewerProps
-  | FileViewerProps
-  | BlankViewerProps
-) &
-  ViewerCommonProps;
-
-// export type ViewerProps =
-//   | XOR<ConnectedViewerProps, FileViewerProps>
-//   | XOR<FileViewerProps, BlankViewerProps>
-//   | XOR<BlankViewerProps, ConnectedViewerProps>;
-
 /**
  * Maintain a list of initilalizer params for use in useBaseViewerInitializer
  * This list MUST match what is in the ViewerInitializerParams interface and should be updated as new properties are added/removed

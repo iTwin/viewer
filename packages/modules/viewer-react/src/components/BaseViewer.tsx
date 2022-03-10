@@ -9,8 +9,16 @@ import React from "react";
 
 import { useAccessToken } from "../hooks/useAccessToken";
 import { useBaseViewerInitializer } from "../hooks/useBaseViewerInitializer";
-import type { ViewerProps } from "../types";
+import type {
+  BlankViewerProps,
+  ConnectedViewerProps,
+  FileViewerProps,
+  ViewerCommonProps,
+} from "../types";
 import IModelLoader from "./iModel/IModelLoader";
+
+type ViewerProps = (ConnectedViewerProps | FileViewerProps | BlankViewerProps) &
+  ViewerCommonProps;
 
 export const BaseViewer = ({
   appInsightsKey,
@@ -35,7 +43,6 @@ export const BaseViewer = ({
   const accessToken = useAccessToken();
   return (
     <ErrorBoundary>
-      {/* {iModelLoaderProps?.filePath || */}
       {("filePath" in loaderProps && loaderProps.filePath) || accessToken ? (
         viewerInitialized ? (
           <IModelLoader appInsightsKey={appInsightsKey} {...loaderProps} />

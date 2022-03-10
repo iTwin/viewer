@@ -5,9 +5,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-// import type { ViewerProps } from "../components/BaseViewer";
 import { BaseInitializer } from "../services/BaseInitializer";
-import type { ViewerCommonProps, ViewerProps } from "../types";
+import type { ViewerCommonProps } from "../types";
 import { getInitializationOptions, isEqual } from "../utilities";
 import { useIsMounted } from "./useIsMounted";
 
