@@ -17,7 +17,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { Viewer } from "../components/Viewer";
-import type { ItwinViewerParams, WebProps } from "../types";
+import type { ItwinViewerParams, WebViewerProps } from "../types";
 import { WebInitializer } from "./Initializer";
 
 export interface LoadParameters {
@@ -70,7 +70,7 @@ export class ItwinViewer {
       throw new Error("Please provide a valid iTwinId and iModelId");
     }
 
-    const viewerProps: WebProps = {
+    const viewerProps: WebViewerProps = {
       authClient: this.authClient,
       iTwinId: args?.iTwinId ?? "",
       iModelId: args?.iModelId ?? "",
@@ -83,7 +83,7 @@ export class ItwinViewer {
       uiProviders: this.uiProviders,
       theme: this.theme,
       enablePerformanceMonitors: this.enablePerformanceMonitors,
-    } as WebProps;
+    } as WebViewerProps;
 
     // render the viewer for the given iModel on the given element
     // ReactDOM.render(

@@ -14,7 +14,7 @@ import {
   ViewerPerformance,
 } from "@itwin/viewer-react";
 
-import type { IModelBackendOptions, WebProps } from "../types";
+import type { IModelBackendOptions, WebViewerProps } from "../types";
 
 const getHostedConnectionInfo = (
   backendOptions?: IModelBackendOptions
@@ -83,7 +83,7 @@ export class WebInitializer {
   };
 
   /** Web viewer startup */
-  public static async startWebViewer(options: WebProps) {
+  public static async startWebViewer(options: WebViewerProps) {
     if (!IModelApp.initialized && !this._initializing) {
       console.log("starting web viewer");
       this._initializing = true;
@@ -94,7 +94,7 @@ export class WebInitializer {
         iModelAppOptions.authorizationClient = options.authClient;
         ViewerAuthorization.client = options.authClient;
         const rpcParams: BentleyCloudRpcParams = initializeRpcParams(
-          "backend" in options ? options?.backend : undefined
+          options?.backend
         );
         // register extensions before startup
         // TODO only build time ATM

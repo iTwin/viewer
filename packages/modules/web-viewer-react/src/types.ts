@@ -7,8 +7,8 @@ import type { BentleyCloudRpcParams } from "@itwin/core-common";
 import type {
   BlankViewerProps,
   ConnectedViewerProps,
-  ItwinViewerCommonParams,
   ViewerAuthorizationClient,
+  ViewerCommonProps,
   XOR,
 } from "@itwin/viewer-react";
 
@@ -37,14 +37,15 @@ export interface IModelBackendOptions {
   customBackend?: CustomBackendConfig;
 }
 
-export type WebProps = XOR<ConnectedViewerProps, BlankViewerProps> & {
-  /** authorization configuration */
-  authClient: ViewerAuthorizationClient;
-  /** options to override the default backend from iTwin Platform */
-  backend?: IModelBackendOptions;
-};
+export type WebViewerProps = XOR<ConnectedViewerProps, BlankViewerProps> &
+  ViewerCommonProps & {
+    /** authorization configuration */
+    authClient: ViewerAuthorizationClient;
+    /** options to override the default backend from iTwin Platform */
+    backend?: IModelBackendOptions;
+  };
 
-export interface ItwinViewerParams extends ItwinViewerCommonParams {
+export interface ItwinViewerParams extends ViewerCommonProps {
   /** id of the html element where the viewer should be rendered */
   elementId: string;
   /** authorization configuration */

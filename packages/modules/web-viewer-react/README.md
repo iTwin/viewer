@@ -168,7 +168,7 @@ export const MyBlankViewerComponent = () => {
     extents: new Range3d(-30, -30, -30, 30, 30, 30),
   };
 
-  const viewStateOptions: BlankConnectionViewState = {
+  const blankConnectionViewState: BlankConnectionViewState = {
     displayStyle: {
       backgroundColor: ColorDef.blue,
     },
@@ -191,7 +191,7 @@ export const MyBlankViewerComponent = () => {
     <Viewer
       authClient={authClient}
       blankConnection={blankConnection}
-      viewStateOptions={viewStateOptions}
+      blankConnectionViewState={blankConnectionViewState}
     />
   );
 };
@@ -205,7 +205,7 @@ It allows for most of the same optional props as the Viewer component, with a fe
 
 #### Optional
 
-- `viewStateOptions` - Override options for the ViewState that is generated for the BlankConnection
+- `blankConnectionViewState` - Override options for the ViewState that is generated for the BlankConnection
 
 # Development
 

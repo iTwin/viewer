@@ -9,7 +9,7 @@ import React from "react";
 
 import { useAccessToken } from "../hooks/useAccessToken";
 import { useBaseViewerInitializer } from "../hooks/useBaseViewerInitializer";
-import type { ItwinViewerCommonParams, ViewerProps } from "../types";
+import type { ViewerProps } from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
 export const BaseViewer = ({
@@ -20,7 +20,7 @@ export const BaseViewer = ({
   additionalI18nNamespaces,
   additionalRpcInterfaces,
   enablePerformanceMonitors,
-  ...iModelLoaderProps
+  ...loaderProps
 }: ViewerProps) => {
   const viewerInitialized = useBaseViewerInitializer({
     appInsightsKey,
@@ -35,10 +35,10 @@ export const BaseViewer = ({
   const accessToken = useAccessToken();
   return (
     <ErrorBoundary>
-      {("filePath" in iModelLoaderProps && iModelLoaderProps.filePath) ||
-      accessToken ? (
+      {/* {iModelLoaderProps?.filePath || */}
+      {("filePath" in loaderProps && loaderProps.filePath) || accessToken ? (
         viewerInitialized ? (
-          <IModelLoader {...iModelLoaderProps} />
+          <IModelLoader appInsightsKey={appInsightsKey} {...loaderProps} />
         ) : (
           <FillCentered>initializing...</FillCentered>
         )

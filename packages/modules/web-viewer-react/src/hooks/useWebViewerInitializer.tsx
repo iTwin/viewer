@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ItwinViewerInitializerParams } from "@itwin/viewer-react";
+import type { ViewerInitializerParams } from "@itwin/viewer-react";
 import {
   getInitializationOptions,
   isEqual,
@@ -12,11 +12,11 @@ import {
 import { useEffect, useMemo, useState } from "react";
 
 import { WebInitializer } from "../services/Initializer";
-import type { WebProps } from "../types";
+import type { WebViewerProps } from "../types";
 
-export const useWebViewerInitializer = (options: WebProps) => {
+export const useWebViewerInitializer = (options: WebViewerProps) => {
   const [webViewerInitOptions, setWebViewerInitOptions] =
-    useState<ItwinViewerInitializerParams>();
+    useState<ViewerInitializerParams>();
   const [webViewerInitalized, setWebViewerInitalized] = useState(false);
   const baseViewerInitialized = useBaseViewerInitializer(
     options,

@@ -183,7 +183,7 @@ describe("IModelLoader", () => {
       extents: new Range3d(-30, -30, -30, 30, 30, 30),
     };
 
-    const viewStateOptions: BlankConnectionViewState = {
+    const blankConnectionViewState: BlankConnectionViewState = {
       setAllow3dManipulations: true,
       displayStyle: {
         backgroundColor: ColorDef.blue,
@@ -193,7 +193,7 @@ describe("IModelLoader", () => {
     const { getByTestId } = render(
       <IModelLoader
         blankConnection={blankConnection}
-        blankConnectionViewState={viewStateOptions}
+        blankConnectionViewState={blankConnectionViewState}
       />
     );
 

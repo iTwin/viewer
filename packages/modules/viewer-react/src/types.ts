@@ -63,7 +63,7 @@ export interface ViewerViewportControlOptions
     | ((iModelConnection: IModelConnection) => Promise<ViewState>);
 }
 
-export interface IModelLoaderParams {
+export interface LoaderProps {
   /** color theme */
   theme?: ColorTheme | string;
   /** Default UI configuration */
@@ -86,16 +86,14 @@ export interface IModelLoaderParams {
   loadingComponent?: React.ReactNode;
 }
 
-export interface ItwinViewerCommonParams
-  extends ItwinViewerInitializerParams,
-    IModelLoaderParams {}
+export type ViewerCommonProps = ViewerInitializerParams & LoaderProps;
 
 export type ViewerIModelAppOptions = Pick<
   IModelAppOptions,
   "hubAccess" | "mapLayerOptions" | "tileAdmin" | "toolAdmin"
 >;
 
-export interface ItwinViewerInitializerParams extends ViewerIModelAppOptions {
+export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   /**
    * Enable reporting data from timed events in the iTwin Viewer.
    * The data is anonynmous numerics and will help to increase Viewer performance in future releases.
@@ -118,32 +116,39 @@ export interface ItwinViewerInitializerParams extends ViewerIModelAppOptions {
   extensions?: BuiltInExtensionLoaderProps[];
 }
 
-export interface ConnectedViewerProps extends ItwinViewerCommonParams {
+export interface ConnectedViewerProps {
   iTwinId: string;
   iModelId: string;
   changeSetId?: string;
 }
 
-export interface FileViewerProps extends ItwinViewerCommonParams {
+export interface FileViewerProps {
   /** Path to local snapshot or briefcase */
   filePath: string;
 }
 
-export interface BlankViewerProps extends ItwinViewerCommonParams {
+export interface BlankViewerProps {
   blankConnection: BlankConnectionProps;
-  viewStateOptions?: BlankConnectionViewState;
+  blankConnectionViewState?: BlankConnectionViewState;
 }
 
-export type ViewerProps =
+export type ViewerProps = (
   | ConnectedViewerProps
   | FileViewerProps
-  | BlankViewerProps;
+  | BlankViewerProps
+) &
+  ViewerCommonProps;
+
+// export type ViewerProps =
+//   | XOR<ConnectedViewerProps, FileViewerProps>
+//   | XOR<FileViewerProps, BlankViewerProps>
+//   | XOR<BlankViewerProps, ConnectedViewerProps>;
 
 /**
  * Maintain a list of initilalizer params for use in useBaseViewerInitializer
- * This list MUST match what is in the ItwinViewerInitializerParams interface and should be updated as new properties are added/removed
+ * This list MUST match what is in the ViewerInitializerParams interface and should be updated as new properties are added/removed
  */
-const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
+const iTwinViewerInitializerParamSample: ViewerInitializerParams = {
   appInsightsKey: undefined,
   productId: undefined,
   i18nUrlTemplate: undefined,

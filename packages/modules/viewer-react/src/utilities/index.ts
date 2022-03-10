@@ -5,8 +5,8 @@
 
 // import type { ViewerProps } from "../components/BaseViewer";
 import type {
-  ItwinViewerCommonParams,
-  ItwinViewerInitializerParams,
+  ViewerCommonProps,
+  ViewerInitializerParams,
   ViewerProps,
 } from "../types";
 import { iTwinViewerInitializerParamList } from "../types";
@@ -66,7 +66,7 @@ export const isEqual = (a?: any, b?: any) => {
  * @param options
  * @returns
  */
-export const getInitializationOptions = (options?: ItwinViewerCommonParams) => {
+export const getInitializationOptions = (options?: ViewerCommonProps) => {
   const initOptions = {};
   if (options) {
     for (const key of iTwinViewerInitializerParamList) {
@@ -75,5 +75,5 @@ export const getInitializationOptions = (options?: ItwinViewerCommonParams) => {
       }
     }
   }
-  return initOptions as ItwinViewerInitializerParams;
+  return initOptions as ViewerInitializerParams;
 };

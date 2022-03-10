@@ -7,16 +7,16 @@ import { useEffect, useMemo, useState } from "react";
 
 // import type { ViewerProps } from "../components/BaseViewer";
 import { BaseInitializer } from "../services/BaseInitializer";
-import type { ItwinViewerCommonParams, ViewerProps } from "../types";
+import type { ViewerCommonProps, ViewerProps } from "../types";
 import { getInitializationOptions, isEqual } from "../utilities";
 import { useIsMounted } from "./useIsMounted";
 
 export const useBaseViewerInitializer = (
-  options?: ItwinViewerCommonParams,
+  options?: ViewerCommonProps,
   delay?: boolean
 ) => {
   const [baseViewerInitOptions, setBaseViewerInitOptions] =
-    useState<ItwinViewerCommonParams>();
+    useState<ViewerCommonProps>();
   const [baseViewerInitalized, setBaseViewerInitalized] = useState(false);
   const isMounted = useIsMounted();
 

@@ -12,7 +12,7 @@ import type { IModelAppOptions } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { UiCore } from "@itwin/core-react";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
-import type { ItwinViewerInitializerParams } from "@itwin/viewer-react";
+import type { ViewerInitializerParams } from "@itwin/viewer-react";
 
 import { WebInitializer } from "../../services/Initializer";
 import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
@@ -71,7 +71,7 @@ jest.mock("@itwin/viewer-react", () => {
   return {
     BaseViewer: jest.fn(),
     getIModelAppOptions: (
-      options: ItwinViewerInitializerParams
+      options: ViewerInitializerParams
     ): IModelAppOptions => {
       return {
         applicationId: options?.productId ?? "3098",

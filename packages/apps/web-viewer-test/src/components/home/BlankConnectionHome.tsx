@@ -68,7 +68,7 @@ export const BlankConnectionHome: React.FC = () => {
           }),
           extents: new Range3d(-30, -30, -30, 30, 30, 30),
         }}
-        viewStateOptions={{
+        blankConnectionViewState={{
           displayStyle: { backgroundColor: ColorDef.white },
           viewFlags: { grid: true, renderMode: RenderMode.SmoothShade },
           setAllow3dManipulations: false,
