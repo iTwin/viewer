@@ -42,7 +42,7 @@ export const useWebViewerInitializer = (options: WebViewerProps) => {
         });
       });
     }
-  }, [options, webViewerInitOptions]);
+  }, [options, webViewerInitOptions, initializationOptions]);
 
   return baseViewerInitialized && webViewerInitalized;
 };

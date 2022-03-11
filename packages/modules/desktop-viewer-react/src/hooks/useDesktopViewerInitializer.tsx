@@ -42,7 +42,7 @@ export const useDesktopViewerInitializer = (options: DesktopViewerProps) => {
         });
       });
     }
-  }, [initializationOptions, desktopViewerInitOptions]);
+  }, [options, desktopViewerInitOptions, initializationOptions]);
 
   return baseViewerInitialized && desktopViewerInitalized;
 };

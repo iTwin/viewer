@@ -13,7 +13,7 @@ import { ModelStatus } from "../types";
 export const getBriefcaseStatus = async (
   briefcase: BriefcaseConnection
 ): Promise<ModelStatus> => {
-  if (briefcase && briefcase.iTwinId && briefcase.iTwinId !== Guid.empty) {
+  if (briefcase.iTwinId !== Guid.empty) {
     try {
       // get the online version
       const remoteConnection = await CheckpointConnection.openRemote(

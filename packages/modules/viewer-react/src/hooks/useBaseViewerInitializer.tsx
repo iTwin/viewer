@@ -42,7 +42,7 @@ export const useBaseViewerInitializer = (
     if (!isMounted.current) {
       return BaseInitializer.cancel();
     }
-  }, [options, delay, baseViewerInitOptions, isMounted]);
+  }, [options, delay, baseViewerInitOptions, initializationOptions, isMounted]);
 
   return baseViewerInitalized;
 };
