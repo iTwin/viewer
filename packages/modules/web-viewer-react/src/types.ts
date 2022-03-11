@@ -37,17 +37,17 @@ export interface IModelBackendOptions {
   customBackend?: CustomBackendConfig;
 }
 
-export type WebViewerProps = XOR<ConnectedViewerProps, BlankViewerProps> &
-  ViewerCommonProps & {
-    /** authorization configuration */
-    authClient: ViewerAuthorizationClient;
-    /** options to override the default backend from iTwin Platform */
-    backend?: IModelBackendOptions;
-  };
-
-export interface ItwinViewerParams extends ViewerCommonProps {
-  /** id of the html element where the viewer should be rendered */
-  elementId: string;
+export type WebInitializerParams = ViewerCommonProps & {
   /** authorization configuration */
   authClient: ViewerAuthorizationClient;
+  /** options to override the default backend from iTwin Platform */
+  backend?: IModelBackendOptions;
+};
+
+export type WebViewerProps = XOR<ConnectedViewerProps, BlankViewerProps> &
+  WebInitializerParams;
+
+export interface ItwinViewerParams extends WebInitializerParams {
+  /** id of the html element where the viewer should be rendered */
+  elementId: string;
 }

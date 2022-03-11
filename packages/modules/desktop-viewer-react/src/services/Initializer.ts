@@ -16,7 +16,7 @@ import {
   ViewerPerformance,
 } from "@itwin/viewer-react";
 
-import type { DesktopInitializerProps } from "../types";
+import type { DesktopInitializerParams } from "../types";
 
 export class DesktopInitializer {
   private static _initialized: Promise<void>;
@@ -42,7 +42,7 @@ export class DesktopInitializer {
   };
 
   /** Desktop viewer startup */
-  public static async startDesktopViewer(options: DesktopInitializerProps) {
+  public static async startDesktopViewer(options: DesktopInitializerParams) {
     if (!IModelApp.initialized && !this._initializing) {
       console.log("starting desktop viewer");
       this._initializing = true;

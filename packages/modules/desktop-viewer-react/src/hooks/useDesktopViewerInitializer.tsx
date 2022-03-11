@@ -12,10 +12,10 @@ import {
 import { useEffect, useMemo, useState } from "react";
 
 import { DesktopInitializer } from "../services/Initializer";
-import type { DesktopInitializerProps } from "../types";
+import type { DesktopInitializerParams } from "../types";
 
 export const useDesktopViewerInitializer = (
-  options: DesktopInitializerProps
+  options: DesktopInitializerParams
 ) => {
   const [desktopViewerInitOptions, setDesktopViewerInitOptions] =
     useState<ViewerInitializerParams>();

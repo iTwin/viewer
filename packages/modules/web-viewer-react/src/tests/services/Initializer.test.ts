@@ -122,8 +122,6 @@ describe("Initializer", () => {
     await WebInitializer.startWebViewer({
       authClient: new MockAuthorizationClient(),
       enablePerformanceMonitors: false,
-      iTwinId: "ITWIN_ID",
-      iModelId: "IMODEL_ID",
     });
     await WebInitializer.initialized;
     expect(IModelApp.startup).toHaveBeenCalled();
