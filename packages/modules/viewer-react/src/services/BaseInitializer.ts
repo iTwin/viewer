@@ -17,10 +17,7 @@ import {
   IModelReadRpcInterface,
   IModelTileRpcInterface,
 } from "@itwin/core-common";
-import type {
-  BuiltInExtensionLoaderProps,
-  IModelAppOptions,
-} from "@itwin/core-frontend";
+import type { IModelAppOptions } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
@@ -252,23 +249,4 @@ export const getIModelAppOptions = (
     mapLayerOptions: options?.mapLayerOptions,
     tileAdmin: options?.tileAdminOptions,
   };
-};
-
-/**
- * Register extensions with the IModelApp ExtensionAdmin instance
- * TODO build time only ATM
- * @param extensions
- * @returns
- */
-export const addExtensions = async (
-  extensions: BuiltInExtensionLoaderProps[]
-) => {
-  return Promise.all(
-    extensions.map((extension) =>
-      IModelApp.extensionAdmin.addBuildExtension(
-        extension.manifest,
-        extension.loader
-      )
-    )
-  );
 };

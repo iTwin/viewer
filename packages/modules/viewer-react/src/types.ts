@@ -16,7 +16,7 @@ import type {
   RpcInterfaceDefinition,
 } from "@itwin/core-common";
 import type {
-  BuiltInExtensionLoaderProps,
+  ExtensionProvider,
   FrontendHubAccess,
   IModelConnection,
   MapLayerOptions,
@@ -112,8 +112,8 @@ export interface ItwinViewerInitializerParams {
   enablePerformanceMonitors: boolean;
   /** options for TileAdmin initialization */
   tileAdminOptions?: TileAdmin.Props;
-  /** TODO build time only for now */
-  extensions?: BuiltInExtensionLoaderProps[];
+  /** array of iTwin.js Extensions */
+  extensions?: ExtensionProvider[];
 }
 
 /**

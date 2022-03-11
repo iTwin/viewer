@@ -3,7 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-export default function main() {
-  console.log("test extension");
-  // registerTool();
-}
+import { registerTool } from "@itwin/core-extension";
+
+import { ExtensionTool } from "./ExtensionTool";
+
+export default () => {
+  console.log("remote extension loaded");
+  void registerTool(ExtensionTool);
+};

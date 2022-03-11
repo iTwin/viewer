@@ -5,6 +5,7 @@
 
 import { ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
+import type { ExtensionProvider } from "@itwin/core-frontend";
 import {
   MeasureTools,
   MeasureToolsUiItemsProvider,
@@ -13,7 +14,7 @@ import {
   PropertyGridManager,
   PropertyGridUiItemsProvider,
 } from "@itwin/property-grid-react";
-import TestExtension from "@itwin/test-extension";
+import LocalExtension from "@itwin/test-local-extension";
 import {
   TreeWidget,
   TreeWidgetUiItemsProvider,
@@ -82,6 +83,11 @@ export const ViewerHome: React.FC = () => {
     await MeasureTools.startup();
   }, []);
 
+  const RemoteExtension: ExtensionProvider = {
+    manifestUrl: "http://localhost:3001/package.json",
+    jsUrl: "http://localhost:3001/dist/index.js",
+  };
+
   return (
     <div style={{ height: "100vh" }}>
       <Viewer
@@ -106,7 +112,7 @@ export const ViewerHome: React.FC = () => {
           }),
           new MeasureToolsUiItemsProvider(),
         ]}
-        extensions={[TestExtension]}
+        extensions={[RemoteExtension, LocalExtension]}
       />
     </div>
   );
