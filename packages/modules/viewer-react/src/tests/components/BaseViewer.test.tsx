@@ -197,6 +197,6 @@ describe("BaseViewer", () => {
     const loader = await waitFor(() => getByTestId("loader-wrapper"));
 
     expect(loader).toBeInTheDocument();
-    expect(IModelService.openLocalImodel).toHaveBeenCalledWith(fileName);
+    expect(IModelService.openLocalIModel).toHaveBeenCalledWith(fileName);
   });
 });

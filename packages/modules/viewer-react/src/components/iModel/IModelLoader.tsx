@@ -23,7 +23,7 @@ import {
 } from "../../hooks";
 import {
   getAndSetViewState,
-  openLocalImodel,
+  openLocalIModel,
   openRemoteIModel,
 } from "../../services/iModel";
 import { userAI, ViewerPerformance } from "../../services/telemetry";
@@ -102,7 +102,7 @@ const Loader = React.memo(
       if (blankConnection) {
         imodelConnection = BlankConnection.create(blankConnection);
       } else if (filePath) {
-        imodelConnection = await openLocalImodel(filePath);
+        imodelConnection = await openLocalIModel(filePath);
       } else if (iTwinId && iModelId) {
         imodelConnection = await openRemoteIModel(
           iTwinId,

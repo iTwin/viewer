@@ -3,10 +3,21 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { FileViewerProps, ViewerCommonProps } from "@itwin/viewer-react";
+import type {
+  BlankViewerProps,
+  ConnectedViewerProps,
+  FileViewerProps,
+  ViewerCommonProps,
+  XOR,
+} from "@itwin/viewer-react";
 
-export type DesktopViewerProps = Omit<FileViewerProps, "appInsightsKey"> &
-  ViewerCommonProps;
+/** Desktop Viewer can open local (snapshot/briefcase), connected or blank connection models */
+export type DesktopViewerProps = (
+  | XOR<FileViewerProps, BlankViewerProps>
+  | XOR<FileViewerProps, ConnectedViewerProps>
+  | XOR<ConnectedViewerProps, BlankViewerProps>
+) &
+  Omit<ViewerCommonProps, "appInsightsKey">;
 
 export enum ModelStatus {
   ONLINE,
