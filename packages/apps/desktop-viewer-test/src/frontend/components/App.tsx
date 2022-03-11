@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { DesktopViewerProps } from "@itwin/desktop-viewer-react";
+import type { DesktopInitializerProps } from "@itwin/desktop-viewer-react";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
 import { Router } from "@reach/router";
@@ -21,7 +21,7 @@ import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
 const App = () => {
   (window as any).ITWIN_VIEWER_HOME = window.location.origin;
 
-  const desktopInitializerProps = useMemo<DesktopViewerProps>(
+  const desktopInitializerProps = useMemo<DesktopInitializerProps>(
     () => ({
       additionalI18nNamespaces: ["iTwinDesktopViewer"],
       enablePerformanceMonitors: true,

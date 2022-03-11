@@ -11,12 +11,14 @@ import type {
   XOR,
 } from "@itwin/viewer-react";
 
+export type DesktopInitializerProps = Omit<ViewerCommonProps, "appInsightsKey">;
+
 /** Desktop Viewer can open local (snapshot/briefcase), connected or blank connection models */
 export type DesktopViewerProps = XOR<
   XOR<FileViewerProps, BlankViewerProps>,
   ConnectedViewerProps
 > &
-  Omit<ViewerCommonProps, "appInsightsKey">;
+  DesktopInitializerProps;
 
 export enum ModelStatus {
   ONLINE,
