@@ -33,7 +33,7 @@ export const ViewerRoute = ({ location }: ViewerRouteProps) => {
 
   return filePath ? (
     <Viewer
-      snapshotPath={filePath}
+      filePath={filePath}
       onIModelAppInit={onIModelAppInitialized}
       defaultUiConfig={{
         contentManipulationTools: { cornerItem: { hideDefault: true } },

@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ItwinViewerInitializerParams } from "@itwin/viewer-react";
+import type { ViewerInitializerParams } from "@itwin/viewer-react";
 import {
   getInitializationOptions,
   isEqual,
@@ -12,11 +12,13 @@ import {
 import { useEffect, useMemo, useState } from "react";
 
 import { DesktopInitializer } from "../services/Initializer";
-import type { DesktopViewerProps } from "../types";
+import type { DesktopInitializerParams } from "../types";
 
-export const useDesktopViewerInitializer = (options: DesktopViewerProps) => {
+export const useDesktopViewerInitializer = (
+  options: DesktopInitializerParams
+) => {
   const [desktopViewerInitOptions, setDesktopViewerInitOptions] =
-    useState<ItwinViewerInitializerParams>();
+    useState<ViewerInitializerParams>();
   const [desktopViewerInitalized, setDesktopViewerInitalized] = useState(false);
   const baseViewerInitialized = useBaseViewerInitializer(
     options,
@@ -42,7 +44,7 @@ export const useDesktopViewerInitializer = (options: DesktopViewerProps) => {
         });
       });
     }
-  }, [initializationOptions, desktopViewerInitOptions]);
+  }, [options, desktopViewerInitOptions, initializationOptions]);
 
   return baseViewerInitialized && desktopViewerInitalized;
 };

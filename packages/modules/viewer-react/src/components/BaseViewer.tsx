@@ -9,38 +9,26 @@ import React from "react";
 
 import { useAccessToken } from "../hooks/useAccessToken";
 import { useBaseViewerInitializer } from "../hooks/useBaseViewerInitializer";
-import type { ItwinViewerCommonParams } from "../types";
+import type {
+  BlankViewerProps,
+  ConnectedViewerProps,
+  FileViewerProps,
+  ViewerCommonProps,
+} from "../types";
 import IModelLoader from "./iModel/IModelLoader";
 
-export interface ViewerProps extends ItwinViewerCommonParams {
-  iTwinId?: string;
-  iModelId?: string;
-  changeSetId?: string;
-  snapshotPath?: string; // TODO next rename (filePath?) as this can be a briefcase or a snapshot
-  loadingComponent?: React.ReactNode;
-}
+type ViewerProps = (ConnectedViewerProps | FileViewerProps | BlankViewerProps) &
+  ViewerCommonProps;
 
-export const BaseViewer: React.FC<ViewerProps> = ({
-  iModelId,
-  iTwinId,
+export const BaseViewer = ({
   appInsightsKey,
-  theme,
-  changeSetId,
-  defaultUiConfig,
-  onIModelConnected,
   productId,
-  snapshotPath,
-  frontstages,
-  backstageItems,
-  viewportOptions,
-  uiProviders,
   i18nUrlTemplate,
   onIModelAppInit,
   additionalI18nNamespaces,
   additionalRpcInterfaces,
-  viewCreatorOptions,
-  loadingComponent,
   enablePerformanceMonitors,
+  ...loaderProps
 }: ViewerProps) => {
   const viewerInitialized = useBaseViewerInitializer({
     appInsightsKey,
@@ -55,24 +43,9 @@ export const BaseViewer: React.FC<ViewerProps> = ({
   const accessToken = useAccessToken();
   return (
     <ErrorBoundary>
-      {snapshotPath || accessToken ? (
+      {("filePath" in loaderProps && loaderProps.filePath) || accessToken ? (
         viewerInitialized ? (
-          <IModelLoader
-            iTwinId={iTwinId}
-            iModelId={iModelId}
-            changeSetId={changeSetId}
-            defaultUiConfig={defaultUiConfig}
-            appInsightsKey={appInsightsKey}
-            onIModelConnected={onIModelConnected}
-            snapshotPath={snapshotPath}
-            frontstages={frontstages}
-            backstageItems={backstageItems}
-            viewportOptions={viewportOptions}
-            uiProviders={uiProviders}
-            theme={theme}
-            viewCreatorOptions={viewCreatorOptions}
-            loadingComponent={loadingComponent}
-          />
+          <IModelLoader appInsightsKey={appInsightsKey} {...loaderProps} />
         ) : (
           <FillCentered>initializing...</FillCentered>
         )

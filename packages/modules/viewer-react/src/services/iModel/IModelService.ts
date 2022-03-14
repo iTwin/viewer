@@ -71,7 +71,7 @@ export const openRemoteIModel = async (
  * @param fileName
  * @returns
  */
-export const openLocalImodel = async (fileName: string) => {
+export const openLocalIModel = async (fileName: string) => {
   try {
     // attempt to open as a briefcase
     const connection = await BriefcaseConnection.openFile({

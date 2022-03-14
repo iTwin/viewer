@@ -234,7 +234,7 @@ describe("BaseInitializer", () => {
   it("uses the TileAdmin options that are provided", () => {
     const cesiumIonKey = "testKey";
     const appOptions = getIModelAppOptions({
-      tileAdminOptions: { cesiumIonKey },
+      tileAdmin: { cesiumIonKey },
       enablePerformanceMonitors: false,
     });
     expect(appOptions.tileAdmin).toEqual({ cesiumIonKey });

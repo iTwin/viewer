@@ -5,17 +5,17 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import type { ViewerProps } from "../components/BaseViewer";
 import { BaseInitializer } from "../services/BaseInitializer";
+import type { ViewerCommonProps } from "../types";
 import { getInitializationOptions, isEqual } from "../utilities";
 import { useIsMounted } from "./useIsMounted";
 
 export const useBaseViewerInitializer = (
-  options?: ViewerProps,
+  options?: ViewerCommonProps,
   delay?: boolean
 ) => {
   const [baseViewerInitOptions, setBaseViewerInitOptions] =
-    useState<ViewerProps>();
+    useState<ViewerCommonProps>();
   const [baseViewerInitalized, setBaseViewerInitalized] = useState(false);
   const isMounted = useIsMounted();
 
@@ -42,7 +42,7 @@ export const useBaseViewerInitializer = (
     if (!isMounted.current) {
       return BaseInitializer.cancel();
     }
-  }, [options, delay, baseViewerInitOptions, isMounted]);
+  }, [options, delay, baseViewerInitOptions, initializationOptions, isMounted]);
 
   return baseViewerInitalized;
 };
