@@ -70,6 +70,12 @@
       "projectFolder": "packages/modules/test-extension",
       "versionPolicyName": "prerelease-monorepo-lockStep",
       "shouldPublish": false
+    },
+    {
+      "packageName": "create-itwin-viewer",
+      "projectFolder": "packages/modules/create-itwin-viewer",
+      "versionPolicyName": "prerelease-monorepo-lockStep",
+      "shouldPublish": true
     }
   ]
 }

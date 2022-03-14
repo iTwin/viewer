@@ -1,0 +1,34 @@
+{
+  "name": "create-itwin-viewer",
+  "version": "1.0.0",
+  "description": "Initializer for iTwin Viewer apps",
+  "bin": "bin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "",
+    "debug": "node bin.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iTwin/viewer.git"
+  },
+  "keywords": [
+    "iTwin",
+    "Viewer",
+    "iTwin.js"
+  ],
+  "author": {
+    "name": "Bentley Systems, Inc.",
+    "url": "http://www.bentley.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iTwin/viewer/issues"
+  },
+  "homepage": "https://github.com/iTwin/viewer#readme",
+  "dependencies": {
+    "kleur": "^4.1.4",
+    "prompts": "^2.4.2"
+  },
+  "type": "module"
+}
