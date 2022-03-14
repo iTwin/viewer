@@ -164,39 +164,16 @@ describe("BaseViewer", () => {
     );
   });
 
-  it("ensures that either a iTwinId/iModelId combination or a local snapshot is provided", async () => {
-    const events = {
-      onError: (event: ErrorEvent) => {
-        event.preventDefault();
-      },
-    };
-
-    jest.spyOn(events, "onError");
-
-    window.addEventListener("error", events.onError);
-
-    const { getByTestId } = render(
-      <BaseViewer enablePerformanceMonitors={false} />
-    );
-
-    const loader = await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(loader).not.toBeInTheDocument();
-    expect(events.onError).toHaveBeenCalled();
-
-    window.removeEventListener("error", events.onError);
-  });
-
   it("renders and attempts to create a briefcase connection or snapshot connection if a local path is provided", async () => {
     const fileName = "/path/to/snapshot";
 
     const { getByTestId } = render(
-      <BaseViewer snapshotPath={fileName} enablePerformanceMonitors={false} />
+      <BaseViewer filePath={fileName} enablePerformanceMonitors={false} />
     );
 
     const loader = await waitFor(() => getByTestId("loader-wrapper"));
 
     expect(loader).toBeInTheDocument();
-    expect(IModelService.openLocalImodel).toHaveBeenCalledWith(fileName);
+    expect(IModelService.openLocalIModel).toHaveBeenCalledWith(fileName);
   });
 });

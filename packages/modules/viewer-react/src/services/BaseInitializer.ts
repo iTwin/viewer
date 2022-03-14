@@ -31,7 +31,7 @@ import { Presentation } from "@itwin/presentation-frontend";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
 
 import { ViewerPerformance } from "../services/telemetry";
-import type { ItwinViewerInitializerParams } from "../types";
+import type { ViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
 import { trackUserEvent, userAI } from "./telemetry/TelemetryService";
 
@@ -91,7 +91,7 @@ export class BaseInitializer {
 
   /** initialize required iTwin.js services */
   public static async initialize(
-    viewerOptions?: ItwinViewerInitializerParams
+    viewerOptions?: ViewerInitializerParams
   ): Promise<void> {
     if (!IModelApp.initialized) {
       throw new Error(
@@ -213,7 +213,7 @@ const getSupportedRpcs = (
  * @returns
  */
 export const getIModelAppOptions = (
-  options?: ItwinViewerInitializerParams
+  options?: ViewerInitializerParams
 ): IModelAppOptions => {
   // if ITWIN_VIEWER_HOME is defined, the viewer is likely being served from another origin
   const viewerHome = (window as any).ITWIN_VIEWER_HOME;
@@ -250,7 +250,7 @@ export const getIModelAppOptions = (
     publicPath: viewerHome ? `${viewerHome}/` : "",
     realityDataAccess: realityDataClient,
     mapLayerOptions: options?.mapLayerOptions,
-    tileAdmin: options?.tileAdminOptions,
+    tileAdmin: options?.tileAdmin,
   };
 };
 

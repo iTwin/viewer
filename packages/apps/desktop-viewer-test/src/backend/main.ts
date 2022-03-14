@@ -155,6 +155,6 @@ const createMenu = () => {
 try {
   void viewerMain();
 } catch (error) {
-  Logger.logError(AppLoggerCategory.Backend, error);
+  Logger.logError(AppLoggerCategory.Backend, error as string);
   process.exitCode = 1;
 }

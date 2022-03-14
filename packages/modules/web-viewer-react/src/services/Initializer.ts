@@ -14,7 +14,7 @@ import {
   ViewerPerformance,
 } from "@itwin/viewer-react";
 
-import type { IModelBackendOptions, WebViewerProps } from "../types";
+import type { IModelBackendOptions, WebInitializerParams } from "../types";
 
 const getHostedConnectionInfo = (
   backendOptions?: IModelBackendOptions
@@ -83,7 +83,7 @@ export class WebInitializer {
   };
 
   /** Web viewer startup */
-  public static async startWebViewer(options: WebViewerProps) {
+  public static async startWebViewer(options: WebInitializerParams) {
     if (!IModelApp.initialized && !this._initializing) {
       console.log("starting web viewer");
       this._initializing = true;

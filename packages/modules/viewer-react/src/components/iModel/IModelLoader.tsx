@@ -7,10 +7,7 @@ import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
 import { StateManager, UiFramework } from "@itwin/appui-react";
-import type {
-  BlankConnectionProps,
-  IModelConnection,
-} from "@itwin/core-frontend";
+import type { IModelConnection } from "@itwin/core-frontend";
 import { BlankConnection, IModelApp } from "@itwin/core-frontend";
 import { useErrorManager } from "@itwin/error-handling-react";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
@@ -26,31 +23,31 @@ import {
 } from "../../hooks";
 import {
   getAndSetViewState,
-  openLocalImodel,
+  openLocalIModel,
   openRemoteIModel,
 } from "../../services/iModel";
 import { userAI, ViewerPerformance } from "../../services/telemetry";
-import type { BlankConnectionViewState, IModelLoaderParams } from "../../types";
+import type {
+  BlankViewerProps,
+  ConnectedViewerProps,
+  FileViewerProps,
+  LoaderProps,
+} from "../../types";
 import { IModelViewer } from "./IModelViewer";
-export interface ModelLoaderProps extends IModelLoaderParams {
-  iTwinId?: string;
-  iModelId?: string;
-  changeSetId?: string;
-  appInsightsKey?: string;
-  snapshotPath?: string;
-  blankConnection?: BlankConnectionProps;
-  blankConnectionViewState?: BlankConnectionViewState;
-  loadingComponent?: React.ReactNode;
-}
 
-const Loader: React.FC<ModelLoaderProps> = React.memo(
+type ModelLoaderProps = Partial<
+  ConnectedViewerProps & FileViewerProps & BlankViewerProps
+> &
+  LoaderProps;
+
+const Loader = React.memo(
   ({
     iModelId,
     iTwinId,
     changeSetId,
     defaultUiConfig,
     onIModelConnected,
-    snapshotPath,
+    filePath,
     frontstages,
     backstageItems,
     viewportOptions,
@@ -85,7 +82,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     const getModelConnection = useCallback(async (): Promise<
       IModelConnection | undefined
     > => {
-      if (!(iTwinId && iModelId) && !snapshotPath && !blankConnection) {
+      if (!(iTwinId && iModelId) && !filePath && !blankConnection) {
         throw new Error(
           IModelApp.localization.getLocalizedStringWithNamespace(
             "iTwinViewer",
@@ -104,8 +101,8 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       // create a new imodelConnection for the passed project and imodel ids or local file
       if (blankConnection) {
         imodelConnection = BlankConnection.create(blankConnection);
-      } else if (snapshotPath) {
-        imodelConnection = await openLocalImodel(snapshotPath);
+      } else if (filePath) {
+        imodelConnection = await openLocalIModel(filePath);
       } else if (iTwinId && iModelId) {
         imodelConnection = await openRemoteIModel(
           iTwinId,
@@ -134,7 +131,7 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       iTwinId,
       iModelId,
       changeSetId,
-      snapshotPath,
+      filePath,
       blankConnection,
       isMounted,
       onIModelConnected,
@@ -217,7 +214,11 @@ const TrackedLoader = withAITracking(
   "tracked-loader"
 );
 
-const IModelLoader: React.FC<ModelLoaderProps> = (props: ModelLoaderProps) => {
+type IModelLoaderProps = ModelLoaderProps & {
+  appInsightsKey?: string;
+};
+
+const IModelLoader = (props: IModelLoaderProps) => {
   if (props.appInsightsKey) {
     return <TrackedLoader {...props} />;
   } else {
