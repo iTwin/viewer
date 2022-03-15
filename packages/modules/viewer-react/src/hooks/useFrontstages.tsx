@@ -7,7 +7,6 @@ import { StageUsage } from "@itwin/appui-abstract";
 import { StandardFrontstageProvider } from "@itwin/appui-react";
 import { useEffect, useState } from "react";
 
-import { DefaultFrontstage } from "../components/app-ui/frontstages/DefaultFrontstage";
 import { DefaultContentGroupProvider } from "../components/app-ui/providers";
 import type {
   BlankConnectionViewState,
@@ -56,14 +55,6 @@ export const useFrontstages = (
     }
 
     if (requiresConnection) {
-      // we require a connection, so initialize the DefaultFrontstage that contains the views that we want
-      // const defaultFrontstageProvider = new DefaultFrontstage(
-      //   defaultUiConfig,
-      //   viewportOptions,
-      //   viewCreatorOptions,
-      //   blankConnectionViewState
-      // );
-
       const contentGroup = new DefaultContentGroupProvider(
         viewportOptions,
         viewCreatorOptions,
