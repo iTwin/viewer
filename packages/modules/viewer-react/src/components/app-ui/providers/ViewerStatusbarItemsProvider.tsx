@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import type {
   CommonStatusBarItem,
   UiItemsProvider,
@@ -39,15 +40,10 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
   }
 
   public provideStatusBarItems(): CommonStatusBarItem[] {
-    const ToolAssistance = withStatusFieldProps(ToolAssistanceField);
-    const MessageCenter = withMessageCenterFieldProps(MessageCenterField);
-    const TileLoadIndicator = withStatusFieldProps(TileLoadingIndicator);
-    const SelectionScope = withStatusFieldProps(SelectionScopeField);
-    const SnapMode = withStatusFieldProps(SnapModeField);
-    const SelectionInfo = withStatusFieldProps(SelectionInfoField);
     const items: StatusBarItem[] = [];
 
     if (!this._defaultItems || this._defaultItems.messageCenter) {
+      const MessageCenter = withMessageCenterFieldProps(MessageCenterField);
       items.push(
         StatusBarItemUtilities.createStatusBarItem(
           "MessageCenter",
@@ -68,6 +64,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
       );
     }
     if (!this._defaultItems || this._defaultItems.toolAssistance) {
+      const ToolAssistance = withStatusFieldProps(ToolAssistanceField);
       items.push(
         StatusBarItemUtilities.createStatusBarItem(
           "ToolAssistance",
@@ -88,6 +85,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
       );
     }
     if (!this._defaultItems || this._defaultItems.tileLoadIndicator) {
+      const TileLoadIndicator = withStatusFieldProps(TileLoadingIndicator);
       items.push(
         StatusBarItemUtilities.createStatusBarItem(
           "TileLoadIndicator",
@@ -98,6 +96,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
       );
     }
     if (!this._defaultItems || this._defaultItems.accuSnapModePicker) {
+      const SnapMode = withStatusFieldProps(SnapModeField);
       items.push(
         StatusBarItemUtilities.createStatusBarItem(
           "SnapModeField",
@@ -108,6 +107,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
       );
     }
     if (!this._defaultItems || this._defaultItems.selectionScope) {
+      const SelectionScope = withStatusFieldProps(SelectionScopeField);
       items.push(
         StatusBarItemUtilities.createStatusBarItem(
           "SelectionScope",
@@ -118,6 +118,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
       );
     }
     if (!this._defaultItems || this._defaultItems.selectionInfo) {
+      const SelectionInfo = withStatusFieldProps(SelectionInfoField);
       items.push(
         StatusBarItemUtilities.createStatusBarItem(
           "SelectionInfo",
