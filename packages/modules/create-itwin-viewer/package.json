@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iTwin/viewer.git"
+    "url": "https://github.com/iTwin/viewer.git"
   },
   "keywords": [
     "iTwin",
@@ -28,7 +28,10 @@
   "homepage": "https://github.com/iTwin/viewer#readme",
   "dependencies": {
     "kleur": "^4.1.4",
-    "prompts": "^2.4.2"
+    "prompts": "^2.4.2",
+    "fs-extra": "^10.0.1",
+    "cross-spawn": "^7.0.3",
+    "validate-npm-package-name": "^3.0.0"
   },
   "type": "module"
 }

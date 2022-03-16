@@ -91,6 +91,7 @@ dependencies:
   copyfiles: 2.4.1
   cpx: 1.5.0
   cross-env: 5.2.1
+  cross-spawn: 7.0.3
   dotenv-flow: 3.2.0
   electron: 14.2.4
   electron-devtools-installer: 2.2.4
@@ -108,6 +109,7 @@ dependencies:
   eslint-plugin-react: 7.28.0_eslint@7.32.0
   eslint-plugin-react-hooks: 4.3.0_eslint@7.32.0
   eslint-plugin-simple-import-sort: 5.0.3_eslint@7.32.0
+  fs-extra: 10.0.1
   graphql: 14.7.0
   history: 4.10.1
   i18next: 19.9.2
@@ -146,6 +148,7 @@ dependencies:
   stylelint-scss: 3.21.0_stylelint@13.13.1
   ts-jest: 26.5.6_jest@26.6.3+typescript@4.4.4
   typescript: 4.4.4
+  validate-npm-package-name: 3.0.0
   webpack: 4.42.0_webpack@4.42.0
 lockfileVersion: 5.1
 packages:
@@ -6785,6 +6788,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
+  /builtins/1.0.3:
+    dev: false
+    resolution:
+      integrity: sha1-y5T662HIaWRR2zZTThQi+U8K7og=
   /bytes/3.0.0:
     dev: false
     engines:
@@ -10377,6 +10384,16 @@ packages:
       node: '>=12'
     resolution:
       integrity: sha512-C5owb14u9eJwizKGdchcDUQeFtlSHHthBk8pbX9Vc1PFZrLombudjDnNns88aYslCyF6IY5SUw3Roz6xShcEIQ==
+  /fs-extra/10.0.1:
+    dependencies:
+      graceful-fs: 4.2.9
+      jsonfile: 6.1.0
+      universalify: 2.0.0
+    dev: false
+    engines:
+      node: '>=12'
+    resolution:
+      integrity: sha512-NbdoVMZso2Lsrn/QwLXOy6rm0ufY2zEOKCDzJR/0kBsb0E6qed0P3iYK+Ath3BfvXEeu4JhEtXLgILx5psUfag==
   /fs-extra/3.0.1:
     dependencies:
       graceful-fs: 4.2.9
@@ -19552,6 +19569,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==
+  /validate-npm-package-name/3.0.0:
+    dependencies:
+      builtins: 1.0.3
+    dev: false
+    resolution:
+      integrity: sha1-X6kS2B630MdK/BQN5zF/DKffQ34=
   /validator/8.2.0:
     dev: false
     engines:
@@ -20464,12 +20487,15 @@ packages:
     version: 0.0.0
   'file:projects/create-itwin-viewer.tgz':
     dependencies:
+      cross-spawn: 7.0.3
+      fs-extra: 10.0.1
       kleur: 4.1.4
       prompts: 2.4.2
+      validate-npm-package-name: 3.0.0
     dev: false
     name: '@rush-temp/create-itwin-viewer'
     resolution:
-      integrity: sha512-+8X18T8lx/5HfkeZ+oCubEAil6ZHbXNyT1PdXX6QLIVGDqMJfTE+Aq+4s2GmjFUtg7a0rsV+dDMwRLMGxrzbqg==
+      integrity: sha512-yAguNDSD0yVF/8jP4tqiJbMwcbLyBlxtFEE075f7z+HYZ4mMgStyF72Qwpq+ttOMs6Pt2Cv5mPgvNe9v/s3/aA==
       tarball: 'file:projects/create-itwin-viewer.tgz'
     version: 0.0.0
   'file:projects/desktop-viewer-react.tgz_8fbd0e4eae4cd4e84e6bf087c10937aa':
@@ -20951,6 +20977,7 @@ specifiers:
   copyfiles: ^2.1.0
   cpx: ^1.5.0
   cross-env: ^5.2.1
+  cross-spawn: ^7.0.3
   dotenv-flow: ^3.2.0
   electron: ^14.0.0
   electron-devtools-installer: ^2.2.3
@@ -20968,6 +20995,7 @@ specifiers:
   eslint-plugin-react: ^7.20.3
   eslint-plugin-react-hooks: ^4.0.7
   eslint-plugin-simple-import-sort: ^5.0.3
+  fs-extra: ^10.0.1
   graphql: ^14.4.2
   history: ^4.10.1
   i18next: ^19.3.2
@@ -21006,4 +21034,5 @@ specifiers:
   stylelint-scss: ^3.18.0
   ts-jest: ^26.1.1
   typescript: ~4.4.0
+  validate-npm-package-name: ^3.0.0
   webpack: 4.42.0
