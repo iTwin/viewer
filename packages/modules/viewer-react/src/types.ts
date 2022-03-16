@@ -264,3 +264,18 @@ export interface BlankConnectionViewState {
   displayStyle?: BlankConnectionViewStateDisplayStyle;
   viewFlags?: BlankConnectionViewStateViewFlags;
 }
+
+/**
+ * Defines what items to include from the default status bar. If any items are
+ * specified then only those items will be added to statusbar.
+ */
+export interface ViewerDefaultStatusbarItems {
+  messageCenter?: boolean;
+  preToolAssistanceSeparator?: boolean;
+  toolAssistance?: boolean;
+  postToolAssistanceSeparator?: boolean;
+  accuSnapModePicker?: boolean;
+  tileLoadIndicator?: boolean;
+  selectionScope?: boolean;
+  selectionInfo?: boolean;
+}

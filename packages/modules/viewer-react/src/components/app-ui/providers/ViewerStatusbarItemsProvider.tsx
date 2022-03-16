@@ -9,7 +9,7 @@ import type {
 } from "@itwin/appui-abstract";
 import { StatusBarSection } from "@itwin/appui-abstract";
 import { FooterSeparator } from "@itwin/appui-layout-react";
-import type { DefaultStatusbarItems, StatusBarItem } from "@itwin/appui-react";
+import type { StatusBarItem } from "@itwin/appui-react";
 import {
   FooterModeField,
   MessageCenterField,
@@ -24,11 +24,13 @@ import {
 } from "@itwin/appui-react";
 import * as React from "react";
 
+import type { ViewerDefaultStatusbarItems } from "../../../types";
+
 export class ViewerStatusbarItemsProvider implements UiItemsProvider {
   public readonly id = "ViewerDefaultStatusbar";
   private _footerModeOnlySeparator: () => React.ReactNode;
 
-  constructor(private _defaultItems?: DefaultStatusbarItems) {
+  constructor(private _defaultItems?: ViewerDefaultStatusbarItems) {
     const FooterOnlyDisplay = withStatusFieldProps(FooterModeField);
     this._footerModeOnlySeparator = (): React.ReactNode => {
       return (
