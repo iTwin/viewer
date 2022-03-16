@@ -158,7 +158,7 @@ describe("IModelLoader", () => {
     );
 
     await waitFor(() => result.getByTestId("loader-wrapper"));
-    expect(UiItemsManager.register).toHaveBeenCalledTimes(4);
+    expect(UiItemsManager.register).toHaveBeenCalledTimes(1);
 
     result.rerender(
       <IModelLoader
@@ -169,7 +169,7 @@ describe("IModelLoader", () => {
     );
 
     await waitFor(() => result.getByTestId("viewer"));
-    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(4);
+    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(1);
   });
 
   it("creates a blank connection", async () => {
