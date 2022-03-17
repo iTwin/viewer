@@ -25,8 +25,7 @@ export class ViewerContentToolsProvider extends StandardContentToolsProvider {
 
     // if the sectionGroup tools are to be shown then we want the status field added to allow clearing or manipulation the section
     if (
-      !this._defaultItems ||
-      !this._defaultItems.vertical ||
+      !this._defaultItems?.vertical ||
       this._defaultItems.vertical.sectionGroup
     ) {
       const Sections = withStatusFieldProps(SectionsStatusField);
