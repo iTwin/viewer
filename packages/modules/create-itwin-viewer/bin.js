@@ -106,6 +106,17 @@ async function main() {
       choices: templates,
     },
     {
+      type: "text",
+      name: "iTwinId",
+      message: "Enter a default iTwinId",
+    },
+    {
+      type: "text",
+      name: "iModelId",
+      message:
+        "Enter a default iModelId (that is a part of the iTwin that you entered in the previous step)",
+    },
+    {
       type: "confirm",
       name: "auth",
       message:
@@ -150,6 +161,8 @@ async function main() {
     ]);
     // TODO
     mergedAppConfig = {
+      iTwinId: mainOptions.iTwinId,
+      iModelId: mainOptions.iModelId,
       auth: {
         ...appConfiguration.auth,
         ...authOptions,
