@@ -18,10 +18,17 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>iTwin Viewer React Sample</title>
+    <script>
+      // TODO remove this once __dirname is no longer referenced in iTwin.js frontend code.
+      // We cannot define __dirname in configuration due to Vite.js always replacing it:
+      // https://github.com/vitejs/vite/pull/2780
+      window.__dirname = "";
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

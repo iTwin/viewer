@@ -8,6 +8,63 @@ import { packageJson } from "./config/package.mjs";
 import { appConfiguration } from "./config/app.mjs";
 import validatePackageName from "validate-npm-package-name";
 
+function finalize(appName) {
+  const endMsg = bold(green("Application generation complete!"));
+  const nextSteps = "Next Steps:";
+  let i = 1;
+  const chDir = bold(cyan(`${i++}. cd ${appName}`));
+  const startApp = bold(
+    cyan(`${i++}. npm start (or yarn start / pnpm start) to start debugging`)
+  );
+  const editApp = bold(
+    cyan(
+      `${i++}. open the directory in your editor of choice to edit the application`
+    )
+  );
+  console.log(endMsg);
+  console.log(nextSteps);
+  console.log(chDir);
+  console.log(editApp);
+  console.log(startApp);
+}
+
+function installDependencies(appRoot, appName) {
+  const npmMsg = "Installing dependencies...";
+  console.log(npmMsg);
+  process.chdir(appRoot);
+  exec("npm install", () => {
+    finalize(appName);
+  });
+}
+
+function copyTemplate(appRoot, platform) {
+  const generatorRoot = new URL(".", import.meta.url).pathname;
+  const templateRoot = path.resolve(generatorRoot, "templates", platform);
+
+  fs.copySync(templateRoot, appRoot);
+}
+
+function writeConfig(appRoot, template, mergedAppConfig) {
+  const configFilePath = path.resolve(appRoot, "./src/config.ts");
+  let configFile = fs.readFileSync(configFilePath, "utf8");
+  const uiConfig = `export const uiConfig: UiConfiguration = ${JSON.stringify(
+    uiConfigurations[template].config
+  )}`;
+  const appConfig = `export const appConfig: AppConfiguration = ${JSON.stringify(
+    mergedAppConfig
+  )}`;
+  configFile = configFile.replace("// UI CONFIG HERE", uiConfig);
+  configFile = configFile.replace("// APP CONFIG HERE", appConfig);
+  fs.writeFileSync(configFilePath, configFile);
+}
+
+function writePackageJson(appRoot, appName) {
+  packageJson.name = appName;
+  packageJson.version = "0.1.0";
+  const packageJsonPath = path.resolve(appRoot, "./package.json");
+  fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson));
+}
+
 async function main() {
   const welcomeMsg = bold(
     cyan("Welcome to the iTwin Viewer Application Generator!")
@@ -51,7 +108,8 @@ async function main() {
     {
       type: "confirm",
       name: "auth",
-      message: "Would you like to add your authorization client configuration?",
+      message:
+        "Would you like to add your authorization client configuration (you must enter it in the src/config.ts file prior to running your application if you do not)?",
       initial: true,
     },
   ]);
@@ -103,54 +161,11 @@ async function main() {
   console.log(startMsg);
 
   const applicationRoot = path.resolve(mainOptions.name);
-  const generatorRoot = new URL(".", import.meta.url).pathname;
-  const templateRoot = path.resolve(
-    generatorRoot,
-    "templates",
-    mainOptions.platform
-  );
 
-  fs.copySync(templateRoot, applicationRoot);
-  const configFilePath = path.resolve(applicationRoot, "./src/config.ts");
-  let configFile = fs.readFileSync(configFilePath, "utf8");
-  const uiConfig = `export const uiConfig: UiConfiguration = ${JSON.stringify(
-    uiConfigurations[mainOptions.template].config
-  )}`;
-  const appConfig = `export const appConfig: AppConfiguration = ${JSON.stringify(
-    mergedAppConfig
-  )}`;
-  configFile = configFile.replace("// UI CONFIG HERE", uiConfig);
-  configFile = configFile.replace("// APP CONFIG HERE", appConfig);
-  fs.writeFileSync(configFilePath, configFile);
-
-  packageJson.name = mainOptions.name;
-  packageJson.version = "0.1.0";
-  const packageJsonPath = path.resolve(applicationRoot, "./package.json");
-  fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson));
-
-  // process.chdir(`/${applicationRoot}`);
-  const npmMsg = "Installing dependencies...";
-  console.log(npmMsg);
-  process.chdir(applicationRoot);
-  exec("npm install", () => {
-    const endMsg = bold(green("Application generation complete!"));
-    const nextSteps = "Next Steps:";
-    let i = 1;
-    const chDir = bold(cyan(`${i++}. cd ${mainOptions.name}`));
-    const startApp = bold(
-      cyan(`${i++}. npm start (or yarn start / pnpm start) to start debugging`)
-    );
-    const editApp = bold(
-      cyan(
-        `${i++}. open the directory in your editor of choice to edit the application`
-      )
-    );
-    console.log(endMsg);
-    console.log(nextSteps);
-    console.log(chDir);
-    console.log(editApp);
-    console.log(startApp);
-  });
+  copyTemplate(applicationRoot, mainOptions.platform);
+  writeConfig(applicationRoot, mainOptions.template, mergedAppConfig);
+  writePackageJson(applicationRoot, mainOptions.name);
+  installDependencies(applicationRoot, mainOptions.name);
 }
 
 main();
