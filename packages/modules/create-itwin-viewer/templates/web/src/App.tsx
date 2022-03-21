@@ -59,7 +59,7 @@ const App: React.FC = () => {
       } else {
         if (!appConfig.iTwinId) {
           throw new Error(
-            "Please add a valid iTwin ID in the .env file and restart the application or add it to the iTwinId query parameter in the url and refresh the page. See the README for more information."
+            "Please add a valid iTwinId to the appConfig object in the config.ts file or add it to the iTwinId query parameter in the url and refresh the page. See the README for more information."
           );
         }
       }
@@ -69,7 +69,7 @@ const App: React.FC = () => {
       } else {
         if (!appConfig.iModelId) {
           throw new Error(
-            "Please add a valid iModel ID in the .env file and restart the application or add it to the iModelId query parameter in the url and refresh the page. See the README for more information."
+            "Please add a valid iModelId to the appConfig object in the config.ts file or add it to the iTwinId query parameter in the url and refresh the page. See the README for more information."
           );
         }
       }

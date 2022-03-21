@@ -14,17 +14,17 @@ import { appConfig } from "./config";
 
 if (!appConfig.auth.clientId) {
   throw new Error(
-    "Please add a valid OIDC client id to the .env file and restart the application. See the README for more information."
+    "Please add a valid OIDC client id to the appConfig object in the config.ts file. See the README for more information."
   );
 }
 if (!appConfig.auth.scope) {
   throw new Error(
-    "Please add valid scopes for your OIDC client to the .env file and restart the application. See the README for more information."
+    "Please add valid scopes for your OIDC client to the appConfig object in the config.ts file. See the README for more information."
   );
 }
 if (!appConfig.auth.redirectUri) {
   throw new Error(
-    "Please add a valid redirect URI to the .env file and restart the application. See the README for more information."
+    "Please add a valid redirect URI to the appConfig object in the config.ts file. See the README for more information."
   );
 }
 
