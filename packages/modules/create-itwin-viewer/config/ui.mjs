@@ -24,5 +24,9 @@ export const uiConfigurations = {
       tools: [],
       widgets: [],
     },
+    dependencies: {
+      "@itwin/tree-widget-react": "^0.3.0",
+      "@itwin/property-grid-react": "^0.3.0",
+    },
   },
 };

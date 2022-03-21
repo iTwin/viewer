@@ -58,9 +58,15 @@ function writeConfig(appRoot, template, mergedAppConfig) {
   fs.writeFileSync(configFilePath, configFile);
 }
 
-function writePackageJson(appRoot, appName) {
+function writePackageJson(appRoot, appName, templateDependencies) {
   packageJson.name = appName;
   packageJson.version = "0.1.0";
+  if (templateDependencies) {
+    packageJson.dependencies = {
+      ...packageJson.dependencies,
+      ...templateDependencies,
+    };
+  }
   const packageJsonPath = path.resolve(appRoot, "./package.json");
   fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson));
 }
@@ -177,7 +183,11 @@ async function main() {
 
   copyTemplate(applicationRoot, mainOptions.platform);
   writeConfig(applicationRoot, mainOptions.template, mergedAppConfig);
-  writePackageJson(applicationRoot, mainOptions.name);
+  writePackageJson(
+    applicationRoot,
+    mainOptions.name,
+    uiConfigurations[mainOptions.template].dependencies
+  );
   installDependencies(applicationRoot, mainOptions.name);
 }
 

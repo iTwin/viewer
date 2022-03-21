@@ -10,7 +10,7 @@
         "[BACKEND] itwin-viewer-desktop",
         "[FRONTEND] itwin-viewer-desktop"
       ]
-    },
+    }
   ],
   "configurations": [
     {
@@ -50,8 +50,8 @@
       "internalConsoleOptions": "neverOpen",
       "port": 9230
     },
-    { /* PARTIAL */
-      "name": "[BACKEND] itwin-viewer-desktop",
+    {
+      /* PARTIAL */ "name": "[BACKEND] itwin-viewer-desktop",
       "cwd": "${workspaceFolder}/packages/apps/desktop-viewer-test",
       "type": "pwa-node",
       "request": "launch",
@@ -63,21 +63,32 @@
         "--remote-debugging-port=9223"
       ],
       "env": {
-        "NODE_ENV": "development",
-      },      
+        "NODE_ENV": "development"
+      },
       "presentation": {
         "group": "desktop-starter"
-      },
+      }
     },
-    { /* PARTIAL */
-      "name": "[FRONTEND] itwin-viewer-desktop",
+    {
+      /* PARTIAL */ "name": "[FRONTEND] itwin-viewer-desktop",
       "type": "pwa-chrome",
       "request": "attach",
       "port": 9223,
       "timeout": 90000,
       "presentation": {
         "group": "desktop-starter"
-      },
+      }
+    },
+    {
+      "name": "Create iTwin Viewer",
+      "type": "node",
+      "request": "launch",
+      "runtimeArgs": [
+        "${workspaceFolder}/packages/modules/create-itwin-viewer/bin.js"
+      ],
+      "cwd": "${workspaceFolder}/packages/modules/create-itwin-viewer",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }
