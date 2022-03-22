@@ -8,6 +8,10 @@ import { packageJson } from "./config/package.mjs";
 import { appConfiguration } from "./config/app.mjs";
 import validatePackageName from "validate-npm-package-name";
 
+/**
+ * Finalize generation and display next steps
+ * @param {*} appName
+ */
 function finalize(appName) {
   const endMsg = bold(green("Application generation complete!"));
   const nextSteps = "Next Steps:";
@@ -28,6 +32,11 @@ function finalize(appName) {
   console.log(startApp);
 }
 
+/**
+ * Install npm packages
+ * @param {*} appRoot
+ * @param {*} appName
+ */
 function installDependencies(appRoot, appName) {
   const npmMsg = "Installing dependencies...";
   console.log(npmMsg);
@@ -37,11 +46,23 @@ function installDependencies(appRoot, appName) {
   });
 }
 
+/**
+ * Copy the platform's template from the package to the app directory
+ * @param {*} appRoot
+ * @param {*} generatorRoot
+ * @param {*} platform
+ */
 function copyTemplate(appRoot, generatorRoot, platform) {
   const templateRoot = path.resolve(generatorRoot, "templates", platform);
   fs.copySync(templateRoot, appRoot);
 }
 
+/**
+ * Write the uiConfig and appConfig for the template to the src/config.ts file
+ * @param {*} appRoot
+ * @param {*} template
+ * @param {*} mergedAppConfig
+ */
 function writeConfig(appRoot, template, mergedAppConfig) {
   const configFilePath = path.resolve(appRoot, "src", "config.ts");
   let configFile = fs.readFileSync(configFilePath, "utf8");
@@ -56,6 +77,13 @@ function writeConfig(appRoot, template, mergedAppConfig) {
   fs.writeFileSync(configFilePath, configFile);
 }
 
+/**
+ * Write extensions for the selected template to src/extensions.ts
+ * This file is imported into App.tsx and used to provide extensions to the Viewer
+ * @param {*} generatorRoot
+ * @param {*} appRoot
+ * @param {*} template
+ */
 function writeExtensions(generatorRoot, appRoot, template) {
   const templateProviderPath = path.resolve(
     generatorRoot,
@@ -67,10 +95,17 @@ function writeExtensions(generatorRoot, appRoot, template) {
   fs.writeFileSync(extensionFilePath, extensions);
 }
 
+/**
+ * Write the preconfigured package.json file
+ * @param {*} appRoot
+ * @param {*} appName
+ * @param {*} templateDependencies
+ */
 function writePackageJson(appRoot, appName, templateDependencies) {
   packageJson.name = appName;
   packageJson.version = "0.1.0";
   if (templateDependencies) {
+    // add template-specific dependencies
     packageJson.dependencies = {
       ...packageJson.dependencies,
       ...templateDependencies,
@@ -89,6 +124,7 @@ async function main() {
   const templates = [];
 
   for (const template in uiConfigurations) {
+    // create a list of template options to present to the user
     templates.push({
       title: uiConfigurations[template].description,
       value: template,
@@ -129,7 +165,7 @@ async function main() {
       type: "text",
       name: "iModelId",
       message:
-        "Enter a default iModelId (that is a part of the iTwin that you entered in the previous step)",
+        "Enter a default iModelId (that is associated with the iTwinId that you entered in the previous step)",
     },
     {
       type: "confirm",
@@ -142,6 +178,7 @@ async function main() {
 
   let mergedAppConfig = appConfiguration;
   if (mainOptions.auth === true) {
+    // user wishes to enter auth config via the CLI
     const authOptions = await prompts([
       {
         type: "text",
