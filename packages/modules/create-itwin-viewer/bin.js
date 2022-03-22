@@ -37,15 +37,13 @@ function installDependencies(appRoot, appName) {
   });
 }
 
-function copyTemplate(appRoot, platform) {
-  const generatorRoot = new URL(".", import.meta.url).pathname;
+function copyTemplate(appRoot, generatorRoot, platform) {
   const templateRoot = path.resolve(generatorRoot, "templates", platform);
-
   fs.copySync(templateRoot, appRoot);
 }
 
 function writeConfig(appRoot, template, mergedAppConfig) {
-  const configFilePath = path.resolve(appRoot, "./src/config.ts");
+  const configFilePath = path.resolve(appRoot, "src", "config.ts");
   let configFile = fs.readFileSync(configFilePath, "utf8");
   const uiConfig = `export const uiConfig: UiConfiguration = ${JSON.stringify(
     uiConfigurations[template].config
@@ -56,6 +54,17 @@ function writeConfig(appRoot, template, mergedAppConfig) {
   configFile = configFile.replace("// UI CONFIG HERE", uiConfig);
   configFile = configFile.replace("// APP CONFIG HERE", appConfig);
   fs.writeFileSync(configFilePath, configFile);
+}
+
+function writeExtensions(generatorRoot, appRoot, template) {
+  const templateProviderPath = path.resolve(
+    generatorRoot,
+    "extensions",
+    `${template}.ts`
+  );
+  let extensions = fs.readFileSync(templateProviderPath, "utf8");
+  const extensionFilePath = path.resolve(appRoot, "src", "extensions.ts");
+  fs.writeFileSync(extensionFilePath, extensions);
 }
 
 function writePackageJson(appRoot, appName, templateDependencies) {
@@ -180,9 +189,11 @@ async function main() {
   console.log(startMsg);
 
   const applicationRoot = path.resolve(mainOptions.name);
+  const generatorRoot = new URL(".", import.meta.url).pathname;
 
-  copyTemplate(applicationRoot, mainOptions.platform);
+  copyTemplate(applicationRoot, generatorRoot, mainOptions.platform);
   writeConfig(applicationRoot, mainOptions.template, mergedAppConfig);
+  writeExtensions(generatorRoot, applicationRoot, mainOptions.template);
   writePackageJson(
     applicationRoot,
     mainOptions.name,

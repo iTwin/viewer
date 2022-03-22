@@ -17,7 +17,9 @@ import {
 } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
+import type { ExtensionProvider } from "./config";
 import { appConfig, uiConfig } from "./config";
+import extensions from "./extensions";
 import { history } from "./history";
 
 const App: React.FC = () => {
@@ -124,6 +126,13 @@ const App: React.FC = () => {
     [viewConfiguration]
   );
 
+  const onIModelAppInit = useCallback(async () => {
+    const initFns = extensions.map(
+      (extension: ExtensionProvider) => extension.initFn && extension.initFn()
+    );
+    return await Promise.all(initFns);
+  }, []);
+
   return (
     <div className="viewer-container">
       {!accessToken && (
@@ -140,6 +149,10 @@ const App: React.FC = () => {
         viewCreatorOptions={viewCreatorOptions}
         enablePerformanceMonitors={true} // see description in the README (https://www.npmjs.com/package/@itwin/desktop-viewer-react)
         defaultUiConfig={{ hideDefaultStatusBar: !uiConfig.statusBar }}
+        uiProviders={extensions.map(
+          (extension: ExtensionProvider) => extension.provider
+        )}
+        onIModelAppInit={onIModelAppInit}
       />
     </div>
   );

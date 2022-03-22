@@ -3,8 +3,6 @@ export const uiConfigurations = {
     description: "Basic (Empty Viewer with a navigation cube)",
     config: {
       statusBar: false,
-      tools: [],
-      widgets: [],
     },
   },
   Intermediate: {
@@ -12,8 +10,6 @@ export const uiConfigurations = {
       "Intermediate (Basic + navigation tools, a selection tool, measurement tools, and a status bar)",
     config: {
       statusBar: true,
-      tools: [],
-      widgets: [],
     },
   },
   Advanced: {
@@ -21,8 +17,6 @@ export const uiConfigurations = {
       "Advanced (Intermediate + sectioning tools, a property grid, and a tree view)",
     config: {
       statusBar: true,
-      tools: [],
-      widgets: [],
     },
     dependencies: {
       "@itwin/tree-widget-react": "^0.3.0",
