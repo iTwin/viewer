@@ -3,12 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  ColorTheme,
-  StandardContentToolsProvider,
-  StandardNavigationToolsProvider,
-  StandardStatusbarItemsProvider,
-} from "@itwin/appui-react";
+import { ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import {
   MeasureTools,
@@ -24,7 +19,12 @@ import {
   TreeWidgetUiItemsProvider,
 } from "@itwin/tree-widget-react";
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
-import { Viewer } from "@itwin/web-viewer-react";
+import {
+  Viewer,
+  ViewerContentToolsProvider,
+  ViewerNavigationToolsProvider,
+  ViewerStatusbarItemsProvider,
+} from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";
@@ -125,9 +125,9 @@ export const ViewerHome: React.FC = () => {
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
-          new StandardNavigationToolsProvider("DefaultNavigationTools"),
-          new StandardContentToolsProvider("DefaultContentTools"),
-          new StandardStatusbarItemsProvider("DefaultStatusbar"),
+          new ViewerNavigationToolsProvider(),
+          new ViewerContentToolsProvider(),
+          new ViewerStatusbarItemsProvider(),
           new TreeWidgetUiItemsProvider(),
           new PropertyGridUiItemsProvider({
             enableCopyingPropertyText: true,

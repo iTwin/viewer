@@ -155,81 +155,9 @@ export const iTwinViewerInitializerParamList = Object.keys(
 );
 
 /**
- * Configure options for the top left corner item
- */
-export interface CornerItem {
-  hideDefault?: boolean;
-  item?: React.ReactNode;
-}
-
-/**
- * Control visibility of individual tools or tool groups in the content manipulation vertical section. Default is true
- */
-export interface ContentManipulationVerticalItems {
-  selectTool?: boolean;
-  measureTools?: boolean;
-  sectionTools?: boolean;
-}
-
-/**
- * Control visibility of individual tools or tool groups in the content manipulation horizontal section. Default is true
- */
-export interface ContentManipulationHorizontalItems {
-  clearSelection?: boolean;
-  clearHideIsolateEmphasizeElements?: boolean;
-  hideElements?: boolean;
-  isolateElements?: boolean;
-  emphasizeElements?: boolean;
-}
-
-/**
- * Configure options for the content manipulation section
- */
-export interface ContentManipulationTools {
-  cornerItem?: CornerItem;
-  hideDefaultHorizontalItems?: boolean;
-  hideDefaultVerticalItems?: boolean;
-  verticalItems?: ContentManipulationVerticalItems;
-  horizontalItems?: ContentManipulationHorizontalItems;
-}
-
-/**
- * Control visibility of individual tools or tool groups in the view navigation horizontal section. Default is true
- */
-export interface ViewNavigationHorizontalItems {
-  rotateView?: boolean;
-  panView?: boolean;
-  fitView?: boolean;
-  windowArea?: boolean;
-  undoView?: boolean;
-  redoView?: boolean;
-}
-
-/**
- * Control visibility of individual tools or tool groups in the view navigation vertical section. Default is true
- */
-export interface ViewNavigationVerticalItems {
-  walkView?: boolean;
-  cameraView?: boolean;
-}
-
-/**
- * Configure options for the navigation section
- */
-export interface ViewNavigationTools {
-  hideDefaultHorizontalItems?: boolean;
-  hideDefaultVerticalItems?: boolean;
-  verticalItems?: ViewNavigationVerticalItems;
-  horizontalItems?: ViewNavigationHorizontalItems;
-}
-
-/**
  * Configure options for the default UI
  */
 export interface ItwinViewerUi {
-  contentManipulationTools?: ContentManipulationTools;
-  navigationTools?: ViewNavigationTools;
-  hideToolSettings?: boolean;
   hideTreeView?: boolean;
   hidePropertyGrid?: boolean;
   hideDefaultStatusBar?: boolean;
@@ -263,4 +191,19 @@ export interface BlankConnectionViewState {
   lookAt?: BlankConnectionViewStateLookAt;
   displayStyle?: BlankConnectionViewStateDisplayStyle;
   viewFlags?: BlankConnectionViewStateViewFlags;
+}
+
+/**
+ * Defines what items to include from the default status bar. If any items are
+ * specified then only those items will be added to statusbar.
+ */
+export interface ViewerDefaultStatusbarItems {
+  messageCenter?: boolean;
+  preToolAssistanceSeparator?: boolean;
+  toolAssistance?: boolean;
+  postToolAssistanceSeparator?: boolean;
+  accuSnapModePicker?: boolean;
+  tileLoadIndicator?: boolean;
+  selectionScope?: boolean;
+  selectionInfo?: boolean;
 }
