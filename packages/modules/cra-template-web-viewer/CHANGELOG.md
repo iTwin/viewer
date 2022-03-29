@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Mon, 07 Feb 2022 14:48:13 GMT and should not be manually modified.
+This log was last generated on Tue, 29 Mar 2022 14:20:55 GMT and should not be manually modified.
+
+## 2.0.4
+Tue, 29 Mar 2022 14:20:55 GMT
+
+### Patches
+
+- Add env vars for optimization
 
 ## 2.0.3
 Mon, 07 Feb 2022 14:48:13 GMT
