@@ -75,6 +75,15 @@ function writeConfig(appRoot, template, mergedAppConfig) {
   configFile = configFile.replace("// UI CONFIG HERE", uiConfig);
   configFile = configFile.replace("// APP CONFIG HERE", appConfig);
   fs.writeFileSync(configFilePath, configFile);
+  // vite.config
+  const viteConfigPath = path.resolve(
+    generatorRoot,
+    "config",
+    "vite.config.ts"
+  );
+  let viteConfig = fs.readFileSync(viteConfigPath, "utf8");
+  const viteFilePath = path.resolve(appRoot, "vite.config.ts");
+  fs.writeFileSync(viteFilePath, viteConfig);
 }
 
 /**
@@ -101,18 +110,19 @@ function writeExtensions(generatorRoot, appRoot, template) {
  * @param {*} appName
  * @param {*} templateDependencies
  */
-function writePackageJson(appRoot, appName, templateDependencies) {
-  packageJson.name = appName;
-  packageJson.version = "0.1.0";
+function writePackageJson(appRoot, appName, platform, templateDependencies) {
+  const pkgJson = packageJson[platform];
+  pkgJson.name = appName;
+  pkgJson.version = "0.1.0";
   if (templateDependencies) {
     // add template-specific dependencies
-    packageJson.dependencies = {
-      ...packageJson.dependencies,
+    pkgJson.dependencies = {
+      ...pkgJson.dependencies,
       ...templateDependencies,
     };
   }
   const packageJsonPath = path.resolve(appRoot, "./package.json");
-  fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson));
+  fs.writeFileSync(packageJsonPath, JSON.stringify(pkgJson));
 }
 
 async function main() {
@@ -234,6 +244,7 @@ async function main() {
   writePackageJson(
     applicationRoot,
     mainOptions.name,
+    mainOptions.platform,
     uiConfigurations[mainOptions.template].dependencies
   );
   installDependencies(applicationRoot, mainOptions.name);
