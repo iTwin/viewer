@@ -16,6 +16,6 @@
     "jsx": "react",
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/frontend/*.ts*"],
+  "include": ["src/*.ts*", "src/frontend/*.ts*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

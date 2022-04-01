@@ -14,8 +14,8 @@ import type {
 } from "electron";
 import { dialog, Menu } from "electron";
 
-import { appConfig } from "../common/config";
-import type { ViewerFile, ViewerIpc, ViewerSettings } from "../common/types";
+import { appConfig } from "../config";
+import type { ViewerFile, ViewerIpc, ViewerSettings } from "../types";
 import UserSettings from "./UserSettings";
 
 class ViewerHandler extends IpcHandler implements ViewerIpc {
