@@ -6,6 +6,4 @@ export const appConfiguration = {
     redirectUri: "http://localhost:3000/signin-callback",
     postSignoutRedirectUri: "http://localhost:3000/logout",
   },
-  iTwinId: "",
-  iModelId: "",
 };

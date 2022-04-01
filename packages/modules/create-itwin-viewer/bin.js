@@ -198,9 +198,13 @@ async function main() {
 
   let mergedAppConfig = {
     ...appConfiguration,
-    iTwinId: webOptions?.iTwinId,
-    iModelId: webOptions?.iModelId,
   };
+  if (webOptions?.iTwinId) {
+    mergedAppConfig.iTwinId = webOptions?.iTwinId;
+  }
+  if (webOptions?.iModelId) {
+    mergedAppConfig.iModelId = webOptions?.iModelId;
+  }
   if (mainOptions.auth === true) {
     // user wishes to enter auth config via the CLI
     const authOptions = await prompts([
