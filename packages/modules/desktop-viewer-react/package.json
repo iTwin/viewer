@@ -1,6 +1,6 @@
 {
   "name": "@itwin/desktop-viewer-react",
-  "version": "3.0.0-dev.2",
+  "version": "3.0.0-dev.3",
   "description": "Configurable iTwin.js viewer for desktop applications",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
@@ -26,7 +26,7 @@
     "lib/**/*"
   ],
   "dependencies": {
-    "@itwin/viewer-react": "3.0.0-dev.2"
+    "@itwin/viewer-react": "3.0.0-dev.3"
   },
   "devDependencies": {
     "@itwin/appui-abstract": "^3.1.0-dev.42",
