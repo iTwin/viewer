@@ -23,7 +23,6 @@
     {
       "packageName": "@itwin/error-handling-react",
       "projectFolder": "packages/modules/error-handling-react",
-      "versionPolicyName": "prerelease-monorepo-lockStep",
       "shouldPublish": false
     },
     {
