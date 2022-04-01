@@ -52,7 +52,7 @@ function installDependencies(appRoot, appName) {
  * @param {*} generatorRoot
  * @param {*} platform
  */
-function copyTemplate(appRoot, generatorRoot, platform) {
+function copyTemplate(generatorRoot, appRoot, platform) {
   const templateRoot = path.resolve(generatorRoot, "templates", platform);
   fs.copySync(templateRoot, appRoot);
 }
@@ -63,7 +63,8 @@ function copyTemplate(appRoot, generatorRoot, platform) {
  * @param {*} template
  * @param {*} mergedAppConfig
  */
-function writeConfig(appRoot, template, mergedAppConfig) {
+function writeConfig(generatorRoot, appRoot, template, mergedAppConfig) {
+  // src/config.ts
   const configFilePath = path.resolve(appRoot, "src", "config.ts");
   let configFile = fs.readFileSync(configFilePath, "utf8");
   const uiConfig = `export const uiConfig: UiConfiguration = ${JSON.stringify(
@@ -75,15 +76,17 @@ function writeConfig(appRoot, template, mergedAppConfig) {
   configFile = configFile.replace("// UI CONFIG HERE", uiConfig);
   configFile = configFile.replace("// APP CONFIG HERE", appConfig);
   fs.writeFileSync(configFilePath, configFile);
-  // vite.config
-  const viteConfigPath = path.resolve(
-    generatorRoot,
-    "config",
-    "vite.config.ts"
-  );
+  const configPath = path.resolve(generatorRoot, "config");
+  // vite.config.ts
+  const viteConfigPath = path.resolve(configPath, "vite.config.ts");
   let viteConfig = fs.readFileSync(viteConfigPath, "utf8");
   const viteFilePath = path.resolve(appRoot, "vite.config.ts");
   fs.writeFileSync(viteFilePath, viteConfig);
+  // tsconfig for vite.config.ts
+  const viteTsConfigPath = path.resolve(configPath, "tsconfig.node.json");
+  let viteTsConfig = fs.readFileSync(viteTsConfigPath, "utf8");
+  const viteTsFilePath = path.resolve(appRoot, "tsconfig.node.json");
+  fs.writeFileSync(viteTsFilePath, viteTsConfig);
 }
 
 /**
@@ -167,17 +170,6 @@ async function main() {
       choices: templates,
     },
     {
-      type: "text",
-      name: "iTwinId",
-      message: "Enter a default iTwinId",
-    },
-    {
-      type: "text",
-      name: "iModelId",
-      message:
-        "Enter a default iModelId (that is associated with the iTwinId that you entered in the previous step)",
-    },
-    {
       type: "confirm",
       name: "auth",
       message:
@@ -186,7 +178,29 @@ async function main() {
     },
   ]);
 
-  let mergedAppConfig = appConfiguration;
+  // web-specific prompts
+  let webOptions;
+  if (mainOptions.platform === "web") {
+    webOptions = await prompts([
+      {
+        type: "text",
+        name: "iTwinId",
+        message: "Enter a default iTwinId",
+      },
+      {
+        type: "text",
+        name: "iModelId",
+        message:
+          "Enter a default iModelId (that is associated with the iTwinId that you entered in the previous step)",
+      },
+    ]);
+  }
+
+  let mergedAppConfig = {
+    ...appConfiguration,
+    iTwinId: webOptions?.iTwinId,
+    iModelId: webOptions?.iModelId,
+  };
   if (mainOptions.auth === true) {
     // user wishes to enter auth config via the CLI
     const authOptions = await prompts([
@@ -223,8 +237,7 @@ async function main() {
     ]);
     // TODO
     mergedAppConfig = {
-      iTwinId: mainOptions.iTwinId,
-      iModelId: mainOptions.iModelId,
+      ...appConfiguration,
       auth: {
         ...appConfiguration.auth,
         ...authOptions,
@@ -238,8 +251,13 @@ async function main() {
   const applicationRoot = path.resolve(mainOptions.name);
   const generatorRoot = new URL(".", import.meta.url).pathname;
 
-  copyTemplate(applicationRoot, generatorRoot, mainOptions.platform);
-  writeConfig(applicationRoot, mainOptions.template, mergedAppConfig);
+  copyTemplate(generatorRoot, applicationRoot, mainOptions.platform);
+  writeConfig(
+    generatorRoot,
+    applicationRoot,
+    mainOptions.template,
+    mergedAppConfig
+  );
   writeExtensions(generatorRoot, applicationRoot, mainOptions.template);
   writePackageJson(
     applicationRoot,

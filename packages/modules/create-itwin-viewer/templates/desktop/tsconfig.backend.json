@@ -1,0 +1,29 @@
+{
+  "extends": "./node_modules/@itwin/build-tools/tsconfig-base.json",
+  "compilerOptions": {
+    "target": "es2020",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react",
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "./lib"
+  },
+  "include": [
+    "src/backend/*.ts",
+    "src/common/*.ts"
+  ]
+}
