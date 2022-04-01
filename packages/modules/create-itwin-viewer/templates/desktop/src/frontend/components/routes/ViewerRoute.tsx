@@ -35,9 +35,6 @@ export const ViewerRoute = ({ location }: ViewerRouteProps) => {
     <Viewer
       filePath={filePath}
       onIModelAppInit={onIModelAppInitialized}
-      defaultUiConfig={{
-        contentManipulationTools: { cornerItem: { hideDefault: true } },
-      }}
       uiProviders={[new IModelMergeItemsProvider()]}
       enablePerformanceMonitors={true}
     />
