@@ -1,6 +1,7 @@
 {
   "name": "@itwin/error-handling-react",
-  "version": "3.0.0-dev.1",
+  "private": true,
+  "version": "3.0.0-dev.2",
   "description": "iTwin Error Handling frontend components",
   "main": "lib/index.js",
   "module": "build/index.js",

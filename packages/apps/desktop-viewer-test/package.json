@@ -51,7 +51,7 @@
     "@itwin/ecschema-metadata": "^3.1.0-dev.42",
     "@itwin/electron-authorization": "^0.8.3",
     "@itwin/express-server": "^3.1.0-dev.42",
-    "@itwin/desktop-viewer-react": "3.0.0-dev.1",
+    "@itwin/desktop-viewer-react": "3.0.0-dev.3",
     "@itwin/imodel-browser-react": "^0.12.2",
     "@itwin/imodels-access-backend": "^1.0.0",
     "@itwin/imodels-access-frontend": "^1.0.1",

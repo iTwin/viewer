@@ -3,5 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-export * from "./BasicToolWidget";
-export * from "./BasicNavigationWidget";
+import type { DefaultNavigationTools } from "@itwin/appui-react";
+import { StandardNavigationToolsProvider } from "@itwin/appui-react";
+
+export class ViewerNavigationToolsProvider extends StandardNavigationToolsProvider {
+  constructor(defaultItems?: DefaultNavigationTools) {
+    super("ViewerDefaultNavigationTools", defaultItems);
+  }
+}
