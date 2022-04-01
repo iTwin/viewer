@@ -67,7 +67,6 @@
     {
       "packageName": "@itwin/test-extension",
       "projectFolder": "packages/modules/test-extension",
-      "versionPolicyName": "prerelease-monorepo-lockStep",
       "shouldPublish": false
     }
   ]
