@@ -24,7 +24,7 @@ export const packageJson = {
       "@itwin/presentation-common": "^3.2.0-dev.14",
       "@itwin/presentation-frontend": "^3.2.0-dev.14",
       "@itwin/reality-data-client": "^0.7.0",
-      "@itwin/web-viewer-react": "^2.0.0", // TODO
+      "@itwin/web-viewer-react": "^3.0.0-dev.3",
       "@itwin/webgl-compatibility": "^3.2.0-dev.14",
       history: "^4.10.1",
       react: "^17.0.2",
@@ -91,7 +91,7 @@ export const packageJson = {
       "@itwin/ecschema-metadata": "^3.2.0-dev.14",
       "@itwin/electron-authorization": "^0.8.3",
       "@itwin/express-server": "^3.2.0-dev.14",
-      "@itwin/desktop-viewer-react": "^2.0.0", // TODO
+      "@itwin/desktop-viewer-react": "^3.0.0-dev.3",
       "@itwin/imodel-browser-react": "^0.12.2",
       "@itwin/imodels-access-backend": "^1.0.0",
       "@itwin/imodels-access-frontend": "^1.0.1",
