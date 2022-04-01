@@ -75,6 +75,7 @@ export const packageJson = {
       "@itwin/appui-abstract": "^3.2.0-dev.14",
       "@itwin/appui-layout-react": "^3.2.0-dev.14",
       "@itwin/appui-react": "^3.2.0-dev.14",
+      "@itwin/browser-authorization": "^0.5.1",
       "@itwin/components-react": "^3.2.0-dev.14",
       "@itwin/core-backend": "^3.2.0-dev.14",
       "@itwin/core-bentley": "^3.2.0-dev.14",
