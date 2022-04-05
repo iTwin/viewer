@@ -70,6 +70,7 @@ export const packageJson = {
     ],
   },
   desktop: {
+    main: "lib/backend/main.js",
     dependencies: {
       "@bentley/icons-generic-webfont": "^1.0.15",
       "@itwin/appui-abstract": "^3.2.0-dev.14",
@@ -130,6 +131,7 @@ export const packageJson = {
       cpx: "^1.5.0",
       "cross-env": "^5.2.1",
       "electron-devtools-installer": "^2.2.3",
+      "electron-reload": "^2.0.0-alpha.1",
       "npm-run-all": "^4.1.5",
       rimraf: "^3.0.2",
       sass: "^1.29.0",
@@ -140,24 +142,19 @@ export const packageJson = {
       plugins: ["@itwin"],
       extends: "plugin:@itwin/itwinjs-recommended",
     },
-    scripts: {
-      start: "vite",
-      build: "tsc && vite build",
-      preview: "vite preview",
-    },
     browserslist: ["electron 8.0.0"],
     os: ["win32", "linux", "darwin"],
     engines: {
       node: ">=10.17.0 <15.0",
     },
     scripts: {
-      "electron:debug":
-        "cross-env NODE_ENV=development electron lib/backend/main.js",
+      "electron:debug": "cross-env NODE_ENV=development electron .",
       build: "npm run -s build:frontend && npm run -s build:backend",
       "build:backend": "tsc -p tsconfig.backend.json",
       "build:frontend": "tsc && vite build",
-      start: 'npm run build:backend && run-p "start:frontend" "electron:debug"',
+      start: 'run-p "start:backend" "start:frontend" "electron:debug"',
       "start:frontend": "vite",
+      "start:backend": "tsc -p tsconfig.backend.json --watch",
     },
   },
 };

@@ -3,6 +3,5 @@
   "compilerOptions": {
     "outDir": "./lib"
   },
-  "include": ["src/*.ts*"],
-  "exclude": ["src/frontend/*.ts*"]
+  "include": ["src/types.ts", "src/config.ts", "src/backend/*.ts*"]
 }

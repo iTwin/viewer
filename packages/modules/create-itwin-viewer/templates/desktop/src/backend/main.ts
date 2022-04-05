@@ -23,6 +23,22 @@ import { AppLoggerCategory, channelName } from "../types";
 import ViewerHandler from "./ViewerHandler";
 
 require("dotenv-flow").config(); // eslint-disable-line @typescript-eslint/no-var-requires
+if (process.env.NODE_ENV === "development") {
+  // add hot reloading for the main process
+  // remove this code if that is not desirable
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  require("electron-reload")(__dirname, {
+    electron: path.join(
+      __dirname,
+      "..",
+      "..",
+      "node_modules",
+      ".bin",
+      "electron"
+    ),
+    hardResetMethod: "exit",
+  });
+}
 
 const appInfo = {
   id: "itwin-viewer",
@@ -129,24 +145,29 @@ const createMenu = () => {
   ] as MenuItemConstructorOptions[];
 
   if (isMac) {
+    const windowMenu: MenuItemConstructorOptions[] = [
+      {
+        label: "Minimize",
+        role: "minimize",
+      },
+      {
+        label: "Zoom",
+        role: "zoom",
+        accelerator: "CommandOrControl+Alt+Z",
+      },
+    ];
+
+    // add a reload menu item for development only
+    if (process.env.NODE_ENV === "development") {
+      windowMenu.push({
+        label: "Reload",
+        role: "reload",
+      });
+    }
+
     template.push({
       label: "Window",
-      submenu: [
-        {
-          label: "Minimize",
-          role: "minimize",
-        },
-        {
-          label: "Zoom",
-          role: "zoom",
-          accelerator: "CommandOrControl+Alt+Z",
-        },
-        // TODO uncomment for dev as needed
-        // {
-        //   label: "Reload",
-        //   role: "reload",
-        // },
-      ],
+      submenu: windowMenu,
     });
     template.unshift({
       label: "iTwin Viewer",
