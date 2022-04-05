@@ -19,8 +19,7 @@ import { Menu, shell } from "electron";
 import type { MenuItemConstructorOptions } from "electron/main";
 import * as path from "path";
 
-import { AppLoggerCategory } from "../types";
-import { channelName } from "../types";
+import { AppLoggerCategory, channelName } from "../types";
 import ViewerHandler from "./ViewerHandler";
 
 require("dotenv-flow").config(); // eslint-disable-line @typescript-eslint/no-var-requires

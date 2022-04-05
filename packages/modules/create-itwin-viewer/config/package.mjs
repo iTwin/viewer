@@ -97,6 +97,7 @@ export const packageJson = {
       "@itwin/imodels-access-backend": "^1.0.0",
       "@itwin/imodels-access-frontend": "^1.0.1",
       "@itwin/imodels-client-management": "^1.0.1",
+      "@itwin/imodel-components-react": "^3.2.0-dev.14",
       "@itwin/itwinui-css": "^0.18.1",
       "@itwin/itwinui-icons-react": "^1.2.0",
       "@itwin/itwinui-react": "^1.16.2",
@@ -112,8 +113,11 @@ export const packageJson = {
       minimist: "^1.2.5",
       react: "^17.0.2",
       "react-dom": "^17.0.2",
+      "react-redux": "^7.2.0",
     },
     devDependencies: {
+      "@esbuild-plugins/node-globals-polyfill": "~0.1.1",
+      "@esbuild-plugins/node-modules-polyfill": "~0.1.2",
       "@bentley/react-scripts": "^4.0.3",
       "@itwin/build-tools": "^3.1.0-dev.42",
       "@types/electron-devtools-installer": "^2.2.0",
@@ -122,6 +126,7 @@ export const packageJson = {
       "@types/reach__router": "~1.3.9",
       "@types/react": "^17.0.19",
       "@types/react-dom": "^17.0.9",
+      "@vitejs/plugin-react": "^1.0.7",
       cpx: "^1.5.0",
       "cross-env": "^5.2.1",
       "electron-devtools-installer": "^2.2.3",
@@ -129,7 +134,7 @@ export const packageJson = {
       rimraf: "^3.0.2",
       sass: "^1.29.0",
       typescript: "~4.4.0",
-      webpack: "4.42.0",
+      vite: "^2.8.0",
     },
     eslintConfig: {
       plugins: ["@itwin"],
@@ -146,8 +151,8 @@ export const packageJson = {
       node: ">=10.17.0 <15.0",
     },
     scripts: {
-      start: "vite",
-      preview: "vite preview",
+      "electron:debug":
+        "cross-env NODE_ENV=development electron lib/backend/main.js",
       build: "npm run -s build:frontend && npm run -s build:backend",
       "build:backend": "tsc -p tsconfig.backend.json",
       "build:frontend": "tsc && vite build",

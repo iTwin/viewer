@@ -16,11 +16,15 @@ import { dialog, Menu } from "electron";
 
 import { appConfig } from "../config";
 import type { ViewerFile, ViewerIpc, ViewerSettings } from "../types";
+import { channelName } from "../types";
 import UserSettings from "./UserSettings";
 
 class ViewerHandler extends IpcHandler implements ViewerIpc {
   private static _authInitialized = false;
 
+  public get channelName() {
+    return channelName;
+  }
   /**
    * Open file dialog
    * @param options

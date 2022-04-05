@@ -7,7 +7,7 @@ import { ElectronHost } from "@itwin/core-electron/lib/cjs/ElectronBackend";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 
-import type { ViewerFile, ViewerSettings } from "../common/types";
+import type { ViewerFile, ViewerSettings } from "../types";
 
 class UserSettings {
   private _settings: ViewerSettings;
@@ -72,7 +72,7 @@ class UserSettings {
     } else {
       // remove if it already exists to keep recents unique
       const existing = this.settings.recents.findIndex(
-        (existingFile) =>
+        (existingFile: ViewerFile) =>
           (file.path && existingFile.path === file.path) ||
           (file.iModelId &&
             existingFile.iTwinId === file.iTwinId &&
