@@ -92,6 +92,7 @@ dependencies:
   cpx: 1.5.0
   cross-env: 5.2.1
   cross-spawn: 7.0.3
+  deepmerge: 4.2.2
   dotenv-flow: 3.2.0
   electron: 14.2.4
   electron-devtools-installer: 2.2.4
@@ -20468,7 +20469,7 @@ packages:
       '@itwin/imodel-components-react': '*'
       redux: '*'
     resolution:
-      integrity: sha512-ZIuTCJ77c6v4cQegbWDrT0dtgHJ2IgpSXsGkPJY9+X7YuP8lIm819Icx/qBJ2Eog+Rns9i8ZzimLGXbwotD+kA==
+      integrity: sha512-urwOW485rgJl3AwaLQckuJ36K202qv/YyzFpJfY4L84YcwHlNmrviJQhyXKE6+T2DEvciAp30GexG3v8pI52Vw==
       tarball: 'file:projects/cdn-viewer.tgz'
     version: 0.0.0
   'file:projects/cra-template-desktop-viewer.tgz':
@@ -20488,6 +20489,7 @@ packages:
   'file:projects/create-itwin-viewer.tgz':
     dependencies:
       cross-spawn: 7.0.3
+      deepmerge: 4.2.2
       fs-extra: 10.0.1
       kleur: 4.1.4
       prompts: 2.4.2
@@ -20495,7 +20497,7 @@ packages:
     dev: false
     name: '@rush-temp/create-itwin-viewer'
     resolution:
-      integrity: sha512-yAguNDSD0yVF/8jP4tqiJbMwcbLyBlxtFEE075f7z+HYZ4mMgStyF72Qwpq+ttOMs6Pt2Cv5mPgvNe9v/s3/aA==
+      integrity: sha512-AYkVl63qJLHoYrQhfiWh8ABUXiIW11RoB4k77DJNWk03TJ7DOj8pEIlJ+k/Am9Ui+/MMyycxJZNuKYhED+uTaw==
       tarball: 'file:projects/create-itwin-viewer.tgz'
     version: 0.0.0
   'file:projects/desktop-viewer-react.tgz_8fbd0e4eae4cd4e84e6bf087c10937aa':
@@ -20549,7 +20551,7 @@ packages:
     peerDependencies:
       '@itwin/ecschema-metadata': '*'
     resolution:
-      integrity: sha512-7G0C/a5J/kvz3CWCEZeQpgBNKYZbns0pEfUpXjNVZSNWxqJEDl7l1bOlxi5jj5sm6lkliVpFXASle94P0jrjzQ==
+      integrity: sha512-uIOn9JNGmVOt/Ib08SRtntTf+jqiWdyXPSEwrdROOuith/SxaG363jCXVQedNlMForzVSsA2Or3LlEJt2jtOqg==
       tarball: 'file:projects/desktop-viewer-react.tgz'
     version: 0.0.0
   'file:projects/desktop-viewer-test.tgz_e2bc709ebe80abd6efb1ebf6112c5892':
@@ -20617,7 +20619,7 @@ packages:
       react-redux: '*'
       redux: '*'
     resolution:
-      integrity: sha512-mssttUWvop1zYnv6MojR+GvMvkpcZyE5c4GNVXEozIEEQTyOHDdcfRzT0LaS8zeS5etMQoyM8GrlLOBa3rkyfw==
+      integrity: sha512-XMvNU7xYQRo4ag6K01wxhP16OgfHRqhShYKB/MBhdvG1/7dweEejQgLSiJbpUcsQ8Gc6xRPbXj135FA+bLo99A==
       tarball: 'file:projects/desktop-viewer-test.tgz'
     version: 0.0.0
   'file:projects/error-handling-react.tgz':
@@ -20746,7 +20748,7 @@ packages:
     dev: false
     name: '@rush-temp/viewer-react'
     resolution:
-      integrity: sha512-XV9oqOZ0KN87YwEymFOibiGtRlIOrDQ0THsVvztQ6guHHpUKA2yBo63NBAQXQh6hlwAj8dKD+Pbz2dfNM63irQ==
+      integrity: sha512-hwlFyMz6dCnd+7Cqf9ty2DAt76XK8XrVZ7h/2tiZFLSqck4pmYueIw/qLMuTqa2uzOtlO7gGVX/Kz13llq6Spw==
       tarball: 'file:projects/viewer-react.tgz'
     version: 0.0.0
   'file:projects/viewer-scripts.tgz_typescript@4.4.4':
@@ -20826,7 +20828,7 @@ packages:
     dev: false
     name: '@rush-temp/web-viewer-react'
     resolution:
-      integrity: sha512-2MvWebOwL6CA3/CA/WjNpeAmduvVurKgWGtu45Ay6CSkFbQoU7aUc5w/dDT0dN7fM6rVHaRr3wwyd2WqvkS3GA==
+      integrity: sha512-IyhGaKvCjhxN3LmoVv0xs8g/DimVJ8TKVlA0EjMO/tmGskF+lYvhf5akOGoVTv7buELkNT3+OboO0TCsoOq6GQ==
       tarball: 'file:projects/web-viewer-react.tgz'
     version: 0.0.0
   'file:projects/web-viewer-test.tgz_f636bdc8e97537cd7cc6d91f8d4be43e':
@@ -20880,7 +20882,7 @@ packages:
       '@itwin/imodel-components-react': '*'
       '@itwin/presentation-components': '*'
     resolution:
-      integrity: sha512-ci5kRpGwL8Q5xSpdttufyFNUfwzxgHRWvKpl1syccYyr/5whoyR+aFtk4K6F5EZu7jZHxLC5V9c3AlaZKmOasw==
+      integrity: sha512-tuaAlLXWVL26H5pC6ll//QCxskDJ8LqaugBMr3jhUl/saX644bbDVRWqrmpPKciuHwFGCtOnar9ekDDneV56Ew==
       tarball: 'file:projects/web-viewer-test.tgz'
     version: 0.0.0
 registry: ''
@@ -20978,6 +20980,7 @@ specifiers:
   cpx: ^1.5.0
   cross-env: ^5.2.1
   cross-spawn: ^7.0.3
+  deepmerge: ^4.2.2
   dotenv-flow: ^3.2.0
   electron: ^14.0.0
   electron-devtools-installer: ^2.2.3

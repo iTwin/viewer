@@ -7,6 +7,7 @@ import { uiConfigurations } from "./config/ui.mjs";
 import { packageJson } from "./config/package.mjs";
 import { appConfiguration } from "./config/app.mjs";
 import validatePackageName from "validate-npm-package-name";
+import deepmerge from "deepmerge";
 
 /**
  * Finalize generation and display next steps
@@ -114,7 +115,7 @@ function writeExtensions(generatorRoot, appRoot, template) {
  * @param {*} templateDependencies
  */
 function writePackageJson(appRoot, appName, platform, templateDependencies) {
-  const pkgJson = packageJson[platform];
+  const pkgJson = deepmerge(packageJson.common, packageJson[platform]);
   pkgJson.name = appName;
   pkgJson.version = "0.1.0";
   if (templateDependencies) {
