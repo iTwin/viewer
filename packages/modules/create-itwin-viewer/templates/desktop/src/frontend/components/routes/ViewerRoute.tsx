@@ -7,7 +7,7 @@ import { Viewer } from "@itwin/desktop-viewer-react";
 import type { RouteComponentProps } from "@reach/router";
 import React, { useCallback, useEffect, useState } from "react";
 
-import { IModelMergeItemsProvider } from "../../extensions";
+import { IModelMergeItemsProvider } from "../../extensions/IModelMergeStatusBarItem";
 
 interface ViewerRouteProps extends RouteComponentProps {
   children?: any;

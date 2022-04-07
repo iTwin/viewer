@@ -4,8 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { DesktopInitializerParams } from "@itwin/desktop-viewer-react";
-import { useConnectivity } from "@itwin/desktop-viewer-react";
-import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
+import {
+  useConnectivity,
+  useDesktopViewerInitializer,
+} from "@itwin/desktop-viewer-react";
 import { Router } from "@reach/router";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
