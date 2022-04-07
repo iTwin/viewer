@@ -8,6 +8,7 @@ import { packageJson } from "./config/package.mjs";
 import { appConfiguration } from "./config/app.mjs";
 import validatePackageName from "validate-npm-package-name";
 import deepmerge from "deepmerge";
+import prettier from "prettier";
 
 /**
  * Finalize generation and display next steps
@@ -76,17 +77,20 @@ function writeConfig(generatorRoot, appRoot, template, mergedAppConfig) {
   )}`;
   configFile = configFile.replace("// UI CONFIG HERE", uiConfig);
   configFile = configFile.replace("// APP CONFIG HERE", appConfig);
+  configFile = prettier.format(configFile, { parser: "typescript" });
   fs.writeFileSync(configFilePath, configFile);
   const configPath = path.resolve(generatorRoot, "config");
   // vite.config.ts
   const viteConfigPath = path.resolve(configPath, "vite.config.ts");
   let viteConfig = fs.readFileSync(viteConfigPath, "utf8");
   const viteFilePath = path.resolve(appRoot, "vite.config.ts");
+  viteConfig = prettier.format(viteConfig, { parser: "typescript" });
   fs.writeFileSync(viteFilePath, viteConfig);
   // tsconfig for vite.config.ts
   const viteTsConfigPath = path.resolve(configPath, "tsconfig.node.json");
   let viteTsConfig = fs.readFileSync(viteTsConfigPath, "utf8");
   const viteTsFilePath = path.resolve(appRoot, "tsconfig.node.json");
+  viteTsConfig = prettier.format(viteTsConfig, { parser: "json" });
   fs.writeFileSync(viteTsFilePath, viteTsConfig);
 }
 
@@ -105,6 +109,7 @@ function writeExtensions(generatorRoot, appRoot, template) {
   );
   let extensions = fs.readFileSync(templateProviderPath, "utf8");
   const extensionFilePath = path.resolve(appRoot, "src", "extensions.ts");
+  extensions = prettier.format(extensions, { parser: "typescript" });
   fs.writeFileSync(extensionFilePath, extensions);
 }
 
@@ -126,7 +131,10 @@ function writePackageJson(appRoot, appName, platform, templateDependencies) {
     };
   }
   const packageJsonPath = path.resolve(appRoot, "./package.json");
-  fs.writeFileSync(packageJsonPath, JSON.stringify(pkgJson));
+  const pkgJsonString = prettier.format(JSON.stringify(pkgJson), {
+    parser: "json",
+  });
+  fs.writeFileSync(packageJsonPath, pkgJsonString);
 }
 
 async function main() {

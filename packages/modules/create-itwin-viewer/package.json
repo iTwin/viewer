@@ -32,7 +32,8 @@
     "fs-extra": "^10.0.1",
     "cross-spawn": "^7.0.3",
     "validate-npm-package-name": "^3.0.0",
-    "deepmerge": "^4.2.2"
+    "deepmerge": "^4.2.2",
+    "prettier": "^2.0.5"
   },
   "type": "module"
 }
