@@ -143,8 +143,8 @@ const App: React.FC = () => {
         </FillCentered>
       )}
       <Viewer
-        iTwinId={iTwinId}
-        iModelId={iModelId}
+        iTwinId={iTwinId ?? ""}
+        iModelId={iModelId ?? ""}
         authClient={authClient}
         viewCreatorOptions={viewCreatorOptions}
         enablePerformanceMonitors={true} // see description in the README (https://www.npmjs.com/package/@itwin/desktop-viewer-react)
