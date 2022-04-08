@@ -33,6 +33,7 @@ export const packageJson = {
     devDependencies: {
       "@esbuild-plugins/node-globals-polyfill": "~0.1.1",
       "@esbuild-plugins/node-modules-polyfill": "~0.1.2",
+      "@kckst8/vite-plugin-commonjs": "^0.1.0",
       "@testing-library/react": "^12.1.4",
       "@types/history": "^4.7.6",
       "@types/jest": "^27.4.1",

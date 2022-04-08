@@ -5,16 +5,23 @@
 
 import { NodeGlobalsPolyfillPlugin } from "@esbuild-plugins/node-globals-polyfill";
 import { NodeModulesPolyfillPlugin } from "@esbuild-plugins/node-modules-polyfill";
+import { esbuildCommonjs, viteCommonjs } from "@kckst8/vite-plugin-commonjs";
 import react from "@vitejs/plugin-react";
-import path from "path";
-import { fileURLToPath } from "url";
 import { defineConfig } from "vite";
-
-const dir = path.dirname(fileURLToPath(import.meta.url)).replace(/\\/g, "/");
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    viteCommonjs({
+      include: [
+        "@itwin/core-frontend",
+        "@itwin/presentation-frontend",
+        "@itwin/presentation-components",
+        "@itwin/appui-react",
+      ],
+    }),
+  ],
   resolve: {
     alias: [
       {
@@ -48,6 +55,12 @@ export default defineConfig({
           buffer: true,
         }),
         NodeModulesPolyfillPlugin(),
+        esbuildCommonjs([
+          "@itwin/core-frontend",
+          "@itwin/presentation-frontend",
+          "@itwin/presentation-components",
+          "@itwin/appui-react",
+        ]),
       ],
       loader: {
         ".svg": "dataurl",
