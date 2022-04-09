@@ -2,7 +2,7 @@
 
 "use strict";
 
-import cpx from "cpx";
+import copyfiles from "copyfiles";
 import path from "path";
 
 const nodeModulesPath = "./node_modules/";
@@ -20,7 +20,7 @@ const i18nToCopy = [
   "webgl-compatibility",
   "select-tool-extension-sample",
 ];
-const i18nTargetPath = "public/locales/";
+const i18nTargetPath = "public";
 
 i18nToCopy.forEach((pkg) => {
   const i18nSrcPath = path.join(
@@ -30,20 +30,21 @@ i18nToCopy.forEach((pkg) => {
     "lib/public/locales/**/*.json"
   );
 
-  cpx.copy(i18nSrcPath, i18nTargetPath, { dereference: true }, (err) => {
-    if (err) {
-      throw err;
-    }
-
-    console.log(
-      `i18n for ${pkg} sucessfully copied from ${i18nSrcPath} to ${i18nTargetPath}`
-    );
-  });
+  try {
+    copyfiles([i18nSrcPath, i18nTargetPath], { up: 5 }, () => {
+      console.log(
+        `i18n for ${pkg} sucessfully copied from ${i18nSrcPath} to ${i18nTargetPath}`
+      );
+    });
+  } catch (e) {
+    console.log(e);
+    /** nop */
+  }
 });
 
 // copy cursors
 const cursorsToCopy = ["core-frontend"];
-const cursorsTargetPath = "public/cursors";
+const cursorsTargetPath = "public";
 
 cursorsToCopy.forEach((pkg) => {
   const cursorsSrcPath = path.join(
@@ -52,20 +53,22 @@ cursorsToCopy.forEach((pkg) => {
     pkg,
     "lib/public/cursors/**"
   );
-  cpx.copy(cursorsSrcPath, cursorsTargetPath, { dereference: true }, (err) => {
-    if (err) {
-      throw err;
-    }
 
-    console.log(
-      `cursors for ${pkg} sucessfully copied from ${cursorsSrcPath} to ${cursorsTargetPath}`
-    );
-  });
+  try {
+    copyfiles([cursorsSrcPath, cursorsTargetPath], { up: 5 }, () => {
+      console.log(
+        `i18n for ${pkg} sucessfully copied from ${cursorsSrcPath} to ${cursorsTargetPath}`
+      );
+    });
+  } catch (e) {
+    console.log(e);
+    /** nop */
+  }
 });
 
 // copy sprites
 const spritesToCopy = ["core-frontend"];
-const spritesTargetPath = "public/sprites";
+const spritesTargetPath = "public";
 
 spritesToCopy.forEach((pkg) => {
   const spritesSrcPath = path.join(
@@ -74,20 +77,17 @@ spritesToCopy.forEach((pkg) => {
     pkg,
     "lib/public/sprites/**"
   );
-  cpx.copy(spritesSrcPath, spritesTargetPath, { dereference: true }, (err) => {
-    if (err) {
-      throw err;
-    }
 
+  copyfiles([spritesSrcPath, spritesTargetPath], { up: 5 }, () => {
     console.log(
-      `sprites for ${pkg} sucessfully copied from ${spritesSrcPath} to ${spritesTargetPath}`
+      `i18n for ${pkg} sucessfully copied from ${spritesSrcPath} to ${spritesTargetPath}`
     );
   });
 });
 
 // copy images
 const imagesToCopy = ["core-frontend"];
-const imagesTargetPath = "public/images";
+const imagesTargetPath = "public";
 
 imagesToCopy.forEach((pkg) => {
   const imagesSrcPath = path.join(
@@ -96,20 +96,16 @@ imagesToCopy.forEach((pkg) => {
     pkg,
     "lib/public/images/**"
   );
-  cpx.copy(imagesSrcPath, imagesTargetPath, { dereference: true }, (err) => {
-    if (err) {
-      throw err;
-    }
-
+  copyfiles([imagesSrcPath, imagesTargetPath], { up: 5 }, () => {
     console.log(
-      `images for ${pkg} sucessfully copied from ${imagesSrcPath} to ${imagesTargetPath}`
+      `i18n for ${pkg} sucessfully copied from ${imagesSrcPath} to ${imagesTargetPath}`
     );
   });
 });
 
 // copy assets
 const assetsToCopy = ["core-frontend"];
-const assetsTargetPath = "public/assets";
+const assetsTargetPath = "public";
 
 assetsToCopy.forEach((pkg) => {
   const assetsSrcPath = path.join(
@@ -118,13 +114,9 @@ assetsToCopy.forEach((pkg) => {
     pkg,
     "lib/public/assets/**"
   );
-  cpx.copy(assetsSrcPath, assetsTargetPath, { dereference: true }, (err) => {
-    if (err) {
-      throw err;
-    }
-
+  copyfiles([assetsSrcPath, assetsTargetPath], { up: 5 }, () => {
     console.log(
-      `assets for ${pkg} sucessfully copied from ${assetsSrcPath} to ${assetsTargetPath}`
+      `i18n for ${pkg} sucessfully copied from ${assetsSrcPath} to ${assetsTargetPath}`
     );
   });
 });

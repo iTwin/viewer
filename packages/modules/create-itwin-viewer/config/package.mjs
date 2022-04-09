@@ -43,6 +43,7 @@ export const packageJson = {
       "@typescript-eslint/eslint-plugin": "^5.18.0",
       "@typescript-eslint/parser": "^5.18.0",
       "@vitejs/plugin-react": "^1.0.7",
+      copyfiles: "^2.4.1",
       eslint: "^8.12.0",
       "eslint-plugin-react": "^7.29.4",
       jest: "^27.5.1",
@@ -57,8 +58,9 @@ export const packageJson = {
     },
     scripts: {
       start: "vite",
-      build: "tsc && vite build",
-      preview: "vite preview",
+      "copy-assets": "node scripts/copyAssets.mjs",
+      build: "npm run copy-assets && vite build",
+      preview: "npm run copy-assets && vite preview",
     },
     browserslist: [
       "last 4 chrome version",
@@ -108,11 +110,14 @@ export const packageJson = {
       node: ">=10.17.0 <15.0",
     },
     scripts: {
+      "copy-assets": "node scripts/copyAssets.mjs",
       "electron:debug": "cross-env NODE_ENV=development electron .",
-      build: "npm run -s build:frontend && npm run -s build:backend",
+      build:
+        "npm run -s copy-assets && npm run -s build:frontend && npm run -s build:backend",
       "build:backend": "tsc -p tsconfig.backend.json",
       "build:frontend": "tsc && vite build",
-      start: 'run-p "start:backend" "start:frontend" "electron:debug"',
+      start:
+        'run-p "copy-assets" "start:backend" "start:frontend" "electron:debug"',
       "start:frontend": "vite",
       "start:backend": "tsc -p tsconfig.backend.json --watch",
     },
