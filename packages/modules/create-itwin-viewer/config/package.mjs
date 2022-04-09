@@ -57,7 +57,7 @@ export const packageJson = {
       "@itwin/web-viewer-react": "^3.0.0-dev.3",
     },
     scripts: {
-      start: "vite",
+      start: "npm run copy-assets && vite",
       "copy-assets": "node scripts/copyAssets.mjs",
       build: "npm run copy-assets && vite build",
       preview: "npm run copy-assets && vite preview",
