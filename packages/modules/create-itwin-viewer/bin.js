@@ -239,9 +239,9 @@ async function main() {
       },
     ]);
     mergedAppConfig = {
-      ...appConfiguration,
+      ...mergedAppConfig,
       auth: {
-        ...appConfiguration.auth,
+        ...mergedAppConfig.auth,
         ...authOptions,
       },
     };
