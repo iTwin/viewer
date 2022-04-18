@@ -42,7 +42,6 @@ jest.mock("@itwin/appui-react", () => {
   };
 });
 jest.mock("@itwin/appui-abstract");
-jest.mock("@microsoft/applicationinsights-react-js");
 
 const flushPromises = () => new Promise((res) => setTimeout(res, 0));
 

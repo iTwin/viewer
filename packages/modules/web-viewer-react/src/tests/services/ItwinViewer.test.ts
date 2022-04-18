@@ -21,7 +21,7 @@ jest.mock("@itwin/viewer-react", () => {
     isEqual: jest.fn().mockReturnValue(true),
     ViewerPerformance: {
       addMark: jest.fn(),
-      addAndLogMeasure: jest.fn(),
+      addMeasure: jest.fn(),
       enable: jest.fn(),
     },
     makeCancellable: jest.requireActual(

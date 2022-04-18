@@ -99,7 +99,6 @@ jest.mock("@itwin/core-frontend", () => {
     },
   };
 });
-jest.mock("../../services/telemetry/TelemetryService");
 
 describe("BaseInitializer", () => {
   beforeEach(() => {
