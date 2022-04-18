@@ -1,16 +1,12 @@
-# Getting Started with the iTwin Viewer Create React App Template
+# Getting Started with the iTwin Viewer Application Template
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Application Configuration
 
-## Environment Variables
+Prior to running the app, you will need to add OIDC client configuration to the appConfig const in src/config.ts if you did not already enter it during installation of the template:
 
-Prior to running the app, you will need to add OIDC client configuration to the variables in the .env file:
+- You can generate a [test client](https://developer.bentley.com/tutorials/web-application-quick-start/#2-register-an-application) to get started.
 
-```
-ITWIN_VIEWER_CLIENT_ID="native-xxxxxxxx"
-```
-
-- You should generate a [client](https://developer.bentley.com/register/) to get started. The client that you generate should be for a desktop app and use the Visualization apis. You can add the default redirect uri (http://localhost:3000/signin-callback).
+- When you are ready to build a production application, [register here](https://developer.bentley.com/register/).
 
 ## Available Scripts
 
@@ -18,25 +14,30 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the Electron app in the development mode.\
-The page will reload if you make edits.
+Uses Electron + Vite to run the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `npm run build:backend`
+The application will reload if you make edits.\
+You will also see any lint errors in the console.
 
-Compiles the backend.
+### `npm test`
 
-### `npm run build:frontend`
+TODO
 
-Compiles and bundles the frontend.
+### `npm run build`
+
+TODO
 
 ## Next Steps
 
-- There is a sample snapshot file in the "samples" directory that can be used for testing application features
-
-- [iTwin Viewer options](https://www.npmjs.com/package/@itwin/desktop-viewer-react)
+- [iTwin Viewer options](https://www.npmjs.com/package/@itwin/web-viewer-react)
 
 - [Extending the iTwin Viewer](https://www.itwinjs.org/learning/tutorials/hello-world-viewer/)
 
 - [Using the iTwin Platform](https://developer.bentley.com/)
 
 - [iTwin Developer Program](https://www.youtube.com/playlist?list=PL6YCKeNfXXd_dXq4u9vtSFfsP3OTVcL8N)
+
+- [Vite](https://vitejs.dev/guide/#overview)
+
+- [Electron](https://www.electronjs.org/docs/latest/)

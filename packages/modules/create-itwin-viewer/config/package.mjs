@@ -46,10 +46,31 @@ export const packageJson = {
       copyfiles: "^2.4.1",
       eslint: "^8.12.0",
       "eslint-plugin-react": "^7.29.4",
+      "identity-obj-proxy": "^3.0.0",
       jest: "^27.5.1",
       sass: "^1.49.9",
+      "ts-jest": "^27.1.4",
       typescript: "~4.4.0",
       vite: "^2.8.0",
+    },
+    jest: {
+      roots: ["<rootDir>/src"],
+      transform: {
+        "^.+\\.(ts|tsx)$": "ts-jest",
+      },
+      transformIgnorePatterns: [
+        "[/\\\\]node_modules[/\\\\](?!@bentley/ui).+\\.(js|jsx|ts|tsx)$",
+        "^.+\\.module\\.(css|sass|scss)$",
+      ],
+      moduleNameMapper: {
+        "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|svg?.+)$":
+          "<rootDir>/src/tests/mocks/fileMock.ts",
+        "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+      },
+      verbose: true,
+      coveragePathIgnorePatterns: ["/node_modules/", "test", ".d.ts"],
+      collectCoverageFrom: ["<rootDir>/src/**"],
+      setupFilesAfterEnv: ["./src/test.setup.ts"],
     },
   },
   web: {
@@ -61,6 +82,7 @@ export const packageJson = {
       "copy-assets": "node scripts/copyAssets.mjs",
       build: "npm run copy-assets && vite build",
       preview: "npm run copy-assets && vite preview",
+      test: "jest --env=jsdom",
     },
     browserslist: [
       "last 4 chrome version",
