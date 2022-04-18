@@ -34,16 +34,6 @@ jest.mock("@itwin/presentation-frontend", () => {
 });
 jest.mock("react-i18next");
 
-jest.mock("@microsoft/applicationinsights-react-js", () => ({
-  ReactPlugin: jest.fn(),
-  withAITracking: (
-    _reactPlugin: any | undefined, // eslint-disable-line @typescript-eslint/no-unused-vars
-    component: any,
-    _componentName?: string, // eslint-disable-line @typescript-eslint/no-unused-vars
-    _className?: string // eslint-disable-line @typescript-eslint/no-unused-vars
-  ) => component,
-}));
-
 jest.mock("@itwin/core-frontend", () => {
   return {
     ...jest.createMockFromModule<any>("@itwin/core-frontend"),
@@ -97,7 +87,6 @@ jest.mock("@itwin/core-frontend", () => {
   };
 });
 
-jest.mock("../../services/telemetry/TelemetryService");
 jest.mock("../../services/BaseInitializer", () => {
   return {
     BaseInitializer: {

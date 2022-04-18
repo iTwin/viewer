@@ -81,7 +81,7 @@ export class DesktopInitializer {
         yield ElectronApp.startup(electronViewerOpts);
         NativeAppLogger.initialize();
         ViewerPerformance.addMark("ViewerStarted");
-        void ViewerPerformance.addAndLogMeasure(
+        void ViewerPerformance.addMeasure(
           "ViewerInitialized",
           "ViewerStarting",
           "ViewerStarted"

@@ -21,7 +21,6 @@ type ViewerProps = (ConnectedViewerProps | FileViewerProps | BlankViewerProps) &
   ViewerCommonProps;
 
 export const BaseViewer = ({
-  appInsightsKey,
   productId,
   i18nUrlTemplate,
   onIModelAppInit,
@@ -31,7 +30,6 @@ export const BaseViewer = ({
   ...loaderProps
 }: ViewerProps) => {
   const viewerInitialized = useBaseViewerInitializer({
-    appInsightsKey,
     productId,
     i18nUrlTemplate,
     onIModelAppInit,
@@ -45,7 +43,7 @@ export const BaseViewer = ({
     <ErrorBoundary>
       {("filePath" in loaderProps && loaderProps.filePath) || accessToken ? (
         viewerInitialized ? (
-          <IModelLoader appInsightsKey={appInsightsKey} {...loaderProps} />
+          <IModelLoader {...loaderProps} />
         ) : (
           <FillCentered>initializing...</FillCentered>
         )
