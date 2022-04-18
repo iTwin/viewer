@@ -106,7 +106,6 @@ describe("iTwinViewer", () => {
       authClient: authClient,
       changeSetId: undefined,
       uiConfig: undefined,
-      appInsightsKey: undefined,
       onIModelConnected: undefined,
       frontstages: undefined,
       viewportOptions: undefined,

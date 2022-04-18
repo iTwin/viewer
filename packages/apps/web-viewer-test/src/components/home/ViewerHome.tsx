@@ -113,7 +113,6 @@ export const ViewerHome: React.FC = () => {
         authClient={authClient}
         iTwinId={iTwinId ?? ""}
         iModelId={iModelId ?? ""}
-        appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
         theme={ColorTheme.Dark}
         loadingComponent={<Loader />}
         mapLayerOptions={{

@@ -206,11 +206,7 @@ const Loader = React.memo(
   }
 );
 
-type IModelLoaderProps = ModelLoaderProps & {
-  appInsightsKey?: string;
-};
-
-const IModelLoader = (props: IModelLoaderProps) => {
+const IModelLoader = (props: ModelLoaderProps) => {
   return <Loader {...props} />;
 };
 
