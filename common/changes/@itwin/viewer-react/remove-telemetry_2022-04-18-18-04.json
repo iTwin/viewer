@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Removed appInsightsKey from ViewerIModelAppOptions. Removed Application Insights telemetry logging.",
+      "type": "none"
+    }
+  ],
+  "packageName": "@itwin/viewer-react",
+  "email": "19596966+johnnyd710@users.noreply.github.com"
+}
