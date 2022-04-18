@@ -17,7 +17,6 @@ import {
   BaseInitializer,
   getIModelAppOptions,
 } from "../../services/BaseInitializer";
-import { userAI } from "../../services/telemetry/TelemetryService";
 import { MockToolAdmin } from "../mocks/MockToolAdmin";
 
 jest.mock("../../services/iModel/ViewCreator3d", () => {
@@ -187,20 +186,6 @@ describe("BaseInitializer", () => {
     expect(IModelApp.localization.registerNamespace).toHaveBeenCalledWith(
       "test2"
     );
-  });
-  it("instantiates an instance of the Telemetry Service when an app insights key is provided", async () => {
-    const appInsightsKey = "123";
-    await BaseInitializer.initialize({
-      appInsightsKey: appInsightsKey,
-      enablePerformanceMonitors: false,
-    });
-    await BaseInitializer.initialized;
-    expect(userAI.initialize).toHaveBeenCalledWith(appInsightsKey);
-  });
-  it("does not instantiate an instance of the Telemetry Service when an app insights key is not provided", async () => {
-    await BaseInitializer.initialize();
-    await BaseInitializer.initialized;
-    expect(userAI.initialize).not.toHaveBeenCalled();
   });
   it("fails to initialize if iModelApp has not been initialized", async () => {
     // override the return value of the getter function

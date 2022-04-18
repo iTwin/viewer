@@ -33,7 +33,6 @@ import { RealityDataAccessClient } from "@itwin/reality-data-client";
 import { ViewerPerformance } from "../services/telemetry";
 import type { ViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
-import { trackUserEvent, userAI } from "./telemetry/TelemetryService";
 
 // initialize required iTwin.js services
 export class BaseInitializer {
@@ -120,14 +119,6 @@ export class BaseInitializer {
         viewerOptions.onIModelAppInit();
       }
 
-      // Add the app's telemetry client if a key was provided
-      if (viewerOptions?.appInsightsKey) {
-        if (!userAI.initialized) {
-          userAI.initialize(viewerOptions?.appInsightsKey);
-        }
-        IModelApp.telemetry.addClient(userAI);
-      }
-
       // initialize localization for the app
       const viewerNamespace = "iTwinViewer";
       let i18nNamespaces = [viewerNamespace];
@@ -164,12 +155,8 @@ export class BaseInitializer {
 
       ConfigurableUiManager.initialize();
 
-      if (viewerOptions?.appInsightsKey) {
-        trackUserEvent("iTwinViewer.Viewer.Initialized");
-      }
-
       ViewerPerformance.addMark("BaseViewerStarted");
-      void ViewerPerformance.addAndLogMeasure(
+      void ViewerPerformance.addMeasure(
         "BaseViewerInitialized",
         "ViewerStarting",
         "BaseViewerStarted"
