@@ -39,7 +39,7 @@ type ModelLoaderProps = Partial<
 > &
   LoaderProps;
 
-const Loader = React.memo(
+const IModelLoader = React.memo(
   ({
     iModelId,
     iTwinId,
@@ -205,9 +205,5 @@ const Loader = React.memo(
     }
   }
 );
-
-const IModelLoader = (props: ModelLoaderProps) => {
-  return <Loader {...props} />;
-};
 
 export default IModelLoader;
