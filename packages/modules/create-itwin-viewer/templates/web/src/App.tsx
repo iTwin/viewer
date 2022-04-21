@@ -126,9 +126,11 @@ const App: React.FC = () => {
   );
 
   const onIModelAppInit = useCallback(async () => {
-    const initFns = extensions.map(
-      (extension: ExtensionProvider) => extension.initFn && extension.initFn()
-    );
+    const initFns = extensions.map((extension: ExtensionProvider) => {
+      if (extension.initFn) {
+        return extension.initFn();
+      }
+    });
     return await Promise.all(initFns);
   }, []);
 
