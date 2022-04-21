@@ -38,15 +38,6 @@ jest.mock("@itwin/appui-react", () => {
   };
 });
 jest.mock("@itwin/appui-abstract");
-jest.mock("@microsoft/applicationinsights-react-js", () => ({
-  ReactPlugin: jest.fn(),
-  withAITracking: (
-    reactPlugin: any | undefined, // eslint-disable-line @typescript-eslint/no-unused-vars
-    component: any,
-    componentName?: string, // eslint-disable-line @typescript-eslint/no-unused-vars
-    className?: string // eslint-disable-line @typescript-eslint/no-unused-vars
-  ) => component,
-}));
 jest.mock("@itwin/core-frontend", () => {
   return {
     IModelApp: {

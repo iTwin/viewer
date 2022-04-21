@@ -101,7 +101,7 @@ jest.mock("@itwin/viewer-react", () => {
     },
     ViewerPerformance: {
       addMark: jest.fn(),
-      addAndLogMeasure: jest.fn(),
+      addMeasure: jest.fn(),
       enable: jest.fn(),
     },
     ViewerAuthorization: {

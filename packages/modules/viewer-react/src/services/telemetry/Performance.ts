@@ -3,8 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { trackViewerMetric, viewerAI } from "./TelemetryService";
-
 export type PerformanceMeasures =
   | "ViewerInitialized"
   | "BaseViewerInitialized"
@@ -24,34 +22,6 @@ export type PerformanceMarks =
 
 export class ViewerPerformance {
   private static _enabled: boolean;
-
-  private static _getAiKey(): string {
-    switch (process.env.IMJS_URL_PREFIX) {
-      case "dev-":
-        return "202e4e19-0357-4b93-abb4-52d9c345384d";
-      case "qa-":
-        return "bc9fee8c-d537-4892-b760-750392c531be";
-      default:
-        return "76ebaa63-f57e-4955-aedf-43e2741724ec";
-    }
-  }
-
-  private static _logMetric(
-    measureName: PerformanceMeasures,
-    sampleCount?: number
-  ) {
-    if (!viewerAI.initialized) {
-      viewerAI.initialize(this._getAiKey());
-    }
-    const measure = performance.getEntriesByName(measureName);
-    if (measure && measure.length > 0) {
-      trackViewerMetric(
-        `iTwinViewer.${measureName}`,
-        measure[0].duration,
-        sampleCount
-      );
-    }
-  }
 
   static get enabled() {
     return this._enabled && window.performance;
@@ -82,20 +52,6 @@ export class ViewerPerformance {
     ) {
       performance.measure(measureName, startMark, endMark);
     }
-  }
-
-  static async addAndLogMeasure(
-    measureName: PerformanceMeasures,
-    startMark: PerformanceMarks,
-    endMark: PerformanceMarks,
-    sampleCount?: number
-  ) {
-    if (!this.enabled) {
-      return;
-    }
-
-    this.addMeasure(measureName, startMark, endMark);
-    this._logMetric(measureName, sampleCount);
   }
 
   static clear() {

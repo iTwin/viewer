@@ -99,8 +99,6 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
    * See the Web or Desktop Viewer package [README](https://www.npmjs.com/package/@itwin/web-viewer-react) for additional details.
    */
   enablePerformanceMonitors: boolean;
-  /** optional Azure Application Insights key for telemetry */
-  appInsightsKey?: string;
   /** GPRID for the consuming application. Will default to the iTwin Viewer GPRID */
   productId?: string;
   /** urlTemplate for querying i18n json files */
@@ -136,7 +134,6 @@ export interface BlankViewerProps {
  * This list MUST match what is in the ViewerInitializerParams interface and should be updated as new properties are added/removed
  */
 const iTwinViewerInitializerParamSample: ViewerInitializerParams = {
-  appInsightsKey: undefined,
   productId: undefined,
   i18nUrlTemplate: undefined,
   onIModelAppInit: undefined,

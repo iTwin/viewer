@@ -21,7 +21,7 @@ jest.mock("@itwin/viewer-react", () => {
     isEqual: jest.fn().mockReturnValue(true),
     ViewerPerformance: {
       addMark: jest.fn(),
-      addAndLogMeasure: jest.fn(),
+      addMeasure: jest.fn(),
       enable: jest.fn(),
     },
     makeCancellable: jest.requireActual(
@@ -106,7 +106,6 @@ describe("iTwinViewer", () => {
       authClient: authClient,
       changeSetId: undefined,
       uiConfig: undefined,
-      appInsightsKey: undefined,
       onIModelConnected: undefined,
       frontstages: undefined,
       viewportOptions: undefined,

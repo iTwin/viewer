@@ -11,7 +11,6 @@ import type { IModelConnection } from "@itwin/core-frontend";
 import { BlankConnection, IModelApp } from "@itwin/core-frontend";
 import { useErrorManager } from "@itwin/error-handling-react";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
-import { withAITracking } from "@microsoft/applicationinsights-react-js";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
@@ -26,7 +25,7 @@ import {
   openLocalIModel,
   openRemoteIModel,
 } from "../../services/iModel";
-import { userAI, ViewerPerformance } from "../../services/telemetry";
+import { ViewerPerformance } from "../../services/telemetry";
 import type {
   BlankViewerProps,
   ConnectedViewerProps,
@@ -40,7 +39,7 @@ type ModelLoaderProps = Partial<
 > &
   LoaderProps;
 
-const Loader = React.memo(
+const IModelLoader = React.memo(
   ({
     iModelId,
     iTwinId,
@@ -92,7 +91,7 @@ const Loader = React.memo(
       }
 
       ViewerPerformance.addMark("IModelConnectionStarted");
-      void ViewerPerformance.addAndLogMeasure(
+      void ViewerPerformance.addMeasure(
         "IModelConnecting",
         "ViewerStarting",
         "IModelConnectionStarted"
@@ -111,7 +110,7 @@ const Loader = React.memo(
         );
       }
       ViewerPerformance.addMark("IModelConnection");
-      void ViewerPerformance.addAndLogMeasure(
+      void ViewerPerformance.addMeasure(
         "IModelConnected",
         "ViewerStarting",
         "IModelConnection"
@@ -206,24 +205,5 @@ const Loader = React.memo(
     }
   }
 );
-
-const TrackedLoader = withAITracking(
-  userAI.reactPlugin,
-  Loader,
-  "IModelLoader",
-  "tracked-loader"
-);
-
-type IModelLoaderProps = ModelLoaderProps & {
-  appInsightsKey?: string;
-};
-
-const IModelLoader = (props: IModelLoaderProps) => {
-  if (props.appInsightsKey) {
-    return <TrackedLoader {...props} />;
-  } else {
-    return <Loader {...props} />;
-  }
-};
 
 export default IModelLoader;
