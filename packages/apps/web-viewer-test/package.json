@@ -29,7 +29,7 @@
     "@itwin/reality-data-client": "^0.7.0",
     "@itwin/tree-widget-react": "^0.3.0",
     "@itwin/webgl-compatibility": "^3.1.0-dev.42",
-    "@itwin/web-viewer-react": "3.0.0-dev.4",
+    "@itwin/web-viewer-react": "3.0.0-dev.5",
     "@itwin/test-extension": "3.0.0-dev.2",
     "history": "^4.10.1",
     "react": "^17.0.2",
