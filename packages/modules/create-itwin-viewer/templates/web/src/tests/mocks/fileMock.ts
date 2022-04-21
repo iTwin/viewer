@@ -3,4 +3,5 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-export default "test-file-stub";
+const stub = "test-file-stub";
+export default stub;
