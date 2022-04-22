@@ -5,7 +5,9 @@
 
 import { ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
-import type { ExtensionProvider } from "@itwin/core-frontend";
+import {
+  LocalExtensionProvider, RemoteExtensionProvider,
+} from "@itwin/core-frontend";
 import {
   MeasureTools,
   MeasureToolsUiItemsProvider,
@@ -83,11 +85,6 @@ export const ViewerHome: React.FC = () => {
     await MeasureTools.startup();
   }, []);
 
-  const RemoteExtension: ExtensionProvider = {
-    manifestUrl: "http://localhost:3001/package.json",
-    jsUrl: "http://localhost:3001/dist/index.js",
-  };
-
   return (
     <div style={{ height: "100vh" }}>
       <Viewer
@@ -112,7 +109,13 @@ export const ViewerHome: React.FC = () => {
           }),
           new MeasureToolsUiItemsProvider(),
         ]}
-        extensions={[RemoteExtension, LocalExtension]}
+        extensions={[
+          new LocalExtensionProvider({ ...LocalExtension }),
+          new RemoteExtensionProvider({
+            jsUrl: "http://localhost:3001/dist/index.js",
+            manifestUrl: "http://localhost:3001/package.json"
+          }),
+        ]}
       />
     </div>
   );
