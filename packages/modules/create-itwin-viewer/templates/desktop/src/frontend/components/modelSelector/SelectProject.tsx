@@ -20,7 +20,7 @@ import {
   Tab,
 } from "@itwin/itwinui-react";
 import { useNavigate } from "@reach/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { SignIn } from "../signin/SignIn";
 
@@ -42,7 +42,7 @@ export const SelectProject = () => {
       ? PROJECT_TYPE_MAP.indexOf(window.location.search)
       : 0
   );
-
+  const [apiPrefix, setApiPrefix] = useState<"" | "dev" | "qa" | undefined>();
   const [searchValue, setSearchValue] = React.useState("");
   const [searchParam, setSearchParam] = React.useState("");
   const startSearch = React.useCallback(() => {
@@ -50,6 +50,18 @@ export const SelectProject = () => {
   }, [searchValue]);
   const accessToken = useAccessToken();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (process.env.IMJS_URL_PREFIX) {
+      setApiPrefix(
+        process.env.IMJS_URL_PREFIX.replace("-", "") as
+          | ""
+          | "dev"
+          | "qa"
+          | undefined
+      );
+    }
+  });
 
   return accessToken ? (
     <>
@@ -107,6 +119,7 @@ export const SelectProject = () => {
               }}
               stringsOverrides={{ noIModels: "No projects found" } as any}
               filterOptions={searchParam}
+              apiOverrides={{ serverEnvironmentPrefix: apiPrefix }}
             />
           </div>
         </HorizontalTabs>

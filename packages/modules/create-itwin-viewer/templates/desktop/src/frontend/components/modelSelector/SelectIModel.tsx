@@ -171,6 +171,19 @@ export const SelectIModel = ({
   const navigate = useNavigate();
   const userSettings = useContext(SettingsContext);
   const modelContext = useContext(IModelContext);
+  const [apiPrefix, setApiPrefix] = useState<"" | "dev" | "qa" | undefined>();
+
+  useEffect(() => {
+    if (process.env.IMJS_URL_PREFIX) {
+      setApiPrefix(
+        process.env.IMJS_URL_PREFIX.replace("-", "") as
+          | ""
+          | "dev"
+          | "qa"
+          | undefined
+      );
+    }
+  });
 
   const selectIModel = async (iModel: IModelFull) => {
     if (modelContext.pendingIModel) {
@@ -205,6 +218,7 @@ export const SelectIModel = ({
           projectId={iTwinId}
           onThumbnailClick={selectIModel}
           useIndividualState={useProgressIndicator}
+          apiOverrides={{ serverEnvironmentPrefix: apiPrefix }}
         />
       </div>
     </div>
