@@ -9,6 +9,7 @@ import { appConfiguration } from "./config/app.mjs";
 import validatePackageName from "validate-npm-package-name";
 import deepmerge from "deepmerge";
 import prettier from "prettier";
+import { fileURLToPath } from "url";
 
 /**
  * Finalize generation and display next steps
@@ -251,7 +252,7 @@ async function main() {
   console.log(startMsg);
 
   const applicationRoot = path.resolve(mainOptions.name);
-  const generatorRoot = new URL(".", import.meta.url).pathname;
+  const generatorRoot = path.dirname(fileURLToPath(import.meta.url));
 
   copyTemplate(generatorRoot, applicationRoot, mainOptions.platform);
   writeConfig(
