@@ -17,7 +17,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { Viewer } from "../components/Viewer";
-import type { ItwinViewerParams, WebViewerProps } from "../types";
+import type {
+  IModelBackendOptions,
+  ItwinViewerParams,
+  WebViewerProps,
+} from "../types";
 import { WebInitializer } from "./Initializer";
 
 export interface LoadParameters {
@@ -65,6 +69,14 @@ export class ItwinViewer {
     if (!args?.iTwinId || !args?.iModelId) {
       throw new Error("Please provide a valid iTwinId and iModelId");
     }
+    const backend: IModelBackendOptions = {
+      customBackend: {
+        rpcParams: {
+          info: { title: "nicks-backend", version: "v1.0" },
+          uriPrefix: "http://localhost:3001",
+        },
+      },
+    };
 
     // render the viewer for the given iModel on the given element
     ReactDOM.render(
@@ -80,6 +92,7 @@ export class ItwinViewer {
         viewportOptions: this.viewportOptions,
         uiProviders: this.uiProviders,
         theme: this.theme,
+        backend: backend,
         enablePerformanceMonitors: this.enablePerformanceMonitors,
       } as WebViewerProps),
       document.getElementById(this.elementId)

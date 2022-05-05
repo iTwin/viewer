@@ -53,7 +53,7 @@ export const IModelBankHome: React.FC = () => {
     customBackend: {
       rpcParams: {
         info: { title: "sample-backend", version: "1.0" },
-        uriPrefix: "https://dev-imodelbank.bentley.com/imodeljs",
+        uriPrefix: "http://localhost:3001",
       },
     },
   };

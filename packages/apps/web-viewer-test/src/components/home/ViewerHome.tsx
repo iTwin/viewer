@@ -105,6 +105,17 @@ export const ViewerHome: React.FC = () => {
         iModelId={iModelId}
         appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
         theme={ColorTheme.Dark}
+        backend={{
+          customBackend: {
+            rpcParams: {
+              info: {
+                title: "nicks-backend",
+                version: "v1.0",
+              },
+              uriPrefix: "http://localhost:3001",
+            },
+          },
+        }}
         loadingComponent={<Loader />}
         mapLayerOptions={{
           BingMaps: {

@@ -92,9 +92,18 @@ export class WebInitializer {
         const iModelAppOptions = getIModelAppOptions(options);
         iModelAppOptions.authorizationClient = options.authClient;
         ViewerAuthorization.client = options.authClient;
+        options.backend = {
+          customBackend: {
+            rpcParams: {
+              info: { title: "nicks-backend", version: "v1.0" },
+              uriPrefix: "http://localhost:3001",
+            },
+          },
+        };
         const rpcParams: BentleyCloudRpcParams = initializeRpcParams(
           options?.backend
         );
+        console.log(`RpcParams: ${rpcParams}`);
         yield IModelApp.startup(iModelAppOptions);
         BentleyCloudRpcManager.initializeClient(
           rpcParams,
