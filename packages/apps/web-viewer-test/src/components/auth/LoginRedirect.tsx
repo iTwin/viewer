@@ -8,7 +8,7 @@ import { Redirect } from "react-router-dom";
 
 import { AuthorizationClient, RedirectKey } from "../../services/auth";
 
-export const LoginRedirect = () => {
+const LoginRedirect = () => {
   const [isAuthVerified, setIsAuthVerified] = useState(false);
   const [redirectPath, setRedirectPath] = useState("/");
 
@@ -42,3 +42,5 @@ export const LoginRedirect = () => {
     </div>
   );
 };
+
+export default LoginRedirect;
