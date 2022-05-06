@@ -10,9 +10,11 @@ import { history, Routes } from "./components/routing";
 
 function App() {
   return (
-    <Router history={history}>
-      <Routes />
-    </Router>
+    <React.Suspense fallback={<></>}>
+      <Router history={history}>
+        <Routes />
+      </Router>
+    </React.Suspense>
   );
 }
 
