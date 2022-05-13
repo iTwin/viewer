@@ -8,3 +8,4 @@ export * from "./useUiProviders";
 export * from "./useIsMounted";
 export * from "./useBaseViewerInitializer";
 export * from "./useAccessToken";
+export * from "./useFrontstages";

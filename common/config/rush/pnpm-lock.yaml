@@ -37,6 +37,7 @@ dependencies:
   '@itwin/imodels-client-management': 1.0.1
   '@itwin/itwinui-css': 0.18.1
   '@itwin/itwinui-icons-react': 1.5.0_react-dom@17.0.2+react@17.0.2
+  '@itwin/itwinui-illustrations-react': 1.2.0_react-dom@17.0.2+react@17.0.2
   '@itwin/itwinui-react': 1.29.1_react-dom@17.0.2+react@17.0.2
   '@itwin/measure-tools-react': 0.6.0_feeac41b88871f812cc6d023ebdb2c0f
   '@itwin/presentation-backend': 3.1.0-dev.42_3a8f14b8d2861a877dcd15c06a89e2a5
@@ -47,8 +48,6 @@ dependencies:
   '@itwin/reality-data-client': 0.7.0_@itwin+core-common@3.1.0-dev.42
   '@itwin/tree-widget-react': 0.3.0_f60b64bad826440105e669479c5ff4fd
   '@itwin/webgl-compatibility': 3.1.0-dev.42
-  '@microsoft/applicationinsights-react-js': 2.3.1
-  '@microsoft/applicationinsights-web': 2.3.1
   '@reach/router': 1.3.4_react-dom@17.0.2+react@17.0.2
   '@rush-temp/cdn-viewer': 'file:projects/cdn-viewer.tgz_95d072ea9c1a707901feccbca6801cd6'
   '@rush-temp/cra-template-desktop-viewer': 'file:projects/cra-template-desktop-viewer.tgz'
@@ -20436,7 +20435,7 @@ packages:
       '@itwin/imodel-components-react': '*'
       redux: '*'
     resolution:
-      integrity: sha512-ZIuTCJ77c6v4cQegbWDrT0dtgHJ2IgpSXsGkPJY9+X7YuP8lIm819Icx/qBJ2Eog+Rns9i8ZzimLGXbwotD+kA==
+      integrity: sha512-BUIBDTE1UAJ68yVF0W/+08tjr3POkZCM8JYPxSTQz1YFLdKa0Ax0mHVIqVWQi30u1vtg5734YPVSKEGqSNGMlQ==
       tarball: 'file:projects/cdn-viewer.tgz'
     version: 0.0.0
   'file:projects/cra-template-desktop-viewer.tgz':
@@ -20504,7 +20503,7 @@ packages:
     peerDependencies:
       '@itwin/ecschema-metadata': '*'
     resolution:
-      integrity: sha512-7G0C/a5J/kvz3CWCEZeQpgBNKYZbns0pEfUpXjNVZSNWxqJEDl7l1bOlxi5jj5sm6lkliVpFXASle94P0jrjzQ==
+      integrity: sha512-CrfACHhfE9bczqc2BQmi67BkIlDKhyVzGAh6DOkASiIPj1STBERmonFROMhHqIsQK1kPiAGfv3S2P6n5vtJpcA==
       tarball: 'file:projects/desktop-viewer-react.tgz'
     version: 0.0.0
   'file:projects/desktop-viewer-test.tgz_e2bc709ebe80abd6efb1ebf6112c5892':
@@ -20572,7 +20571,7 @@ packages:
       react-redux: '*'
       redux: '*'
     resolution:
-      integrity: sha512-mssttUWvop1zYnv6MojR+GvMvkpcZyE5c4GNVXEozIEEQTyOHDdcfRzT0LaS8zeS5etMQoyM8GrlLOBa3rkyfw==
+      integrity: sha512-JSw6Y9n0ql1XVT2r7fOIWloPzDTElbHdFkl00uHfB2ysCdH/WemF1UaUOaADNNLCIHM5VyRot6BrjBp32ZQHyw==
       tarball: 'file:projects/desktop-viewer-test.tgz'
     version: 0.0.0
   'file:projects/error-handling-react.tgz':
@@ -20691,6 +20690,7 @@ packages:
       '@itwin/imodel-components-react': 3.1.0-dev.42_4f9c842c84e30423e3d29940faa7abeb
       '@itwin/imodels-access-frontend': 1.0.1_b1f9f7b927954d6136bda185d8eefdad
       '@itwin/imodels-client-management': 1.0.1
+      '@itwin/itwinui-illustrations-react': 1.2.0_react-dom@17.0.2+react@17.0.2
       '@itwin/itwinui-react': 1.29.1_react-dom@17.0.2+react@17.0.2
       '@itwin/measure-tools-react': 0.2.0_feeac41b88871f812cc6d023ebdb2c0f
       '@itwin/presentation-common': 3.1.0-dev.42_d7c100557246498a16fea88f426c978f
@@ -20725,7 +20725,7 @@ packages:
     dev: false
     name: '@rush-temp/viewer-react'
     resolution:
-      integrity: sha512-HA9Dp43ijBYwOwQTh2v2iPElaMpgew07Dvpu/YrvSDEQZGb5A5olKelYRqm1wYUL3LxE5zBPH40E6EwaTJ6wXw==
+      integrity: sha512-kdHl0G2qZn9Xjsz5G4UFjZcyyVR1bY27TG5LICH5HUB77dhl3zZ35XBVbZ5h/2X4mF7FbfkVQqUcroSGRJ5Sjw==
       tarball: 'file:projects/viewer-react.tgz'
     version: 0.0.0
   'file:projects/viewer-scripts.tgz_typescript@4.4.4':
@@ -20805,7 +20805,7 @@ packages:
     dev: false
     name: '@rush-temp/web-viewer-react'
     resolution:
-      integrity: sha512-2MvWebOwL6CA3/CA/WjNpeAmduvVurKgWGtu45Ay6CSkFbQoU7aUc5w/dDT0dN7fM6rVHaRr3wwyd2WqvkS3GA==
+      integrity: sha512-LZhvJhfX6IJSZWbjRf+qQlGpGBH2lCMdCVOCNK1pT8m3jXu8r74TRy9pe1q6IK2G5CEJCpEG7uxZBqN59/EoAg==
       tarball: 'file:projects/web-viewer-react.tgz'
     version: 0.0.0
   'file:projects/web-viewer-test.tgz_f636bdc8e97537cd7cc6d91f8d4be43e':
@@ -20859,7 +20859,7 @@ packages:
       '@itwin/imodel-components-react': '*'
       '@itwin/presentation-components': '*'
     resolution:
-      integrity: sha512-pyAoZw3+zLp8ZVxMpnRXBffxlvdKFZ2s/Zn3mFyYQV10wFDWgQ+sriZVQLIfGdFY1hIqOfthYBqRsgwQarxDhw==
+      integrity: sha512-S8SSk7PxLCNq0pRPraMury9Qud64P3jEpwO+kBXrGDMvcmzUjOYJsNsItgghSp4jYvRsgU3Ka0/9o+vHRc/E8A==
       tarball: 'file:projects/web-viewer-test.tgz'
     version: 0.0.0
 registry: ''
@@ -20902,6 +20902,7 @@ specifiers:
   '@itwin/imodels-client-management': ^1.0.1
   '@itwin/itwinui-css': ^0.18.1
   '@itwin/itwinui-icons-react': ^1.2.0
+  '@itwin/itwinui-illustrations-react': ^1.2.0
   '@itwin/itwinui-react': ^1.16.2
   '@itwin/measure-tools-react': ^0.6.0
   '@itwin/presentation-backend': ^3.1.0-dev.42
@@ -20912,8 +20913,6 @@ specifiers:
   '@itwin/reality-data-client': ^0.7.0
   '@itwin/tree-widget-react': ^0.3.0
   '@itwin/webgl-compatibility': ^3.1.0-dev.42
-  '@microsoft/applicationinsights-react-js': 2.3.1
-  '@microsoft/applicationinsights-web': 2.3.1
   '@reach/router': ~1.3.4
   '@rush-temp/cdn-viewer': 'file:./projects/cdn-viewer.tgz'
   '@rush-temp/cra-template-desktop-viewer': 'file:./projects/cra-template-desktop-viewer.tgz'

@@ -11,7 +11,7 @@ import type { BlankConnectionViewState } from "../../types";
 
 export const createBlankViewState = (
   iModel: BlankConnection,
-  viewStateOptions?: BlankConnectionViewState
+  blankConnectionViewState?: BlankConnectionViewState
 ): SpatialViewState => {
   const ext = iModel.projectExtents;
   const viewState = SpatialViewState.createBlank(
@@ -21,13 +21,13 @@ export const createBlankViewState = (
   );
 
   const allow3dManipulations =
-    viewStateOptions?.setAllow3dManipulations !== undefined
-      ? viewStateOptions?.setAllow3dManipulations
+    blankConnectionViewState?.setAllow3dManipulations !== undefined
+      ? blankConnectionViewState?.setAllow3dManipulations
       : true;
 
   viewState.setAllow3dManipulations(allow3dManipulations);
 
-  const viewStateLookAt = viewStateOptions?.lookAt;
+  const viewStateLookAt = blankConnectionViewState?.lookAt;
   if (viewStateLookAt) {
     const viewStatus = viewState.lookAt({
       eyePoint: viewStateLookAt.eyePoint,
@@ -47,12 +47,12 @@ export const createBlankViewState = (
   }
 
   viewState.displayStyle.backgroundColor =
-    viewStateOptions?.displayStyle?.backgroundColor ?? ColorDef.white;
+    blankConnectionViewState?.displayStyle?.backgroundColor ?? ColorDef.white;
   const flags = viewState.viewFlags.copy({
-    grid: viewStateOptions?.viewFlags?.grid ?? false,
+    grid: blankConnectionViewState?.viewFlags?.grid ?? false,
     renderMode:
-      viewStateOptions?.viewFlags?.renderMode ?? RenderMode.SmoothShade,
-    backgroundMap: viewStateOptions?.viewFlags?.backgroundMap ?? false,
+      blankConnectionViewState?.viewFlags?.renderMode ?? RenderMode.SmoothShade,
+    backgroundMap: blankConnectionViewState?.viewFlags?.backgroundMap ?? false,
   });
   viewState.displayStyle.viewFlags = flags;
 

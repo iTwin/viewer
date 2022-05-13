@@ -10,11 +10,8 @@ import { useDesktopViewerInitializer } from "../hooks";
 import type { DesktopViewerProps } from "../types";
 
 export const Viewer = (props: DesktopViewerProps) => {
-  const memoizedProps = useMemo(() => {
-    return { ...props };
-  }, [props]);
-
+  const memoizedProps = useMemo(() => ({ ...props }), [props]);
   const initialized = useDesktopViewerInitializer(memoizedProps);
 
-  return initialized ? <BaseViewer {...memoizedProps} /> : null; //TODO loader?
+  return initialized ? <BaseViewer {...memoizedProps} /> : null;
 };

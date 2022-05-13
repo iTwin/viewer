@@ -106,9 +106,8 @@ export const IModelBankHome: React.FC = () => {
     <div style={{ height: "100vh" }}>
       <Viewer
         authClient={authClient}
-        iTwinId={iTwinId}
-        iModelId={iModelId}
-        appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
+        iTwinId={iTwinId ?? ""}
+        iModelId={iModelId ?? ""}
         theme={ColorTheme.Dark}
         viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
         backend={backend}

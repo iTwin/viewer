@@ -28,9 +28,8 @@ import { Presentation } from "@itwin/presentation-frontend";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
 
 import { ViewerPerformance } from "../services/telemetry";
-import type { ItwinViewerInitializerParams } from "../types";
+import type { ViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
-import { trackUserEvent, userAI } from "./telemetry/TelemetryService";
 
 // initialize required iTwin.js services
 export class BaseInitializer {
@@ -88,7 +87,7 @@ export class BaseInitializer {
 
   /** initialize required iTwin.js services */
   public static async initialize(
-    viewerOptions?: ItwinViewerInitializerParams
+    viewerOptions?: ViewerInitializerParams
   ): Promise<void> {
     if (!IModelApp.initialized) {
       throw new Error(
@@ -115,14 +114,6 @@ export class BaseInitializer {
       // execute the iModelApp initialization callback if provided
       if (viewerOptions?.onIModelAppInit) {
         viewerOptions.onIModelAppInit();
-      }
-
-      // Add the app's telemetry client if a key was provided
-      if (viewerOptions?.appInsightsKey) {
-        if (!userAI.initialized) {
-          userAI.initialize(viewerOptions?.appInsightsKey);
-        }
-        IModelApp.telemetry.addClient(userAI);
       }
 
       // initialize localization for the app
@@ -161,12 +152,8 @@ export class BaseInitializer {
 
       ConfigurableUiManager.initialize();
 
-      if (viewerOptions?.appInsightsKey) {
-        trackUserEvent("iTwinViewer.Viewer.Initialized");
-      }
-
       ViewerPerformance.addMark("BaseViewerStarted");
-      void ViewerPerformance.addAndLogMeasure(
+      void ViewerPerformance.addMeasure(
         "BaseViewerInitialized",
         "ViewerStarting",
         "BaseViewerStarted"
@@ -210,7 +197,7 @@ const getSupportedRpcs = (
  * @returns
  */
 export const getIModelAppOptions = (
-  options?: ItwinViewerInitializerParams
+  options?: ViewerInitializerParams
 ): IModelAppOptions => {
   // if ITWIN_VIEWER_HOME is defined, the viewer is likely being served from another origin
   const viewerHome = (window as any).ITWIN_VIEWER_HOME;
@@ -247,6 +234,6 @@ export const getIModelAppOptions = (
     publicPath: viewerHome ? `${viewerHome}/` : "",
     realityDataAccess: realityDataClient,
     mapLayerOptions: options?.mapLayerOptions,
-    tileAdmin: options?.tileAdminOptions,
+    tileAdmin: options?.tileAdmin,
   };
 };

@@ -16,18 +16,21 @@ import type {
   RpcInterfaceDefinition,
 } from "@itwin/core-common";
 import type {
+  BlankConnectionProps,
   ExtensionProvider,
-  FrontendHubAccess,
+  IModelAppOptions,
   IModelConnection,
-  MapLayerOptions,
   ScreenViewport,
-  TileAdmin,
-  ToolAdmin,
   ViewChangeOptions,
   ViewCreator3dOptions,
   ViewState,
 } from "@itwin/core-frontend";
 import type { Vector3d, XAndY, XYAndZ } from "@itwin/core-geometry";
+
+export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
+export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
+  ? (Without<T1, T2> & T2) | (Without<T2, T1> & T1)
+  : T1 | T2;
 
 /**
  * options for configuration of 3D view
@@ -59,13 +62,15 @@ export interface ViewerViewportControlOptions
     | ((iModelConnection: IModelConnection) => Promise<ViewState>);
 }
 
-export interface IModelLoaderParams {
+export interface LoaderProps {
   /** color theme */
   theme?: ColorTheme | string;
   /** Default UI configuration */
   defaultUiConfig?: ItwinViewerUi;
   /** Optional callback function when iModel is connected */
-  onIModelConnected?: (iModel: IModelConnection) => void;
+  onIModelConnected?:
+    | ((iModel: IModelConnection) => void)
+    | ((iModel: IModelConnection) => Promise<void>);
   /** additional frontstages to register */
   frontstages?: ViewerFrontstage[];
   /** menu items for the backstage */
@@ -76,15 +81,24 @@ export interface IModelLoaderParams {
   uiProviders?: UiItemsProvider[];
   /** options for creating the default viewState */
   viewCreatorOptions?: ViewerViewCreator3dOptions;
+  /** Component to show when loading iModel key */
+  loadingComponent?: React.ReactNode;
 }
 
-export interface ItwinViewerCommonParams
-  extends ItwinViewerInitializerParams,
-    IModelLoaderParams {}
+export type ViewerCommonProps = ViewerInitializerParams & LoaderProps;
 
-export interface ItwinViewerInitializerParams {
-  /** optional Azure Application Insights key for telemetry */
-  appInsightsKey?: string;
+export type ViewerIModelAppOptions = Pick<
+  IModelAppOptions,
+  "hubAccess" | "mapLayerOptions" | "tileAdmin" | "toolAdmin"
+>;
+
+export interface ViewerInitializerParams extends ViewerIModelAppOptions {
+  /**
+   * Enable reporting data from timed events in the iTwin Viewer.
+   * The data is anonynmous numerics and will help to increase Viewer performance in future releases.
+   * See the Web or Desktop Viewer package [README](https://www.npmjs.com/package/@itwin/web-viewer-react) for additional details.
+   */
+  enablePerformanceMonitors: boolean;
   /** GPRID for the consuming application. Will default to the iTwin Viewer GPRID */
   productId?: string;
   /** urlTemplate for querying i18n json files */
@@ -95,33 +109,31 @@ export interface ItwinViewerInitializerParams {
   additionalI18nNamespaces?: string[];
   /** custom rpc interfaces (assumes that they are supported in your backend) */
   additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
-  /** optional ToolAdmin to initialize */
-  toolAdmin?: ToolAdmin;
-  /** optional hubAccess (defaults to iTwin Platform's iModels) */
-  hubAccess?: FrontendHubAccess;
-  /**
-   * options for MapLayers initialization
-   * Applications are required to provide their own keys. See [iTwin.js changelog](https://www.itwinjs.org/changehistory/3.0.0/#removed-default-api-keys) for additional details.
-   */
-  mapLayerOptions?: MapLayerOptions;
-  /**
-   * Enable reporting data from timed events in the iTwin Viewer.
-   * The data is anonynmous numerics and will help to increase Viewer performance in future releases.
-   * See the Web or Desktop Viewer package [README](https://www.npmjs.com/package/@itwin/web-viewer-react) for additional details.
-   */
-  enablePerformanceMonitors: boolean;
-  /** options for TileAdmin initialization */
-  tileAdminOptions?: TileAdmin.Props;
   /** array of iTwin.js Extensions */
   extensions?: ExtensionProvider[];
 }
 
+export interface ConnectedViewerProps {
+  iTwinId: string;
+  iModelId: string;
+  changeSetId?: string;
+}
+
+export interface FileViewerProps {
+  /** Path to local snapshot or briefcase */
+  filePath: string;
+}
+
+export interface BlankViewerProps {
+  blankConnection: BlankConnectionProps;
+  blankConnectionViewState?: BlankConnectionViewState;
+}
+
 /**
  * Maintain a list of initilalizer params for use in useBaseViewerInitializer
- * This list MUST match what is in the ItwinViewerInitializerParams interface and should be updated as new properties are added/removed
+ * This list MUST match what is in the ViewerInitializerParams interface and should be updated as new properties are added/removed
  */
-const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
-  appInsightsKey: undefined,
+const iTwinViewerInitializerParamSample: ViewerInitializerParams = {
   productId: undefined,
   i18nUrlTemplate: undefined,
   onIModelAppInit: undefined,
@@ -132,7 +144,7 @@ const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
   mapLayerOptions: undefined,
   extensions: undefined,
   enablePerformanceMonitors: false,
-  tileAdminOptions: undefined,
+  tileAdmin: undefined,
 };
 
 export const iTwinViewerInitializerParamList = Object.keys(
@@ -140,81 +152,9 @@ export const iTwinViewerInitializerParamList = Object.keys(
 );
 
 /**
- * Configure options for the top left corner item
- */
-export interface CornerItem {
-  hideDefault?: boolean;
-  item?: React.ReactNode;
-}
-
-/**
- * Control visibility of individual tools or tool groups in the content manipulation vertical section. Default is true
- */
-export interface ContentManipulationVerticalItems {
-  selectTool?: boolean;
-  measureTools?: boolean;
-  sectionTools?: boolean;
-}
-
-/**
- * Control visibility of individual tools or tool groups in the content manipulation horizontal section. Default is true
- */
-export interface ContentManipulationHorizontalItems {
-  clearSelection?: boolean;
-  clearHideIsolateEmphasizeElements?: boolean;
-  hideElements?: boolean;
-  isolateElements?: boolean;
-  emphasizeElements?: boolean;
-}
-
-/**
- * Configure options for the content manipulation section
- */
-export interface ContentManipulationTools {
-  cornerItem?: CornerItem;
-  hideDefaultHorizontalItems?: boolean;
-  hideDefaultVerticalItems?: boolean;
-  verticalItems?: ContentManipulationVerticalItems;
-  horizontalItems?: ContentManipulationHorizontalItems;
-}
-
-/**
- * Control visibility of individual tools or tool groups in the view navigation horizontal section. Default is true
- */
-export interface ViewNavigationHorizontalItems {
-  rotateView?: boolean;
-  panView?: boolean;
-  fitView?: boolean;
-  windowArea?: boolean;
-  undoView?: boolean;
-  redoView?: boolean;
-}
-
-/**
- * Control visibility of individual tools or tool groups in the view navigation vertical section. Default is true
- */
-export interface ViewNavigationVerticalItems {
-  walkView?: boolean;
-  cameraView?: boolean;
-}
-
-/**
- * Configure options for the navigation section
- */
-export interface ViewNavigationTools {
-  hideDefaultHorizontalItems?: boolean;
-  hideDefaultVerticalItems?: boolean;
-  verticalItems?: ViewNavigationVerticalItems;
-  horizontalItems?: ViewNavigationHorizontalItems;
-}
-
-/**
  * Configure options for the default UI
  */
 export interface ItwinViewerUi {
-  contentManipulationTools?: ContentManipulationTools;
-  navigationTools?: ViewNavigationTools;
-  hideToolSettings?: boolean;
   hideTreeView?: boolean;
   hidePropertyGrid?: boolean;
   hideDefaultStatusBar?: boolean;
@@ -248,4 +188,19 @@ export interface BlankConnectionViewState {
   lookAt?: BlankConnectionViewStateLookAt;
   displayStyle?: BlankConnectionViewStateDisplayStyle;
   viewFlags?: BlankConnectionViewStateViewFlags;
+}
+
+/**
+ * Defines what items to include from the default status bar. If any items are
+ * specified then only those items will be added to statusbar.
+ */
+export interface ViewerDefaultStatusbarItems {
+  messageCenter?: boolean;
+  preToolAssistanceSeparator?: boolean;
+  toolAssistance?: boolean;
+  postToolAssistanceSeparator?: boolean;
+  accuSnapModePicker?: boolean;
+  tileLoadIndicator?: boolean;
+  selectionScope?: boolean;
+  selectionInfo?: boolean;
 }

@@ -22,7 +22,13 @@ import {
   TreeWidget,
   TreeWidgetUiItemsProvider,
 } from "@itwin/tree-widget-react";
-import { Viewer } from "@itwin/web-viewer-react";
+import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
+import {
+  Viewer,
+  ViewerContentToolsProvider,
+  ViewerNavigationToolsProvider,
+  ViewerStatusbarItemsProvider,
+} from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";
@@ -86,13 +92,31 @@ export const ViewerHome: React.FC = () => {
     await MeasureTools.startup();
   }, []);
 
+  const backstageItems: ViewerBackstageItem[] = [
+    {
+      id: "BS1",
+      execute: () => console.log("BS1"),
+      groupPriority: 10,
+      itemPriority: 30,
+      labeli18nKey: "iTwinViewer:backstage.mainFrontstage",
+      label: "",
+    },
+    {
+      id: "BS2",
+      execute: () => console.log("BS2"),
+      groupPriority: 10,
+      itemPriority: 60,
+      labeli18nKey: "iTwinViewer:backstage.mainFrontstage",
+      label: "",
+    },
+  ];
+
   return (
     <div style={{ height: "100vh" }}>
       <Viewer
         authClient={authClient}
-        iTwinId={iTwinId}
-        iModelId={iModelId}
-        appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
+        iTwinId={iTwinId ?? ""}
+        iModelId={iModelId ?? ""}
         theme={ColorTheme.Dark}
         loadingComponent={<Loader />}
         mapLayerOptions={{
@@ -104,6 +128,9 @@ export const ViewerHome: React.FC = () => {
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
+          new ViewerNavigationToolsProvider(),
+          new ViewerContentToolsProvider(),
+          new ViewerStatusbarItemsProvider(),
           new TreeWidgetUiItemsProvider(),
           new PropertyGridUiItemsProvider({
             enableCopyingPropertyText: true,
@@ -120,6 +147,7 @@ export const ViewerHome: React.FC = () => {
             manifestUrl: "http://localhost:3001/package.json",
           }),
         ]}
+        backstageItems={backstageItems}
       />
     </div>
   );

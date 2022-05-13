@@ -36,10 +36,12 @@ jest.mock("@itwin/appui-react", () => {
       clearFrontstageDefs: jest.fn(),
     },
     FrontstageProvider: jest.fn(),
+    ThemeManager: jest.fn(() => <div></div>),
+    FrameworkVersion: jest.fn(() => <div></div>),
+    ConfigurableUiContent: jest.fn(() => <div></div>),
   };
 });
 jest.mock("@itwin/appui-abstract");
-jest.mock("@microsoft/applicationinsights-react-js");
 
 const flushPromises = () => new Promise((res) => setTimeout(res, 0));
 

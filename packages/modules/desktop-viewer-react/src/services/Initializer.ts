@@ -15,7 +15,7 @@ import {
   ViewerPerformance,
 } from "@itwin/viewer-react";
 
-import type { DesktopViewerProps } from "../types";
+import type { DesktopInitializerParams } from "../types";
 
 export class DesktopInitializer {
   private static _initialized: Promise<void>;
@@ -41,7 +41,7 @@ export class DesktopInitializer {
   };
 
   /** Desktop viewer startup */
-  public static async startDesktopViewer(options: DesktopViewerProps) {
+  public static async startDesktopViewer(options: DesktopInitializerParams) {
     if (!IModelApp.initialized && !this._initializing) {
       console.log("starting desktop viewer");
       this._initializing = true;
@@ -65,7 +65,7 @@ export class DesktopInitializer {
           iModelApp: iModelAppOpts,
         };
         // this is a hack to workaround a bug in ITJS 2.x where browser connectivity events are not registered
-        // TODO verify and remove in 3.x
+        // TODO next verify and remove if no longer needed
         window.ononline = () => {
           /* nop */
         };
@@ -80,7 +80,7 @@ export class DesktopInitializer {
         yield ElectronApp.startup(electronViewerOpts);
         NativeAppLogger.initialize();
         ViewerPerformance.addMark("ViewerStarted");
-        void ViewerPerformance.addAndLogMeasure(
+        void ViewerPerformance.addMeasure(
           "ViewerInitialized",
           "ViewerStarting",
           "ViewerStarted"
