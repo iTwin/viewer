@@ -95,11 +95,16 @@ export class WebInitializer {
         const rpcParams: BentleyCloudRpcParams = initializeRpcParams(
           options?.backend
         );
-        // register extensions before startup
-        if (options?.extensions) {
-          yield IModelApp.extensionAdmin.addExtensions(options.extensions);
-        }
         yield IModelApp.startup(iModelAppOptions);
+        // register extensions after startup
+        if (options?.extensions) {
+          options.extensions.map((extension) => {
+            if (extension.hostname) {
+              IModelApp.extensionAdmin.registerHost(`http://${extension.hostname}`);
+            }
+            IModelApp.extensionAdmin.addExtension(extension).catch(e => console.log(e));
+          });
+        }
         BentleyCloudRpcManager.initializeClient(
           rpcParams,
           iModelAppOptions.rpcInterfaces ?? []

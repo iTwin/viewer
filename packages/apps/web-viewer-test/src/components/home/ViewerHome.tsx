@@ -6,7 +6,8 @@
 import { ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import {
-  LocalExtensionProvider, RemoteExtensionProvider,
+  LocalExtensionProvider,
+  RemoteExtensionProvider,
 } from "@itwin/core-frontend";
 import {
   MeasureTools,
@@ -110,10 +111,13 @@ export const ViewerHome: React.FC = () => {
           new MeasureToolsUiItemsProvider(),
         ]}
         extensions={[
-          new LocalExtensionProvider({ ...LocalExtension }),
+          new LocalExtensionProvider({
+            manifestPromise: LocalExtension.manifestPromise,
+            main: LocalExtension.main,
+          }),
           new RemoteExtensionProvider({
             jsUrl: "http://localhost:3001/dist/index.js",
-            manifestUrl: "http://localhost:3001/package.json"
+            manifestUrl: "http://localhost:3001/package.json",
           }),
         ]}
       />
