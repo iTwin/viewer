@@ -72,12 +72,20 @@ export class DesktopInitializer {
         window.onoffline = () => {
           /* nop */
         };
-        // register extensions before startup
-        // TODO only build time ATM
-        if (options?.extensions) {
-          yield IModelApp.extensionAdmin.addExtensions(options.extensions);
-        }
         yield ElectronApp.startup(electronViewerOpts);
+        // register extensions after startup
+        if (options?.extensions) {
+          options.extensions.forEach((extension) => {
+            if (extension.hostname) {
+              IModelApp.extensionAdmin.registerHost(
+                `https://${extension.hostname}`
+              );
+            }
+            IModelApp.extensionAdmin
+              .addExtension(extension)
+              .catch((e) => console.log(e));
+          });
+        }
         NativeAppLogger.initialize();
         ViewerPerformance.addMark("ViewerStarted");
         void ViewerPerformance.addMeasure(

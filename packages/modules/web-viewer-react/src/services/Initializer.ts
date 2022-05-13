@@ -98,10 +98,10 @@ export class WebInitializer {
         yield IModelApp.startup(iModelAppOptions);
         // register extensions after startup
         if (options?.extensions) {
-          options.extensions.map((extension) => {
+          options.extensions.forEach((extension) => {
             if (extension.hostname) {
               IModelApp.extensionAdmin.registerHost(
-                `http://${extension.hostname}`
+                `https://${extension.hostname}`
               );
             }
             IModelApp.extensionAdmin
