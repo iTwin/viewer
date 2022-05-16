@@ -114,10 +114,6 @@ export const ViewerHome: React.FC = () => {
         }}
         enablePerformanceMonitors={true}
         uiProviders={uiProviders}
-        defaultUiConfig={{
-          hideTreeView: true,
-          hidePropertyGrid: true,
-        }}
         backstageItems={backstageItems}
       />
     </div>
