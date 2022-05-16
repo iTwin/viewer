@@ -28,7 +28,8 @@
     "build:esbuild": "node esbuild.js",
     "start": "run-p \"build:** -- --watch\"",
     "debug": "serve .",
-    "clean": "rimraf lib dist"
+    "clean": "rimraf lib dist",
+    "test": ""
   },
   "activationEvents": [
     "onStartup"

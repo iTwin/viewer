@@ -17,7 +17,7 @@ import { TestUiProvider2 } from "../../providers";
  * Test blank connection viewer
  * @returns
  */
-export const BlankConnectionHome: React.FC = () => {
+const BlankConnectionHome: React.FC = () => {
   const authClient = useMemo(
     () =>
       new BrowserAuthorizationClient({
@@ -81,3 +81,5 @@ export const BlankConnectionHome: React.FC = () => {
     </div>
   );
 };
+
+export default BlankConnectionHome;

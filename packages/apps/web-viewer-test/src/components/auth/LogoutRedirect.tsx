@@ -8,7 +8,7 @@ import { Redirect } from "react-router-dom";
 
 import { RedirectKey } from "../../services/auth";
 
-export const LogoutRedirect = () => {
+const LogoutRedirect = () => {
   const redirectPath = sessionStorage.getItem(RedirectKey) ?? "/";
   return (
     <div>
@@ -16,3 +16,5 @@ export const LogoutRedirect = () => {
     </div>
   );
 };
+
+export default LogoutRedirect;

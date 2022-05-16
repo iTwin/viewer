@@ -11,7 +11,7 @@ import type { RouteComponentProps } from "react-router";
 import { ReactComponent as Itwin } from "../../images/itwin.svg";
 import styles from "./Home.module.scss";
 
-export const Home = ({ history }: RouteComponentProps) => {
+const Home = ({ history }: RouteComponentProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -52,3 +52,5 @@ export const Home = ({ history }: RouteComponentProps) => {
     </div>
   );
 };
+
+export default Home;
