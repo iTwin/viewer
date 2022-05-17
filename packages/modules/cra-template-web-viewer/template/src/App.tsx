@@ -94,11 +94,10 @@ const App: React.FC = () => {
         const intvl = setInterval(() => {
           if (viewPort.areAllTileTreesLoaded) {
             ViewerPerformance.addMark("TilesLoaded");
-            void ViewerPerformance.addAndLogMeasure(
+            void ViewerPerformance.addMeasure(
               "TileTreesLoaded",
               "ViewerStarting",
-              "TilesLoaded",
-              viewPort.numReadyTiles
+              "TilesLoaded"
             );
             clearInterval(intvl);
             resolve(true);
@@ -133,8 +132,8 @@ const App: React.FC = () => {
         </FillCentered>
       )}
       <Viewer
-        iTwinId={iTwinId}
-        iModelId={iModelId}
+        iTwinId={iTwinId ?? ""}
+        iModelId={iModelId ?? ""}
         authClient={authClient}
         viewCreatorOptions={viewCreatorOptions}
         enablePerformanceMonitors={true} // see description in the README (https://www.npmjs.com/package/@itwin/desktop-viewer-react)

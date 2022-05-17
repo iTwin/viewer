@@ -1,0 +1,26 @@
+{
+  "downloadBriefcase": "Download Briefcase",
+  "open": "Open",
+  "download": "Download",
+  "home": {
+    "start": "Start",
+    "learn": "Learn",
+    "openRecent": "Open recent",
+    "links": {
+      "viewerComponent": "Learn more about the Viewer component",
+      "customizeViewer": "Learn how to customize your iTwin Viewer"
+    }
+  },
+  "saveBriefcase": "Save Briefcase",
+  "briefcaseStatusTitle": {
+    "comparing": "Checking for changes...",
+    "merging": "Pulling changes...",
+    "downloading": "Downloading...",
+    "outdated": "Click to pull upstream changes",
+    "upToDate": "Up to date",
+    "error": "An error occurred while retrieving the status",
+    "online": "Click to download the iModel",
+    "connection": "Connection:",
+    "changes": "Changes:"
+  }
+}

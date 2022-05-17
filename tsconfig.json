@@ -26,5 +26,5 @@
     "downlevelIteration": true,
     "allowJs": true
   },
-  "include": ["./packages/**/src/**/*.ts*"]
+  "include": ["./packages/**/**/*.ts*"]
 }

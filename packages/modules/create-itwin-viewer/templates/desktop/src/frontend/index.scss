@@ -1,0 +1,30 @@
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
+@import "@itwin/itwinui-css/scss/variables";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  @include themed {
+    background-color: t(iui-color-background-2);
+    color: t(iui-color-foreground-primary);
+  }
+}
+
+.itv-scrolling-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .itv-scrolling-content {
+    overflow: auto;
+    flex-basis: 100%;
+  }
+}
+
+.itv-content-margins {
+  margin: 20px calc(var(--responsive-grid-margin, 64px) - 3px) 0;
+}

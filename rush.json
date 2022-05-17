@@ -68,6 +68,12 @@
       "packageName": "@itwin/test-extension",
       "projectFolder": "packages/modules/test-extension",
       "shouldPublish": false
+    },
+    {
+      "packageName": "create-itwin-viewer",
+      "projectFolder": "packages/modules/create-itwin-viewer",
+      "versionPolicyName": "prerelease-monorepo-lockStep",
+      "shouldPublish": true
     }
   ]
 }
