@@ -36,7 +36,7 @@ import { history } from "../routing";
  * Test a viewer that uses auth configuration provided at startup
  * @returns
  */
-export const ViewerHome: React.FC = () => {
+const ViewerHome: React.FC = () => {
   const [iModelId, setIModelId] = useState(
     process.env.IMJS_AUTH_CLIENT_IMODEL_ID
   );
@@ -152,3 +152,5 @@ export const ViewerHome: React.FC = () => {
     </div>
   );
 };
+
+export default ViewerHome;
