@@ -6,6 +6,10 @@
 import { ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import {
+  LocalExtensionProvider,
+  RemoteExtensionProvider,
+} from "@itwin/core-frontend";
+import {
   MeasureTools,
   MeasureToolsUiItemsProvider,
 } from "@itwin/measure-tools-react";
@@ -13,7 +17,7 @@ import {
   PropertyGridManager,
   PropertyGridUiItemsProvider,
 } from "@itwin/property-grid-react";
-import TestExtension from "@itwin/test-extension";
+import LocalExtension from "@itwin/test-local-extension";
 import {
   TreeWidget,
   TreeWidgetUiItemsProvider,
@@ -133,7 +137,16 @@ const ViewerHome: React.FC = () => {
           }),
           new MeasureToolsUiItemsProvider(),
         ]}
-        extensions={[TestExtension]}
+        extensions={[
+          new LocalExtensionProvider({
+            manifestPromise: LocalExtension.manifestPromise,
+            main: LocalExtension.main,
+          }),
+          new RemoteExtensionProvider({
+            jsUrl: "http://localhost:3001/dist/index.js",
+            manifestUrl: "http://localhost:3001/package.json",
+          }),
+        ]}
         backstageItems={backstageItems}
       />
     </div>

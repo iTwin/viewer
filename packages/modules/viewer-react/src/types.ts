@@ -17,7 +17,7 @@ import type {
 } from "@itwin/core-common";
 import type {
   BlankConnectionProps,
-  BuiltInExtensionLoaderProps,
+  ExtensionProvider,
   IModelAppOptions,
   IModelConnection,
   ScreenViewport,
@@ -109,8 +109,8 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   additionalI18nNamespaces?: string[];
   /** custom rpc interfaces (assumes that they are supported in your backend) */
   additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
-  /** TODO build time only for now */
-  extensions?: BuiltInExtensionLoaderProps[];
+  /** array of iTwin.js Extensions */
+  extensions?: ExtensionProvider[];
 }
 
 export interface ConnectedViewerProps {

@@ -65,8 +65,15 @@
       "shouldPublish": false
     },
     {
-      "packageName": "@itwin/test-extension",
-      "projectFolder": "packages/modules/test-extension",
+      "packageName": "@itwin/test-local-extension",
+      "projectFolder": "packages/modules/test-local-extension",
+      "versionPolicyName": "prerelease-monorepo-lockStep",
+      "shouldPublish": false
+    },
+    {
+      "packageName": "@itwin/test-remote-extension",
+      "projectFolder": "packages/modules/test-remote-extension",
+      "versionPolicyName": "prerelease-monorepo-lockStep",
       "shouldPublish": false
     }
   ]
