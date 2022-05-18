@@ -7,6 +7,7 @@ import { Viewer } from "@itwin/desktop-viewer-react";
 import type { RouteComponentProps } from "@reach/router";
 import React, { useCallback, useEffect, useState } from "react";
 
+import type { ViewerExtensionProvider } from "../../../config";
 import { uiConfig } from "../../../config";
 import extensions from "../../../extensions";
 import { IModelMergeItemsProvider } from "../../extensions/IModelMergeStatusBarItem";
@@ -29,8 +30,13 @@ export const ViewerRoute = ({ location }: ViewerRouteProps) => {
     }
   }, [location?.state]);
 
-  const onIModelAppInitialized = useCallback(() => {
-    console.log("iTwin.js Initialized!");
+  const onIModelAppInitialized = useCallback(async () => {
+    const initFns = extensions.map((extension: ViewerExtensionProvider) => {
+      if (extension.initFn) {
+        return extension.initFn();
+      }
+    });
+    return await Promise.all(initFns);
   }, []);
 
   const uiProviders = extensions.map((extension) => extension.provider);

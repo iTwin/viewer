@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import {
   PropertyGridManager,
   PropertyGridUiItemsProvider,
@@ -11,7 +12,7 @@ import {
   TreeWidgetUiItemsProvider,
 } from "@itwin/tree-widget-react";
 
-import type { ExtensionProvider } from "./config";
+import type { ViewerExtensionProvider } from "./config";
 
 export default [
   {
@@ -28,4 +29,4 @@ export default [
       await PropertyGridManager.initialize();
     },
   },
-] as ExtensionProvider[];
+] as ViewerExtensionProvider[];

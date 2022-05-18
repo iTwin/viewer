@@ -6,7 +6,7 @@
 import type { UiItemsProvider } from "@itwin/appui-abstract";
 import type { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
 
-export interface ExtensionProvider {
+export interface ViewerExtensionProvider {
   provider: UiItemsProvider;
   initFn?: () => Promise<void>;
 }
