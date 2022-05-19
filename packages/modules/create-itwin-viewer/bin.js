@@ -196,8 +196,13 @@ async function main() {
     ]);
   }
 
+  const appConfig = deepmerge(
+    appConfiguration.common,
+    appConfiguration[mainOptions.platform]
+  );
+
   let mergedAppConfig = {
-    ...appConfiguration,
+    ...appConfig,
   };
   if (webOptions?.iTwinId) {
     mergedAppConfig.iTwinId = webOptions?.iTwinId;
@@ -212,7 +217,7 @@ async function main() {
         type: "text",
         name: "authority",
         message: "Enter the authority for your Identity Provider",
-        initial: appConfiguration.auth.authority,
+        initial: mergedAppConfig.auth.authority,
       },
       {
         type: "text",
@@ -224,19 +229,19 @@ async function main() {
         type: "text",
         name: "scope",
         message: "Enter your scope list",
-        initial: appConfiguration.auth.scope,
+        initial: mergedAppConfig.auth.scope,
       },
       {
         type: "text",
         name: "redirectUri",
         message: "Enter your redirect uri",
-        initial: appConfiguration.auth.redirectUri,
+        initial: mergedAppConfig.auth.redirectUri,
       },
       {
         type: "text",
         name: "postSignoutRedirectUri",
         message: "Enter your post logout redirect uri",
-        initial: appConfiguration.auth.postSignoutRedirectUri,
+        initial: mergedAppConfig.auth.postSignoutRedirectUri,
       },
     ]);
     mergedAppConfig = {

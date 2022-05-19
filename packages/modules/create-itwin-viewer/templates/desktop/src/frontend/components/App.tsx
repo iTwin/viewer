@@ -11,6 +11,8 @@ import {
 import { Router } from "@reach/router";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
+import type { ExtensionProvider } from "../../config";
+import extensions from "../../extensions";
 import type { ViewerSettings } from "../../types";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import {
@@ -23,10 +25,20 @@ import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
 const App = () => {
   (window as any).ITWIN_VIEWER_HOME = window.location.origin;
 
+  const onIModelAppInitialized = useCallback(async () => {
+    const initFns = extensions.map((extension: ExtensionProvider) => {
+      if (extension.initFn) {
+        return extension.initFn();
+      }
+    });
+    return await Promise.all(initFns);
+  }, []);
+
   const desktopInitializerProps = useMemo<DesktopInitializerParams>(
     () => ({
       additionalI18nNamespaces: ["iTwinDesktopViewer"],
       enablePerformanceMonitors: true,
+      onIModelAppInit: onIModelAppInitialized,
     }),
     []
   );
