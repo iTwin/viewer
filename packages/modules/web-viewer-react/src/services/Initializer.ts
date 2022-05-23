@@ -133,6 +133,8 @@ export class WebInitializer {
           WebInitializer._initializing = false;
           WebInitializer._cancel = undefined;
         });
+    } else if (IModelApp.initialized && !this._initialized) {
+      throw new Error("IModel app initialized before web viewer");
     }
   }
 }
