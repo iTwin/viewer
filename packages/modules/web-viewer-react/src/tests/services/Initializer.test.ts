@@ -134,6 +134,6 @@ describe("Initializer", () => {
       enablePerformanceMonitors: false,
     });
     await WebInitializer.initialized;
-    expect("IModel app initialized before web viewer");
+    expect("Use the useWebViewInitializer");
   });
 });
