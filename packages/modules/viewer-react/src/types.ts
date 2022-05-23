@@ -2,6 +2,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 import type { BackstageItem, UiItemsProvider } from "@itwin/appui-abstract";
 import type {
   ColorTheme,
@@ -114,7 +118,7 @@ export interface ItwinViewerInitializerParams {
   /** options for TileAdmin initialization */
   tileAdminOptions?: TileAdmin.Props;
   /** options for RenderSystem initialization */
-  renderSys?: RenderSystem.Options;
+  renderSys?: RenderSystem | RenderSystem.Options;
 }
 
 /**

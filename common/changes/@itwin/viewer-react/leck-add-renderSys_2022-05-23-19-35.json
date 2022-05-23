@@ -2,8 +2,8 @@
   "changes": [
     {
       "packageName": "@itwin/viewer-react",
-      "comment": "Add renderSys option to IModelApp",
-      "type": "patch"
+      "comment": "Expose `renderSys` option for IModelApp",
+      "type": "minor"
     }
   ],
   "packageName": "@itwin/viewer-react",
