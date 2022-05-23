@@ -2,6 +2,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 import type { BackstageItem, UiItemsProvider } from "@itwin/appui-abstract";
 import type {
   ColorTheme,
@@ -18,6 +22,7 @@ import type {
   FrontendHubAccess,
   IModelConnection,
   MapLayerOptions,
+  RenderSystem,
   ScreenViewport,
   TileAdmin,
   ToolAdmin,
@@ -112,6 +117,8 @@ export interface ItwinViewerInitializerParams {
   enablePerformanceMonitors: boolean;
   /** options for TileAdmin initialization */
   tileAdminOptions?: TileAdmin.Props;
+  /** options for RenderSystem initialization */
+  renderSys?: RenderSystem.Options;
 }
 
 /**
@@ -131,6 +138,7 @@ const iTwinViewerInitializerParamSample: ItwinViewerInitializerParams = {
   // extensions: undefined,
   enablePerformanceMonitors: false,
   tileAdminOptions: undefined,
+  renderSys: undefined,
 };
 
 export const iTwinViewerInitializerParamList = Object.keys(
