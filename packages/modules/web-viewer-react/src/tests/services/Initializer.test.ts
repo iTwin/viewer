@@ -126,4 +126,14 @@ describe("Initializer", () => {
     await WebInitializer.initialized;
     expect(IModelApp.startup).toHaveBeenCalled();
   });
+
+  it("IModel initialized before Webviewer initializer", async () => {
+    await IModelApp.startup();
+    await WebInitializer.startWebViewer({
+      authClient: new MockAuthorizationClient(),
+      enablePerformanceMonitors: false,
+    });
+    await WebInitializer.initialized;
+    expect("IModel app initialized before web viewer");
+  });
 });
