@@ -127,7 +127,7 @@ describe("Initializer", () => {
     expect(IModelApp.startup).toHaveBeenCalled();
   });
 
-  it("IModel initialized before Webviewer initializer", async () => {
+  it("Should throw an error when Imodelapp startup is called before webinitizializer", async () => {
     await IModelApp.startup();
     await WebInitializer.startWebViewer({
       authClient: new MockAuthorizationClient(),
