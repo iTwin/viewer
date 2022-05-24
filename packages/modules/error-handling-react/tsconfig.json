@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target":  "es2020",
+    "target": "es2017",
     "lib": [
       // Required for async iterators/generators:
       "esnext.asynciterable",
