@@ -134,6 +134,8 @@ describe("Initializer", () => {
       enablePerformanceMonitors: false,
     });
     await WebInitializer.initialized;
-    expect("Use the useWebViewInitializer");
+    expect(WebInitializer.startWebViewer).toThrowError(
+      "Use the useWebViewInitializer"
+    );
   });
 });
