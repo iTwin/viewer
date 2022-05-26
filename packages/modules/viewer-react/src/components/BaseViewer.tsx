@@ -2,13 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-/*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
-
 import { FillCentered } from "@itwin/core-react";
-// import { ErrorBoundary } from "@itwin/error-handling-react";
 import React from "react";
 
 import { useAccessToken } from "../hooks/useAccessToken";
@@ -19,6 +13,7 @@ import type {
   FileViewerProps,
   ViewerCommonProps,
 } from "../types";
+import { ErrorBoundary } from "./error/ErrorBoundary";
 import IModelLoader from "./iModel/IModelLoader";
 
 type ViewerProps = (ConnectedViewerProps | FileViewerProps | BlankViewerProps) &
@@ -44,7 +39,7 @@ export const BaseViewer = ({
 
   const accessToken = useAccessToken();
   return (
-    <>
+    <ErrorBoundary>
       {("filePath" in loaderProps && loaderProps.filePath) || accessToken ? (
         viewerInitialized ? (
           <IModelLoader {...loaderProps} />
@@ -54,6 +49,6 @@ export const BaseViewer = ({
       ) : (
         <FillCentered>Please provide a valid access token.</FillCentered>
       )}
-    </>
+    </ErrorBoundary>
   );
 };
