@@ -2,9 +2,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import type { ErrorPageProps, ErrorPageType } from "@itwin/itwinui-react";
 import { ErrorPage } from "@itwin/itwinui-react";
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 
 interface Props {
   eventTitle?: string;
@@ -41,7 +42,7 @@ export class ErrorBoundary extends Component<
       let errorMessage: ErrorPageProps["errorMessage"] = (
         <>
           We can't find the iModel that you are looking for or it does not
-          exist. Visit the iModel HUB or contact our support team.
+          exist. Visit the iModelHub or contact our support team.
         </>
       );
 
@@ -75,7 +76,7 @@ export class ErrorBoundary extends Component<
                 We can not find the iModel that you are looking for or it does
                 not exist.
                 <br />
-                Visit the iModel HUB or contact our support team.
+                Visit the iModelHub or contact our support team.
               </>
             );
             break;
@@ -84,7 +85,7 @@ export class ErrorBoundary extends Component<
             errorMessage = (
               <>
                 Please retry again. If this continues to happen, please contact
-                our support team or visit the iModel HUB.
+                our support team or visit the iModelHub.
               </>
             );
             break;
@@ -94,7 +95,7 @@ export class ErrorBoundary extends Component<
             errorMessage = (
               <>
                 This service is being worked on. Please come back in a little
-                bit or visit iModel HUB.
+                bit or visit iModelHub.
               </>
             );
             break;
@@ -103,7 +104,7 @@ export class ErrorBoundary extends Component<
             errorMessage = (
               <>
                 This service is being worked on. Please come back in a little
-                bit or visit iModel HUB.
+                bit or visit iModelHub.
               </>
             );
             break;
@@ -112,29 +113,16 @@ export class ErrorBoundary extends Component<
             errorMessage = (
               <>
                 We can't find the iModel that you are looking for or it does not
-                exist. Visit the iModel HUB or contact our support team.
+                exist. Visit the iModelHub or contact our support team.
               </>
             );
             break;
         }
       }
 
-      return (
-        <ErrorPage
-          errorMessage={errorMessage}
-          errorType={errorType}
-          primaryButtonHandle={() => {
-            console.log("Close");
-          }}
-          primaryButtonLabel="Close"
-          secondaryButtonHandle={() => {
-            console.log("Cancel");
-          }}
-          secondaryButtonLabel="Cancel"
-        />
-      );
+      return <ErrorPage errorMessage={errorMessage} errorType={errorType} />;
     } else {
-      return <Fragment>{this.props.children}</Fragment>;
+      return <>{this.props.children}</>;
     }
   }
 }
