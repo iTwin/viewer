@@ -1,6 +1,6 @@
 {
   "name": "@itwin/test-local-extension",
-  "version": "1.0.0",
+  "version": "3.0.0-dev.6",
   "description": "Test iTwin.js extension",
   "main": "./dist/index.js",
   "module": "./lib/loader.js",
