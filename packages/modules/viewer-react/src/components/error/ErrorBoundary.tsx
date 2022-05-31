@@ -4,27 +4,24 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ErrorPage } from "@itwin/itwinui-react";
+import type { PropsWithChildren, ReactNode } from "react";
 import React, { Component } from "react";
-
-interface Props {
-  children: React.ReactNode;
-}
 
 interface State {
   fallback: boolean;
   error: Error;
 }
 
-export class ErrorBoundary extends Component<Props, State> {
-  override state = {
+export class ErrorBoundary extends Component<
+  PropsWithChildren<ReactNode>,
+  State
+> {
+  override state: State = {
     fallback: false,
     error: new Error(),
   };
 
-  static getDerivedStateFromError(e: Error): {
-    fallback: boolean;
-    error: Error;
-  } {
+  static getDerivedStateFromError(e: Error): State {
     return {
       fallback: true,
       error: e,
