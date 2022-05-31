@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ErrorPage } from "@itwin/itwinui-react";
-import type { PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren } from "react";
 import React, { Component } from "react";
 
 interface State {
@@ -13,7 +13,7 @@ interface State {
 }
 
 export class ErrorBoundary extends Component<
-  PropsWithChildren<ReactNode>,
+  PropsWithChildren<Record<string, unknown>>,
   State
 > {
   override state: State = {
