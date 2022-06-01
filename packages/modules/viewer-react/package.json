@@ -33,7 +33,6 @@
   ],
   "dependencies": {
     "@bentley/icons-generic-webfont": "^1.0.15",
-    "@itwin/error-handling-react": "2.0.1",
     "@itwin/itwinui-illustrations-react": "^1.2.0",
     "@itwin/itwinui-react": "^1.16.2"
   },
