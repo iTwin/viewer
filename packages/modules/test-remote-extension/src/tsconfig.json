@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "../lib/",
     "resolveJsonModule": true,
-    "module": "esnext",
+    "module": "es2020",
     "moduleResolution": "node",
     "isolatedModules": true,
     "skipLibCheck": true,

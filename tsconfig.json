@@ -10,13 +10,13 @@
       "dom.iterable",
       "scripthost"
     ],
-    "module": "commonjs",
+    "module": "es2020",//commonjs
+    "moduleResolution": "node",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
     "resolveJsonModule": true,
     "jsx": "react",
     "declaration": true,
