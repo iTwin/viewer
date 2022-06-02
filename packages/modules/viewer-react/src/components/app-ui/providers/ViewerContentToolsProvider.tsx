@@ -20,21 +20,9 @@ export class ViewerContentToolsProvider extends StandardContentToolsProvider {
       "ViewerDefaultContentTools",
       (_defaultItems = {
         vertical: {
-          measureGroup:
-            typeof _defaultItems?.vertical?.measureGroup === "undefined" ||
-            _defaultItems?.vertical?.measureGroup
-              ? true
-              : false,
-          sectionGroup:
-            typeof _defaultItems?.vertical?.sectionGroup === "undefined" ||
-            _defaultItems?.vertical?.sectionGroup
-              ? true
-              : false,
-          selectElement:
-            typeof _defaultItems?.vertical?.selectElement === "undefined" ||
-            _defaultItems?.vertical?.selectElement
-              ? true
-              : false,
+          measureGroup: _defaultItems?.vertical?.measureGroup ?? true,
+          sectionGroup: _defaultItems?.vertical?.sectionGroup ?? true,
+          selectElement: _defaultItems?.vertical?.sectionGroup ?? true,
         },
       })
     );
