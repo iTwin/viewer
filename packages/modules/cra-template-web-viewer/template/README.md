@@ -20,9 +20,9 @@ IMJS_AUTH_CLIENT_SCOPES =""
 
   - `imodelaccess:read` is part of the Visualization API.
 
-  - `imodels:read` is part of the iModels API.
+  - `imodels:read` is part of the iModels API, within Digital Twin Management.
 
-  - `realitydata:read` is part of the Reality Data API.
+  - `realitydata:read` is part of the Reality Data API, within Digital Twin Management.
 
 - The application will use the path of the redirect URI to handle the redirection, it must simply match what is defined in your client.
 
