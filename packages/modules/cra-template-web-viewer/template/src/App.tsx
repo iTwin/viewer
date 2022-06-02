@@ -2,6 +2,10 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import "./App.scss";
 
@@ -161,7 +165,13 @@ const App: React.FC = () => {
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
           new ViewerNavigationToolsProvider(),
-          new ViewerContentToolsProvider(),
+          new ViewerContentToolsProvider({
+            vertical: {
+              measureGroup: false,
+              sectionGroup: true,
+              selectElement: true,
+            },
+          }),
           new ViewerStatusbarItemsProvider(),
           new TreeWidgetUiItemsProvider(),
           new PropertyGridUiItemsProvider({
