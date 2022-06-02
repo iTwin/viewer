@@ -8,6 +8,21 @@ import { StandardNavigationToolsProvider } from "@itwin/appui-react";
 
 export class ViewerNavigationToolsProvider extends StandardNavigationToolsProvider {
   constructor(defaultItems?: DefaultNavigationTools) {
-    super("ViewerDefaultNavigationTools", defaultItems);
+    super(
+      "ViewerDefaultNavigationTools",
+      (defaultItems = {
+        horizontal: {
+          fitView: defaultItems?.horizontal?.fitView ?? true,
+          panView: defaultItems?.horizontal?.panView ?? true,
+          rotateView: defaultItems?.horizontal?.rotateView ?? true,
+          viewUndoRedo: defaultItems?.horizontal?.viewUndoRedo ?? true,
+          windowArea: defaultItems?.horizontal?.windowArea ?? true,
+        },
+        vertical: {
+          toggleCamera: defaultItems?.vertical?.toggleCamera ?? true,
+          walk: defaultItems?.vertical?.walk ?? true,
+        },
+      })
+    );
   }
 }
