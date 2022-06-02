@@ -16,13 +16,11 @@ IMJS_AUTH_CLIENT_SCOPES =""
 
 - You can generate a [test client](https://developer.bentley.com/tutorials/web-application-quick-start/#2-register-an-application) to get started.
 
-- Scopes expected by the viewer are `imodelaccess:read`, `imodels:read` and `realitydata:read`.
+- Scopes expected by the viewer are:
 
-  - `imodelaccess:read` is part of the Visualization API.
-
-  - `imodels:read` is part of the iModels API, within Digital Twin Management.
-
-  - `realitydata:read` is part of the Reality Data API, within Digital Twin Management.
+  - **Visualization**: `imodelaccess:read`
+  - **iModels**: `imodels:read`
+  - **Reality Data**: `realitydata:read`
 
 - The application will use the path of the redirect URI to handle the redirection, it must simply match what is defined in your client.
 

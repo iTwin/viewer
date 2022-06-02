@@ -12,15 +12,12 @@ ITWIN_VIEWER_CLIENT_ID="native-xxxxxxxx"
 
 - You should generate a [client](https://developer.bentley.com/register/) to get started. The client that you generate should be for a desktop app and use the following list of apis. You can add the default redirect uri (http://localhost:3000/signin-callback).
 
-- Scopes expected by the viewer are the following:
+- Scopes expected by the viewer are:
 
-  - `imodelaccess:read` is part of Visualization.
-
-  - `imodels:read` is part of iModels API, within Digital Twin Management.
-
-  - `realitydata:read` is part of Reality Data API, within Digital Twin Management.
-
-  - `projects:read` is part of Projects API, within Administration.
+  - **Visualization**: `imodelaccess:read`
+  - **iModels**: `imodels:read`
+  - **Reality Data**: `realitydata:read`
+  - **Projects**: `projects:read`
 
 ## Available Scripts
 
