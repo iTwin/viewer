@@ -5,8 +5,7 @@
     "esModuleInterop": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "moduleResolution": "node",
-    "module": "es2020"
+    "target": "es2020"
   },
   "include": ["./src/**/*.ts*"]
 }

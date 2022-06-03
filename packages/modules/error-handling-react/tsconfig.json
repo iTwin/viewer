@@ -10,7 +10,7 @@
       "dom.iterable",
       "scripthost"
     ],
-    "module": "es2020",
+    "module": "commonjs",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

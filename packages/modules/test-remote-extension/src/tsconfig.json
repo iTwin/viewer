@@ -1,9 +1,10 @@
 {
   "extends": "../node_modules/@itwin/build-tools/tsconfig-base.json",
   "compilerOptions": {
+    "target": "es2020",
     "outDir": "../lib/",
     "resolveJsonModule": true,
-    "module": "es2020",
+    "module": "esnext",
     "moduleResolution": "node",
     "isolatedModules": true,
     "skipLibCheck": true,
