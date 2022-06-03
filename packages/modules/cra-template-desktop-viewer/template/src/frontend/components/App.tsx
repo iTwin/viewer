@@ -6,6 +6,9 @@
 import type { DesktopInitializerParams } from "@itwin/desktop-viewer-react";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
+import { MeasureTools } from "@itwin/measure-tools-react";
+import { PropertyGridManager } from "@itwin/property-grid-react";
+import { TreeWidget } from "@itwin/tree-widget-react";
 import { Router } from "@reach/router";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -21,10 +24,17 @@ import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
 const App = () => {
   (window as any).ITWIN_VIEWER_HOME = window.location.origin;
 
+  const onIModelAppInitialized = useCallback(async () => {
+    await TreeWidget.initialize();
+    await PropertyGridManager.initialize();
+    await MeasureTools.startup();
+  }, []);
+
   const desktopInitializerProps = useMemo<DesktopInitializerParams>(
     () => ({
       additionalI18nNamespaces: ["iTwinDesktopViewer"],
       enablePerformanceMonitors: true,
+      onIModelAppInit: onIModelAppInitialized,
     }),
     []
   );
