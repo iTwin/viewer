@@ -21,9 +21,6 @@
     "clean": "rimraf lib",
     "rebuild": "npm run clean && npm run build"
   },
-  "files": [
-    "lib/**/*"
-  ],
   "dependencies": {
     "@itwin/viewer-react": "3.0.0-dev.8"
   },
