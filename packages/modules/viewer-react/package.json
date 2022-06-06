@@ -28,9 +28,6 @@
     "clean": "rimraf lib",
     "rebuild": "npm run clean && npm run build"
   },
-  "files": [
-    "lib/**/*"
-  ],
   "dependencies": {
     "@bentley/icons-generic-webfont": "^1.0.15",
     "@itwin/itwinui-illustrations-react": "^1.2.0",
