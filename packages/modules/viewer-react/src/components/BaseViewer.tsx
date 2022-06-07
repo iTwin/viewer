@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { FillCentered } from "@itwin/core-react";
-import { ErrorBoundary } from "@itwin/error-handling-react";
 import React from "react";
 
 import { useAccessToken } from "../hooks/useAccessToken";
@@ -15,6 +14,7 @@ import type {
   FileViewerProps,
   ViewerCommonProps,
 } from "../types";
+import { ErrorBoundary } from "./error/ErrorBoundary";
 import IModelLoader from "./iModel/IModelLoader";
 
 type ViewerProps = (ConnectedViewerProps | FileViewerProps | BlankViewerProps) &
@@ -45,10 +45,10 @@ export const BaseViewer = ({
         viewerInitialized ? (
           <IModelLoader {...loaderProps} />
         ) : (
-          <FillCentered>initializing...</FillCentered>
+          <FillCentered>Initializing...</FillCentered>
         )
       ) : (
-        <FillCentered>Please sign in.</FillCentered>
+        <FillCentered>Please provide a valid access token.</FillCentered>
       )}
     </ErrorBoundary>
   );
