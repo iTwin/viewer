@@ -16,16 +16,22 @@ import * as React from "react";
 
 export class ViewerContentToolsProvider extends StandardContentToolsProvider {
   constructor(private _defaultItems?: DefaultContentTools) {
-    super(
-      "ViewerDefaultContentTools",
-      (_defaultItems = {
-        vertical: {
-          measureGroup: _defaultItems?.vertical?.measureGroup ?? true,
-          sectionGroup: _defaultItems?.vertical?.sectionGroup ?? true,
-          selectElement: _defaultItems?.vertical?.sectionGroup ?? true,
-        },
-      })
-    );
+    super("ViewerDefaultContentTools", {
+      horizontal: {
+        clearSelection: true,
+        clearDisplayOverrides: true,
+        hide: "element",
+        isolate: "element",
+        emphasize: "element",
+        ..._defaultItems?.horizontal,
+      },
+      vertical: {
+        measureGroup: true,
+        sectionGroup: true,
+        selectElement: true,
+        ..._defaultItems?.vertical,
+      },
+    });
   }
 
   // need to override this method to move sectioning "clear" tool to its proper position on the left
