@@ -89,7 +89,7 @@ export type ViewerCommonProps = ViewerInitializerParams & LoaderProps;
 
 export type ViewerIModelAppOptions = Pick<
   IModelAppOptions,
-  "hubAccess" | "mapLayerOptions" | "tileAdmin" | "toolAdmin"
+  "hubAccess" | "mapLayerOptions" | "tileAdmin" | "toolAdmin" | "renderSys"
 >;
 
 export interface ViewerInitializerParams extends ViewerIModelAppOptions {
@@ -145,6 +145,7 @@ const iTwinViewerInitializerParamSample: ViewerInitializerParams = {
   extensions: undefined,
   enablePerformanceMonitors: false,
   tileAdmin: undefined,
+  renderSys: undefined,
 };
 
 export const iTwinViewerInitializerParamList = Object.keys(

@@ -9,7 +9,6 @@ import "./IModelLoader.scss";
 import { StateManager, UiFramework } from "@itwin/appui-react";
 import type { IModelConnection } from "@itwin/core-frontend";
 import { BlankConnection, IModelApp } from "@itwin/core-frontend";
-import { useErrorManager } from "@itwin/error-handling-react";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
@@ -71,12 +70,6 @@ const IModelLoader = React.memo(
 
     useUiProviders(uiProviders);
     useTheme(theme);
-
-    // trigger error boundary when fatal error is thrown
-    const errorManager = useErrorManager({});
-    useEffect(() => {
-      setError(errorManager.fatalError);
-    }, [errorManager.fatalError]);
 
     const getModelConnection = useCallback(async (): Promise<
       IModelConnection | undefined
@@ -141,9 +134,7 @@ const IModelLoader = React.memo(
 
       void getModelConnection()
         .then((connection) => (prevConnection = connection))
-        .catch((error) => {
-          errorManager.throwFatalError(error);
-        });
+        .catch(setError);
 
       const mounted = isMounted.current;
       return () => {
