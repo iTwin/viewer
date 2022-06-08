@@ -111,24 +111,29 @@ const createMenu = () => {
   ] as MenuItemConstructorOptions[];
 
   if (isMac) {
+    const windowMenu: MenuItemConstructorOptions[] = [
+      {
+        label: "Minimize",
+        role: "minimize",
+      },
+      {
+        label: "Zoom",
+        role: "zoom",
+        accelerator: "CommandOrControl+Alt+Z",
+      },
+    ];
+
+    // add a reload menu item for development only
+    if (process.env.NODE_ENV === "development") {
+      windowMenu.push({
+        label: "Reload",
+        role: "reload",
+      });
+    }
+
     template.push({
       label: "Window",
-      submenu: [
-        {
-          label: "Minimize",
-          role: "minimize",
-        },
-        {
-          label: "Zoom",
-          role: "zoom",
-          accelerator: "CommandOrControl+Alt+Z",
-        },
-        // TODO uncomment for dev as needed
-        // {
-        //   label: "Reload",
-        //   role: "reload",
-        // },
-      ],
+      submenu: windowMenu,
     });
     template.unshift({
       label: "iTwin Viewer",
