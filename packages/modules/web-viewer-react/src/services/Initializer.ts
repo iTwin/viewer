@@ -134,7 +134,9 @@ export class WebInitializer {
           WebInitializer._cancel = undefined;
         });
     } else if (this._initializing) {
-      return this._initialized;
+      if(!this._initialized){
+        return this._initialized;
+      }
     } else {
       throw new Error(
         "Looks like you called IModelApp.startup in your application. Please use the useWebViewerInitializer hook instead."

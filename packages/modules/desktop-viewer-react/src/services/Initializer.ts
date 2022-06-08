@@ -107,8 +107,10 @@ export class DesktopInitializer {
           DesktopInitializer._initializing = false;
           DesktopInitializer._cancel = undefined;
         });
-    } else if (!this._initialized) {
-      this._initialized = Promise.resolve();
+    } else if (this._initializing) {
+      if(!this._initialized){
+        this._initialized = Promise.resolve();
+      }
     } else {
       throw new Error(
         "Looks like you called IModelApp.startup in your application. Please use the useDesktopViewerInitializer hook instead."
