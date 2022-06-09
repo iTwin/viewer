@@ -129,11 +129,7 @@ const ViewerHome: React.FC = () => {
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
           new ViewerNavigationToolsProvider(),
-          new ViewerContentToolsProvider({
-            vertical: {
-              measureGroup: false,
-            },
-          }),
+          new ViewerContentToolsProvider(),
           new ViewerStatusbarItemsProvider(),
           new TreeWidgetUiItemsProvider(),
           new PropertyGridUiItemsProvider({

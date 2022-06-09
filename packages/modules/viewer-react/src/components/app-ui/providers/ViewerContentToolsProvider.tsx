@@ -26,7 +26,7 @@ export class ViewerContentToolsProvider extends StandardContentToolsProvider {
         ..._defaultItems?.horizontal,
       },
       vertical: {
-        measureGroup: true,
+        measureGroup: false,
         sectionGroup: true,
         selectElement: true,
         ..._defaultItems?.vertical,
