@@ -134,8 +134,8 @@ export class WebInitializer {
           WebInitializer._cancel = undefined;
         });
     } else if (this._initializing) {
-      if(!this._initialized){
-        return this._initialized;
+      if (!this._initialized) {
+        return (this._initialized = Promise.resolve());
       }
     } else {
       throw new Error(

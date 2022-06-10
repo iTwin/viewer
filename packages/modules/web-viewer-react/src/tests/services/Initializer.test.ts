@@ -135,7 +135,7 @@ describe("Initializer", () => {
     });
     await WebInitializer.initialized;
     expect(WebInitializer.startWebViewer).toThrowError(
-      "Use the useWebViewInitializer"
+      "Looks like you called IModelApp.startup in your application. Please use the useWebViewerInitializer hook instead."
     );
   });
 });
