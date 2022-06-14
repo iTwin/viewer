@@ -87,7 +87,12 @@ export type ViewerCommonProps = ViewerInitializerParams & LoaderProps;
 
 export type ViewerIModelAppOptions = Pick<
   IModelAppOptions,
-  "hubAccess" | "mapLayerOptions" | "tileAdmin" | "toolAdmin" | "renderSys"
+  | "hubAccess"
+  | "mapLayerOptions"
+  | "tileAdmin"
+  | "toolAdmin"
+  | "renderSys"
+  | "realityDataAccess"
 >;
 
 export interface ViewerInitializerParams extends ViewerIModelAppOptions {

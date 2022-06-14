@@ -103,6 +103,7 @@ export const MyViewerComponent = () => {
 - `toolAdmin` - Optional `ToolAdmin` to override the Viewer's default tool admin
 - `tileAdmin` - Optional `tileAdmin` to override the Viewer's default tile admin
 - `renderSys` - Optional `renderSys` to override the Viewer's default render system
+- `realityDataAccess` - Optional `realityDataAccess` to override the Viewer's default reality data access
 
 ## Typescript API
 
