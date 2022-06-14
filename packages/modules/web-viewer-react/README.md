@@ -1,6 +1,6 @@
 # iTwin Viewer for Web
 
-The iTwin Web Viewer is a configurable iTwin.js viewer that offers basic tooling and widgets out-of-the-box and can be further extended through the use of [iTwin.js UI Providers](https://www.itwinjs.org/learning/ui/augmentingui/). This package should be used for web-based applications. For desktop applications, use [@itwin/desktop-viewer-react](https://www.npmjs.com/package/@itwin/desktop-viewer-react).
+The iTwin Web Viewer is a configurable iTwin.js viewer that offers basic configuration out-of-the-box and can be further extended through the use of [iTwin.js UI Providers](https://www.itwinjs.org/learning/ui/augmentingui/). This package should be used for web-based applications. For desktop applications, use [@itwin/desktop-viewer-react](https://www.npmjs.com/package/@itwin/desktop-viewer-react).
 
 ## Installation
 
@@ -16,10 +16,10 @@ npm install @itwin/web-viewer-react
 
 ## Dependencies
 
-If you are creating a new application and are using React, it is advised that you use create-react-app with @bentley/react-scripts. There is also a predefined template that includes the iTwin Viewer package:
+If you are creating a new application and are using React, it is advised that you use create-react-app with `@bentley/react-scripts`. There is also a predefined template that includes the iTwin Viewer package:
 
 ```
-npx create-react-app my-app --scripts-version @bentley/react-scripts --template @itwin/web-viewer
+npx create-react-app@latest my-app --scripts-version @bentley/react-scripts --template @itwin/web-viewer
 ```
 
 ## React component
@@ -33,7 +33,6 @@ export const MyViewerComponent = () => {
   const iTwinId = "myITwinId";
   const iModelId = "myIModelId";
 
-  // authorization client
   const authClient = useMemo(
     () =>
       new BrowserAuthorizationClient({
@@ -61,8 +60,6 @@ export const MyViewerComponent = () => {
 
 #### Required
 
-- `iTwinId` - GUID for the iTwin (project, asset, etc.) that contains the iModel that you wish to view
-- `iModelId` - GUID for the iModel that you wish to view
 - `authClient` - Client that implements the [ViewerAuthorizationClient](https://github.com/iTwin/viewer/blob/master/packages/modules/viewer-react/src/services/auth/ViewerAuthorization.ts) interface
 - `enablePerformanceMonitors` - Enable reporting of data from timed events in the iTwin Viewer in order to aid in future performance optimizations. These are the metrics that will be collected and logged to the browser's performance timeline:
   - Duration of startup to the initialization of iTwin.js services
@@ -70,23 +67,42 @@ export const MyViewerComponent = () => {
   - Duration of startup to the creation of a view state for the iModel
   - Duration of startup until the last tile is loaded and rendered for the initial iModel view
 
+##### Connected iModel
+
+- `iTwinId` - GUID for the iTwin (project, asset, etc.) that contains the iModel that you wish to view
+- `iModelId` - GUID for the iModel that you wish to view
+
+##### Blank Connections
+
+- `blankConnection` - Data to use to create the BlankConnection (name, location, extents, etc.). Note that this can't be used in conjunction with the iTwinId or iModelId prop.
+
 #### Optional
 
-- `changeSetId` - changeset id to view if combined with the iTwinId and iModelId props
-- `backend` - backend connection info (defaults to the iTwin General Purpose backend)
-- `theme` - override the default theme
-- `productId` - application's GPRID
+- `changeSetId` - Changeset id to view if combined with the iTwinId and iModelId props
+- `blankConnectionViewState` - Override options for the ViewState that is generated for the BlankConnection
+
+- `backend` - Backend connection info (defaults to the iTwin Platform's iModel Access Service)
+
+- `theme` - Override the default theme
 - `onIModelConnected` - Callback function that executes after the iModel connection is successful and contains the iModel connection as a parameter
-- `i18nUrlTemplate` - Override the default url template where i18n resource files are queried
 - `frontstages` - Provide additional frontstages for the viewer to render
 - `backstageItems` - Provide additional backstage items for the viewer's backstage composer
-- `onIModelAppInit` - Callback function that executes after IModelApp.startup completes
 - `viewportOptions` - Additional options for the default frontstage's IModelViewportControl
+- `uiProviders` - Extend the viewer's default ui
+- `viewCreatorOptions` - Options for creating the default viewState
+- `loadingComponent` - provide a custom React component to override the spinner when an iModel is loading
+
+- `productId` - application's GPRID
+- `i18nUrlTemplate` - Override the default url template where i18n resource files are queried
+- `onIModelAppInit` - Callback function that executes after IModelApp.startup completes
 - `additionalI18nNamespaces` - Additional i18n namespaces to register
 - `additionalRpcInterfaces` - Additional rpc interfaces to register (assumes that they are supported in your backend)
-- `toolAdmin` - Optional `ToolAdmin` to register
-- `imodelClient` - provide a client other than the default iModelHub client to access iModels (i.e. iModelBankClient)
-- `loadingComponent` - provide a custom React component to override the spinner and text that displays when an iModel is loading
+- `extensions` - Provide extensions for the viewer
+- `hubAccess` - Optional `hubAccess` to override the Viewer's default hub access
+- `mapLayerOptions` - Optional key value pair to provide map layers
+- `toolAdmin` - Optional `ToolAdmin` to override the Viewer's default tool admin
+- `tileAdmin` - Optional `tileAdmin` to override the Viewer's default tile admin
+- `renderSys` - Optional `renderSys` to override the Viewer's default render system
 
 ## Typescript API
 
@@ -103,7 +119,6 @@ import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 const iTwinId = "myITwinId";
 const iModelId = "myIModelId";
 
-// authorization client
 const authClient = new BrowserAuthorizationClient({
   scope: "profile email",
   clientId: "my-oidc-client",
@@ -124,7 +139,7 @@ if (viewer) {
 
 ## Blank Viewer
 
-For cases where you would prefer to use a [Blank iModelConnection](https://www.itwinjs.org/learning/frontend/blankconnection/), you should use the Viewer React component.
+For cases where you would prefer to use a [Blank iModelConnection](https://www.itwinjs.org/learning/frontend/blankconnection/), you should supply the `blankConnection` prop to the Viewer React component.
 
 ```javascript
 import React, { useState, useEffect } from "react";
@@ -146,7 +161,6 @@ export const MyBlankViewerComponent = () => {
     },
   };
 
-  // authorization client
   const authClient = useMemo(
     () =>
       new BrowserAuthorizationClient({
@@ -169,19 +183,9 @@ export const MyBlankViewerComponent = () => {
 };
 ```
 
-It allows for most of the same optional props as the Viewer component, with a few differences:
-
-#### Required
-
-- `blankConnection` - Data to use to create the BlankConnection (name, location, extents, etc.). Note that no iTwinId or iModelId is required for this component
-
-#### Optional
-
-- `blankConnectionViewState` - Override options for the ViewState that is generated for the BlankConnection
-
 # Development
 
-When making changes to the src, run `npm start` in the package's root folder to enable source watching and rebuild, so the dev-server will have access to updated code on succesful code compilation.
+When making changes to the src, run `npm start` in the package's root folder to enable source watching and rebuild, so the dev-server will have access to updated code on successful code compilation.
 
 # Next Steps
 
