@@ -28,7 +28,7 @@
     "pseudolocalize": "betools pseudolocalize --englishDir ./public/locales/en --out ./public/locales/en-PSEUDO"
   },
   "browserslist": [
-    "electron 8.0.0"
+    "electron 14.0.0"
   ],
   "dependencies": {
     "@bentley/icons-generic-webfont": "^1.0.15",
@@ -50,7 +50,7 @@
     "@itwin/core-telemetry": "^3.2.0",
     "@itwin/ecschema-metadata": "^3.2.0",
     "@itwin/electron-authorization": "^0.8.3",
-    "@itwin/express-server": "^3.2.0",
+    "@itwin/express-server": "^3.0.0",
     "@itwin/desktop-viewer-react": "3.0.0-dev.9",
     "@itwin/imodel-browser-react": "^0.12.2",
     "@itwin/imodels-access-backend": "^1.0.0",

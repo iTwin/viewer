@@ -31,7 +31,9 @@ import { Viewer } from "@itwin/desktop-viewer-react";
 export const MyViewerComponent = () => {
   const snapshotPath = "./samples/house_model.bim";
 
-  return <Viewer filePath={snapshotPath} />;
+  return (
+    <Viewer filePath={snapshotPath} enablePerformanceMonitors={true} />
+  );
 };
 ```
 

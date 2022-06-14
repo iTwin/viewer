@@ -2,6 +2,30 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "2.5.0",
+      "tag": "@itwin/viewer-react_v2.5.0",
+      "date": "Mon, 23 May 2022 21:37:15 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Expose `renderSys` option for IModelApp"
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.4.0",
+      "tag": "@itwin/viewer-react_v2.4.0",
+      "date": "Mon, 16 May 2022 15:03:07 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update default widgets from viewer-components-react"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.3.2",
       "tag": "@itwin/viewer-react_v2.3.2",
       "date": "Wed, 02 Mar 2022 18:47:06 GMT",

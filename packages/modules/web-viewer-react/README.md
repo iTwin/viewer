@@ -47,7 +47,12 @@ export const MyViewerComponent = () => {
   );
 
   return (
-    <Viewer authClient={authClient} iTwinId={iTwinId} iModelId={iModelId} />
+    <Viewer
+      authClient={authClient}
+      iTwinId={iTwinId}
+      iModelId={iModelId}
+      enablePerformanceMonitors={true}
+    />
   );
 };
 ```
