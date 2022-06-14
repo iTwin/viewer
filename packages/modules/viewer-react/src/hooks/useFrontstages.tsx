@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import { DefaultContentGroupProvider } from "../components/app-ui/providers";
 import type {
   BlankConnectionViewState,
-  ItwinViewerUi,
   ViewerFrontstage,
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
@@ -18,7 +17,6 @@ import type {
 
 export const useFrontstages = (
   frontstages?: ViewerFrontstage[],
-  defaultUiConfig?: ItwinViewerUi,
   viewportOptions?: ViewerViewportControlOptions,
   viewCreatorOptions?: ViewerViewCreator3dOptions,
   blankConnectionViewState?: BlankConnectionViewState
@@ -77,7 +75,6 @@ export const useFrontstages = (
     setFinalFrontstages(allFrontstages);
   }, [
     frontstages,
-    defaultUiConfig,
     viewCreatorOptions,
     viewportOptions,
     blankConnectionViewState,

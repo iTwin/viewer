@@ -64,7 +64,7 @@ export const MyViewerComponent = () => {
 - `iTwinId` - GUID for the iTwin (project, asset, etc.) that contains the iModel that you wish to view
 - `iModelId` - GUID for the iModel that you wish to view
 - `authClient` - Client that implements the [ViewerAuthorizationClient](https://github.com/iTwin/viewer/blob/master/packages/modules/viewer-react/src/services/auth/ViewerAuthorization.ts) interface
-- `enablePerformanceMonitors` - Enable reporting of data from timed events in the iTwin Viewer in order to aid in future performance optimizations. These are the metrics that will be collected and logged to the browser's performance timeline as well as to Azure Application Insights:
+- `enablePerformanceMonitors` - Enable reporting of data from timed events in the iTwin Viewer in order to aid in future performance optimizations. These are the metrics that will be collected and logged to the browser's performance timeline:
   - Duration of startup to the initialization of iTwin.js services
   - Duration of startup to the establishment of a connection to the iModel
   - Duration of startup to the creation of a view state for the iModel
@@ -75,12 +75,7 @@ export const MyViewerComponent = () => {
 - `changeSetId` - changeset id to view if combined with the iTwinId and iModelId props
 - `backend` - backend connection info (defaults to the iTwin General Purpose backend)
 - `theme` - override the default theme
-- `defaultUiConfig` - hide or override default tooling and widgets
-  - `hideTreeView` - hide the tree view widget
-  - `hidePropertyGrid` - hide the property grid widget
-  - `hideDefaultStatusBar` - hide the status bar
 - `productId` - application's GPRID
-- `appInsightsKey` - Application Insights key for telemetry
 - `onIModelConnected` - Callback function that executes after the iModel connection is successful and contains the iModel connection as a parameter
 - `i18nUrlTemplate` - Override the default url template where i18n resource files are queried
 - `frontstages` - Provide additional frontstages for the viewer to render

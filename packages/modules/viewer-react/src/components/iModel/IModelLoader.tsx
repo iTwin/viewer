@@ -43,7 +43,6 @@ const IModelLoader = React.memo(
     iModelId,
     iTwinId,
     changeSetId,
-    defaultUiConfig,
     onIModelConnected,
     filePath,
     frontstages,
@@ -62,7 +61,6 @@ const IModelLoader = React.memo(
     const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
       useFrontstages(
         frontstages,
-        defaultUiConfig,
         viewportOptions,
         viewCreatorOptions,
         blankConnectionViewState

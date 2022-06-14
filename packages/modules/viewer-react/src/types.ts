@@ -65,8 +65,6 @@ export interface ViewerViewportControlOptions
 export interface LoaderProps {
   /** color theme */
   theme?: ColorTheme | string;
-  /** Default UI configuration */
-  defaultUiConfig?: ItwinViewerUi;
   /** Optional callback function when iModel is connected */
   onIModelConnected?:
     | ((iModel: IModelConnection) => void)
@@ -151,15 +149,6 @@ const iTwinViewerInitializerParamSample: ViewerInitializerParams = {
 export const iTwinViewerInitializerParamList = Object.keys(
   iTwinViewerInitializerParamSample
 );
-
-/**
- * Configure options for the default UI
- */
-export interface ItwinViewerUi {
-  hideTreeView?: boolean;
-  hidePropertyGrid?: boolean;
-  hideDefaultStatusBar?: boolean;
-}
 
 /**
  * Blank connection ViewState types
