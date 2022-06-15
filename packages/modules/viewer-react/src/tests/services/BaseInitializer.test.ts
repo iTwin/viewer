@@ -50,7 +50,6 @@ jest.mock("@itwin/presentation-frontend", () => {
   };
 });
 jest.mock("@itwin/core-frontend", () => {
-  const noMock = jest.requireActual("@itwin/core-frontend");
   return {
     IModelApp: {
       startup: jest.fn().mockResolvedValue(true),
@@ -83,7 +82,7 @@ jest.mock("@itwin/core-frontend", () => {
     SnapshotConnection: {
       openFile: jest.fn(),
     },
-    ToolAdmin: noMock.ToolAdmin,
+    ToolAdmin: class {},
     ItemField: {},
     CompassMode: {},
     RotationMode: {},

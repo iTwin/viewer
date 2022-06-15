@@ -32,7 +32,6 @@ jest.mock("@itwin/presentation-frontend", () => {
     },
   };
 });
-jest.mock("react-i18next");
 
 jest.mock("@itwin/core-frontend", () => {
   return {

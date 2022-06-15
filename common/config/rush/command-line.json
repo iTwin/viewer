@@ -16,8 +16,7 @@
       "commandKind": "global",
       "summary": "Runs npm audit for the entire monorepo",
       "description": "Scans the entire monorepo for security vulnerabilities via npm audit",
-      "shellCommand": "node common/scripts/audit.js",
-      "allowWarningsInSuccessfulBuild": true
+      "shellCommand": "node common/scripts/audit.js"
     },
     {
       "name": "clean",
