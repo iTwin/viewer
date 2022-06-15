@@ -1,6 +1,6 @@
 {
   "name": "@itwin/test-remote-extension",
-  "version": "3.0.0-dev.6",
+  "version": "0.1.0",
   "description": "Test iTwin.js extension",
   "module": "./lib/index.js",
   "typings": "./lib/index",
@@ -12,14 +12,21 @@
     "@itwin/core-extension": "^3.2.0"
   },
   "devDependencies": {
-    "typescript": "~4.4.0",
     "@esbuild-plugins/node-modules-polyfill": "~0.1.2",
     "@esbuild-plugins/node-globals-polyfill": "~0.1.1",
+    "@itwin/appui-abstract": "^3.2.0",
     "@itwin/build-tools": "^3.2.0",
+    "@itwin/core-bentley": "^3.2.0",
+    "@itwin/core-common": "^3.2.0",
+    "@itwin/core-geometry": "^3.2.0",
+    "@itwin/core-orbitgt": "^3.2.0",
+    "@itwin/core-quantity": "^3.2.0",
+    "@itwin/webgl-compatibility": "^3.2.0",
     "esbuild": "^0.13.13",
+    "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "serve": "^13.0.2",
-    "npm-run-all": "^4.1.5"
+    "typescript": "~4.4.0"
   },
   "scripts": {
     "build": "run-p build:**",
