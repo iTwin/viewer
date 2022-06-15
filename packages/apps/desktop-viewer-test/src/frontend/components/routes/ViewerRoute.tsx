@@ -40,7 +40,11 @@ export const ViewerRoute = ({ location }: ViewerRouteProps) => {
       filePath={filePath}
       uiProviders={[
         new ViewerNavigationToolsProvider(),
-        new ViewerContentToolsProvider(),
+        new ViewerContentToolsProvider({
+          vertical: {
+            measureGroup: false,
+          },
+        }),
         new ViewerStatusbarItemsProvider(),
         new TreeWidgetUiItemsProvider(),
         new PropertyGridUiItemsProvider({
