@@ -164,8 +164,6 @@ const App: React.FC = () => {
           new ViewerContentToolsProvider({
             vertical: {
               measureGroup: false,
-              sectionGroup: true,
-              selectElement: true,
             },
           }),
           new ViewerStatusbarItemsProvider(),
