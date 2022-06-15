@@ -3,7 +3,10 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Viewer } from "@itwin/desktop-viewer-react";
+import {
+  Viewer,
+  ViewerContentToolsProvider,
+} from "@itwin/desktop-viewer-react";
 import type { RouteComponentProps } from "@reach/router";
 import React, { useCallback, useEffect, useState } from "react";
 
@@ -38,7 +41,14 @@ export const ViewerRoute = ({ location }: ViewerRouteProps) => {
       defaultUiConfig={{
         contentManipulationTools: { cornerItem: { hideDefault: true } },
       }}
-      uiProviders={[new IModelMergeItemsProvider()]}
+      uiProviders={[
+        new IModelMergeItemsProvider(),
+        new ViewerContentToolsProvider({
+          vertical: {
+            measureGroup: false,
+          },
+        }),
+      ]}
       enablePerformanceMonitors={true}
     />
   ) : null;
