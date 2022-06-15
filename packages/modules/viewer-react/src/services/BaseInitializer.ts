@@ -205,19 +205,25 @@ export const getIModelAppOptions = (
     console.log(`resources served from: ${viewerHome}`);
   }
 
-  const iModelsClient = new IModelsClient({
-    api: {
+  const hubAccess =
+    options?.hubAccess ??
+    new FrontendIModelsAccess(
+      new IModelsClient({
+        api: {
+          baseUrl: `https://${
+            process.env.IMJS_URL_PREFIX ?? ""
+          }api.bentley.com/imodels`,
+        },
+      })
+    );
+
+  const realityDataAccess =
+    options?.realityDataAccess ??
+    new RealityDataAccessClient({
       baseUrl: `https://${
         process.env.IMJS_URL_PREFIX ?? ""
-      }api.bentley.com/imodels`,
-    },
-  });
-
-  const realityDataClient = new RealityDataAccessClient({
-    baseUrl: `https://${
-      process.env.IMJS_URL_PREFIX ?? ""
-    }api.bentley.com/realitydata`,
-  });
+      }api.bentley.com/realitydata`,
+    });
 
   return {
     applicationId: options?.productId ?? "3098",
@@ -225,14 +231,14 @@ export const getIModelAppOptions = (
     uiAdmin: new FrameworkUiAdmin(),
     rpcInterfaces: getSupportedRpcs(options?.additionalRpcInterfaces ?? []),
     toolAdmin: options?.toolAdmin,
-    hubAccess: options?.hubAccess ?? new FrontendIModelsAccess(iModelsClient),
+    hubAccess,
     localization: new ITwinLocalization({
       urlTemplate:
         options?.i18nUrlTemplate ??
         (viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`),
     }),
     publicPath: viewerHome ? `${viewerHome}/` : "",
-    realityDataAccess: realityDataClient,
+    realityDataAccess,
     mapLayerOptions: options?.mapLayerOptions,
     tileAdmin: options?.tileAdmin,
   };
