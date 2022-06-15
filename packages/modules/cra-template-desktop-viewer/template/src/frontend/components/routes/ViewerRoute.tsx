@@ -6,9 +6,14 @@
 import {
   Viewer,
   ViewerContentToolsProvider,
+  ViewerNavigationToolsProvider,
+  ViewerStatusbarItemsProvider,
 } from "@itwin/desktop-viewer-react";
+import { MeasureToolsUiItemsProvider } from "@itwin/measure-tools-react";
+import { PropertyGridUiItemsProvider } from "@itwin/property-grid-react";
+import { TreeWidgetUiItemsProvider } from "@itwin/tree-widget-react";
 import type { RouteComponentProps } from "@reach/router";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { IModelMergeItemsProvider } from "../../extensions";
 
@@ -30,24 +35,19 @@ export const ViewerRoute = ({ location }: ViewerRouteProps) => {
     }
   }, [location?.state]);
 
-  const onIModelAppInitialized = useCallback(() => {
-    console.log("iTwin.js Initialized!");
-  }, []);
-
   return filePath ? (
     <Viewer
       filePath={filePath}
-      onIModelAppInit={onIModelAppInitialized}
-      defaultUiConfig={{
-        contentManipulationTools: { cornerItem: { hideDefault: true } },
-      }}
       uiProviders={[
-        new IModelMergeItemsProvider(),
-        new ViewerContentToolsProvider({
-          vertical: {
-            measureGroup: false,
-          },
+        new ViewerNavigationToolsProvider(),
+        new ViewerContentToolsProvider(),
+        new ViewerStatusbarItemsProvider(),
+        new TreeWidgetUiItemsProvider(),
+        new PropertyGridUiItemsProvider({
+          enableCopyingPropertyText: true,
         }),
+        new MeasureToolsUiItemsProvider(),
+        new IModelMergeItemsProvider(),
       ]}
       enablePerformanceMonitors={true}
     />

@@ -8,6 +8,7 @@ import type {
   ColorTheme,
   FrontstageProvider,
   IModelViewportControlOptions,
+  StandardFrontstageProps,
 } from "@itwin/appui-react";
 import type {
   ColorDef,
@@ -66,7 +67,7 @@ export interface LoaderProps {
   /** color theme */
   theme?: ColorTheme | string;
   /** Default UI configuration */
-  defaultUiConfig?: ItwinViewerUi;
+  defaultUiConfig?: ViewerDefaultFrontstageConfig;
   /** Optional callback function when iModel is connected */
   onIModelConnected?:
     | ((iModel: IModelConnection) => void)
@@ -89,7 +90,12 @@ export type ViewerCommonProps = ViewerInitializerParams & LoaderProps;
 
 export type ViewerIModelAppOptions = Pick<
   IModelAppOptions,
-  "hubAccess" | "mapLayerOptions" | "tileAdmin" | "toolAdmin" | "renderSys"
+  | "hubAccess"
+  | "mapLayerOptions"
+  | "tileAdmin"
+  | "toolAdmin"
+  | "renderSys"
+  | "realityDataAccess"
 >;
 
 export interface ViewerInitializerParams extends ViewerIModelAppOptions {
@@ -153,15 +159,6 @@ export const iTwinViewerInitializerParamList = Object.keys(
 );
 
 /**
- * Configure options for the default UI
- */
-export interface ItwinViewerUi {
-  hideTreeView?: boolean;
-  hidePropertyGrid?: boolean;
-  hideDefaultStatusBar?: boolean;
-}
-
-/**
  * Blank connection ViewState types
  */
 export interface BlankConnectionViewStateLookAt {
@@ -205,3 +202,8 @@ export interface ViewerDefaultStatusbarItems {
   selectionScope?: boolean;
   selectionInfo?: boolean;
 }
+
+export type ViewerDefaultFrontstageConfig = Pick<
+  StandardFrontstageProps,
+  "hideNavigationAid" | "hideStatusBar"
+>;

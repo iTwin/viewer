@@ -21,11 +21,6 @@
       "shouldPublish": true
     },
     {
-      "packageName": "@itwin/error-handling-react",
-      "projectFolder": "packages/modules/error-handling-react",
-      "shouldPublish": false
-    },
-    {
       "packageName": "@itwin/cra-template-web-viewer",
       "projectFolder": "packages/modules/cra-template-web-viewer",
       "versionPolicyName": "prerelease-monorepo-lockStep",

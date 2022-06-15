@@ -43,10 +43,10 @@ const IModelLoader = React.memo(
     iModelId,
     iTwinId,
     changeSetId,
-    defaultUiConfig,
     onIModelConnected,
     filePath,
     frontstages,
+    defaultUiConfig,
     backstageItems,
     viewportOptions,
     blankConnection,
@@ -60,13 +60,13 @@ const IModelLoader = React.memo(
     const [connection, setConnection] = useState<IModelConnection>();
     const isMounted = useIsMounted();
     const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
-      useFrontstages(
+      useFrontstages({
         frontstages,
         defaultUiConfig,
         viewportOptions,
         viewCreatorOptions,
-        blankConnectionViewState
-      );
+        blankConnectionViewState,
+      });
 
     useUiProviders(uiProviders);
     useTheme(theme);

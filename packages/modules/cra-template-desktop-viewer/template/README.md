@@ -10,7 +10,14 @@ Prior to running the app, you will need to add OIDC client configuration to the 
 ITWIN_VIEWER_CLIENT_ID="native-xxxxxxxx"
 ```
 
-- You should generate a [client](https://developer.bentley.com/register/) to get started. The client that you generate should be for a desktop app and use the Visualization apis. You can add the default redirect uri (http://localhost:3000/signin-callback).
+- You should generate a [client](https://developer.bentley.com/register/) to get started. The client that you generate should be for a desktop app and use the following list of apis. You can add the default redirect uri (http://localhost:3000/signin-callback).
+
+- Scopes expected by the viewer are:
+
+  - **Visualization**: `imodelaccess:read`
+  - **iModels**: `imodels:read`
+  - **Reality Data**: `realitydata:read`
+  - **Projects**: `projects:read`
 
 ## Available Scripts
 

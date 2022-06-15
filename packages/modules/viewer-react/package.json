@@ -1,6 +1,6 @@
 {
   "name": "@itwin/viewer-react",
-  "version": "3.0.0-dev.8",
+  "version": "3.0.0-dev.9",
   "description": "Configurable iTwin.js viewer",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
@@ -28,9 +28,6 @@
     "clean": "rimraf lib",
     "rebuild": "npm run clean && npm run build"
   },
-  "files": [
-    "lib/**/*"
-  ],
   "dependencies": {
     "@bentley/icons-generic-webfont": "^1.0.15",
     "@itwin/itwinui-illustrations-react": "^1.2.0",
@@ -58,7 +55,7 @@
     "@itwin/presentation-common": "^3.2.0",
     "@itwin/presentation-components": "^3.2.0",
     "@itwin/presentation-frontend": "^3.2.0",
-    "@itwin/reality-data-client": "^0.7.0",
+    "@itwin/reality-data-client": "^0.9.0",
     "@itwin/webgl-compatibility": "^3.2.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^10.4.4",
@@ -93,7 +90,7 @@
     "@itwin/imodels-access-frontend": "^1.0.1",
     "@itwin/presentation-common": "^3.2.0",
     "@itwin/presentation-frontend": "^3.2.0",
-    "@itwin/reality-data-client": "^0.7.0",
+    "@itwin/reality-data-client": "^0.9.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.0",

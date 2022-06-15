@@ -1,6 +1,20 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Wed, 02 Mar 2022 18:47:06 GMT and should not be manually modified.
+This log was last generated on Mon, 23 May 2022 21:37:15 GMT and should not be manually modified.
+
+## 2.5.0
+Mon, 23 May 2022 21:37:15 GMT
+
+### Minor changes
+
+- Expose `renderSys` option for IModelApp
+
+## 2.4.0
+Mon, 16 May 2022 15:03:07 GMT
+
+### Minor changes
+
+- Update default widgets from viewer-components-react
 
 ## 2.3.2
 Wed, 02 Mar 2022 18:47:06 GMT

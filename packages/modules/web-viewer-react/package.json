@@ -1,6 +1,6 @@
 {
   "name": "@itwin/web-viewer-react",
-  "version": "3.0.0-dev.8",
+  "version": "3.0.0-dev.9",
   "description": "Configurable iTwin.js viewer for web applications",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
@@ -21,11 +21,8 @@
     "clean": "rimraf lib",
     "rebuild": "npm run clean && npm run build"
   },
-  "files": [
-    "lib/**/*"
-  ],
   "dependencies": {
-    "@itwin/viewer-react": "3.0.0-dev.8"
+    "@itwin/viewer-react": "3.0.0-dev.9"
   },
   "devDependencies": {
     "@itwin/appui-abstract": "^3.2.0",
@@ -46,7 +43,7 @@
     "@itwin/presentation-common": "^3.2.0",
     "@itwin/presentation-components": "^3.2.0",
     "@itwin/presentation-frontend": "^3.2.0",
-    "@itwin/reality-data-client": "^0.7.0",
+    "@itwin/reality-data-client": "^0.9.0",
     "@itwin/webgl-compatibility": "^3.2.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^10.4.4",
