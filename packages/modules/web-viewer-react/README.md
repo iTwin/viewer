@@ -84,6 +84,9 @@ export const MyViewerComponent = () => {
 - `backend` - Backend connection info (defaults to the iTwin Platform's iModel Access Service)
 
 - `theme` - Override the default theme
+- `defaultUiConfig` - hide parts of the default frontstage
+  - `hideNavigationAid` - hide the navigation aid cube
+  - `hideStatusBar` - hide the status bar
 - `onIModelConnected` - Callback function that executes after the iModel connection is successful and contains the iModel connection as a parameter
 - `frontstages` - Provide additional frontstages for the viewer to render
 - `backstageItems` - Provide additional backstage items for the viewer's backstage composer

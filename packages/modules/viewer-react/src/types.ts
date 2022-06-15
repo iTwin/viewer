@@ -8,6 +8,7 @@ import type {
   ColorTheme,
   FrontstageProvider,
   IModelViewportControlOptions,
+  StandardFrontstageProps,
 } from "@itwin/appui-react";
 import type {
   ColorDef,
@@ -65,6 +66,8 @@ export interface ViewerViewportControlOptions
 export interface LoaderProps {
   /** color theme */
   theme?: ColorTheme | string;
+  /** Default UI configuration */
+  defaultUiConfig?: ViewerDefaultFrontstageConfig;
   /** Optional callback function when iModel is connected */
   onIModelConnected?:
     | ((iModel: IModelConnection) => void)
@@ -199,3 +202,8 @@ export interface ViewerDefaultStatusbarItems {
   selectionScope?: boolean;
   selectionInfo?: boolean;
 }
+
+export type ViewerDefaultFrontstageConfig = Pick<
+  StandardFrontstageProps,
+  "hideNavigationAid" | "hideStatusBar"
+>;

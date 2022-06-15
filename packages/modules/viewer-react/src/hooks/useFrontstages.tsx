@@ -10,17 +10,27 @@ import { useEffect, useState } from "react";
 import { DefaultContentGroupProvider } from "../components/app-ui/providers";
 import type {
   BlankConnectionViewState,
+  ViewerDefaultFrontstageConfig,
   ViewerFrontstage,
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
 } from "../types";
 
-export const useFrontstages = (
-  frontstages?: ViewerFrontstage[],
-  viewportOptions?: ViewerViewportControlOptions,
-  viewCreatorOptions?: ViewerViewCreator3dOptions,
-  blankConnectionViewState?: BlankConnectionViewState
-) => {
+export interface UseFrontstagesProps {
+  frontstages?: ViewerFrontstage[];
+  defaultUiConfig?: ViewerDefaultFrontstageConfig;
+  viewportOptions?: ViewerViewportControlOptions;
+  viewCreatorOptions?: ViewerViewCreator3dOptions;
+  blankConnectionViewState?: BlankConnectionViewState;
+}
+
+export const useFrontstages = ({
+  frontstages,
+  blankConnectionViewState,
+  defaultUiConfig,
+  viewCreatorOptions,
+  viewportOptions,
+}: UseFrontstagesProps) => {
   const [finalFrontstages, setFinalFrontstages] =
     useState<ViewerFrontstage[]>();
   const [noConnectionRequired, setNoConnectionRequired] =
@@ -63,6 +73,7 @@ export const useFrontstages = (
         id: "DefaultFrontstage",
         usage: StageUsage.General,
         contentGroupProps: contentGroup,
+        ...defaultUiConfig,
       });
 
       // add the default frontstage first so that it's default status can be overridden
@@ -75,6 +86,7 @@ export const useFrontstages = (
     setFinalFrontstages(allFrontstages);
   }, [
     frontstages,
+    defaultUiConfig,
     viewCreatorOptions,
     viewportOptions,
     blankConnectionViewState,
