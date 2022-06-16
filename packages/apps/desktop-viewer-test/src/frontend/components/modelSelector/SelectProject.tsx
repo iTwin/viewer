@@ -19,8 +19,8 @@ import {
   LabeledInput,
   Tab,
 } from "@itwin/itwinui-react";
-import { useNavigate } from "@reach/router";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { SignIn } from "../signin/SignIn";
 

@@ -12,20 +12,17 @@ import {
 import { MeasureToolsUiItemsProvider } from "@itwin/measure-tools-react";
 import { PropertyGridUiItemsProvider } from "@itwin/property-grid-react";
 import { TreeWidgetUiItemsProvider } from "@itwin/tree-widget-react";
-import type { RouteComponentProps } from "@reach/router";
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { IModelMergeItemsProvider } from "../../extensions";
-
-interface ViewerRouteProps extends RouteComponentProps {
-  children?: any;
-}
 
 export interface ViewerRouteState {
   filePath?: string;
 }
 
-export const ViewerRoute = ({ location }: ViewerRouteProps) => {
+export const ViewerRoute = () => {
+  const location = useLocation();
   const [filePath, setFilePath] = useState<string>();
 
   useEffect(() => {

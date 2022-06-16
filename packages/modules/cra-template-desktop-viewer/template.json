@@ -32,14 +32,14 @@
       "@itwin/itwinui-css": "^0.18.1",
       "@itwin/itwinui-icons-react": "^1.2.0",
       "@itwin/itwinui-react": "^1.16.2",
-      "@itwin/measure-tools-react": "^0.6.0",
+      "@itwin/measure-tools-react": "latest",
       "@itwin/presentation-backend": "^3.2.0",
       "@itwin/presentation-common": "^3.2.0",
       "@itwin/presentation-components": "^3.2.0",
       "@itwin/presentation-frontend": "^3.2.0",
-      "@itwin/property-grid-react": "^0.3.0",
+      "@itwin/property-grid-react": "latest",
       "@itwin/reality-data-client": "^0.9.0",
-      "@itwin/tree-widget-react": "^0.3.0",
+      "@itwin/tree-widget-react": "latest",
       "@itwin/webgl-compatibility": "^3.2.0",
       "@reach/router": "^1.3.4",
       "@types/electron-devtools-installer": "^2.2.0",
@@ -68,12 +68,11 @@
     "scripts": {
       "build": "npm run build:backend && npm run build:frontend",
       "build:backend": "tsc -p tsconfig.backend.json",
-      "build:frontend": "npm run pseudolocalize && react-scripts build",
+      "build:frontend": "react-scripts build",
       "electron": "electron lib/backend/main.js",
       "electron:debug": "cross-env NODE_ENV=development electron lib/backend/main.js",
       "start": "npm run build:backend && run-p \"start:frontend\" \"electron:debug\"",
-      "start:frontend": "react-scripts start",
-      "pseudolocalize": "betools pseudolocalize --englishDir ./public/locales/en --out ./public/locales/en-PSEUDO"
+      "start:frontend": "react-scripts start"
     },
     "browserslist": ["electron 14.0.0"]
   }
