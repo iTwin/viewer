@@ -1,11 +1,11 @@
 # This workflow will install dependencies, check for dependency version consistency, build all packages in the repo, and run tests
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: iTwin Viewer NPM Publish
+name: iTwin Viewer CI for next branch
 
 on:
-  push:
-    branches: [master]
+  pull_request:
+    branches: [next]
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.PUBLISH_PAT }}
+          fetch-depth: 0
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -30,11 +30,7 @@ jobs:
 
           echo 'Building...'
           node common/scripts/install-run-rush.js rebuild
-               
-          echo 'Publishing...'
-          git config user.name "iTwinViewerWorkflow"
-          git config user.email "itwinviewer@users.noreply.github.com"
-          node common/scripts/install-run-rush.js version --bump --target-branch master
-          node common/scripts/install-run-rush.js publish --include-all --set-access-level public --apply --publish --npm-auth-token $NPM_TOKEN --target-branch master
-        env:
-          NPM_TOKEN: ${{ secrets.NPMJS_PUBLISH_ITWIN }}
+
+          echo 'Testing...'
+          node common/scripts/install-run-rush.js test --verbose
+
