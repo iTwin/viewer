@@ -109,7 +109,6 @@ importers:
       '@itwin/presentation-components': ^3.2.0
       '@itwin/presentation-frontend': ^3.2.0
       '@itwin/property-grid-react': latest
-      '@itwin/reality-data-client': ^0.9.0
       '@itwin/tree-widget-react': latest
       '@itwin/webgl-compatibility': ^3.2.0
       '@types/electron-devtools-installer': ^2.2.0
@@ -168,7 +167,6 @@ importers:
       '@itwin/presentation-components': 3.2.2_0c8e54e1d46986e00a4f386734b921be
       '@itwin/presentation-frontend': 3.2.2_7d67946d87cba22f9e077d73ef83df22
       '@itwin/property-grid-react': 0.5.4_ffca7816b6a4a42f91f5b6a1e8ef9ce3
-      '@itwin/reality-data-client': 0.9.0_@itwin+core-bentley@3.2.2
       '@itwin/tree-widget-react': 0.4.7_01d13aab3c9f3314a87fc8cdc6dd64c3
       '@itwin/webgl-compatibility': 3.2.2
       dotenv-flow: 3.2.0
@@ -223,7 +221,6 @@ importers:
       '@itwin/presentation-components': ^3.2.0
       '@itwin/presentation-frontend': ^3.2.0
       '@itwin/property-grid-react': latest
-      '@itwin/reality-data-client': ^0.9.0
       '@itwin/test-local-extension': workspace:*
       '@itwin/tree-widget-react': latest
       '@itwin/web-viewer-react': workspace:*
@@ -269,7 +266,6 @@ importers:
       '@itwin/presentation-components': 3.2.2_0c8e54e1d46986e00a4f386734b921be
       '@itwin/presentation-frontend': 3.2.2_7d67946d87cba22f9e077d73ef83df22
       '@itwin/property-grid-react': 0.5.4_67c55d75f70f087292ff19e197a373f0
-      '@itwin/reality-data-client': 0.9.0_@itwin+core-bentley@3.2.2
       '@itwin/test-local-extension': link:../../modules/test-local-extension
       '@itwin/tree-widget-react': 0.4.7_01d13aab3c9f3314a87fc8cdc6dd64c3
       '@itwin/web-viewer-react': link:../../modules/web-viewer-react
@@ -322,7 +318,6 @@ importers:
       '@itwin/presentation-common': ^3.2.0
       '@itwin/presentation-components': ^3.2.0
       '@itwin/presentation-frontend': ^3.2.0
-      '@itwin/reality-data-client': ^0.9.0
       '@itwin/viewer-react': workspace:*
       '@itwin/webgl-compatibility': ^3.2.0
       '@testing-library/jest-dom': ^4.2.4
@@ -368,7 +363,6 @@ importers:
       '@itwin/presentation-common': 3.2.2_aa7c17727124c31a56baeab89140d952
       '@itwin/presentation-components': 3.2.2_0c8e54e1d46986e00a4f386734b921be
       '@itwin/presentation-frontend': 3.2.2_7d67946d87cba22f9e077d73ef83df22
-      '@itwin/reality-data-client': 0.9.0_@itwin+core-bentley@3.2.2
       '@itwin/webgl-compatibility': 3.2.2
       '@testing-library/jest-dom': 4.2.4
       '@testing-library/react': 10.4.9_react-dom@17.0.2+react@17.0.2
@@ -514,6 +508,7 @@ importers:
       '@bentley/icons-generic-webfont': 1.0.34
       '@itwin/itwinui-illustrations-react': 1.3.1_react-dom@17.0.2+react@17.0.2
       '@itwin/itwinui-react': 1.40.0_react-dom@17.0.2+react@17.0.2
+      '@itwin/reality-data-client': 0.9.0_@itwin+core-bentley@3.2.2
     devDependencies:
       '@itwin/appui-abstract': 3.2.2_@itwin+core-bentley@3.2.2
       '@itwin/appui-layout-react': 3.2.2_0099bfc9ea57e7c3c0d0f85e9959e8d2
@@ -536,7 +531,6 @@ importers:
       '@itwin/presentation-common': 3.2.2_aa7c17727124c31a56baeab89140d952
       '@itwin/presentation-components': 3.2.2_0c8e54e1d46986e00a4f386734b921be
       '@itwin/presentation-frontend': 3.2.2_7d67946d87cba22f9e077d73ef83df22
-      '@itwin/reality-data-client': 0.9.0_@itwin+core-bentley@3.2.2
       '@itwin/webgl-compatibility': 3.2.2
       '@testing-library/jest-dom': 4.2.4
       '@testing-library/react': 10.4.9_react-dom@17.0.2+react@17.0.2
@@ -578,7 +572,6 @@ importers:
       '@itwin/presentation-common': ^3.2.0
       '@itwin/presentation-components': ^3.2.0
       '@itwin/presentation-frontend': ^3.2.0
-      '@itwin/reality-data-client': ^0.9.0
       '@itwin/viewer-react': workspace:*
       '@itwin/webgl-compatibility': ^3.2.0
       '@testing-library/jest-dom': ^4.2.4
@@ -619,7 +612,6 @@ importers:
       '@itwin/presentation-common': 3.2.2_aa7c17727124c31a56baeab89140d952
       '@itwin/presentation-components': 3.2.2_0c8e54e1d46986e00a4f386734b921be
       '@itwin/presentation-frontend': 3.2.2_7d67946d87cba22f9e077d73ef83df22
-      '@itwin/reality-data-client': 0.9.0_@itwin+core-bentley@3.2.2
       '@itwin/webgl-compatibility': 3.2.2
       '@testing-library/jest-dom': 4.2.4
       '@testing-library/react': 10.4.9_react-dom@17.0.2+react@17.0.2
@@ -3395,6 +3387,7 @@ packages:
       axios: 0.25.0
     transitivePeerDependencies:
       - debug
+    dev: false
 
   /@itwin/tree-widget-react/0.4.7_01d13aab3c9f3314a87fc8cdc6dd64c3:
     resolution: {integrity: sha512-Y6GqtpJBNoMOKOJeswUwkl+RWL652mqvld4QH3RrmYMh2LQil79rNp8K2naiiNY86pTCgoNJxLl2M34gExW1tw==}
@@ -3794,7 +3787,7 @@ packages:
       '@types/base64-js': 1.3.0
       '@types/jquery': 3.5.14
       base64-js: 1.5.1
-      follow-redirects: 1.15.1
+      follow-redirects: 1.15.1_debug@4.3.4
       form-data: 4.0.0
       opener: 1.5.2
     transitivePeerDependencies:
@@ -5431,6 +5424,7 @@ packages:
       follow-redirects: 1.15.1_debug@4.3.4
     transitivePeerDependencies:
       - debug
+    dev: false
 
   /axobject-query/2.2.0:
     resolution: {integrity: sha512-Td525n+iPOOyUQIeBfcASuG6uJsDOITl7Mds5gFyerkWiX7qhUTdYUBlSgNMyVqtSJqwpt1kXGLdUt6SykLMRA==}
