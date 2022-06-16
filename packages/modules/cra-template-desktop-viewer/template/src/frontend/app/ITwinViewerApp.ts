@@ -47,9 +47,12 @@ export class ITwinViewerApp {
 
       switch (key) {
         case "getConfig":
-          return ITwinViewerApp._config
-            ? () => Promise.resolve(ITwinViewerApp._config)
-            : makeIpcCall("getConfig");
+          return async () => {
+            if (!ITwinViewerApp._config) {
+              ITwinViewerApp._config = await makeIpcCall("getConfig")();
+            }
+            return ITwinViewerApp._config;
+          };
         default:
           return makeIpcCall(key);
       }
