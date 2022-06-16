@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import { AuthorizationClient, RedirectKey } from "../../services/auth";
 
@@ -35,7 +35,7 @@ const LoginRedirect = () => {
   return (
     <div>
       {isAuthVerified ? (
-        <Redirect to={redirectPath} />
+        <Navigate to={redirectPath} />
       ) : (
         <p>{displayMessage}</p>
       )}
