@@ -47,11 +47,9 @@ export class ITwinViewerApp {
 
       switch (key) {
         case "getConfig":
-          return async () =>
-            // if we already cached getConfig results, just resolve to that
-            Promise.resolve(
-              (ITwinViewerApp._config ??= await makeIpcCall("getConfig")())
-            );
+          return ITwinViewerApp._config
+            ? () => Promise.resolve(ITwinViewerApp._config)
+            : makeIpcCall("getConfig");
         default:
           return makeIpcCall(key);
       }
