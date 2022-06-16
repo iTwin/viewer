@@ -24,7 +24,7 @@ import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
 const App = () => {
   (window as any).ITWIN_VIEWER_HOME = window.location.origin;
 
-  const onIModelAppInitialized = useCallback(async () => {
+  const onIModelAppInit = useCallback(async () => {
     await TreeWidget.initialize();
     await PropertyGridManager.initialize();
     await MeasureTools.startup();
@@ -34,9 +34,9 @@ const App = () => {
     () => ({
       additionalI18nNamespaces: ["iTwinDesktopViewer"],
       enablePerformanceMonitors: true,
-      onIModelAppInit: onIModelAppInitialized,
+      onIModelAppInit,
     }),
-    []
+    [onIModelAppInit]
   );
 
   const initialized = useDesktopViewerInitializer(desktopInitializerProps);

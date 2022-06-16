@@ -64,7 +64,7 @@ importers:
     devDependencies:
       '@bentley/react-scripts': 4.0.7_react@17.0.2+typescript@4.4.4
       '@types/node': 14.18.21
-      '@types/react': 17.0.45
+      '@types/react': 17.0.46
       '@types/react-dom': 17.0.17
       cross-env: 5.2.1
       rewire: 5.0.0
@@ -156,9 +156,9 @@ importers:
       '@itwin/express-server': 3.2.2_@itwin+core-backend@3.2.2
       '@itwin/imodel-browser-react': 0.12.3_react-dom@17.0.2+react@17.0.2
       '@itwin/imodel-components-react': 3.2.2_fd0453885139ba43494b554614c626b0
-      '@itwin/imodels-access-backend': 1.0.1_51c8055828dc67a1920b65bd2785f7fc
-      '@itwin/imodels-access-frontend': 1.0.1_e42c8153c9c78e18694e22e7ad06c7e0
-      '@itwin/imodels-client-management': 1.0.1
+      '@itwin/imodels-access-backend': 1.0.2_51c8055828dc67a1920b65bd2785f7fc
+      '@itwin/imodels-access-frontend': 1.0.2_e42c8153c9c78e18694e22e7ad06c7e0
+      '@itwin/imodels-client-management': 1.1.0
       '@itwin/itwinui-css': 0.18.1
       '@itwin/itwinui-icons-react': 1.10.1_react-dom@17.0.2+react@17.0.2
       '@itwin/itwinui-react': 1.40.0_react-dom@17.0.2+react@17.0.2
@@ -184,7 +184,7 @@ importers:
       '@types/electron-devtools-installer': 2.2.2
       '@types/minimist': 1.2.2
       '@types/node': 14.18.21
-      '@types/react': 17.0.45
+      '@types/react': 17.0.46
       '@types/react-dom': 17.0.17
       cpx: 1.5.0
       cross-env: 5.2.1
@@ -261,8 +261,8 @@ importers:
       '@itwin/core-react': 3.2.2_635ad49d75618b72dca44ab860e4509b
       '@itwin/core-telemetry': 3.2.2_@itwin+core-geometry@3.2.2
       '@itwin/imodel-components-react': 3.2.2_fd0453885139ba43494b554614c626b0
-      '@itwin/imodels-access-frontend': 1.0.1_e42c8153c9c78e18694e22e7ad06c7e0
-      '@itwin/imodels-client-management': 1.0.1
+      '@itwin/imodels-access-frontend': 1.0.2_e42c8153c9c78e18694e22e7ad06c7e0
+      '@itwin/imodels-client-management': 1.1.0
       '@itwin/itwinui-react': 1.40.0_react-dom@17.0.2+react@17.0.2
       '@itwin/measure-tools-react': 0.7.3_a2ec9d6e42dadca633981db1a7d87a31
       '@itwin/presentation-common': 3.2.2_aa7c17727124c31a56baeab89140d952
@@ -286,7 +286,7 @@ importers:
       '@svgr/webpack': 5.5.0
       '@types/history': 4.7.11
       '@types/node': 14.18.21
-      '@types/react': 17.0.45
+      '@types/react': 17.0.46
       '@types/react-dom': 17.0.17
       '@types/react-router': 5.1.18
       '@types/react-router-dom': 5.3.3
@@ -316,6 +316,7 @@ importers:
       '@itwin/core-quantity': ^3.2.0
       '@itwin/core-react': ^3.2.0
       '@itwin/core-telemetry': ^3.2.0
+      '@itwin/ecschema-metadata': ^3.2.0
       '@itwin/electron-authorization': ^0.8.3
       '@itwin/imodel-components-react': ^3.2.0
       '@itwin/presentation-common': ^3.2.0
@@ -350,7 +351,7 @@ importers:
       '@itwin/appui-react': 3.2.2_aa34eb5e5b8b1b1425fcfb7518d6d1e3
       '@itwin/build-tools': 3.2.2
       '@itwin/components-react': 3.2.2_0099bfc9ea57e7c3c0d0f85e9959e8d2
-      '@itwin/core-backend': 3.2.2_f227e074bd15511119c3fd9c316905b0
+      '@itwin/core-backend': 3.2.2_69410abdf1e413ccfb500d66eacb3423
       '@itwin/core-bentley': 3.2.2
       '@itwin/core-common': 3.2.2_e6d66caefee1fbf2ea2f1b02ed39e7bc
       '@itwin/core-electron': 3.2.2_b39efd45e7c007e81d034745e85189de
@@ -361,6 +362,7 @@ importers:
       '@itwin/core-quantity': 3.2.2_@itwin+core-bentley@3.2.2
       '@itwin/core-react': 3.2.2_635ad49d75618b72dca44ab860e4509b
       '@itwin/core-telemetry': 3.2.2_@itwin+core-geometry@3.2.2
+      '@itwin/ecschema-metadata': 3.2.2_cee3a9ab5aceca78f2838a9984a6d7fa
       '@itwin/electron-authorization': 0.8.4_@itwin+core-bentley@3.2.2
       '@itwin/imodel-components-react': 3.2.2_fd0453885139ba43494b554614c626b0
       '@itwin/presentation-common': 3.2.2_aa7c17727124c31a56baeab89140d952
@@ -373,7 +375,7 @@ importers:
       '@testing-library/user-event': 7.2.1
       '@types/jest': 26.0.24
       '@types/node': 14.18.21
-      '@types/react': 17.0.45
+      '@types/react': 17.0.46
       '@types/react-dom': 17.0.17
       '@types/react-redux': 7.1.24
       concurrently: 5.3.0
@@ -529,8 +531,8 @@ importers:
       '@itwin/core-react': 3.2.2_635ad49d75618b72dca44ab860e4509b
       '@itwin/core-telemetry': 3.2.2_@itwin+core-geometry@3.2.2
       '@itwin/imodel-components-react': 3.2.2_fd0453885139ba43494b554614c626b0
-      '@itwin/imodels-access-frontend': 1.0.1_e42c8153c9c78e18694e22e7ad06c7e0
-      '@itwin/imodels-client-management': 1.0.1
+      '@itwin/imodels-access-frontend': 1.0.2_e42c8153c9c78e18694e22e7ad06c7e0
+      '@itwin/imodels-client-management': 1.1.0
       '@itwin/presentation-common': 3.2.2_aa7c17727124c31a56baeab89140d952
       '@itwin/presentation-components': 3.2.2_0c8e54e1d46986e00a4f386734b921be
       '@itwin/presentation-frontend': 3.2.2_7d67946d87cba22f9e077d73ef83df22
@@ -541,7 +543,7 @@ importers:
       '@testing-library/user-event': 7.2.1
       '@types/jest': 26.0.24
       '@types/node': 14.18.21
-      '@types/react': 17.0.45
+      '@types/react': 17.0.46
       '@types/react-dom': 17.0.17
       '@types/react-redux': 7.1.24
       concurrently: 5.3.0
@@ -624,7 +626,7 @@ importers:
       '@testing-library/user-event': 7.2.1
       '@types/jest': 26.0.24
       '@types/node': 14.18.21
-      '@types/react': 17.0.45
+      '@types/react': 17.0.46
       '@types/react-dom': 17.0.17
       '@types/react-redux': 7.1.24
       concurrently: 5.3.0
@@ -673,16 +675,16 @@ importers:
       eslint-plugin-import: 2.26.0_eslint@7.32.0
       eslint-plugin-jsx-a11y: 6.5.1_eslint@7.32.0
       eslint-plugin-prefer-arrow: 1.2.3_eslint@7.32.0
-      eslint-plugin-prettier: 3.4.1_ee3519ba4b231f91d4e9b046feeac0d1
+      eslint-plugin-prettier: 3.4.1_8bd3a5b4ad839bdb92894c0c8bad2334
       eslint-plugin-react: 7.30.0_eslint@7.32.0
       eslint-plugin-react-hooks: 4.6.0_eslint@7.32.0
       eslint-plugin-simple-import-sort: 5.0.3_eslint@7.32.0
       lint-staged: 10.5.4
-      prettier: 2.7.0
+      prettier: 2.7.1
       stylelint: 13.13.1
       stylelint-config-prettier: 8.0.2_stylelint@13.13.1
       stylelint-config-sass-guidelines: 7.1.0_stylelint@13.13.1
-      stylelint-prettier: 1.2.0_prettier@2.7.0+stylelint@13.13.1
+      stylelint-prettier: 1.2.0_prettier@2.7.1+stylelint@13.13.1
       stylelint-scss: 3.21.0_stylelint@13.13.1
 
 packages:
@@ -721,7 +723,7 @@ packages:
       '@azure/core-auth': 1.3.2
       '@azure/core-tracing': 1.0.0-preview.13
       '@azure/logger': 1.0.3
-      '@types/node-fetch': 2.6.1
+      '@types/node-fetch': 2.6.2
       '@types/tunnel': 0.0.3
       form-data: 4.0.0
       node-fetch: 2.6.7
@@ -833,7 +835,7 @@ packages:
       gensync: 1.0.0-beta.2
       json5: 2.2.1
       lodash: 4.17.21
-      resolve: 1.18.1
+      resolve: 1.19.0
       semver: 5.7.1
       source-map: 0.5.7
     transitivePeerDependencies:
@@ -2879,38 +2881,6 @@ packages:
       - bufferutil
       - encoding
       - utf-8-validate
-    dev: false
-
-  /@itwin/core-backend/3.2.2_f227e074bd15511119c3fd9c316905b0:
-    resolution: {integrity: sha512-9FUIrDgekQHbG/u6EjKvGU0yTF4CNttxdhLOFPnPecuQpusUi20Fq6xszS/cXqDd48CoWsWrhyi3y7dKV2TVWg==}
-    engines: {node: '>=12.22.0 < 14.0 || >=14.17.0 <17.0'}
-    peerDependencies:
-      '@itwin/core-bentley': ^3.2.2
-      '@itwin/core-common': ^3.2.2
-      '@itwin/core-geometry': ^3.2.2
-      '@itwin/ecschema-metadata': ^3.2.2
-    peerDependenciesMeta:
-      '@itwin/ecschema-metadata':
-        optional: true
-    dependencies:
-      '@azure/storage-blob': 12.10.0
-      '@bentley/imodeljs-native': 3.2.10
-      '@itwin/core-bentley': 3.2.2
-      '@itwin/core-common': 3.2.2_e6d66caefee1fbf2ea2f1b02ed39e7bc
-      '@itwin/core-geometry': 3.2.2
-      '@itwin/core-telemetry': 3.2.2_@itwin+core-geometry@3.2.2
-      form-data: 2.5.1
-      fs-extra: 8.1.0
-      js-base64: 3.7.2
-      json5: 2.2.1
-      multiparty: 4.2.3
-      semver: 5.7.1
-      ws: 7.5.8
-    transitivePeerDependencies:
-      - bufferutil
-      - encoding
-      - utf-8-validate
-    dev: true
 
   /@itwin/core-bentley/3.2.2:
     resolution: {integrity: sha512-FXvnJi7STf+gQqnC/mSgET8TNL70kGERluQEhL/Msugs+j9NkwTICqbvQFmc2xsAchO5JxsMkwipekGh3qlMtA==}
@@ -2940,7 +2910,7 @@ packages:
       '@itwin/presentation-common': ^3.2.2
       electron: ^14.0.0
     dependencies:
-      '@itwin/core-backend': 3.2.2_f227e074bd15511119c3fd9c316905b0
+      '@itwin/core-backend': 3.2.2_69410abdf1e413ccfb500d66eacb3423
       '@itwin/core-bentley': 3.2.2
       '@itwin/core-common': 3.2.2_e6d66caefee1fbf2ea2f1b02ed39e7bc
       '@itwin/core-frontend': 3.2.2_8ccda288ed47acb9d98e6367860e03c6
@@ -3014,7 +2984,7 @@ packages:
       '@itwin/core-bentley': ^3.2.2
     dependencies:
       '@itwin/core-bentley': 3.2.2
-      i18next: 21.8.9
+      i18next: 21.8.10
       i18next-browser-languagedetector: 6.1.4
       i18next-http-backend: 1.4.1
       i18next-xhr-backend: 3.2.2
@@ -3084,7 +3054,6 @@ packages:
       '@itwin/core-bentley': 3.2.2
       '@itwin/core-quantity': 3.2.2_@itwin+core-bentley@3.2.2
       almost-equal: 1.1.0
-    dev: false
 
   /@itwin/electron-authorization/0.8.4_@itwin+core-bentley@3.2.2:
     resolution: {integrity: sha512-+RjmO3CgmsKFKCHzSzFMB57YWxYFgqYffGpire4Tb9b8HcN+Ooai689g5DaREI9NEO4A01teVEZyWQzdmzbqFw==}
@@ -3161,8 +3130,8 @@ packages:
       react-dom: 17.0.2_react@17.0.2
       ts-key-enum: 2.0.11
 
-  /@itwin/imodels-access-backend/1.0.1_51c8055828dc67a1920b65bd2785f7fc:
-    resolution: {integrity: sha512-W3g/V6lFMPYdlfGRqWbBQaAlyIP9LdHslOgMShDWGK4AOtnVoWP6WJGU+/iomKGhb0FMYoKMW8Vyy1+0U3Sxig==}
+  /@itwin/imodels-access-backend/1.0.2_51c8055828dc67a1920b65bd2785f7fc:
+    resolution: {integrity: sha512-pEP+Sycbw7kFyRuMn1ia8E6Qcw/aIWjP8LWRKj4bPCeIOrL+FCqOl5dhsCHGAJltlA0QIavKxgm7jzBRUZfNWA==}
     peerDependencies:
       '@itwin/core-backend': ^3.0.0
       '@itwin/core-bentley': ^3.0.0
@@ -3171,14 +3140,14 @@ packages:
       '@itwin/core-backend': 3.2.2_69410abdf1e413ccfb500d66eacb3423
       '@itwin/core-bentley': 3.2.2
       '@itwin/core-common': 3.2.2_e6d66caefee1fbf2ea2f1b02ed39e7bc
-      '@itwin/imodels-client-authoring': 1.0.1
+      '@itwin/imodels-client-authoring': 1.1.0
     transitivePeerDependencies:
       - debug
       - encoding
     dev: false
 
-  /@itwin/imodels-access-frontend/1.0.1_e42c8153c9c78e18694e22e7ad06c7e0:
-    resolution: {integrity: sha512-qwD8kM7sW/ku5EAqj7kTZR1C1gv2vfRZYgu2VaYXHtTYEibCnbU0tOHhAfRyWMeF8LnZMNUmpZZjjZkruYoWhw==}
+  /@itwin/imodels-access-frontend/1.0.2_e42c8153c9c78e18694e22e7ad06c7e0:
+    resolution: {integrity: sha512-ya20mAwvGltFXH5hguy39laQU1Ku1hHMU7KSSGgxKlN8WSrpe4haM3nT0FR5Fj+XUBdQ+c7T/V1+Kg27uz4BFw==}
     peerDependencies:
       '@itwin/core-bentley': ^3.0.0
       '@itwin/core-common': ^3.0.0
@@ -3187,22 +3156,22 @@ packages:
       '@itwin/core-bentley': 3.2.2
       '@itwin/core-common': 3.2.2_e6d66caefee1fbf2ea2f1b02ed39e7bc
       '@itwin/core-frontend': 3.2.2_8ccda288ed47acb9d98e6367860e03c6
-      '@itwin/imodels-client-management': 1.0.1
+      '@itwin/imodels-client-management': 1.1.0
     transitivePeerDependencies:
       - debug
 
-  /@itwin/imodels-client-authoring/1.0.1:
-    resolution: {integrity: sha512-RuvRNxFS44WFY64oBEiGOC2G/bKde1B4Hrmb2iv+TKRum/GMidGQIGr21BC69Hgfl0LoTUzK9svlc0yW4FYlFA==}
+  /@itwin/imodels-client-authoring/1.1.0:
+    resolution: {integrity: sha512-vyJBPyot0thTVHuhVXCk7XH1DTlurP6FQcgVt3TmlWSMQpSnwwsIICgLOJvdr6WfKExWHoEVEoa8bOLYuB0UJw==}
     dependencies:
       '@azure/storage-blob': 12.7.0
-      '@itwin/imodels-client-management': 1.0.1
+      '@itwin/imodels-client-management': 1.1.0
     transitivePeerDependencies:
       - debug
       - encoding
     dev: false
 
-  /@itwin/imodels-client-management/1.0.1:
-    resolution: {integrity: sha512-HzwegaR7krCXY1I2UPGGjxp4tttcU4RD5kZoHFpA+Nit3jrsvoXR0CieH7H0GUSKmgoV0Go5KN1YvbBUgqruRg==}
+  /@itwin/imodels-client-management/1.1.0:
+    resolution: {integrity: sha512-fj60aj4FHUGm33YrOc4ozvuPc0PzIG46wOMY6q2WjqAPqBR3Q0Vlkx6k3Mk6aHXj1cB9VfxbQUY+yni1Wgx1/A==}
     dependencies:
       axios: 0.21.4
     transitivePeerDependencies:
@@ -4256,7 +4225,7 @@ packages:
   /@types/hoist-non-react-statics/3.3.1:
     resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}
     dependencies:
-      '@types/react': 17.0.45
+      '@types/react': 17.0.46
       hoist-non-react-statics: 3.3.2
 
   /@types/html-minifier-terser/5.1.2:
@@ -4320,8 +4289,8 @@ packages:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
     dev: true
 
-  /@types/node-fetch/2.6.1:
-    resolution: {integrity: sha512-oMqjURCaxoSIsHSr1E47QHzbmzNR5rK8McHuNb11BOM9cHcIK3Avy0s/b2JlXHoQGTYS3NsvWzV1M0iK7l0wbA==}
+  /@types/node-fetch/2.6.2:
+    resolution: {integrity: sha512-DHqhlq5jeESLy19TYhLakJ07kNumXWjcDdxXsLUMJZ6ue8VZJj4kLPQVE/2mdHh3xZziNF1xppu5lwmS53HR+A==}
     dependencies:
       '@types/node': 14.18.21
       form-data: 3.0.1
@@ -4354,14 +4323,14 @@ packages:
   /@types/react-dom/17.0.17:
     resolution: {integrity: sha512-VjnqEmqGnasQKV0CWLevqMTXBYG9GbwuE6x3VetERLh0cq2LTptFE73MrQi2S7GkKXCf2GgwItB/melLnxfnsg==}
     dependencies:
-      '@types/react': 17.0.45
+      '@types/react': 17.0.46
     dev: true
 
   /@types/react-redux/7.1.24:
     resolution: {integrity: sha512-7FkurKcS1k0FHZEtdbbgN8Oc6b+stGSfZYjQGicofJ0j4U0qIn/jaSvnP2pLwZKiai3/17xqqxkkrxTgN8UNbQ==}
     dependencies:
       '@types/hoist-non-react-statics': 3.3.1
-      '@types/react': 17.0.45
+      '@types/react': 17.0.46
       hoist-non-react-statics: 3.3.2
       redux: 4.2.0
 
@@ -4369,7 +4338,7 @@ packages:
     resolution: {integrity: sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw==}
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 17.0.45
+      '@types/react': 17.0.46
       '@types/react-router': 5.1.18
     dev: true
 
@@ -4377,16 +4346,16 @@ packages:
     resolution: {integrity: sha512-YYknwy0D0iOwKQgz9v8nOzt2J6l4gouBmDnWqUUznltOTaon+r8US8ky8HvN0tXvc38U9m6z/t2RsVsnd1zM0g==}
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 17.0.45
+      '@types/react': 17.0.46
     dev: true
 
   /@types/react-table/7.7.12:
     resolution: {integrity: sha512-bRUent+NR/WwtDGwI/BqhZ8XnHghwHw0HUKeohzB5xN3K2qKWYE5w19e7GCuOkL1CXD9Gi1HFy7TIm2AvgWUHg==}
     dependencies:
-      '@types/react': 17.0.45
+      '@types/react': 17.0.46
 
-  /@types/react/17.0.45:
-    resolution: {integrity: sha512-YfhQ22Lah2e3CHPsb93tRwIGNiSwkuz1/blk4e6QrWS0jQzCSNbGLtOEYhPg02W0yGTTmpajp7dCTbBAMN3qsg==}
+  /@types/react/17.0.46:
+    resolution: {integrity: sha512-zNAJVEO9dBEQLPa/OuedGfx92/UlD+1rNxSv2qVWUQZ+orEtLUWFgZ08xfyI9TAZLnmWzZDtssAsgtbXT7Ew0g==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
@@ -5095,7 +5064,6 @@ packages:
 
   /almost-equal/1.1.0:
     resolution: {integrity: sha512-0V/PkoculFl5+0Lp47JoxUcO0xSxhIBvm+BxHdD/OgXNmdRpRHCFnKVuUoWyS9EzQP+otSGv0m9Lb4yVkQBn2A==}
-    dev: false
 
   /alphanum-sort/1.0.2:
     resolution: {integrity: sha512-0FcBfdcmaumGPQ0qPn7Q5qTgz/ooXgIyp1rf8ik5bGX8mpE2YHjC0P/eyQvxu1GURYQgq9ozf2mteQ5ZD9YiyQ==}
@@ -5437,7 +5405,7 @@ packages:
     hasBin: true
     dependencies:
       browserslist: 4.20.4
-      caniuse-lite: 1.0.30001354
+      caniuse-lite: 1.0.30001355
       normalize-range: 0.1.2
       num2fraction: 1.2.2
       picocolors: 0.2.1
@@ -6026,8 +5994,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001354
-      electron-to-chromium: 1.4.156
+      caniuse-lite: 1.0.30001355
+      electron-to-chromium: 1.4.158
       escalade: 3.1.1
       node-releases: 1.1.77
     dev: true
@@ -6037,8 +6005,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001354
-      electron-to-chromium: 1.4.156
+      caniuse-lite: 1.0.30001355
+      electron-to-chromium: 1.4.158
       escalade: 3.1.1
       node-releases: 2.0.5
       picocolors: 1.0.0
@@ -6249,13 +6217,13 @@ packages:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
       browserslist: 4.20.4
-      caniuse-lite: 1.0.30001354
+      caniuse-lite: 1.0.30001355
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
 
-  /caniuse-lite/1.0.30001354:
-    resolution: {integrity: sha512-mImKeCkyGDAHNywYFA4bqnLAzTUvVkqPvhY4DV47X+Gl2c5Z8c3KNETnXp14GQt11LvxE8AwjzGxJ+rsikiOzg==}
+  /caniuse-lite/1.0.30001355:
+    resolution: {integrity: sha512-Sd6pjJHF27LzCB7pT7qs+kuX2ndurzCzkpJl6Qct7LPSZ9jn0bkOA8mdgMgmqnQAWLVOOGjLpc+66V57eLtb1g==}
     dev: true
 
   /capture-exit/2.0.0:
@@ -7781,8 +7749,8 @@ packages:
       semver: 5.7.1
     dev: true
 
-  /electron-to-chromium/1.4.156:
-    resolution: {integrity: sha512-/Wj5NC7E0wHaMCdqxWz9B0lv7CcycDTiHyXCtbbu3pXM9TV2AOp8BtMqkVuqvJNdEvltBG6LxT2Q+BxY4LUCIA==}
+  /electron-to-chromium/1.4.158:
+    resolution: {integrity: sha512-gppO3/+Y6sP432HtvwvuU8S+YYYLH4PmAYvQwqUtt9HDOmEsBwQfLnK9T8+1NIKwAS1BEygIjTaATC4H5EzvxQ==}
     dev: true
 
   /electron/14.2.9:
@@ -8385,7 +8353,7 @@ packages:
       eslint: 7.32.0
     dev: true
 
-  /eslint-plugin-prettier/3.4.1_ee3519ba4b231f91d4e9b046feeac0d1:
+  /eslint-plugin-prettier/3.4.1_8bd3a5b4ad839bdb92894c0c8bad2334:
     resolution: {integrity: sha512-htg25EUYUeIhKHXjOinK4BgCcDwtLHjqaxCDsMy5nbnUMkKFvIhMVCp+5GFUXQ4Nr8lBsPqtGAqBenbpFqAA2g==}
     engines: {node: '>=6.0.0'}
     peerDependencies:
@@ -8398,7 +8366,7 @@ packages:
     dependencies:
       eslint: 7.32.0
       eslint-config-prettier: 6.15.0_eslint@7.32.0
-      prettier: 2.7.0
+      prettier: 2.7.1
       prettier-linter-helpers: 1.0.0
     dev: true
 
@@ -10104,8 +10072,8 @@ packages:
     resolution: {integrity: sha512-ycRlN145kQf8EsyDAzMfjqv1ZT1Jwp7P2H/07bP8JLWm+7cSLD4XqlJOvq4mKVS2y2mMIy10lX9ZeYUdQ0qSRw==}
     dev: false
 
-  /i18next/21.8.9:
-    resolution: {integrity: sha512-PY9a/8ADVmnju1tETeglbbVQi+nM5pcJQWm9kvKMTE3GPgHHtpDsHy5HQ/hccz2/xtW7j3vuso23JdQSH0EttA==}
+  /i18next/21.8.10:
+    resolution: {integrity: sha512-7xRb6y4QlSqZRZ3uA5BIEsLuZpmxpzHLizQyKjDDThOcvdfgICOX7aFoBnh4BSWcLtJamTqSweaOuK22A2xqkA==}
     dependencies:
       '@babel/runtime': 7.18.3
 
@@ -11159,7 +11127,7 @@ packages:
       jest-pnp-resolver: 1.2.2_jest-resolve@26.6.0
       jest-util: 26.6.2
       read-pkg-up: 7.0.1
-      resolve: 1.18.1
+      resolve: 1.19.0
       slash: 3.0.0
     dev: true
 
@@ -13882,7 +13850,7 @@ packages:
     dependencies:
       autoprefixer: 9.8.8
       browserslist: 4.20.4
-      caniuse-lite: 1.0.30001354
+      caniuse-lite: 1.0.30001355
       css-blank-pseudo: 0.1.4
       css-has-pseudo: 0.10.0
       css-prefers-color-scheme: 3.1.1
@@ -14196,8 +14164,8 @@ packages:
       fast-diff: 1.2.0
     dev: true
 
-  /prettier/2.7.0:
-    resolution: {integrity: sha512-nwoX4GMFgxoPC6diHvSwmK/4yU8FFH3V8XWtLQrbj4IBsK2pkYhG4kf/ljF/haaZ/aii+wNJqISrCDPgxGWDVQ==}
+  /prettier/2.7.1:
+    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
@@ -16198,14 +16166,14 @@ packages:
       stylelint: 13.13.1
     dev: true
 
-  /stylelint-prettier/1.2.0_prettier@2.7.0+stylelint@13.13.1:
+  /stylelint-prettier/1.2.0_prettier@2.7.1+stylelint@13.13.1:
     resolution: {integrity: sha512-/MYz6W2CNgKHblPzPtk7cybu8H5dGG3c2GevL64RButERj1uJg4SdBIIat1hMfDOmN6QQpldc6tCc//ZAWh9WQ==}
     engines: {node: '>=6'}
     peerDependencies:
       prettier: '>= 0.11.0'
       stylelint: '>= 9.2.1'
     dependencies:
-      prettier: 2.7.0
+      prettier: 2.7.1
       prettier-linter-helpers: 1.0.0
       stylelint: 13.13.1
     dev: true

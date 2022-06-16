@@ -101,7 +101,7 @@ export const SelectProject = () => {
                   : (searchParam as any) ?? ""
               }
               onThumbnailClick={(project) => {
-                void navigate(`itwins/${project.id}`, {
+                void navigate(`/itwins/${project.id}`, {
                   state: { projectName: project.displayName },
                 });
               }}

@@ -57,7 +57,7 @@
       "request": "launch",
       "console": "internalConsole",
       "outputCapture": "std",
-      "runtimeExecutable": "${workspaceFolder}/common/temp/node_modules/.bin/electron",
+      "runtimeExecutable": "${workspaceFolder}/packages/apps/desktop-viewer-test/node_modules/.bin/electron",
       "runtimeArgs": [
         "${workspaceFolder}/packages/apps/desktop-viewer-test/lib/backend/main.js",
         "--remote-debugging-port=9223"
