@@ -87,6 +87,7 @@ export const App: React.FC = () => {
 ```
 
 - Removed support for Azure Application Insights
+- Removed the BlankViewer component. Instead the desktop and web Viewer components now support BlankConnections and the props that were previously reserved for the BlankViewer
 
 ### New minimum iTwin.js version
 
@@ -146,13 +147,9 @@ export const App: React.FC = () => {
 };
 ```
 
-### Loading Bar
+### realityDataAccess configuration
 
-- We've changed the style of the default loading bar that displays when an iModel is loading
-
-### renderSys configuration
-
-- Added support for iTwin.js renderSys configuration
+- Added support for iTwin.js realityDataAccess configuration
 
 ### New error components
 
@@ -201,5 +198,4 @@ export const App: React.FC = () => {
 
 ## Optimizations
 
-- Consolidated the types for the Viewer and the BlankViewer
 - Added additional environment variables to optimize the build in the Web Viewer template
