@@ -11,7 +11,6 @@ import type { IModelFull, IModelGridProps } from "@itwin/imodel-browser-react";
 import { IModelGrid } from "@itwin/imodel-browser-react";
 import type { TileProps } from "@itwin/itwinui-react";
 import { Title } from "@itwin/itwinui-react";
-import { useNavigate } from "@reach/router";
 import React, {
   useCallback,
   useContext,
@@ -19,6 +18,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useDownload } from "../../hooks/useDownload";
 import { SettingsContext } from "../../services/SettingsClient";

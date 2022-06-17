@@ -9,8 +9,8 @@ import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
 import { MeasureTools } from "@itwin/measure-tools-react";
 import { PropertyGridManager } from "@itwin/property-grid-react";
 import { TreeWidget } from "@itwin/tree-widget-react";
-import { Router } from "@reach/router";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import type { ViewerSettings } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
@@ -24,7 +24,7 @@ import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
 const App = () => {
   (window as any).ITWIN_VIEWER_HOME = window.location.origin;
 
-  const onIModelAppInitialized = useCallback(async () => {
+  const onIModelAppInit = useCallback(async () => {
     await TreeWidget.initialize();
     await PropertyGridManager.initialize();
     await MeasureTools.startup();
@@ -34,9 +34,9 @@ const App = () => {
     () => ({
       additionalI18nNamespaces: ["iTwinDesktopViewer"],
       enablePerformanceMonitors: true,
-      onIModelAppInit: onIModelAppInitialized,
+      onIModelAppInit,
     }),
-    []
+    [onIModelAppInit]
   );
 
   const initialized = useDesktopViewerInitializer(desktopInitializerProps);
@@ -74,16 +74,18 @@ const App = () => {
   );
 
   return initialized && settings ? (
-    <SettingsContext.Provider value={{ settings, addRecent }}>
-      <div style={{ height: "100%" }}>
-        <Router style={{ height: "100%" }}>
-          <HomeRoute path="/" />
-          <IModelsRoute path="/itwins/:iTwinId" />
-          <ITwinsRoute path="/itwins" />
-          <ViewerRoute path="/viewer" />
-        </Router>
-      </div>
-    </SettingsContext.Provider>
+    <div style={{ height: "100%" }}>
+      <SettingsContext.Provider value={{ settings, addRecent }}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomeRoute />} />
+            <Route path="/itwins/:iTwinId" element={<IModelsRoute />} />
+            <Route path="/itwins" element={<ITwinsRoute />} />
+            <Route path="/viewer" element={<ViewerRoute />} />
+          </Routes>
+        </BrowserRouter>
+      </SettingsContext.Provider>
+    </div>
   ) : (
     <></>
   );

@@ -3,15 +3,14 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { RouteComponentProps, useNavigate } from "@reach/router";
 import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { ITwinViewerApp } from "../../app/ITwinViewerApp";
 import { SettingsContext } from "../../services/SettingsClient";
 import Home from "../home/Home";
 
-//eslint-disable-next-line no-empty-pattern
-export const HomeRoute = ({}: RouteComponentProps) => {
+export const HomeRoute = () => {
   const navigate = useNavigate();
   const userSettings = useContext(SettingsContext);
 

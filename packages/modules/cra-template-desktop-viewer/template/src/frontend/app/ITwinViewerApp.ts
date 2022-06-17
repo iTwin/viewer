@@ -6,8 +6,8 @@
 import type { AsyncFunction, PromiseReturnType } from "@itwin/core-bentley";
 import type { IpcListener } from "@itwin/core-common";
 import { IModelApp, IpcApp } from "@itwin/core-frontend";
-import type { NavigateFn } from "@reach/router";
 import type { OpenDialogOptions, SaveDialogOptions } from "electron";
+import type { NavigateFunction } from "react-router-dom";
 
 import type { ViewerConfig, ViewerIpc } from "../../common/ViewerConfig";
 import { channelName } from "../../common/ViewerConfig";
@@ -73,7 +73,7 @@ export class ITwinViewerApp {
   }
 
   public static initializeMenuListeners(
-    navigate: NavigateFn,
+    navigate: NavigateFunction,
     userSettings: Settings
   ) {
     if (this._menuListener) {

@@ -5,7 +5,7 @@ name: iTwin Viewer monorepo CI
 
 on:
   pull_request:
-    branches: [next]
+    branches: [master]
 
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [16.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -28,8 +28,8 @@ jobs:
           echo 'Installing...'
           node common/scripts/install-run-rush.js install
 
-          # echo 'Checking Rush Change...'
-          # node common/scripts/install-run-rush.js change -v
+          echo 'Checking Rush Change...'
+          node common/scripts/install-run-rush.js change -v
 
           echo 'Verifying Dependency Versions...'
           node common/scripts/install-run-rush.js check
@@ -37,8 +37,8 @@ jobs:
           echo 'Building...'
           node common/scripts/install-run-rush.js rebuild
 
-          # echo 'Testing...'
-          # node common/scripts/install-run-rush.js test --verbose
+          echo 'Testing...'
+          node common/scripts/install-run-rush.js test --verbose
 
-          # echo 'Auditing...'
-          # node common/scripts/install-run-rush.js audit
+          echo 'Auditing...'
+          node common/scripts/install-run-rush.js audit
