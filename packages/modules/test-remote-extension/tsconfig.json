@@ -2,6 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": ".",
+    "target": "es2020",
     "resolveJsonModule": true,
     "composite": true,
     "incremental": false

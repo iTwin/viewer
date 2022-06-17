@@ -2,7 +2,8 @@
   "extends": "./node_modules/@itwin/build-tools/tsconfig-base.json",
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "target": "es2020"
   },
   "include": [
     "./src/**/*.ts"

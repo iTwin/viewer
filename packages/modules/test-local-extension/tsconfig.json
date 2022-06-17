@@ -4,7 +4,8 @@
     "outDir": ".",
     "resolveJsonModule": true,
     "composite": true,
-    "incremental": false
+    "incremental": false,
+    "target":"es2020"
   },
   "files": ["package.json"]
 }
