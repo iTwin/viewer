@@ -1,7 +1,10 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
-  "rushVersion": "5.28.0",
-  "pnpmVersion": "4.12.5",
+  "rushVersion": "5.58.0",
+  "pnpmVersion": "6.24.4",
+  "pnpmOptions": {
+    "useWorkspaces": true
+  },
   "nodeSupportedVersionRange": ">=12.17.0 <17.0.0",
   "projectFolderMinDepth": 2,
   "projectFolderMaxDepth": 3,
@@ -19,11 +22,6 @@
       "projectFolder": "packages/modules/viewer-react",
       "versionPolicyName": "prerelease-monorepo-lockStep",
       "shouldPublish": true
-    },
-    {
-      "packageName": "@itwin/error-handling-react",
-      "projectFolder": "packages/modules/error-handling-react",
-      "shouldPublish": false
     },
     {
       "packageName": "@itwin/cra-template-web-viewer",

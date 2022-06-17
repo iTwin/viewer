@@ -3,8 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { useNavigate } from "@reach/router";
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import type { ViewerFile } from "../../../common/ViewerConfig";
 import { SettingsContext } from "../../services/SettingsClient";

@@ -6,12 +6,13 @@
 import modelImg from "@bentley/icons-generic/icons/imodeljs.svg";
 import { Button } from "@itwin/itwinui-react";
 import React from "react";
-import type { RouteComponentProps } from "react-router";
+import { useNavigate } from "react-router";
 
 import { ReactComponent as Itwin } from "../../images/itwin.svg";
 import styles from "./Home.module.scss";
 
-const Home = ({ history }: RouteComponentProps) => {
+const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -25,7 +26,7 @@ const Home = ({ history }: RouteComponentProps) => {
         <div className={styles.signIn}>
           <Button
             className={styles.homeButton}
-            onClick={() => history.push("/viewer")}
+            onClick={() => navigate("/viewer")}
             styleType={"high-visibility"}
             size={"large"}
           >
@@ -33,7 +34,7 @@ const Home = ({ history }: RouteComponentProps) => {
           </Button>
           <Button
             className={styles.homeButton}
-            onClick={() => history.push("/blankconnection")}
+            onClick={() => navigate("/blankconnection")}
             styleType={"cta"}
             size={"large"}
           >
@@ -41,7 +42,7 @@ const Home = ({ history }: RouteComponentProps) => {
           </Button>
           <Button
             className={styles.homeButton}
-            onClick={() => history.push("/imodelbank")}
+            onClick={() => navigate("/imodelbank")}
             styleType={"default"}
             size={"large"}
           >

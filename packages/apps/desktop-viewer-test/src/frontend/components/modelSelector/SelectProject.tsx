@@ -19,8 +19,8 @@ import {
   LabeledInput,
   Tab,
 } from "@itwin/itwinui-react";
-import { useNavigate } from "@reach/router";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { SignIn } from "../signin/SignIn";
 
@@ -101,7 +101,7 @@ export const SelectProject = () => {
                   : (searchParam as any) ?? ""
               }
               onThumbnailClick={(project) => {
-                void navigate(`itwins/${project.id}`, {
+                void navigate(`/itwins/${project.id}`, {
                   state: { projectName: project.displayName },
                 });
               }}

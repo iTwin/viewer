@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 async function loadHomeRoute() {
   return import(
@@ -55,19 +55,15 @@ const IModelBankHome = React.lazy(loadIModelBankRoute);
 const BlankConnectionHome = React.lazy(loadBlankConnectionRoute);
 const ViewerHome = React.lazy(loadViewerRoute);
 
-export const Routes = () => {
+export const AllRoutes = () => {
   return (
-    <Switch>
-      <Route path="/" exact={true} component={Home} />
-      <Route path="/logout" exact={true} component={LogoutRedirect} />
-      <Route path="/signin-callback" exact={true} component={LoginRedirect} />
-      <Route path="/viewer" exact={true} component={ViewerHome} />
-      <Route
-        path="/blankconnection"
-        exact={true}
-        component={BlankConnectionHome}
-      />
-      <Route path="/imodelbank" exact={true} component={IModelBankHome} />
-    </Switch>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/logout" element={<LogoutRedirect />} />
+      <Route path="/signin-callback" element={<LoginRedirect />} />
+      <Route path="/viewer" element={<ViewerHome />} />
+      <Route path="/blankconnection" element={<BlankConnectionHome />} />
+      <Route path="/imodelbank" element={<IModelBankHome />} />
+    </Routes>
   );
 };

@@ -19,10 +19,11 @@
     "@itwin/core-quantity": "^3.2.0",
     "@itwin/core-react": "^3.2.0",
     "@itwin/core-telemetry": "^3.2.0",
+    "@itwin/imodel-components-react": "^3.2.0",
     "@itwin/presentation-common": "^3.2.0",
     "@itwin/presentation-frontend": "^3.2.0",
     "@itwin/webgl-compatibility": "^3.2.0",
-    "@itwin/web-viewer-react": "3.0.0-dev.8",
+    "@itwin/web-viewer-react": "workspace:*",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.0"

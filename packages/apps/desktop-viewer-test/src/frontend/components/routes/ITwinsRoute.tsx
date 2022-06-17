@@ -4,18 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { useAccessToken } from "@itwin/desktop-viewer-react";
-import type { RouteComponentProps } from "@reach/router";
 import React from "react";
 
 import { SelectProject } from "../modelSelector";
 import { SignIn } from "../signin/SignIn";
 
-interface ITwinsRouteProps extends RouteComponentProps {
-  children?: any;
-}
-
-//eslint-disable-next-line no-empty-pattern
-export const ITwinsRoute = ({}: ITwinsRouteProps) => {
+export const ITwinsRoute = () => {
   const accessToken = useAccessToken();
 
   if (accessToken) {
