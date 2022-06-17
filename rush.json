@@ -20,31 +20,31 @@
     {
       "packageName": "@itwin/viewer-react",
       "projectFolder": "packages/modules/viewer-react",
-      "versionPolicyName": "prerelease-monorepo-lockStep",
+      "versionPolicyName": "independentModule",
       "shouldPublish": true
     },
     {
       "packageName": "@itwin/cra-template-web-viewer",
       "projectFolder": "packages/modules/cra-template-web-viewer",
-      "versionPolicyName": "prerelease-monorepo-lockStep",
+      "versionPolicyName": "independentModule",
       "shouldPublish": true
     },
     {
       "packageName": "@itwin/web-viewer-react",
       "projectFolder": "packages/modules/web-viewer-react",
-      "versionPolicyName": "prerelease-monorepo-lockStep",
+      "versionPolicyName": "independentModule",
       "shouldPublish": true
     },
     {
       "packageName": "@itwin/desktop-viewer-react",
       "projectFolder": "packages/modules/desktop-viewer-react",
-      "versionPolicyName": "prerelease-monorepo-lockStep",
+      "versionPolicyName": "independentModule",
       "shouldPublish": true
     },
     {
       "packageName": "@itwin/cra-template-desktop-viewer",
       "projectFolder": "packages/modules/cra-template-desktop-viewer",
-      "versionPolicyName": "prerelease-monorepo-lockStep",
+      "versionPolicyName": "independentModule",
       "shouldPublish": true
     },
     {
