@@ -126,4 +126,16 @@ describe("Initializer", () => {
     await WebInitializer.initialized;
     expect(IModelApp.startup).toHaveBeenCalled();
   });
+
+  it("Should throw an error when IModelApp.startup is called prior to rendering the Viewer", async () => {
+    await IModelApp.startup();
+    await WebInitializer.startWebViewer({
+      authClient: new MockAuthorizationClient(),
+      enablePerformanceMonitors: false,
+    });
+    await WebInitializer.initialized;
+    expect(WebInitializer.startWebViewer).toThrowError(
+      "Looks like you called IModelApp.startup in your application. Please use the useWebViewerInitializer hook instead."
+    );
+  });
 });
