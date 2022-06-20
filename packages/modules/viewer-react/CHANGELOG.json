@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "3.0.0",
+      "tag": "@itwin/viewer-react_v3.0.0",
+      "date": "Mon, 20 Jun 2022 14:39:09 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "See [release notes](https://github.com/iTwin/viewer/blob/master/releases/CHANGELOG-3.0.md)."
+          }
+        ]
+      }
+    },
+    {
       "version": "2.5.0",
       "tag": "@itwin/viewer-react_v2.5.0",
       "date": "Mon, 23 May 2022 21:37:15 GMT",
