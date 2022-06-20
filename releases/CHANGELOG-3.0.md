@@ -88,6 +88,11 @@ export const App: React.FC = () => {
 
 - Removed support for Azure Application Insights
 - Removed the BlankViewer component. Instead the desktop and web Viewer components now support BlankConnections and the props that were previously reserved for the BlankViewer
+- Removed most of the properties in the `defaultUiConfig` prop in favor of their respective UI Providers
+
+### Renamed
+
+- Renamed the `tileAdminProps` prop to `tileAdmin`
 
 ### New minimum iTwin.js version
 
