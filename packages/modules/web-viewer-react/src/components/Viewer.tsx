@@ -10,11 +10,8 @@ import { useWebViewerInitializer } from "../hooks";
 import type { WebViewerProps } from "../types";
 
 export const Viewer = (props: WebViewerProps) => {
-  const memoizedProps = useMemo(() => {
-    return { ...props };
-  }, [props]);
-
+  const memoizedProps = useMemo(() => ({ ...props }), [props]);
   const initialized = useWebViewerInitializer(memoizedProps);
 
-  return initialized ? <BaseViewer {...props} /> : null;
+  return initialized ? <BaseViewer {...memoizedProps} /> : null;
 };

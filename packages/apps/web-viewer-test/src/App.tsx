@@ -4,15 +4,17 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from "react";
-import { Router } from "react-router-dom";
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 
-import { history, Routes } from "./components/routing";
+import { AllRoutes, history } from "./components/routing";
 
 function App() {
   return (
-    <Router history={history}>
-      <Routes />
-    </Router>
+    <React.Suspense fallback={<></>}>
+      <HistoryRouter history={history}>
+        <AllRoutes />
+      </HistoryRouter>
+    </React.Suspense>
   );
 }
 

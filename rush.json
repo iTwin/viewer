@@ -1,7 +1,10 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
-  "rushVersion": "5.28.0",
-  "pnpmVersion": "4.12.5",
+  "rushVersion": "5.58.0",
+  "pnpmVersion": "6.24.4",
+  "pnpmOptions": {
+    "useWorkspaces": true
+  },
   "nodeSupportedVersionRange": ">=12.17.0 <17.0.0",
   "projectFolderMinDepth": 2,
   "projectFolderMaxDepth": 3,
@@ -17,12 +20,6 @@
     {
       "packageName": "@itwin/viewer-react",
       "projectFolder": "packages/modules/viewer-react",
-      "versionPolicyName": "independentModule",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "@itwin/error-handling-react",
-      "projectFolder": "packages/modules/error-handling-react",
       "versionPolicyName": "independentModule",
       "shouldPublish": true
     },
@@ -63,6 +60,16 @@
     {
       "packageName": "@itwin/desktop-viewer-test",
       "projectFolder": "packages/apps/desktop-viewer-test",
+      "shouldPublish": false
+    },
+    {
+      "packageName": "@itwin/test-local-extension",
+      "projectFolder": "packages/modules/test-local-extension",
+      "shouldPublish": false
+    },
+    {
+      "packageName": "@itwin/test-remote-extension",
+      "projectFolder": "packages/modules/test-remote-extension",
       "shouldPublish": false
     }
   ]

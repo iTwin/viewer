@@ -18,7 +18,7 @@ import { history } from "../routing";
  * Test a viewer that is connected to an iModelBank
  * @returns
  */
-export const IModelBankHome: React.FC = () => {
+const IModelBankHome: React.FC = () => {
   const [iModelId, setIModelId] = useState(
     process.env.IMJS_AUTH_CLIENT_IMODEL_ID
   );
@@ -106,9 +106,8 @@ export const IModelBankHome: React.FC = () => {
     <div style={{ height: "100vh" }}>
       <Viewer
         authClient={authClient}
-        iTwinId={iTwinId}
-        iModelId={iModelId}
-        appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
+        iTwinId={iTwinId ?? ""}
+        iModelId={iModelId ?? ""}
         theme={ColorTheme.Dark}
         viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
         backend={backend}
@@ -118,3 +117,5 @@ export const IModelBankHome: React.FC = () => {
     </div>
   );
 };
+
+export default IModelBankHome;

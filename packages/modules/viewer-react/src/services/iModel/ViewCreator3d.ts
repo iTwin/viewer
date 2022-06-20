@@ -74,11 +74,10 @@ export class ViewCreator3d extends ViewCreator {
               const intvl = setInterval(() => {
                 if (viewPort.areAllTileTreesLoaded) {
                   ViewerPerformance.addMark("TilesLoaded");
-                  void ViewerPerformance.addAndLogMeasure(
+                  void ViewerPerformance.addMeasure(
                     "TileTreesLoaded",
                     "ViewerStarting",
-                    "TilesLoaded",
-                    viewPort.numReadyTiles
+                    "TilesLoaded"
                   );
                   clearInterval(intvl);
                   resolve(true);
@@ -103,7 +102,7 @@ export class ViewCreator3d extends ViewCreator {
     }
 
     ViewerPerformance.addMark("ViewStateCreation");
-    void ViewerPerformance.addAndLogMeasure(
+    void ViewerPerformance.addMeasure(
       "ViewStateCreated",
       "ViewerStarting",
       "ViewStateCreation"

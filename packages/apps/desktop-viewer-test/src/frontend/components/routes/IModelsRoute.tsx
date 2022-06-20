@@ -4,21 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { useAccessToken } from "@itwin/desktop-viewer-react";
-import React, {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
-import type { RouteComponentProps } from "@reach/router";
+import type { Dispatch, SetStateAction } from "react";
+import React, { createContext, useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 
 import { SelectIModel } from "../modelSelector";
 import { SignIn } from "../signin/SignIn";
 
-interface IModelsRouteParams {
-  iTwinId?: string;
-}
 interface IModelsRouteState {
   projectName?: string;
 }
@@ -30,10 +22,9 @@ export interface IModelContextOptions {
 
 export const IModelContext = createContext({} as IModelContextOptions);
 
-export const IModelsRoute = ({
-  iTwinId,
-  location,
-}: RouteComponentProps<IModelsRouteParams>) => {
+export const IModelsRoute = () => {
+  const { iTwinId } = useParams();
+  const location = useLocation();
   const [projectName, setProjectName] = useState<string>();
   const [pendingIModel, setPendingIModel] = useState<string>();
   const accessToken = useAccessToken();

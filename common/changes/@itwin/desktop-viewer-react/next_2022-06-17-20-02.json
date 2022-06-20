@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "comment": "See [release notes](https://github.com/iTwin/viewer/blob/master/releases/CHANGELOG-3.0.md).",
+      "type": "major",
+      "packageName": "@itwin/desktop-viewer-react"
+    }
+  ],
+  "packageName": "@itwin/desktop-viewer-react",
+  "email": "aruniverse@users.noreply.github.com"
+}

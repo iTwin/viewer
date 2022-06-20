@@ -5,18 +5,38 @@
 
 import { ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
+import {
+  LocalExtensionProvider,
+  RemoteExtensionProvider,
+} from "@itwin/core-frontend";
+import {
+  MeasureTools,
+  MeasureToolsUiItemsProvider,
+} from "@itwin/measure-tools-react";
+import {
+  PropertyGridManager,
+  PropertyGridUiItemsProvider,
+} from "@itwin/property-grid-react";
+import LocalExtension from "@itwin/test-local-extension";
+import {
+  TreeWidget,
+  TreeWidgetUiItemsProvider,
+} from "@itwin/tree-widget-react";
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
-import { Viewer } from "@itwin/web-viewer-react";
+import {
+  Viewer,
+  ViewerContentToolsProvider,
+  ViewerNavigationToolsProvider,
+  ViewerStatusbarItemsProvider,
+} from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-import { ViewportWidgetProvider } from "../../providers/ViewportAccessWidget";
 import { history } from "../routing";
-
 /**
  * Test a viewer that uses auth configuration provided at startup
  * @returns
  */
-export const ViewerHome: React.FC = () => {
+const ViewerHome: React.FC = () => {
   const [iModelId, setIModelId] = useState(
     process.env.IMJS_AUTH_CLIENT_IMODEL_ID
   );
@@ -62,21 +82,15 @@ export const ViewerHome: React.FC = () => {
     history.push(`viewer?iTwinId=${iTwinId}&iModelId=${iModelId}`);
   }, [iTwinId, iModelId]);
 
-  const updateModelInfo = (iModelId: string) => {
-    console.log(
-      `About to pass iModelId of ${iModelId} into the Viewer Component`
-    );
-    setIModelId(iModelId);
-  };
-
-  const uiProviders = useMemo(
-    () => [new ViewportWidgetProvider(updateModelInfo)],
-    []
-  );
-
   const Loader = () => {
     return <div>Things are happening...</div>;
   };
+
+  const onIModelAppInit = useCallback(async () => {
+    await TreeWidget.initialize();
+    await PropertyGridManager.initialize();
+    await MeasureTools.startup();
+  }, []);
 
   const backstageItems: ViewerBackstageItem[] = [
     {
@@ -101,9 +115,8 @@ export const ViewerHome: React.FC = () => {
     <div style={{ height: "100vh" }}>
       <Viewer
         authClient={authClient}
-        iTwinId={iTwinId}
-        iModelId={iModelId}
-        appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
+        iTwinId={iTwinId ?? ""}
+        iModelId={iModelId ?? ""}
         theme={ColorTheme.Dark}
         loadingComponent={<Loader />}
         mapLayerOptions={{
@@ -113,9 +126,35 @@ export const ViewerHome: React.FC = () => {
           },
         }}
         enablePerformanceMonitors={true}
-        uiProviders={uiProviders}
+        onIModelAppInit={onIModelAppInit}
+        uiProviders={[
+          new ViewerNavigationToolsProvider(),
+          new ViewerContentToolsProvider({
+            vertical: {
+              measureGroup: false,
+            },
+          }),
+          new ViewerStatusbarItemsProvider(),
+          new TreeWidgetUiItemsProvider(),
+          new PropertyGridUiItemsProvider({
+            enableCopyingPropertyText: true,
+          }),
+          new MeasureToolsUiItemsProvider(),
+        ]}
+        extensions={[
+          new LocalExtensionProvider({
+            manifestPromise: LocalExtension.manifestPromise,
+            main: LocalExtension.main,
+          }),
+          new RemoteExtensionProvider({
+            jsUrl: "http://localhost:3001/dist/index.js",
+            manifestUrl: "http://localhost:3001/package.json",
+          }),
+        ]}
         backstageItems={backstageItems}
       />
     </div>
   );
 };
+
+export default ViewerHome;

@@ -3,24 +3,34 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { StageUsage } from "@itwin/appui-abstract";
+import { StandardFrontstageProvider } from "@itwin/appui-react";
 import { useEffect, useState } from "react";
 
-import { DefaultFrontstage } from "../components/app-ui/frontstages/DefaultFrontstage";
+import { DefaultContentGroupProvider } from "../components/app-ui/providers";
 import type {
   BlankConnectionViewState,
-  ItwinViewerUi,
+  ViewerDefaultFrontstageConfig,
   ViewerFrontstage,
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
 } from "../types";
 
-export const useFrontstages = (
-  frontstages?: ViewerFrontstage[],
-  defaultUiConfig?: ItwinViewerUi,
-  viewportOptions?: ViewerViewportControlOptions,
-  viewCreatorOptions?: ViewerViewCreator3dOptions,
-  blankConnectionViewState?: BlankConnectionViewState
-) => {
+export interface UseFrontstagesProps {
+  frontstages?: ViewerFrontstage[];
+  defaultUiConfig?: ViewerDefaultFrontstageConfig;
+  viewportOptions?: ViewerViewportControlOptions;
+  viewCreatorOptions?: ViewerViewCreator3dOptions;
+  blankConnectionViewState?: BlankConnectionViewState;
+}
+
+export const useFrontstages = ({
+  frontstages,
+  blankConnectionViewState,
+  defaultUiConfig,
+  viewCreatorOptions,
+  viewportOptions,
+}: UseFrontstagesProps) => {
   const [finalFrontstages, setFinalFrontstages] =
     useState<ViewerFrontstage[]>();
   const [noConnectionRequired, setNoConnectionRequired] =
@@ -53,13 +63,18 @@ export const useFrontstages = (
     }
 
     if (requiresConnection) {
-      // we require a connection, so initialize the DefaultFrontstage that contains the views that we want
-      const defaultFrontstageProvider = new DefaultFrontstage(
-        defaultUiConfig,
+      const contentGroup = new DefaultContentGroupProvider(
         viewportOptions,
         viewCreatorOptions,
         blankConnectionViewState
       );
+
+      const defaultFrontstageProvider = new StandardFrontstageProvider({
+        id: "DefaultFrontstage",
+        usage: StageUsage.General,
+        contentGroupProps: contentGroup,
+        ...defaultUiConfig,
+      });
 
       // add the default frontstage first so that it's default status can be overridden
       allFrontstages.unshift({

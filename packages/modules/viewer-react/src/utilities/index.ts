@@ -3,8 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ViewerProps } from "../components/BaseViewer";
-import type { ItwinViewerInitializerParams } from "../types";
+import type { ViewerCommonProps, ViewerInitializerParams } from "../types";
 import { iTwinViewerInitializerParamList } from "../types";
 
 export * from "./MakeCancellable";
@@ -62,7 +61,7 @@ export const isEqual = (a?: any, b?: any) => {
  * @param options
  * @returns
  */
-export const getInitializationOptions = (options?: ViewerProps) => {
+export const getInitializationOptions = (options?: ViewerCommonProps) => {
   const initOptions = {};
   if (options) {
     for (const key of iTwinViewerInitializerParamList) {
@@ -71,5 +70,5 @@ export const getInitializationOptions = (options?: ViewerProps) => {
       }
     }
   }
-  return initOptions as ItwinViewerInitializerParams;
+  return initOptions as ViewerInitializerParams;
 };

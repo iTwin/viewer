@@ -13,7 +13,7 @@ import {
   ViewerPerformance,
 } from "@itwin/viewer-react";
 
-import type { IModelBackendOptions, WebViewerProps } from "../types";
+import type { IModelBackendOptions, WebInitializerParams } from "../types";
 
 const getHostedConnectionInfo = (
   backendOptions?: IModelBackendOptions
@@ -82,7 +82,7 @@ export class WebInitializer {
   };
 
   /** Web viewer startup */
-  public static async startWebViewer(options: WebViewerProps) {
+  public static async startWebViewer(options: WebInitializerParams) {
     if (!IModelApp.initialized && !this._initializing) {
       console.log("starting web viewer");
       this._initializing = true;
@@ -96,13 +96,26 @@ export class WebInitializer {
           options?.backend
         );
         yield IModelApp.startup(iModelAppOptions);
+        // register extensions after startup
+        if (options?.extensions) {
+          options.extensions.forEach((extension) => {
+            if (extension.hostname) {
+              IModelApp.extensionAdmin.registerHost(
+                `https://${extension.hostname}`
+              );
+            }
+            IModelApp.extensionAdmin
+              .addExtension(extension)
+              .catch((e) => console.log(e));
+          });
+        }
         BentleyCloudRpcManager.initializeClient(
           rpcParams,
           iModelAppOptions.rpcInterfaces ?? []
         );
         console.log("web viewer started");
         ViewerPerformance.addMark("ViewerStarted");
-        void ViewerPerformance.addAndLogMeasure(
+        void ViewerPerformance.addMeasure(
           "ViewerInitialized",
           "ViewerStarting",
           "ViewerStarted"

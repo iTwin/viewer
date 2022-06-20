@@ -4,15 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import { RedirectKey } from "../../services/auth";
 
-export const LogoutRedirect = () => {
+const LogoutRedirect = () => {
   const redirectPath = sessionStorage.getItem(RedirectKey) ?? "/";
-  return (
-    <div>
-      <Redirect to={redirectPath} />
-    </div>
-  );
+  return <Navigate to={redirectPath} />;
 };
+
+export default LogoutRedirect;

@@ -4,11 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import { AuthorizationClient, RedirectKey } from "../../services/auth";
 
-export const LoginRedirect = () => {
+const LoginRedirect = () => {
   const [isAuthVerified, setIsAuthVerified] = useState(false);
   const [redirectPath, setRedirectPath] = useState("/");
 
@@ -35,10 +35,12 @@ export const LoginRedirect = () => {
   return (
     <div>
       {isAuthVerified ? (
-        <Redirect to={redirectPath} />
+        <Navigate to={redirectPath} />
       ) : (
         <p>{displayMessage}</p>
       )}
     </div>
   );
 };
+
+export default LoginRedirect;

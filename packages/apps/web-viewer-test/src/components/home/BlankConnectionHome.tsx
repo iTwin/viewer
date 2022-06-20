@@ -7,7 +7,7 @@ import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import { Cartographic, ColorDef, RenderMode } from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
-import { BlankViewer } from "@itwin/web-viewer-react";
+import { Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo } from "react";
 
 import { GeometryDecorator } from "../../decorators/GeometryDecorator";
@@ -17,7 +17,7 @@ import { TestUiProvider2 } from "../../providers";
  * Test blank connection viewer
  * @returns
  */
-export const BlankConnectionHome: React.FC = () => {
+const BlankConnectionHome: React.FC = () => {
   const authClient = useMemo(
     () =>
       new BrowserAuthorizationClient({
@@ -57,7 +57,7 @@ export const BlankConnectionHome: React.FC = () => {
 
   return (
     <div style={{ height: "100vh" }}>
-      <BlankViewer
+      <Viewer
         authClient={authClient}
         blankConnection={{
           name: "GeometryConnection",
@@ -68,7 +68,7 @@ export const BlankConnectionHome: React.FC = () => {
           }),
           extents: new Range3d(-30, -30, -30, 30, 30, 30),
         }}
-        viewStateOptions={{
+        blankConnectionViewState={{
           displayStyle: { backgroundColor: ColorDef.white },
           viewFlags: { grid: true, renderMode: RenderMode.SmoothShade },
           setAllow3dManipulations: false,
@@ -81,3 +81,5 @@ export const BlankConnectionHome: React.FC = () => {
     </div>
   );
 };
+
+export default BlankConnectionHome;

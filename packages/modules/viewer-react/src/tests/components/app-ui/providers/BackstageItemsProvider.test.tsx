@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { BackstageItemUtilities } from "@itwin/appui-abstract";
 import type { FrontstageProps } from "@itwin/appui-react";
 import { FrontstageProvider } from "@itwin/appui-react";

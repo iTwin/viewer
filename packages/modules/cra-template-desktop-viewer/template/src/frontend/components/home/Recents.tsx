@@ -3,10 +3,10 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { useNavigate } from "@reach/router";
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { ViewerFile } from "../../../common/ViewerConfig";
+import type { ViewerFile } from "../../../common/ViewerConfig";
 import { SettingsContext } from "../../services/SettingsClient";
 
 export const Recents = () => {

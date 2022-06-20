@@ -23,17 +23,13 @@ import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
 import { FrontendIModelsAccess } from "@itwin/imodels-access-frontend";
 import { IModelsClient } from "@itwin/imodels-client-management";
-import { MeasureTools } from "@itwin/measure-tools-react";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
-import { PropertyGridManager } from "@itwin/property-grid-react";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
-import { TreeWidget } from "@itwin/tree-widget-react";
 
 import { ViewerPerformance } from "../services/telemetry";
-import type { ItwinViewerInitializerParams } from "../types";
+import type { ViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
-import { trackUserEvent, userAI } from "./telemetry/TelemetryService";
 
 // initialize required iTwin.js services
 export class BaseInitializer {
@@ -91,7 +87,7 @@ export class BaseInitializer {
 
   /** initialize required iTwin.js services */
   public static async initialize(
-    viewerOptions?: ItwinViewerInitializerParams
+    viewerOptions?: ViewerInitializerParams
   ): Promise<void> {
     if (!IModelApp.initialized) {
       throw new Error(
@@ -118,14 +114,6 @@ export class BaseInitializer {
       // execute the iModelApp initialization callback if provided
       if (viewerOptions?.onIModelAppInit) {
         viewerOptions.onIModelAppInit();
-      }
-
-      // Add the app's telemetry client if a key was provided
-      if (viewerOptions?.appInsightsKey) {
-        if (!userAI.initialized) {
-          userAI.initialize(viewerOptions?.appInsightsKey);
-        }
-        IModelApp.telemetry.addClient(userAI);
       }
 
       // initialize localization for the app
@@ -164,16 +152,8 @@ export class BaseInitializer {
 
       ConfigurableUiManager.initialize();
 
-      yield TreeWidget.initialize(IModelApp.localization);
-      yield PropertyGridManager.initialize(IModelApp.localization);
-      yield MeasureTools.startup();
-
-      if (viewerOptions?.appInsightsKey) {
-        trackUserEvent("iTwinViewer.Viewer.Initialized");
-      }
-
       ViewerPerformance.addMark("BaseViewerStarted");
-      void ViewerPerformance.addAndLogMeasure(
+      void ViewerPerformance.addMeasure(
         "BaseViewerInitialized",
         "ViewerStarting",
         "BaseViewerStarted"
@@ -217,7 +197,7 @@ const getSupportedRpcs = (
  * @returns
  */
 export const getIModelAppOptions = (
-  options?: ItwinViewerInitializerParams
+  options?: ViewerInitializerParams
 ): IModelAppOptions => {
   // if ITWIN_VIEWER_HOME is defined, the viewer is likely being served from another origin
   const viewerHome = (window as any).ITWIN_VIEWER_HOME;
@@ -225,19 +205,25 @@ export const getIModelAppOptions = (
     console.log(`resources served from: ${viewerHome}`);
   }
 
-  const iModelsClient = new IModelsClient({
-    api: {
+  const hubAccess =
+    options?.hubAccess ??
+    new FrontendIModelsAccess(
+      new IModelsClient({
+        api: {
+          baseUrl: `https://${
+            process.env.IMJS_URL_PREFIX ?? ""
+          }api.bentley.com/imodels`,
+        },
+      })
+    );
+
+  const realityDataAccess =
+    options?.realityDataAccess ??
+    new RealityDataAccessClient({
       baseUrl: `https://${
         process.env.IMJS_URL_PREFIX ?? ""
-      }api.bentley.com/imodels`,
-    },
-  });
-
-  const realityDataClient = new RealityDataAccessClient({
-    baseUrl: `https://${
-      process.env.IMJS_URL_PREFIX ?? ""
-    }api.bentley.com/realitydata`,
-  });
+      }api.bentley.com/realitydata`,
+    });
 
   return {
     applicationId: options?.productId ?? "3098",
@@ -245,15 +231,15 @@ export const getIModelAppOptions = (
     uiAdmin: new FrameworkUiAdmin(),
     rpcInterfaces: getSupportedRpcs(options?.additionalRpcInterfaces ?? []),
     toolAdmin: options?.toolAdmin,
-    hubAccess: options?.hubAccess ?? new FrontendIModelsAccess(iModelsClient),
+    hubAccess,
     localization: new ITwinLocalization({
       urlTemplate:
         options?.i18nUrlTemplate ??
         (viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`),
     }),
     publicPath: viewerHome ? `${viewerHome}/` : "",
-    realityDataAccess: realityDataClient,
+    realityDataAccess,
     mapLayerOptions: options?.mapLayerOptions,
-    tileAdmin: options?.tileAdminOptions,
+    tileAdmin: options?.tileAdmin,
   };
 };

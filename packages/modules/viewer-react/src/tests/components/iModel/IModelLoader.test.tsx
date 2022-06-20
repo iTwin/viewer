@@ -38,15 +38,6 @@ jest.mock("@itwin/appui-react", () => {
   };
 });
 jest.mock("@itwin/appui-abstract");
-jest.mock("@microsoft/applicationinsights-react-js", () => ({
-  ReactPlugin: jest.fn(),
-  withAITracking: (
-    reactPlugin: any | undefined, // eslint-disable-line @typescript-eslint/no-unused-vars
-    component: any,
-    componentName?: string, // eslint-disable-line @typescript-eslint/no-unused-vars
-    className?: string // eslint-disable-line @typescript-eslint/no-unused-vars
-  ) => component,
-}));
 jest.mock("@itwin/core-frontend", () => {
   return {
     IModelApp: {
@@ -158,7 +149,7 @@ describe("IModelLoader", () => {
     );
 
     await waitFor(() => result.getByTestId("loader-wrapper"));
-    expect(UiItemsManager.register).toHaveBeenCalledTimes(4);
+    expect(UiItemsManager.register).toHaveBeenCalledTimes(1);
 
     result.rerender(
       <IModelLoader
@@ -169,7 +160,7 @@ describe("IModelLoader", () => {
     );
 
     await waitFor(() => result.getByTestId("viewer"));
-    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(4);
+    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(1);
   });
 
   it("creates a blank connection", async () => {
@@ -183,7 +174,7 @@ describe("IModelLoader", () => {
       extents: new Range3d(-30, -30, -30, 30, 30, 30),
     };
 
-    const viewStateOptions: BlankConnectionViewState = {
+    const blankConnectionViewState: BlankConnectionViewState = {
       setAllow3dManipulations: true,
       displayStyle: {
         backgroundColor: ColorDef.blue,
@@ -193,7 +184,7 @@ describe("IModelLoader", () => {
     const { getByTestId } = render(
       <IModelLoader
         blankConnection={blankConnection}
-        blankConnectionViewState={viewStateOptions}
+        blankConnectionViewState={blankConnectionViewState}
       />
     );
 

@@ -11,9 +11,24 @@ import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
 import { FillCentered } from "@itwin/core-react";
 import { ProgressLinear } from "@itwin/itwinui-react";
 import {
+  MeasureTools,
+  MeasureToolsUiItemsProvider,
+} from "@itwin/measure-tools-react";
+import {
+  PropertyGridManager,
+  PropertyGridUiItemsProvider,
+} from "@itwin/property-grid-react";
+import {
+  TreeWidget,
+  TreeWidgetUiItemsProvider,
+} from "@itwin/tree-widget-react";
+import {
   useAccessToken,
   Viewer,
+  ViewerContentToolsProvider,
+  ViewerNavigationToolsProvider,
   ViewerPerformance,
+  ViewerStatusbarItemsProvider,
 } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -94,11 +109,10 @@ const App: React.FC = () => {
         const intvl = setInterval(() => {
           if (viewPort.areAllTileTreesLoaded) {
             ViewerPerformance.addMark("TilesLoaded");
-            void ViewerPerformance.addAndLogMeasure(
+            void ViewerPerformance.addMeasure(
               "TileTreesLoaded",
               "ViewerStarting",
-              "TilesLoaded",
-              viewPort.numReadyTiles
+              "TilesLoaded"
             );
             clearInterval(intvl);
             resolve(true);
@@ -123,6 +137,12 @@ const App: React.FC = () => {
     [viewConfiguration]
   );
 
+  const onIModelAppInit = useCallback(async () => {
+    await TreeWidget.initialize();
+    await PropertyGridManager.initialize();
+    await MeasureTools.startup();
+  }, []);
+
   return (
     <div className="viewer-container">
       {!accessToken && (
@@ -133,11 +153,26 @@ const App: React.FC = () => {
         </FillCentered>
       )}
       <Viewer
-        iTwinId={iTwinId}
-        iModelId={iModelId}
+        iTwinId={iTwinId ?? ""}
+        iModelId={iModelId ?? ""}
         authClient={authClient}
         viewCreatorOptions={viewCreatorOptions}
-        enablePerformanceMonitors={true} // see description in the README (https://www.npmjs.com/package/@itwin/desktop-viewer-react)
+        enablePerformanceMonitors={true} // see description in the README (https://www.npmjs.com/package/@itwin/web-viewer-react)
+        onIModelAppInit={onIModelAppInit}
+        uiProviders={[
+          new ViewerNavigationToolsProvider(),
+          new ViewerContentToolsProvider({
+            vertical: {
+              measureGroup: false,
+            },
+          }),
+          new ViewerStatusbarItemsProvider(),
+          new TreeWidgetUiItemsProvider(),
+          new PropertyGridUiItemsProvider({
+            enableCopyingPropertyText: true,
+          }),
+          new MeasureToolsUiItemsProvider(),
+        ]}
       />
     </div>
   );

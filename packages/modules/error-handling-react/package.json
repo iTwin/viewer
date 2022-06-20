@@ -1,5 +1,6 @@
 {
   "name": "@itwin/error-handling-react",
+  "private": true,
   "version": "2.0.1",
   "description": "iTwin Error Handling frontend components",
   "main": "lib/index.js",
@@ -73,7 +74,7 @@
     "react-test-renderer": "16.13.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.1.1",
-    "typescript": "~4.3.0",
+    "typescript": "~4.4.0",
     "@types/sanitize-html": "^1.27.1"
   },
   "peerDependencies": {

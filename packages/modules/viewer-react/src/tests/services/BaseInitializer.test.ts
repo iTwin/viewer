@@ -17,7 +17,6 @@ import {
   BaseInitializer,
   getIModelAppOptions,
 } from "../../services/BaseInitializer";
-import { userAI } from "../../services/telemetry/TelemetryService";
 import { MockToolAdmin } from "../mocks/MockToolAdmin";
 
 jest.mock("../../services/iModel/ViewCreator3d", () => {
@@ -51,7 +50,6 @@ jest.mock("@itwin/presentation-frontend", () => {
   };
 });
 jest.mock("@itwin/core-frontend", () => {
-  const noMock = jest.requireActual("@itwin/core-frontend");
   return {
     IModelApp: {
       startup: jest.fn().mockResolvedValue(true),
@@ -84,7 +82,7 @@ jest.mock("@itwin/core-frontend", () => {
     SnapshotConnection: {
       openFile: jest.fn(),
     },
-    ToolAdmin: noMock.ToolAdmin,
+    ToolAdmin: class {},
     ItemField: {},
     CompassMode: {},
     RotationMode: {},
@@ -100,27 +98,6 @@ jest.mock("@itwin/core-frontend", () => {
     },
   };
 });
-jest.mock("@itwin/property-grid-react", () => {
-  return {
-    ...jest.createMockFromModule<any>("@itwin/property-grid-react"),
-    PropertyGridManager: {
-      ...jest.createMockFromModule<any>("@itwin/property-grid-react")
-        .PropertyGridManager,
-      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
-    },
-  };
-});
-jest.mock("@itwin/measure-tools-react", () => {
-  return {
-    ...jest.createMockFromModule<any>("@itwin/measure-tools-react"),
-    MeasureTools: {
-      ...jest.createMockFromModule<any>("@itwin/measure-tools-react")
-        .MeasureTools,
-      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
-    },
-  };
-});
-jest.mock("../../services/telemetry/TelemetryService");
 
 describe("BaseInitializer", () => {
   beforeEach(() => {
@@ -208,20 +185,6 @@ describe("BaseInitializer", () => {
       "test2"
     );
   });
-  it("instantiates an instance of the Telemetry Service when an app insights key is provided", async () => {
-    const appInsightsKey = "123";
-    await BaseInitializer.initialize({
-      appInsightsKey: appInsightsKey,
-      enablePerformanceMonitors: false,
-    });
-    await BaseInitializer.initialized;
-    expect(userAI.initialize).toHaveBeenCalledWith(appInsightsKey);
-  });
-  it("does not instantiate an instance of the Telemetry Service when an app insights key is not provided", async () => {
-    await BaseInitializer.initialize();
-    await BaseInitializer.initialized;
-    expect(userAI.initialize).not.toHaveBeenCalled();
-  });
   it("fails to initialize if iModelApp has not been initialized", async () => {
     // override the return value of the getter function
     Object.defineProperty(IModelApp, "initialized", {
@@ -254,7 +217,7 @@ describe("BaseInitializer", () => {
   it("uses the TileAdmin options that are provided", () => {
     const cesiumIonKey = "testKey";
     const appOptions = getIModelAppOptions({
-      tileAdminOptions: { cesiumIonKey },
+      tileAdmin: { cesiumIonKey },
       enablePerformanceMonitors: false,
     });
     expect(appOptions.tileAdmin).toEqual({ cesiumIonKey });
