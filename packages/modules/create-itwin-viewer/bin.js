@@ -92,10 +92,11 @@ function writeConfig(generatorRoot, appRoot, template, mergedAppConfig) {
  * @param {*} appRoot
  * @param {*} template
  */
-function writeExtensions(generatorRoot, appRoot, template) {
+function writeExtensions(generatorRoot, appRoot, template, platform) {
   const templateProviderPath = path.resolve(
     generatorRoot,
     "extensions",
+    platform,
     `${template}.ts`
   );
   let extensions = fs.readFileSync(templateProviderPath, "utf8");
@@ -266,7 +267,7 @@ async function main() {
     mainOptions.template,
     mergedAppConfig
   );
-  writeExtensions(generatorRoot, applicationRoot, mainOptions.template);
+  writeExtensions(generatorRoot, applicationRoot, mainOptions.template, mainOptions.platform);
   writePackageJson(
     applicationRoot,
     mainOptions.name,
