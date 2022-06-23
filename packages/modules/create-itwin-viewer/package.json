@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "create-itwin-viewer",
   "version": "1.0.0",
   "description": "Initializer for iTwin Viewer apps",
   "bin": {
@@ -19,7 +19,10 @@
     "Viewer",
     "iTwin.js"
   ],
-  "author": "Bentley Systems, Inc. (http://www.bentley.com)",
+  "author":   { 
+    "name": "Bentley Systems, Inc.",
+    "url": "http://www.bentley.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/iTwin/viewer/issues"
