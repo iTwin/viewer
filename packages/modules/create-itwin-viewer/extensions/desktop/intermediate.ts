@@ -3,13 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { StandardNavigationToolsProvider } from "@itwin/desktop-viewer-itwin-react";
-
+import { StandardNavigationToolsProvider } from "../../../web-viewer-react/node_modules/@itwin/desktop-viewer-react/src";
 import {
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
   ViewerStatusbarItemsProvider,
-} from "../../../web-viewer-react/node_modules/@itwin/viewer-react/src";
+} from "../../../web-viewer-react/node_modules/@itwin/desktop-viewer-react/src";
 import type { ViewerExtensionProvider } from "./config";
 
 export default [

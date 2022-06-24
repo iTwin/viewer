@@ -11,13 +11,13 @@ import {
   TreeWidget,
   TreeWidgetUiItemsProvider,
 } from "@itwin/tree-widget-react";
-import { StandardNavigationToolsProvider } from "@itwin/web-viewer-itwin-react";
 
+import { StandardNavigationToolsProvider } from "../../web-viewer-react/node_modules/@itwin/web-viewer-react/src";
 import {
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
   ViewerStatusbarItemsProvider,
-} from "../../web-viewer-react/node_modules/@itwin/viewer-react/src";
+} from "../../web-viewer-react/node_modules/@itwin/web-viewer-react/src";
 import type { ViewerExtensionProvider } from "./config";
 
 export default [
