@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import {
-  StandardNavigationToolsProvider,
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
   ViewerStatusbarItemsProvider,
@@ -13,9 +12,6 @@ import {
 import type { ViewerExtensionProvider } from "./config";
 
 export default [
-  {
-    provider: new StandardNavigationToolsProvider(),
-  },
   {
     provider: new ViewerNavigationToolsProvider(),
   },
