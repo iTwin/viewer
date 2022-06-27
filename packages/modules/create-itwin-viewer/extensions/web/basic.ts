@@ -3,9 +3,10 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Viewer } from "../../../apps/cdn-viewer/node_modules/@itwin/web-viewer-react/lib/esm";
-import { StandardNavigationToolsProvider } from "../../web-viewer-react/node_modules/@itwin/web-viewer-react/src";
-import { ViewerNavigationToolsProvider } from "../../web-viewer-react/node_modules/@itwin/web-viewer-react/src";
+import { Viewer } from "@itwin/web-viewer-react";
+import { StandardNavigationToolsProvider } from "@itwin/web-viewer-react";
+import { ViewerNavigationToolsProvider } from "@itwin/web-viewer-react";
+
 import type { ViewerExtensionProvider } from "./config";
 
 export default [

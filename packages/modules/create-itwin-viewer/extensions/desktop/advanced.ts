@@ -3,6 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { StandardNavigationToolsProvider } from "@itwin/desktop-viewer-react";
+import {
+  ViewerContentToolsProvider,
+  ViewerNavigationToolsProvider,
+  ViewerStatusbarItemsProvider,
+} from "@itwin/desktop-viewer-react";
 import {
   PropertyGridManager,
   PropertyGridUiItemsProvider,
@@ -12,12 +18,6 @@ import {
   TreeWidgetUiItemsProvider,
 } from "@itwin/tree-widget-react";
 
-import { StandardNavigationToolsProvider } from "../../../web-viewer-react/node_modules/@itwin/desktop-viewer-react/src";
-import {
-  ViewerContentToolsProvider,
-  ViewerNavigationToolsProvider,
-  ViewerStatusbarItemsProvider,
-} from "../../../web-viewer-react/node_modules/@itwin/desktop-viewer-react/src";
 import type { ViewerExtensionProvider } from "./config";
 
 export default [
