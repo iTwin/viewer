@@ -3,8 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { StandardNavigationToolsProvider } from "@itwin/web-viewer-react";
 import {
+  StandardNavigationToolsProvider,
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
   ViewerStatusbarItemsProvider,

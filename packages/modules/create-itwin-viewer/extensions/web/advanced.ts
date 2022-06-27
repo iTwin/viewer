@@ -11,8 +11,8 @@ import {
   TreeWidget,
   TreeWidgetUiItemsProvider,
 } from "@itwin/tree-widget-react";
-import { StandardNavigationToolsProvider } from "@itwin/web-viewer-react";
 import {
+  StandardNavigationToolsProvider,
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
   ViewerStatusbarItemsProvider,
