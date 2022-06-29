@@ -102,20 +102,7 @@ const IModelBankHome: React.FC = () => {
     });
   };
 
-  return (
-    <div style={{ height: "100vh" }}>
-      <Viewer
-        authClient={authClient}
-        iTwinId={iTwinId ?? ""}
-        iModelId={iModelId ?? ""}
-        theme={ColorTheme.Dark}
-        viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
-        backend={backend}
-        // hubAccess={imodelBankClient}
-        enablePerformanceMonitors={true}
-      />
-    </div>
-  );
+  return <div style={{ height: "100vh" }} />;
 };
 
 export default IModelBankHome;

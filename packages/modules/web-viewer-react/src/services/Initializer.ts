@@ -13,7 +13,12 @@ import {
   ViewerPerformance,
 } from "@itwin/viewer-react";
 
-import type { IModelBackendOptions, WebInitializerParams } from "../types";
+import type {
+  HostedBackendConfig,
+  IModelBackendOptions,
+  WebInitializerParams,
+  WebViewerProps,
+} from "../types";
 
 const getHostedConnectionInfo = (
   backendOptions?: IModelBackendOptions
@@ -21,6 +26,15 @@ const getHostedConnectionInfo = (
   const orchestratorUrl = `https://${
     process.env.IMJS_URL_PREFIX ?? ""
   }api.bentley.com`;
+  // const hostedBackend: HostedBackendConfig = {
+  //   title: "",
+  //   version: "",
+  // }
+  // if (backendOptions === undefined) {
+  //   backendOptions = {hostedBackend: hostedBackend};
+  // }
+  // orchestratorUrl = "http://localhost:3001";
+  // backendOptions.hostedBackend = hostedBackend;
 
   if (backendOptions?.hostedBackend) {
     if (!backendOptions.hostedBackend.title) {
@@ -98,7 +112,7 @@ export class WebInitializer {
         yield IModelApp.startup(iModelAppOptions);
         // register extensions after startup
         if (options?.extensions) {
-          options.extensions.forEach((extension) => {
+          options.extensions.forEach((extension: any) => {
             if (extension.hostname) {
               IModelApp.extensionAdmin.registerHost(
                 `https://${extension.hostname}`

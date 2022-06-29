@@ -5,6 +5,8 @@
 
 import { ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
+import type { AccessToken } from "@itwin/core-bentley";
+import { BeEvent, BentleyError } from "@itwin/core-bentley";
 import {
   LocalExtensionProvider,
   RemoteExtensionProvider,
@@ -22,7 +24,10 @@ import {
   TreeWidget,
   TreeWidgetUiItemsProvider,
 } from "@itwin/tree-widget-react";
-import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
+import type {
+  ViewerAuthorizationClient,
+  ViewerBackstageItem,
+} from "@itwin/web-viewer-react";
 import {
   Viewer,
   ViewerContentToolsProvider,
@@ -32,6 +37,37 @@ import {
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";
+
+export class MyTokenServerAuthClient implements ViewerAuthorizationClient {
+  public readonly onAccessTokenChanged = new BeEvent<
+    (token: AccessToken) => void
+  >();
+  protected _accessToken?: AccessToken;
+
+  public async initialize() {
+    // defaults to the localhost version of the token server
+    const tokenUrl = process.env.TOKEN_URL ?? "http://localhost:3002/getToken";
+    try {
+      const res = await fetch(tokenUrl);
+      if (res) {
+        const accessToken = await res.text();
+        this._accessToken = accessToken;
+        this.onAccessTokenChanged.raiseEvent(accessToken);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  public async getAccessToken(): Promise<AccessToken> {
+    await this.initialize();
+    if (!this._accessToken) {
+      throw new BentleyError(1, "Cannot get access token");
+    }
+    return this._accessToken;
+  }
+}
+
 /**
  * Test a viewer that uses auth configuration provided at startup
  * @returns
@@ -123,6 +159,14 @@ const ViewerHome: React.FC = () => {
           BingMaps: {
             key: "key",
             value: process.env.IMJS_BING_MAPS_KEY ?? "",
+          },
+        }}
+        backend={{
+          customBackend: {
+            rpcParams: {
+              info: { title: "nicks-backend", version: "v1.0" },
+              uriPrefix: "http://localhost:3001",
+            },
           },
         }}
         enablePerformanceMonitors={true}
