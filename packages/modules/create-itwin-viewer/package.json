@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iTwin/viewer.git"
+    "url": "https://github.com/iTwin/viewer.git"
   },
   "keywords": [
     "iTwin",
     "Viewer",
     "iTwin.js"
   ],
-  "author":   { 
+  "author": { 
     "name": "Bentley Systems, Inc.",
     "url": "http://www.bentley.com"
   },
