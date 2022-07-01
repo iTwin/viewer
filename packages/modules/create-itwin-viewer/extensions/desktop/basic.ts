@@ -3,8 +3,5 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Viewer } from "@itwin/desktop-viewer-react";
-
 import type { ViewerExtensionProvider } from "./config";
-
 export default [] as ViewerExtensionProvider[];
