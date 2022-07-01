@@ -17,7 +17,7 @@
     "Viewer",
     "iTwin.js"
   ],
-  "author": {
+  "author": { 
     "name": "Bentley Systems, Inc.",
     "url": "http://www.bentley.com"
   },
@@ -35,5 +35,6 @@
     "deepmerge": "^4.2.2",
     "prettier": "^2.0.5"
   },
-  "type": "module"
+  "type": "module",
+  "main": "bin.js"
 }
