@@ -2,6 +2,23 @@
   "name": "@itwin/web-viewer-react",
   "entries": [
     {
+      "version": "3.0.1",
+      "tag": "@itwin/web-viewer-react_v3.0.1",
+      "date": "Tue, 05 Jul 2022 20:30:55 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added custom localization option in the base viewer"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" to `3.0.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.0",
       "tag": "@itwin/web-viewer-react_v3.0.0",
       "date": "Mon, 20 Jun 2022 14:39:09 GMT",
