@@ -91,6 +91,7 @@ export const MyViewerComponent = () => {
 - `tileAdmin` - Optional `tileAdmin` to override the Viewer's default tile admin
 - `renderSys` - Optional `renderSys` to override the Viewer's default render system
 - `realityDataAccess` - Optional `realityDataAccess` to override the Viewer's default reality data access
+- `localization` - Optional `localization` to provide your own Localization instance
 
 # Development
 

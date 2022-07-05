@@ -91,6 +91,7 @@ export type ViewerCommonProps = ViewerInitializerParams & LoaderProps;
 export type ViewerIModelAppOptions = Pick<
   IModelAppOptions,
   | "hubAccess"
+  | "localization"
   | "mapLayerOptions"
   | "tileAdmin"
   | "toolAdmin"

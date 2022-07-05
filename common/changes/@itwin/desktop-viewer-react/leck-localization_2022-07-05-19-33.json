@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/desktop-viewer-react",
+      "comment": "Added custom localization option in the base viewer",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/desktop-viewer-react"
+}

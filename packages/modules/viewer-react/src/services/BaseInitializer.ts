@@ -217,6 +217,14 @@ export const getIModelAppOptions = (
       })
     );
 
+  const localization =
+    options?.localization ??
+    new ITwinLocalization({
+      urlTemplate:
+        options?.i18nUrlTemplate ??
+        (viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`),
+    });
+
   const realityDataAccess =
     options?.realityDataAccess ??
     new RealityDataAccessClient({
@@ -232,11 +240,7 @@ export const getIModelAppOptions = (
     rpcInterfaces: getSupportedRpcs(options?.additionalRpcInterfaces ?? []),
     toolAdmin: options?.toolAdmin,
     hubAccess,
-    localization: new ITwinLocalization({
-      urlTemplate:
-        options?.i18nUrlTemplate ??
-        (viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`),
-    }),
+    localization,
     publicPath: viewerHome ? `${viewerHome}/` : "",
     realityDataAccess,
     mapLayerOptions: options?.mapLayerOptions,
