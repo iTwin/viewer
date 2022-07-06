@@ -24,15 +24,15 @@
     "@itwin/presentation-frontend": "^3.2.0",
     "@itwin/webgl-compatibility": "^3.2.0",
     "@itwin/web-viewer-react": "workspace:*",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-redux": "^7.2.0"
   },
   "devDependencies": {
     "@bentley/react-scripts": "^4.0.3",
     "@types/node": "^14.0.19",
-    "@types/react": "^17.0.19",
-    "@types/react-dom": "^17.0.9",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
     "cross-env": "^5.2.1",
     "rewire": "^5.0.0",
     "typescript": "~4.4.0"
