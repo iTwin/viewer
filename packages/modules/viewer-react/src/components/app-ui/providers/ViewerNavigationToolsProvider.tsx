@@ -4,7 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { DefaultNavigationTools } from "@itwin/appui-react";
-import { StandardNavigationToolsProvider } from "@itwin/appui-react";
+
+import { StandardNavigationToolsProvider } from "./StandardNavigationToolsProvider";
 
 export class ViewerNavigationToolsProvider extends StandardNavigationToolsProvider {
   constructor(defaultItems?: DefaultNavigationTools) {
