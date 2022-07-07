@@ -87,6 +87,7 @@ jest.mock("@itwin/core-frontend", () => {
     CompassMode: {},
     RotationMode: {},
     AccuDraw: class {},
+    AccuSnap: class {},
     SpatialViewState: {
       className: "",
     },
@@ -118,6 +119,7 @@ describe("BaseInitializer", () => {
     const appOptions = getIModelAppOptions();
     expect(appOptions).toEqual({
       applicationId: "3098",
+      accuSnap: expect.anything(),
       notifications: expect.anything(),
       uiAdmin: expect.anything(),
       rpcInterfaces: [

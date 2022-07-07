@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Add implementation of AccuSnap that obtains the snap modes off the UiFramework. Fix issues where changing the SnapMode in the UI wouldn't reflect in AccuSnap.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}

@@ -88,6 +88,7 @@ jest.mock("@itwin/core-frontend", () => {
     CompassMode: {},
     RotationMode: {},
     AccuDraw: class {},
+    AccuSnap: class {},
     ToolAdmin: class {},
     WebViewerApp: {
       startup: jest.fn().mockResolvedValue(true),
