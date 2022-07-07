@@ -128,7 +128,11 @@ const ViewerHome: React.FC = () => {
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
-          new ViewerNavigationToolsProvider(),
+          new ViewerNavigationToolsProvider({
+            vertical: {
+              walk: false,
+            },
+          }),
           new ViewerContentToolsProvider({
             vertical: {
               measureGroup: false,
