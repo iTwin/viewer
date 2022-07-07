@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Tue, 05 Jul 2022 20:30:55 GMT and should not be manually modified.
+This log was last generated on Thu, 07 Jul 2022 18:12:22 GMT and should not be manually modified.
+
+## 3.1.0
+Thu, 07 Jul 2022 18:12:22 GMT
+
+### Minor changes
+
+- Add implementation of AccuSnap that obtains the snap modes off the UiFramework. Fix issues where changing the SnapMode in the UI wouldn't reflect in AccuSnap.
 
 ## 3.0.1
 Tue, 05 Jul 2022 20:30:55 GMT
