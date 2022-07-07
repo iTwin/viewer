@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "3.1.1",
+      "tag": "@itwin/viewer-react_v3.1.1",
+      "date": "Thu, 07 Jul 2022 21:04:19 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Use LookAndMove tool as default walk tool"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.1.0",
       "tag": "@itwin/viewer-react_v3.1.0",
       "date": "Thu, 07 Jul 2022 18:12:22 GMT",
