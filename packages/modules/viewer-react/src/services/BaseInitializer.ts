@@ -18,6 +18,7 @@ import {
   IModelTileRpcInterface,
 } from "@itwin/core-common";
 import type { IModelAppOptions } from "@itwin/core-frontend";
+import { AccuSnap, SnapMode } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
@@ -235,6 +236,7 @@ export const getIModelAppOptions = (
 
   return {
     applicationId: options?.productId ?? "3098",
+    accuSnap: new ViewerAccuSnap(),
     notifications: new AppNotificationManager(),
     uiAdmin: new FrameworkUiAdmin(),
     rpcInterfaces: getSupportedRpcs(options?.additionalRpcInterfaces ?? []),
@@ -247,3 +249,33 @@ export const getIModelAppOptions = (
     tileAdmin: options?.tileAdmin,
   };
 };
+
+class ViewerAccuSnap extends AccuSnap {
+  public override getActiveSnapModes(): SnapMode[] {
+    // The SnapMode in the UiFramework is a bit mask.
+    const snapMode = UiFramework.getAccudrawSnapMode();
+    const snaps: SnapMode[] = [];
+    if (0 < (snapMode & SnapMode.Bisector)) {
+      snaps.push(SnapMode.Bisector);
+    }
+    if (0 < (snapMode & SnapMode.Center)) {
+      snaps.push(SnapMode.Center);
+    }
+    if (0 < (snapMode & SnapMode.Intersection)) {
+      snaps.push(SnapMode.Intersection);
+    }
+    if (0 < (snapMode & SnapMode.MidPoint)) {
+      snaps.push(SnapMode.MidPoint);
+    }
+    if (0 < (snapMode & SnapMode.Nearest)) {
+      snaps.push(SnapMode.Nearest);
+    }
+    if (0 < (snapMode & SnapMode.NearestKeypoint)) {
+      snaps.push(SnapMode.NearestKeypoint);
+    }
+    if (0 < (snapMode & SnapMode.Origin)) {
+      snaps.push(SnapMode.Origin);
+    }
+    return snaps;
+  }
+}
