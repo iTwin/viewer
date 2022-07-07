@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/viewer-react",
       "comment": "Use LookAndMove tool as default walk tool",
-      "type": "minor"
+      "type": "patch"
     }
   ],
   "packageName": "@itwin/viewer-react"
