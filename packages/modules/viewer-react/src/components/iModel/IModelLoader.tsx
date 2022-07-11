@@ -84,7 +84,7 @@ const IModelLoader = React.memo(
       }
 
       ViewerPerformance.addMark("IModelConnectionStarted");
-      void ViewerPerformance.addMeasure(
+      ViewerPerformance.addMeasure(
         "IModelConnecting",
         "ViewerStarting",
         "IModelConnectionStarted"
@@ -103,7 +103,7 @@ const IModelLoader = React.memo(
         );
       }
       ViewerPerformance.addMark("IModelConnection");
-      void ViewerPerformance.addMeasure(
+      ViewerPerformance.addMeasure(
         "IModelConnected",
         "ViewerStarting",
         "IModelConnection"
