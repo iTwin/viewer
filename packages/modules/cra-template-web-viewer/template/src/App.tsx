@@ -109,7 +109,7 @@ const App: React.FC = () => {
         const intvl = setInterval(() => {
           if (viewPort.areAllTileTreesLoaded) {
             ViewerPerformance.addMark("TilesLoaded");
-            void ViewerPerformance.addMeasure(
+            ViewerPerformance.addMeasure(
               "TileTreesLoaded",
               "ViewerStarting",
               "TilesLoaded"

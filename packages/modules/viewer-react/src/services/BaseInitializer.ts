@@ -154,7 +154,7 @@ export class BaseInitializer {
       ConfigurableUiManager.initialize();
 
       ViewerPerformance.addMark("BaseViewerStarted");
-      void ViewerPerformance.addMeasure(
+      ViewerPerformance.addMeasure(
         "BaseViewerInitialized",
         "ViewerStarting",
         "BaseViewerStarted"

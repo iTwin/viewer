@@ -115,7 +115,7 @@ export class WebInitializer {
         );
         console.log("web viewer started");
         ViewerPerformance.addMark("ViewerStarted");
-        void ViewerPerformance.addMeasure(
+        ViewerPerformance.addMeasure(
           "ViewerInitialized",
           "ViewerStarting",
           "ViewerStarted"
