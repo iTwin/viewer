@@ -4,10 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
-import { IToastLink } from "./Toast";
-import ToastMaster, { IToastObject, IToastSettings } from "./ToastMaster";
+import type { IToastLink } from "./Toast";
+import type { IToastObject, IToastSettings } from "./ToastMaster";
+import ToastMaster from "./ToastMaster";
 
 type IToastOptions = {
   duration?: number;
@@ -33,12 +34,12 @@ export default class Toaster {
     const container = document.createElement("div");
     container.setAttribute("itwin-toaster-container", "");
     document.body.appendChild(container);
-    ReactDOM.render(
+    const root = createRoot(container!);
+    root.render(
       <ToastMaster
         bindNotify={this._bindNotify}
         bindCloseAll={this._bindCloseAll}
-      />,
-      container
+      />
     );
   }
 

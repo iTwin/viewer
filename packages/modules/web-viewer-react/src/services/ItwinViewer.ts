@@ -6,7 +6,7 @@
 import type { ConnectedViewerProps } from "@itwin/viewer-react";
 import { ViewerPerformance } from "@itwin/viewer-react";
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import { Viewer } from "../components/Viewer";
 import type { ItwinViewerParams, WebInitializerParams } from "../types";
@@ -40,9 +40,8 @@ export class ItwinViewer {
     } as ConnectedViewerProps & WebInitializerParams;
 
     // render the viewer for the given iModel on the given element
-    ReactDOM.render(
-      React.createElement(Viewer, viewerProps),
-      document.getElementById(this.elementId)
-    );
+    const container = document.getElementById(this.elementId);
+    const root = createRoot(container!);
+    root.render(React.createElement(Viewer, viewerProps));
   };
 }

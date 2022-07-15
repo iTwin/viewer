@@ -7,7 +7,7 @@ import "./index.scss";
 
 import { BrowserAuthorizationCallbackHandler } from "@itwin/browser-authorization";
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -34,11 +34,12 @@ if (redirectUrl.pathname === window.location.pathname) {
     redirectUrl.toString()
   ).catch(console.error);
 } else {
-  ReactDOM.render(
+  const container = document.getElementById("root");
+  const root = createRoot(container!);
+  root.render(
     <React.StrictMode>
       <App />
-    </React.StrictMode>,
-    document.getElementById("root")
+    </React.StrictMode>
   );
 }
 

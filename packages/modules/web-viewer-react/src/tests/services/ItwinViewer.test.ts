@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import { Viewer } from "../../components/Viewer";
 import { WebInitializer } from "../../services/Initializer";
@@ -79,20 +79,20 @@ const elementId = "viewerRoot";
 const mockITwinId = "mockITwinId";
 const mockiModelId = "mockImodelId";
 const authClient = new MockAuthorizationClient();
+const viewerRoot = document.createElement("div");
+viewerRoot.id = elementId;
+document.body.append(viewerRoot);
+const container = document.getElementById(elementId);
+const root = createRoot(container!);
 
 describe("iTwinViewer", () => {
-  beforeAll(() => {
-    const viewerRoot = document.createElement("div");
-    viewerRoot.id = elementId;
-    document.body.append(viewerRoot);
-  });
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it("renders the viewer for the proper iTwinId and iModelId on the element whose id is passed to the constructor", async () => {
     jest.spyOn(React, "createElement");
-    jest.spyOn(ReactDOM, "render");
+    jest.spyOn(root, "render");
     const viewer = new ItwinViewer({
       elementId,
       authClient,
@@ -113,9 +113,6 @@ describe("iTwinViewer", () => {
       theme: undefined,
       enablePerformanceMonitors: false,
     });
-    expect(ReactDOM.render).toHaveBeenCalledWith(
-      expect.anything(),
-      document.getElementById(elementId)
-    );
+    expect(root.render).toHaveBeenCalledWith(expect.anything());
   });
 });
