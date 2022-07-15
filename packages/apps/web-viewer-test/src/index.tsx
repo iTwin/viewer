@@ -11,7 +11,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-globalThis.IMJS_URL_PREFIX = process.env.IMJS_URL_PREFIX ?? "";
+globalThis.IMJS_URL_PREFIX = process.env.IMJS_URL_PREFIX || "";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
