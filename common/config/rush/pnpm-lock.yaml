@@ -8,7 +8,7 @@ importers:
   ../../packages/apps/cdn-viewer:
     specifiers:
       '@bentley/icons-generic': ^1.0.13
-      '@bentley/react-scripts': ^4.0.3
+      '@bentley/react-scripts': ^4.0.7
       '@itwin/appui-abstract': ^3.2.0
       '@itwin/appui-layout-react': ^3.2.0
       '@itwin/appui-react': ^3.2.0
@@ -73,7 +73,7 @@ importers:
   ../../packages/apps/desktop-viewer-test:
     specifiers:
       '@bentley/icons-generic-webfont': ^1.0.15
-      '@bentley/react-scripts': ^4.0.3
+      '@bentley/react-scripts': ^4.0.7
       '@itwin/appui-abstract': ^3.2.0
       '@itwin/appui-layout-react': ^3.2.0
       '@itwin/appui-react': ^3.2.0
