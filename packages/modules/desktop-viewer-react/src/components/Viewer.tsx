@@ -4,14 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { BaseViewer } from "@itwin/viewer-react";
-import React, { useMemo } from "react";
+import React from "react";
 
 import { useDesktopViewerInitializer } from "../hooks";
 import type { DesktopViewerProps } from "../types";
 
 export const Viewer = (props: DesktopViewerProps) => {
-  const memoizedProps = useMemo(() => ({ ...props }), [props]);
-  const initialized = useDesktopViewerInitializer(memoizedProps);
-
-  return initialized ? <BaseViewer {...memoizedProps} /> : null;
+  const initialized = useDesktopViewerInitializer(props);
+  return initialized ? <BaseViewer {...props} /> : null;
 };

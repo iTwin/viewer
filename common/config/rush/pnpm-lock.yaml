@@ -166,7 +166,7 @@ importers:
       '@itwin/presentation-common': 3.2.2_aa7c17727124c31a56baeab89140d952
       '@itwin/presentation-components': 3.2.2_0c8e54e1d46986e00a4f386734b921be
       '@itwin/presentation-frontend': 3.2.2_7d67946d87cba22f9e077d73ef83df22
-      '@itwin/property-grid-react': 0.5.4_ffca7816b6a4a42f91f5b6a1e8ef9ce3
+      '@itwin/property-grid-react': 0.7.1_ffca7816b6a4a42f91f5b6a1e8ef9ce3
       '@itwin/tree-widget-react': 0.4.7_01d13aab3c9f3314a87fc8cdc6dd64c3
       '@itwin/webgl-compatibility': 3.2.2
       dotenv-flow: 3.2.0
@@ -196,7 +196,7 @@ importers:
   ../../packages/apps/web-viewer-test:
     specifiers:
       '@bentley/icons-generic': ^1.0.13
-      '@bentley/react-scripts': ^4.0.3
+      '@bentley/react-scripts': ^4.0.7
       '@itwin/appui-abstract': ^3.2.0
       '@itwin/appui-layout-react': ^3.2.0
       '@itwin/appui-react': ^3.2.0
@@ -262,7 +262,7 @@ importers:
       '@itwin/presentation-common': 3.2.2_aa7c17727124c31a56baeab89140d952
       '@itwin/presentation-components': 3.2.2_0c8e54e1d46986e00a4f386734b921be
       '@itwin/presentation-frontend': 3.2.2_7d67946d87cba22f9e077d73ef83df22
-      '@itwin/property-grid-react': 0.5.4_67c55d75f70f087292ff19e197a373f0
+      '@itwin/property-grid-react': 0.7.1_67c55d75f70f087292ff19e197a373f0
       '@itwin/test-local-extension': link:../../modules/test-local-extension
       '@itwin/tree-widget-react': 0.4.7_01d13aab3c9f3314a87fc8cdc6dd64c3
       '@itwin/web-viewer-react': link:../../modules/web-viewer-react
@@ -821,7 +821,7 @@ packages:
       gensync: 1.0.0-beta.2
       json5: 2.2.1
       lodash: 4.17.21
-      resolve: 1.19.0
+      resolve: 1.22.0
       semver: 5.7.1
       source-map: 0.5.7
     transitivePeerDependencies:
@@ -3310,17 +3310,17 @@ packages:
       '@itwin/core-quantity': 3.2.2_@itwin+core-bentley@3.2.2
       '@itwin/presentation-common': 3.2.2_aa7c17727124c31a56baeab89140d952
 
-  /@itwin/property-grid-react/0.5.4_67c55d75f70f087292ff19e197a373f0:
-    resolution: {integrity: sha512-Mhpc/SgEkKqLUiAMBYr6Tn03X5/o3vhYvIdEns9r1MxoTcYXKtQIKTJpWqFcSVSUr6ldw2AV3AqcwsR/Trn3gg==}
+  /@itwin/property-grid-react/0.7.1_67c55d75f70f087292ff19e197a373f0:
+    resolution: {integrity: sha512-X8HIjKFpL6/m8JmTsJiBmxBQgRpyYU2dXE8CriA2FTwOQetMFGLuLXah5yA4am/mAILqHSPC8BiO6vko1udDZA==}
     peerDependencies:
-      '@itwin/appui-abstract': ^3.0.0
-      '@itwin/appui-react': ^3.0.0
-      '@itwin/components-react': ^3.0.0
-      '@itwin/core-bentley': ^3.0.0
-      '@itwin/core-frontend': ^3.0.0
-      '@itwin/core-react': ^3.0.0
-      '@itwin/presentation-components': ^3.0.0
-      '@itwin/presentation-frontend': ^3.0.0
+      '@itwin/appui-abstract': ^3.2.3
+      '@itwin/appui-react': ^3.2.3
+      '@itwin/components-react': ^3.2.3
+      '@itwin/core-bentley': ^3.2.3
+      '@itwin/core-frontend': ^3.2.3
+      '@itwin/core-react': ^3.2.3
+      '@itwin/presentation-components': ^3.2.3
+      '@itwin/presentation-frontend': ^3.2.3
       react: ^17.0.2
       react-dom: ^17.0.2
       react-redux: ^7.2.0
@@ -3341,17 +3341,17 @@ packages:
       redux: 4.2.0
     dev: false
 
-  /@itwin/property-grid-react/0.5.4_ffca7816b6a4a42f91f5b6a1e8ef9ce3:
-    resolution: {integrity: sha512-Mhpc/SgEkKqLUiAMBYr6Tn03X5/o3vhYvIdEns9r1MxoTcYXKtQIKTJpWqFcSVSUr6ldw2AV3AqcwsR/Trn3gg==}
+  /@itwin/property-grid-react/0.7.1_ffca7816b6a4a42f91f5b6a1e8ef9ce3:
+    resolution: {integrity: sha512-X8HIjKFpL6/m8JmTsJiBmxBQgRpyYU2dXE8CriA2FTwOQetMFGLuLXah5yA4am/mAILqHSPC8BiO6vko1udDZA==}
     peerDependencies:
-      '@itwin/appui-abstract': ^3.0.0
-      '@itwin/appui-react': ^3.0.0
-      '@itwin/components-react': ^3.0.0
-      '@itwin/core-bentley': ^3.0.0
-      '@itwin/core-frontend': ^3.0.0
-      '@itwin/core-react': ^3.0.0
-      '@itwin/presentation-components': ^3.0.0
-      '@itwin/presentation-frontend': ^3.0.0
+      '@itwin/appui-abstract': ^3.2.3
+      '@itwin/appui-react': ^3.2.3
+      '@itwin/components-react': ^3.2.3
+      '@itwin/core-bentley': ^3.2.3
+      '@itwin/core-frontend': ^3.2.3
+      '@itwin/core-react': ^3.2.3
+      '@itwin/presentation-components': ^3.2.3
+      '@itwin/presentation-frontend': ^3.2.3
       react: ^17.0.2
       react-dom: ^17.0.2
       react-redux: ^7.2.0
@@ -3869,7 +3869,7 @@ packages:
       '@types/resolve': 0.0.8
       builtin-modules: 3.3.0
       is-module: 1.0.0
-      resolve: 1.19.0
+      resolve: 1.22.0
       rollup: 1.32.1
     dev: true
 
@@ -5072,7 +5072,7 @@ packages:
     dev: true
 
   /ansi-html/0.0.7:
-    resolution: {integrity: sha1-gTWEAhliqenm/QOflA0S9WynhZ4=}
+    resolution: {integrity: sha512-JoAxEa1DfP9m2xfB/y2r/aKcwXNlltr4+0QSBC4TrLfcxyvepX2Pv0t/xpgGV5bGsDzCYV8SzjWgyCW0T9yYbA==}
     engines: {'0': node >= 0.8.0}
     hasBin: true
     dev: true
@@ -5418,7 +5418,7 @@ packages:
       '@babel/types': 7.18.4
       eslint: 7.32.0
       eslint-visitor-keys: 1.3.0
-      resolve: 1.18.1
+      resolve: 1.22.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5544,7 +5544,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.18.3
       cosmiconfig: 7.0.1
-      resolve: 1.19.0
+      resolve: 1.22.0
     dev: true
 
   /babel-plugin-named-asset-import/0.3.8_@babel+core@7.12.3:
@@ -6814,6 +6814,7 @@ packages:
 
   /core-js-pure/3.23.1:
     resolution: {integrity: sha512-3qNgf6TqI3U1uhuSYRzJZGfFd4T+YlbyVPl+jgRiKjdZopvG4keZQwWZDAWpu1UH9nCgTpUzIV3GFawC7cJsqg==}
+    deprecated: core-js-pure@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js-pure.
     requiresBuild: true
     dev: true
 
@@ -6825,6 +6826,7 @@ packages:
 
   /core-js/3.23.1:
     resolution: {integrity: sha512-wfMYHWi1WQjpgZNC9kAlN4ut04TM9fUTdi7CqIoTVM7yaiOUQTklOzfb+oWH3r9edQcT3F887swuVmxrV+CC8w==}
+    deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
     requiresBuild: true
 
   /core-util-is/1.0.3:
@@ -7040,7 +7042,7 @@ packages:
       postcss-modules-values: 3.0.0
       postcss-value-parser: 4.2.0
       schema-utils: 2.7.1
-      semver: 7.3.2
+      semver: 7.3.7
       webpack: 4.44.2
     dev: true
 
@@ -9175,7 +9177,7 @@ packages:
     resolution: {integrity: sha512-DUxuQaKoqfNne8iikd14SAkh5uw4+8vNifp6gmA73yYNS6ywLIWSLD/n/mBzHQRpW3J7rbATEakmiA8JvkTyZw==}
     engines: {node: '>=6.11.5', yarn: '>=1.0.0'}
     dependencies:
-      '@babel/code-frame': 7.10.4
+      '@babel/code-frame': 7.16.7
       chalk: 2.4.2
       micromatch: 3.1.10
       minimatch: 3.1.2
@@ -11086,7 +11088,7 @@ packages:
       jest-pnp-resolver: 1.2.2_jest-resolve@26.6.0
       jest-util: 26.6.2
       read-pkg-up: 7.0.1
-      resolve: 1.19.0
+      resolve: 1.22.0
       slash: 3.0.0
     dev: true
 
@@ -12297,7 +12299,7 @@ packages:
     dev: true
 
   /mitt/1.1.2:
-    resolution: {integrity: sha1-OA5hSA1qYVtmDwertg1R4KTkvtY=}
+    resolution: {integrity: sha512-3btxP0O9iGADGWAkteQ8mzDtEspZqu4I32y4GZYCV5BrwtzdcRpF4dQgNdJadCrbBx7Lu6Sq9AVrerMHR0Hkmw==}
     dev: true
 
   /mixin-deep/1.3.2:
@@ -14292,7 +14294,7 @@ packages:
     dev: true
 
   /querystring/0.2.0:
-    resolution: {integrity: sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=}
+    resolution: {integrity: sha512-X/xY82scca2tau62i9mDyU9K+I+djTMUsvwf7xnUX5GLvVzgJybOJf4Y6o9Zx3oJK/LSXg5tTZBjwzqVPaPO2g==}
     engines: {node: '>=0.4.x'}
     deprecated: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
     dev: true
@@ -15217,7 +15219,7 @@ packages:
       neo-async: 2.6.2
       sass: 1.52.3
       schema-utils: 3.1.1
-      semver: 7.3.2
+      semver: 7.3.7
       webpack: 4.44.2
     dev: true
 
@@ -15771,6 +15773,7 @@ packages:
 
   /stable/0.1.8:
     resolution: {integrity: sha512-ji9qxRnOVfcuLDySj9qzhGSEFVobyt1kIOSkj1qZzYLzq7Tos/oUUWvotUPQLlrsidqsK6tBH89Bc9kL5zHA6w==}
+    deprecated: 'Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility'
     dev: true
 
   /stack-utils/2.0.5:
@@ -16728,7 +16731,7 @@ packages:
     dev: true
 
   /tty-browserify/0.0.0:
-    resolution: {integrity: sha1-oVe6QC2iTpv5V/mqadUk7tQpAaY=}
+    resolution: {integrity: sha512-JVa5ijo+j/sOoHGjw0sxw734b1LhBkQ3bvUGNdxnVXDCX81Yx7TFgnZygxrIIWn23hbfTaMYLwRmAxFyDuFmIw==}
     dev: true
 
   /tunnel-agent/0.6.0:

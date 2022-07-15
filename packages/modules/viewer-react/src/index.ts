@@ -3,6 +3,9 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import "./typings/global";
+globalThis.IMJS_URL_PREFIX ??= "";
+
 export * from "./components/BaseViewer";
 export * from "./services/BaseInitializer";
 export * from "./services/iModel";

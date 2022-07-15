@@ -201,7 +201,7 @@ export const getIModelAppOptions = (
   options?: ViewerInitializerParams
 ): IModelAppOptions => {
   // if ITWIN_VIEWER_HOME is defined, the viewer is likely being served from another origin
-  const viewerHome = (window as any).ITWIN_VIEWER_HOME;
+  const viewerHome = window.ITWIN_VIEWER_HOME;
   if (viewerHome) {
     console.log(`resources served from: ${viewerHome}`);
   }
@@ -211,9 +211,7 @@ export const getIModelAppOptions = (
     new FrontendIModelsAccess(
       new IModelsClient({
         api: {
-          baseUrl: `https://${
-            process.env.IMJS_URL_PREFIX ?? ""
-          }api.bentley.com/imodels`,
+          baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/imodels`,
         },
       })
     );
@@ -229,9 +227,7 @@ export const getIModelAppOptions = (
   const realityDataAccess =
     options?.realityDataAccess ??
     new RealityDataAccessClient({
-      baseUrl: `https://${
-        process.env.IMJS_URL_PREFIX ?? ""
-      }api.bentley.com/realitydata`,
+      baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/realitydata`,
     });
 
   return {
