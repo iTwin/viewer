@@ -4,4 +4,3 @@
  *--------------------------------------------------------------------------------------------*/
 
 /// <reference types="@bentley/react-scripts" />
-/// <reference types="@itwin/web-viewer-react" />
