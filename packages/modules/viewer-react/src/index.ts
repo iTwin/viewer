@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import "./typings/global";
-globalThis.IMJS_URL_PREFIX ??= "";
+globalThis.IMJS_URL_PREFIX ??= ""; // default to prod
 
 export * from "./components/BaseViewer";
 export * from "./services/BaseInitializer";
