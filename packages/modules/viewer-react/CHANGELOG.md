@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Thu, 07 Jul 2022 21:04:19 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 19:45:36 GMT and should not be manually modified.
+
+## 3.1.2
+Tue, 19 Jul 2022 19:45:36 GMT
+
+### Patches
+
+- Expose option to hide tool settings
 
 ## 3.1.1
 Thu, 07 Jul 2022 21:04:19 GMT
