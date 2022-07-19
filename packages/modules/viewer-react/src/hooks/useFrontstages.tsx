@@ -6,8 +6,10 @@
 import { StageUsage } from "@itwin/appui-abstract";
 import { useEffect, useState } from "react";
 
-import { DefaultContentGroupProvider } from "../components/app-ui/providers";
-import { StandardFrontstageProvider } from "../components/app-ui/providers/StandardFrontstageProvider";
+import {
+  DefaultContentGroupProvider,
+  StandardFrontstageProvider,
+} from "../components/app-ui/providers";
 import type {
   BlankConnectionViewState,
   ViewerDefaultFrontstageConfig,
