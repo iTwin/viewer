@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Hide tool settings by default",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
