@@ -4,10 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { StageUsage } from "@itwin/appui-abstract";
-import { StandardFrontstageProvider } from "@itwin/appui-react";
 import { useEffect, useState } from "react";
 
-import { DefaultContentGroupProvider } from "../components/app-ui/providers";
+import {
+  DefaultContentGroupProvider,
+  StandardFrontstageProvider,
+} from "../components/app-ui/providers";
 import type {
   BlankConnectionViewState,
   ViewerDefaultFrontstageConfig,

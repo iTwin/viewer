@@ -8,7 +8,6 @@ import type {
   ColorTheme,
   FrontstageProvider,
   IModelViewportControlOptions,
-  StandardFrontstageProps,
 } from "@itwin/appui-react";
 import type {
   ColorDef,
@@ -27,6 +26,8 @@ import type {
   ViewState,
 } from "@itwin/core-frontend";
 import type { Vector3d, XAndY, XYAndZ } from "@itwin/core-geometry";
+
+import type { StandardFrontstageProps } from "./components/app-ui/providers";
 
 export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
@@ -206,5 +207,5 @@ export interface ViewerDefaultStatusbarItems {
 
 export type ViewerDefaultFrontstageConfig = Pick<
   StandardFrontstageProps,
-  "hideNavigationAid" | "hideStatusBar"
+  "hideNavigationAid" | "hideStatusBar" | "hideToolSettings"
 >;
