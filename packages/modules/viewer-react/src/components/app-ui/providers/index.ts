@@ -8,3 +8,4 @@ export * from "./BackstageItemsProvider";
 export * from "./ViewerContentToolsProvider";
 export * from "./ViewerNavigationToolsProvider";
 export * from "./ViewerStatusbarItemsProvider";
+export * from "./StandardFrontstageProvider";

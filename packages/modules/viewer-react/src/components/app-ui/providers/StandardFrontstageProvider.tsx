@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 /**
+ * TODO: Remove this file when we bump the minor core version.
  * Clone of StandardFrontstageProvider from core appui-react.
  */
 import type { StageUsage } from "@itwin/appui-abstract";

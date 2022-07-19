@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@itwin/viewer-react",
-      "comment": "Hide tool settings by default",
+      "comment": "Expose option to hide tool settings",
       "type": "patch"
     }
   ],

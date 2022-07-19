@@ -73,7 +73,6 @@ export const useFrontstages = ({
         id: "DefaultFrontstage",
         usage: StageUsage.General,
         contentGroupProps: contentGroup,
-        hideToolSettings: true,
         ...defaultUiConfig,
       });
 
