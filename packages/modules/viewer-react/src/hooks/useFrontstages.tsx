@@ -4,10 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { StageUsage } from "@itwin/appui-abstract";
-import { StandardFrontstageProvider } from "@itwin/appui-react";
 import { useEffect, useState } from "react";
 
 import { DefaultContentGroupProvider } from "../components/app-ui/providers";
+import { StandardFrontstageProvider } from "../components/app-ui/providers/StandardFrontstageProvider";
 import type {
   BlankConnectionViewState,
   ViewerDefaultFrontstageConfig,
@@ -73,6 +73,7 @@ export const useFrontstages = ({
         id: "DefaultFrontstage",
         usage: StageUsage.General,
         contentGroupProps: contentGroup,
+        hideToolSettings: true,
         ...defaultUiConfig,
       });
 
