@@ -18,9 +18,7 @@ import type { IModelBackendOptions, WebInitializerParams } from "../types";
 const getHostedConnectionInfo = (
   backendOptions?: IModelBackendOptions
 ): BentleyCloudRpcParams => {
-  const orchestratorUrl = `https://${
-    process.env.IMJS_URL_PREFIX ?? ""
-  }api.bentley.com`;
+  const orchestratorUrl = `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com`;
 
   if (backendOptions?.hostedBackend) {
     if (!backendOptions.hostedBackend.title) {

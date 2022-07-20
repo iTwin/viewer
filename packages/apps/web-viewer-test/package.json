@@ -41,7 +41,7 @@
     "redux": "^4.0.5"
   },
   "devDependencies": {
-    "@bentley/react-scripts": "^4.0.3",
+    "@bentley/react-scripts": "^4.0.7",
     "@svgr/webpack": "^5.5.0",
     "@types/node": "^14.0.19",
     "@types/react": "^17.0.19",

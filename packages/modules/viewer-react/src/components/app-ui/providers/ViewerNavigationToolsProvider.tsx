@@ -31,8 +31,8 @@ export class ViewerNavigationToolsProvider extends StandardNavigationToolsProvid
   }
 
   public override provideToolbarButtonItems(
-    stageId: string,
-    stageUsage: string,
+    _stageId: string,
+    _stageUsage: string,
     toolbarUsage: ToolbarUsage,
     toolbarOrientation: ToolbarOrientation
   ): CommonToolbarItem[] {

@@ -22,7 +22,7 @@ import {
 import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
 
 const App = () => {
-  (window as any).ITWIN_VIEWER_HOME = window.location.origin;
+  window.ITWIN_VIEWER_HOME = window.location.origin;
 
   const onIModelAppInit = useCallback(async () => {
     await TreeWidget.initialize();
