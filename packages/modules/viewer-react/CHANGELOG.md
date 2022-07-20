@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Wed, 20 Jul 2022 03:20:17 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Jul 2022 14:16:19 GMT and should not be manually modified.
+
+## 3.2.1
+Wed, 20 Jul 2022 14:16:19 GMT
+
+### Patches
+
+- Avoid StateManager re-initialization.
 
 ## 3.2.0
 Wed, 20 Jul 2022 03:20:17 GMT
