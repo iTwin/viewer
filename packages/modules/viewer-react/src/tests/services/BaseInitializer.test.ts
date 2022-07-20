@@ -3,6 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { StateManager } from "@itwin/appui-react";
 import {
   DevToolsRpcInterface,
   IModelReadRpcInterface,
@@ -223,5 +224,16 @@ describe("BaseInitializer", () => {
       enablePerformanceMonitors: false,
     });
     expect(appOptions.tileAdmin).toEqual({ cesiumIonKey });
+  });
+  it("initializes StateManager", async () => {
+    await BaseInitializer.initialize();
+    await BaseInitializer.initialized;
+    expect(StateManager).toHaveBeenCalledTimes(1);
+  });
+  it("should not re-initialize StateManager", async () => {
+    jest.spyOn(StateManager, "isInitialized").mockReturnValue(true);
+    await BaseInitializer.initialize();
+    await BaseInitializer.initialized;
+    expect(StateManager).not.toHaveBeenCalled();
   });
 });

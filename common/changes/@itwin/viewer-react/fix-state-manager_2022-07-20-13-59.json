@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Avoid StateManager re-initialization.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
