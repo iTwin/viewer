@@ -108,9 +108,11 @@ export class BaseInitializer {
     const cancellable = makeCancellable(function* () {
       // Initialize state manager
       // This will setup a singleton store inside the StoreManager class.
-      new StateManager({
-        frameworkState: FrameworkReducer,
-      });
+      if (!StateManager.isInitialized()) {
+        new StateManager({
+          frameworkState: FrameworkReducer,
+        });
+      }
 
       // execute the iModelApp initialization callback if provided
       if (viewerOptions?.onIModelAppInit) {
