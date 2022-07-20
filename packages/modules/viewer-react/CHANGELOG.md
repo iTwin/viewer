@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Tue, 19 Jul 2022 19:45:36 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Jul 2022 03:20:17 GMT and should not be manually modified.
+
+## 3.2.0
+Wed, 20 Jul 2022 03:20:17 GMT
+
+### Minor changes
+
+- Use `globalThis` instead of `process.env` to set env at runtime
 
 ## 3.1.2
 Tue, 19 Jul 2022 19:45:36 GMT
