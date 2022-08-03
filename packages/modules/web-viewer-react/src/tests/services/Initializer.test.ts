@@ -126,4 +126,13 @@ describe("Initializer", () => {
     await WebInitializer.initialized;
     expect(IModelApp.startup).toHaveBeenCalled();
   });
+
+  it("makes sure WebInitializer.initialized is defined if IModelApp is already initialized", async () => {
+    await IModelApp.startup();
+    await WebInitializer.startWebViewer({
+      authClient: new MockAuthorizationClient(),
+      enablePerformanceMonitors: false,
+    });
+    await expect(WebInitializer.initialized).resolves.not.toThrow();
+  });
 });
