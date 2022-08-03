@@ -107,7 +107,7 @@ export class DesktopInitializer {
           DesktopInitializer._initializing = false;
           DesktopInitializer._cancel = undefined;
         });
-    } else if (this._initializing) {
+    } else if (!this._initializing) {
       if (!this._initialized) {
         this._initialized = Promise.resolve();
       }
