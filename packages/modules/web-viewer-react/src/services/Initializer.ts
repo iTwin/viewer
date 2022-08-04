@@ -136,6 +136,10 @@ export class WebInitializer {
         this._initialized = Promise.resolve();
       }
       return this._initialized;
+    } else {
+      throw new Error(
+        "You have already called IModelApp.startup in your application. Please use the useWebViewerInitializer hook instead."
+      );
     }
   }
 }
