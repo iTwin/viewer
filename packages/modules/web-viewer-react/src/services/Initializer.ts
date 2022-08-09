@@ -81,7 +81,12 @@ export class WebInitializer {
 
   /** Web viewer startup */
   public static async startWebViewer(options: WebInitializerParams) {
-    if (!IModelApp.initialized && !this._initializing) {
+    if (IModelApp.initialized) {
+      throw new Error(
+        "You have already called IModelApp.startup in your application. Please use the useWebViewerInitializer hook instead."
+      );
+    }
+    if (!this._initializing) {
       console.log("starting web viewer");
       this._initializing = true;
       const cancellable = makeCancellable(function* () {
@@ -132,9 +137,7 @@ export class WebInitializer {
           WebInitializer._cancel = undefined;
         });
     } else {
-      throw new Error(
-        "You have already called IModelApp.startup in your application. Please use the useWebViewerInitializer hook instead."
-      );
+      return this._initialized;
     }
   }
 }

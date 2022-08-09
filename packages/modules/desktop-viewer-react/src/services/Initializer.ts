@@ -42,7 +42,12 @@ export class DesktopInitializer {
 
   /** Desktop viewer startup */
   public static async startDesktopViewer(options: DesktopInitializerParams) {
-    if (!IModelApp.initialized && !this._initializing) {
+    if (IModelApp.initialized) {
+      throw new Error(
+        "You have already called IModelApp.startup in your application. Please use the useWebViewerInitializer hook instead."
+      );
+    }
+    if (!this._initializing) {
       console.log("starting desktop viewer");
       this._initializing = true;
 
@@ -108,9 +113,7 @@ export class DesktopInitializer {
           DesktopInitializer._cancel = undefined;
         });
     } else {
-      throw new Error(
-        "You have already called IModelApp.startup in your application. Please use the useDesktopViewerInitializer hook instead."
-      );
+      return this._initialized;
     }
   }
 }
