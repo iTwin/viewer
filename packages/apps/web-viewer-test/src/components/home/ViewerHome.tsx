@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ColorTheme } from "@itwin/appui-react";
+import { BackstageAppButton, ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import {
   LocalExtensionProvider,
@@ -24,6 +24,7 @@ import {
 } from "@itwin/tree-widget-react";
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
 import {
+  BackstageItemsProvider,
   Viewer,
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
@@ -111,6 +112,8 @@ const ViewerHome: React.FC = () => {
     },
   ];
 
+  const cornerButton = <BackstageAppButton />;
+
   return (
     <div style={{ height: "100vh" }}>
       <Viewer
@@ -128,6 +131,7 @@ const ViewerHome: React.FC = () => {
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
+          new BackstageItemsProvider(backstageItems),
           new ViewerNavigationToolsProvider(),
           new ViewerContentToolsProvider({
             vertical: {
@@ -152,6 +156,7 @@ const ViewerHome: React.FC = () => {
           }),
         ]}
         backstageItems={backstageItems}
+        defaultUiConfig={{ cornerButton: cornerButton }}
       />
     </div>
   );
