@@ -24,6 +24,7 @@ import {
 } from "@itwin/tree-widget-react";
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
 import {
+  EcsqlWidgetProvider,
   Viewer,
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
@@ -140,6 +141,7 @@ const ViewerHome: React.FC = () => {
             enableCopyingPropertyText: true,
           }),
           new MeasureToolsUiItemsProvider(),
+          new EcsqlWidgetProvider(),
         ]}
         extensions={[
           new LocalExtensionProvider({
