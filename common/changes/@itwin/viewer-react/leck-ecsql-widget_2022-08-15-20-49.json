@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Add ecsql widget",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
