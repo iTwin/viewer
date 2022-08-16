@@ -5,7 +5,12 @@
 
 import { UiFramework } from "@itwin/appui-react";
 import { QueryRowFormat } from "@itwin/core-common";
-import { Button, LabeledTextarea, Table } from "@itwin/itwinui-react";
+import {
+  Button,
+  ExpandableBlock,
+  LabeledTextarea,
+  Table,
+} from "@itwin/itwinui-react";
 import React, { useState } from "react";
 
 export default function EcsqlWidget() {
@@ -26,17 +31,44 @@ export default function EcsqlWidget() {
         { rowFormat: QueryRowFormat.UseJsPropertyNames }
       );
       const rows = [];
+      const headers: string[] = [];
+
       for await (const obj of results) {
         const row = { ...obj };
+        // Case 1: Need to convert booleans to strings to display them in the table
+        Object.keys(row)
+          .filter((key) => typeof row[key] === "boolean")
+          .forEach((key) => {
+            row[key] = obj[key].toString();
+          });
+        // Case 2: Need to stringify objects to display them in the table
         Object.keys(row)
           .filter((key) => typeof row[key] === "object")
           .forEach((key) => {
             row[key] = JSON.stringify(obj[key]);
           });
+        // Case 3: If the cell content is too long, put it inside an ExpandableBlock
+        Object.keys(row)
+          .filter(
+            (key) => typeof row[key] === "string" && row[key].length > 500
+          )
+          .forEach((key) => {
+            row[key] = (
+              <ExpandableBlock title="..." size="small" styleType="borderless">
+                {row[key]}
+              </ExpandableBlock>
+            );
+          });
+
         rows.push(row);
+        for (const key of Object.keys(row)) {
+          if (!headers.includes(key)) {
+            headers.push(key);
+          }
+        }
       }
       setRows(rows);
-      setHeaders(Object.keys(rows[0]));
+      setHeaders(headers);
       setLoading(false);
       setError("");
     } catch (err: any) {
