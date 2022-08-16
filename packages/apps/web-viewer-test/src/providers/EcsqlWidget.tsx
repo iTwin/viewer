@@ -14,23 +14,25 @@ import {
 import React, { useState } from "react";
 
 export default function EcsqlWidget() {
-  const [input, setInput] = useState<string>("");
-  const [rows, setRows] = useState<Record<string, string>[]>([]);
+  const [input, setInput] = useState("");
+  const [data, setData] = useState<Record<string, string | React.ReactNode>[]>(
+    []
+  );
   const [headers, setHeaders] = useState<string[]>([]);
-  const [isloading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  const [isloading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const getData = async () => {
     try {
-      setRows([]);
+      setData([]);
       setHeaders([]);
-      setLoading(true);
+      setIsLoading(true);
       const results = UiFramework.getIModelConnection()!.query(
         input,
         undefined,
         { rowFormat: QueryRowFormat.UseJsPropertyNames }
       );
-      const rows = [];
+      const rows: Record<string, string | React.ReactNode>[] = [];
       const headers: string[] = [];
 
       for await (const obj of results) {
@@ -67,12 +69,12 @@ export default function EcsqlWidget() {
           }
         }
       }
-      setRows(rows);
+      setData(rows);
       setHeaders(headers);
-      setLoading(false);
+      setIsLoading(false);
       setError("");
     } catch (err: any) {
-      setLoading(false);
+      setIsLoading(false);
       setError(err.message);
     }
   };
@@ -85,13 +87,11 @@ export default function EcsqlWidget() {
           id: str,
           Header: str,
           accessor: str,
-          width: 300,
         })),
       },
     ],
     [headers]
   );
-  const data = rows;
 
   return (
     <div style={{ height: "100%", display: "flex", flexFlow: "column" }}>
@@ -123,6 +123,7 @@ export default function EcsqlWidget() {
         </Button>
       </div>
       <Table
+        enableVirtualization
         columns={columns}
         data={data}
         isSortable={true}

@@ -7,7 +7,11 @@ import type {
   AbstractWidgetProps,
   UiItemsProvider,
 } from "@itwin/appui-abstract";
-import { StagePanelLocation, StagePanelSection } from "@itwin/appui-abstract";
+import {
+  StagePanelLocation,
+  StagePanelSection,
+  StageUsage,
+} from "@itwin/appui-abstract";
 import React from "react";
 
 import EcsqlWidget from "./EcsqlWidget";
@@ -24,8 +28,8 @@ export class EcsqlWidgetProvider implements UiItemsProvider {
     const widgets: AbstractWidgetProps[] = [];
 
     if (
-      stageId &&
-      stageUsage &&
+      stageId === "DefaultFrontstage" &&
+      stageUsage === StageUsage.General &&
       location === StagePanelLocation.Bottom &&
       section === StagePanelSection.Start
     ) {
