@@ -24,7 +24,6 @@ import {
 } from "@itwin/tree-widget-react";
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
 import {
-  EcsqlWidgetProvider,
   Viewer,
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
@@ -32,7 +31,9 @@ import {
 } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
+import { EcsqlWidgetProvider } from "../../providers/EcsqlWidgetProvider";
 import { history } from "../routing";
+
 /**
  * Test a viewer that uses auth configuration provided at startup
  * @returns

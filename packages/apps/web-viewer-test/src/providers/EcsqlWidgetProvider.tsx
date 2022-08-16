@@ -10,7 +10,7 @@ import type {
 import { StagePanelLocation, StagePanelSection } from "@itwin/appui-abstract";
 import React from "react";
 
-import EcsqlWidget from "../EcsqlWidget";
+import EcsqlWidget from "./EcsqlWidget";
 
 export class EcsqlWidgetProvider implements UiItemsProvider {
   public readonly id = "EcsqlWidgetProvider";
