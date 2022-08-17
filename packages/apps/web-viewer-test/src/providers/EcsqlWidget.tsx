@@ -3,8 +3,9 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { UiFramework } from "@itwin/appui-react";
+import { useActiveIModelConnection } from "@itwin/appui-react";
 import { QueryRowFormat } from "@itwin/core-common";
+import type { IModelConnection } from "@itwin/core-frontend";
 import {
   Button,
   ExpandableBlock,
@@ -19,21 +20,20 @@ export default function EcsqlWidget() {
     []
   );
   const [headers, setHeaders] = useState<string[]>([]);
-  const [isloading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const iModelConnection = useActiveIModelConnection() as IModelConnection;
 
   const getData = async () => {
     try {
       setData([]);
       setHeaders([]);
       setIsLoading(true);
-      const results = UiFramework.getIModelConnection()!.query(
-        input,
-        undefined,
-        { rowFormat: QueryRowFormat.UseJsPropertyNames }
-      );
+      const results = iModelConnection.query(input, undefined, {
+        rowFormat: QueryRowFormat.UseJsPropertyNames,
+      });
       const rows: Record<string, string | React.ReactNode>[] = [];
-      const headers: string[] = [];
+      const columnHeaders: string[] = [];
 
       for await (const obj of results) {
         const row = { ...obj };
@@ -64,13 +64,13 @@ export default function EcsqlWidget() {
 
         rows.push(row);
         for (const key of Object.keys(row)) {
-          if (!headers.includes(key)) {
-            headers.push(key);
+          if (!columnHeaders.includes(key)) {
+            columnHeaders.push(key);
           }
         }
       }
       setData(rows);
-      setHeaders(headers);
+      setHeaders(columnHeaders);
       setIsLoading(false);
       setError("");
     } catch (err: any) {
@@ -130,7 +130,7 @@ export default function EcsqlWidget() {
         isResizable={true}
         density="extra-condensed"
         emptyTableContent="No data."
-        isLoading={isloading}
+        isLoading={isLoading}
         style={{
           flex: "1 1 auto",
           height: "0em",

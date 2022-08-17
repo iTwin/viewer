@@ -20,7 +20,7 @@ export class EcsqlWidgetProvider implements UiItemsProvider {
   public readonly id = "EcsqlWidgetProvider";
 
   public provideWidgets(
-    stageId: string,
+    _stageId: string,
     stageUsage: string,
     location: StagePanelLocation,
     section?: StagePanelSection
@@ -28,7 +28,6 @@ export class EcsqlWidgetProvider implements UiItemsProvider {
     const widgets: AbstractWidgetProps[] = [];
 
     if (
-      stageId === "DefaultFrontstage" &&
       stageUsage === StageUsage.General &&
       location === StagePanelLocation.Bottom &&
       section === StagePanelSection.Start
