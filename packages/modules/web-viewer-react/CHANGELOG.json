@@ -2,6 +2,18 @@
   "name": "@itwin/web-viewer-react",
   "entries": [
     {
+      "version": "3.0.7",
+      "tag": "@itwin/web-viewer-react_v3.0.7",
+      "date": "Wed, 17 Aug 2022 20:24:25 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixes WebInitializer.initialized error if IModelApp is already initialized"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.6",
       "tag": "@itwin/web-viewer-react_v3.0.6",
       "date": "Wed, 20 Jul 2022 14:16:19 GMT",
