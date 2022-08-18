@@ -87,6 +87,8 @@ export default function EcsqlWidget() {
           id: str,
           Header: str,
           accessor: str,
+          width: 300,
+          minWidth: 100,
         })),
       },
     ],
@@ -106,10 +108,14 @@ export default function EcsqlWidget() {
       >
         <LabeledTextarea
           label=""
-          message={error ? error : data.length.toString() + " results"}
+          message={
+            isLoading
+              ? "Loading..."
+              : error || data.length.toString() + " results"
+          }
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          status={error ? "negative" : undefined}
+          status={error && !isLoading ? "negative" : undefined}
           rows={1}
           style={{ flexGrow: 1 }}
         />
@@ -123,7 +129,6 @@ export default function EcsqlWidget() {
         </Button>
       </div>
       <Table
-        enableVirtualization
         columns={columns}
         data={data}
         isSortable={true}
