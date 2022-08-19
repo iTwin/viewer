@@ -5,7 +5,6 @@
 
 import { useActiveIModelConnection } from "@itwin/appui-react";
 import { QueryRowFormat } from "@itwin/core-common";
-import type { IModelConnection } from "@itwin/core-frontend";
 import {
   Button,
   ExpandableBlock,
@@ -22,9 +21,12 @@ export default function EcsqlWidget() {
   const [headers, setHeaders] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const iModelConnection = useActiveIModelConnection() as IModelConnection;
+  const iModelConnection = useActiveIModelConnection();
 
   const getData = async () => {
+    if (!iModelConnection) {
+      return;
+    }
     try {
       setData([]);
       setHeaders([]);
@@ -71,11 +73,11 @@ export default function EcsqlWidget() {
       }
       setData(rows);
       setHeaders(columnHeaders);
-      setIsLoading(false);
       setError("");
     } catch (err: any) {
-      setIsLoading(false);
       setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
