@@ -123,17 +123,16 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
 
 export interface ConnectedViewerProps {
   iTwinId: string;
-  iModelId: string;
+  iModelId?: string;
   changeSetId?: string;
 }
-
 export interface FileViewerProps {
   /** Path to local snapshot or briefcase */
   filePath: string;
 }
 
 export interface BlankViewerProps {
-  blankConnection: BlankConnectionProps;
+  blankConnection?: BlankConnectionProps;
   blankConnectionViewState?: BlankConnectionViewState;
 }
 

@@ -164,7 +164,22 @@ describe("IModelLoader", () => {
     expect(UiItemsManager.unregister).toHaveBeenCalledTimes(1);
   });
 
-  it("creates a blank connection", async () => {
+  it("creates a default blank connection if no iModelId provided", async () => {
+    const { getByTestId } = render(<IModelLoader iTwinId={mockITwinId} />);
+
+    await waitFor(() => getByTestId("viewer"));
+    expect(BlankConnection.create).toHaveBeenCalledWith({
+      name: "Default Blank Connection",
+      location: Cartographic.fromDegrees({
+        longitude: -75.167,
+        latitude: 39.9559,
+        height: 10000,
+      }),
+      extents: new Range3d(-20, -20, -20, 20, 20, 20),
+    });
+  });
+
+  it("can provide blank connection to override defaults", async () => {
     const blankConnection: BlankConnectionProps = {
       name: "GeometryConnection",
       location: Cartographic.fromDegrees({
@@ -184,6 +199,7 @@ describe("IModelLoader", () => {
 
     const { getByTestId } = render(
       <IModelLoader
+        iTwinId={mockITwinId}
         blankConnection={blankConnection}
         blankConnectionViewState={blankConnectionViewState}
       />

@@ -7,8 +7,13 @@ import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
 import { StateManager, UiFramework } from "@itwin/appui-react";
-import type { IModelConnection } from "@itwin/core-frontend";
+import { Cartographic } from "@itwin/core-common";
+import type {
+  BlankConnectionProps,
+  IModelConnection,
+} from "@itwin/core-frontend";
 import { BlankConnection, IModelApp } from "@itwin/core-frontend";
+import { Range3d } from "@itwin/core-geometry";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
@@ -74,7 +79,7 @@ const IModelLoader = React.memo(
     const getModelConnection = useCallback(async (): Promise<
       IModelConnection | undefined
     > => {
-      if (!(iTwinId && iModelId) && !filePath && !blankConnection) {
+      if (!iTwinId && !filePath && !blankConnection) {
         throw new Error(
           IModelApp.localization.getLocalizedStringWithNamespace(
             "iTwinViewer",
@@ -91,8 +96,8 @@ const IModelLoader = React.memo(
       );
       let imodelConnection: IModelConnection | undefined;
       // create a new imodelConnection for the passed project and imodel ids or local file
-      if (blankConnection) {
-        imodelConnection = BlankConnection.create(blankConnection);
+      if (iTwinId && !iModelId) {
+        imodelConnection = createBlankConnection(blankConnection);
       } else if (filePath) {
         imodelConnection = await openLocalIModel(filePath);
       } else if (iTwinId && iModelId) {
@@ -196,5 +201,24 @@ const IModelLoader = React.memo(
     }
   }
 );
+
+/**
+ * Create a blank connection with default props
+ * @param blankConnectionProps?
+ * @returns BlankConnection
+ */
+const createBlankConnection = (
+  blankConnectionProps?: Partial<BlankConnectionProps>
+) =>
+  BlankConnection.create({
+    name: "Default Blank Connection",
+    location: Cartographic.fromDegrees({
+      longitude: -75.167,
+      latitude: 39.9559,
+      height: 10000,
+    }),
+    extents: new Range3d(-20, -20, -20, 20, 20, 20),
+    ...blankConnectionProps,
+  });
 
 export default IModelLoader;
