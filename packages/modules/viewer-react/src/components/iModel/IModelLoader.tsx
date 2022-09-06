@@ -97,7 +97,7 @@ const IModelLoader = React.memo(
       let imodelConnection: IModelConnection | undefined;
       // create a new imodelConnection for the passed project and imodel ids or local file
       if (iTwinId && !iModelId) {
-        imodelConnection = createBlankConnection(blankConnection);
+        imodelConnection = createBlankConnection(iTwinId, blankConnection);
       } else if (filePath) {
         imodelConnection = await openLocalIModel(filePath);
       } else if (iTwinId && iModelId) {
@@ -208,9 +208,11 @@ const IModelLoader = React.memo(
  * @returns BlankConnection
  */
 const createBlankConnection = (
+  iTwinId: string,
   blankConnectionProps?: Partial<BlankConnectionProps>
 ) =>
   BlankConnection.create({
+    iTwinId,
     name: "Default Blank Connection",
     location: Cartographic.fromDegrees({
       longitude: -75.167,
