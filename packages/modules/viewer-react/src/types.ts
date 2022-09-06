@@ -132,7 +132,7 @@ export interface FileViewerProps {
 }
 
 export interface BlankViewerProps {
-  blankConnection?: BlankConnectionProps;
+  blankConnection: BlankConnectionProps;
   blankConnectionViewState?: BlankConnectionViewState;
 }
 

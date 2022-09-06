@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-web-viewer",
+      "comment": "iModelId not required",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/cra-template-web-viewer"
+}

@@ -7,13 +7,8 @@ import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
 import { StateManager, UiFramework } from "@itwin/appui-react";
-import { Cartographic } from "@itwin/core-common";
-import type {
-  BlankConnectionProps,
-  IModelConnection,
-} from "@itwin/core-frontend";
+import type { IModelConnection } from "@itwin/core-frontend";
 import { BlankConnection, IModelApp } from "@itwin/core-frontend";
-import { Range3d } from "@itwin/core-geometry";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
@@ -72,7 +67,6 @@ const IModelLoader = React.memo(
         viewCreatorOptions,
         blankConnectionViewState,
       });
-
     useUiProviders(uiProviders);
     useTheme(theme);
 
@@ -96,8 +90,8 @@ const IModelLoader = React.memo(
       );
       let imodelConnection: IModelConnection | undefined;
       // create a new imodelConnection for the passed project and imodel ids or local file
-      if (iTwinId && !iModelId) {
-        imodelConnection = createBlankConnection(iTwinId, blankConnection);
+      if (blankConnection) {
+        imodelConnection = BlankConnection.create(blankConnection);
       } else if (filePath) {
         imodelConnection = await openLocalIModel(filePath);
       } else if (iTwinId && iModelId) {
@@ -201,26 +195,5 @@ const IModelLoader = React.memo(
     }
   }
 );
-
-/**
- * Create a blank connection with default props
- * @param blankConnectionProps?
- * @returns BlankConnection
- */
-const createBlankConnection = (
-  iTwinId: string,
-  blankConnectionProps?: Partial<BlankConnectionProps>
-) =>
-  BlankConnection.create({
-    iTwinId,
-    name: "Default Blank Connection",
-    location: Cartographic.fromDegrees({
-      longitude: -75.167,
-      latitude: 39.9559,
-      height: 10000,
-    }),
-    extents: new Range3d(-20, -20, -20, 20, 20, 20),
-    ...blankConnectionProps,
-  });
 
 export default IModelLoader;
