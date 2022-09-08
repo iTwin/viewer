@@ -59,24 +59,11 @@ const BlankConnectionHome: React.FC = () => {
     <div style={{ height: "100vh" }}>
       <Viewer
         authClient={authClient}
-        blankConnection={{
-          name: "GeometryConnection",
-          location: Cartographic.fromDegrees({
-            longitude: 0,
-            latitude: 0,
-            height: 0,
-          }),
-          extents: new Range3d(-30, -30, -30, 30, 30, 30),
-        }}
-        blankConnectionViewState={{
-          displayStyle: { backgroundColor: ColorDef.white },
-          viewFlags: { grid: true, renderMode: RenderMode.SmoothShade },
-          setAllow3dManipulations: false,
-        }}
         productId={productId}
         onIModelAppInit={iModelAppInit}
         uiProviders={[new TestUiProvider2()]}
         enablePerformanceMonitors={true}
+        iTwinId={process.env.IMJS_AUTH_CLIENT_ITWIN_ID_PROD}
       />
     </div>
   );

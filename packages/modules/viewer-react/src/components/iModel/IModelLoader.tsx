@@ -7,8 +7,13 @@ import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
 import { StateManager, UiFramework } from "@itwin/appui-react";
-import type { IModelConnection } from "@itwin/core-frontend";
+import { Cartographic } from "@itwin/core-common";
+import type {
+  BlankConnectionProps,
+  IModelConnection,
+} from "@itwin/core-frontend";
 import { BlankConnection, IModelApp } from "@itwin/core-frontend";
+import { Range3d } from "@itwin/core-geometry";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
@@ -90,8 +95,11 @@ const IModelLoader = React.memo(
       );
       let imodelConnection: IModelConnection | undefined;
       // create a new imodelConnection for the passed project and imodel ids or local file
-      if (blankConnection) {
-        imodelConnection = BlankConnection.create(blankConnection);
+      if (iTwinId && !iModelId) {
+        imodelConnection = createBlankConnection({
+          iTwinId,
+          blankConnectionProps: blankConnection,
+        });
       } else if (filePath) {
         imodelConnection = await openLocalIModel(filePath);
       } else if (iTwinId && iModelId) {
@@ -197,3 +205,29 @@ const IModelLoader = React.memo(
 );
 
 export default IModelLoader;
+
+interface BlankConnectionInitializationProps {
+  iTwinId?: string;
+  blankConnectionProps?: Partial<BlankConnectionProps>;
+}
+
+/**
+ * Create a blank connection with default props
+ * @param BlankConnectionInitializationProps
+ * @returns BlankConnection
+ */
+const createBlankConnection = ({
+  iTwinId,
+  blankConnectionProps,
+}: BlankConnectionInitializationProps) =>
+  BlankConnection.create({
+    name: "Default Blank Connection",
+    location: Cartographic.fromDegrees({
+      longitude: -75.686694,
+      latitude: 40.065757,
+      height: 0,
+    }),
+    extents: new Range3d(-1000, -1000, -100, 1000, 1000, 100),
+    iTwinId,
+    ...blankConnectionProps,
+  });

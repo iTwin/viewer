@@ -5,7 +5,7 @@
 
 import { UiFramework } from "@itwin/appui-react";
 import { Guid } from "@itwin/core-bentley";
-import { IModelVersion } from "@itwin/core-common";
+import { ColorDef, IModelVersion, RenderMode } from "@itwin/core-common";
 import type { IModelConnection, ViewState } from "@itwin/core-frontend";
 import {
   BriefcaseConnection,
@@ -146,7 +146,20 @@ export const getViewState = async (
       (view.iModel.iModelId !== connection.iModelId && connection.isOpen))
   ) {
     if (connection.isBlankConnection()) {
-      view = createBlankViewState(connection, blankConnectionViewState);
+      const defaultBlankConnectionViewState = {
+        displayStyle: { backgroundColor: ColorDef.white },
+        viewFlags: {
+          grid: true,
+          backgroundMap: true,
+          renderMode: RenderMode.SmoothShade,
+        },
+        setAllow3dManipulations: true,
+      };
+
+      view = createBlankViewState(connection, {
+        ...blankConnectionViewState,
+        ...defaultBlankConnectionViewState,
+      });
     } else {
       // attempt to construct a default viewState
       const viewCreator = new ViewCreator3d(connection);

@@ -79,7 +79,10 @@ const ViewerHome: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    history.push(`viewer?iTwinId=${iTwinId}&iModelId=${iModelId}`);
+    history.push(`viewer?iTwinId=${iTwinId}`);
+    if (iModelId) {
+      history.push(`&iModelId=${iModelId}`);
+    }
   }, [iTwinId, iModelId]);
 
   const Loader = () => {
