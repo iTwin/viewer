@@ -2,6 +2,18 @@
   "name": "@itwin/web-viewer-react",
   "entries": [
     {
+      "version": "3.0.8",
+      "tag": "@itwin/web-viewer-react_v3.0.8",
+      "date": "Thu, 08 Sep 2022 14:52:15 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "revert https://github.com/iTwin/viewer/pull/210"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.7",
       "tag": "@itwin/web-viewer-react_v3.0.7",
       "date": "Wed, 17 Aug 2022 20:24:25 GMT",
