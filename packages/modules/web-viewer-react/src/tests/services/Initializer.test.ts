@@ -126,16 +126,4 @@ describe("Initializer", () => {
     await WebInitializer.initialized;
     expect(IModelApp.startup).toHaveBeenCalled();
   });
-
-  it("displays a warning if IModelApp is already initialized and WebInitializer.startWebViewer is called", async () => {
-    Object.defineProperty(IModelApp, "initialized", { value: jest.fn() });
-    await expect(
-      WebInitializer.startWebViewer({
-        authClient: new MockAuthorizationClient(),
-        enablePerformanceMonitors: false,
-      })
-    ).rejects.toThrow(
-      "You have already called IModelApp.startup in your application. Please use the useWebViewerInitializer hook instead."
-    );
-  });
 });
