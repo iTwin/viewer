@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/web-viewer-react",
+      "comment": "revert https://github.com/iTwin/viewer/pull/210",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/web-viewer-react"
+}
