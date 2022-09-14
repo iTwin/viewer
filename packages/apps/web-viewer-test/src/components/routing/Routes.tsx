@@ -41,17 +41,9 @@ async function loadBlankConnectionRoute() {
   );
 }
 
-async function loadIModelBankRoute() {
-  return import(
-    /* webpackChunkName: "route--imodelbank" */
-    "../home/IModelBankHome"
-  );
-}
-
 const Home = React.lazy(loadHomeRoute);
 const LoginRedirect = React.lazy(loadLoginRoute);
 const LogoutRedirect = React.lazy(loadLogoutRoute);
-const IModelBankHome = React.lazy(loadIModelBankRoute);
 const BlankConnectionHome = React.lazy(loadBlankConnectionRoute);
 const ViewerHome = React.lazy(loadViewerRoute);
 
@@ -63,7 +55,6 @@ export const AllRoutes = () => {
       <Route path="/signin-callback" element={<LoginRedirect />} />
       <Route path="/viewer" element={<ViewerHome />} />
       <Route path="/blankconnection" element={<BlankConnectionHome />} />
-      <Route path="/imodelbank" element={<IModelBankHome />} />
     </Routes>
   );
 };

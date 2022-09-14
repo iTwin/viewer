@@ -55,6 +55,7 @@ export const openRemoteIModel = async (
   iModelId: string,
   changeSetId?: string
 ): Promise<CheckpointConnection | undefined> => {
+  console.count("openRemoteIModel");
   try {
     // get the version to query
     const version = await getVersion(iModelId, changeSetId);

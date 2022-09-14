@@ -56,6 +56,7 @@ const IModelLoader = React.memo(
     viewCreatorOptions,
     loadingComponent,
   }: ModelLoaderProps) => {
+    console.count("IModelLoader");
     const [error, setError] = useState<Error>();
     const [connection, setConnection] = useState<IModelConnection>();
     const isMounted = useIsMounted();
