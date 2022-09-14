@@ -35,6 +35,16 @@ export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
   : T1 | T2;
 
 /**
+ * Converts the following optional arg foo of type T
+ * foo?: T
+ * to a required arg with union of type T and undefined
+ * foo: T | undefined
+ */
+export type OptionalToUndefinedUnion<T> = {
+  [P in keyof Required<T>]: T[P] | undefined;
+};
+
+/**
  * options for configuration of 3D view
  */
 export interface ViewerViewCreator3dOptions extends ViewCreator3dOptions {
@@ -141,20 +151,23 @@ export interface BlankViewerProps {
  * Maintain a list of initilalizer params for use in useBaseViewerInitializer
  * This list MUST match what is in the ViewerInitializerParams interface and should be updated as new properties are added/removed
  */
-const iTwinViewerInitializerParamSample: ViewerInitializerParams = {
-  productId: undefined,
-  i18nUrlTemplate: undefined,
-  onIModelAppInit: undefined,
-  additionalI18nNamespaces: undefined,
-  additionalRpcInterfaces: undefined,
-  toolAdmin: undefined,
-  hubAccess: undefined,
-  mapLayerOptions: undefined,
-  extensions: undefined,
-  enablePerformanceMonitors: false,
-  tileAdmin: undefined,
-  renderSys: undefined,
-};
+const iTwinViewerInitializerParamSample: OptionalToUndefinedUnion<ViewerInitializerParams> =
+  {
+    hubAccess: undefined,
+    localization: undefined,
+    mapLayerOptions: undefined,
+    tileAdmin: undefined,
+    toolAdmin: undefined,
+    renderSys: undefined,
+    realityDataAccess: undefined,
+    enablePerformanceMonitors: undefined,
+    productId: undefined,
+    i18nUrlTemplate: undefined,
+    onIModelAppInit: undefined,
+    additionalI18nNamespaces: undefined,
+    additionalRpcInterfaces: undefined,
+    extensions: undefined,
+  };
 
 export const iTwinViewerInitializerParamList = Object.keys(
   iTwinViewerInitializerParamSample
