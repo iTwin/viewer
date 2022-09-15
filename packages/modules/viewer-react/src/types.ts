@@ -99,6 +99,7 @@ export interface LoaderProps {
 
 export type ViewerCommonProps = ViewerInitializerParams & LoaderProps;
 
+// Note: When updating this, also update getIModelAppOptions
 export type ViewerIModelAppOptions = Pick<
   IModelAppOptions,
   | "hubAccess"
