@@ -3,43 +3,41 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Vector3d, XAndY, XYAndZ } from "@bentley/geometry-core";
-import { IModelClient } from "@bentley/imodelhub-client";
-import {
+import type { BackstageItem, UiItemsProvider } from "@itwin/appui-abstract";
+import type {
+  ColorTheme,
+  FrontstageProvider,
+  IModelViewportControlOptions,
+} from "@itwin/appui-react";
+import type {
   ColorDef,
   RenderMode,
   RpcInterface,
   RpcInterfaceDefinition,
-} from "@bentley/imodeljs-common";
-import {
+} from "@itwin/core-common";
+import type {
+  BlankConnectionProps,
+  ExtensionProvider,
+  IModelAppOptions,
   IModelConnection,
   ScreenViewport,
-  StandardViewId,
-  ToolAdmin,
   ViewChangeOptions,
-} from "@bentley/imodeljs-frontend";
-import { BackstageItem, UiItemsProvider } from "@bentley/ui-abstract";
-import {
-  ColorTheme,
-  FrameworkVersion,
-  FrontstageProvider,
-  IModelViewportControlOptions,
-} from "@bentley/ui-framework";
+  ViewCreator3dOptions,
+  ViewState,
+} from "@itwin/core-frontend";
+import type { Vector3d, XAndY, XYAndZ } from "@itwin/core-geometry";
+
+import type { StandardFrontstageProps } from "./components/app-ui/providers";
+
+export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
+export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
+  ? (Without<T1, T2> & T2) | (Without<T2, T1> & T1)
+  : T1 | T2;
 
 /**
  * options for configuration of 3D view
  */
-export interface ViewCreator3dOptions {
-  /** Turn [[Camera]] on when generating the view. */
-  cameraOn?: boolean;
-  /** Turn [[SkyBox]] on when generating the view. */
-  skyboxOn?: boolean;
-  /** [[StandardViewId]] for the view state. */
-  standardViewId?: StandardViewId;
-  /** Merge in props from the seed view (default spatial view) of the iModel.  */
-  useSeedView?: boolean;
-  /** Aspect ratio of [[Viewport]]. Required to fit contents of the model(s) in the initial state of the view. */
-  vpAspect?: number;
+export interface ViewerViewCreator3dOptions extends ViewCreator3dOptions {
   /** optional function to configure the viewport on load */
   viewportConfigurer?: (viewport: ScreenViewport) => void;
 }
@@ -57,36 +55,58 @@ export type ViewerBackstageItem = BackstageItem & {
   labeli18nKey?: string;
 };
 
-export interface IModelLoaderParams {
+export interface ViewerViewportControlOptions
+  extends Omit<IModelViewportControlOptions, "viewState"> {
+  /** ViewState or a function to return a ViewState */
+  viewState?:
+    | ViewState
+    | ((iModelConnection: IModelConnection) => ViewState)
+    | ((iModelConnection: IModelConnection) => Promise<ViewState>);
+}
+
+export interface LoaderProps {
   /** color theme */
   theme?: ColorTheme | string;
   /** Default UI configuration */
-  defaultUiConfig?: ItwinViewerUi;
+  defaultUiConfig?: ViewerDefaultFrontstageConfig;
   /** Optional callback function when iModel is connected */
-  onIModelConnected?: (iModel: IModelConnection) => void;
+  onIModelConnected?:
+    | ((iModel: IModelConnection) => void)
+    | ((iModel: IModelConnection) => Promise<void>);
   /** additional frontstages to register */
   frontstages?: ViewerFrontstage[];
   /** menu items for the backstage */
   backstageItems?: ViewerBackstageItem[];
-  /** optionally override the UI framework version (defaults to 2) */
-  uiFrameworkVersion?: FrameworkVersion;
   /** additional viewport options for the default frontstage's viewport control */
-  viewportOptions?: IModelViewportControlOptions;
-  /** UI Providers to register https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/ */
+  viewportOptions?: ViewerViewportControlOptions;
+  /** [UI Providers](https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/) to register */
   uiProviders?: UiItemsProvider[];
   /** options for creating the default viewState */
-  viewCreatorOptions?: ViewCreator3dOptions;
+  viewCreatorOptions?: ViewerViewCreator3dOptions;
+  /** Component to show when loading iModel key */
+  loadingComponent?: React.ReactNode;
 }
 
-export interface ItwinViewerCommonParams
-  extends ItwinViewerInitializerParams,
-    IModelLoaderParams {}
+export type ViewerCommonProps = ViewerInitializerParams & LoaderProps;
 
-export interface ItwinViewerInitializerParams {
-  /** optional Azure Application Insights key for telemetry */
-  appInsightsKey?: string;
-  /** optional iTwin.js Application Insights key for telemetry within iTwin.js */
-  imjsAppInsightsKey?: string;
+export type ViewerIModelAppOptions = Pick<
+  IModelAppOptions,
+  | "hubAccess"
+  | "localization"
+  | "mapLayerOptions"
+  | "tileAdmin"
+  | "toolAdmin"
+  | "renderSys"
+  | "realityDataAccess"
+>;
+
+export interface ViewerInitializerParams extends ViewerIModelAppOptions {
+  /**
+   * Enable reporting data from timed events in the iTwin Viewer.
+   * The data is anonynmous numerics and will help to increase Viewer performance in future releases.
+   * See the Web or Desktop Viewer package [README](https://www.npmjs.com/package/@itwin/web-viewer-react) for additional details.
+   */
+  enablePerformanceMonitors: boolean;
   /** GPRID for the consuming application. Will default to the iTwin Viewer GPRID */
   productId?: string;
   /** urlTemplate for querying i18n json files */
@@ -97,94 +117,48 @@ export interface ItwinViewerInitializerParams {
   additionalI18nNamespaces?: string[];
   /** custom rpc interfaces (assumes that they are supported in your backend) */
   additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
-  /** override the default message that sends users to the iTwin Synchronizer when there are data-related errors with an iModel. Pass empty string to override with no message. */
-  iModelDataErrorMessage?: string;
-  /** optional ToolAdmin to initialize */
-  toolAdmin?: ToolAdmin;
-  /** option imodelClient (defaults to iModelHubClient) */
-  imodelClient?: IModelClient;
+  /** array of iTwin.js Extensions */
+  extensions?: ExtensionProvider[];
+}
+
+export interface ConnectedViewerProps {
+  iTwinId: string;
+  iModelId: string;
+  changeSetId?: string;
+}
+
+export interface FileViewerProps {
+  /** Path to local snapshot or briefcase */
+  filePath: string;
+}
+
+export interface BlankViewerProps {
+  blankConnection: BlankConnectionProps;
+  blankConnectionViewState?: BlankConnectionViewState;
 }
 
 /**
- * Configure options for the top left corner item
+ * Maintain a list of initilalizer params for use in useBaseViewerInitializer
+ * This list MUST match what is in the ViewerInitializerParams interface and should be updated as new properties are added/removed
  */
-export interface CornerItem {
-  hideDefault?: boolean;
-  item?: React.ReactNode;
-}
+const iTwinViewerInitializerParamSample: ViewerInitializerParams = {
+  productId: undefined,
+  i18nUrlTemplate: undefined,
+  onIModelAppInit: undefined,
+  additionalI18nNamespaces: undefined,
+  additionalRpcInterfaces: undefined,
+  toolAdmin: undefined,
+  hubAccess: undefined,
+  mapLayerOptions: undefined,
+  extensions: undefined,
+  enablePerformanceMonitors: false,
+  tileAdmin: undefined,
+  renderSys: undefined,
+};
 
-/**
- * Control visibility of individual tools or tool groups in the content manipulation vertical section. Default is true
- */
-export interface ContentManipulationVerticalItems {
-  selectTool?: boolean;
-  measureTools?: boolean;
-  sectionTools?: boolean;
-}
-
-/**
- * Control visibility of individual tools or tool groups in the content manipulation horizontal section. Default is true
- */
-export interface ContentManipulationHorizontalItems {
-  clearSelection?: boolean;
-  clearHideIsolateEmphasizeElements?: boolean;
-  hideElements?: boolean;
-  isolateElements?: boolean;
-  emphasizeElements?: boolean;
-}
-
-/**
- * Configure options for the content manipulation section
- */
-export interface ContentManipulationTools {
-  cornerItem?: CornerItem;
-  hideDefaultHorizontalItems?: boolean;
-  hideDefaultVerticalItems?: boolean;
-  verticalItems?: ContentManipulationVerticalItems;
-  horizontalItems?: ContentManipulationHorizontalItems;
-}
-
-/**
- * Control visibility of individual tools or tool groups in the view navigation horizontal section. Default is true
- */
-export interface ViewNavigationHorizontalItems {
-  rotateView?: boolean;
-  panView?: boolean;
-  fitView?: boolean;
-  windowArea?: boolean;
-  undoView?: boolean;
-  redoView?: boolean;
-}
-
-/**
- * Control visibility of individual tools or tool groups in the view navigation vertical section. Default is true
- */
-export interface ViewNavigationVerticalItems {
-  walkView?: boolean;
-  cameraView?: boolean;
-}
-
-/**
- * Configure options for the navigation section
- */
-export interface ViewNavigationTools {
-  hideDefaultHorizontalItems?: boolean;
-  hideDefaultVerticalItems?: boolean;
-  verticalItems?: ViewNavigationVerticalItems;
-  horizontalItems?: ViewNavigationHorizontalItems;
-}
-
-/**
- * Configure options for the default UI
- */
-export interface ItwinViewerUi {
-  contentManipulationTools?: ContentManipulationTools;
-  navigationTools?: ViewNavigationTools;
-  hideToolSettings?: boolean;
-  hideTreeView?: boolean;
-  hidePropertyGrid?: boolean;
-  hideDefaultStatusBar?: boolean;
-}
+export const iTwinViewerInitializerParamList = Object.keys(
+  iTwinViewerInitializerParamSample
+);
 
 /**
  * Blank connection ViewState types
@@ -206,6 +180,7 @@ export interface BlankConnectionViewStateDisplayStyle {
 export interface BlankConnectionViewStateViewFlags {
   grid?: boolean;
   renderMode?: RenderMode;
+  backgroundMap?: boolean;
 }
 
 export interface BlankConnectionViewState {
@@ -214,3 +189,23 @@ export interface BlankConnectionViewState {
   displayStyle?: BlankConnectionViewStateDisplayStyle;
   viewFlags?: BlankConnectionViewStateViewFlags;
 }
+
+/**
+ * Defines what items to include from the default status bar. If any items are
+ * specified then only those items will be added to statusbar.
+ */
+export interface ViewerDefaultStatusbarItems {
+  messageCenter?: boolean;
+  preToolAssistanceSeparator?: boolean;
+  toolAssistance?: boolean;
+  postToolAssistanceSeparator?: boolean;
+  accuSnapModePicker?: boolean;
+  tileLoadIndicator?: boolean;
+  selectionScope?: boolean;
+  selectionInfo?: boolean;
+}
+
+export type ViewerDefaultFrontstageConfig = Pick<
+  StandardFrontstageProps,
+  "hideNavigationAid" | "hideStatusBar" | "hideToolSettings"
+>;

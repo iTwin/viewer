@@ -3,86 +3,45 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { CheckpointConnection } from "@bentley/imodeljs-frontend";
-import { UiItemsProvider } from "@bentley/ui-abstract";
-import {
-  ColorTheme,
-  FrameworkVersion,
-  IModelViewportControlOptions,
-} from "@bentley/ui-framework";
-import { ItwinViewerUi } from "@itwin/viewer-react";
+import type { ConnectedViewerProps } from "@itwin/viewer-react";
+import { ViewerPerformance } from "@itwin/viewer-react";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { ViewerFrontstage } from "..";
 import { Viewer } from "../components/Viewer";
-import {
-  ItwinViewerParams,
-  WebAuthorizationOptions,
-  WebViewerProps,
-} from "../types";
+import type { ItwinViewerParams, WebInitializerParams } from "../types";
 import { WebInitializer } from "./Initializer";
-
-export interface LoadParameters {
-  contextId?: string;
-  iModelId?: string;
-  changeSetId?: string;
-}
 
 export class ItwinViewer {
   elementId: string;
-  theme: ColorTheme | string | undefined;
-  uiConfig: ItwinViewerUi | undefined;
-  appInsightsKey: string | undefined;
-  frontstages: ViewerFrontstage[] | undefined;
-  uiFrameworkVersion: FrameworkVersion | undefined;
-  viewportOptions: IModelViewportControlOptions | undefined;
-  uiProviders: UiItemsProvider[] | undefined;
-  authConfig: WebAuthorizationOptions;
+  options: WebInitializerParams;
 
-  onIModelConnected: ((iModel: CheckpointConnection) => void) | undefined;
-
-  constructor(options: ItwinViewerParams) {
-    if (!options.elementId) {
+  constructor({ elementId, ...options }: ItwinViewerParams) {
+    if (!elementId) {
       //TODO localize
-      throw new Error("Please supply a root elementId as the first parameter"); //TODO localize
+      throw new Error("Please supply a root elementId as the first parameter");
     }
-    this.elementId = options.elementId;
-    this.theme = options.theme;
-    this.uiConfig = options.defaultUiConfig;
-    this.appInsightsKey = options.appInsightsKey;
-    this.onIModelConnected = options.onIModelConnected;
-    this.frontstages = options.frontstages;
-    this.uiFrameworkVersion = options.uiFrameworkVersion;
-    this.viewportOptions = options.viewportOptions;
-    this.uiProviders = options.uiProviders;
-    this.authConfig = options.authConfig;
-
+    ViewerPerformance.enable(options.enablePerformanceMonitors);
+    ViewerPerformance.addMark("ViewerStarting");
+    this.elementId = elementId;
+    this.options = options;
     void WebInitializer.startWebViewer(options);
   }
 
   /** load a model in the viewer once iTwinViewerApp is ready */
-  load = async (args: LoadParameters): Promise<void> => {
-    if (!args?.contextId || !args?.iModelId) {
-      throw new Error("Please provide a valid contextId and iModelId");
+  load = async (args: ConnectedViewerProps): Promise<void> => {
+    if (!args.iTwinId || !args.iModelId) {
+      throw new Error("Please provide a valid iTwinId and iModelId");
     }
+
+    const viewerProps = {
+      ...args,
+      ...this.options,
+    } as ConnectedViewerProps & WebInitializerParams;
 
     // render the viewer for the given iModel on the given element
     ReactDOM.render(
-      React.createElement(Viewer, {
-        authConfig: this.authConfig,
-        contextId: args?.contextId,
-        iModelId: args?.iModelId,
-        changeSetId: args?.changeSetId,
-        uiConfig: this.uiConfig,
-        appInsightsKey: this.appInsightsKey,
-        onIModelConnected: this.onIModelConnected,
-        frontstages: this.frontstages,
-        uiFrameworkVersion: this.uiFrameworkVersion,
-        viewportOptions: this.viewportOptions,
-        uiProviders: this.uiProviders,
-        theme: this.theme,
-      } as WebViewerProps),
+      React.createElement(Viewer, viewerProps),
       document.getElementById(this.elementId)
     );
   };

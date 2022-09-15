@@ -3,54 +3,45 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
-import { Range3d } from "@bentley/geometry-core";
-import { Cartographic, ColorDef } from "@bentley/imodeljs-common";
-import { IModelApp } from "@bentley/imodeljs-frontend";
-import { BlankViewer } from "@itwin/web-viewer-react";
-import React, { useEffect, useState } from "react";
+import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
+import { Cartographic, ColorDef, RenderMode } from "@itwin/core-common";
+import { IModelApp } from "@itwin/core-frontend";
+import { Range3d } from "@itwin/core-geometry";
+import { Viewer } from "@itwin/web-viewer-react";
+import React, { useCallback, useEffect, useMemo } from "react";
 
 import { GeometryDecorator } from "../../decorators/GeometryDecorator";
 import { TestUiProvider2 } from "../../providers";
-import { Header } from "./";
-import styles from "./Home.module.scss";
 
 /**
  * Test blank connection viewer
  * @returns
  */
-export const BlankConnectionHome: React.FC = () => {
-  const [loggedIn, setLoggedIn] = useState(
-    (IModelApp.authorizationClient?.hasSignedIn &&
-      IModelApp.authorizationClient?.isAuthorized) ||
-      false
+const BlankConnectionHome: React.FC = () => {
+  const authClient = useMemo(
+    () =>
+      new BrowserAuthorizationClient({
+        scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
+        clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
+        redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
+        postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
+        responseType: "code",
+        authority: process.env.IMJS_AUTH_AUTHORITY,
+      }),
+    []
   );
 
-  const authConfig: BrowserAuthorizationClientConfiguration = {
-    scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
-    clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
-    redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
-    postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
-    responseType: "code",
-    authority: process.env.IMJS_AUTH_AUTHORITY,
-  };
+  const login = useCallback(async () => {
+    try {
+      await authClient.signInSilent();
+    } catch {
+      await authClient.signIn();
+    }
+  }, [authClient]);
 
   useEffect(() => {
-    setLoggedIn(
-      IModelApp.authorizationClient
-        ? IModelApp.authorizationClient.hasSignedIn &&
-            IModelApp.authorizationClient.isAuthorized
-        : false
-    );
-  }, []);
-
-  const toggleLogin = async () => {
-    if (!loggedIn) {
-      await IModelApp.authorizationClient?.signIn();
-    } else {
-      await IModelApp.authorizationClient?.signOut();
-    }
-  };
+    void login();
+  }, [login]);
 
   /**
    * This value is for the iTwin Viewer and will be the default if the productId prop is not provided.
@@ -65,24 +56,30 @@ export const BlankConnectionHome: React.FC = () => {
   };
 
   return (
-    <div className={styles.home}>
-      <Header handleLoginToggle={toggleLogin} loggedIn={loggedIn} />
-      <BlankViewer
-        authConfig={{ config: authConfig }}
+    <div style={{ height: "100vh" }}>
+      <Viewer
+        authClient={authClient}
         blankConnection={{
           name: "GeometryConnection",
-          location: Cartographic.fromDegrees(0, 0, 0),
+          location: Cartographic.fromDegrees({
+            longitude: 0,
+            latitude: 0,
+            height: 0,
+          }),
           extents: new Range3d(-30, -30, -30, 30, 30, 30),
         }}
-        viewStateOptions={{
-          displayStyle: {
-            backgroundColor: ColorDef.blue,
-          },
+        blankConnectionViewState={{
+          displayStyle: { backgroundColor: ColorDef.white },
+          viewFlags: { grid: true, renderMode: RenderMode.SmoothShade },
+          setAllow3dManipulations: false,
         }}
         productId={productId}
         onIModelAppInit={iModelAppInit}
         uiProviders={[new TestUiProvider2()]}
+        enablePerformanceMonitors={true}
       />
     </div>
   );
 };
+
+export default BlankConnectionHome;

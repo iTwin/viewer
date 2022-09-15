@@ -3,133 +3,52 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IModelApp } from "@bentley/imodeljs-frontend";
-import { FillCentered } from "@bentley/ui-core/lib/ui-core";
-import { ErrorBoundary } from "@itwin/error-handling-react";
-import React, { useEffect, useState } from "react";
+import { FillCentered } from "@itwin/core-react";
+import React from "react";
 
-import { useIsMounted } from "../hooks";
-import { BaseInitializer } from "../services/BaseInitializer";
-import { ItwinViewerCommonParams } from "../types";
+import { useAccessToken } from "../hooks/useAccessToken";
+import { useBaseViewerInitializer } from "../hooks/useBaseViewerInitializer";
+import type {
+  BlankViewerProps,
+  ConnectedViewerProps,
+  FileViewerProps,
+  ViewerCommonProps,
+} from "../types";
+import { ErrorBoundary } from "./error/ErrorBoundary";
 import IModelLoader from "./iModel/IModelLoader";
 
-export interface ViewerProps extends ItwinViewerCommonParams {
-  contextId?: string;
-  iModelId?: string;
-  changeSetId?: string;
-  snapshotPath?: string;
-}
+type ViewerProps = (ConnectedViewerProps | FileViewerProps | BlankViewerProps) &
+  ViewerCommonProps;
 
-export const BaseViewer: React.FC<ViewerProps> = ({
-  iModelId,
-  contextId,
-  appInsightsKey,
-  theme,
-  changeSetId,
-  defaultUiConfig,
-  onIModelConnected,
+export const BaseViewer = ({
   productId,
-  snapshotPath,
-  frontstages,
-  backstageItems,
-  uiFrameworkVersion,
-  viewportOptions,
-  uiProviders,
-  imjsAppInsightsKey,
   i18nUrlTemplate,
   onIModelAppInit,
   additionalI18nNamespaces,
   additionalRpcInterfaces,
-  viewCreatorOptions,
+  enablePerformanceMonitors,
+  ...loaderProps
 }: ViewerProps) => {
-  // assume authorized when using a local snapshot
-  const [authorized, setAuthorized] = useState(!!snapshotPath);
-  const [iModelJsInitialized, setIModelJsInitialized] = useState(false);
-  const isMounted = useIsMounted();
-
-  useEffect(() => {
-    // assume authorized when using a local snapshot
-    if (snapshotPath) {
-      setAuthorized(true);
-    } else {
-      setAuthorized(
-        (IModelApp.authorizationClient?.hasSignedIn &&
-          IModelApp.authorizationClient?.isAuthorized) ||
-          false
-      );
-      IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
-        setAuthorized(
-          (IModelApp.authorizationClient?.hasSignedIn &&
-            IModelApp.authorizationClient?.isAuthorized) ||
-            false
-        );
-      });
-    }
-  }, [snapshotPath]);
-
-  useEffect(() => {
-    if (!iModelJsInitialized) {
-      void BaseInitializer.initialize({
-        appInsightsKey,
-        productId,
-        imjsAppInsightsKey,
-        i18nUrlTemplate,
-        onIModelAppInit,
-        additionalI18nNamespaces,
-        additionalRpcInterfaces,
-      }).then(() => {
-        void BaseInitializer.initialized
-          .then(() => setIModelJsInitialized(true))
-          .catch((error) => {
-            if (error === "Cancelled") {
-              // canceled from previous dismount. Not a true error
-              console.log(error);
-            } else {
-              throw error;
-            }
-          });
-      });
-    }
-    if (!isMounted.current) {
-      return BaseInitializer.cancel;
-    }
-  }, [
-    appInsightsKey,
+  const viewerInitialized = useBaseViewerInitializer({
     productId,
-    imjsAppInsightsKey,
     i18nUrlTemplate,
+    onIModelAppInit,
     additionalI18nNamespaces,
     additionalRpcInterfaces,
-    isMounted,
-    iModelJsInitialized,
-    onIModelAppInit,
-  ]);
+    enablePerformanceMonitors,
+  });
 
+  const accessToken = useAccessToken();
   return (
     <ErrorBoundary>
-      {authorized ? (
-        iModelJsInitialized ? (
-          <IModelLoader
-            contextId={contextId}
-            iModelId={iModelId}
-            changeSetId={changeSetId}
-            defaultUiConfig={defaultUiConfig}
-            appInsightsKey={appInsightsKey}
-            onIModelConnected={onIModelConnected}
-            snapshotPath={snapshotPath}
-            frontstages={frontstages}
-            backstageItems={backstageItems}
-            uiFrameworkVersion={uiFrameworkVersion}
-            viewportOptions={viewportOptions}
-            uiProviders={uiProviders}
-            theme={theme}
-            viewCreatorOptions={viewCreatorOptions}
-          />
+      {("filePath" in loaderProps && loaderProps.filePath) || accessToken ? (
+        viewerInitialized ? (
+          <IModelLoader {...loaderProps} />
         ) : (
-          <FillCentered>initializing...</FillCentered>
+          <FillCentered>Initializing...</FillCentered>
         )
       ) : (
-        <FillCentered>Please sign in.</FillCentered>
+        <FillCentered>Please provide a valid access token.</FillCentered>
       )}
     </ErrorBoundary>
   );

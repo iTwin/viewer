@@ -3,47 +3,51 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
-import { IModelBankClient } from "@bentley/imodelhub-client";
-import {
-  FitViewTool,
-  IModelApp,
-  ScreenViewport,
-  StandardViewId,
-} from "@bentley/imodeljs-frontend";
-import { ColorTheme } from "@bentley/ui-framework";
-import { IModelBackendOptions, Viewer } from "@itwin/web-viewer-react";
-import React, { useEffect, useState } from "react";
+import { ColorTheme } from "@itwin/appui-react";
+import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
+import type { ScreenViewport } from "@itwin/core-frontend";
+import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
+import type { IModelBackendOptions } from "@itwin/web-viewer-react";
+import { Viewer } from "@itwin/web-viewer-react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
+// import { IModelBankFrontend } from "../../services/IModelBankFrontendHubAccess";
 import { history } from "../routing";
-import { Header } from ".";
-import styles from "./Home.module.scss";
 
 /**
  * Test a viewer that is connected to an iModelBank
  * @returns
  */
-export const IModelBankHome: React.FC = () => {
-  const [loggedIn, setLoggedIn] = useState(
-    (IModelApp.authorizationClient?.hasSignedIn &&
-      IModelApp.authorizationClient?.isAuthorized) ||
-      false
-  );
+const IModelBankHome: React.FC = () => {
   const [iModelId, setIModelId] = useState(
     process.env.IMJS_AUTH_CLIENT_IMODEL_ID
   );
-  const [contextId, setContextId] = useState(
-    process.env.IMJS_AUTH_CLIENT_CONTEXT_ID
+  const [iTwinId, setITwinId] = useState(process.env.IMJS_AUTH_CLIENT_ITWIN_ID);
+
+  const authClient = useMemo(
+    () =>
+      new BrowserAuthorizationClient({
+        scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
+        clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
+        redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
+        postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
+        responseType: "code",
+        authority: process.env.IMJS_AUTH_AUTHORITY,
+      }),
+    []
   );
 
-  const authConfig: BrowserAuthorizationClientConfiguration = {
-    scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
-    clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
-    redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
-    postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
-    responseType: "code",
-    authority: process.env.IMJS_AUTH_AUTHORITY,
-  };
+  const login = useCallback(async () => {
+    try {
+      await authClient.signInSilent();
+    } catch {
+      await authClient.signIn();
+    }
+  }, [authClient]);
+
+  useEffect(() => {
+    void login();
+  }, [login]);
 
   const backend: IModelBackendOptions = {
     customBackend: {
@@ -54,24 +58,14 @@ export const IModelBankHome: React.FC = () => {
     },
   };
 
-  const imodelClient = new IModelBankClient(
-    "https://dev-imodelbank.bentley.com",
-    undefined
-  );
-
-  useEffect(() => {
-    setLoggedIn(
-      IModelApp.authorizationClient
-        ? IModelApp.authorizationClient.hasSignedIn &&
-            IModelApp.authorizationClient.isAuthorized
-        : false
-    );
-  }, []);
+  // const imodelBankClient = new IModelBankFrontend(
+  //   "https://dev-imodelbank.bentley.com"
+  // );
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has("contextId")) {
-      setContextId(urlParams.get("contextId") as string);
+    if (urlParams.has("iTwinId")) {
+      setITwinId(urlParams.get("iTwinId") as string);
     }
 
     if (urlParams.has("iModelId")) {
@@ -80,35 +74,8 @@ export const IModelBankHome: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    history.push(`imodelbank?contextId=${contextId}&iModelId=${iModelId}`);
-  }, [contextId, iModelId]);
-
-  const toggleLogin = async () => {
-    if (!loggedIn) {
-      await IModelApp.authorizationClient?.signIn();
-    } else {
-      await IModelApp.authorizationClient?.signOut();
-    }
-  };
-
-  const onIModelAppInit = () => {
-    setLoggedIn(IModelApp.authorizationClient?.isAuthorized ?? false);
-    IModelApp.authorizationClient?.onUserStateChanged.addListener(() => {
-      setLoggedIn(
-        (IModelApp.authorizationClient?.hasSignedIn &&
-          IModelApp.authorizationClient?.isAuthorized) ||
-          false
-      );
-    });
-  };
-
-  const switchModel = () => {
-    if (iModelId === (process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string)) {
-      setIModelId(process.env.IMJS_AUTH_CLIENT_IMODEL_ID2 as string);
-    } else {
-      setIModelId(process.env.IMJS_AUTH_CLIENT_IMODEL_ID as string);
-    }
-  };
+    history.push(`imodelbank?iTwinId=${iTwinId}&iModelId=${iModelId}`);
+  }, [iTwinId, iModelId]);
 
   const viewConfiguration = (viewPort: ScreenViewport) => {
     // default execute the fitview tool and use the iso standard view after tile trees are loaded
@@ -130,29 +97,25 @@ export const IModelBankHome: React.FC = () => {
     };
 
     tileTreesLoaded().finally(() => {
-      IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
+      void IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
       viewPort.view.setStandardRotation(StandardViewId.Iso);
     });
   };
 
   return (
-    <div className={styles.home}>
-      <Header
-        handleLoginToggle={toggleLogin}
-        loggedIn={loggedIn}
-        switchModel={switchModel}
-      />
+    <div style={{ height: "100vh" }}>
       <Viewer
-        authConfig={{ config: authConfig }}
-        contextId={contextId}
-        iModelId={iModelId}
-        appInsightsKey={process.env.IMJS_APPLICATION_INSIGHTS_KEY}
+        authClient={authClient}
+        iTwinId={iTwinId ?? ""}
+        iModelId={iModelId ?? ""}
         theme={ColorTheme.Dark}
-        onIModelAppInit={onIModelAppInit}
         viewCreatorOptions={{ viewportConfigurer: viewConfiguration }}
         backend={backend}
-        imodelClient={imodelClient}
+        // hubAccess={imodelBankClient}
+        enablePerformanceMonitors={true}
       />
     </div>
   );
 };
+
+export default IModelBankHome;

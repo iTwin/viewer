@@ -1,6 +1,69 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Wed, 04 Aug 2021 19:32:44 GMT and should not be manually modified.
+This log was last generated on Mon, 20 Jun 2022 14:39:09 GMT and should not be manually modified.
+
+## 3.0.0
+Mon, 20 Jun 2022 14:39:09 GMT
+
+### Breaking changes
+
+- See [release notes](https://github.com/iTwin/viewer/blob/master/releases/CHANGELOG-3.0.md).
+
+## 2.0.5
+Mon, 16 May 2022 15:03:07 GMT
+
+### Patches
+
+- Fix env var spelling
+
+## 2.0.4
+Tue, 29 Mar 2022 14:20:55 GMT
+
+### Patches
+
+- Add env vars for optimization
+
+## 2.0.3
+Mon, 07 Feb 2022 14:48:13 GMT
+
+### Patches
+
+- Add TileTreesLoaded performance measure
+
+## 2.0.2
+Wed, 26 Jan 2022 03:31:33 GMT
+
+### Patches
+
+- Add sign in loading bar indicator
+
+## 2.0.1
+Tue, 25 Jan 2022 22:20:19 GMT
+
+### Patches
+
+- Update to always pull in latest version of viewer
+
+## 2.0.0
+Tue, 25 Jan 2022 20:14:40 GMT
+
+### Breaking changes
+
+- Upgrade to iTwin.js 3.0
+
+## 1.3.0
+Tue, 12 Oct 2021 16:52:48 GMT
+
+### Minor changes
+
+- Revert Sandbox Export CRA Web Template Refactor (#47)
+
+## 1.2.0
+Thu, 30 Sep 2021 13:57:43 GMT
+
+### Minor changes
+
+- App.tsx refactored to modularize the viewer. A react context has been added to feed in the iModelId and contextId. The header has been removed and authentication is now automatically handled on app start.
 
 ## 1.1.0
 Wed, 04 Aug 2021 19:32:44 GMT

@@ -1,0 +1,10 @@
+[
+  {
+    "textKey": "home.links.viewerComponent",
+    "url":"https://www.npmjs.com/package/@itwin/desktop-viewer-react"
+  },
+  {
+    "textKey": "home.links.customizeViewer",
+    "url":"https://developer.bentley.com/tutorials/itwin-viewer-hello-world/"    
+  }
+]

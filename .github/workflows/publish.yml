@@ -5,37 +5,36 @@ name: iTwin Viewer NPM Publish
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [16.x]
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        token: ${{ secrets.PUBLISH_PAT }}
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: |
-        set -e
-        echo 'Installing...'
-        node common/scripts/install-run-rush.js install
-        
-        echo 'Building...'
-        node common/scripts/install-run-rush.js rebuild
-             
-        echo 'Publishing...'
-        git config user.name "iTwinViewerWorkflow"
-        git config user.email "itwinviewer@users.noreply.github.com"
-        node common/scripts/install-run-rush.js version --bump --target-branch master
-        node common/scripts/install-run-rush.js publish --include-all --set-access-level public --apply --publish --npm-auth-token $NPM_TOKEN --target-branch master --suffix alpha
-      env:
-        NPM_TOKEN: ${{ secrets.NPMJS_PUBLISH_ITWIN }}
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PUBLISH_PAT }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: |
+          set -e
+          echo 'Installing...'
+          node common/scripts/install-run-rush.js install
+
+          echo 'Building...'
+          node common/scripts/install-run-rush.js rebuild
+               
+          echo 'Publishing...'
+          git config user.name "iTwinViewerWorkflow"
+          git config user.email "itwinviewer@users.noreply.github.com"
+          node common/scripts/install-run-rush.js version --bump --target-branch master
+          node common/scripts/install-run-rush.js publish --include-all --set-access-level public --apply --publish --npm-auth-token $NPM_TOKEN --target-branch master
+        env:
+          NPM_TOKEN: ${{ secrets.NPMJS_PUBLISH_ITWIN }}

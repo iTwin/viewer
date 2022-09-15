@@ -3,46 +3,21 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  BrowserAuthorizationClientConfiguration,
-  FrontendAuthorizationClient,
-} from "@bentley/frontend-authorization-client";
-import {
-  BentleyCloudRpcParams,
-  RpcRoutingToken,
-} from "@bentley/imodeljs-common";
-import {
+import type { BentleyCloudRpcParams } from "@itwin/core-common";
+import type {
   BlankViewerProps,
-  ItwinViewerCommonParams,
-  ViewerProps,
+  ConnectedViewerProps,
+  ViewerAuthorizationClient,
+  ViewerCommonProps,
+  XOR,
 } from "@itwin/viewer-react";
-import { UserManager } from "oidc-client";
-
-/**
- * Authorization options. Must provide one.
- */
-export interface WebAuthorizationOptions {
-  /** provide an existing iTwin.js authorization client */
-  oidcClient?: FrontendAuthorizationClient;
-  /** provide configuration for an oidc client to be managed within the Viewer */
-  config?: BrowserAuthorizationClientConfiguration;
-  /** reference to a function that returns a pre-configured oidc UserManager */
-  getUserManagerFunction?: () => UserManager;
-}
-
-/**
- * List of possible hosted backends that the iTwin Viewer can use
- */
-export enum IModelBackend {
-  GeneralPurpose = "general-purpose-imodeljs-backend",
-}
 
 /**
  * Hosted backend configuration
  */
 export interface HostedBackendConfig {
   /* title for rpc config */
-  title: IModelBackend | string;
+  title: string;
   /* in the form "vx.x" */
   version: string;
 }
@@ -60,32 +35,19 @@ export interface CustomBackendConfig {
 export interface IModelBackendOptions {
   hostedBackend?: HostedBackendConfig;
   customBackend?: CustomBackendConfig;
-  buddiRegion?: number;
-  buddiServer?: string;
 }
 
-export interface WebViewerPropsFull extends ViewerProps {
-  /** routing token for rpcs */
-  rpcRoutingToken?: RpcRoutingToken;
+export type WebInitializerParams = ViewerCommonProps & {
   /** authorization configuration */
-  authConfig: WebAuthorizationOptions;
-  /** options to override the default backend (general-purpose-imodeljs-backend) */
+  authClient: ViewerAuthorizationClient;
+  /** options to override the default backend from iTwin Platform */
   backend?: IModelBackendOptions;
-}
+};
 
-// TODO remove this once we support opening snapshots remotely
-export type WebViewerProps = Omit<WebViewerPropsFull, "snapshotPath">;
+export type WebViewerProps = XOR<ConnectedViewerProps, BlankViewerProps> &
+  WebInitializerParams;
 
-export interface WebBlankViewerProps extends BlankViewerProps {
-  /** authorization configuration */
-  authConfig: WebAuthorizationOptions;
-}
-
-export interface ItwinViewerParams extends ItwinViewerCommonParams {
+export interface ItwinViewerParams extends WebInitializerParams {
   /** id of the html element where the viewer should be rendered */
   elementId: string;
-  /** routing token for rpcs */
-  rpcRoutingToken?: RpcRoutingToken;
-  /** authorization configuration */
-  authConfig: WebAuthorizationOptions;
 }

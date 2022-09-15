@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Subheading, Subheading2 } from "@bentley/ui-core";
+import { Headline, Subheading, Title } from "@itwin/itwinui-react";
 import classNames from "classnames";
 import React from "react";
 import { Helmet } from "react-helmet-async";
@@ -34,12 +34,12 @@ export const FallbackUi = ({
       {withHelmet && <Helmet title={title} />}
       <div className={styles.content}>
         <img src={imageSource} alt={imageAlt} data-testid="test-fallback-img" />
-        <p className={styles.title} data-testid="test-fallback-title">
-          <Subheading2>{title}</Subheading2>
-        </p>
-        <p className={styles.message} data-testid="test-fallback-text">
+        <Headline className={styles.title} data-testid="test-fallback-title">
+          <Title>{title}</Title>
+        </Headline>
+        <Headline className={styles.message} data-testid="test-fallback-text">
           <Subheading dangerouslySetInnerHTML={{ __html: innerText }} />
-        </p>
+        </Headline>
       </div>
     </div>
   );

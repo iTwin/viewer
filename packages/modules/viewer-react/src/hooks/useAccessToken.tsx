@@ -1,0 +1,43 @@
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
+
+import type { AccessToken } from "@itwin/core-bentley";
+import { useEffect, useState } from "react";
+
+import { ViewerAuthorization } from "../services/auth";
+import { useIsMounted } from "./useIsMounted";
+
+export const useAccessToken = () => {
+  const [accessToken, setAccessToken] = useState<AccessToken>();
+  const isMounted = useIsMounted();
+
+  useEffect(() => {
+    const getAccessToken = async () => {
+      try {
+        const token = await ViewerAuthorization.client?.getAccessToken();
+        setAccessToken(token);
+      } catch {}
+    };
+    void getAccessToken();
+  }, []);
+
+  useEffect(() => {
+    const removeListener =
+      ViewerAuthorization.client?.onAccessTokenChanged.addListener(
+        (token: AccessToken) => {
+          if (isMounted.current) {
+            setAccessToken(token);
+          }
+        }
+      );
+    return () => {
+      if (removeListener) {
+        removeListener();
+      }
+    };
+  }, [isMounted]);
+
+  return accessToken;
+};

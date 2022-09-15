@@ -6,324 +6,166 @@
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
-import {
-  BlankConnection,
-  BlankConnectionProps,
-  IModelApp,
-  IModelConnection,
-  SnapshotConnection,
-  ViewState,
-} from "@bentley/imodeljs-frontend";
-import {
-  BackstageActionItem,
-  BackstageItemUtilities,
-  BackstageStageLauncher,
-} from "@bentley/ui-abstract";
-import {
-  StateManager,
-  SyncUiEventDispatcher,
-  UiFramework,
-} from "@bentley/ui-framework";
-import { useErrorManager } from "@itwin/error-handling-react";
-import { withAITracking } from "@microsoft/applicationinsights-react-js";
+import { StateManager, UiFramework } from "@itwin/appui-react";
+import type { IModelConnection } from "@itwin/core-frontend";
+import { BlankConnection, IModelApp } from "@itwin/core-frontend";
+import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
-import { useIsMounted, useTheme, useUiProviders } from "../../hooks";
-import { openRemoteImodel } from "../../services/iModel";
-import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
-import { ai } from "../../services/telemetry/TelemetryService";
 import {
-  BlankConnectionViewState,
-  IModelLoaderParams,
-  ViewCreator3dOptions,
-  ViewerBackstageItem,
-  ViewerFrontstage,
+  useFrontstages,
+  useIsMounted,
+  useTheme,
+  useUiProviders,
+} from "../../hooks";
+import {
+  getAndSetViewState,
+  openLocalIModel,
+  openRemoteIModel,
+} from "../../services/iModel";
+import { ViewerPerformance } from "../../services/telemetry";
+import type {
+  BlankViewerProps,
+  ConnectedViewerProps,
+  FileViewerProps,
+  LoaderProps,
 } from "../../types";
-import { DefaultFrontstage } from "../app-ui/frontstages/DefaultFrontstage";
-import { IModelBusy, IModelViewer } from ".";
+import { IModelViewer } from "./IModelViewer";
 
-export interface ModelLoaderProps extends IModelLoaderParams {
-  contextId?: string;
-  iModelId?: string;
-  changeSetId?: string;
-  appInsightsKey?: string;
-  snapshotPath?: string;
-  blankConnection?: BlankConnectionProps;
-  blankConnectionViewState?: BlankConnectionViewState;
-}
+type ModelLoaderProps = Partial<
+  ConnectedViewerProps & FileViewerProps & BlankViewerProps
+> &
+  LoaderProps;
 
-const Loader: React.FC<ModelLoaderProps> = React.memo(
+const IModelLoader = React.memo(
   ({
     iModelId,
-    contextId,
+    iTwinId,
     changeSetId,
-    defaultUiConfig,
     onIModelConnected,
-    snapshotPath,
+    filePath,
     frontstages,
+    defaultUiConfig,
     backstageItems,
-    uiFrameworkVersion,
     viewportOptions,
     blankConnection,
     blankConnectionViewState,
     uiProviders,
     theme,
     viewCreatorOptions,
+    loadingComponent,
   }: ModelLoaderProps) => {
     const [error, setError] = useState<Error>();
-    const [finalFrontstages, setFinalFrontstages] =
-      useState<ViewerFrontstage[]>();
-    const [finalBackstageItems, setFinalBackstageItems] =
-      useState<ViewerBackstageItem[]>();
-    const [viewState, setViewState] = useState<ViewState>();
-    const [noConnection, setNoConnection] = useState<boolean>(false);
     const [connection, setConnection] = useState<IModelConnection>();
     const isMounted = useIsMounted();
-
-    useUiProviders(uiProviders, defaultUiConfig);
-    useTheme(theme);
-
-    // trigger error boundary when fatal error is thrown
-    const errorManager = useErrorManager({});
-    useEffect(() => {
-      setError(errorManager.fatalError);
-    }, [errorManager.fatalError]);
-
-    /**
-     * Initialize a blank connection and viewState
-     * @param blankConnection
-     */
-    const initBlankConnection = (
-      blankConnection: BlankConnectionProps,
-      onIModelConnected?: (iModel: IModelConnection) => void
-    ) => {
-      const imodelConnection = BlankConnection.create(blankConnection);
-      UiFramework.setIModelConnection(imodelConnection);
-
-      if (onIModelConnected) {
-        onIModelConnected(imodelConnection);
-      }
-      setConnection(imodelConnection);
-    };
-
-    const getViewState = useCallback(async () => {
-      if (viewportOptions?.viewState) {
-        if (typeof viewportOptions.viewState === "function") {
-          setViewState(viewportOptions.viewState());
-        } else {
-          setViewState(viewportOptions.viewState);
-        }
-        return;
-      }
-      if (connection) {
-        let defaultViewState: ViewState;
-        if (connection.isBlankConnection()) {
-          defaultViewState = createBlankViewState(
-            connection,
-            blankConnectionViewState
-          );
-        } else {
-          // attempt to construct a default viewState
-          const viewCreator = new ViewCreator3d(connection);
-
-          const options: ViewCreator3dOptions = viewCreatorOptions
-            ? { ...viewCreatorOptions }
-            : { useSeedView: true };
-
-          if (options.useSeedView === undefined) {
-            options.useSeedView = true;
-          }
-
-          defaultViewState = await viewCreator.createDefaultView(options);
-          UiFramework.setActiveSelectionScope("top-assembly");
-        }
-
-        // Should not be undefined
-        if (!defaultViewState) {
-          throw new Error("No default view state for the imodel!");
-        }
-
-        // Set default view state
-        UiFramework.setDefaultViewState(defaultViewState);
-        setViewState(defaultViewState);
-      }
-    }, [
-      connection,
-      viewportOptions,
-      blankConnectionViewState,
-      viewCreatorOptions,
-    ]);
-
-    useEffect(() => {
-      void getViewState();
-    }, [getViewState]);
-
-    useEffect(() => {
-      const getModelConnection = async () => {
-        // first check to see if some other frontstage is defined as the default
-        // allow fronstages other than the default viewport to continue to render if so
-        if (frontstages) {
-          const defaultFrontstages = frontstages.filter(
-            (frontstage) => frontstage.default
-          );
-          if (defaultFrontstages.length > 0) {
-            // there should only be one, but check if any default frontstage requires an iModel connection
-            let requiresConnection = false;
-            for (let i = 0; i < defaultFrontstages.length; i++) {
-              if (defaultFrontstages[i].requiresIModelConnection) {
-                requiresConnection = true;
-                break;
-              }
-            }
-            if (!requiresConnection) {
-              // allow to continue to render
-              setNoConnection(true);
-              return;
-            }
-          }
-        }
-
-        if (blankConnection) {
-          return initBlankConnection(blankConnection, onIModelConnected);
-        }
-
-        if (!(contextId && iModelId) && !snapshotPath) {
-          throw new Error(
-            IModelApp.i18n.translateWithNamespace(
-              "iTwinViewer",
-              "missingConnectionProps"
-            )
-          );
-        }
-
-        let imodelConnection: IModelConnection | undefined;
-        // create a new imodelConnection for the passed project and imodel ids
-        // TODO add the ability to open a BriefcaseConnection for Electron apps
-        if (snapshotPath) {
-          imodelConnection = await SnapshotConnection.openFile(snapshotPath);
-        } else if (contextId && iModelId) {
-          imodelConnection = await openRemoteImodel(
-            contextId,
-            iModelId,
-            changeSetId
-          );
-        }
-        if (imodelConnection) {
-          // Tell the SyncUiEventDispatcher and StateManager about the iModelConnection
-          UiFramework.setIModelConnection(imodelConnection);
-
-          SyncUiEventDispatcher.initializeConnectionEvents(imodelConnection);
-
-          if (onIModelConnected) {
-            onIModelConnected(imodelConnection);
-          }
-
-          setConnection(imodelConnection);
-        }
-      };
-
-      const closeIModelConnection = async () => {
-        const iModelConn = UiFramework.getIModelConnection();
-        if (iModelConn) {
-          await iModelConn.close();
-        }
-      };
-
-      getModelConnection().catch((error) => {
-        errorManager.throwFatalError(error);
+    const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
+      useFrontstages({
+        frontstages,
+        defaultUiConfig,
+        viewportOptions,
+        viewCreatorOptions,
+        blankConnectionViewState,
       });
 
-      return () => {
-        if (!isMounted.current) {
-          closeIModelConnection().catch(() => {
-            /* no-op */
-          });
+    useUiProviders(uiProviders);
+    useTheme(theme);
+
+    const getModelConnection = useCallback(async (): Promise<
+      IModelConnection | undefined
+    > => {
+      if (!(iTwinId && iModelId) && !filePath && !blankConnection) {
+        throw new Error(
+          IModelApp.localization.getLocalizedStringWithNamespace(
+            "iTwinViewer",
+            "missingConnectionProps"
+          )
+        );
+      }
+
+      ViewerPerformance.addMark("IModelConnectionStarted");
+      ViewerPerformance.addMeasure(
+        "IModelConnecting",
+        "ViewerStarting",
+        "IModelConnectionStarted"
+      );
+      let imodelConnection: IModelConnection | undefined;
+      // create a new imodelConnection for the passed project and imodel ids or local file
+      if (blankConnection) {
+        imodelConnection = BlankConnection.create(blankConnection);
+      } else if (filePath) {
+        imodelConnection = await openLocalIModel(filePath);
+      } else if (iTwinId && iModelId) {
+        imodelConnection = await openRemoteIModel(
+          iTwinId,
+          iModelId,
+          changeSetId
+        );
+      }
+      ViewerPerformance.addMark("IModelConnection");
+      ViewerPerformance.addMeasure(
+        "IModelConnected",
+        "ViewerStarting",
+        "IModelConnection"
+      );
+      if (imodelConnection && isMounted.current) {
+        // Tell the SyncUiEventDispatcher and StateManager about the iModelConnection
+        UiFramework.setIModelConnection(imodelConnection, true);
+
+        if (onIModelConnected) {
+          await onIModelConnected(imodelConnection);
         }
-      };
+        setConnection(imodelConnection);
+        return imodelConnection;
+      }
+      return;
     }, [
-      contextId,
+      iTwinId,
       iModelId,
       changeSetId,
-      snapshotPath,
-      frontstages,
+      filePath,
       blankConnection,
-      blankConnectionViewState,
       isMounted,
+      onIModelConnected,
     ]);
 
     useEffect(() => {
-      const allBackstageItems: ViewerBackstageItem[] = [];
-      if (backstageItems) {
-        backstageItems.forEach((backstageItem) => {
-          // check for label i18n key and translate if needed
-          if (backstageItem.labeli18nKey) {
-            let newItem;
-            if ((backstageItem as BackstageStageLauncher).stageId) {
-              newItem = BackstageItemUtilities.createStageLauncher(
-                (backstageItem as BackstageStageLauncher).stageId,
-                backstageItem.groupPriority,
-                backstageItem.itemPriority,
-                IModelApp.i18n.translate(backstageItem.labeli18nKey),
-                backstageItem.subtitle,
-                backstageItem.icon
-              );
-            } else {
-              newItem = BackstageItemUtilities.createActionItem(
-                backstageItem.id,
-                backstageItem.groupPriority,
-                backstageItem.itemPriority,
-                (backstageItem as BackstageActionItem).execute,
-                IModelApp.i18n.translate(backstageItem.labeli18nKey),
-                backstageItem.subtitle,
-                backstageItem.icon
-              );
-            }
-            allBackstageItems.push(newItem);
-          } else {
-            allBackstageItems.push(backstageItem);
-          }
-        });
-      }
+      let prevConnection: IModelConnection | undefined;
 
-      if (viewState) {
-        allBackstageItems.unshift({
-          stageId: "DefaultFrontstage",
-          id: "DefaultFrontstage",
-          groupPriority: 100,
-          itemPriority: 10,
-          label: IModelApp.i18n.translate(
-            "iTwinViewer:backstage.mainFrontstage"
-          ),
-        });
-      }
+      void getModelConnection()
+        .then((connection) => (prevConnection = connection))
+        .catch(setError);
 
-      setFinalBackstageItems(allBackstageItems);
-    }, [backstageItems, viewState]);
+      const mounted = isMounted.current;
+      return () => {
+        if (prevConnection) {
+          void prevConnection.close();
+          prevConnection = undefined;
+        }
+        if (mounted) {
+          setConnection(undefined);
+        }
+      };
+    }, [getModelConnection, isMounted]);
 
     useEffect(() => {
-      let allFrontstages: ViewerFrontstage[] = [];
-      if (frontstages) {
-        allFrontstages = [...frontstages];
-      }
-
-      if (viewState) {
-        // initialize the DefaultFrontstage that contains the views that we want
-        const defaultFrontstageProvider = new DefaultFrontstage(
-          [viewState],
-          defaultUiConfig,
-          viewportOptions
+      if (customDefaultFrontstage && connection) {
+        // there is a custom default frontstage so we need to generate a viewstate for backwards compatibility
+        // TODO next revisit/remove in the next major release
+        void getAndSetViewState(
+          connection,
+          viewportOptions,
+          viewCreatorOptions,
+          blankConnectionViewState
         );
-
-        // add the default frontstage first so that it's default status can be overridden
-        allFrontstages.unshift({
-          provider: defaultFrontstageProvider,
-          default: true,
-        });
       }
-
-      setFinalFrontstages(allFrontstages);
-    }, [frontstages, viewportOptions, viewState, defaultUiConfig]);
+    }, [
+      customDefaultFrontstage,
+      connection,
+      viewportOptions,
+      viewCreatorOptions,
+      blankConnectionViewState,
+    ]);
 
     if (error) {
       throw error;
@@ -331,19 +173,22 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
       return (
         <div className="itwin-viewer-container">
           {finalFrontstages &&
-          finalBackstageItems &&
-          (viewState || noConnection) &&
+          (connection || noConnectionRequired) &&
           StateManager.store ? (
             <Provider store={StateManager.store}>
               <IModelViewer
                 frontstages={finalFrontstages}
-                backstageItems={finalBackstageItems}
-                uiFrameworkVersion={uiFrameworkVersion}
+                backstageItems={backstageItems}
               />
             </Provider>
           ) : (
             <div className="itwin-viewer-loading-container">
-              <IModelBusy />
+              {loadingComponent ?? (
+                <SvgIModelLoader
+                  data-testid="loader-wrapper"
+                  className="itwin-viewer-loading-icon"
+                />
+              )}
             </div>
           )}
         </div>
@@ -351,20 +196,5 @@ const Loader: React.FC<ModelLoaderProps> = React.memo(
     }
   }
 );
-
-const TrackedLoader = withAITracking(
-  ai.reactPlugin,
-  Loader,
-  "IModelLoader",
-  "tracked-loader"
-);
-
-const IModelLoader: React.FC<ModelLoaderProps> = (props: ModelLoaderProps) => {
-  if (props.appInsightsKey) {
-    return <TrackedLoader {...props} />;
-  } else {
-    return <Loader {...props} />;
-  }
-};
 
 export default IModelLoader;

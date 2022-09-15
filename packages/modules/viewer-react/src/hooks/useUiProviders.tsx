@@ -3,39 +3,20 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { PropertyGridUiItemsProvider } from "@bentley/property-grid-react";
-import { TreeWidgetUiItemsProvider } from "@bentley/tree-widget-react";
-import { UiItemsManager, UiItemsProvider } from "@bentley/ui-abstract";
+import type { UiItemsProvider } from "@itwin/appui-abstract";
+import { UiItemsManager } from "@itwin/appui-abstract";
 import { useEffect } from "react";
 
-import { ItwinViewerUi } from "../types";
-
-export function useUiProviders(
-  customUiProviders?: UiItemsProvider[],
-  defaultUiConfig?: ItwinViewerUi
-): void {
+export function useUiProviders(uiProviders?: UiItemsProvider[]): void {
   useEffect(() => {
-    const defaultProviders: UiItemsProvider[] = [];
-
-    if (!defaultUiConfig?.hideTreeView) {
-      defaultProviders.push(new TreeWidgetUiItemsProvider());
-    }
-    if (!defaultUiConfig?.hidePropertyGrid) {
-      defaultProviders.push(new PropertyGridUiItemsProvider());
-    }
-
-    const uiProviders = customUiProviders
-      ? customUiProviders.concat(defaultProviders)
-      : defaultProviders;
-
-    uiProviders.forEach((uiProvider) => {
+    uiProviders?.forEach((uiProvider) => {
       UiItemsManager.register(uiProvider);
     });
 
     return () => {
-      uiProviders.forEach((uiProvider) => {
+      uiProviders?.forEach((uiProvider) => {
         UiItemsManager.unregister(uiProvider.id);
       });
     };
-  }, [customUiProviders, defaultUiConfig]);
+  }, [uiProviders]);
 }

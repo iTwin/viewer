@@ -1,6 +1,76 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Mon, 16 Aug 2021 15:22:00 GMT and should not be manually modified.
+This log was last generated on Mon, 20 Jun 2022 14:39:09 GMT and should not be manually modified.
+
+## 3.0.0
+Mon, 20 Jun 2022 14:39:09 GMT
+
+### Breaking changes
+
+- See [release notes](https://github.com/iTwin/viewer/blob/master/releases/CHANGELOG-3.0.md).
+
+## 2.0.3
+Mon, 16 May 2022 15:03:07 GMT
+
+### Patches
+
+- Fix env var spelling
+
+## 2.0.2
+Mon, 07 Feb 2022 13:54:26 GMT
+
+### Patches
+
+- Bug fixes
+
+## 2.0.1
+Tue, 25 Jan 2022 22:20:19 GMT
+
+### Patches
+
+- Update to always pull in latest version of viewer
+
+## 2.0.0
+Tue, 25 Jan 2022 20:14:40 GMT
+
+### Breaking changes
+
+- Upgrade to iTwin.js 3.0
+
+## 1.4.1
+Thu, 16 Dec 2021 21:14:32 GMT
+
+### Patches
+
+- Update the status bar item UX
+
+## 1.4.0
+Tue, 07 Dec 2021 19:40:48 GMT
+
+### Minor changes
+
+- Add support for local briefcases
+
+## 1.3.2
+Wed, 29 Sep 2021 17:19:00 GMT
+
+### Patches
+
+- Fix issues with duplicate menu listeners
+
+## 1.3.1
+Tue, 28 Sep 2021 22:45:05 GMT
+
+### Patches
+
+- Update localized strings
+
+## 1.3.0
+Tue, 28 Sep 2021 21:15:48 GMT
+
+### Minor changes
+
+- Upgrade the UX
 
 ## 1.2.0
 Mon, 16 Aug 2021 15:22:00 GMT

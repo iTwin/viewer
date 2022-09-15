@@ -5,8 +5,7 @@
 
 import "@testing-library/jest-dom/extend-expect";
 
-import { SnapshotConnection } from "@bentley/imodeljs-frontend";
-import { UiCore } from "@bentley/ui-core";
+import { UiCore } from "@itwin/core-react";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
@@ -14,58 +13,47 @@ import { BaseViewer } from "../..";
 import * as IModelService from "../../services/iModel/IModelService";
 
 jest.mock("../../services/iModel/IModelService");
-jest.mock("@bentley/ui-framework", () => {
+jest.mock("@itwin/appui-react", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/ui-framework"),
+    ...jest.createMockFromModule<any>("@itwin/appui-react"),
     UiFramework: {
-      ...jest.createMockFromModule<any>("@bentley/ui-framework").UiFramework,
+      ...jest.createMockFromModule<any>("@itwin/appui-react").UiFramework,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
   };
 });
-jest.mock("@bentley/presentation-frontend", () => {
+jest.mock("@itwin/presentation-frontend", () => {
   return {
-    ...jest.createMockFromModule<any>("@bentley/presentation-frontend"),
+    ...jest.createMockFromModule<any>("@itwin/presentation-frontend"),
     Presentation: {
-      ...jest.createMockFromModule<any>("@bentley/presentation-frontend")
+      ...jest.createMockFromModule<any>("@itwin/presentation-frontend")
         .Presentation,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
   };
 });
-jest.mock("react-i18next");
 
-jest.mock("@microsoft/applicationinsights-react-js", () => ({
-  ReactPlugin: jest.fn(),
-  withAITracking: (
-    _reactPlugin: any | undefined, // eslint-disable-line no-unused-vars
-    component: any,
-    _componentName?: string, // eslint-disable-line no-unused-vars
-    _className?: string // eslint-disable-line no-unused-vars
-  ) => component,
-}));
-
-jest.mock("@bentley/imodeljs-frontend", () => {
+jest.mock("@itwin/core-frontend", () => {
   return {
+    ...jest.createMockFromModule<any>("@itwin/core-frontend"),
     IModelApp: {
+      initialized: true,
       startup: jest.fn(),
       telemetry: {
         addClient: jest.fn(),
       },
-      i18n: {
-        registerNamespace: jest.fn().mockReturnValue({
-          readFinished: jest.fn().mockResolvedValue(true),
-        }),
-        languageList: jest.fn().mockReturnValue(["en-US"]),
+      localization: {
+        registerNamespace: jest.fn().mockResolvedValue(true),
+        getLanguageList: jest.fn().mockReturnValue(["en-US"]),
+        getLocalizedString: jest.fn(),
         unregisterNamespace: jest.fn(),
+        translateWithNamespace: jest.fn(),
       },
       uiAdmin: {
         updateFeatureFlags: jest.fn(),
       },
       authorizationClient: {
-        hasSignedIn: true,
-        isAuthorized: true,
-        onUserStateChanged: {
+        onAccessTokenChanged: {
           addListener: jest.fn(),
         },
       },
@@ -92,22 +80,34 @@ jest.mock("@bentley/imodeljs-frontend", () => {
     RotationMode: {},
     AccuDraw: class {},
     ToolAdmin: class {},
-  };
-});
-
-jest.mock("../../services/telemetry/TelemetryService");
-jest.mock("@bentley/property-grid-react", () => {
-  return {
-    ...jest.createMockFromModule<any>("@bentley/property-grid-react"),
-    PropertyGridManager: {
-      ...jest.createMockFromModule<any>("@bentley/property-grid-react")
-        .PropertyGridManager,
-      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+    BriefcaseConnection: {
+      openFile: jest.fn(),
     },
   };
 });
 
-const mockProjectId = "123";
+jest.mock("../../services/BaseInitializer", () => {
+  return {
+    BaseInitializer: {
+      authClient: {
+        hasSignedIn: true,
+        isAuthorized: true,
+        onAccessTokenChanged: {
+          addListener: jest.fn(),
+        },
+      },
+      initialize: jest.fn().mockResolvedValue(true),
+      cancel: jest.fn(),
+      shutdown: jest.fn(),
+      initialized: Promise.resolve(),
+    },
+  };
+});
+jest.mock("../../hooks/useAccessToken", () => {
+  return { useAccessToken: () => "mockToken" };
+});
+
+const mockITwinId = "123";
 const mockIModelId = "456";
 
 describe("BaseViewer", () => {
@@ -118,9 +118,13 @@ describe("BaseViewer", () => {
     }
   });
 
-  it("loads the model loader for the specified contextId and iModelId", async () => {
+  it("loads the model loader for the specified iTwinId and iModelId", async () => {
     const { getByTestId } = render(
-      <BaseViewer contextId={mockProjectId} iModelId={mockIModelId} />
+      <BaseViewer
+        iTwinId={mockITwinId}
+        iModelId={mockIModelId}
+        enablePerformanceMonitors={false}
+      />
     );
 
     const viewerContainer = await waitFor(() => getByTestId("loader-wrapper"));
@@ -131,69 +135,33 @@ describe("BaseViewer", () => {
   it("queries the iModel with the provided changeSetId", async () => {
     const { getByTestId } = render(
       <BaseViewer
-        contextId={mockProjectId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         productId={"0000"}
         changeSetId={"123"}
+        enablePerformanceMonitors={false}
       />
     );
 
     await waitFor(() => getByTestId("loader-wrapper"));
 
-    expect(IModelService.openRemoteImodel).toHaveBeenCalledWith(
-      mockProjectId,
+    expect(IModelService.openRemoteIModel).toHaveBeenCalledWith(
+      mockITwinId,
       mockIModelId,
       "123"
     );
   });
 
-  it("ensures that either a contextId/iModelId combination or a local snapshot is provided", async () => {
-    const events = {
-      onError: (event: ErrorEvent) => {
-        event.preventDefault();
-      },
-    };
+  it("renders and attempts to create a briefcase connection or snapshot connection if a local path is provided", async () => {
+    const fileName = "/path/to/snapshot";
 
-    jest.spyOn(events, "onError");
-
-    window.addEventListener("error", events.onError);
-
-    const { getByTestId } = render(<BaseViewer />);
-
-    const loader = await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(loader).not.toBeInTheDocument();
-    expect(events.onError).toHaveBeenCalled();
-
-    window.removeEventListener("error", events.onError);
-  });
-
-  it("renders and establishes a SnapshotConnection if a local snapshot is provided", async () => {
-    const snapshotPath = "/path/to/snapshot";
-
-    const { getByTestId } = render(<BaseViewer snapshotPath={snapshotPath} />);
-
-    const loader = await waitFor(() => getByTestId("loader-wrapper"));
-
-    expect(loader).toBeInTheDocument();
-    expect(SnapshotConnection.openFile).toHaveBeenCalledWith(snapshotPath);
-  });
-
-  it("executes a callback after IModelApp is initialized", async () => {
-    const callbacks = {
-      onIModelAppInit: jest.fn(),
-    };
     const { getByTestId } = render(
-      <BaseViewer
-        contextId={mockProjectId}
-        iModelId={mockIModelId}
-        onIModelAppInit={callbacks.onIModelAppInit}
-      />
+      <BaseViewer filePath={fileName} enablePerformanceMonitors={false} />
     );
 
     const loader = await waitFor(() => getByTestId("loader-wrapper"));
 
     expect(loader).toBeInTheDocument();
-    expect(callbacks.onIModelAppInit).toHaveBeenCalled();
+    expect(IModelService.openLocalIModel).toHaveBeenCalledWith(fileName);
   });
 });

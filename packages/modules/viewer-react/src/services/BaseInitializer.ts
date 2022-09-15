@@ -3,30 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ClientRequestContext } from "@bentley/bentleyjs-core";
-import { Config } from "@bentley/bentleyjs-core";
-import {
-  IModelReadRpcInterface,
-  IModelTileRpcInterface,
-  RpcInterface,
-  RpcInterfaceDefinition,
-  SnapshotIModelRpcInterface,
-} from "@bentley/imodeljs-common";
-import {
-  FitViewTool,
-  IModelApp,
-  IModelAppOptions,
-  ScreenViewport,
-  StandardViewId,
-} from "@bentley/imodeljs-frontend";
-import { I18N } from "@bentley/imodeljs-i18n";
-import { UrlDiscoveryClient } from "@bentley/itwin-client";
-import { PresentationRpcInterface } from "@bentley/presentation-common";
-import { Presentation } from "@bentley/presentation-frontend";
-import { PropertyGridManager } from "@bentley/property-grid-react";
-import { TreeWidget } from "@bentley/tree-widget-react";
-import { UiComponents } from "@bentley/ui-components";
-import { UiCore } from "@bentley/ui-core";
 import {
   AppNotificationManager,
   ConfigurableUiManager,
@@ -34,41 +10,33 @@ import {
   FrameworkUiAdmin,
   StateManager,
   UiFramework,
-} from "@bentley/ui-framework";
+} from "@itwin/appui-react";
+import { UiComponents } from "@itwin/components-react";
+import type { RpcInterface, RpcInterfaceDefinition } from "@itwin/core-common";
+import {
+  IModelReadRpcInterface,
+  IModelTileRpcInterface,
+} from "@itwin/core-common";
+import type { IModelAppOptions } from "@itwin/core-frontend";
+import { AccuSnap, SnapMode } from "@itwin/core-frontend";
+import { IModelApp } from "@itwin/core-frontend";
+import { ITwinLocalization } from "@itwin/core-i18n";
+import { UiCore } from "@itwin/core-react";
+import { FrontendIModelsAccess } from "@itwin/imodels-access-frontend";
+import { IModelsClient } from "@itwin/imodels-client-management";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
+import { Presentation } from "@itwin/presentation-frontend";
+import { RealityDataAccessClient } from "@itwin/reality-data-client";
 
-import { ItwinViewerInitializerParams } from "../types";
+import { ViewerPerformance } from "../services/telemetry";
+import type { ViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
-import { ai, trackEvent } from "./telemetry/TelemetryService";
 
 // initialize required iTwin.js services
 export class BaseInitializer {
   private static _initialized: Promise<void>;
   private static _initializing = false;
-  private static _iModelDataErrorMessage: string | undefined;
-  private static _synchronizerRootUrl: string | undefined;
   private static _cancel: (() => void) | undefined;
-
-  public static async getSynchronizerUrl(
-    contextId: string,
-    iModelId: string
-  ): Promise<string> {
-    if (!this._synchronizerRootUrl) {
-      const urlDiscoveryClient = new UrlDiscoveryClient();
-      this._synchronizerRootUrl = await urlDiscoveryClient.discoverUrl(
-        new ClientRequestContext(),
-        "itwinbridgeportal",
-        Config.App.get("imjs_buddi_resolve_url_using_region")
-      );
-    }
-    const portalUrl = `${this._synchronizerRootUrl}/${contextId}/${iModelId}`;
-    return IModelApp.i18n.translateWithNamespace(
-      "iTwinViewer",
-      "iModels.synchronizerLink",
-      {
-        bridgePortal: portalUrl,
-      }
-    );
-  }
 
   /** expose initialized promise */
   public static get initialized(): Promise<void> {
@@ -77,73 +45,41 @@ export class BaseInitializer {
 
   /** expose initialized cancel method */
   public static cancel: () => void = () => {
-    if (BaseInitializer._initializing) {
-      if (BaseInitializer._cancel) {
-        BaseInitializer._cancel();
+    if (BaseInitializer._cancel) {
+      BaseInitializer._cancel();
+    }
+    try {
+      Presentation.presentation.dispose();
+    } catch (err) {
+      // Do nothing, its possible that we never started.
+    }
+    try {
+      Presentation.terminate();
+    } catch (err) {
+      // Do nothing, its possible that we never started.
+    }
+    try {
+      if (UiFramework.initialized) {
+        UiFramework.terminate();
       }
-      try {
-        Presentation.presentation.dispose();
-      } catch (err) {
-        // Do nothing, its possible that we never started.
+    } catch (err) {
+      // Do nothing.
+    }
+    try {
+      if (UiComponents.initialized) {
+        UiComponents.terminate();
       }
-      try {
-        Presentation.terminate();
-      } catch (err) {
-        // Do nothing, its possible that we never started.
-      }
-      try {
-        if (UiFramework.initialized) {
-          UiFramework.terminate();
-        }
-      } catch (err) {
-        // Do nothing.
-      }
-      try {
-        if (UiComponents.initialized) {
-          UiComponents.terminate();
-        }
-      } catch (err) {
-        // Do nothing.
-      }
-      try {
-        if (UiCore.initialized) {
-          UiCore.terminate();
-        }
-      } catch (err) {
-        // Do nothing
-      }
-      try {
-        IModelApp.i18n
-          .languageList()
-          .forEach((ns) => IModelApp.i18n.unregisterNamespace(ns));
-      } catch (err) {
-        // Do nothing
-      }
-      IModelApp.shutdown().catch(() => {
-        // Do nothing, its possible that we never started.
-      });
+    } catch (err) {
+      // Do nothing
+    }
+    try {
+      IModelApp.localization
+        .getLanguageList()
+        .forEach((ns) => IModelApp.localization.unregisterNamespace(ns));
+    } catch (err) {
+      // Do nothing
     }
   };
-
-  /** Message to display when there are iModel data-related errors */
-  public static async getIModelDataErrorMessage(
-    contextId: string,
-    iModelId: string,
-    prefix?: string
-  ): Promise<string> {
-    if (this._iModelDataErrorMessage !== undefined) {
-      return prefix
-        ? `${prefix} ${this._iModelDataErrorMessage}`
-        : this._iModelDataErrorMessage;
-    }
-    const synchronizerPortalUrl = await this.getSynchronizerUrl(
-      contextId,
-      iModelId
-    );
-    return prefix
-      ? `${prefix} ${synchronizerPortalUrl}`
-      : synchronizerPortalUrl;
-  }
 
   /** shutdown IModelApp */
   static async shutdown(): Promise<void> {
@@ -152,10 +88,15 @@ export class BaseInitializer {
 
   /** initialize required iTwin.js services */
   public static async initialize(
-    viewerOptions?: ItwinViewerInitializerParams
+    viewerOptions?: ViewerInitializerParams
   ): Promise<void> {
+    if (!IModelApp.initialized) {
+      throw new Error(
+        "IModelApp must be initialized prior to rendering the Base Viewer"
+      );
+    }
     if (UiCore.initialized && !this._initializing) {
-      return Promise.resolve();
+      return (this._initialized = Promise.resolve());
     } else if (this._initializing) {
       // in the process of initializing, so return
       return;
@@ -167,25 +108,15 @@ export class BaseInitializer {
     const cancellable = makeCancellable(function* () {
       // Initialize state manager
       // This will setup a singleton store inside the StoreManager class.
-      new StateManager({
-        frameworkState: FrameworkReducer,
-      });
-
-      // fit view by default
-      IModelApp.viewManager.onViewOpen.addOnce((vp: ScreenViewport) => {
-        IModelApp.tools.run(FitViewTool.toolId, vp, true);
-        vp.view.setStandardRotation(StandardViewId.Iso);
-      });
+      if (!StateManager.isInitialized()) {
+        new StateManager({
+          frameworkState: FrameworkReducer,
+        });
+      }
 
       // execute the iModelApp initialization callback if provided
       if (viewerOptions?.onIModelAppInit) {
         viewerOptions.onIModelAppInit();
-      }
-
-      // Add the app's telemetry client if a key was provided
-      if (viewerOptions?.appInsightsKey) {
-        ai.initialize(viewerOptions?.appInsightsKey);
-        IModelApp.telemetry.addClient(ai);
       }
 
       // initialize localization for the app
@@ -196,25 +127,27 @@ export class BaseInitializer {
           viewerOptions.additionalI18nNamespaces
         );
       }
-      const i18nPromises = i18nNamespaces.map(
-        async (ns) => IModelApp.i18n.registerNamespace(ns).readFinished
+      const i18nPromises = i18nNamespaces.map(async (ns) =>
+        IModelApp.localization.registerNamespace(ns)
       );
 
       yield Promise.all(i18nPromises);
 
       // initialize UiCore
-      yield UiCore.initialize(IModelApp.i18n);
+      yield UiCore.initialize(IModelApp.localization);
 
       // initialize UiComponents
-      yield UiComponents.initialize(IModelApp.i18n);
+      yield UiComponents.initialize(IModelApp.localization);
 
       // initialize UiFramework
       // Use undefined so that UiFramework uses StateManager
-      yield UiFramework.initialize(undefined, IModelApp.i18n);
+      yield UiFramework.initialize(undefined);
 
       // initialize Presentation
       yield Presentation.initialize({
-        activeLocale: IModelApp.i18n.languageList()[0],
+        presentation: {
+          activeLocale: IModelApp.localization.getLanguageList()[0],
+        },
       });
 
       // allow uiAdmin to open key-in palette when Ctrl+F2 is pressed - good for manually loading UI providers
@@ -222,18 +155,12 @@ export class BaseInitializer {
 
       ConfigurableUiManager.initialize();
 
-      if (viewerOptions?.appInsightsKey) {
-        trackEvent("iTwinViewer.Viewer.Initialized");
-      }
-
-      yield PropertyGridManager.initialize(IModelApp.i18n);
-
-      yield TreeWidget.initialize(IModelApp.i18n);
-
-      // override the default data error message
-      BaseInitializer._iModelDataErrorMessage =
-        viewerOptions?.iModelDataErrorMessage;
-
+      ViewerPerformance.addMark("BaseViewerStarted");
+      ViewerPerformance.addMeasure(
+        "BaseViewerInitialized",
+        "ViewerStarting",
+        "BaseViewerStarted"
+      );
       console.log("iTwin.js initialized");
     });
 
@@ -244,7 +171,7 @@ export class BaseInitializer {
           throw err;
         }
       })
-      .finally(() => {
+      .finally(async () => {
         BaseInitializer._initializing = false;
         BaseInitializer._cancel = undefined;
       });
@@ -263,7 +190,6 @@ const getSupportedRpcs = (
     IModelReadRpcInterface,
     IModelTileRpcInterface,
     PresentationRpcInterface,
-    SnapshotIModelRpcInterface,
     ...additionalRpcInterfaces,
   ];
 };
@@ -274,25 +200,80 @@ const getSupportedRpcs = (
  * @returns
  */
 export const getIModelAppOptions = (
-  options?: ItwinViewerInitializerParams
+  options?: ViewerInitializerParams
 ): IModelAppOptions => {
   // if ITWIN_VIEWER_HOME is defined, the viewer is likely being served from another origin
-  const viewerHome = (window as any).ITWIN_VIEWER_HOME;
+  const viewerHome = window.ITWIN_VIEWER_HOME;
   if (viewerHome) {
     console.log(`resources served from: ${viewerHome}`);
   }
 
+  const hubAccess =
+    options?.hubAccess ??
+    new FrontendIModelsAccess(
+      new IModelsClient({
+        api: {
+          baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/imodels`,
+        },
+      })
+    );
+
+  const localization =
+    options?.localization ??
+    new ITwinLocalization({
+      urlTemplate:
+        options?.i18nUrlTemplate ??
+        (viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`),
+    });
+
+  const realityDataAccess =
+    options?.realityDataAccess ??
+    new RealityDataAccessClient({
+      baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/realitydata`,
+    });
+
   return {
     applicationId: options?.productId ?? "3098",
+    accuSnap: new ViewerAccuSnap(),
     notifications: new AppNotificationManager(),
     uiAdmin: new FrameworkUiAdmin(),
     rpcInterfaces: getSupportedRpcs(options?.additionalRpcInterfaces ?? []),
-    i18n: new I18N("iModelJs", {
-      urlTemplate: options?.i18nUrlTemplate
-        ? options.i18nUrlTemplate
-        : viewerHome && `${viewerHome}/locales/{{lng}}/{{ns}}.json`,
-    }),
     toolAdmin: options?.toolAdmin,
-    imodelClient: options?.imodelClient,
+    hubAccess,
+    localization,
+    publicPath: viewerHome ? `${viewerHome}/` : "",
+    realityDataAccess,
+    mapLayerOptions: options?.mapLayerOptions,
+    tileAdmin: options?.tileAdmin,
   };
 };
+
+class ViewerAccuSnap extends AccuSnap {
+  public override getActiveSnapModes(): SnapMode[] {
+    // The SnapMode in the UiFramework is a bit mask.
+    const snapMode = UiFramework.getAccudrawSnapMode();
+    const snaps: SnapMode[] = [];
+    if (0 < (snapMode & SnapMode.Bisector)) {
+      snaps.push(SnapMode.Bisector);
+    }
+    if (0 < (snapMode & SnapMode.Center)) {
+      snaps.push(SnapMode.Center);
+    }
+    if (0 < (snapMode & SnapMode.Intersection)) {
+      snaps.push(SnapMode.Intersection);
+    }
+    if (0 < (snapMode & SnapMode.MidPoint)) {
+      snaps.push(SnapMode.MidPoint);
+    }
+    if (0 < (snapMode & SnapMode.Nearest)) {
+      snaps.push(SnapMode.Nearest);
+    }
+    if (0 < (snapMode & SnapMode.NearestKeypoint)) {
+      snaps.push(SnapMode.NearestKeypoint);
+    }
+    if (0 < (snapMode & SnapMode.Origin)) {
+      snaps.push(SnapMode.Origin);
+    }
+    return snaps;
+  }
+}

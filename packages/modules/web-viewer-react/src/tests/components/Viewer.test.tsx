@@ -3,28 +3,29 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
 import {
+  DevToolsRpcInterface,
   IModelReadRpcInterface,
   IModelTileRpcInterface,
-  IModelWriteRpcInterface,
   SnapshotIModelRpcInterface,
-} from "@bentley/imodeljs-common";
-import { IModelAppOptions, WebViewerApp } from "@bentley/imodeljs-frontend";
-import { PresentationRpcInterface } from "@bentley/presentation-common";
-import { ItwinViewerInitializerParams } from "@itwin/viewer-react";
+} from "@itwin/core-common";
+import type { IModelAppOptions } from "@itwin/core-frontend";
+import { IModelApp } from "@itwin/core-frontend";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
+import type { ViewerInitializerParams } from "@itwin/viewer-react";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
 import { Viewer } from "../../components/Viewer";
 import { WebInitializer } from "../../services/Initializer";
-import { IModelBackendOptions } from "../../types";
+import type { IModelBackendOptions } from "../../types";
+import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
 
 jest.mock("@itwin/viewer-react", () => {
   return {
     BaseViewer: jest.fn(() => <div data-testid="mock-div"></div>),
     getIModelAppOptions: (
-      options: ItwinViewerInitializerParams
+      options: ViewerInitializerParams
     ): IModelAppOptions => {
       return {
         applicationId: options?.productId ?? "3098",
@@ -37,19 +38,33 @@ jest.mock("@itwin/viewer-react", () => {
           SnapshotIModelRpcInterface,
           ...(options?.additionalRpcInterfaces ?? []),
         ],
-        i18n: expect.anything(),
+        localization: expect.anything(),
         toolAdmin: options?.toolAdmin,
         authorizationClient: expect.anything(),
       };
     },
     useIsMounted: jest.fn().mockReturnValue(true),
     makeCancellable: jest.requireActual(
-      "@itwin/viewer-react/lib/utilities/MakeCancellable"
+      "@itwin/viewer-react/lib/cjs/utilities/MakeCancellable"
     ).makeCancellable,
+    useBaseViewerInitializer: jest.fn().mockReturnValue(true),
+    getInitializationOptions: jest.fn().mockReturnValue({}),
+    isEqual: jest.fn().mockReturnValue(true),
+    BaseInitializer: {
+      initialize: jest.fn(),
+    },
+    ViewerPerformance: {
+      addMark: jest.fn(),
+      addAndLogMeasure: jest.fn(),
+      enable: jest.fn(),
+    },
+    ViewerAuthorization: {
+      client: {},
+    },
   };
 });
 
-jest.mock("@bentley/imodeljs-frontend", () => {
+jest.mock("@itwin/core-frontend", () => {
   return {
     IModelApp: {
       startup: jest.fn(),
@@ -61,6 +76,7 @@ jest.mock("@bentley/imodeljs-frontend", () => {
           readFinished: jest.fn().mockResolvedValue(true),
         }),
         languageList: jest.fn().mockReturnValue(["en-US"]),
+        translateWithNamespace: jest.fn(),
       },
       uiAdmin: {
         updateFeatureFlags: jest.fn(),
@@ -97,15 +113,10 @@ jest.mock("@bentley/imodeljs-frontend", () => {
   };
 });
 
-const mockProjectId = "123";
+const mockITwinId = "123";
 const mockIModelId = "456";
 
-const authConfig: BrowserAuthorizationClientConfiguration = {
-  clientId: "test-client",
-  scope: "test-scope",
-  responseType: "code",
-  redirectUri: "http://localhost",
-};
+const authClient = new MockAuthorizationClient();
 
 describe("Viewer", () => {
   beforeEach(() => {
@@ -115,42 +126,30 @@ describe("Viewer", () => {
   it("starts the WebViewerApp", async () => {
     const { getByTestId } = render(
       <Viewer
-        authConfig={{ config: authConfig }}
-        contextId={mockProjectId}
+        authClient={authClient}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
-        additionalRpcInterfaces={[IModelWriteRpcInterface]}
+        additionalRpcInterfaces={[DevToolsRpcInterface]}
+        enablePerformanceMonitors={false}
       />
     );
 
     await waitFor(() => getByTestId("mock-div"));
 
-    expect(WebViewerApp.startup).toHaveBeenCalledWith({
-      webViewerApp: {
-        rpcParams: {
-          info: {
-            title: "general-purpose-imodeljs-backend",
-            version: "v2.0",
-          },
-          uriPrefix: "https://api.bentley.com/imodeljs",
-        },
-        authConfig: authConfig,
-        routing: undefined,
-      },
-      iModelApp: {
-        applicationId: "3098",
-        authorizationClient: expect.anything(),
-        i18n: expect.anything(),
-        notifications: expect.anything(),
-        rpcInterfaces: [
-          IModelReadRpcInterface,
-          IModelTileRpcInterface,
-          PresentationRpcInterface,
-          SnapshotIModelRpcInterface,
-          IModelWriteRpcInterface,
-        ],
-        uiAdmin: expect.anything(),
-        toolAdmin: undefined,
-      },
+    expect(IModelApp.startup).toHaveBeenCalledWith({
+      applicationId: "3098",
+      authorizationClient: expect.anything(),
+      localization: expect.anything(),
+      notifications: expect.anything(),
+      rpcInterfaces: [
+        IModelReadRpcInterface,
+        IModelTileRpcInterface,
+        PresentationRpcInterface,
+        SnapshotIModelRpcInterface,
+        DevToolsRpcInterface,
+      ],
+      uiAdmin: expect.anything(),
+      toolAdmin: undefined,
     });
   });
 
@@ -170,20 +169,22 @@ describe("Viewer", () => {
 
     const { getByTestId } = render(
       <Viewer
-        authConfig={{ config: authConfig }}
-        contextId={mockProjectId}
+        authClient={authClient}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         backend={backendConfig}
+        enablePerformanceMonitors={false}
       />
     );
 
     await waitFor(() => getByTestId("mock-div"));
 
     expect(WebInitializer.startWebViewer).toHaveBeenCalledWith({
-      authConfig: { config: authConfig },
+      authClient: authClient,
       backend: backendConfig,
-      contextId: mockProjectId,
+      iTwinId: mockITwinId,
       iModelId: mockIModelId,
+      enablePerformanceMonitors: false,
     });
   });
 });

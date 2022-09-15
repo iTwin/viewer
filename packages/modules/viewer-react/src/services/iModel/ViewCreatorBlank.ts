@@ -3,15 +3,15 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Point3d, Vector3d } from "@bentley/geometry-core";
-import { ColorDef, RenderMode } from "@bentley/imodeljs-common";
-import { BlankConnection, SpatialViewState } from "@bentley/imodeljs-frontend";
+import { ColorDef, RenderMode } from "@itwin/core-common";
+import type { BlankConnection } from "@itwin/core-frontend";
+import { IModelApp, SpatialViewState, ViewStatus } from "@itwin/core-frontend";
 
-import { BlankConnectionViewState } from "../../types";
+import type { BlankConnectionViewState } from "../../types";
 
 export const createBlankViewState = (
   iModel: BlankConnection,
-  viewStateOptions?: BlankConnectionViewState
+  blankConnectionViewState?: BlankConnectionViewState
 ): SpatialViewState => {
   const ext = iModel.projectExtents;
   const viewState = SpatialViewState.createBlank(
@@ -21,34 +21,46 @@ export const createBlankViewState = (
   );
 
   const allow3dManipulations =
-    viewStateOptions?.setAllow3dManipulations !== undefined
-      ? viewStateOptions?.setAllow3dManipulations
+    blankConnectionViewState?.setAllow3dManipulations !== undefined
+      ? blankConnectionViewState?.setAllow3dManipulations
       : true;
 
   viewState.setAllow3dManipulations(allow3dManipulations);
 
-  const viewStateLookAt = viewStateOptions?.lookAt ?? {
-    eyePoint: new Point3d(15, 15, 15),
-    targetPoint: new Point3d(0, 0, 0),
-    upVector: new Vector3d(0, 0, 1),
-  };
+  const viewStateLookAt = blankConnectionViewState?.lookAt;
+  if (viewStateLookAt) {
+    const viewStatus = viewState.lookAt({
+      eyePoint: viewStateLookAt.eyePoint,
+      targetPoint: viewStateLookAt.targetPoint,
+      upVector: viewStateLookAt.upVector,
+      newExtents: viewStateLookAt.newExtents,
+      frontDistance: viewStateLookAt.frontDistance,
+      backDistance: viewStateLookAt.backDistance,
+      opts: viewStateLookAt.opts,
+    });
 
-  viewState.lookAt(
-    viewStateLookAt.eyePoint,
-    viewStateLookAt.targetPoint,
-    viewStateLookAt.upVector,
-    viewStateLookAt.newExtents,
-    viewStateLookAt.frontDistance,
-    viewStateLookAt.backDistance,
-    viewStateLookAt.opts
-  );
+    if (viewStatus !== ViewStatus.Success) {
+      throw new Error(
+        "Invalid 'lookAt' view state option: " + ViewStatus[viewStatus]
+      );
+    }
+  }
 
   viewState.displayStyle.backgroundColor =
-    viewStateOptions?.displayStyle?.backgroundColor ?? ColorDef.white;
-  const flags = viewState.viewFlags.clone();
-  flags.grid = viewStateOptions?.viewFlags?.grid ?? false;
-  flags.renderMode =
-    viewStateOptions?.viewFlags?.renderMode ?? RenderMode.SmoothShade;
+    blankConnectionViewState?.displayStyle?.backgroundColor ?? ColorDef.white;
+  const flags = viewState.viewFlags.copy({
+    grid: blankConnectionViewState?.viewFlags?.grid ?? false,
+    renderMode:
+      blankConnectionViewState?.viewFlags?.renderMode ?? RenderMode.SmoothShade,
+    backgroundMap: blankConnectionViewState?.viewFlags?.backgroundMap ?? false,
+  });
   viewState.displayStyle.viewFlags = flags;
+
+  IModelApp.viewManager.onViewOpen.addOnce((vp) => {
+    if (vp.view.hasSameCoordinates(viewState)) {
+      vp.applyViewState(viewState);
+    }
+  });
+
   return viewState;
 };

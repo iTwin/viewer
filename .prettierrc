@@ -17,4 +17,4 @@ semi: true
 # introduces an inconsistency and is incompatible with some linter rules.
 arrowParens: "always"
 # Enforce Linux style line endings.
-endOfLine: "lf"
+endOfLine: "auto"

@@ -4,31 +4,66 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-import { LoginRedirect, LogoutRedirect } from "../auth";
-import {
-  AuthClientHome,
-  AuthConfigHome,
-  BlankConnectionHome,
-  Home,
-} from "../home";
-import { IModelBankHome } from "../home/IModelBankHome";
+async function loadHomeRoute() {
+  return import(
+    /* webpackChunkName: "route--home" */
+    "../home/Home"
+  );
+}
 
-export const Routes = () => {
+async function loadLogoutRoute() {
+  return import(
+    /* webpackChunkName: "route--logout" */
+    "../auth/LogoutRedirect"
+  );
+}
+
+async function loadLoginRoute() {
+  return import(
+    /* webpackChunkName: "route--login" */
+    "../auth/LoginRedirect"
+  );
+}
+
+async function loadViewerRoute() {
+  return import(
+    /* webpackPrefetch: true, webpackChunkName: "route--viewer" */
+    "../home/ViewerHome"
+  );
+}
+
+async function loadBlankConnectionRoute() {
+  return import(
+    /* webpackChunkName: "route--blankconnection" */
+    "../home/BlankConnectionHome"
+  );
+}
+
+async function loadIModelBankRoute() {
+  return import(
+    /* webpackChunkName: "route--imodelbank" */
+    "../home/IModelBankHome"
+  );
+}
+
+const Home = React.lazy(loadHomeRoute);
+const LoginRedirect = React.lazy(loadLoginRoute);
+const LogoutRedirect = React.lazy(loadLogoutRoute);
+const IModelBankHome = React.lazy(loadIModelBankRoute);
+const BlankConnectionHome = React.lazy(loadBlankConnectionRoute);
+const ViewerHome = React.lazy(loadViewerRoute);
+
+export const AllRoutes = () => {
   return (
-    <Switch>
-      <Route path="/" exact={true} component={Home} />
-      <Route path="/logout" exact={true} component={LogoutRedirect} />
-      <Route path="/signin-callback" exact={true} component={LoginRedirect} />
-      <Route path="/authclient" exact={true} component={AuthClientHome} />
-      <Route
-        path="/blankconnection"
-        exact={true}
-        component={BlankConnectionHome}
-      />
-      <Route path="/authconfig" exact={true} component={AuthConfigHome} />
-      <Route path="/imodelbank" exact={true} component={IModelBankHome} />
-    </Switch>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/logout" element={<LogoutRedirect />} />
+      <Route path="/signin-callback" element={<LoginRedirect />} />
+      <Route path="/viewer" element={<ViewerHome />} />
+      <Route path="/blankconnection" element={<BlankConnectionHome />} />
+      <Route path="/imodelbank" element={<IModelBankHome />} />
+    </Routes>
   );
 };

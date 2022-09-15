@@ -3,63 +3,51 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Config } from "@bentley/bentleyjs-core";
-import { Range3d } from "@bentley/geometry-core";
-import { Cartographic, ColorDef } from "@bentley/imodeljs-common";
-import {
-  BlankConnection,
-  BlankConnectionProps,
-  IModelApp,
-  SnapshotConnection,
-} from "@bentley/imodeljs-frontend";
-import { UrlDiscoveryClient } from "@bentley/itwin-client";
-import { BackstageItemUtilities, UiItemsManager } from "@bentley/ui-abstract";
-import {
-  ColorTheme,
-  FrontstageProps,
-  FrontstageProvider,
-  IModelViewportControlOptions,
-  UiFramework,
-} from "@bentley/ui-framework";
+import "@testing-library/jest-dom/extend-expect";
+
+import { UiItemsManager } from "@itwin/appui-abstract";
+import { ColorTheme, UiFramework } from "@itwin/appui-react";
+import { Cartographic, ColorDef } from "@itwin/core-common";
+import type { BlankConnectionProps } from "@itwin/core-frontend";
+import { BlankConnection, SnapshotConnection } from "@itwin/core-frontend";
+import { Range3d } from "@itwin/core-geometry";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
+import { IModelViewer } from "../../../components/iModel";
 import IModelLoader from "../../../components/iModel/IModelLoader";
-import { ViewCreator3d } from "../../../services/iModel";
 import * as IModelServices from "../../../services/iModel/IModelService";
-import { createBlankViewState } from "../../../services/iModel/ViewCreatorBlank";
-import {
+import type {
   BlankConnectionViewState,
-  ViewerBackstageItem,
   ViewerFrontstage,
 } from "../../../types";
 import { TestUiProvider, TestUiProvider2 } from "../../mocks/MockUiProviders";
 
-jest.mock("@bentley/ui-framework");
-jest.mock("@bentley/ui-abstract");
-jest.mock("@microsoft/applicationinsights-react-js", () => ({
-  ReactPlugin: jest.fn(),
-  withAITracking: (
-    reactPlugin: any | undefined, // eslint-disable-line no-unused-vars
-    component: any,
-    componentName?: string, // eslint-disable-line no-unused-vars
-    className?: string // eslint-disable-line no-unused-vars
-  ) => component,
+jest.mock("react-redux", () => ({
+  ...jest.requireActual<any>("react-redux"),
+  Provider: jest.fn().mockImplementation(({ children }: any) => children),
 }));
-jest.mock("@bentley/imodeljs-frontend", () => {
+
+jest.mock("@itwin/appui-react", () => {
+  return {
+    ...jest.createMockFromModule<any>("@itwin/appui-react"),
+    StateManager: {
+      ...jest.createMockFromModule<any>("@itwin/appui-react").StateManager,
+      store: jest.fn(),
+    },
+  };
+});
+jest.mock("@itwin/appui-abstract");
+jest.mock("@itwin/core-frontend", () => {
   return {
     IModelApp: {
       startup: jest.fn(),
       telemetry: {
         addClient: jest.fn(),
       },
-      i18n: {
-        registerNamespace: jest.fn().mockReturnValue({
-          readFinished: jest.fn().mockResolvedValue(true),
-        }),
-        languageList: jest.fn().mockReturnValue(["en-US"]),
-        translate: jest.fn(),
-        translateWithNamespace: jest.fn(),
+      localization: {
+        getLocalizedString: jest.fn(),
+        registerNamespace: jest.fn().mockResolvedValue(true),
       },
       uiAdmin: {
         updateFeatureFlags: jest.fn(),
@@ -91,14 +79,16 @@ jest.mock("@bentley/imodeljs-frontend", () => {
       Critical: 1,
     },
     BlankConnection: {
-      create: jest
-        .fn()
-        .mockReturnValue({ isBlankConnection: () => true } as any),
+      create: jest.fn().mockReturnValue({
+        isBlankConnection: () => true,
+        isOpen: true,
+      } as any),
     },
     ItemField: {},
     CompassMode: {},
     RotationMode: {},
     AccuDraw: class {},
+    AccuSnap: class {},
     ToolAdmin: class {},
     WebViewerApp: {
       startup: jest.fn().mockResolvedValue(true),
@@ -108,51 +98,39 @@ jest.mock("@bentley/imodeljs-frontend", () => {
         createDefaultView: jest.fn().mockResolvedValue({}),
       };
     }),
+    SpatialViewState: {
+      className: "",
+    },
+    DrawingViewState: {
+      className: "",
+    },
+    SheetViewState: {
+      className: "",
+    },
   };
 });
 jest.mock("../../../services/iModel/IModelService");
-jest.mock("@bentley/itwin-client");
-jest.mock("../../../services/iModel/ViewCreatorBlank", () => {
-  return {
-    createBlankViewState: jest.fn().mockResolvedValue({}),
-  };
-});
-jest.mock("../../../services/iModel/ViewCreator3d", () => {
-  return {
-    ViewCreator3d: jest.fn().mockImplementation(() => {
-      return {
-        createDefaultView: jest.fn().mockResolvedValue({}),
-      };
-    }),
-  };
-});
-class Frontstage1Provider extends FrontstageProvider {
-  public get frontstage(): React.ReactElement<FrontstageProps> {
-    return <div></div>;
-  }
-}
 
-class Frontstage2Provider extends FrontstageProvider {
-  public get frontstage(): React.ReactElement<FrontstageProps> {
-    return <div></div>;
-  }
-}
+jest.mock("../../../components/iModel/IModelViewer", () => ({
+  __esModule: true,
+  IModelViewer: jest.fn(() => <div data-testid="viewer"></div>),
+}));
 
-const mockContextId = "mockContextId";
+const mockITwinId = "mockITwinId";
 const mockIModelId = "mockIModelId";
 
 describe("IModelLoader", () => {
   beforeEach(() => {
-    jest
-      .spyOn(IModelServices, "openRemoteImodel")
-      .mockResolvedValue({ isBlankConnection: () => false } as any);
-    jest
-      .spyOn(UrlDiscoveryClient.prototype, "discoverUrl")
-      .mockResolvedValue("https://test.com");
-    jest.spyOn(Config.App, "get").mockReturnValue(1);
-    jest
-      .spyOn(SnapshotConnection, "openFile")
-      .mockResolvedValue({ isBlankConnection: () => true } as any);
+    jest.spyOn(IModelServices, "openRemoteIModel").mockResolvedValue({
+      isBlankConnection: () => false,
+      iModelId: mockIModelId,
+      close: jest.fn(),
+      isOpen: true,
+    } as any);
+    jest.spyOn(SnapshotConnection, "openFile").mockResolvedValue({
+      isBlankConnection: () => true,
+      isOpen: true,
+    } as any);
   });
 
   afterEach(() => {
@@ -165,86 +143,39 @@ describe("IModelLoader", () => {
 
     const result = render(
       <IModelLoader
-        contextId={mockContextId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         uiProviders={[new TestUiProvider()]}
       />
     );
 
     await waitFor(() => result.getByTestId("loader-wrapper"));
-
-    expect(UiItemsManager.register).toHaveBeenCalledTimes(3);
+    expect(UiItemsManager.register).toHaveBeenCalledTimes(1);
 
     result.rerender(
       <IModelLoader
-        contextId={mockContextId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         uiProviders={[new TestUiProvider2()]}
       />
     );
 
-    await waitFor(() => result.getByTestId("loader-wrapper"));
-
-    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(3);
+    await waitFor(() => result.getByTestId("viewer"));
+    expect(UiItemsManager.unregister).toHaveBeenCalledTimes(1);
   });
 
-  it("adds backstage items and translates their labels", async () => {
-    const fs1 = new Frontstage1Provider();
-    const fs2 = new Frontstage2Provider();
-    const frontstages: ViewerFrontstage[] = [
-      {
-        provider: fs1,
-      },
-      {
-        provider: fs2,
-      },
-    ];
-
-    const actionItem = {
-      id: "bs1",
-      execute: jest.fn(),
-      groupPriority: 100,
-      itemPriority: 1,
-      label: "",
-      labeli18nKey: "bs1Key",
-    };
-
-    const stageLauncher = {
-      id: "bs2",
-      stageId: "bs2",
-      groupPriority: 100,
-      itemPriority: 2,
-      label: "",
-      labeli18nKey: "bs2Key",
-    };
-
-    const backstageItems: ViewerBackstageItem[] = [actionItem, stageLauncher];
-
-    const { getByTestId } = render(
-      <IModelLoader
-        frontstages={frontstages}
-        backstageItems={backstageItems}
-        contextId={mockContextId}
-        iModelId={mockIModelId}
-      />
-    );
-
-    await waitFor(() => getByTestId("loader-wrapper"));
-
-    // these calls will be doubled. items will be set first without a viewState and reset with one additional translation for the default frontstage once we have a viewState
-    expect(BackstageItemUtilities.createStageLauncher).toHaveBeenCalledTimes(2);
-    expect(BackstageItemUtilities.createActionItem).toHaveBeenCalledTimes(2);
-    expect(IModelApp.i18n.translate).toHaveBeenCalledTimes(5);
-  });
-
-  it("creates a blank connection and a blank ViewState", async () => {
+  it("creates a blank connection", async () => {
     const blankConnection: BlankConnectionProps = {
       name: "GeometryConnection",
-      location: Cartographic.fromDegrees(0, 0, 0),
+      location: Cartographic.fromDegrees({
+        longitude: 0,
+        latitude: 0,
+        height: 0,
+      }),
       extents: new Range3d(-30, -30, -30, 30, 30, 30),
     };
 
-    const viewStateOptions: BlankConnectionViewState = {
+    const blankConnectionViewState: BlankConnectionViewState = {
       setAllow3dManipulations: true,
       displayStyle: {
         backgroundColor: ColorDef.blue,
@@ -254,23 +185,19 @@ describe("IModelLoader", () => {
     const { getByTestId } = render(
       <IModelLoader
         blankConnection={blankConnection}
-        blankConnectionViewState={viewStateOptions}
+        blankConnectionViewState={blankConnectionViewState}
       />
     );
 
-    await waitFor(() => getByTestId("loader-wrapper"));
+    await waitFor(() => getByTestId("viewer"));
 
     expect(BlankConnection.create).toHaveBeenCalledWith(blankConnection);
-    expect(createBlankViewState).toHaveBeenCalledWith(
-      expect.anything(),
-      viewStateOptions
-    );
   });
 
   it("sets the theme to the provided theme", async () => {
     const { getByTestId } = render(
       <IModelLoader
-        contextId={mockContextId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         theme={ColorTheme.Dark}
       />
@@ -281,37 +208,7 @@ describe("IModelLoader", () => {
     expect(UiFramework.setColorTheme).toHaveBeenCalledWith(ColorTheme.Dark);
   });
 
-  it("creates a default viewstate", async () => {
-    jest.spyOn(UiFramework, "setDefaultViewState");
-    const result = render(
-      <IModelLoader contextId={mockContextId} iModelId={mockIModelId} />
-    );
-
-    await waitFor(() => result.getByTestId("loader-wrapper"));
-
-    expect(UiFramework.setDefaultViewState).toHaveBeenCalled();
-  });
-
-  it("uses the provided viewstate", async () => {
-    jest.spyOn(UiFramework, "setDefaultViewState");
-    const viewportOptions: IModelViewportControlOptions = {
-      viewState: {} as any,
-    };
-    const result = render(
-      <IModelLoader
-        contextId={mockContextId}
-        iModelId={mockIModelId}
-        viewportOptions={viewportOptions}
-      />
-    );
-
-    await waitFor(() => result.getByTestId("loader-wrapper"));
-
-    expect(UiFramework.setDefaultViewState).not.toHaveBeenCalled();
-  });
-
   it("renders without a viewState if the default frontstage does not require a connection", async () => {
-    jest.spyOn(UiFramework, "setDefaultViewState");
     const frontstages: ViewerFrontstage[] = [
       {
         default: true,
@@ -320,14 +217,115 @@ describe("IModelLoader", () => {
     ];
     const result = render(
       <IModelLoader
-        contextId={mockContextId}
+        iTwinId={mockITwinId}
         iModelId={mockIModelId}
         frontstages={frontstages}
       />
     );
+    await waitFor(() => result.getByTestId("viewer"));
+    expect(IModelViewer).toHaveBeenCalledWith(
+      { backstageItems: undefined, frontstages },
+      {}
+    );
+  });
 
-    await waitFor(() => result.getByTestId("loader-wrapper"));
+  it("closes connection on unmount", async () => {
+    const connection = {
+      isBlankConnection: () => false,
+      iModelId: mockIModelId,
+      close: jest.fn(),
+    };
+    jest
+      .spyOn(IModelServices, "openRemoteIModel")
+      .mockResolvedValue(connection as any);
+    const result = render(
+      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
+    );
+    await waitFor(() => result.getByTestId("viewer"));
 
-    expect(UiFramework.setDefaultViewState).not.toHaveBeenCalled();
+    result.unmount();
+
+    expect(connection.close).toHaveBeenCalled();
+  });
+
+  it("closes connection between model ids change", async () => {
+    const connection = {
+      isBlankConnection: () => false,
+      iModelId: mockIModelId,
+      close: jest.fn(),
+    };
+    jest
+      .spyOn(IModelServices, "openRemoteIModel")
+      .mockResolvedValue(connection as any);
+    const result = render(
+      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
+    );
+
+    await waitFor(() => result.getByTestId("viewer"));
+
+    result.rerender(
+      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId + "1"} />
+    );
+
+    await waitFor(() => result.getByTestId("viewer"));
+    expect(connection.close).toHaveBeenCalled();
+  });
+
+  it("closes connection between iTwin ids change", async () => {
+    const connection = {
+      isBlankConnection: () => false,
+      iModelId: mockIModelId,
+      close: jest.fn(),
+    };
+    jest
+      .spyOn(IModelServices, "openRemoteIModel")
+      .mockResolvedValue(connection as any);
+    const result = render(
+      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
+    );
+
+    await waitFor(() => result.getByTestId("viewer"));
+
+    result.rerender(
+      <IModelLoader iTwinId={mockITwinId + "1"} iModelId={mockIModelId} />
+    );
+
+    await waitFor(() => result.getByTestId("viewer"));
+    expect(connection.close).toHaveBeenCalled();
+  });
+
+  it("renders a custom loading component", async () => {
+    jest.spyOn(IModelServices, "openRemoteIModel").mockImplementation(
+      () =>
+        new Promise((resolve) =>
+          setTimeout(
+            () =>
+              resolve({
+                isBlankConnection: () => false,
+                iModelId: mockIModelId,
+                close: jest.fn(),
+                isOpen: true,
+              } as any),
+            500
+          )
+        )
+    );
+
+    const Loader = () => {
+      return <div>Things are happening</div>;
+    };
+    const result = render(
+      <IModelLoader
+        iTwinId={mockITwinId}
+        iModelId={mockIModelId}
+        loadingComponent={<Loader />}
+      />
+    );
+
+    const loadingComponent = await waitFor(() =>
+      result.getByText("Things are happening")
+    );
+
+    expect(loadingComponent).toBeInTheDocument();
   });
 });

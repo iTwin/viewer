@@ -3,14 +3,22 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { FrontendApplicationInsightsClient } from "@bentley/frontend-application-insights-client";
-import { BrowserAuthorizationClientConfiguration } from "@bentley/frontend-authorization-client";
-import { UiCore } from "@bentley/ui-core";
+import {
+  IModelReadRpcInterface,
+  IModelTileRpcInterface,
+  SnapshotIModelRpcInterface,
+} from "@itwin/core-common";
+import type { IModelAppOptions } from "@itwin/core-frontend";
+import { IModelApp } from "@itwin/core-frontend";
+import { UiCore } from "@itwin/core-react";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
+import type { ViewerInitializerParams } from "@itwin/viewer-react";
 
 import { WebInitializer } from "../../services/Initializer";
+import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
 
-jest.mock("@bentley/imodeljs-frontend", () => {
-  const noMock = jest.requireActual("@bentley/imodeljs-frontend");
+jest.mock("@itwin/core-frontend", () => {
+  const noMock = jest.requireActual("@itwin/core-frontend");
   return {
     IModelApp: {
       startup: jest.fn().mockResolvedValue(true),
@@ -23,6 +31,7 @@ jest.mock("@bentley/imodeljs-frontend", () => {
         }),
         languageList: jest.fn().mockReturnValue(["en-US"]),
         unregisterNamespace: jest.fn(),
+        translateWithNamespace: jest.fn(),
       },
       uiAdmin: {
         updateFeatureFlags: jest.fn(),
@@ -50,33 +59,56 @@ jest.mock("@bentley/imodeljs-frontend", () => {
       startup: jest.fn().mockResolvedValue(true),
       shutdown: jest.fn().mockResolvedValue(true),
     },
-  };
-});
-jest.mock("@bentley/frontend-application-insights-client");
-jest.mock("@microsoft/applicationinsights-react-js", () => ({
-  ReactPlugin: jest.fn(),
-  withAITracking: (
-    _reactPlugin: any | undefined, // eslint-disable-line no-unused-vars
-    component: any,
-    _componentName?: string, // eslint-disable-line no-unused-vars
-    _className?: string // eslint-disable-line no-unused-vars
-  ) => component,
-}));
-jest.mock("@itwin/viewer-react", () => {
-  return {
-    ...jest.createMockFromModule<any>("@itwin/viewer-react"),
-    makeCancellable: jest.requireActual(
-      "@itwin/viewer-react/lib/utilities/MakeCancellable"
-    ).makeCancellable,
+    ViewCreator3d: jest.fn().mockImplementation(() => {
+      return {
+        createDefaultView: jest.fn().mockResolvedValue({}),
+      };
+    }),
   };
 });
 
-const authConfig: BrowserAuthorizationClientConfiguration = {
-  clientId: "test-client",
-  scope: "test-scope",
-  responseType: "code",
-  redirectUri: "http://localhost",
-};
+jest.mock("@itwin/viewer-react", () => {
+  return {
+    BaseViewer: jest.fn(),
+    getIModelAppOptions: (
+      options: ViewerInitializerParams
+    ): IModelAppOptions => {
+      return {
+        applicationId: options?.productId ?? "3098",
+        notifications: expect.anything(),
+        uiAdmin: expect.anything(),
+        rpcInterfaces: [
+          IModelReadRpcInterface,
+          IModelTileRpcInterface,
+          PresentationRpcInterface,
+          SnapshotIModelRpcInterface,
+          ...(options?.additionalRpcInterfaces ?? []),
+        ],
+        localization: expect.anything(),
+        toolAdmin: options?.toolAdmin,
+        authorizationClient: expect.anything(),
+      };
+    },
+    useIsMounted: jest.fn().mockReturnValue(true),
+    makeCancellable: jest.requireActual(
+      "@itwin/viewer-react/lib/cjs/utilities/MakeCancellable"
+    ).makeCancellable,
+    useBaseViewerInitializer: jest.fn().mockReturnValue(true),
+    getInitializationOptions: jest.fn().mockReturnValue({}),
+    isEqual: jest.fn().mockReturnValue(true),
+    BaseInitializer: {
+      initialize: jest.fn(),
+    },
+    ViewerPerformance: {
+      addMark: jest.fn(),
+      addMeasure: jest.fn(),
+      enable: jest.fn(),
+    },
+    ViewerAuthorization: {
+      client: jest.fn(),
+    },
+  };
+});
 
 describe("Initializer", () => {
   beforeEach(() => {
@@ -86,25 +118,12 @@ describe("Initializer", () => {
     }
   });
 
-  it("adds the iTwin.js telemetry client when the imjs key is provided", async () => {
-    const imjsAppInsightsKey = "456";
+  it("initializes iModelApp", async () => {
     await WebInitializer.startWebViewer({
-      authConfig: { config: authConfig },
-      imjsAppInsightsKey: imjsAppInsightsKey,
+      authClient: new MockAuthorizationClient(),
+      enablePerformanceMonitors: false,
     });
-
     await WebInitializer.initialized;
-
-    expect(FrontendApplicationInsightsClient).toHaveBeenCalledWith(
-      imjsAppInsightsKey
-    );
-  });
-
-  it("does not add the iTwin.js telemetry client when the imjs key is not provided", async () => {
-    await WebInitializer.startWebViewer();
-
-    await WebInitializer.initialized;
-
-    expect(FrontendApplicationInsightsClient).not.toHaveBeenCalled();
+    expect(IModelApp.startup).toHaveBeenCalled();
   });
 });

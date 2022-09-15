@@ -2,6 +2,352 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "3.2.1",
+      "tag": "@itwin/viewer-react_v3.2.1",
+      "date": "Wed, 20 Jul 2022 14:16:19 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Avoid StateManager re-initialization."
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.2.0",
+      "tag": "@itwin/viewer-react_v3.2.0",
+      "date": "Wed, 20 Jul 2022 03:20:17 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Use `globalThis` instead of `process.env` to set env at runtime"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.1.2",
+      "tag": "@itwin/viewer-react_v3.1.2",
+      "date": "Tue, 19 Jul 2022 19:45:36 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Expose option to hide tool settings"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.1.1",
+      "tag": "@itwin/viewer-react_v3.1.1",
+      "date": "Thu, 07 Jul 2022 21:04:19 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Use LookAndMove tool as default walk tool"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.1.0",
+      "tag": "@itwin/viewer-react_v3.1.0",
+      "date": "Thu, 07 Jul 2022 18:12:22 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add implementation of AccuSnap that obtains the snap modes off the UiFramework. Fix issues where changing the SnapMode in the UI wouldn't reflect in AccuSnap."
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.0.1",
+      "tag": "@itwin/viewer-react_v3.0.1",
+      "date": "Tue, 05 Jul 2022 20:30:55 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added custom localization option"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.0.0",
+      "tag": "@itwin/viewer-react_v3.0.0",
+      "date": "Mon, 20 Jun 2022 14:39:09 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "See [release notes](https://github.com/iTwin/viewer/blob/master/releases/CHANGELOG-3.0.md)."
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.5.0",
+      "tag": "@itwin/viewer-react_v2.5.0",
+      "date": "Mon, 23 May 2022 21:37:15 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Expose `renderSys` option for IModelApp"
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.4.0",
+      "tag": "@itwin/viewer-react_v2.4.0",
+      "date": "Mon, 16 May 2022 15:03:07 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update default widgets from viewer-components-react"
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.3.2",
+      "tag": "@itwin/viewer-react_v2.3.2",
+      "date": "Wed, 02 Mar 2022 18:47:06 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "No longer uses the ViewCreator seed by default"
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.3.1",
+      "tag": "@itwin/viewer-react_v2.3.1",
+      "date": "Thu, 17 Feb 2022 17:58:47 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Do not use backstage items directly. Instead rely on the Provider"
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.3.0",
+      "tag": "@itwin/viewer-react_v2.3.0",
+      "date": "Wed, 16 Feb 2022 18:52:55 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update default IModel loader indicator"
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.2.2",
+      "tag": "@itwin/viewer-react_v2.2.2",
+      "date": "Fri, 11 Feb 2022 20:57:09 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Code optimization and refactoring"
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.2.1",
+      "tag": "@itwin/viewer-react_v2.2.1",
+      "date": "Mon, 07 Feb 2022 14:48:13 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add iModelConnecting performance measure"
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.2.0",
+      "tag": "@itwin/viewer-react_v2.2.0",
+      "date": "Tue, 01 Feb 2022 21:30:27 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add option for backgroundMap in BlankConnectionViewState.viewFlags"
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.1.0",
+      "tag": "@itwin/viewer-react_v2.1.0",
+      "date": "Thu, 27 Jan 2022 18:31:31 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add TileAdmin configuration option"
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.0.1",
+      "tag": "@itwin/viewer-react_v2.0.1",
+      "date": "Tue, 25 Jan 2022 22:20:19 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Updated Changelog"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/error-handling-react\" from `2.0.0` to `2.0.1`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.0.0",
+      "tag": "@itwin/viewer-react_v2.0.0",
+      "date": "Tue, 25 Jan 2022 20:14:40 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "Upgrade to iTwin.js 3.0"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/error-handling-react\" from `2.0.0-dev.25` to `2.0.0`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.9.1",
+      "tag": "@itwin/viewer-react_v1.9.1",
+      "date": "Fri, 10 Dec 2021 14:41:02 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add check for BlankConnections when creating viewState as they are always closed"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.9.0",
+      "tag": "@itwin/viewer-react_v1.9.0",
+      "date": "Tue, 07 Dec 2021 15:48:19 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add support for local briefcases"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.8.4",
+      "tag": "@itwin/viewer-react_v1.8.4",
+      "date": "Fri, 19 Nov 2021 19:48:35 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "remove backend peer dep"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.8.3",
+      "tag": "@itwin/viewer-react_v1.8.3",
+      "date": "Tue, 16 Nov 2021 17:38:03 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix intellisense"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.8.2",
+      "tag": "@itwin/viewer-react_v1.8.2",
+      "date": "Mon, 08 Nov 2021 20:49:09 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Change iModel loading spinner to a bar and remove redundant text"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.8.1",
+      "tag": "@itwin/viewer-react_v1.8.1",
+      "date": "Thu, 21 Oct 2021 14:29:56 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Re-add the center and right zones for users who are still on ui-1.0\""
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.8.0",
+      "tag": "@itwin/viewer-react_v1.8.0",
+      "date": "Fri, 08 Oct 2021 17:32:09 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Modified viewportOptions to accept async methods for viewstate and alwaysUseSuppliedViewState does not create a default viewState when true. De-prioritized viewportOptions.iModelConnection and viewportOptions.viewState in favor of allowing viewer to supply both. View states and iModel connetions provided by the viewportOptions prop will no longer be passed directly to the default frontstage."
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.7.1",
+      "tag": "@itwin/viewer-react_v1.7.1",
+      "date": "Fri, 01 Oct 2021 13:57:31 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Changed how viewstate is initialized and handled. Viewstate and the connection established by contextId & iModelId should be the same and the view will only render when both a connection and a viewstate has been established. Patched race condition and patched memory leak"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.7.0",
+      "tag": "@itwin/viewer-react_v1.7.0",
+      "date": "Wed, 29 Sep 2021 17:58:34 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add support for a custom loading component"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.6.0",
+      "tag": "@itwin/viewer-react_v1.6.0",
+      "date": "Tue, 28 Sep 2021 21:15:48 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add hook for pre-initialization"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.5.0",
       "tag": "@itwin/viewer-react_v1.5.0",
       "date": "Thu, 26 Aug 2021 17:06:47 GMT",

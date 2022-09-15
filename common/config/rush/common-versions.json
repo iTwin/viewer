@@ -2,6 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/common-versions.schema.json",
 
   "preferredVersions": {
-    "lint-staged": "^10.2.11"
+    "lint-staged": "^10.2.11",
+    "immer": "^9.0.6",
+    "react-error-overlay": "6.0.9"
   }
 }

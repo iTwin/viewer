@@ -7,6 +7,7 @@ yarn-error.log*
 # Output
 /**/build
 /**/lib
+/**/dist/
 
 # Dependency directories
 node_modules/
@@ -32,9 +33,12 @@ common/temp/
 
 # local env vars
 .env.local
-.env.*.local 
+.env.*.local
 
 # local snapshot files
 **/*.db
 **/*.db-journal
 **/*.Tiles
+**/*.Tiles-journal
+
+**/tsconfig.tsbuildinfo

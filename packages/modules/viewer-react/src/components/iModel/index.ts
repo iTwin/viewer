@@ -3,6 +3,5 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-export * from "./IModelBusy";
 export * from "./IModelLoader";
 export * from "./IModelViewer";

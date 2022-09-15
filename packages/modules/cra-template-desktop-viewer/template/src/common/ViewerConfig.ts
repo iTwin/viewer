@@ -6,17 +6,29 @@
 import {
   IModelReadRpcInterface,
   IModelTileRpcInterface,
+  InternetConnectivityStatus,
   iTwinChannel,
   SnapshotIModelRpcInterface,
-} from "@bentley/imodeljs-common";
-import { PresentationRpcInterface } from "@bentley/presentation-common";
-import type { OpenDialogOptions, OpenDialogReturnValue } from "electron";
+} from "@itwin/core-common";
+import type {
+  OpenDialogOptions,
+  OpenDialogReturnValue,
+  SaveDialogOptions,
+  SaveDialogReturnValue,
+} from "electron";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
 
 export const channelName = iTwinChannel("desktop-viewer");
 
 export interface ViewerIpc {
   getConfig: () => Promise<ViewerConfig>;
   openFile: (options: OpenDialogOptions) => Promise<OpenDialogReturnValue>;
+  getSettings: () => Promise<ViewerSettings>;
+  addRecentFile: (file: ViewerFile) => Promise<void>;
+  saveFile: (options: SaveDialogOptions) => Promise<SaveDialogReturnValue>;
+  setConnectivity: (
+    connectivityStatus: InternetConnectivityStatus
+  ) => Promise<void>;
 }
 
 export interface ViewerConfig {
@@ -33,3 +45,15 @@ export const viewerRpcs = [
   PresentationRpcInterface,
   SnapshotIModelRpcInterface,
 ];
+
+export interface ViewerFile {
+  displayName: string;
+  path: string;
+  iTwinId?: string;
+  iModelId?: string;
+}
+
+export interface ViewerSettings {
+  defaultRecent?: boolean;
+  recents?: ViewerFile[];
+}

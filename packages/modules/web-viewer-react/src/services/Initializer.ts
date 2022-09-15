@@ -3,32 +3,22 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ClientRequestContext, Config } from "@bentley/bentleyjs-core";
-import { FrontendApplicationInsightsClient } from "@bentley/frontend-application-insights-client";
-import { BentleyCloudRpcParams } from "@bentley/imodeljs-common";
+import type { BentleyCloudRpcParams } from "@itwin/core-common";
+import { BentleyCloudRpcManager } from "@itwin/core-common";
+import { IModelApp } from "@itwin/core-frontend";
 import {
-  IModelApp,
-  IModelAppOptions,
-  WebViewerApp,
-  WebViewerAppOpts,
-} from "@bentley/imodeljs-frontend";
-import { UrlDiscoveryClient } from "@bentley/itwin-client";
-import { getIModelAppOptions, makeCancellable } from "@itwin/viewer-react";
+  getIModelAppOptions,
+  makeCancellable,
+  ViewerAuthorization,
+  ViewerPerformance,
+} from "@itwin/viewer-react";
 
-import { IModelBackendOptions, WebViewerProps } from "../types";
-import AuthorizationClient from "./auth/AuthorizationClient";
+import type { IModelBackendOptions, WebInitializerParams } from "../types";
 
-const getHostedConnectionInfo = async (
+const getHostedConnectionInfo = (
   backendOptions?: IModelBackendOptions
-): Promise<BentleyCloudRpcParams> => {
-  const urlClient = new UrlDiscoveryClient();
-  const requestContext = new ClientRequestContext();
-
-  const orchestratorUrl = await urlClient.discoverUrl(
-    requestContext,
-    `iModelJsOrchestrator.K8S`,
-    backendOptions?.buddiRegion
-  );
+): BentleyCloudRpcParams => {
+  const orchestratorUrl = `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com`;
 
   if (backendOptions?.hostedBackend) {
     if (!backendOptions.hostedBackend.title) {
@@ -48,21 +38,21 @@ const getHostedConnectionInfo = async (
     };
   } else {
     return {
-      info: { title: "general-purpose-imodeljs-backend", version: "v2.0" },
+      info: { title: "imodel/rpc", version: "" },
       uriPrefix: orchestratorUrl,
     };
   }
 };
 
-const initializeRpcParams = async (
+const initializeRpcParams = (
   backendOptions?: IModelBackendOptions
-): Promise<BentleyCloudRpcParams> => {
+): BentleyCloudRpcParams => {
   // if rpc params for a custom backend are provided, use those
   if (backendOptions?.customBackend && backendOptions.customBackend.rpcParams) {
     return backendOptions.customBackend.rpcParams;
   } else {
     // otherwise construct params for a hosted connection
-    return await getHostedConnectionInfo(backendOptions);
+    return getHostedConnectionInfo(backendOptions);
   }
 };
 
@@ -70,35 +60,6 @@ export class WebInitializer {
   private static _initialized: Promise<void>;
   private static _initializing = false;
   private static _cancel: (() => void) | undefined;
-
-  private static _checkForAuthorizationClient(
-    iModelAppOptions: IModelAppOptions,
-    viewerOptions?: WebViewerProps
-  ) {
-    const options = { ...iModelAppOptions };
-    if (!viewerOptions?.authConfig.config) {
-      if (viewerOptions?.authConfig.oidcClient) {
-        options.authorizationClient = viewerOptions.authConfig.oidcClient;
-      } else if (viewerOptions?.authConfig.getUserManagerFunction) {
-        options.authorizationClient = new AuthorizationClient(
-          viewerOptions.authConfig.getUserManagerFunction
-        );
-      }
-    }
-    return options;
-  }
-
-  /** add required values to Config.App */
-  private static _setupEnv(options?: IModelBackendOptions): void {
-    Config.App.merge({
-      imjs_buddi_url:
-        options?.buddiServer !== undefined
-          ? options.buddiServer
-          : "https://buddi.bentley.com/WebService",
-      imjs_buddi_resolve_url_using_region:
-        options?.buddiRegion !== undefined ? options.buddiRegion : 0,
-    });
-  }
 
   /** expose initialized promise */
   public static get initialized(): Promise<void> {
@@ -111,46 +72,52 @@ export class WebInitializer {
       if (WebInitializer._cancel) {
         WebInitializer._cancel();
       }
-      WebViewerApp.shutdown().catch(() => {
+      IModelApp.shutdown().catch(() => {
         // Do nothing, its possible that we never started.
       });
+      ViewerPerformance.clear();
     }
   };
 
   /** Web viewer startup */
-  public static async startWebViewer(options?: WebViewerProps) {
+  public static async startWebViewer(options: WebInitializerParams) {
     if (!IModelApp.initialized && !this._initializing) {
       console.log("starting web viewer");
       this._initializing = true;
-
       const cancellable = makeCancellable(function* () {
-        const rpcParams: BentleyCloudRpcParams = yield initializeRpcParams(
+        ViewerPerformance.enable(options.enablePerformanceMonitors);
+        ViewerPerformance.addMark("ViewerStarting");
+        const iModelAppOptions = getIModelAppOptions(options);
+        iModelAppOptions.authorizationClient = options.authClient;
+        ViewerAuthorization.client = options.authClient;
+        const rpcParams: BentleyCloudRpcParams = initializeRpcParams(
           options?.backend
         );
-        const webViewerOptions: WebViewerAppOpts = {
-          iModelApp: WebInitializer._checkForAuthorizationClient(
-            getIModelAppOptions(options),
-            options
-          ),
-          webViewerApp: {
-            rpcParams: rpcParams,
-            authConfig: options?.authConfig.config,
-            routing: options?.rpcRoutingToken,
-          },
-        };
-        yield WebViewerApp.startup(webViewerOptions);
-
-        // optionally change the environment
-        WebInitializer._setupEnv(options?.backend);
-
-        // Add iModelJS ApplicationInsights telemetry client if a key is provided
-        if (options?.imjsAppInsightsKey) {
-          const imjsApplicationInsightsClient =
-            new FrontendApplicationInsightsClient(options.imjsAppInsightsKey);
-          IModelApp.telemetry.addClient(imjsApplicationInsightsClient);
+        yield IModelApp.startup(iModelAppOptions);
+        // register extensions after startup
+        if (options?.extensions) {
+          options.extensions.forEach((extension) => {
+            if (extension.hostname) {
+              IModelApp.extensionAdmin.registerHost(
+                `https://${extension.hostname}`
+              );
+            }
+            IModelApp.extensionAdmin
+              .addExtension(extension)
+              .catch((e) => console.log(e));
+          });
         }
-
+        BentleyCloudRpcManager.initializeClient(
+          rpcParams,
+          iModelAppOptions.rpcInterfaces ?? []
+        );
         console.log("web viewer started");
+        ViewerPerformance.addMark("ViewerStarted");
+        ViewerPerformance.addMeasure(
+          "ViewerInitialized",
+          "ViewerStarting",
+          "ViewerStarted"
+        );
       });
 
       WebInitializer._cancel = cancellable.cancel;

@@ -3,10 +3,20 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import type { TextString, ViewFlagOverrides } from "@itwin/core-common";
+import { ColorDef, LinePixels } from "@itwin/core-common";
+import type {
+  DecorateContext,
+  Decorator,
+  GraphicBuilder,
+  Marker,
+  RenderGraphic,
+} from "@itwin/core-frontend";
+import { GraphicBranch, GraphicType, IModelApp } from "@itwin/core-frontend";
+import type { GeometryQuery } from "@itwin/core-geometry";
 import {
   Arc3d,
   CurveChainWithDistanceIndex,
-  GeometryQuery,
   IndexedPolyface,
   IndexedPolyfaceVisitor,
   LineSegment3d,
@@ -15,23 +25,7 @@ import {
   Path,
   Point3d,
   Transform,
-} from "@bentley/geometry-core";
-import {
-  ColorDef,
-  LinePixels,
-  TextString,
-  ViewFlagOverrides,
-} from "@bentley/imodeljs-common";
-import {
-  DecorateContext,
-  Decorator,
-  GraphicBranch,
-  GraphicBuilder,
-  GraphicType,
-  IModelApp,
-  Marker,
-  RenderGraphic,
-} from "@bentley/imodeljs-frontend";
+} from "@itwin/core-geometry";
 
 // Since all geometry is rendered concurrently, when adding geometry, we attach their desired attributes to them in an object
 interface CustomGeometryQuery {
@@ -260,14 +254,15 @@ export class GeometryDecorator implements Decorator {
 
   // Generates new graphics if needed, and adds them to the scene
   public decorate(context: DecorateContext): void {
-    const overrides = new ViewFlagOverrides();
-    overrides.setShowVisibleEdges(true);
-    overrides.setApplyLighting(true);
+    const overrides: ViewFlagOverrides = {
+      lighting: true,
+      visibleEdges: true,
+    };
     const branch = new GraphicBranch(false);
 
     branch.setViewFlagOverrides(overrides);
 
-    context.viewFlags.visibleEdges = true;
+    // context.viewFlags.visibleEdges = true; TODO 3.0
     if (!this.graphics) {
       this.graphics = this.createGraphics(context);
     }
