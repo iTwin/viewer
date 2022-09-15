@@ -29,6 +29,13 @@ export const BaseViewer = ({
   enablePerformanceMonitors,
   ...loaderProps
 }: ViewerProps) => {
+  React.useEffect(() => {
+    console.count("BaseViewer mounting");
+    return () => {
+      console.count("BaseViewer unmounting");
+    };
+  }, []);
+
   const viewerInitialized = useBaseViewerInitializer({
     productId,
     i18nUrlTemplate,

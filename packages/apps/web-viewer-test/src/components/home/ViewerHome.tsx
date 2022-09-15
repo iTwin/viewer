@@ -86,7 +86,7 @@ const ViewerHome: React.FC = () => {
   useEffect(() => {
     let url = `viewer?iTwinId=${iTwinId}&iModelId=${iModelId}`;
     if (changesetId) {
-      url += `changesetId=${changesetId}`;
+      url = `${url}&changesetId=${changesetId}`;
     }
     history.push(url);
   }, [iTwinId, iModelId, changesetId]);
@@ -162,6 +162,7 @@ const ViewerHome: React.FC = () => {
           }),
         ]}
         backstageItems={backstageItems}
+        // renderSys={{doIdleWork: true}}
       />
     </div>
   );

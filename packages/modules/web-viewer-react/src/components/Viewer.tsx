@@ -11,5 +11,6 @@ import type { WebViewerProps } from "../types";
 
 export const Viewer = (props: WebViewerProps) => {
   const initialized = useWebViewerInitializer(props);
+  console.log("useWebViewerInitializer.initialized", initialized);
   return initialized ? <BaseViewer {...props} /> : null;
 };

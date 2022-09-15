@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { ViewerInitializerParams } from "@itwin/viewer-react";
+import { useIsMounted } from "@itwin/viewer-react";
 import {
   getInitializationOptions,
   isEqual,
@@ -15,15 +16,16 @@ import { WebInitializer } from "../services/Initializer";
 import type { WebViewerProps } from "../types";
 
 export const useWebViewerInitializer = (options: WebViewerProps) => {
-  const [webViewerInitOptions, setWebViewerInitOptions] =
+  const [viewerInitializerParams, setViewerInitializerParams] =
     useState<ViewerInitializerParams>();
   const [webViewerInitalized, setWebViewerInitalized] = useState(false);
   const baseViewerInitialized = useBaseViewerInitializer(
     options,
     !webViewerInitalized
   );
+  const isMounted = useIsMounted();
 
-  // only re-initialize when initialize options change
+  // only re-initialize when initialization options (ViewerInitializerParams) change
   const initializationOptions = useMemo(
     () => getInitializationOptions(options),
     [options]
@@ -31,18 +33,21 @@ export const useWebViewerInitializer = (options: WebViewerProps) => {
 
   useEffect(() => {
     if (
-      !webViewerInitOptions ||
-      !isEqual(initializationOptions, webViewerInitOptions)
+      !viewerInitializerParams ||
+      !isEqual(initializationOptions, viewerInitializerParams)
     ) {
       setWebViewerInitalized(false);
-      setWebViewerInitOptions(initializationOptions);
+      setViewerInitializerParams(initializationOptions);
       void WebInitializer.startWebViewer(options).then(() => {
         void WebInitializer.initialized.then(() => {
           setWebViewerInitalized(true);
         });
       });
     }
-  }, [options, webViewerInitOptions, initializationOptions]);
+    if (!isMounted.current) {
+      return WebInitializer.cancel();
+    }
+  }, [options, viewerInitializerParams, initializationOptions, isMounted]);
 
   return baseViewerInitialized && webViewerInitalized;
 };

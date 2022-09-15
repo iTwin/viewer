@@ -69,9 +69,7 @@ export class WebInitializer {
   /** expose initialized cancel method */
   public static cancel: () => void = () => {
     if (WebInitializer._initializing) {
-      if (WebInitializer._cancel) {
-        WebInitializer._cancel();
-      }
+      WebInitializer._cancel?.();
       IModelApp.shutdown().catch(() => {
         // Do nothing, its possible that we never started.
       });
