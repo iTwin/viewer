@@ -33,7 +33,6 @@
       "cwd": "${workspaceFolder}/packages/modules/web-viewer-react",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "port": 9229
     },
     {
       "name": "Base Tests",
@@ -48,12 +47,11 @@
       "cwd": "${workspaceFolder}/packages/modules/viewer-react",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "port": 9230
     },
     { /* PARTIAL */
       "name": "[BACKEND] itwin-viewer-desktop",
       "cwd": "${workspaceFolder}/packages/apps/desktop-viewer-test",
-      "type": "pwa-node",
+      "type": "node",
       "request": "launch",
       "console": "internalConsole",
       "outputCapture": "std",
@@ -71,13 +69,23 @@
     },
     { /* PARTIAL */
       "name": "[FRONTEND] itwin-viewer-desktop",
-      "type": "pwa-chrome",
+      "type": "chrome",
       "request": "attach",
       "port": 9223,
       "timeout": 90000,
       "presentation": {
         "group": "desktop-starter"
       },
+    },
+    {
+      "name": "web-viewer-test app",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000/",
+      "webRoot": "${workspaceFolder}/packages/apps/web-viewer-test/src",
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/*"
+      }
     }
   ]
 }

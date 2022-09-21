@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "add `OptionalToUndefinedUnion` utility type to fix missing params from iTwinViewerInitializerParamSample and getIModelAppOptions",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}

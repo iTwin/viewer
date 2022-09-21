@@ -37,10 +37,13 @@ import { history } from "../routing";
  * @returns
  */
 const ViewerHome: React.FC = () => {
+  const [iTwinId, setITwinId] = useState(process.env.IMJS_AUTH_CLIENT_ITWIN_ID);
   const [iModelId, setIModelId] = useState(
     process.env.IMJS_AUTH_CLIENT_IMODEL_ID
   );
-  const [iTwinId, setITwinId] = useState(process.env.IMJS_AUTH_CLIENT_ITWIN_ID);
+  const [changesetId, setChangesetId] = useState(
+    process.env.IMJS_AUTH_CLIENT_CHANGESET_ID
+  );
 
   const authClient = useMemo(
     () =>
@@ -72,15 +75,21 @@ const ViewerHome: React.FC = () => {
     if (urlParams.has("iTwinId")) {
       setITwinId(urlParams.get("iTwinId") as string);
     }
-
     if (urlParams.has("iModelId")) {
       setIModelId(urlParams.get("iModelId") as string);
+    }
+    if (urlParams.has("changesetId")) {
+      setChangesetId(urlParams.get("changesetId") as string);
     }
   }, []);
 
   useEffect(() => {
-    history.push(`viewer?iTwinId=${iTwinId}&iModelId=${iModelId}`);
-  }, [iTwinId, iModelId]);
+    let url = `viewer?iTwinId=${iTwinId}&iModelId=${iModelId}`;
+    if (changesetId) {
+      url = `${url}&changesetId=${changesetId}`;
+    }
+    history.push(url);
+  }, [iTwinId, iModelId, changesetId]);
 
   const Loader = () => {
     return <div>Things are happening...</div>;
@@ -117,6 +126,7 @@ const ViewerHome: React.FC = () => {
         authClient={authClient}
         iTwinId={iTwinId ?? ""}
         iModelId={iModelId ?? ""}
+        changeSetId={changesetId}
         theme={ColorTheme.Dark}
         loadingComponent={<Loader />}
         mapLayerOptions={{
@@ -152,6 +162,7 @@ const ViewerHome: React.FC = () => {
           }),
         ]}
         backstageItems={backstageItems}
+        // renderSys={{doIdleWork: true}}
       />
     </div>
   );

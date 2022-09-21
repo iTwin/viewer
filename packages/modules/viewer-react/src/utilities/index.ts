@@ -33,7 +33,11 @@ export const isFunction = (item: any) => {
  * @returns
  */
 export const isEqual = (a?: any, b?: any) => {
-  if (!a || !b) {
+  if (a === undefined && b === undefined) {
+    return true;
+  }
+  // Do not check !a or !b as value can be boolean type
+  if (a === undefined || b === undefined) {
     return false;
   }
   const aKeys = Object.keys(a);
