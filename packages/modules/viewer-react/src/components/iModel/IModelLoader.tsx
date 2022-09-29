@@ -7,13 +7,8 @@ import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
 import { StateManager, UiFramework } from "@itwin/appui-react";
-import { Cartographic } from "@itwin/core-common";
-import type {
-  BlankConnectionProps,
-  IModelConnection,
-} from "@itwin/core-frontend";
-import { BlankConnection, IModelApp } from "@itwin/core-frontend";
-import { Range3d } from "@itwin/core-geometry";
+import type { IModelConnection } from "@itwin/core-frontend";
+import { IModelApp } from "@itwin/core-frontend";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
@@ -24,24 +19,14 @@ import {
   useTheme,
   useUiProviders,
 } from "../../hooks";
+import { getAndSetViewState } from "../../services/iModel";
 import {
-  getAndSetViewState,
-  openLocalIModel,
-  openRemoteIModel,
-} from "../../services/iModel";
+  getConnectionType,
+  openConnection,
+} from "../../services/iModel/iModelViewerHelper";
 import { ViewerPerformance } from "../../services/telemetry";
-import type {
-  BlankViewerProps,
-  ConnectedViewerProps,
-  FileViewerProps,
-  LoaderProps,
-} from "../../types";
+import type { ModelLoaderProps } from "../../types";
 import { IModelViewer } from "./IModelViewer";
-
-type ModelLoaderProps = Partial<
-  ConnectedViewerProps & FileViewerProps & BlankViewerProps
-> &
-  LoaderProps;
 
 const IModelLoader = React.memo(
   ({
@@ -60,6 +45,8 @@ const IModelLoader = React.memo(
     theme,
     viewCreatorOptions,
     loadingComponent,
+    extents,
+    location,
   }: ModelLoaderProps) => {
     const [error, setError] = useState<Error>();
     const [connection, setConnection] = useState<IModelConnection>();
@@ -78,7 +65,16 @@ const IModelLoader = React.memo(
     const getModelConnection = useCallback(async (): Promise<
       IModelConnection | undefined
     > => {
-      if (!iTwinId && !filePath && !blankConnection) {
+      const connectionType = getConnectionType({
+        iTwinId,
+        iModelId,
+        filePath,
+        blankConnection,
+        extents,
+        location,
+      });
+
+      if (!connectionType) {
         throw new Error(
           IModelApp.localization.getLocalizedStringWithNamespace(
             "iTwinViewer",
@@ -93,22 +89,18 @@ const IModelLoader = React.memo(
         "ViewerStarting",
         "IModelConnectionStarted"
       );
-      let imodelConnection: IModelConnection | undefined;
+
       // create a new imodelConnection for the passed project and imodel ids or local file
-      if (iTwinId && !iModelId) {
-        imodelConnection = createBlankConnection({
-          iTwinId,
-          blankConnectionProps: blankConnection,
-        });
-      } else if (filePath) {
-        imodelConnection = await openLocalIModel(filePath);
-      } else if (iTwinId && iModelId) {
-        imodelConnection = await openRemoteIModel(
-          iTwinId,
-          iModelId,
-          changeSetId
-        );
-      }
+      const imodelConnection = await openConnection(connectionType, {
+        iTwinId,
+        iModelId,
+        changeSetId,
+        filePath,
+        blankConnection,
+        extents,
+        location,
+      });
+
       ViewerPerformance.addMark("IModelConnection");
       ViewerPerformance.addMeasure(
         "IModelConnected",
@@ -205,29 +197,3 @@ const IModelLoader = React.memo(
 );
 
 export default IModelLoader;
-
-interface BlankConnectionInitializationProps {
-  iTwinId?: string;
-  blankConnectionProps?: Partial<BlankConnectionProps>;
-}
-
-/**
- * Create a blank connection with default props
- * @param BlankConnectionInitializationProps
- * @returns BlankConnection
- */
-const createBlankConnection = ({
-  iTwinId,
-  blankConnectionProps,
-}: BlankConnectionInitializationProps) =>
-  BlankConnection.create({
-    name: "Default Blank Connection",
-    location: Cartographic.fromDegrees({
-      longitude: -75.686694,
-      latitude: 40.065757,
-      height: 0,
-    }),
-    extents: new Range3d(-1000, -1000, -100, 1000, 1000, 100),
-    iTwinId,
-    ...blankConnectionProps,
-  });

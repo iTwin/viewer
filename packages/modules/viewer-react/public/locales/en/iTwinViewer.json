@@ -9,7 +9,7 @@
     "connectionError": "An error occurred while establishing a connection to the iModel.",
     "synchronizerLink": "Please visit <a href={{bridgePortal}} rel=\"noopener noreferrer\" target=\"_blank\">the Synchronization Portal</a> to review the iModel's data connections and synchronize changes."
   },
-  "missingConnectionProps": "Please provide a valid iTwinId and a local snapshotPath.",
+  "missingConnectionProps": "Please provide a valid iTwinId and one of the following: an iModelId or either location and extents or a blankConnection. Alternatively, provide a local snapshotPath.",
   "backstage": {
     "mainFrontstage": "Main Frontstage"
   },

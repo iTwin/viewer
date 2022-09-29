@@ -8,6 +8,6 @@
     "@typescript-eslint/prefer-optional-chain": "warn",
     "@typescript-eslint/prefer-nullish-coalescing": "warn",
     "react-hooks/exhaustive-deps": "warn",
-    "deprecation/deprecation": "error"
+    "deprecation/deprecation": "warn"
   }
 }

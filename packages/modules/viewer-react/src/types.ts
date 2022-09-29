@@ -10,7 +10,9 @@ import type {
   IModelViewportControlOptions,
 } from "@itwin/appui-react";
 import type {
+  Cartographic,
   ColorDef,
+  EcefLocationProps,
   RenderMode,
   RpcInterface,
   RpcInterfaceDefinition,
@@ -25,7 +27,12 @@ import type {
   ViewCreator3dOptions,
   ViewState,
 } from "@itwin/core-frontend";
-import type { Vector3d, XAndY, XYAndZ } from "@itwin/core-geometry";
+import type {
+  Range3dProps,
+  Vector3d,
+  XAndY,
+  XYAndZ,
+} from "@itwin/core-geometry";
 
 import type { StandardFrontstageProps } from "./components/app-ui/providers";
 
@@ -131,11 +138,39 @@ export interface FileViewerProps {
   filePath: string;
 }
 
-export interface BlankViewerProps {
+export type BlankViewerProps = {
+  /** @deprecated specify location and extents instead. */
   blankConnection?: BlankConnectionProps;
+  location?: Cartographic | EcefLocationProps;
+  extents?: Range3dProps;
   blankConnectionViewState?: BlankConnectionViewState;
+};
+
+export interface BlankConnectionInitializationProps {
+  iTwinId?: string;
+  blankConnectionProps: BlankConnectionProps;
 }
 
+export interface RequiredViewerConnectionProps {
+  iTwinId?: string;
+  iModelId?: string;
+  filePath?: string;
+  blankConnection?: BlankConnectionProps;
+  extents?: Range3dProps;
+  location?: Cartographic | EcefLocationProps;
+}
+
+export enum ConnectionType {
+  None,
+  Local,
+  Remote,
+  Blank,
+}
+
+export type ModelLoaderProps = Partial<
+  ConnectedViewerProps & FileViewerProps & BlankViewerProps
+> &
+  LoaderProps;
 /**
  * Maintain a list of initilalizer params for use in useBaseViewerInitializer
  * This list MUST match what is in the ViewerInitializerParams interface and should be updated as new properties are added/removed

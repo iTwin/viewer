@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
-import { Cartographic, ColorDef, RenderMode } from "@itwin/core-common";
+import { Cartographic } from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
 import { Viewer } from "@itwin/web-viewer-react";
@@ -64,6 +64,8 @@ const BlankConnectionHome: React.FC = () => {
         uiProviders={[new TestUiProvider2()]}
         enablePerformanceMonitors={true}
         iTwinId={process.env.IMJS_AUTH_CLIENT_ITWIN_ID_PROD}
+        location={Cartographic.createZero()}
+        extents={new Range3d()}
       />
     </div>
   );

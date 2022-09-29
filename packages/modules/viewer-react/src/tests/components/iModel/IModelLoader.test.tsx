@@ -164,7 +164,38 @@ describe("IModelLoader", () => {
     expect(UiItemsManager.unregister).toHaveBeenCalledTimes(1);
   });
 
-  it("creates a blank connection", async () => {
+  it("creates a blank connection with iTwinId passed in blankConnection", async () => {
+    const blankConnection: BlankConnectionProps = {
+      name: "GeometryConnection",
+      location: Cartographic.fromDegrees({
+        longitude: 0,
+        latitude: 0,
+        height: 0,
+      }),
+      extents: new Range3d(-30, -30, -30, 30, 30, 30),
+      iTwinId: mockITwinId,
+    };
+
+    const blankConnectionViewState: BlankConnectionViewState = {
+      setAllow3dManipulations: true,
+      displayStyle: {
+        backgroundColor: ColorDef.blue,
+      },
+    };
+
+    const { getByTestId } = render(
+      <IModelLoader
+        blankConnection={blankConnection}
+        blankConnectionViewState={blankConnectionViewState}
+      />
+    );
+
+    await waitFor(() => getByTestId("viewer"));
+
+    expect(BlankConnection.create).toHaveBeenCalledWith(blankConnection);
+  });
+
+  it("creates a blank connection with iTwinId passed separate from blankConnection", async () => {
     const blankConnection: BlankConnectionProps = {
       name: "GeometryConnection",
       location: Cartographic.fromDegrees({
@@ -186,12 +217,16 @@ describe("IModelLoader", () => {
       <IModelLoader
         blankConnection={blankConnection}
         blankConnectionViewState={blankConnectionViewState}
+        iTwinId={mockITwinId}
       />
     );
 
     await waitFor(() => getByTestId("viewer"));
 
-    expect(BlankConnection.create).toHaveBeenCalledWith(blankConnection);
+    expect(BlankConnection.create).toHaveBeenCalledWith({
+      ...blankConnection,
+      iTwinId: mockITwinId,
+    });
   });
 
   it("sets the theme to the provided theme", async () => {
