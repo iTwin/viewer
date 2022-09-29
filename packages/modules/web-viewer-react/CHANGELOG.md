@@ -1,6 +1,18 @@
 # Change Log - @itwin/web-viewer-react
 
-This log was last generated on Wed, 17 Aug 2022 20:24:25 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Sep 2022 12:09:30 GMT and should not be manually modified.
+
+## 3.0.9
+Wed, 21 Sep 2022 12:09:30 GMT
+
+_Version update only_
+
+## 3.0.8
+Thu, 08 Sep 2022 14:52:15 GMT
+
+### Patches
+
+- revert https://github.com/iTwin/viewer/pull/210
 
 ## 3.0.7
 Wed, 17 Aug 2022 20:24:25 GMT
