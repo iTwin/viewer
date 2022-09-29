@@ -146,6 +146,13 @@ export type BlankViewerProps = {
   blankConnectionViewState?: BlankConnectionViewState;
 };
 
+type BlankViewerPropsWithoutDeprecation = {
+  blankConnection?: BlankConnectionProps;
+  location?: Cartographic | EcefLocationProps;
+  extents?: Range3dProps;
+  blankConnectionViewState?: BlankConnectionViewState;
+};
+
 export interface BlankConnectionInitializationProps {
   iTwinId?: string;
   blankConnectionProps: BlankConnectionProps;
@@ -169,6 +176,11 @@ export enum ConnectionType {
 
 export type ModelLoaderProps = Partial<
   ConnectedViewerProps & FileViewerProps & BlankViewerProps
+> &
+  LoaderProps;
+
+export type ModelLoaderPropsWithoutDeprecation = Partial<
+  ConnectedViewerProps & FileViewerProps & BlankViewerPropsWithoutDeprecation
 > &
   LoaderProps;
 /**

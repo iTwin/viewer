@@ -25,7 +25,7 @@ import {
   openConnection,
 } from "../../services/iModel/iModelViewerHelper";
 import { ViewerPerformance } from "../../services/telemetry";
-import type { ModelLoaderProps } from "../../types";
+import type { ModelLoaderPropsWithoutDeprecation } from "../../types";
 import { IModelViewer } from "./IModelViewer";
 
 const IModelLoader = React.memo(
@@ -47,7 +47,7 @@ const IModelLoader = React.memo(
     loadingComponent,
     extents,
     location,
-  }: ModelLoaderProps) => {
+  }: ModelLoaderPropsWithoutDeprecation) => {
     const [error, setError] = useState<Error>();
     const [connection, setConnection] = useState<IModelConnection>();
     const isMounted = useIsMounted();

@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import { Cartographic } from "@itwin/core-common";
 import type { BlankConnectionProps } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
