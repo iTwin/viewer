@@ -8,17 +8,9 @@ import React from "react";
 
 import { useAccessToken } from "../hooks/useAccessToken";
 import { useBaseViewerInitializer } from "../hooks/useBaseViewerInitializer";
-import type {
-  BlankViewerProps,
-  ConnectedViewerProps,
-  FileViewerProps,
-  ViewerCommonProps,
-} from "../types";
+import type { ViewerProps } from "../types";
 import { ErrorBoundary } from "./error/ErrorBoundary";
 import IModelLoader from "./iModel/IModelLoader";
-
-type ViewerProps = (ConnectedViewerProps | FileViewerProps | BlankViewerProps) &
-  ViewerCommonProps;
 
 export const BaseViewer = ({
   productId,
@@ -41,7 +33,7 @@ export const BaseViewer = ({
   const accessToken = useAccessToken();
   return (
     <ErrorBoundary>
-      {("filePath" in loaderProps && loaderProps.filePath) || accessToken ? (
+      {loaderProps.filePath || accessToken ? (
         viewerInitialized ? (
           <IModelLoader {...loaderProps} />
         ) : (

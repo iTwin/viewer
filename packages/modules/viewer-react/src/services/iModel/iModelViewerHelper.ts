@@ -2,18 +2,14 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
-import type {
-  BlankConnectionProps,
-  IModelConnection,
-} from "@itwin/core-frontend";
+
+import type { IModelConnection } from "@itwin/core-frontend";
 import { BlankConnection } from "@itwin/core-frontend";
 
 import type {
   BlankConnectionInitializationProps,
-  ModelLoaderProps,
-  RequiredViewerConnectionProps,
+  RequiredViewerProps,
 } from "../../types";
-import { ConnectionType } from "../../types";
 import { openLocalIModel, openRemoteIModel } from "./IModelService";
 
 /**
@@ -30,62 +26,68 @@ export const createBlankConnection = ({
     ...blankConnectionProps,
   });
 
-export const getConnectionType = ({
-  iTwinId,
-  iModelId,
-  filePath,
-  blankConnection,
-  extents,
-  location,
-}: RequiredViewerConnectionProps): ConnectionType => {
+/**
+ * Creates a remote, local, or blank connection
+ * based on RequiredViewerProps passed.
+ * @param RequiredViewerProps
+ * @returns Promise<IModelConnection | undefined>
+ */
+export const openConnection = async (
+  options: RequiredViewerProps
+): Promise<IModelConnection | undefined> => {
+  if (options.iTwinId && options.iModelId) {
+    return await openRemoteIModel(
+      options.iTwinId,
+      options.iModelId,
+      options.changeSetId
+    );
+  }
+
+  if (options.filePath) {
+    console.log("openming local i model");
+    return await openLocalIModel(options.filePath);
+  }
+
+  if (options.extents) {
+    return createBlankConnection({
+      iTwinId: options.iTwinId,
+      blankConnectionProps: {
+        extents: options.extents,
+        location: options.location,
+        name: "Blank Connection",
+      },
+    });
+  }
+
+  if (options.blankConnection) {
+    return createBlankConnection({
+      iTwinId: options.iTwinId,
+      blankConnectionProps: options.blankConnection,
+    });
+  }
+
+  return;
+};
+
+export const missingViewerConnectionProps = (
+  props: Partial<RequiredViewerProps>
+): boolean => {
+  const { iTwinId, iModelId, filePath, blankConnection, extents, location } =
+    props;
+
   if (filePath) {
-    return ConnectionType.Local;
+    return false;
   }
   if (iModelId && iTwinId) {
-    return ConnectionType.Remote;
+    return false;
   }
   if (
     blankConnection?.iTwinId ||
     (blankConnection && iTwinId) ||
     (extents && location && iTwinId)
   ) {
-    return ConnectionType.Blank;
+    return false;
   }
 
-  return ConnectionType.None;
-};
-
-export const openConnection = async (
-  connectionType: ConnectionType,
-  {
-    iTwinId,
-    iModelId,
-    changeSetId,
-    filePath,
-    blankConnection,
-    extents,
-    location,
-  }: ModelLoaderProps
-): Promise<IModelConnection | undefined> => {
-  switch (connectionType) {
-    case ConnectionType.Remote:
-      return await openRemoteIModel(iTwinId!, iModelId!, changeSetId);
-
-    case ConnectionType.Local:
-      return await openLocalIModel(filePath!);
-
-    case ConnectionType.Blank:
-      const blankConnectionProps: BlankConnectionProps = blankConnection || {
-        extents: extents!,
-        location: location!,
-        name: "Blank Connection",
-      };
-
-      return createBlankConnection({
-        iTwinId,
-        blankConnectionProps,
-      });
-  }
-
-  return undefined;
+  return true;
 };

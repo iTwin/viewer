@@ -131,6 +131,13 @@ describe("IModelLoader", () => {
       isBlankConnection: () => true,
       isOpen: true,
     } as any);
+
+    jest.spyOn(IModelServices, "openLocalIModel").mockResolvedValue({
+      isBlankConnection: () => false,
+      iModelId: mockIModelId,
+      close: jest.fn(),
+      isOpen: true,
+    } as any);
   });
 
   afterEach(() => {
@@ -165,7 +172,7 @@ describe("IModelLoader", () => {
   });
 
   it("creates a blank connection with iTwinId passed in blankConnection", async () => {
-    const blankConnection: BlankConnectionProps = {
+    const blankConnection = {
       name: "GeometryConnection",
       location: Cartographic.fromDegrees({
         longitude: 0,
@@ -227,6 +234,28 @@ describe("IModelLoader", () => {
       ...blankConnection,
       iTwinId: mockITwinId,
     });
+  });
+
+  it("creates a remote connection from iModelId and iTwinId", async () => {
+    const { getByTestId } = render(
+      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
+    );
+
+    await waitFor(() => getByTestId("viewer"));
+
+    expect(IModelServices.openRemoteIModel).toHaveBeenCalledWith(
+      mockITwinId,
+      mockIModelId,
+      undefined // optional changesetId
+    );
+  });
+
+  it("creates a local connection from filePath", async () => {
+    const { getByTestId } = render(<IModelLoader filePath="x://iModel" />);
+
+    await waitFor(() => getByTestId("viewer"));
+
+    expect(IModelServices.openLocalIModel).toHaveBeenCalledWith("x://iModel");
   });
 
   it("sets the theme to the provided theme", async () => {
