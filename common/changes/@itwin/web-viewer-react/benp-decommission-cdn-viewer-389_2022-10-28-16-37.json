@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/web-viewer-react",
+      "comment": "Remove ITwinViewer service",
+      "type": "major"
+    }
+  ],
+  "packageName": "@itwin/web-viewer-react"
+}
