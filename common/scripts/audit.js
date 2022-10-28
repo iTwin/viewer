@@ -48,6 +48,7 @@ const rushCommonDir = path.join(__dirname, "../");
   // All security issues should be addressed asap.
   const excludedAdvisories = [
     "GHSA-ww39-953v-wcq6", // https://github.com/advisories/GHSA-ww39-953v-wcq6, desktop-viewer-test>webpack>watchpack>watchpack-chokidar2>chokidar>glob-parent
+    "GHSA-f8q6-p94x-37v3", // https://github.com/advisories/GHSA-f8q6-p94x-37v3, cdn-viewer>@bentley/react-scripts>react-dev-utils>recursive-readdir>minimatch (regex dos)
   ];
 
   let shouldFailBuild = false;
