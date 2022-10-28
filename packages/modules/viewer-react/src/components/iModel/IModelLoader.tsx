@@ -43,11 +43,6 @@ const IModelLoader = React.memo((viewerProps: ViewerLoaderProps) => {
     onIModelConnected,
     backstageItems,
     loadingComponent,
-    iTwinId,
-    iModelId,
-    changeSetId,
-    filePath,
-    blankConnection,
   } = viewerProps;
 
   const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
@@ -101,15 +96,7 @@ const IModelLoader = React.memo((viewerProps: ViewerLoaderProps) => {
       return imodelConnection;
     }
     return;
-  }, [
-    iTwinId,
-    iModelId,
-    changeSetId,
-    filePath,
-    blankConnection,
-    isMounted,
-    onIModelConnected,
-  ]);
+  }, [viewerProps, isMounted, onIModelConnected]);
 
   useEffect(() => {
     let prevConnection: IModelConnection | undefined;

@@ -13,7 +13,6 @@ import {
   createBlankConnection,
   openConnection,
 } from "../../services/iModel/iModelViewerHelper";
-import { ConnectionType } from "../../types";
 
 jest.mock("@itwin/core-frontend", () => {
   return {
