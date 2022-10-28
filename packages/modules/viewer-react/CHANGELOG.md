@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Wed, 20 Jul 2022 14:16:19 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Sep 2022 12:09:30 GMT and should not be manually modified.
+
+## 3.2.2
+Wed, 21 Sep 2022 12:09:30 GMT
+
+### Patches
+
+- add `OptionalToUndefinedUnion` utility type to fix missing params from iTwinViewerInitializerParamSample and getIModelAppOptions
 
 ## 3.2.1
 Wed, 20 Jul 2022 14:16:19 GMT

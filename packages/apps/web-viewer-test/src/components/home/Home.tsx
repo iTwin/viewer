@@ -40,14 +40,6 @@ const Home = () => {
           >
             {"Blank Connection"}
           </Button>
-          <Button
-            className={styles.homeButton}
-            onClick={() => navigate("/imodelbank")}
-            styleType={"default"}
-            size={"large"}
-          >
-            {"iModel Bank"}
-          </Button>
         </div>
       </div>
     </div>
