@@ -37,15 +37,7 @@ export const BaseViewer = ({
     <ErrorBoundary>
       {loaderProps.filePath || accessToken ? (
         viewerInitialized ? (
-          <IModelLoader
-            blankConnection={{
-              extents: new Range3d(0, 0, 0, 0, 0),
-              location: Cartographic.createZero(),
-              name: "name",
-            }}
-            iTwinId="asdsa"
-            iModelId="sadaqsd"
-          />
+          <IModelLoader {...loaderProps} />
         ) : (
           <FillCentered>Initializing...</FillCentered>
         )

@@ -72,15 +72,22 @@ export const openConnection = async (
 export const gatherRequiredViewerProps = (
   props: ModelLoaderProps
 ): RequiredViewerProps | false => {
-  const { iTwinId, iModelId, filePath, blankConnection, extents, location } =
-    props;
+  const {
+    iTwinId,
+    iModelId,
+    filePath,
+    blankConnection,
+    extents,
+    location,
+    changeSetId,
+  } = props;
 
   if (filePath) {
     return { filePath };
   }
 
   if (iModelId && iTwinId) {
-    return { iModelId, iTwinId };
+    return { iModelId, iTwinId, changeSetId };
   }
 
   if (
