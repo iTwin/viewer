@@ -3,8 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Cartographic } from "@itwin/core-common";
-import { Range3d } from "@itwin/core-geometry";
 import { FillCentered } from "@itwin/core-react";
 import React from "react";
 
