@@ -8,6 +8,7 @@ import { BlankConnection } from "@itwin/core-frontend";
 
 import type {
   BlankConnectionInitializationProps,
+  ModelLoaderProps,
   RequiredViewerProps,
 } from "../../types";
 import { openLocalIModel, openRemoteIModel } from "./IModelService";
@@ -44,11 +45,10 @@ export const openConnection = async (
   }
 
   if (options.filePath) {
-    console.log("openming local i model");
     return await openLocalIModel(options.filePath);
   }
 
-  if (options.extents) {
+  if (options.extents && options.location) {
     return createBlankConnection({
       iTwinId: options.iTwinId,
       blankConnectionProps: {
@@ -69,25 +69,27 @@ export const openConnection = async (
   return;
 };
 
-export const missingViewerConnectionProps = (
-  props: Partial<RequiredViewerProps>
-): boolean => {
+export const gatherRequiredViewerProps = (
+  props: ModelLoaderProps
+): RequiredViewerProps | false => {
   const { iTwinId, iModelId, filePath, blankConnection, extents, location } =
     props;
 
   if (filePath) {
-    return false;
+    return { filePath };
   }
+
   if (iModelId && iTwinId) {
-    return false;
+    return { iModelId, iTwinId };
   }
+
   if (
     blankConnection?.iTwinId ||
     (blankConnection && iTwinId) ||
     (extents && location && iTwinId)
   ) {
-    return false;
+    return { blankConnection, iTwinId, extents, location };
   }
 
-  return true;
+  return false;
 };

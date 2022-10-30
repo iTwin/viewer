@@ -3,6 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { Cartographic } from "@itwin/core-common";
+import { Range3d } from "@itwin/core-geometry";
 import { FillCentered } from "@itwin/core-react";
 import React from "react";
 
@@ -35,7 +37,15 @@ export const BaseViewer = ({
     <ErrorBoundary>
       {loaderProps.filePath || accessToken ? (
         viewerInitialized ? (
-          <IModelLoader {...loaderProps} />
+          <IModelLoader
+            blankConnection={{
+              extents: new Range3d(0, 0, 0, 0, 0),
+              location: Cartographic.createZero(),
+              name: "name",
+            }}
+            iTwinId="asdsa"
+            iModelId="sadaqsd"
+          />
         ) : (
           <FillCentered>Initializing...</FillCentered>
         )

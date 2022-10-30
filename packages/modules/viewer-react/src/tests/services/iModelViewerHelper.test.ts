@@ -11,6 +11,7 @@ import { Range3d } from "@itwin/core-geometry";
 import * as iModelService from "../../services/iModel/IModelService";
 import {
   createBlankConnection,
+  gatherRequiredViewerProps,
   openConnection,
 } from "../../services/iModel/iModelViewerHelper";
 
@@ -164,5 +165,41 @@ describe("iModelViewerHelper", () => {
     });
 
     expect(BlankConnection.create).toHaveBeenCalledTimes(2);
+  });
+
+  it("gatherRequiredViewerProps narrows required viewer properties", async () => {
+    const validConnectedProps = { iTwinId: "iTwinId", iModelId: "iModelId" };
+    const validDeprecatedBlankConnectionProps = {
+      blankConnection: {
+        name: "Blank Connection",
+        extents: new Range3d(10, 10, 10),
+        location: Cartographic.createZero(),
+        iTwinId: "mockITwinId",
+      },
+    };
+    const validBlankConnectionProps = {
+      extents: new Range3d(10, 10, 10),
+      location: Cartographic.createZero(),
+      iTwinId: "mockITwinId",
+    };
+    const validLocalConnectionProps = { filePath: "x:\\imodel" };
+
+    expect(gatherRequiredViewerProps(validConnectedProps)).toEqual(
+      validConnectedProps
+    );
+    expect(
+      gatherRequiredViewerProps(validDeprecatedBlankConnectionProps)
+    ).toEqual(validDeprecatedBlankConnectionProps);
+    expect(gatherRequiredViewerProps(validBlankConnectionProps)).toEqual(
+      validBlankConnectionProps
+    );
+    expect(gatherRequiredViewerProps(validLocalConnectionProps)).toEqual(
+      validLocalConnectionProps
+    );
+    expect(gatherRequiredViewerProps({})).toBe(false);
+    expect(gatherRequiredViewerProps({ iTwinId: "mockItwinId" })).toEqual(
+      false
+    );
+    expect(gatherRequiredViewerProps({ iModelId: "iModelId" })).toEqual(false);
   });
 });

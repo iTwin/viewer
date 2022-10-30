@@ -21,14 +21,14 @@ import {
 } from "../../hooks";
 import { getAndSetViewState } from "../../services/iModel";
 import {
-  missingViewerConnectionProps,
+  gatherRequiredViewerProps,
   openConnection,
 } from "../../services/iModel/iModelViewerHelper";
 import { ViewerPerformance } from "../../services/telemetry";
-import type { ViewerLoaderProps } from "../../types";
+import type { ModelLoaderProps } from "../../types";
 import { IModelViewer } from "./IModelViewer";
 
-const IModelLoader = React.memo((viewerProps: ViewerLoaderProps) => {
+const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   const [error, setError] = useState<Error>();
   const [connection, setConnection] = useState<IModelConnection>();
   const isMounted = useIsMounted();
@@ -59,7 +59,9 @@ const IModelLoader = React.memo((viewerProps: ViewerLoaderProps) => {
   const getModelConnection = useCallback(async (): Promise<
     IModelConnection | undefined
   > => {
-    if (missingViewerConnectionProps(viewerProps)) {
+    const sanitizedProps = gatherRequiredViewerProps(viewerProps);
+
+    if (!sanitizedProps) {
       throw new Error(
         IModelApp.localization.getLocalizedStringWithNamespace(
           "iTwinViewer",
@@ -76,7 +78,7 @@ const IModelLoader = React.memo((viewerProps: ViewerLoaderProps) => {
     );
 
     // create a new imodelConnection for the passed project and imodel ids or local file
-    const imodelConnection = await openConnection(viewerProps);
+    const imodelConnection = await openConnection(sanitizedProps);
 
     ViewerPerformance.addMark("IModelConnection");
     ViewerPerformance.addMeasure(

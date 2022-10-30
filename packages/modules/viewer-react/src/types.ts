@@ -9,7 +9,6 @@ import type {
   FrontstageProvider,
   IModelViewportControlOptions,
 } from "@itwin/appui-react";
-import type { GuidString } from "@itwin/core-bentley";
 import type {
   Cartographic,
   ColorDef,
@@ -41,9 +40,7 @@ export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
   ? (Without<T1, T2> & T2) | (Without<T2, T1> & T1)
   : T1 | T2;
-type PropRequired<T, Prop> = Prop extends keyof T
-  ? Required<Pick<T, Prop>> & Omit<T, Prop>
-  : never;
+
 /**
  * Converts the following optional arg foo of type T
  * foo?: T
@@ -145,10 +142,17 @@ export type RequiredViewerProps = XOR<
   XOR<ConnectedViewerProps, FileViewerProps>,
   BlankViewerProps
 >;
+
+export type ModelLoaderProps = Partial<
+  ConnectedViewerProps & FileViewerProps & BlankViewerProps
+> &
+  LoaderProps;
+
 export type ViewerProps = RequiredViewerProps & ViewerCommonProps;
 export type ViewerLoaderProps = RequiredViewerProps & LoaderProps;
+
 export type ConnectedViewerProps = {
-  iTwinId: GuidString;
+  iTwinId: string;
   iModelId: string;
   changeSetId?: string;
 };
@@ -157,38 +161,20 @@ export type FileViewerProps = {
   filePath: string;
 };
 
-export type BlankViewerProps = XOR<
-  XOR<
-    {
-      /** @deprecated specify location and extents instead. */
-      blankConnection: PropRequired<BlankConnectionProps, "iTwinId">;
-      blankConnectionViewState?: BlankConnectionViewState;
-    },
-    {
-      /** @deprecated specify location and extents instead. */
-      blankConnection: BlankConnectionProps;
-      blankConnectionViewState?: BlankConnectionViewState;
-      iTwinId: GuidString;
-    }
-  >,
-  {
-    blankConnectionViewState?: BlankConnectionViewState;
-    location: Cartographic | EcefLocationProps;
-    extents: Range3dProps;
-    iTwinId: GuidString;
-  }
->;
+// it's fine to say that if either location or extents is defined, then both have to be defined.
+export type BlankViewerProps = {
+  /** @deprecated specify location and extents instead. */
+  blankConnection?: BlankConnectionProps;
+  blankConnectionViewState?: BlankConnectionViewState;
+  location?: Cartographic | EcefLocationProps;
+  extents?: Range3dProps;
+  iTwinId?: string;
+};
 
 export type BlankConnectionInitializationProps = {
   iTwinId?: string;
   blankConnectionProps: BlankConnectionProps;
 };
-
-export enum ConnectionType {
-  Local,
-  Remote,
-  Blank,
-}
 
 /**
  * Maintain a list of initilalizer params for use in useBaseViewerInitializer
