@@ -72,8 +72,10 @@
     "minimist": "^1.2.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.0",
     "react-router": "^6.3.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@bentley/react-scripts": "^5.0.0",
