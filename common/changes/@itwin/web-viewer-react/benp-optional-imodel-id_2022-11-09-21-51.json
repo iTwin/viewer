@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/web-viewer-react",
+      "comment": "blank connection will be created if iTwinId is supplied and iModelId is not; deprecate blankConnectionProps",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/web-viewer-react"
+}
