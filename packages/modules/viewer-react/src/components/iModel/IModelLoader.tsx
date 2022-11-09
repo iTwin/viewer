@@ -19,14 +19,14 @@ import {
   useTheme,
   useUiProviders,
 } from "../../hooks";
-import { getAndSetViewState } from "../../services/iModel";
 import {
   gatherRequiredViewerProps,
+  getAndSetViewState,
   openConnection,
-} from "../../services/iModel/iModelViewerHelper";
+} from "../../services/iModel";
 import { ViewerPerformance } from "../../services/telemetry";
 import type { ModelLoaderProps } from "../../types";
-import { IModelViewer } from "./IModelViewer";
+import { IModelViewer } from "./";
 
 const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   const [error, setError] = useState<Error>();
@@ -44,7 +44,6 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     backstageItems,
     loadingComponent,
   } = viewerProps;
-
   const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
     useFrontstages({
       frontstages,
@@ -53,15 +52,16 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       viewCreatorOptions,
       blankConnectionViewState,
     });
+
   useUiProviders(uiProviders);
   useTheme(theme);
 
   const getModelConnection = useCallback(async (): Promise<
     IModelConnection | undefined
   > => {
-    const sanitizedProps = gatherRequiredViewerProps(viewerProps);
+    const requiredConnectionProps = gatherRequiredViewerProps(viewerProps);
 
-    if (!sanitizedProps) {
+    if (!requiredConnectionProps) {
       throw new Error(
         IModelApp.localization.getLocalizedStringWithNamespace(
           "iTwinViewer",
@@ -78,7 +78,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     );
 
     // create a new imodelConnection for the passed project and imodel ids or local file
-    const imodelConnection = await openConnection(sanitizedProps);
+    const imodelConnection = await openConnection(requiredConnectionProps);
 
     ViewerPerformance.addMark("IModelConnection");
     ViewerPerformance.addMeasure(

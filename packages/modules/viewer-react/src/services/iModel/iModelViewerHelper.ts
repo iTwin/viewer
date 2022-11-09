@@ -3,16 +3,19 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { IModelConnection } from "@itwin/core-frontend";
+import type {
+  BlankConnectionProps,
+  IModelConnection,
+} from "@itwin/core-frontend";
 import { BlankConnection } from "@itwin/core-frontend";
 
-import type {
-  BlankConnectionInitializationProps,
-  ModelLoaderProps,
-  RequiredViewerProps,
-} from "../../types";
+import type { ModelLoaderProps, RequiredViewerProps } from "../../types";
 import { openLocalIModel, openRemoteIModel } from "./IModelService";
 
+type BlankConnectionInitializationProps = {
+  iTwinId?: string;
+  blankConnectionProps: BlankConnectionProps;
+};
 /**
  * Create a blank connection with default props
  * @param BlankConnectionInitializationProps
@@ -58,30 +61,27 @@ export const openConnection = async (
       },
     });
   }
-
+  /* eslint-disable-next-line deprecation/deprecation */
   if (options.blankConnection) {
     return createBlankConnection({
       iTwinId: options.iTwinId,
-      blankConnectionProps: options.blankConnection,
+      blankConnectionProps:
+        options.blankConnection /* eslint-disable-line deprecation/deprecation */,
     });
   }
 
   return;
 };
 
-export const gatherRequiredViewerProps = (
-  props: ModelLoaderProps
-): RequiredViewerProps | false => {
-  const {
-    iTwinId,
-    iModelId,
-    filePath,
-    blankConnection,
-    extents,
-    location,
-    changeSetId,
-  } = props;
-
+export const gatherRequiredViewerProps = ({
+  iTwinId,
+  iModelId,
+  filePath,
+  blankConnection /* eslint-disable-line deprecation/deprecation */,
+  extents,
+  location,
+  changeSetId,
+}: ModelLoaderProps): RequiredViewerProps | undefined => {
   if (filePath) {
     return { filePath };
   }
@@ -90,13 +90,15 @@ export const gatherRequiredViewerProps = (
     return { iModelId, iTwinId, changeSetId };
   }
 
+  /* eslint-disable-next-line deprecation/deprecation */
   if (
     blankConnection?.iTwinId ||
     (blankConnection && iTwinId) ||
     (extents && location && iTwinId)
   ) {
+    /* eslint-disable-next-line deprecation/deprecation */
     return { blankConnection, iTwinId, extents, location };
   }
 
-  return false;
+  return;
 };

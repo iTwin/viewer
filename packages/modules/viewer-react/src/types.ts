@@ -171,11 +171,6 @@ export type BlankViewerProps = {
   iTwinId?: string;
 };
 
-export type BlankConnectionInitializationProps = {
-  iTwinId?: string;
-  blankConnectionProps: BlankConnectionProps;
-};
-
 /**
  * Maintain a list of initilalizer params for use in useBaseViewerInitializer
  * This list MUST match what is in the ViewerInitializerParams interface and should be updated as new properties are added/removed

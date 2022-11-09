@@ -196,10 +196,10 @@ describe("iModelViewerHelper", () => {
     expect(gatherRequiredViewerProps(validLocalConnectionProps)).toEqual(
       validLocalConnectionProps
     );
-    expect(gatherRequiredViewerProps({})).toBe(false);
-    expect(gatherRequiredViewerProps({ iTwinId: "mockItwinId" })).toEqual(
-      false
-    );
-    expect(gatherRequiredViewerProps({ iModelId: "iModelId" })).toEqual(false);
+    expect(gatherRequiredViewerProps({})).toBeUndefined();
+    expect(
+      gatherRequiredViewerProps({ iTwinId: "mockItwinId" })
+    ).toBeUndefined();
+    expect(gatherRequiredViewerProps({ iModelId: "iModelId" })).toBeUndefined();
   });
 });

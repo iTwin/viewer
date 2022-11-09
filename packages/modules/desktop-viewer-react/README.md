@@ -58,7 +58,9 @@ export const MyViewerComponent = () => {
 
 ##### Blank Connections
 
-- `blankConnection` - Data to use to create the BlankConnection (name, location, extents, etc.). Note that this can't be used in conjunction with the iTwinId or iModelId prop.
+- `location` - The spatial location for the blank connection.
+- `extents` - The volume of interest, in meters, centered around location
+Note that this can't be used in conjunction with the iTwinId or iModelId prop.
 
 #### Optional
 
