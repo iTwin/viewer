@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@itwin/web-viewer-react",
-      "comment": "Added redux, react-redux and @itwin/imodels-client-management as dependency",
+      "comment": "Added redux, react-redux and @itwin/imodels-client-management as peer dependency",
       "type": "patch"
     }
   ],

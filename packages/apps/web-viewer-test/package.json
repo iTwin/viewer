@@ -22,6 +22,7 @@
     "@itwin/frontend-devtools": "^3.2.0",
     "@itwin/imodel-components-react": "^3.2.0",
     "@itwin/imodels-access-frontend": "^1.0.1",
+    "@itwin/imodels-client-management": "^1.0.1",
     "@itwin/itwinui-react": "^1.16.2",
     "@itwin/measure-tools-react": "latest",
     "@itwin/presentation-common": "^3.2.0",
