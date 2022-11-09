@@ -49,6 +49,7 @@ const rushCommonDir = path.join(__dirname, "../");
   const excludedAdvisories = [
     "GHSA-ww39-953v-wcq6", // https://github.com/advisories/GHSA-ww39-953v-wcq6, desktop-viewer-test>webpack>watchpack>watchpack-chokidar2>chokidar>glob-parent
     "GHSA-f8q6-p94x-37v3", // https://github.com/advisories/GHSA-f8q6-p94x-37v3, cdn-viewer>@bentley/react-scripts>react-dev-utils>recursive-readdir>minimatch (regex dos)
+    "GHSA-76p3-8jx3-jpfq", // https://github.com/advisories/GHSA-76p3-8jx3-jpfq, desktop-viewer-test>@bentley/react-scripts>fast-sass-loader>loader-utils
   ];
 
   let shouldFailBuild = false;

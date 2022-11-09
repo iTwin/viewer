@@ -53,11 +53,6 @@
       "shouldPublish": false
     },
     {
-      "packageName": "@itwin/cdn-viewer",
-      "projectFolder": "packages/apps/cdn-viewer",
-      "shouldPublish": false
-    },
-    {
       "packageName": "@itwin/desktop-viewer-test",
       "projectFolder": "packages/apps/desktop-viewer-test",
       "shouldPublish": false
