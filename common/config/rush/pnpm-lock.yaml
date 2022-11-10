@@ -34,7 +34,6 @@ importers:
       '@itwin/imodel-components-react': ^3.2.0
       '@itwin/imodels-access-backend': ^1.0.0
       '@itwin/imodels-access-frontend': ^1.0.1
-      '@itwin/imodels-client-management': ^1.0.1
       '@itwin/itwinui-css': ^0.18.1
       '@itwin/itwinui-icons-react': ^1.2.0
       '@itwin/itwinui-react': ^1.16.2
@@ -94,7 +93,6 @@ importers:
       '@itwin/imodel-components-react': 3.3.4_6040e7d624cc13b0c66bcec7949328ee
       '@itwin/imodels-access-backend': 1.0.2_2d95cb31df2f68a7fa3ae2d0540e8fc8
       '@itwin/imodels-access-frontend': 1.0.2_9619703a848757f6d091df0b8e79a1bf
-      '@itwin/imodels-client-management': 1.1.0
       '@itwin/itwinui-css': 0.18.1
       '@itwin/itwinui-icons-react': 1.15.1_react-dom@17.0.2+react@17.0.2
       '@itwin/itwinui-react': 1.46.0_react-dom@17.0.2+react@17.0.2
@@ -154,7 +152,6 @@ importers:
       '@itwin/frontend-devtools': ^3.2.0
       '@itwin/imodel-components-react': ^3.2.0
       '@itwin/imodels-access-frontend': ^1.0.1
-      '@itwin/imodels-client-management': ^1.0.1
       '@itwin/itwinui-react': ^1.16.2
       '@itwin/measure-tools-react': latest
       '@itwin/presentation-common': ^3.2.0
@@ -196,7 +193,6 @@ importers:
       '@itwin/frontend-devtools': 3.3.4_8b94e1372ad515e49e37416d0d665cb6
       '@itwin/imodel-components-react': 3.3.4_6040e7d624cc13b0c66bcec7949328ee
       '@itwin/imodels-access-frontend': 1.0.2_9619703a848757f6d091df0b8e79a1bf
-      '@itwin/imodels-client-management': 1.1.0
       '@itwin/itwinui-react': 1.46.0_react-dom@17.0.2+react@17.0.2
       '@itwin/measure-tools-react': 0.10.4_6590ebe4ce6501c9b87301f75021881c
       '@itwin/presentation-common': 3.3.4_ea412cabc05ab72a479cf8968fee7e9e
@@ -275,6 +271,7 @@ importers:
       ts-jest: ^26.1.1
       typescript: ~4.4.0
     dependencies:
+      '@itwin/imodels-client-management': 1.1.0
       '@itwin/viewer-react': link:../viewer-react
     devDependencies:
       '@itwin/appui-abstract': 3.3.4_@itwin+core-bentley@3.3.4
@@ -296,7 +293,6 @@ importers:
       '@itwin/ecschema-metadata': 3.3.4_41a2cbae03e5be9bcfe79f47880ad836
       '@itwin/electron-authorization': 0.8.5_43a03bd66cf08b0ee61087b6f3dd5d56
       '@itwin/imodel-components-react': 3.3.4_6040e7d624cc13b0c66bcec7949328ee
-      '@itwin/imodels-client-management': 1.1.0
       '@itwin/presentation-common': 3.3.4_ea412cabc05ab72a479cf8968fee7e9e
       '@itwin/presentation-components': 3.3.4_cdb8b324b442f3462788984ddeb37b6d
       '@itwin/presentation-frontend': 3.3.4_7a735fcbbabcc3c21adb316c8a87ca73
@@ -534,6 +530,7 @@ importers:
       ts-jest: ^26.1.1
       typescript: ~4.4.0
     dependencies:
+      '@itwin/imodels-client-management': 1.1.0
       '@itwin/viewer-react': link:../viewer-react
     devDependencies:
       '@itwin/appui-abstract': 3.3.4_@itwin+core-bentley@3.3.4
@@ -551,7 +548,6 @@ importers:
       '@itwin/core-react': 3.3.4_455a33cf96af58c8398e4a38845673d9
       '@itwin/core-telemetry': 3.3.4_@itwin+core-geometry@3.3.4
       '@itwin/imodel-components-react': 3.3.4_6040e7d624cc13b0c66bcec7949328ee
-      '@itwin/imodels-client-management': 1.1.0
       '@itwin/presentation-common': 3.3.4_ea412cabc05ab72a479cf8968fee7e9e
       '@itwin/presentation-components': 3.3.4_cdb8b324b442f3462788984ddeb37b6d
       '@itwin/presentation-frontend': 3.3.4_7a735fcbbabcc3c21adb316c8a87ca73

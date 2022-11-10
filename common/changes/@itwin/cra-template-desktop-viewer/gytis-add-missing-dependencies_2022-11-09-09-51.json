@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@itwin/cra-template-desktop-viewer",
-      "comment": "",
+      "comment": "Removed @itwin/imodels-client-management as dependency",
       "type": "patch"
     }
   ],
