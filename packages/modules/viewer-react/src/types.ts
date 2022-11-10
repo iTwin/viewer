@@ -10,7 +10,9 @@ import type {
   IModelViewportControlOptions,
 } from "@itwin/appui-react";
 import type {
+  Cartographic,
   ColorDef,
+  EcefLocationProps,
   RenderMode,
   RpcInterface,
   RpcInterfaceDefinition,
@@ -25,7 +27,12 @@ import type {
   ViewCreator3dOptions,
   ViewState,
 } from "@itwin/core-frontend";
-import type { Vector3d, XAndY, XYAndZ } from "@itwin/core-geometry";
+import type {
+  Range3dProps,
+  Vector3d,
+  XAndY,
+  XYAndZ,
+} from "@itwin/core-geometry";
 
 import type { StandardFrontstageProps } from "./components/app-ui/providers";
 
@@ -131,22 +138,38 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   /** array of iTwin.js Extensions */
   extensions?: ExtensionProvider[];
 }
+export type RequiredViewerProps = XOR<
+  XOR<ConnectedViewerProps, FileViewerProps>,
+  BlankViewerProps
+>;
 
-export interface ConnectedViewerProps {
+export type ModelLoaderProps = Partial<
+  ConnectedViewerProps & FileViewerProps & BlankViewerProps
+> &
+  LoaderProps;
+
+export type ViewerProps = RequiredViewerProps & ViewerCommonProps;
+export type ViewerLoaderProps = RequiredViewerProps & LoaderProps;
+
+export type ConnectedViewerProps = {
   iTwinId: string;
   iModelId: string;
   changeSetId?: string;
-}
-
-export interface FileViewerProps {
+};
+export type FileViewerProps = {
   /** Path to local snapshot or briefcase */
   filePath: string;
-}
+};
 
-export interface BlankViewerProps {
-  blankConnection: BlankConnectionProps;
+// it's fine to say that if either location or extents is defined, then both have to be defined.
+export type BlankViewerProps = {
+  /** @deprecated specify location and extents instead. */
+  blankConnection?: BlankConnectionProps;
   blankConnectionViewState?: BlankConnectionViewState;
-}
+  location?: Cartographic | EcefLocationProps;
+  extents?: Range3dProps;
+  iTwinId?: string;
+};
 
 /**
  * Maintain a list of initilalizer params for use in useBaseViewerInitializer
