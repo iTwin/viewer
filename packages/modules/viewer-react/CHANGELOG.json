@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "3.3.0",
+      "tag": "@itwin/viewer-react_v3.3.0",
+      "date": "Thu, 10 Nov 2022 13:34:14 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "blank connection will be created if iTwinId is supplied and iModelId is not; deprecate blankConnectionProps"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.2",
       "tag": "@itwin/viewer-react_v3.2.2",
       "date": "Wed, 21 Sep 2022 12:09:30 GMT",
