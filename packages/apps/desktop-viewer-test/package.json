@@ -55,7 +55,6 @@
     "@itwin/imodel-components-react": "^3.2.0",
     "@itwin/imodels-access-backend": "^1.0.0",
     "@itwin/imodels-access-frontend": "^1.0.1",
-    "@itwin/imodels-client-management": "^1.0.1",
     "@itwin/itwinui-css": "^0.18.1",
     "@itwin/itwinui-icons-react": "^1.2.0",
     "@itwin/itwinui-react": "^1.16.2",
@@ -72,8 +71,10 @@
     "minimist": "^1.2.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.0",
     "react-router": "^6.3.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@bentley/react-scripts": "^5.0.0",
