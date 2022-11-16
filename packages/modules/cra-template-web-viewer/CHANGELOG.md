@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Thu, 10 Nov 2022 13:34:14 GMT and should not be manually modified.
+This log was last generated on Wed, 16 Nov 2022 07:15:12 GMT and should not be manually modified.
+
+## 3.1.1
+Wed, 16 Nov 2022 07:15:12 GMT
+
+### Patches
+
+- Added redux as dependency, removed @itwin/imodels-client-management as dependency
 
 ## 3.1.0
 Thu, 10 Nov 2022 13:34:14 GMT
