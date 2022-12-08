@@ -144,7 +144,7 @@ if (viewer) {
 
 ## Blank Viewer
 
-For cases where you would prefer to use a [Blank iModelConnection](https://www.itwinjs.org/learning/frontend/blankconnection/), you should supply the `blankConnection` prop to the Viewer React component.
+For cases where you would prefer to use a [Blank iModelConnection](https://www.itwinjs.org/learning/frontend/blankconnection/), you should supply the `location` and `extents` props to the Viewer React component.
 
 ```javascript
 import React, { useState, useEffect } from "react";
@@ -154,12 +154,6 @@ import { Cartographic, ColorDef } from "@itwin/core-common";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 
 export const MyBlankViewerComponent = () => {
-  const blankConnection: BlankConnectionProps = {
-    name: "GeometryConnection",
-    location: Cartographic.fromDegrees(0, 0, 0),
-    extents: new Range3d(-30, -30, -30, 30, 30, 30),
-  };
-
   const blankConnectionViewState: BlankConnectionViewState = {
     displayStyle: {
       backgroundColor: ColorDef.blue,
@@ -181,7 +175,8 @@ export const MyBlankViewerComponent = () => {
   return (
     <Viewer
       authClient={authClient}
-      blankConnection={blankConnection}
+      location={Cartographic.fromDegrees(0, 0, 0)}
+      extents={new Range3d(-30, -30, -30, 30, 30, 30)}
       blankConnectionViewState={blankConnectionViewState}
     />
   );
