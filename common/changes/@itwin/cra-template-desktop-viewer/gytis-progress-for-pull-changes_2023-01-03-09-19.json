@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-desktop-viewer",
+      "comment": "Show progress indicator during changesets download.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/cra-template-desktop-viewer"
+}
