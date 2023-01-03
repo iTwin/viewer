@@ -3994,7 +3994,7 @@ packages:
       resolve: 1.17.0
       semver: 7.3.7
       source-map: 0.6.1
-      typescript: 4.4.4
+      typescript: 4.6.4
     dev: true
 
   /@microsoft/tsdoc-config/0.16.2:
@@ -7743,8 +7743,8 @@ packages:
       minimist: 1.2.6
     dev: true
 
-  /dezalgo/1.0.3:
-    resolution: {integrity: sha512-K7i4zNfT2kgQz3GylDw40ot9GAE47sFZ9EXHFSPP6zONLgH6kWXE0KWJchkbQJLBkRazq4APwZ4OwiFFlT95OQ==}
+  /dezalgo/1.0.4:
+    resolution: {integrity: sha512-rXSP0bf+5n0Qonsb+SVVfNfIsimO4HEtmnIpPHY8Q1UCzKlQrDMfdobr8nJOOsRgWCyMRqeSBQzmWUMq7zvVig==}
     dependencies:
       asap: 2.0.6
       wrappy: 1.0.2
@@ -9514,13 +9514,13 @@ packages:
       combined-stream: 1.0.8
       mime-types: 2.1.35
 
-  /formidable/2.0.1:
-    resolution: {integrity: sha512-rjTMNbp2BpfQShhFbR3Ruk3qk2y9jKpvMW78nJgx8QKtxjDVrwbZG+wvDOmVbifHyOUOQJXxqEy6r0faRrPzTQ==}
+  /formidable/2.1.1:
+    resolution: {integrity: sha512-0EcS9wCFEzLvfiks7omJ+SiYJAiD+TzK4Pcw1UlUoGnhUxDcMKjt0P7x8wEb0u6OHu8Nb98WG3nxtlF5C7bvUQ==}
     dependencies:
-      dezalgo: 1.0.3
+      dezalgo: 1.0.4
       hexoid: 1.0.0
       once: 1.4.0
-      qs: 6.9.3
+      qs: 6.11.0
 
   /forwarded/0.2.0:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
@@ -14688,10 +14688,6 @@ packages:
     dependencies:
       side-channel: 1.0.4
 
-  /qs/6.9.3:
-    resolution: {integrity: sha512-EbZYNarm6138UKKq46tdx08Yo/q9ZhFoAXAI1meAFd2GtbRDhbZY2WQSICskT0c5q99aFzLG1D4nvTk9tqfXIw==}
-    engines: {node: '>=0.6'}
-
   /query-string/4.3.4:
     resolution: {integrity: sha512-O2XLNDBIg1DnTOa+2XrIwSiXEV8h2KImXUnjhhn2+UsvZ+Es2uyd5CCRTNQlDGbzUQOW3aYCBx9rVA6dzsiY7Q==}
     engines: {node: '>=0.10.0'}
@@ -16513,7 +16509,7 @@ packages:
       debug: 4.3.4
       fast-safe-stringify: 2.1.1
       form-data: 4.0.0
-      formidable: 2.0.1
+      formidable: 2.1.1
       methods: 1.1.2
       mime: 2.6.0
       qs: 6.11.0
@@ -17160,6 +17156,12 @@ packages:
 
   /typescript/4.4.4:
     resolution: {integrity: sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
+  /typescript/4.6.4:
+    resolution: {integrity: sha512-9ia/jWHIEbo49HfjrLGfKbZSuWo9iTMwXO+Ca3pRsSpbsMbc7/IU8NKdCZVRRBafVPGnoJeFL76ZOAA84I9fEg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
