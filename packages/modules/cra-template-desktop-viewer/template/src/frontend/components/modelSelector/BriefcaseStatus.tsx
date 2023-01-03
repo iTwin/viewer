@@ -36,6 +36,8 @@ export const BriefcaseStatus = ({
   const [title, setTitle] = useState<string>();
   const [classNames, setClassNames] = useState<string>();
 
+  const isDownloading = !!mergeProgress && mergeProgress < 100;
+
   useEffect(() => {
     let titleKey = "";
     let allClassNames = className
@@ -46,7 +48,9 @@ export const BriefcaseStatus = ({
         titleKey = "briefcaseStatusTitle.comparing";
         break;
       case ModelStatus.MERGING:
-        titleKey = "briefcaseStatusTitle.merging";
+        titleKey = `briefcaseStatusTitle.${
+          isDownloading ? "downloading" : "merging"
+        }`;
         break;
       case ModelStatus.DOWNLOADING:
         titleKey = "briefcaseStatusTitle.downloading";
@@ -69,7 +73,7 @@ export const BriefcaseStatus = ({
 
     setTitle(ITwinViewerApp.translate(titleKey));
     setClassNames(allClassNames);
-  }, [mergeStatus, className]);
+  }, [mergeStatus, className, isDownloading]);
 
   const statusComponent = useCallback(() => {
     switch (mergeStatus) {
@@ -80,7 +84,8 @@ export const BriefcaseStatus = ({
       case ModelStatus.MERGING:
         return (
           <ProgressRadial
-            indeterminate={true}
+            indeterminate={!isDownloading}
+            value={mergeProgress}
             style={{ height: "100%", width: "20px" }}
           />
         );
@@ -103,7 +108,13 @@ export const BriefcaseStatus = ({
       default:
         return <SvgSyncDisabled />;
     }
-  }, [mergeStatus, mergeProgress, onMergeClick, onDownloadClick]);
+  }, [
+    mergeStatus,
+    mergeProgress,
+    isDownloading,
+    onMergeClick,
+    onDownloadClick,
+  ]);
 
   return (
     <div title={title} className={classNames}>
