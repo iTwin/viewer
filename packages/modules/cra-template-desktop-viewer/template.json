@@ -2,7 +2,7 @@
   "package": {
     "dependencies": {
       "@bentley/icons-generic-webfont": "^1.0.15",
-      "@bentley/react-scripts": "^4.0.7",
+      "@bentley/react-scripts": "^5.0.3",
       "@itwin/appui-abstract": "^3.2.0",
       "@itwin/appui-layout-react": "^3.2.0",
       "@itwin/appui-react": "^3.2.0",

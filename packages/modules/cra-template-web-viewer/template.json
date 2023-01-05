@@ -2,7 +2,7 @@
   "package": {
     "dependencies": {
       "@bentley/icons-generic": "^1.0.13",
-      "@bentley/react-scripts": "^4.0.7",
+      "@bentley/react-scripts": "^5.0.3",
       "@itwin/core-telemetry": "^3.2.0",
       "@itwin/appui-abstract": "^3.2.0",
       "@itwin/appui-layout-react": "^3.2.0",
