@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-desktop-viewer",
+      "comment": "Update react-scripts to v5",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/cra-template-desktop-viewer"
+}
