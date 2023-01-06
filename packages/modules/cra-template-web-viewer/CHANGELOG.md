@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Wed, 16 Nov 2022 07:15:12 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Jan 2023 14:28:28 GMT and should not be manually modified.
+
+## 3.2.0
+Fri, 06 Jan 2023 14:28:28 GMT
+
+### Minor changes
+
+- Update react-scripts to v5
 
 ## 3.1.1
 Wed, 16 Nov 2022 07:15:12 GMT
