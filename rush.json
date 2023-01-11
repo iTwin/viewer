@@ -11,6 +11,7 @@
   "repository": {
     "url": "https://github.com/itwin/viewer"
   },
+  "ensureConsistentVersions": false,
   "projects": [
     {
       "packageName": "@itwin/viewer-scripts",
