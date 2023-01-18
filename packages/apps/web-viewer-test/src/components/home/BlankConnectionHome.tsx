@@ -8,6 +8,7 @@ import { Cartographic, ColorDef, RenderMode } from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
 import { ITwinLocalization } from "@itwin/core-i18n";
+import { RealityDataAccessClient } from "@itwin/reality-data-client";
 import { Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo } from "react";
 
@@ -31,6 +32,15 @@ const BlankConnectionHome: React.FC = () => {
         authority: process.env.IMJS_AUTH_AUTHORITY,
       }),
     []
+  );
+
+  const realityDataAccessClient = useMemo(
+    () =>
+      new RealityDataAccessClient({
+        baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/realitydata`,
+        authorizationClient: authClient,
+      }),
+    [authClient]
   );
 
   const login = useCallback(async () => {
@@ -78,6 +88,7 @@ const BlankConnectionHome: React.FC = () => {
         }}
         extents={new Range3d(-30, -30, -30, 30, 30, 30)}
         localization={localization}
+        realityDataAccess={realityDataAccessClient}
       />
     </div>
   );

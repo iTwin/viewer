@@ -158,6 +158,7 @@ importers:
       '@itwin/presentation-components': ^3.2.0
       '@itwin/presentation-frontend': ^3.2.0
       '@itwin/property-grid-react': latest
+      '@itwin/reality-data-client': ^0.9.0
       '@itwin/test-local-extension': workspace:*
       '@itwin/tree-widget-react': latest
       '@itwin/web-viewer-react': workspace:*
@@ -199,6 +200,7 @@ importers:
       '@itwin/presentation-components': 3.5.1_1b221fcc2b30368689980e9e5f563472
       '@itwin/presentation-frontend': 3.5.1_d6b565b7d56b61228f60b1dbd5440e67
       '@itwin/property-grid-react': 0.8.1_54e781232dae349830d83d638abea982
+      '@itwin/reality-data-client': 0.9.0_@itwin+core-bentley@3.5.1
       '@itwin/test-local-extension': link:../../modules/test-local-extension
       '@itwin/tree-widget-react': 0.6.0_692cbfd68e4a80be74a248afca8368b4
       '@itwin/web-viewer-react': link:../../modules/web-viewer-react

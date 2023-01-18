@@ -28,6 +28,7 @@
     "@itwin/presentation-components": "^3.2.0",
     "@itwin/presentation-frontend": "^3.2.0",
     "@itwin/property-grid-react": "latest",
+    "@itwin/reality-data-client": "^0.9.0",
     "@itwin/test-local-extension": "workspace:*",
     "@itwin/tree-widget-react": "latest",
     "@itwin/web-viewer-react": "workspace:*",
