@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "use lodash.isEqual which tracks traversed objects enabling objects with circular references to be compared and prevents OOM",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
