@@ -121,8 +121,9 @@ export type ViewerIModelAppOptions = Pick<
 export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   /**
    * Enable reporting data from timed events in the iTwin Viewer.
-   * The data is anonynmous numerics and will help to increase Viewer performance in future releases.
-   * See the Web or Desktop Viewer package [README](https://www.npmjs.com/package/@itwin/web-viewer-react) for additional details.
+   * The data is anonymous numerics and will help to increase Viewer performance in future releases.
+   * See the [Web](https://www.npmjs.com/package/@itwin/web-viewer-react) or
+   * [Desktop](https://www.npmjs.com/package/@itwin/desktop-viewer-react) Viewer package READMEs for additional details.
    */
   enablePerformanceMonitors: boolean;
   /** GPRID for the consuming application. Will default to the iTwin Viewer GPRID */
@@ -172,7 +173,7 @@ export type BlankViewerProps = {
 };
 
 /**
- * Maintain a list of initilalizer params for use in useBaseViewerInitializer
+ * Maintain a list of initializer params for use in useBaseViewerInitializer
  * This list MUST match what is in the ViewerInitializerParams interface and should be updated as new properties are added/removed
  */
 const iTwinViewerInitializerParamSample: OptionalToUndefinedUnion<ViewerInitializerParams> =
