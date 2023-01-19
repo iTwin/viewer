@@ -158,6 +158,7 @@ importers:
       '@itwin/presentation-components': ^3.2.0
       '@itwin/presentation-frontend': ^3.2.0
       '@itwin/property-grid-react': latest
+      '@itwin/reality-data-client': ^0.9.0
       '@itwin/test-local-extension': workspace:*
       '@itwin/tree-widget-react': latest
       '@itwin/web-viewer-react': workspace:*
@@ -199,6 +200,7 @@ importers:
       '@itwin/presentation-components': 3.5.1_1b221fcc2b30368689980e9e5f563472
       '@itwin/presentation-frontend': 3.5.1_d6b565b7d56b61228f60b1dbd5440e67
       '@itwin/property-grid-react': 0.8.1_54e781232dae349830d83d638abea982
+      '@itwin/reality-data-client': 0.9.0_@itwin+core-bentley@3.5.1
       '@itwin/test-local-extension': link:../../modules/test-local-extension
       '@itwin/tree-widget-react': 0.6.0_692cbfd68e4a80be74a248afca8368b4
       '@itwin/web-viewer-react': link:../../modules/web-viewer-react
@@ -424,6 +426,7 @@ importers:
       '@testing-library/react': ^10.4.4
       '@testing-library/user-event': ^7.1.2
       '@types/jest': ^26.0.4
+      '@types/lodash.isequal': ^4.5.6
       '@types/node': ^14.0.19
       '@types/react': ^17.0.19
       '@types/react-dom': ^17.0.9
@@ -432,6 +435,7 @@ importers:
       copyfiles: ^2.1.0
       identity-obj-proxy: ^3.0.0
       jest: ^26.1.0
+      lodash.isequal: ^4.5.0
       react: ^17.0.2
       react-dom: ^17.0.2
       react-redux: ^7.2.0
@@ -444,6 +448,7 @@ importers:
       '@itwin/itwinui-illustrations-react': 1.3.1_react-dom@17.0.2+react@17.0.2
       '@itwin/itwinui-react': 1.46.0_react-dom@17.0.2+react@17.0.2
       '@itwin/reality-data-client': 0.9.0_@itwin+core-bentley@3.5.1
+      lodash.isequal: 4.5.0
     devDependencies:
       '@itwin/appui-abstract': 3.5.1_@itwin+core-bentley@3.5.1
       '@itwin/appui-layout-react': 3.5.1_fb827c5eb5054b51feb5ec34538f42c7
@@ -471,6 +476,7 @@ importers:
       '@testing-library/react': 10.4.9_react-dom@17.0.2+react@17.0.2
       '@testing-library/user-event': 7.2.1
       '@types/jest': 26.0.24
+      '@types/lodash.isequal': 4.5.6
       '@types/node': 14.18.29
       '@types/react': 17.0.50
       '@types/react-dom': 17.0.17
@@ -4712,6 +4718,16 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: true
+
+  /@types/lodash.isequal/4.5.6:
+    resolution: {integrity: sha512-Ww4UGSe3DmtvLLJm2F16hDwEQSv7U0Rr8SujLUA2wHI2D2dm8kPu6Et+/y303LfjTIwSBKXB/YTUcAKpem/XEg==}
+    dependencies:
+      '@types/lodash': 4.14.191
+    dev: true
+
+  /@types/lodash/4.14.191:
+    resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
     dev: true
 
   /@types/mdast/3.0.10:
@@ -12250,7 +12266,6 @@ packages:
 
   /lodash.isequal/4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
-    dev: true
 
   /lodash.memoize/4.1.2:
     resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
