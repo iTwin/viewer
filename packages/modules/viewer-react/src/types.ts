@@ -42,6 +42,26 @@ export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
   : T1 | T2;
 
 /**
+ * Makes the property K on type T required
+ */
+export type RequireOne<T, K extends keyof T> = {
+  [X in Exclude<keyof T, K>]?: T[X];
+} & {
+  [P in K]-?: T[P];
+};
+
+/**
+ * Requires that _at least one_ of the Keys in type T be required
+ */
+export type RequireOneOf<T, Keys extends keyof T = keyof T> = Pick<
+  T,
+  Exclude<keyof T, Keys>
+> &
+  {
+    [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>;
+  }[Keys];
+
+/**
  * Converts the following optional arg foo of type T
  * foo?: T
  * to a required arg with union of type T and undefined

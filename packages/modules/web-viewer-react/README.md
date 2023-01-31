@@ -4,13 +4,13 @@ The iTwin Web Viewer is a configurable iTwin.js viewer that offers basic configu
 
 ## Installation
 
-```
+```bash
 yarn add @itwin/web-viewer-react
 ```
 
 or
 
-```
+```bash
 npm install @itwin/web-viewer-react
 ```
 
@@ -18,7 +18,7 @@ npm install @itwin/web-viewer-react
 
 If you are creating a new application and are using React, it is advised that you use create-react-app with `@bentley/react-scripts`. There is also a predefined template that includes the iTwin Viewer package:
 
-```
+```bash
 npx create-react-app@latest my-app --scripts-version @bentley/react-scripts --template @itwin/web-viewer
 ```
 
@@ -80,9 +80,7 @@ export const MyViewerComponent = () => {
 
 - `changeSetId` - Changeset id to view if combined with the iTwinId and iModelId props
 - `blankConnectionViewState` - Override options for the ViewState that is generated for the BlankConnection
-
-- `backend` - Backend connection info (defaults to the iTwin Platform's iModel Access Service)
-
+- `backendConfiguration` - Manage backend(s) connection info and RPC Interfaces. [See below](#backend-configuration)
 - `theme` - Override the default theme
 - `defaultUiConfig` - hide parts of the default frontstage
   - `hideNavigationAid` - hide the navigation aid cube
@@ -94,7 +92,6 @@ export const MyViewerComponent = () => {
 - `uiProviders` - Extend the viewer's default ui
 - `viewCreatorOptions` - Options for creating the default viewState
 - `loadingComponent` - provide a custom React component to override the spinner when an iModel is loading
-
 - `productId` - application's GPRID
 - `i18nUrlTemplate` - Override the default url template where i18n resource files are queried
 - `onIModelAppInit` - Callback function that executes after IModelApp.startup completes
@@ -183,10 +180,95 @@ export const MyBlankViewerComponent = () => {
 };
 ```
 
-# Development
+## Backend Configuration
+
+If no `backendConfiguration` is specified, the backend defaults to the iTwin Platform's iModel Access Service. You can modify or override this default backend, add additional RpcInterfaces to it, and/or add additional backends. The below examples are not mutually exclusive.
+
+### Default Backend
+
+#### Change default backend details
+
+```javascript
+    // ... rest of code omitted
+    <Viewer
+      // ...other props omitted
+      backendConfiguration={{
+        defaultBackend: {
+          config: {
+            info: {
+              title: "New Default Backend Title",
+              version: "v5.0"
+            },
+            uriPrefix: "https://new-default-backend-uri"
+          }
+        }
+      }}
+    />
+```
+
+#### Add additional RPC Interfaces to Default Backend
+
+```javascript
+    // ... rest of code omitted
+    <Viewer
+      // ...other props omitted
+      backendConfiguration={{
+        defaultBackend: {
+          rpcInterfaces: [
+            MyRpcInterface,
+            AnotherRpcInterface
+          ]
+        }
+      }}
+    />
+```
+
+### Custom Backends
+
+Add one or more custom backends with any number of RPC Interfaces registered against each.
+
+#### Example
+
+```javascript
+    // ... rest of code omitted
+    <Viewer
+      // ...other props omitted
+      backendConfiguration={{
+        customBackends: [
+          { 
+            config: {
+              info: {
+                title: "Custom Backend One",
+                version: "v3.0"
+              },
+              uriPrefix: "https://custom-backend-uri"
+            },
+            rpcInterfaces: [
+              BackendOneRpcInterface,
+              BackendOneRpcInterfaceTwo
+            ]
+          },
+          { 
+            config: {
+              info: {
+                title: "Custom Backend Two",
+                version: "v4.0"
+              },
+              uriPrefix: "https://custom-backend-two-uri"
+            },
+            rpcInterfaces: [
+              BackendTwoRpcInterface
+            ]
+          }
+        ]
+      }}
+    />
+```
+
+## Development
 
 When making changes to the src, run `npm start` in the package's root folder to enable source watching and rebuild, so the dev-server will have access to updated code on successful code compilation.
 
-# Next Steps
+## Next Steps
 
 [Extending the iTwin Viewer](https://www.itwinjs.org/learning/tutorials/hello-world-viewer/)

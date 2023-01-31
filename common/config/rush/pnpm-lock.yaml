@@ -102,7 +102,7 @@ importers:
       '@itwin/presentation-components': 3.5.1_1b221fcc2b30368689980e9e5f563472
       '@itwin/presentation-frontend': 3.5.1_d6b565b7d56b61228f60b1dbd5440e67
       '@itwin/property-grid-react': 0.8.1_54e781232dae349830d83d638abea982
-      '@itwin/tree-widget-react': 0.6.0_692cbfd68e4a80be74a248afca8368b4
+      '@itwin/tree-widget-react': 0.6.1_692cbfd68e4a80be74a248afca8368b4
       '@itwin/webgl-compatibility': 3.5.1
       dotenv-flow: 3.2.0
       electron: 14.2.9
@@ -202,7 +202,7 @@ importers:
       '@itwin/property-grid-react': 0.8.1_54e781232dae349830d83d638abea982
       '@itwin/reality-data-client': 0.9.0_@itwin+core-bentley@3.5.1
       '@itwin/test-local-extension': link:../../modules/test-local-extension
-      '@itwin/tree-widget-react': 0.6.0_692cbfd68e4a80be74a248afca8368b4
+      '@itwin/tree-widget-react': 0.6.1_692cbfd68e4a80be74a248afca8368b4
       '@itwin/web-viewer-react': link:../../modules/web-viewer-react
       '@itwin/webgl-compatibility': 3.5.1
       history: 5.3.0
@@ -3430,8 +3430,8 @@ packages:
       - debug
     dev: false
 
-  /@itwin/tree-widget-react/0.6.0_692cbfd68e4a80be74a248afca8368b4:
-    resolution: {integrity: sha512-nwF5g3ytnoOy9auv9H9LficclKJIOnPliGB6ICeqHfra+7yZCcnhCGzfsBjrx3dcP9+F6N6uvaLOQLi/mRrC3g==}
+  /@itwin/tree-widget-react/0.6.1_692cbfd68e4a80be74a248afca8368b4:
+    resolution: {integrity: sha512-S7gjmskNbUoJR68i4Ht1kpkKdeEYvXxU44Vj1RNOdcjRZWmYnnNhdzPPUDD7KJ5CKqE74L0otzM+HDJ+4/9RRQ==}
     peerDependencies:
       '@itwin/appui-abstract': ^3.5.0
       '@itwin/appui-react': ^3.5.0
@@ -6751,7 +6751,7 @@ packages:
     dev: true
 
   /classnames/2.3.2:
-    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
+    resolution: {integrity: sha1-NR2BO/ATf8xqdqFriCCNJWCg2SQ=}
 
   /clean-css/5.3.1:
     resolution: {integrity: sha512-lCr8OHhiWCTw4v8POJovCoh4T7I9U11yVsPjMWWnnMmp9ZowCxyad1Pathle/9HjaDp+fdQKjO9fQydE6RHTZg==}
@@ -9447,7 +9447,7 @@ packages:
     dev: true
 
   /flatbuffers/1.12.0:
-    resolution: {integrity: sha512-c7CZADjRcl6j0PlvFy0ZqXQ67qSEZfrVPynmnL+2zPc+NtMvrF8Y0QceMo7QqnSPc7+uWjUIAbvCQ5WIKlMVdQ==}
+    resolution: {integrity: sha1-cuh9FybLGyFug57wJliqh9zvaKo=}
 
   /flatted/3.2.7:
     resolution: {integrity: sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==}
@@ -15526,7 +15526,7 @@ packages:
     dev: true
 
   /rxjs/6.6.7:
-    resolution: {integrity: sha512-hTdwr+7yYNIT5n4AMYp85KA6yw2Va0FLa3Rguvbpa4W3I5xynaBZo41cM3XM+4Q6fRMj3sBYIR1VAmZMXYJvRQ==}
+    resolution: {integrity: sha1-kKwBisq/SRv2UEQjXVhjxNq4BMk=}
     engines: {npm: '>=2.0.0'}
     dependencies:
       tslib: 1.14.1
@@ -18013,7 +18013,7 @@ packages:
     dev: true
 
   /workerpool/6.2.1:
-    resolution: {integrity: sha512-ILEIE97kDZvF9Wb9f6h5aXK4swSlKGUcOEGiIYb2OOu/IrDU9iwj0fD//SsA6E5ibwJxpEvhullJY4Sl4GcpAw==}
+    resolution: {integrity: sha1-RvwVDBfYJrhqAI5aRQhlZ3fpw0M=}
     dev: true
 
   /wrap-ansi/5.1.0:

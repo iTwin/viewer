@@ -18,7 +18,7 @@ import React from "react";
 
 import { Viewer } from "../../components/Viewer";
 import { WebInitializer } from "../../services/Initializer";
-import type { IModelBackendOptions } from "../../types";
+import type { BackendConfiguration } from "../../types";
 import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
 
 jest.mock("@itwin/viewer-react", () => {
@@ -156,13 +156,14 @@ describe("Viewer", () => {
   it("initializes the Viewer with the provided backend configuration", async () => {
     jest.spyOn(WebInitializer, "startWebViewer");
 
-    const backendConfig: IModelBackendOptions = {
-      customBackend: {
-        rpcParams: {
+    const backendConfig: BackendConfiguration = {
+      defaultBackend: {
+        config: {
           info: {
-            title: "myBackend",
-            version: "v1.0",
+            title: "default Title",
+            version: "23.0",
           },
+          uriPrefix: "https://customBackendUrl",
         },
       },
     };
@@ -172,7 +173,7 @@ describe("Viewer", () => {
         authClient={authClient}
         iTwinId={mockITwinId}
         iModelId={mockIModelId}
-        backend={backendConfig}
+        backendConfiguration={backendConfig}
         enablePerformanceMonitors={false}
       />
     );
@@ -181,7 +182,7 @@ describe("Viewer", () => {
 
     expect(WebInitializer.startWebViewer).toHaveBeenCalledWith({
       authClient: authClient,
-      backend: backendConfig,
+      backendConfiguration: backendConfig,
       iTwinId: mockITwinId,
       iModelId: mockIModelId,
       enablePerformanceMonitors: false,

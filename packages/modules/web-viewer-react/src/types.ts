@@ -3,45 +3,51 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { BentleyCloudRpcParams } from "@itwin/core-common";
+import type {
+  BentleyCloudRpcParams,
+  RpcInterface,
+  RpcInterfaceDefinition,
+} from "@itwin/core-common";
 import type {
   BlankViewerProps,
   ConnectedViewerProps,
+  RequireOne,
+  RequireOneOf,
   ViewerAuthorizationClient,
   ViewerCommonProps,
   XOR,
 } from "@itwin/viewer-react";
 
 /**
- * Hosted backend configuration
+ * Custom backend and rpc configuration
  */
-export interface HostedBackendConfig {
-  /* title for rpc config */
-  title: string;
-  /* in the form "vx.x" */
-  version: string;
-}
+export type BackendConfiguration = RequireOneOf<
+  {
+    defaultBackend: RequireOneOf<DefaultBackend, "rpcInterfaces" | "config">;
+    customBackends: CustomBackend[];
+  },
+  "defaultBackend" | "customBackends"
+>;
 
-/**
- * Custom rpc configuration
- */
-export interface CustomBackendConfig {
-  rpcParams: BentleyCloudRpcParams;
-}
+export type RegisterClientOptions = {
+  defaultBackend: RequireOne<DefaultBackend, "rpcInterfaces">;
+  customBackends?: CustomBackend[];
+};
 
-/**
- * Backend configuration
- */
-export interface IModelBackendOptions {
-  hostedBackend?: HostedBackendConfig;
-  customBackend?: CustomBackendConfig;
-}
+export type DefaultBackend = {
+  rpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[]; // will be combined with a set of default interfaces
+  config?: Partial<BentleyCloudRpcParams>;
+};
+
+export type CustomBackend = {
+  rpcInterfaces: RpcInterfaceDefinition<RpcInterface>[]; // will be combined with a set of default interfaces
+  config: BentleyCloudRpcParams;
+};
 
 export type WebInitializerParams = ViewerCommonProps & {
   /** authorization configuration */
   authClient: ViewerAuthorizationClient;
-  /** options to override the default backend from iTwin Platform */
-  backend?: IModelBackendOptions;
+  backendConfiguration?: BackendConfiguration;
 };
 
 export type WebViewerProps = XOR<ConnectedViewerProps, BlankViewerProps> &
