@@ -1,6 +1,27 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Mon, 20 Jun 2022 14:39:09 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Jan 2023 14:28:28 GMT and should not be manually modified.
+
+## 3.2.0
+Fri, 06 Jan 2023 14:28:28 GMT
+
+### Minor changes
+
+- Update react-scripts to v5
+
+## 3.1.1
+Wed, 16 Nov 2022 07:15:12 GMT
+
+### Patches
+
+- Added redux as dependency, removed @itwin/imodels-client-management as dependency
+
+## 3.1.0
+Thu, 10 Nov 2022 13:34:14 GMT
+
+### Minor changes
+
+- blank connection will be created if iTwinId is supplied and iModelId is not; deprecate blankConnectionProps
 
 ## 3.0.0
 Mon, 20 Jun 2022 14:39:09 GMT

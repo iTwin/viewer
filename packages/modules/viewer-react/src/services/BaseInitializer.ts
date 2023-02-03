@@ -45,9 +45,7 @@ export class BaseInitializer {
 
   /** expose initialized cancel method */
   public static cancel: () => void = () => {
-    if (BaseInitializer._cancel) {
-      BaseInitializer._cancel();
-    }
+    BaseInitializer._cancel?.();
     try {
       Presentation.presentation.dispose();
     } catch (err) {
@@ -238,13 +236,14 @@ export const getIModelAppOptions = (
     notifications: new AppNotificationManager(),
     uiAdmin: new FrameworkUiAdmin(),
     rpcInterfaces: getSupportedRpcs(options?.additionalRpcInterfaces ?? []),
-    toolAdmin: options?.toolAdmin,
+    publicPath: viewerHome ? `${viewerHome}/` : "",
     hubAccess,
     localization,
-    publicPath: viewerHome ? `${viewerHome}/` : "",
-    realityDataAccess,
     mapLayerOptions: options?.mapLayerOptions,
     tileAdmin: options?.tileAdmin,
+    toolAdmin: options?.toolAdmin,
+    renderSys: options?.renderSys,
+    realityDataAccess,
   };
 };
 

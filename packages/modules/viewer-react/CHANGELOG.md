@@ -1,6 +1,34 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Wed, 20 Jul 2022 14:16:19 GMT and should not be manually modified.
+This log was last generated on Thu, 19 Jan 2023 13:51:30 GMT and should not be manually modified.
+
+## 3.3.2
+Thu, 19 Jan 2023 13:51:30 GMT
+
+### Patches
+
+- use lodash.isEqual which tracks traversed objects enabling objects with circular references to be compared and prevents OOM
+
+## 3.3.1
+Wed, 16 Nov 2022 07:15:12 GMT
+
+### Patches
+
+- Added @itwin/imodels-client-management as peer dependency
+
+## 3.3.0
+Thu, 10 Nov 2022 13:34:14 GMT
+
+### Minor changes
+
+- blank connection will be created if iTwinId is supplied and iModelId is not; deprecate blankConnectionProps
+
+## 3.2.2
+Wed, 21 Sep 2022 12:09:30 GMT
+
+### Patches
+
+- add `OptionalToUndefinedUnion` utility type to fix missing params from iTwinViewerInitializerParamSample and getIModelAppOptions
 
 ## 3.2.1
 Wed, 20 Jul 2022 14:16:19 GMT

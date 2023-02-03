@@ -1,6 +1,6 @@
 {
   "name": "@itwin/viewer-react",
-  "version": "3.2.1",
+  "version": "3.3.2",
   "description": "Configurable iTwin.js viewer",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
@@ -32,7 +32,8 @@
     "@bentley/icons-generic-webfont": "^1.0.15",
     "@itwin/itwinui-illustrations-react": "^1.2.0",
     "@itwin/itwinui-react": "^1.16.2",
-    "@itwin/reality-data-client": "^0.9.0"
+    "@itwin/reality-data-client": "^0.9.0",
+    "lodash.isequal": "^4.5.0"
   },
   "devDependencies": {
     "@itwin/appui-abstract": "^3.2.0",
@@ -61,6 +62,7 @@
     "@testing-library/react": "^10.4.4",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^26.0.4",
+    "@types/lodash.isequal": "^4.5.6",
     "@types/node": "^14.0.19",
     "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
@@ -88,6 +90,7 @@
     "@itwin/core-geometry": "^3.2.0",
     "@itwin/core-react": "^3.2.0",
     "@itwin/imodels-access-frontend": "^1.0.1",
+    "@itwin/imodels-client-management": "^1.0.1",
     "@itwin/presentation-common": "^3.2.0",
     "@itwin/presentation-frontend": "^3.2.0",
     "react": "^17.0.2",

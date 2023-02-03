@@ -1,6 +1,30 @@
 # Change Log - @itwin/web-viewer-react
 
-This log was last generated on Thu, 08 Sep 2022 14:52:15 GMT and should not be manually modified.
+This log was last generated on Thu, 19 Jan 2023 13:51:30 GMT and should not be manually modified.
+
+## 3.1.2
+Thu, 19 Jan 2023 13:51:30 GMT
+
+_Version update only_
+
+## 3.1.1
+Wed, 16 Nov 2022 07:15:12 GMT
+
+### Patches
+
+- Added redux, react-redux and @itwin/imodels-client-management as dependency
+
+## 3.1.0
+Thu, 10 Nov 2022 13:34:14 GMT
+
+### Minor changes
+
+- blank connection will be created if iTwinId is supplied and iModelId is not; deprecate blankConnectionProps
+
+## 3.0.9
+Wed, 21 Sep 2022 12:09:30 GMT
+
+_Version update only_
 
 ## 3.0.8
 Thu, 08 Sep 2022 14:52:15 GMT

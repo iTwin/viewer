@@ -1,8 +1,3 @@
-/*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
-
 import "./App.scss";
 
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
@@ -80,19 +75,18 @@ const App: React.FC = () => {
 
       if (urlParams.has("iModelId")) {
         setIModelId(urlParams.get("iModelId") as string);
-      } else {
-        if (!process.env.IMJS_IMODEL_ID) {
-          throw new Error(
-            "Please add a valid iModel ID in the .env file and restart the application or add it to the iModelId query parameter in the url and refresh the page. See the README for more information."
-          );
-        }
       }
     }
   }, [accessToken]);
 
   useEffect(() => {
-    if (accessToken && iTwinId && iModelId) {
-      history.push(`?iTwinId=${iTwinId}&iModelId=${iModelId}`);
+    if (accessToken && iTwinId) {
+      let queryString = `?iTwinId=${iTwinId}`;
+      if (iModelId) {
+        queryString += `&iModelId=${iModelId}`;
+      }
+
+      history.push(queryString);
     }
   }, [accessToken, iTwinId, iModelId]);
 

@@ -10,7 +10,9 @@ import type {
   IModelViewportControlOptions,
 } from "@itwin/appui-react";
 import type {
+  Cartographic,
   ColorDef,
+  EcefLocationProps,
   RenderMode,
   RpcInterface,
   RpcInterfaceDefinition,
@@ -25,7 +27,12 @@ import type {
   ViewCreator3dOptions,
   ViewState,
 } from "@itwin/core-frontend";
-import type { Vector3d, XAndY, XYAndZ } from "@itwin/core-geometry";
+import type {
+  Range3dProps,
+  Vector3d,
+  XAndY,
+  XYAndZ,
+} from "@itwin/core-geometry";
 
 import type { StandardFrontstageProps } from "./components/app-ui/providers";
 
@@ -33,6 +40,16 @@ export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
   ? (Without<T1, T2> & T2) | (Without<T2, T1> & T1)
   : T1 | T2;
+
+/**
+ * Converts the following optional arg foo of type T
+ * foo?: T
+ * to a required arg with union of type T and undefined
+ * foo: T | undefined
+ */
+export type OptionalToUndefinedUnion<T> = {
+  [P in keyof Required<T>]: T[P] | undefined;
+};
 
 /**
  * options for configuration of 3D view
@@ -89,6 +106,7 @@ export interface LoaderProps {
 
 export type ViewerCommonProps = ViewerInitializerParams & LoaderProps;
 
+// Note: When updating this, also update getIModelAppOptions
 export type ViewerIModelAppOptions = Pick<
   IModelAppOptions,
   | "hubAccess"
@@ -103,8 +121,9 @@ export type ViewerIModelAppOptions = Pick<
 export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   /**
    * Enable reporting data from timed events in the iTwin Viewer.
-   * The data is anonynmous numerics and will help to increase Viewer performance in future releases.
-   * See the Web or Desktop Viewer package [README](https://www.npmjs.com/package/@itwin/web-viewer-react) for additional details.
+   * The data is anonymous numerics and will help to increase Viewer performance in future releases.
+   * See the [Web](https://www.npmjs.com/package/@itwin/web-viewer-react) or
+   * [Desktop](https://www.npmjs.com/package/@itwin/desktop-viewer-react) Viewer package READMEs for additional details.
    */
   enablePerformanceMonitors: boolean;
   /** GPRID for the consuming application. Will default to the iTwin Viewer GPRID */
@@ -120,41 +139,60 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   /** array of iTwin.js Extensions */
   extensions?: ExtensionProvider[];
 }
+export type RequiredViewerProps = XOR<
+  XOR<ConnectedViewerProps, FileViewerProps>,
+  BlankViewerProps
+>;
 
-export interface ConnectedViewerProps {
+export type ModelLoaderProps = Partial<
+  ConnectedViewerProps & FileViewerProps & BlankViewerProps
+> &
+  LoaderProps;
+
+export type ViewerProps = RequiredViewerProps & ViewerCommonProps;
+export type ViewerLoaderProps = RequiredViewerProps & LoaderProps;
+
+export type ConnectedViewerProps = {
   iTwinId: string;
   iModelId: string;
   changeSetId?: string;
-}
-
-export interface FileViewerProps {
+};
+export type FileViewerProps = {
   /** Path to local snapshot or briefcase */
   filePath: string;
-}
+};
 
-export interface BlankViewerProps {
-  blankConnection: BlankConnectionProps;
+// it's fine to say that if either location or extents is defined, then both have to be defined.
+export type BlankViewerProps = {
+  /** @deprecated specify location and extents instead. */
+  blankConnection?: BlankConnectionProps;
   blankConnectionViewState?: BlankConnectionViewState;
-}
+  location?: Cartographic | EcefLocationProps;
+  extents?: Range3dProps;
+  iTwinId?: string;
+};
 
 /**
- * Maintain a list of initilalizer params for use in useBaseViewerInitializer
+ * Maintain a list of initializer params for use in useBaseViewerInitializer
  * This list MUST match what is in the ViewerInitializerParams interface and should be updated as new properties are added/removed
  */
-const iTwinViewerInitializerParamSample: ViewerInitializerParams = {
-  productId: undefined,
-  i18nUrlTemplate: undefined,
-  onIModelAppInit: undefined,
-  additionalI18nNamespaces: undefined,
-  additionalRpcInterfaces: undefined,
-  toolAdmin: undefined,
-  hubAccess: undefined,
-  mapLayerOptions: undefined,
-  extensions: undefined,
-  enablePerformanceMonitors: false,
-  tileAdmin: undefined,
-  renderSys: undefined,
-};
+const iTwinViewerInitializerParamSample: OptionalToUndefinedUnion<ViewerInitializerParams> =
+  {
+    hubAccess: undefined,
+    localization: undefined,
+    mapLayerOptions: undefined,
+    tileAdmin: undefined,
+    toolAdmin: undefined,
+    renderSys: undefined,
+    realityDataAccess: undefined,
+    enablePerformanceMonitors: undefined,
+    productId: undefined,
+    i18nUrlTemplate: undefined,
+    onIModelAppInit: undefined,
+    additionalI18nNamespaces: undefined,
+    additionalRpcInterfaces: undefined,
+    extensions: undefined,
+  };
 
 export const iTwinViewerInitializerParamList = Object.keys(
   iTwinViewerInitializerParamSample

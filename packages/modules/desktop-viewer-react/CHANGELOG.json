@@ -2,6 +2,64 @@
   "name": "@itwin/desktop-viewer-react",
   "entries": [
     {
+      "version": "3.1.2",
+      "tag": "@itwin/desktop-viewer-react_v3.1.2",
+      "date": "Thu, 19 Jan 2023 13:51:29 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" to `3.3.2`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.1.1",
+      "tag": "@itwin/desktop-viewer-react_v3.1.1",
+      "date": "Wed, 16 Nov 2022 07:15:12 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added redux, react-redux and @itwin/imodels-client-management as dependency"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" to `3.3.1`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.1.0",
+      "tag": "@itwin/desktop-viewer-react_v3.1.0",
+      "date": "Thu, 10 Nov 2022 13:34:14 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "blank connection will be created if iTwinId is supplied and iModelId is not; deprecate blankConnectionProps"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" to `3.3.0`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.0.9",
+      "tag": "@itwin/desktop-viewer-react_v3.0.9",
+      "date": "Wed, 21 Sep 2022 12:09:30 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" to `3.2.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.8",
       "tag": "@itwin/desktop-viewer-react_v3.0.8",
       "date": "Thu, 08 Sep 2022 14:52:15 GMT",

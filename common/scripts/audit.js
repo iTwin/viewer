@@ -47,29 +47,10 @@ const rushCommonDir = path.join(__dirname, "../");
   // for development dependencies only.
   // All security issues should be addressed asap.
   const excludedAdvisories = [
-    "GHSA-8p5q-j9m2-g8wr", // https://github.com/advisories/GHSA-8p5q-j9m2-g8wr.
-    "GHSA-ww39-953v-wcq6", // https://github.com/advisories/GHSA-ww39-953v-wcq6.
-    "GHSA-8v27-2fg9-7h62", // https://github.com/advisories/GHSA-8v27-2fg9-7h62.
-    "GHSA-33f9-j839-rf8h", // https://github.com/advisories/GHSA-33f9-j839-rf8h.
-    "GHSA-c36v-fmgq-m8hx", // https://github.com/advisories/GHSA-c36v-fmgq-m8hx.
-    "GHSA-4jqc-8m5r-9rpr", // https://github.com/advisories/GHSA-4jqc-8m5r-9rpr.
-    "GHSA-whgm-jr23-g3j9", // https://github.com/advisories/GHSA-whgm-jr23-g3j9.
-    "GHSA-qq89-hq3f-393p", // https://github.com/advisories/GHSA-qq89-hq3f-393p.,
-    "GHSA-5955-9wpr-37jh", // https://github.com/advisories/GHSA-5955-9wpr-37jh,
-    "GHSA-r683-j2x4-v87g", // https://github.com/advisories/GHSA-r683-j2x4-v87g  /TODO Fix
-    "GHSA-wpg7-2c88-r8xv", // https://github.com/advisories/GHSA-wpg7-2c88-r8xv,
-    "GHSA-rqff-837h-mm52", // https://github.com/advisories/GHSA-rqff-837h-mm52,
-    "GHSA-hgjh-723h-mx2j", // https://github.com/advisories/GHSA-hgjh-723h-mx2j,
-    "GHSA-xvch-5gv4-984h", // https://github.com/advisories/GHSA-xvch-5gv4-984h,
-    "GHSA-cfm4-qjh2-4765", // https://github.com/advisories/GHSA-cfm4-qjh2-4765,
-    "GHSA-x4jg-mjrx-434g", // https://github.com/advisories/GHSA-x4jg-mjrx-434g,
-    "GHSA-phwq-j96m-2c2q", // https://github.com/advisories/GHSA-phwq-j96m-2c2q // @bentley/react-scripts>workbox-webpack-plugin>workbox-build>@surma/rollup-plugin-off-main-thread>ejs
-    "GHSA-93q8-gq69-wqmw", // https://github.com/advisories/GHSA-93q8-gq69-wqmw // @itwin/build-tools>mocha>wide-align>string-width>strip-ansi>ansi-regex
-    "GHSA-fwr7-v2mv-hh25", // https://github.com/advisories/GHSA-fwr7-v2mv-hh25 // @bentley/react-scripts>fast-sass-loader>async
-    "GHSA-rp65-9cf3-cjxr", // https://github.com/advisories/GHSA-rp65-9cf3-cjxr // @bentley/react-scripts>optimize-css-assets-webpack-plugin>cssnano>cssnano-preset-default>postcss-svgo>svgo>css-select>nth-check
-    "GHSA-6h5x-7c5m-7cr7", // https://github.com/advisories/GHSA-6h5x-7c5m-7cr7 // @bentley/react-scripts>webpack-dev-server>sockjs-client>eventsource
-    "GHSA-g4rg-993r-mgx7", // https://github.com/advisories/GHSA-g4rg-993r-mgx7 // @bentley/react-scripts>react-dev-utils>shell-quote
-    "GHSA-4wf5-vphf-c2xc", // https://github.com/advisories/GHSA-4wf5-vphf-c2xc // @bentley/react-scripts>html-webpack-plugin>html-minifier-terser>terser
+    "GHSA-ww39-953v-wcq6", // https://github.com/advisories/GHSA-ww39-953v-wcq6, desktop-viewer-test>webpack>watchpack>watchpack-chokidar2>chokidar>glob-parent
+    "GHSA-f8q6-p94x-37v3", // https://github.com/advisories/GHSA-f8q6-p94x-37v3, cdn-viewer>@bentley/react-scripts>react-dev-utils>recursive-readdir>minimatch (regex dos)
+    "GHSA-76p3-8jx3-jpfq", // https://github.com/advisories/GHSA-76p3-8jx3-jpfq, desktop-viewer-test>@bentley/react-scripts>fast-sass-loader>loader-utils
+    "GHSA-9c47-m6qq-7p4h", // https://github.com/advisories/GHSA-9c47-m6qq-7p4h, desktop-viewer-test>@bentley/react-scripts>eslint-config-react-app>eslint-plugin-import>tsconfig-paths>json5
   ];
 
   let shouldFailBuild = false;

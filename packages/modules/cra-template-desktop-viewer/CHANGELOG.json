@@ -2,6 +2,30 @@
   "name": "@itwin/cra-template-desktop-viewer",
   "entries": [
     {
+      "version": "3.1.0",
+      "tag": "@itwin/cra-template-desktop-viewer_v3.1.0",
+      "date": "Fri, 06 Jan 2023 14:28:28 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update react-scripts to v5"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.0.1",
+      "tag": "@itwin/cra-template-desktop-viewer_v3.0.1",
+      "date": "Wed, 16 Nov 2022 07:15:12 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Removed @itwin/imodels-client-management as dependency"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.0",
       "tag": "@itwin/cra-template-desktop-viewer_v3.0.0",
       "date": "Mon, 20 Jun 2022 14:39:09 GMT",
