@@ -1,13 +1,13 @@
 {
   "name": "@itwin/cra-template-web-viewer",
-  "version": "3.2.0",
+  "version": "4.0.0-dev.1",
   "keywords": [
     "react",
     "create-react-app",
     "template",
     "typescript",
     "iModel",
-    "iModelJs",
+    "iTwinJs",
     "iTwin",
     "iTwin Viewer"
   ],

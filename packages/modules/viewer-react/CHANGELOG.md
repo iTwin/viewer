@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Wed, 16 Nov 2022 07:15:12 GMT and should not be manually modified.
+This log was last generated on Thu, 19 Jan 2023 13:51:30 GMT and should not be manually modified.
+
+## 3.3.2
+Thu, 19 Jan 2023 13:51:30 GMT
+
+### Patches
+
+- use lodash.isEqual which tracks traversed objects enabling objects with circular references to be compared and prevents OOM
 
 ## 3.3.1
 Wed, 16 Nov 2022 07:15:12 GMT
