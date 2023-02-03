@@ -4,7 +4,7 @@
     "dockerFile": "./Dockerfile",
     "context": ".",
     "workspaceMount": "",
-    "workspaceFolder": "/workspace/viewer",
+    "workspaceFolder": "/workspaces/viewer",
     "extensions": [
       "streetsidesoftware.code-spell-checker",
       "dbaeumer.vscode-eslint",
