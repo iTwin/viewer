@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@itwin/cra-template-web-viewer",
-      "comment": "Increase iTwin.js dependencies version to 3.5.0",
+      "comment": "",
       "type": "minor"
     }
   ],
