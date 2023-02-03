@@ -31,8 +31,8 @@ jobs:
           echo 'Checking Rush Change...'
           node common/scripts/install-run-rush.js change -v
 
-          # echo 'Verifying Dependency Versions...'
-          # node common/scripts/install-run-rush.js check
+          echo 'Verifying Dependency Versions...'
+          node common/scripts/install-run-rush.js check
 
           echo 'Building...'
           node common/scripts/install-run-rush.js rebuild
