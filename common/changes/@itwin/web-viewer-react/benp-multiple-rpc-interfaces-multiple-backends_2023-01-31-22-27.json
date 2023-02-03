@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/web-viewer-react",
       "comment": "Allow multiple backends to be registered, each with a collection of RPC interfaces.",
-      "type": "major"
+      "type": ""
     }
   ],
   "packageName": "@itwin/web-viewer-react"

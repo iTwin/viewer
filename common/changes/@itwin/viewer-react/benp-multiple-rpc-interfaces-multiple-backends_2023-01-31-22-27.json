@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/viewer-react",
       "comment": "Add two utility types: RequireOne and RequireOneOf",
-      "type": "patch"
+      "type": ""
     }
   ],
   "packageName": "@itwin/viewer-react"
