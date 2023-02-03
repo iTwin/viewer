@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/cra-template-desktop-viewer",
       "comment": "Show progress indicator during changesets download.",
-      "type": "minor"
+      "type": ""
     }
   ],
   "packageName": "@itwin/cra-template-desktop-viewer"
