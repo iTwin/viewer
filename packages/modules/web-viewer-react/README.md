@@ -109,39 +109,6 @@ export const MyViewerComponent = () => {
 - `realityDataAccess` - Optional `realityDataAccess` to override the Viewer's default reality data access
 - `localization` - Optional `localization` to provide your own Localization instance
 
-## Typescript API
-
-```html
-<html>
-  <div id="viewerRoot">
-</html>
-```
-
-```javascript
-import { ItwinViewer } from "@itwin/web-viewer-react";
-import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
-
-const iTwinId = "myITwinId";
-const iModelId = "myIModelId";
-
-const authClient = new BrowserAuthorizationClient({
-  scope: "profile email",
-  clientId: "my-oidc-client",
-  redirectUri: "https://myredirecturi.com",
-  postSignoutRedirectUri: "https://mypostsignouturi.com",
-  responseType: "code",
-});
-
-const viewer = new iTwinViewer({
-  elementId: "viewerRoot",
-  authClient,
-});
-
-if (viewer) {
-  viewer.load({ iTwinId, iModelId });
-}
-```
-
 ## Blank Viewer
 
 For cases where you would prefer to use a [Blank iModelConnection](https://www.itwinjs.org/learning/frontend/blankconnection/), you should supply the `location` and `extents` props to the Viewer React component.
