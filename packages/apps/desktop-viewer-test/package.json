@@ -54,7 +54,7 @@
     "@itwin/imodel-browser-react": "^0.12.2",
     "@itwin/imodel-components-react": "^3.6.0-dev.65",
     "@itwin/imodels-access-backend": "^2.2.1",
-    "@itwin/imodels-access-frontend": "^1.0.1",
+    "@itwin/imodels-access-frontend": "^2.2.1",
     "@itwin/itwinui-css": "^0.18.1",
     "@itwin/itwinui-icons-react": "^1.2.0",
     "@itwin/itwinui-react": "^1.16.2",

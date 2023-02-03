@@ -22,7 +22,7 @@
     "rebuild": "npm run clean && npm run build"
   },
   "dependencies": {
-    "@itwin/imodels-client-management": "^1.0.1",
+    "@itwin/imodels-client-management": "^2.2.1",
     "@itwin/viewer-react": "workspace:*"
   },
   "devDependencies": {
