@@ -27,7 +27,7 @@
     "test": ""
   },
   "browserslist": [
-    "electron 14.0.0"
+    "electron 22.0.0"
   ],
   "dependencies": {
     "@bentley/icons-generic-webfont": "^1.0.15",
@@ -67,7 +67,7 @@
     "@itwin/tree-widget-react": "latest",
     "@itwin/webgl-compatibility": "^3.6.0-dev.65",
     "dotenv-flow": "^3.2.0",
-    "electron": "^14.0.0",
+    "electron": "^22.0.0",
     "minimist": "^1.2.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
