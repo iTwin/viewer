@@ -25,11 +25,11 @@ import {
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
 import {
   Viewer,
-  ViewerContentToolsProvider,
-  ViewerNavigationToolsProvider,
-  ViewerStatusbarItemsProvider,
 } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { StandardContentToolsProvider,
+  StandardNavigationToolsProvider,
+  StandardStatusbarItemsProvider, } from "@itwin/appui-react";
 
 import { history } from "../routing";
 /**
@@ -144,13 +144,9 @@ const ViewerHome: React.FC = () => {
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
-          new ViewerNavigationToolsProvider(),
-          new ViewerContentToolsProvider({
-            vertical: {
-              measureGroup: false,
-            },
-          }),
-          new ViewerStatusbarItemsProvider(),
+          new StandardNavigationToolsProvider("StandardNavTools"),
+          new StandardContentToolsProvider("StandardContentTools"),
+          new StandardStatusbarItemsProvider("StandardStatusBar"),
           new TreeWidgetUiItemsProvider(),
           new PropertyGridUiItemsProvider({
             enableCopyingPropertyText: true,

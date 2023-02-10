@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { BackstageItemUtilities } from "@itwin/appui-abstract";
-import type { FrontstageProps } from "@itwin/appui-react";
+import type { FrontstageConfig } from "@itwin/appui-react";
 import { FrontstageProvider } from "@itwin/appui-react";
 import { IModelApp } from "@itwin/core-frontend";
 import React from "react";
@@ -85,17 +85,23 @@ jest.mock("@itwin/core-frontend", () => {
 jest.mock("@itwin/appui-abstract");
 
 class Frontstage1Provider extends FrontstageProvider {
-  public id = "Frontstage1";
-  public get frontstage(): React.ReactElement<FrontstageProps> {
-    return <div></div>;
+  frontstageConfig(): FrontstageConfig {
+    throw new Error("Method not implemented.");
   }
+  public id = "Frontstage1";
+  // public get frontstage(): React.ReactElement<FrontstageProps> {
+  //   return <div></div>;
+  // }
 }
 
 class Frontstage2Provider extends FrontstageProvider {
-  public id = "Frontstage2";
-  public get frontstage(): React.ReactElement<FrontstageProps> {
-    return <div></div>;
+  frontstageConfig(): FrontstageConfig {
+    throw new Error("Method not implemented.");
   }
+  public id = "Frontstage2";
+  // public get frontstage(): React.ReactElement<FrontstageProps> {
+  //   return <div></div>;
+  // }
 }
 
 describe("BackstageItemsProvider", () => {

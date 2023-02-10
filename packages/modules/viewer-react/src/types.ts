@@ -8,6 +8,7 @@ import type {
   ColorTheme,
   FrontstageProvider,
   IModelViewportControlOptions,
+  StandardFrontstageProps,
 } from "@itwin/appui-react";
 import type {
   Cartographic,
@@ -34,7 +35,7 @@ import type {
   XYAndZ,
 } from "@itwin/core-geometry";
 
-import type { StandardFrontstageProps } from "./components/app-ui/providers";
+// import type { StandardFrontstageProps } from "./components/app-ui/providers";
 
 export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>

@@ -8,7 +8,6 @@ import type { FrontstageProvider } from "@itwin/appui-react";
 import {
   BackstageComposer,
   ConfigurableUiContent,
-  FrameworkVersion,
   FrontstageManager,
   ThemeManager,
 } from "@itwin/appui-react";
@@ -54,14 +53,12 @@ export const IModelViewer: React.FC<ModelProps> = ({
   // there will always be at least one (for the default frontstage). Wait for it to be loaded into the list before rendering the content
   return (
     <ThemeManager>
-      <FrameworkVersion>
-        <ConfigurableUiContent
-          appBackstage={
-            backstageItems &&
-            backstageItems.length > 0 && <BackstageComposer items={[]} />
-          }
-        />
-      </FrameworkVersion>
+      <ConfigurableUiContent
+        appBackstage={
+          backstageItems &&
+          backstageItems.length > 0 && <BackstageComposer items={[]} />
+        }
+      />
     </ThemeManager>
   );
 };

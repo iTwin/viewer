@@ -10,7 +10,7 @@ import {
   SectionsStatusField,
   StandardContentToolsProvider,
   StatusBarItemUtilities,
-  withStatusFieldProps,
+  // withStatusFieldProps,
 } from "@itwin/appui-react";
 import * as React from "react";
 
@@ -43,13 +43,13 @@ export class ViewerContentToolsProvider extends StandardContentToolsProvider {
       !this._defaultItems?.vertical ||
       this._defaultItems.vertical.sectionGroup
     ) {
-      const Sections = withStatusFieldProps(SectionsStatusField);
+      // const Sections = withStatusFieldProps(SectionsStatusField);
       statusBarItems.push(
         StatusBarItemUtilities.createStatusBarItem(
           "Sections",
           StatusBarSection.Left,
           30,
-          <Sections hideWhenUnused />
+          <SectionsStatusField hideWhenUnused />
         )
       );
     }

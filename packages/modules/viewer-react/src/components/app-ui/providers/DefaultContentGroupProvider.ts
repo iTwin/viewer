@@ -7,6 +7,7 @@ import { StandardContentLayouts } from "@itwin/appui-abstract";
 import {
   ContentGroup,
   ContentGroupProvider,
+  FrontstageConfig,
   IModelViewportControl,
   UiFramework,
 } from "@itwin/appui-react";
@@ -22,6 +23,9 @@ import type {
  * Provide a default content group to the default frontstage
  */
 export class DefaultContentGroupProvider extends ContentGroupProvider {
+  contentGroup(_config: FrontstageConfig): Promise<ContentGroup> {
+    throw new Error("Method not implemented.");
+  }
   private _viewportOptions: ViewerViewportControlOptions | undefined;
   private _blankConnectionViewState: BlankConnectionViewState | undefined;
   private _viewCreatorOptions: ViewerViewCreator3dOptions | undefined;
