@@ -5,4 +5,7 @@
 
 import { createBrowserHistory } from "history";
 
-export const history = createBrowserHistory({ window });
+export const history = new History();
+
+// export const history = createBrowserHistory({ window });
+
