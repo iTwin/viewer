@@ -102,7 +102,7 @@ importers:
       '@itwin/presentation-components': 3.5.1_1b221fcc2b30368689980e9e5f563472
       '@itwin/presentation-frontend': 3.5.1_d6b565b7d56b61228f60b1dbd5440e67
       '@itwin/property-grid-react': 0.8.1_54e781232dae349830d83d638abea982
-      '@itwin/tree-widget-react': 0.6.0_692cbfd68e4a80be74a248afca8368b4
+      '@itwin/tree-widget-react': 0.6.1_692cbfd68e4a80be74a248afca8368b4
       '@itwin/webgl-compatibility': 3.5.1
       dotenv-flow: 3.2.0
       electron: 14.2.9
@@ -163,6 +163,7 @@ importers:
       '@itwin/tree-widget-react': latest
       '@itwin/web-viewer-react': workspace:*
       '@itwin/webgl-compatibility': ^3.2.0
+      '@remix-run/router': ^1.3.2
       '@types/node': ^14.0.19
       '@types/react': ^17.0.19
       '@types/react-dom': ^17.0.9
@@ -202,9 +203,10 @@ importers:
       '@itwin/property-grid-react': 0.8.1_54e781232dae349830d83d638abea982
       '@itwin/reality-data-client': 0.9.0_@itwin+core-bentley@3.5.1
       '@itwin/test-local-extension': link:../../modules/test-local-extension
-      '@itwin/tree-widget-react': 0.6.0_692cbfd68e4a80be74a248afca8368b4
+      '@itwin/tree-widget-react': 0.6.1_692cbfd68e4a80be74a248afca8368b4
       '@itwin/web-viewer-react': link:../../modules/web-viewer-react
       '@itwin/webgl-compatibility': 3.5.1
+      '@remix-run/router': 1.3.2
       history: 5.3.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -3430,8 +3432,8 @@ packages:
       - debug
     dev: false
 
-  /@itwin/tree-widget-react/0.6.0_692cbfd68e4a80be74a248afca8368b4:
-    resolution: {integrity: sha512-nwF5g3ytnoOy9auv9H9LficclKJIOnPliGB6ICeqHfra+7yZCcnhCGzfsBjrx3dcP9+F6N6uvaLOQLi/mRrC3g==}
+  /@itwin/tree-widget-react/0.6.1_692cbfd68e4a80be74a248afca8368b4:
+    resolution: {integrity: sha512-S7gjmskNbUoJR68i4Ht1kpkKdeEYvXxU44Vj1RNOdcjRZWmYnnNhdzPPUDD7KJ5CKqE74L0otzM+HDJ+4/9RRQ==}
     peerDependencies:
       '@itwin/appui-abstract': ^3.5.0
       '@itwin/appui-react': ^3.5.0
@@ -4151,6 +4153,11 @@ packages:
 
   /@remix-run/router/1.0.0:
     resolution: {integrity: sha512-SCR1cxRSMNKjaVYptCzBApPDqGwa3FGdjVHc+rOToocNPHQdIYLZBfv/3f+KvYuXDkUGVIW9IAzmPNZDRL1I4A==}
+    engines: {node: '>=14'}
+    dev: false
+
+  /@remix-run/router/1.3.2:
+    resolution: {integrity: sha512-t54ONhl/h75X94SWsHGQ4G/ZrCEguKSRQr7DrjTciJXW0YU1QhlwYeycvK5JgkzlxmvrK7wq1NB/PLtHxoiDcA==}
     engines: {node: '>=14'}
     dev: false
 
