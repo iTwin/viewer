@@ -3,11 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import type { ContentLayoutProps } from "@itwin/appui-abstract";
 import { StandardContentLayouts } from "@itwin/appui-abstract";
+import type { FrontstageConfig } from "@itwin/appui-react";
 import {
   ContentGroup,
   ContentGroupProvider,
-  FrontstageConfig,
   IModelViewportControl,
   UiFramework,
 } from "@itwin/appui-react";
@@ -23,8 +24,33 @@ import type {
  * Provide a default content group to the default frontstage
  */
 export class DefaultContentGroupProvider extends ContentGroupProvider {
-  contentGroup(_config: FrontstageConfig): Promise<ContentGroup> {
-    throw new Error("Method not implemented.");
+  public async contentGroup(_config: FrontstageConfig): Promise<ContentGroup> {
+    const singleView: ContentLayoutProps = {
+      ...StandardContentLayouts.singleView,
+    };
+    return new ContentGroup({
+      id: "DefaultContentGroupProvider",
+      layout: singleView,
+      contents: [
+        {
+          id: "primaryContent",
+          classId: IModelViewportControl,
+          applicationData: {
+            isPrimaryView: true,
+            supports: ["viewIdSelection", "3dModels", "2dModels"],
+            viewState: UiFramework.getDefaultViewState,
+            iModelConnection: UiFramework.getIModelConnection,
+            featureOptions: {
+              defaultViewOverlay: {
+                enableScheduleAnimationViewOverlay: true,
+                enableAnalysisTimelineViewOverlay: true,
+                enableSolarTimelineViewOverlay: true,
+              },
+            },
+          },
+        },
+      ],
+    });
   }
   private _viewportOptions: ViewerViewportControlOptions | undefined;
   private _blankConnectionViewState: BlankConnectionViewState | undefined;
