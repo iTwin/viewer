@@ -31,6 +31,7 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import { BriefcaseStatus } from "../components/modelSelector";
+import { usePullChanges } from "../hooks/usePullChanges";
 
 const ConnectionStatusBarItem = () => {
   const accessToken = useAccessToken();
@@ -72,13 +73,15 @@ const MergeStatusBarItem = () => {
     setMergeStatus(ModelStatus.MERGING);
   };
 
+  const { pullProgress, doPullChanges } = usePullChanges(connection);
+
   const getLatestChangesets = useCallback(async () => {
     if (connection) {
       try {
         connection.txns.onChangesPulled.addOnce(() => {
           IModelApp.viewManager.refreshForModifiedModels(undefined);
         });
-        await connection.pullChanges();
+        await doPullChanges();
         if (isMounted.current) {
           setMergeStatus(ModelStatus.UPTODATE);
         }
@@ -87,7 +90,7 @@ const MergeStatusBarItem = () => {
         setMergeStatus(ModelStatus.ERROR);
       }
     }
-  }, [connection, isMounted]);
+  }, [connection, doPullChanges, isMounted]);
 
   useEffect(() => {
     if (mergeStatus === ModelStatus.MERGING) {
@@ -133,6 +136,7 @@ const MergeStatusBarItem = () => {
       </span>
       <BriefcaseStatus
         mergeStatus={mergeStatus}
+        mergeProgress={pullProgress}
         onMergeClick={onMergeClick}
         className={"status-bar-status"}
       />
@@ -162,6 +166,7 @@ export class IModelMergeItemsProvider implements UiItemsProvider {
           "IModelMergeItemsProvider:PostIModelMergeStatusBarItem",
           StatusBarSection.Center,
           2,
+          // eslint-disable-next-line deprecation/deprecation
           <FooterSeparator />
         )
       );
