@@ -4,6 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ColorTheme } from "@itwin/appui-react";
+import {
+  StandardContentToolsProvider,
+  StandardNavigationToolsProvider,
+  StandardStatusbarItemsProvider,
+} from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import {
   LocalExtensionProvider,
@@ -23,13 +28,8 @@ import {
   TreeWidgetUiItemsProvider,
 } from "@itwin/tree-widget-react";
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
-import {
-  Viewer,
-} from "@itwin/web-viewer-react";
+import { Viewer } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { StandardContentToolsProvider,
-  StandardNavigationToolsProvider,
-  StandardStatusbarItemsProvider, } from "@itwin/appui-react";
 
 import { history } from "../routing";
 /**
@@ -85,16 +85,15 @@ const ViewerHome: React.FC = () => {
 
   useEffect(() => {
     let url = `viewer?iTwinId=${iTwinId}`;
-    
+
     if (iModelId) {
-       url = `${url}&ModelId=${iModelId}`
+      url = `${url}&ModelId=${iModelId}`;
     }
-   
+
     if (changesetId) {
-       url = `${url}&changesetId=${changesetId}`;
+      url = `${url}&changesetId=${changesetId}`;
     }
     history.push(url);
-
   }, [iTwinId, iModelId, changesetId]);
 
   const Loader = () => {
@@ -147,10 +146,10 @@ const ViewerHome: React.FC = () => {
           new StandardNavigationToolsProvider("StandardNavTools"),
           new StandardContentToolsProvider("StandardContentTools"),
           new StandardStatusbarItemsProvider("StandardStatusBar"),
-          new TreeWidgetUiItemsProvider(),
-          new PropertyGridUiItemsProvider({
-            enableCopyingPropertyText: true,
-          }),
+          // new TreeWidgetUiItemsProvider(),
+          // new PropertyGridUiItemsProvider({
+          //   enableCopyingPropertyText: true,
+          // }),
           new MeasureToolsUiItemsProvider(),
         ]}
         extensions={[
@@ -159,8 +158,8 @@ const ViewerHome: React.FC = () => {
             main: LocalExtension.main,
           }),
           new RemoteExtensionProvider({
-            jsUrl: "http://localhost:3001/dist/index.js",
-            manifestUrl: "http://localhost:3001/package.json",
+            jsUrl: "http://localhost:3000/dist/index.js",
+            manifestUrl: "http://localhost:3000/package.json",
           }),
         ]}
         backstageItems={backstageItems}

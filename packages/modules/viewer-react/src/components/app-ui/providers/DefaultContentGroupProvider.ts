@@ -24,34 +24,6 @@ import type {
  * Provide a default content group to the default frontstage
  */
 export class DefaultContentGroupProvider extends ContentGroupProvider {
-  public async contentGroup(_config: FrontstageConfig): Promise<ContentGroup> {
-    const singleView: ContentLayoutProps = {
-      ...StandardContentLayouts.singleView,
-    };
-    return new ContentGroup({
-      id: "DefaultContentGroupProvider",
-      layout: singleView,
-      contents: [
-        {
-          id: "primaryContent",
-          classId: IModelViewportControl,
-          applicationData: {
-            isPrimaryView: true,
-            supports: ["viewIdSelection", "3dModels", "2dModels"],
-            viewState: UiFramework.getDefaultViewState,
-            iModelConnection: UiFramework.getIModelConnection,
-            featureOptions: {
-              defaultViewOverlay: {
-                enableScheduleAnimationViewOverlay: true,
-                enableAnalysisTimelineViewOverlay: true,
-                enableSolarTimelineViewOverlay: true,
-              },
-            },
-          },
-        },
-      ],
-    });
-  }
   private _viewportOptions: ViewerViewportControlOptions | undefined;
   private _blankConnectionViewState: BlankConnectionViewState | undefined;
   private _viewCreatorOptions: ViewerViewCreator3dOptions | undefined;
@@ -67,7 +39,8 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
     this._viewCreatorOptions = viewCreatorOptions;
   }
 
-  public async provideContentGroup(): Promise<ContentGroup> {
+  public async contentGroup(_config: FrontstageConfig): Promise<ContentGroup> {
+    console.log(_config);
     const iModelConnection = UiFramework.getIModelConnection();
     let viewState;
     if (iModelConnection) {
