@@ -32,6 +32,7 @@ import {
   Viewer,
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
+  ViewerStatusbarItemsProvider,
 } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -147,11 +148,9 @@ const ViewerHome: React.FC = () => {
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
-          // new StandardNavigationToolsProvider("StandardNavTools"),
           new ViewerNavigationToolsProvider(),
-          // new StandardContentToolsProvider("StandardContentTools"),
           new ViewerContentToolsProvider(),
-          new StandardStatusbarItemsProvider("StandardStatusTools"),
+          new ViewerStatusbarItemsProvider(),
           // new TreeWidgetUiItemsProvider(),
           // new PropertyGridUiItemsProvider({
           //   enableCopyingPropertyText: true,
