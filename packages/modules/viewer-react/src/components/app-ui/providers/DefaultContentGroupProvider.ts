@@ -40,7 +40,6 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
   }
 
   public async contentGroup(_config: FrontstageConfig): Promise<ContentGroup> {
-    console.log(_config);
     const iModelConnection = UiFramework.getIModelConnection();
     let viewState;
     if (iModelConnection) {

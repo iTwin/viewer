@@ -4,11 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ColorTheme } from "@itwin/appui-react";
-import {
-  StandardContentToolsProvider,
-  StandardNavigationToolsProvider,
-  StandardStatusbarItemsProvider,
-} from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import {
   LocalExtensionProvider,
@@ -90,11 +85,9 @@ const ViewerHome: React.FC = () => {
 
   useEffect(() => {
     let url = `viewer?iTwinId=${iTwinId}`;
-
     if (iModelId) {
       url = `${url}&ModelId=${iModelId}`;
     }
-
     if (changesetId) {
       url = `${url}&changesetId=${changesetId}`;
     }

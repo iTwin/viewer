@@ -9,7 +9,6 @@ import type {
 } from "@itwin/appui-abstract";
 import { StatusBarSection } from "@itwin/appui-abstract";
 import type { StatusBarItem } from "@itwin/appui-react";
-import { MessageManager } from "@itwin/appui-react";
 import {
   MessageCenterField,
   SelectionInfoField,
@@ -42,16 +41,6 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
         )
       );
     }
-    // if (!this._defaultItems || this._defaultItems.preToolAssistanceSeparator) {
-    //   items.push(
-    //     StatusBarItemUtilities.createStatusBarItem(
-    //       "PreToolAssistance",
-    //       StatusBarSection.Left,
-    //       15,
-    //       this._footerModeOnlySeparator()
-    //     )
-    //   );
-    // }
     if (!this._defaultItems || this._defaultItems.toolAssistance) {
       const ToolAssistance = ToolAssistanceField;
       items.push(
@@ -63,16 +52,6 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
         )
       );
     }
-    // if (!this._defaultItems || this._defaultItems.postToolAssistanceSeparator) {
-    //   items.push(
-    //     StatusBarItemUtilities.createStatusBarItem(
-    //       "PostToolAssistance",
-    //       StatusBarSection.Left,
-    //       25,
-    //       this._footerModeOnlySeparator()
-    //     )
-    //   );
-    // }
     if (!this._defaultItems || this._defaultItems.tileLoadIndicator) {
       const TileLoadIndicator = TileLoadingIndicator;
       items.push(

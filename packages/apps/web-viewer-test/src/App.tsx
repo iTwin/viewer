@@ -11,7 +11,6 @@ import { AllRoutes } from "./components/routing";
 function App() {
   return (
     <React.Suspense fallback={<></>}>
-      {/* <RouterProvider router={router}></RouterProvider> */}
       <BrowserRouter>
         <AllRoutes />
       </BrowserRouter>
