@@ -31,68 +31,62 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
     const items: StatusBarItem[] = [];
 
     if (!this._defaultItems || this._defaultItems.messageCenter) {
-      const MessageCenter = MessageCenterField;
       items.push(
         StatusBarItemUtilities.createStatusBarItem(
           "MessageCenter",
           StatusBarSection.Left,
           10,
-          <MessageCenter />
+          <MessageCenterField />
         )
       );
     }
     if (!this._defaultItems || this._defaultItems.toolAssistance) {
-      const ToolAssistance = ToolAssistanceField;
       items.push(
         StatusBarItemUtilities.createStatusBarItem(
           "ToolAssistance",
           StatusBarSection.Left,
           20,
-          <ToolAssistance />
+          <ToolAssistanceField />
         )
       );
     }
     if (!this._defaultItems || this._defaultItems.tileLoadIndicator) {
-      const TileLoadIndicator = TileLoadingIndicator;
       items.push(
         StatusBarItemUtilities.createStatusBarItem(
           "TileLoadIndicator",
           StatusBarSection.Right,
           10,
-          <TileLoadIndicator />
+          <TileLoadingIndicator />
         )
       );
     }
     if (!this._defaultItems || this._defaultItems.accuSnapModePicker) {
-      const SnapMode = SnapModeField;
       items.push(
         StatusBarItemUtilities.createStatusBarItem(
           "SnapModeField",
           StatusBarSection.Right,
           20,
-          <SnapMode />
+          <SnapModeField />
         )
       );
     }
     if (!this._defaultItems || this._defaultItems.selectionScope) {
-      const SelectionScope = SelectionScopeField;
       items.push(
         StatusBarItemUtilities.createStatusBarItem(
           "SelectionScope",
           StatusBarSection.Right,
           30,
-          <SelectionScope />
+          <SelectionScopeField />
         )
       );
     }
     if (!this._defaultItems || this._defaultItems.selectionInfo) {
-      const SelectionInfo = SelectionInfoField;
       items.push(
         StatusBarItemUtilities.createStatusBarItem(
           "SelectionInfo",
           StatusBarSection.Right,
           40,
-          <SelectionInfo />
+          <SelectionInfoField />
         )
       );
     }

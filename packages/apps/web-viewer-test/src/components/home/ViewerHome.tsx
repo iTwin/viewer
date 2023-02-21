@@ -156,8 +156,8 @@ const ViewerHome: React.FC = () => {
             main: LocalExtension.main,
           }),
           new RemoteExtensionProvider({
-            jsUrl: "http://localhost:3000/dist/index.js",
-            manifestUrl: "http://localhost:3000/package.json",
+            jsUrl: "http://localhost:3001/dist/index.js",
+            manifestUrl: "http://localhost:3001/package.json",
           }),
         ]}
         backstageItems={backstageItems}

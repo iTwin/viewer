@@ -35,8 +35,6 @@ import type {
   XYAndZ,
 } from "@itwin/core-geometry";
 
-// import type { StandardFrontstageProps } from "./components/app-ui/providers";
-
 export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
   ? (Without<T1, T2> & T2) | (Without<T2, T1> & T1)
