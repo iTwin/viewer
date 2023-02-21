@@ -28,7 +28,11 @@ import {
   TreeWidgetUiItemsProvider,
 } from "@itwin/tree-widget-react";
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
-import { Viewer } from "@itwin/web-viewer-react";
+import {
+  Viewer,
+  ViewerContentToolsProvider,
+  ViewerNavigationToolsProvider,
+} from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";
@@ -143,14 +147,16 @@ const ViewerHome: React.FC = () => {
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
-          new StandardNavigationToolsProvider("StandardNavTools"),
-          new StandardContentToolsProvider("StandardContentTools"),
-          new StandardStatusbarItemsProvider("StandardStatusBar"),
+          // new StandardNavigationToolsProvider("StandardNavTools"),
+          new ViewerNavigationToolsProvider(),
+          // new StandardContentToolsProvider("StandardContentTools"),
+          new ViewerContentToolsProvider(),
+          new StandardStatusbarItemsProvider("StandardStatusTools"),
           // new TreeWidgetUiItemsProvider(),
           // new PropertyGridUiItemsProvider({
           //   enableCopyingPropertyText: true,
           // }),
-          new MeasureToolsUiItemsProvider(),
+          // new MeasureToolsUiItemsProvider(),
         ]}
         extensions={[
           new LocalExtensionProvider({
