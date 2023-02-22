@@ -1,6 +1,6 @@
 {
   "name": "@itwin/viewer-react",
-  "version": "4.0.0-dev.1",
+  "version": "4.0.0-dev.2",
   "description": "Configurable iTwin.js viewer",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
@@ -52,7 +52,7 @@
     "@itwin/core-react": "4.0.0-dev.9",
     "@itwin/core-telemetry": "4.0.0-dev.22",
     "@itwin/imodels-access-frontend": "^1.0.1",
-    "@itwin/imodels-client-management": "^1.0.1",
+    "@itwin/imodels-client-management": "^2.2.1",
     "@itwin/imodel-components-react": "4.0.0-dev.9",
     "@itwin/presentation-common": "4.0.0-dev.22",
     "@itwin/presentation-components": "4.0.0-dev.14",

@@ -1,6 +1,6 @@
 {
   "name": "@itwin/desktop-viewer-react",
-  "version": "4.0.0-dev.1",
+  "version": "4.0.0-dev.2",
   "description": "Configurable iTwin.js viewer for desktop applications",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
@@ -23,7 +23,7 @@
     "rebuild": "npm run clean && npm run build"
   },
   "dependencies": {
-    "@itwin/imodels-client-management": "^1.0.1",
+    "@itwin/imodels-client-management": "^2.2.1",
     "@itwin/viewer-react": "workspace:*"
   },
   "devDependencies": {
@@ -60,7 +60,7 @@
     "@types/react-redux": "^7.1.9",
     "concurrently": "^5.2.0",
     "copyfiles": "^2.1.0",
-    "electron": "^14.0.0",
+    "electron": "^22.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.1.0",
     "react": "^17.0.2",
@@ -78,7 +78,7 @@
     "@itwin/core-frontend": "4.0.0-dev.22",
     "@itwin/ecschema-metadata": "4.0.0-dev.22",
     "@itwin/electron-authorization": "^0.8.3",
-    "electron": "^14.0.0",
+    "electron": "^22.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.0",

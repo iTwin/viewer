@@ -85,9 +85,11 @@ const ViewerHome: React.FC = () => {
 
   useEffect(() => {
     let url = `viewer?iTwinId=${iTwinId}`;
+
     if (iModelId) {
       url = `${url}&ModelId=${iModelId}`;
     }
+
     if (changesetId) {
       url = `${url}&changesetId=${changesetId}`;
     }

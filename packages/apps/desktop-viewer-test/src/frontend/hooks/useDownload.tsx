@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IModelVersion, SyncMode } from "@itwin/core-common";
+import type { OnDownloadProgress } from "@itwin/core-frontend";
 import { NativeApp } from "@itwin/core-frontend";
-import type { ProgressInfo } from "@itwin/desktop-viewer-react";
 import { useCallback, useContext, useState } from "react";
 
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
@@ -26,26 +26,21 @@ export const useDownload = (
   const doDownload = useCallback(async () => {
     const fileName = await ITwinViewerApp.saveBriefcase(iModelName);
     if (fileName) {
+      const progressCallback: OnDownloadProgress = (progress) => {
+        const { loaded, total } = progress;
+        const percent = loaded / total;
+
+        setProgress(percent);
+        console.log(
+          `Briefcase download progress (${loaded}/${total}) -> ${percent}%`
+        );
+      };
+
       const req = await NativeApp.requestDownloadBriefcase(
         iTwinId,
         iModelId,
-        { syncMode: SyncMode.PullOnly, fileName },
-        IModelVersion.latest(),
-        async (progress: ProgressInfo) => {
-          setProgress(
-            progress.total
-              ? (progress.loaded / progress.total) * 100
-              : progress.percent
-          );
-
-          console.log(
-            `Progress (${progress.loaded}/${progress.total}) -> ${
-              progress.total
-                ? ((progress.loaded / progress.total) * 100).toPrecision(2)
-                : progress.percent
-            }%`
-          );
-        }
+        { syncMode: SyncMode.PullOnly, fileName, progressCallback },
+        IModelVersion.latest()
       );
       await req.downloadPromise;
       await addRecent(fileName);

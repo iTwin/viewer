@@ -21,6 +21,7 @@ import React, {
 import { useNavigate } from "react-router-dom";
 
 import { useDownload } from "../../hooks/useDownload";
+import { usePullChanges } from "../../hooks/usePullChanges";
 import { SettingsContext } from "../../services/SettingsClient";
 import { IModelContext } from "../routes";
 import { BriefcaseStatus } from "./BriefcaseStatus";
@@ -71,12 +72,6 @@ const useProgressIndicator = (iModel: IModelFull) => {
     iModel.projectId ?? ""
   );
 
-  const getLatestChangesets = useCallback(async () => {
-    if (briefcase) {
-      await briefcase.pullChanges();
-    }
-  }, [briefcase]);
-
   const startDownload = useCallback(async () => {
     try {
       setStatus(ModelStatus.DOWNLOADING);
@@ -93,13 +88,15 @@ const useProgressIndicator = (iModel: IModelFull) => {
     }
   }, []);
 
+  const { pullProgress, doPullChanges } = usePullChanges(briefcase);
+
   const mergeChanges = useCallback(() => {
     setStatus(ModelStatus.MERGING);
   }, []);
 
   useEffect(() => {
     if (status === ModelStatus.MERGING) {
-      getLatestChangesets()
+      doPullChanges()
         .then(() => {
           setStatus(ModelStatus.UPTODATE);
         })
@@ -108,7 +105,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
           setStatus(ModelStatus.ERROR);
         });
     }
-  }, [status]);
+  }, [status, doPullChanges]);
 
   useEffect(() => {
     if (!briefcase) {
@@ -152,14 +149,14 @@ const useProgressIndicator = (iModel: IModelFull) => {
         >
           <BriefcaseStatus
             mergeStatus={status}
-            mergeProgress={progress}
+            mergeProgress={pullProgress ?? progress}
             onMergeClick={mergeChanges}
             onDownloadClick={startDownload}
           />
         </div>
       ),
     };
-  }, [progress, status]);
+  }, [progress, pullProgress, status]);
   return { tileProps };
 };
 
