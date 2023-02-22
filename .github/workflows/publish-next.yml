@@ -15,9 +15,9 @@ jobs:
         node-version: [16.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.PUBLISH_PAT }}
+          token: ${{ secrets.IMJS_ADMIN_GH_TOKEN }}
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -29,8 +29,8 @@ jobs:
           echo 'Building...'
           node common/scripts/install-run-rush.js rebuild
           echo 'Publishing...'
-          git config user.name "iTwinViewerWorkflow"
-          git config user.email "itwinviewer@users.noreply.github.com"
+          git config user.name "imodeljs-admin"
+          git config user.email "imodeljs-admin@users.noreply.github.com"
           node common/scripts/install-run-rush.js version --bump --target-branch next
           node common/scripts/install-run-rush.js publish --include-all --version-policy prerelease-monorepo-lockStep --set-access-level public --apply --publish --npm-auth-token $NPM_TOKEN --target-branch next --tag next
         env:
