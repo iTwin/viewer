@@ -14,7 +14,7 @@
   "devDependencies": {
     "@esbuild-plugins/node-modules-polyfill": "~0.1.2",
     "@esbuild-plugins/node-globals-polyfill": "~0.1.1",
-    "@itwin/appui-abstract": "4.0.0-dev.9",
+    "@itwin/appui-abstract": "4.0.0-dev.10",
     "@itwin/build-tools": "4.0.0-dev.22",
     "@itwin/core-bentley": "4.0.0-dev.22",
     "@itwin/core-common": "4.0.0-dev.22",

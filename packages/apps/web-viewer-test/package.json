@@ -4,9 +4,9 @@
   "private": true,
   "dependencies": {
     "@bentley/icons-generic": "^1.0.13",
-    "@itwin/appui-abstract": "4.0.0-dev.9",
-    "@itwin/appui-layout-react": "4.0.0-dev.9",
-    "@itwin/appui-react": "4.0.0-dev.9",
+    "@itwin/appui-abstract": "4.0.0-dev.10",
+    "@itwin/appui-layout-react": "4.0.0-dev.10",
+    "@itwin/appui-react": "4.0.0-dev.10",
     "@itwin/browser-authorization": "^0.5.1",
     "@itwin/components-react": "4.0.0-dev.9",
     "@itwin/core-bentley": "4.0.0-dev.22",

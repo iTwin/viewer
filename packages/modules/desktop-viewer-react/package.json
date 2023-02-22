@@ -27,9 +27,9 @@
     "@itwin/viewer-react": "workspace:*"
   },
   "devDependencies": {
-    "@itwin/appui-abstract": "4.0.0-dev.9",
-    "@itwin/appui-layout-react": "4.0.0-dev.9",
-    "@itwin/appui-react": "4.0.0-dev.9",
+    "@itwin/appui-abstract": "4.0.0-dev.10",
+    "@itwin/appui-layout-react": "4.0.0-dev.10",
+    "@itwin/appui-react": "4.0.0-dev.10",
     "@itwin/build-tools": "4.0.0-dev.22",
     "@itwin/components-react": "4.0.0-dev.9",
     "@itwin/core-backend": "4.0.0-dev.22",
