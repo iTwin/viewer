@@ -60,7 +60,7 @@
     "@itwin/itwinui-react": "^1.16.2",
     "@itwin/presentation-backend": "4.0.0-dev.22",
     "@itwin/presentation-common": "4.0.0-dev.22",
-    "@itwin/presentation-components": "4.0.0-dev.14",
+    "@itwin/presentation-components": "4.0.0-dev.15",
     "@itwin/presentation-frontend": "4.0.0-dev.22",
     "@itwin/webgl-compatibility": "4.0.0-dev.22",
     "dotenv-flow": "^3.2.0",
