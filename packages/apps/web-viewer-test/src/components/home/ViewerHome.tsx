@@ -9,19 +9,19 @@ import {
   LocalExtensionProvider,
   RemoteExtensionProvider,
 } from "@itwin/core-frontend";
-import {
-  MeasureTools,
-  MeasureToolsUiItemsProvider,
-} from "@itwin/measure-tools-react";
-import {
-  PropertyGridManager,
-  PropertyGridUiItemsProvider,
-} from "@itwin/property-grid-react";
-import LocalExtension from "@itwin/test-local-extension";
-import {
-  TreeWidget,
-  TreeWidgetUiItemsProvider,
-} from "@itwin/tree-widget-react";
+// import {
+//   MeasureTools,
+//   MeasureToolsUiItemsProvider,
+// } from "@itwin/measure-tools-react";
+// import {
+//   PropertyGridManager,
+//   PropertyGridUiItemsProvider,
+// } from "@itwin/property-grid-react";
+// import LocalExtension from "@itwin/test-local-extension";
+// import {
+//   TreeWidget,
+//   TreeWidgetUiItemsProvider,
+// } from "@itwin/tree-widget-react";
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
 import {
   Viewer,
@@ -99,9 +99,9 @@ const ViewerHome: React.FC = () => {
   };
 
   const onIModelAppInit = useCallback(async () => {
-    await TreeWidget.initialize();
-    await PropertyGridManager.initialize();
-    await MeasureTools.startup();
+    // await TreeWidget.initialize();
+    // await PropertyGridManager.initialize();
+    // await MeasureTools.startup();
   }, []);
 
   const backstageItems: ViewerBackstageItem[] = [
@@ -154,16 +154,16 @@ const ViewerHome: React.FC = () => {
           // }),
           // new MeasureToolsUiItemsProvider(),
         ]}
-        extensions={[
-          new LocalExtensionProvider({
-            manifestPromise: LocalExtension.manifestPromise,
-            main: LocalExtension.main,
-          }),
-          new RemoteExtensionProvider({
-            jsUrl: "http://localhost:3001/dist/index.js",
-            manifestUrl: "http://localhost:3001/package.json",
-          }),
-        ]}
+        // extensions={[
+        //   new LocalExtensionProvider({
+        //     manifestPromise: LocalExtension.manifestPromise,
+        //     main: LocalExtension.main,
+        //   }),
+        //   new RemoteExtensionProvider({
+        //     jsUrl: "http://localhost:3001/dist/index.js",
+        //     manifestUrl: "http://localhost:3001/package.json",
+        //   }),
+        // ]}
         backstageItems={backstageItems}
         // renderSys={{doIdleWork: true}}
       />
