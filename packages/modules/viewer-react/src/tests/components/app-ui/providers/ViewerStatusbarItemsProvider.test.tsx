@@ -40,13 +40,13 @@ const testArray: { items: ViewerDefaultStatusbarItems; amount: number }[] = [
 ];
 
 describe("ViewerDefaultStatusbarProvider", () => {
-  it("should register ViewerStatusbarItemsProvider with 8 default items", () => {
+  it("should register ViewerStatusbarItemsProvider with 6 default items", () => {
     const provider = new ViewerStatusbarItemsProvider();
     UiItemsManager.register(provider);
     expect(UiItemsManager.hasRegisteredProviders).toBeTruthy();
     expect(
       UiItemsManager.getStatusBarItems("test", StageUsage.General).length
-    ).toBe(8);
+    ).toBe(6);
     UiItemsManager.unregister(provider.id);
     expect(UiItemsManager.hasRegisteredProviders).toBeFalsy();
   });
