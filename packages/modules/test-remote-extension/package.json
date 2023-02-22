@@ -9,19 +9,19 @@
   "author": "Bentley Systems, Inc.",
   "license": "MIT",
   "dependencies": {
-    "@itwin/core-extension": "^3.6.0"
+    "@itwin/core-extension": "4.0.0-dev.22"
   },
   "devDependencies": {
     "@esbuild-plugins/node-modules-polyfill": "~0.1.2",
     "@esbuild-plugins/node-globals-polyfill": "~0.1.1",
-    "@itwin/appui-abstract": "^3.6.0",
-    "@itwin/build-tools": "^3.6.0",
-    "@itwin/core-bentley": "^3.6.0",
-    "@itwin/core-common": "^3.6.0",
-    "@itwin/core-geometry": "^3.6.0",
-    "@itwin/core-orbitgt": "^3.6.0",
-    "@itwin/core-quantity": "^3.6.0",
-    "@itwin/webgl-compatibility": "^3.6.0",
+    "@itwin/appui-abstract": "4.0.0-dev.10",
+    "@itwin/build-tools": "4.0.0-dev.22",
+    "@itwin/core-bentley": "4.0.0-dev.22",
+    "@itwin/core-common": "4.0.0-dev.22",
+    "@itwin/core-geometry": "4.0.0-dev.22",
+    "@itwin/core-orbitgt": "4.0.0-dev.22",
+    "@itwin/core-quantity": "4.0.0-dev.22",
+    "@itwin/webgl-compatibility": "4.0.0-dev.22",
     "esbuild": "^0.13.13",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",

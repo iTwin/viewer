@@ -3,7 +3,7 @@
     "dependencies": {
       "@bentley/icons-generic-webfont": "^1.0.15",
       "@bentley/react-scripts": "^5.0.3",
-      "@itwin/appui-abstract": "^3.6.0",
+      "@itwin/appui-abstract": "4.0.0-dev.9",
       "@itwin/appui-layout-react": "^3.6.0",
       "@itwin/appui-react": "^3.6.0",
       "@itwin/build-tools": "^3.6.0",

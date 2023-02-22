@@ -4,7 +4,7 @@
       "@bentley/icons-generic": "^1.0.13",
       "@bentley/react-scripts": "^5.0.3",
       "@itwin/core-telemetry": "^3.6.0",
-      "@itwin/appui-abstract": "^3.6.0",
+      "@itwin/appui-abstract": "4.0.0-dev.9",
       "@itwin/appui-layout-react": "^3.6.0",
       "@itwin/appui-react": "^3.6.0",
       "@itwin/browser-authorization": "^0.5.1",
