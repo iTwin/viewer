@@ -5,10 +5,6 @@
 
 import { ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
-import {
-  LocalExtensionProvider,
-  RemoteExtensionProvider,
-} from "@itwin/core-frontend";
 // import {
 //   MeasureTools,
 //   MeasureToolsUiItemsProvider,

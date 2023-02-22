@@ -5,12 +5,8 @@
 
 import "./IModelMergeStatusBarItem.scss";
 
-import type {
-  CommonStatusBarItem,
-  UiItemsProvider,
-} from "@itwin/appui-abstract";
-import { StageUsage, StatusBarSection } from "@itwin/appui-abstract";
-import { FooterSeparator } from "@itwin/appui-layout-react";
+import type { AnyStatusBarItem, UiItemsProvider } from "@itwin/appui-react";
+import { StageUsage, StatusBarSection } from "@itwin/appui-react";
 import {
   StatusBarItemUtilities,
   useActiveIModelConnection,
@@ -150,11 +146,11 @@ export class IModelMergeItemsProvider implements UiItemsProvider {
   public provideStatusBarItems(
     _stageId: string,
     stageUsage: string
-  ): CommonStatusBarItem[] {
-    const statusBarItems: CommonStatusBarItem[] = [];
+  ): AnyStatusBarItem[] {
+    const statusBarItems: AnyStatusBarItem[] = [];
     if (stageUsage === StageUsage.General) {
       statusBarItems.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "IModelMergeItemsProvider:ConnectionStatusBarItem",
           StatusBarSection.Center,
           1,
@@ -162,16 +158,7 @@ export class IModelMergeItemsProvider implements UiItemsProvider {
         )
       );
       statusBarItems.push(
-        StatusBarItemUtilities.createStatusBarItem(
-          "IModelMergeItemsProvider:PostIModelMergeStatusBarItem",
-          StatusBarSection.Center,
-          2,
-          // eslint-disable-next-line deprecation/deprecation
-          <FooterSeparator />
-        )
-      );
-      statusBarItems.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "IModelMergeItemsProvider:IModelMergeStatusBarItem",
           StatusBarSection.Center,
           3,
