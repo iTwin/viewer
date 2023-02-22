@@ -4,17 +4,17 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type {
-  CommonStatusBarItem,
+  AnyStatusBarItem,
+  StatusBarCustomItem,
   UiItemsProvider,
-} from "@itwin/appui-abstract";
-import { StatusBarSection } from "@itwin/appui-abstract";
-import type { StatusBarItem } from "@itwin/appui-react";
+} from "@itwin/appui-react";
 import {
   MessageCenterField,
   SelectionInfoField,
   SelectionScopeField,
   SnapModeField,
   StatusBarItemUtilities,
+  StatusBarSection,
   TileLoadingIndicator,
   ToolAssistanceField,
 } from "@itwin/appui-react";
@@ -27,12 +27,12 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
 
   constructor(private _defaultItems?: ViewerDefaultStatusbarItems) {}
 
-  public provideStatusBarItems(): CommonStatusBarItem[] {
-    const items: StatusBarItem[] = [];
+  public provideStatusBarItems(): AnyStatusBarItem[] {
+    const items: StatusBarCustomItem[] = [];
 
     if (!this._defaultItems || this._defaultItems.messageCenter) {
       items.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "MessageCenter",
           StatusBarSection.Left,
           10,
@@ -42,7 +42,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
     }
     if (!this._defaultItems || this._defaultItems.toolAssistance) {
       items.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "ToolAssistance",
           StatusBarSection.Left,
           20,
@@ -52,7 +52,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
     }
     if (!this._defaultItems || this._defaultItems.tileLoadIndicator) {
       items.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "TileLoadIndicator",
           StatusBarSection.Right,
           10,
@@ -62,7 +62,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
     }
     if (!this._defaultItems || this._defaultItems.accuSnapModePicker) {
       items.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "SnapModeField",
           StatusBarSection.Right,
           20,
@@ -72,7 +72,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
     }
     if (!this._defaultItems || this._defaultItems.selectionScope) {
       items.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "SelectionScope",
           StatusBarSection.Right,
           30,
@@ -82,7 +82,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
     }
     if (!this._defaultItems || this._defaultItems.selectionInfo) {
       items.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "SelectionInfo",
           StatusBarSection.Right,
           40,
