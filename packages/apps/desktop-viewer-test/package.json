@@ -8,7 +8,7 @@
     "darwin"
   ],
   "engines": {
-    "node": ">=12.17.0 <17.0.0"
+    "node": ">=18.0.0"
   },
   "scripts": {
     "build": "",
@@ -27,7 +27,7 @@
     "test": ""
   },
   "browserslist": [
-    "electron 22.0.0"
+    "electron 23.0.0"
   ],
   "dependencies": {
     "@bentley/icons-generic-webfont": "^1.0.15",
@@ -48,7 +48,7 @@
     "@itwin/core-react": "4.0.0-dev.9",
     "@itwin/core-telemetry": "4.0.0-dev.22",
     "@itwin/ecschema-metadata": "4.0.0-dev.22",
-    "@itwin/electron-authorization": "^0.8.3",
+    "@itwin/electron-authorization": "^0.11.0",
     "@itwin/express-server": "4.0.0-dev.22",
     "@itwin/desktop-viewer-react": "workspace:*",
     "@itwin/imodel-browser-react": "^0.12.2",
@@ -64,7 +64,7 @@
     "@itwin/presentation-frontend": "4.0.0-dev.22",
     "@itwin/webgl-compatibility": "4.0.0-dev.22",
     "dotenv-flow": "^3.2.0",
-    "electron": "^22.0.0",
+    "electron": "^23.0.0",
     "minimist": "^1.2.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

@@ -68,6 +68,6 @@
       "start": "npm run build:backend && run-p \"start:frontend\" \"electron:debug\"",
       "start:frontend": "react-scripts start"
     },
-    "browserslist": ["electron 22.0.0"]
+    "browserslist": ["electron 23.0.0"]
   }
 }
