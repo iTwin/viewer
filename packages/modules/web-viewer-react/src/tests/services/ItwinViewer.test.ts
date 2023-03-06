@@ -30,6 +30,9 @@ jest.mock("@itwin/viewer-react", () => {
     ViewerAuthorization: {
       client: {},
     },
+    RpcInitializer: jest.requireActual(
+      "@itwin/viewer-react/lib/cjs/services/RpcInitializer"
+    ).RpcInitializer,
   };
 });
 

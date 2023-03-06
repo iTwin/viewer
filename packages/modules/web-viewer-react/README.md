@@ -96,7 +96,6 @@ export const MyViewerComponent = () => {
 - `i18nUrlTemplate` - Override the default url template where i18n resource files are queried
 - `onIModelAppInit` - Callback function that executes after IModelApp.startup completes
 - `additionalI18nNamespaces` - Additional i18n namespaces to register
-- `additionalRpcInterfaces` - Additional rpc interfaces to register (assumes that they are supported in your backend)
 - `extensions` - Provide extensions for the viewer
 - `hubAccess` - Optional `hubAccess` to override the Viewer's default hub access
 - `mapLayerOptions` - Optional key value pair to provide map layers

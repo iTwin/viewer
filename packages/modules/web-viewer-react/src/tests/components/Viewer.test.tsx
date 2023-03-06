@@ -3,22 +3,17 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  DevToolsRpcInterface,
-  IModelReadRpcInterface,
-  IModelTileRpcInterface,
-  SnapshotIModelRpcInterface,
-} from "@itwin/core-common";
 import type { IModelAppOptions } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
-import { PresentationRpcInterface } from "@itwin/presentation-common";
-import type { ViewerInitializerParams } from "@itwin/viewer-react";
+import type {
+  BackendConfiguration,
+  ViewerInitializerParams,
+} from "@itwin/viewer-react";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
 import { Viewer } from "../../components/Viewer";
 import { WebInitializer } from "../../services/Initializer";
-import type { BackendConfiguration } from "../../types";
 import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
 
 jest.mock("@itwin/viewer-react", () => {
@@ -31,13 +26,6 @@ jest.mock("@itwin/viewer-react", () => {
         applicationId: options?.productId ?? "3098",
         notifications: expect.anything(),
         uiAdmin: expect.anything(),
-        rpcInterfaces: [
-          IModelReadRpcInterface,
-          IModelTileRpcInterface,
-          PresentationRpcInterface,
-          SnapshotIModelRpcInterface,
-          ...(options?.additionalRpcInterfaces ?? []),
-        ],
         localization: expect.anything(),
         toolAdmin: options?.toolAdmin,
         authorizationClient: expect.anything(),
@@ -47,6 +35,9 @@ jest.mock("@itwin/viewer-react", () => {
     makeCancellable: jest.requireActual(
       "@itwin/viewer-react/lib/cjs/utilities/MakeCancellable"
     ).makeCancellable,
+    RpcInitializer: jest.requireActual(
+      "@itwin/viewer-react/lib/cjs/services/RpcInitializer"
+    ).RpcInitializer,
     useBaseViewerInitializer: jest.fn().mockReturnValue(true),
     getInitializationOptions: jest.fn().mockReturnValue({}),
     isEqual: jest.fn().mockReturnValue(true),
@@ -129,7 +120,6 @@ describe("Viewer", () => {
         authClient={authClient}
         iTwinId={mockITwinId}
         iModelId={mockIModelId}
-        additionalRpcInterfaces={[DevToolsRpcInterface]}
         enablePerformanceMonitors={false}
       />
     );
@@ -141,13 +131,6 @@ describe("Viewer", () => {
       authorizationClient: expect.anything(),
       localization: expect.anything(),
       notifications: expect.anything(),
-      rpcInterfaces: [
-        IModelReadRpcInterface,
-        IModelTileRpcInterface,
-        PresentationRpcInterface,
-        SnapshotIModelRpcInterface,
-        DevToolsRpcInterface,
-      ],
       uiAdmin: expect.anything(),
       toolAdmin: undefined,
     });

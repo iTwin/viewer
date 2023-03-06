@@ -77,10 +77,7 @@ jest.mock("@itwin/viewer-react", () => {
         applicationId: options?.productId ?? "3098",
         notifications: expect.anything(),
         uiAdmin: expect.anything(),
-        rpcInterfaces: [
-          ...defaultRpcInterfaces,
-          ...(options?.additionalRpcInterfaces ?? []),
-        ],
+        rpcInterfaces: [...defaultRpcInterfaces],
         localization: expect.anything(),
         toolAdmin: options?.toolAdmin,
         authorizationClient: expect.anything(),
@@ -90,6 +87,9 @@ jest.mock("@itwin/viewer-react", () => {
     makeCancellable: jest.requireActual(
       "@itwin/viewer-react/lib/cjs/utilities/MakeCancellable"
     ).makeCancellable,
+    RpcInitializer: jest.requireActual(
+      "@itwin/viewer-react/lib/cjs/services/RpcInitializer"
+    ).RpcInitializer,
     useBaseViewerInitializer: jest.fn().mockReturnValue(true),
     getInitializationOptions: jest.fn().mockReturnValue({}),
     isEqual: jest.fn().mockReturnValue(true),
@@ -225,52 +225,6 @@ describe("Initializer", () => {
       },
       [...defaultRpcInterfaces, TestRpcInterface]
     );
-  });
-
-  it("default backend throws if config is specified but no version is provided", async () => {
-    await WebInitializer.startWebViewer({
-      authClient: new MockAuthorizationClient(),
-      enablePerformanceMonitors: false,
-      backendConfiguration: {
-        defaultBackend: {
-          config: {
-            info: {
-              title: "specified default backend",
-              version: "",
-            },
-          },
-        },
-      },
-    });
-
-    expect(WebInitializer.initialized).rejects.toThrowError(
-      "Please provide the version for the iTwin.js backend"
-    );
-
-    expect(initClientSpy).toHaveBeenCalledTimes(0);
-  });
-
-  it("default backend throws if config is specified but no version is provided", async () => {
-    await WebInitializer.startWebViewer({
-      authClient: new MockAuthorizationClient(),
-      enablePerformanceMonitors: false,
-      backendConfiguration: {
-        defaultBackend: {
-          config: {
-            info: {
-              title: "specified default backend",
-              version: "",
-            },
-          },
-        },
-      },
-    });
-
-    expect(WebInitializer.initialized).rejects.toThrowError(
-      "Please provide the version for the iTwin.js backend"
-    );
-
-    expect(initClientSpy).toHaveBeenCalledTimes(0);
   });
 
   it("initializes multiple backends - specified custom (default included by default)", async () => {

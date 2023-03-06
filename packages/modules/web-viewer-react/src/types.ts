@@ -4,45 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type {
-  BentleyCloudRpcParams,
-  RpcInterface,
-  RpcInterfaceDefinition,
-} from "@itwin/core-common";
-import type {
+  BackendConfiguration,
   BlankViewerProps,
   ConnectedViewerProps,
-  RequireOne,
-  RequireOneOf,
   ViewerAuthorizationClient,
   ViewerCommonProps,
   XOR,
 } from "@itwin/viewer-react";
-
-/**
- * Custom backend and rpc configuration
- */
-export type BackendConfiguration = RequireOneOf<
-  {
-    defaultBackend: RequireOneOf<DefaultBackend, "rpcInterfaces" | "config">;
-    customBackends: CustomBackend[];
-  },
-  "defaultBackend" | "customBackends"
->;
-
-export type RegisterClientOptions = {
-  defaultBackend: RequireOne<DefaultBackend, "rpcInterfaces">;
-  customBackends?: CustomBackend[];
-};
-
-export type DefaultBackend = {
-  rpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[]; // will be combined with a set of default interfaces
-  config?: Partial<BentleyCloudRpcParams>;
-};
-
-export type CustomBackend = {
-  rpcInterfaces: RpcInterfaceDefinition<RpcInterface>[]; // will be combined with a set of default interfaces
-  config: BentleyCloudRpcParams;
-};
 
 export type WebInitializerParams = ViewerCommonProps & {
   /** authorization configuration */

@@ -3,17 +3,16 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { IModelAppOptions } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import {
   getIModelAppOptions,
   makeCancellable,
+  RpcInitializer,
   ViewerAuthorization,
   ViewerPerformance,
 } from "@itwin/viewer-react";
 
 import type { WebInitializerParams } from "../types";
-import { RpcInitializer } from "./RpcInitializer";
 
 export class WebInitializer {
   private static _initialized: Promise<void>;
@@ -42,17 +41,15 @@ export class WebInitializer {
       console.log("starting web viewer");
       this._initializing = true;
       const iModelAppOptions = getIModelAppOptions(options);
-      const rpcOptions = this.reconcileDefaultRpcOptions(
-        options,
-        iModelAppOptions
-      );
-
+      console.log(iModelAppOptions);
       const cancellable = makeCancellable(function* () {
         ViewerPerformance.enable(options.enablePerformanceMonitors);
         ViewerPerformance.addMark("ViewerStarting");
         iModelAppOptions.authorizationClient = options.authClient;
         ViewerAuthorization.client = options.authClient;
+
         yield IModelApp.startup(iModelAppOptions);
+
         // register extensions after startup
         if (options?.extensions) {
           options.extensions.forEach((extension) => {
@@ -66,8 +63,7 @@ export class WebInitializer {
               .catch((e) => console.log(e));
           });
         }
-        RpcInitializer.registerClients(rpcOptions);
-        console.log("web viewer started");
+        RpcInitializer.registerClients(options.backendConfiguration);
         ViewerPerformance.addMark("ViewerStarted");
         ViewerPerformance.addMeasure(
           "ViewerInitialized",
@@ -88,22 +84,5 @@ export class WebInitializer {
           WebInitializer._cancel = undefined;
         });
     }
-  }
-
-  private static reconcileDefaultRpcOptions(
-    options: WebInitializerParams,
-    iModelAppOptions: IModelAppOptions
-  ) {
-    return {
-      ...options.backendConfiguration,
-      defaultBackend: {
-        ...options.backendConfiguration?.defaultBackend,
-        rpcInterfaces: [
-          ...(iModelAppOptions.rpcInterfaces ?? []),
-          ...(options.backendConfiguration?.defaultBackend?.rpcInterfaces ??
-            []),
-        ],
-      },
-    };
   }
 }

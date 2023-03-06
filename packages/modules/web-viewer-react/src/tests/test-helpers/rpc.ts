@@ -11,7 +11,6 @@ import {
   IModelTileRpcInterface,
   RpcInterface,
   RpcManager,
-  SnapshotIModelRpcInterface,
 } from "@itwin/core-common";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 
@@ -19,7 +18,6 @@ export const defaultRpcInterfaces = [
   IModelReadRpcInterface,
   IModelTileRpcInterface,
   PresentationRpcInterface,
-  SnapshotIModelRpcInterface,
 ];
 
 export abstract class TestRpcInterface extends RpcInterface {

@@ -10,6 +10,7 @@ import type {
   IModelViewportControlOptions,
 } from "@itwin/appui-react";
 import type {
+  BentleyCloudRpcParams,
   Cartographic,
   ColorDef,
   EcefLocationProps,
@@ -40,15 +41,6 @@ export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
   ? (Without<T1, T2> & T2) | (Without<T2, T1> & T1)
   : T1 | T2;
-
-/**
- * Makes the property K on type T required
- */
-export type RequireOne<T, K extends keyof T> = {
-  [X in Exclude<keyof T, K>]?: T[X];
-} & {
-  [P in K]-?: T[P];
-};
 
 /**
  * Requires that _at least one_ of the Keys in type T be required
@@ -154,8 +146,6 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   onIModelAppInit?: () => void;
   /** additional i18n namespaces to register */
   additionalI18nNamespaces?: string[];
-  /** custom rpc interfaces (assumes that they are supported in your backend) */
-  additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
   /** array of iTwin.js Extensions */
   extensions?: ExtensionProvider[];
 }
@@ -210,7 +200,6 @@ const iTwinViewerInitializerParamSample: OptionalToUndefinedUnion<ViewerInitiali
     i18nUrlTemplate: undefined,
     onIModelAppInit: undefined,
     additionalI18nNamespaces: undefined,
-    additionalRpcInterfaces: undefined,
     extensions: undefined,
   };
 
@@ -267,3 +256,20 @@ export type ViewerDefaultFrontstageConfig = Pick<
   StandardFrontstageProps,
   "hideNavigationAid" | "hideStatusBar" | "hideToolSettings"
 >;
+/**
+ * Custom backend and rpc configuration
+ */
+export type BackendConfiguration = {
+  defaultBackend?: RequireOneOf<DefaultBackend, "rpcInterfaces" | "config">;
+  customBackends?: CustomBackend[];
+};
+
+export type DefaultBackend = {
+  rpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[]; // will be combined with a set of default interfaces
+  config?: Partial<BentleyCloudRpcParams>;
+};
+
+export type CustomBackend = {
+  rpcInterfaces: RpcInterfaceDefinition<RpcInterface>[]; // will be combined with a set of default interfaces
+  config: BentleyCloudRpcParams;
+};
