@@ -3,9 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CommonToolbarItem } from "@itwin/appui-abstract";
-import { ToolbarOrientation, ToolbarUsage } from "@itwin/appui-abstract";
-import type { DefaultNavigationTools } from "@itwin/appui-react";
+import type { DefaultNavigationTools, ToolbarItem } from "@itwin/appui-react";
+import { ToolbarOrientation, ToolbarUsage } from "@itwin/appui-react";
 import { CoreTools } from "@itwin/appui-react";
 import { ToolbarHelper, ToolItemDef } from "@itwin/appui-react";
 import { StandardNavigationToolsProvider } from "@itwin/appui-react";
@@ -30,13 +29,13 @@ export class ViewerNavigationToolsProvider extends StandardNavigationToolsProvid
     });
   }
 
-  public override provideToolbarButtonItems(
+  public provideToolbarButtonItems(
     _stageId: string,
     _stageUsage: string,
     toolbarUsage: ToolbarUsage,
     toolbarOrientation: ToolbarOrientation
-  ): CommonToolbarItem[] {
-    const items: CommonToolbarItem[] = [];
+  ): ToolbarItem[] {
+    const items: ToolbarItem[] = [];
 
     if (
       toolbarUsage === ToolbarUsage.ViewNavigation &&
