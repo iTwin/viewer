@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { AbstractWidgetProps } from "@itwin/appui-abstract";
 import {
   ConditionalBooleanValue,
   ConditionalStringValue,
