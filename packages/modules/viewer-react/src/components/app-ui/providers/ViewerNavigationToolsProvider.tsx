@@ -29,7 +29,7 @@ export class ViewerNavigationToolsProvider extends StandardNavigationToolsProvid
     });
   }
 
-  public provideToolbarButtonItems(
+  public override provideToolbarItemsInternal(
     _stageId: string,
     _stageUsage: string,
     toolbarUsage: ToolbarUsage,

@@ -3,11 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type {
-  CommonStatusBarItem,
-  DefaultContentTools,
-  StatusBarItem,
-} from "@itwin/appui-react";
+import type { DefaultContentTools, StatusBarItem } from "@itwin/appui-react";
 import {
   SectionsStatusField,
   StandardContentToolsProvider,

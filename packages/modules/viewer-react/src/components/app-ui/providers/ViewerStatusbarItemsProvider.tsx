@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type {
-  CommonStatusBarItem,
   StatusBarCustomItem,
   StatusBarItem,
   UiItemsProvider,

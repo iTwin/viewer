@@ -6,7 +6,6 @@
 import {
   ConditionalBooleanValue,
   ConditionalStringValue,
-  ToolbarItemUtilities,
 } from "@itwin/appui-abstract";
 import type {
   StagePanelSection,
@@ -21,6 +20,7 @@ import {
   StatusBarItemUtilities,
   StatusBarSection,
   SyncUiEventDispatcher,
+  ToolbarItemUtilities,
   ToolbarOrientation,
   ToolbarUsage,
 } from "@itwin/appui-react";
@@ -53,7 +53,7 @@ export class TestUiProvider implements UiItemsProvider {
         [this.syncEventId]
       );
 
-      const visibilityActionSpec = ToolbarItemUtilities.createActionButton(
+      const visibilityActionSpec = ToolbarItemUtilities.createActionItem(
         "visibility-action-tool",
         200,
         iconCondition,
@@ -65,7 +65,7 @@ export class TestUiProvider implements UiItemsProvider {
         }
       );
 
-      const alertActionSpec = ToolbarItemUtilities.createActionButton(
+      const alertActionSpec = ToolbarItemUtilities.createActionItem(
         "alert-action-tool",
         210,
         "icon-developer",
