@@ -30,8 +30,8 @@
   },
   "dependencies": {
     "@bentley/icons-generic-webfont": "^1.0.15",
-    "@itwin/itwinui-illustrations-react": "^1.2.0",
-    "@itwin/itwinui-react": "^1.16.2",
+    "@itwin/itwinui-illustrations-react": "^2.0.1",
+    "@itwin/itwinui-react": "^2.6.0",
     "@itwin/reality-data-client": "^0.9.0",
     "lodash.isequal": "^4.5.0"
   },

@@ -22,7 +22,7 @@
     "@itwin/frontend-devtools": "^4.0.0-dev.37",
     "@itwin/imodel-components-react": "^4.0.0-dev.11",
     "@itwin/imodels-access-frontend": "^2.2.1",
-    "@itwin/itwinui-react": "^1.16.2",
+    "@itwin/itwinui-react": "^2.6.0",
     "@itwin/presentation-common": "^4.0.0-dev.37",
     "@itwin/presentation-components": "^4.0.0-dev.19",
     "@itwin/presentation-frontend": "^4.0.0-dev.37",

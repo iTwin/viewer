@@ -34,9 +34,9 @@ importers:
       '@itwin/imodel-components-react': ^4.0.0-dev.11
       '@itwin/imodels-access-backend': ^2.2.1
       '@itwin/imodels-access-frontend': ^2.2.1
-      '@itwin/itwinui-css': ^0.18.1
-      '@itwin/itwinui-icons-react': ^1.2.0
-      '@itwin/itwinui-react': ^1.16.2
+      '@itwin/itwinui-css': ^1.7.0
+      '@itwin/itwinui-icons-react': ^2.1.0
+      '@itwin/itwinui-react': ^2.6.0
       '@itwin/presentation-backend': ^4.0.0-dev.37
       '@itwin/presentation-common': ^4.0.0-dev.37
       '@itwin/presentation-components': ^4.0.0-dev.19
@@ -90,9 +90,9 @@ importers:
       '@itwin/imodel-components-react': 4.0.0-dev.11_ba9fbb821107af25e17c359115d297f5
       '@itwin/imodels-access-backend': 2.3.0_191d103de32035dab8932d08c4c2b427
       '@itwin/imodels-access-frontend': 2.3.0_c9d8f7beeeb25b8c3e7835aad7c4b95d
-      '@itwin/itwinui-css': 0.18.1
-      '@itwin/itwinui-icons-react': 1.16.0_react-dom@17.0.2+react@17.0.2
-      '@itwin/itwinui-react': 1.48.1_react-dom@17.0.2+react@17.0.2
+      '@itwin/itwinui-css': 1.7.0
+      '@itwin/itwinui-icons-react': 2.1.0_react-dom@17.0.2+react@17.0.2
+      '@itwin/itwinui-react': 2.6.0_react-dom@17.0.2+react@17.0.2
       '@itwin/presentation-backend': 4.0.0-dev.37_e49f4149b572a4156bd3cad1a3b9c5e7
       '@itwin/presentation-common': 4.0.0-dev.37_cd8774a01a3f83aae8763e593b1e26e5
       '@itwin/presentation-components': 4.0.0-dev.19_c2ba351823548bfbd90018510149aec7
@@ -146,7 +146,7 @@ importers:
       '@itwin/frontend-devtools': ^4.0.0-dev.37
       '@itwin/imodel-components-react': ^4.0.0-dev.11
       '@itwin/imodels-access-frontend': ^2.2.1
-      '@itwin/itwinui-react': ^1.16.2
+      '@itwin/itwinui-react': ^2.6.0
       '@itwin/presentation-common': ^4.0.0-dev.37
       '@itwin/presentation-components': ^4.0.0-dev.19
       '@itwin/presentation-frontend': ^4.0.0-dev.37
@@ -185,7 +185,7 @@ importers:
       '@itwin/frontend-devtools': 4.0.0-dev.37_eddbe1e811e088d743e11ece2ee26187
       '@itwin/imodel-components-react': 4.0.0-dev.11_ba9fbb821107af25e17c359115d297f5
       '@itwin/imodels-access-frontend': 2.3.0_c9d8f7beeeb25b8c3e7835aad7c4b95d
-      '@itwin/itwinui-react': 1.48.1_react-dom@17.0.2+react@17.0.2
+      '@itwin/itwinui-react': 2.6.0_react-dom@17.0.2+react@17.0.2
       '@itwin/presentation-common': 4.0.0-dev.37_20590be0d6f723523f52eb2a8758aec6
       '@itwin/presentation-components': 4.0.0-dev.19_c2ba351823548bfbd90018510149aec7
       '@itwin/presentation-frontend': 4.0.0-dev.37_75d6ef083d3174d5bbe8c45418249edb
@@ -403,8 +403,8 @@ importers:
       '@itwin/imodel-components-react': ^4.0.0-dev.11
       '@itwin/imodels-access-frontend': ^2.2.1
       '@itwin/imodels-client-management': ^2.2.1
-      '@itwin/itwinui-illustrations-react': ^1.2.0
-      '@itwin/itwinui-react': ^1.16.2
+      '@itwin/itwinui-illustrations-react': ^2.0.1
+      '@itwin/itwinui-react': ^2.6.0
       '@itwin/presentation-common': ^4.0.0-dev.37
       '@itwin/presentation-components': ^4.0.0-dev.19
       '@itwin/presentation-frontend': ^4.0.0-dev.37
@@ -433,8 +433,8 @@ importers:
       typescript: ~4.4.0
     dependencies:
       '@bentley/icons-generic-webfont': 1.0.34
-      '@itwin/itwinui-illustrations-react': 1.3.1_react-dom@17.0.2+react@17.0.2
-      '@itwin/itwinui-react': 1.48.1_react-dom@17.0.2+react@17.0.2
+      '@itwin/itwinui-illustrations-react': 2.0.1_react-dom@17.0.2+react@17.0.2
+      '@itwin/itwinui-react': 2.6.0_react-dom@17.0.2+react@17.0.2
       '@itwin/reality-data-client': 0.9.0_@itwin+core-bentley@4.0.0-dev.37
       lodash.isequal: 4.5.0
     devDependencies:

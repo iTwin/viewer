@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { Headline, Subheading, Title } from "@itwin/itwinui-react";
+import { Text } from "@itwin/itwinui-react";
 import classNames from "classnames";
 import React from "react";
 import { Helmet } from "react-helmet-async";
@@ -34,12 +34,23 @@ export const FallbackUi = ({
       {withHelmet && <Helmet title={title} />}
       <div className={styles.content}>
         <img src={imageSource} alt={imageAlt} data-testid="test-fallback-img" />
-        <Headline className={styles.title} data-testid="test-fallback-title">
-          <Title>{title}</Title>
-        </Headline>
-        <Headline className={styles.message} data-testid="test-fallback-text">
-          <Subheading dangerouslySetInnerHTML={{ __html: innerText }} />
-        </Headline>
+        <Text
+          variant="headline"
+          className={styles.title}
+          data-testid="test-fallback-title"
+        >
+          <Text variant="title">{title}</Text>
+        </Text>
+        <Text
+          variant="headline"
+          className={styles.message}
+          data-testid="test-fallback-text"
+        >
+          <Text
+            variant="subheading"
+            dangerouslySetInnerHTML={{ __html: innerText }}
+          />
+        </Text>
       </div>
     </div>
   );

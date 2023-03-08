@@ -3,9 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BackstageItemUtilities } from "@itwin/appui-abstract";
 import type { FrontstageConfig } from "@itwin/appui-react";
-import { FrontstageProvider } from "@itwin/appui-react";
+import { BackstageItemUtilities, FrontstageProvider } from "@itwin/appui-react";
 import { IModelApp } from "@itwin/core-frontend";
 import React from "react";
 

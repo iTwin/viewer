@@ -8,7 +8,7 @@ import "./Home.scss";
 import { InternetConnectivityStatus } from "@itwin/core-common";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { SvgFolderOpened, SvgImodel } from "@itwin/itwinui-icons-react";
-import { Blockquote, Headline, Title } from "@itwin/itwinui-react";
+import { Blockquote, Text, Title } from "@itwin/itwinui-react";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -56,10 +56,12 @@ const Home = () => {
 
   return (
     <div>
-      <Headline className="home-title">iTwin Viewer for Desktop</Headline>
+      <Text className="home-title" variant="headline">
+        iTwin Viewer for Desktop
+      </Text>
       <div className="home">
         <div className="home-section start">
-          <Title> {ITwinViewerApp.translate("home.start")}</Title>
+          <Text variant="title"> {ITwinViewerApp.translate("home.start")}</Text>
           <nav>
             <div>
               <SvgFolderOpened />
@@ -74,7 +76,7 @@ const Home = () => {
           </nav>
         </div>
         <div className="home-section learn">
-          <Title> {ITwinViewerApp.translate("home.learn")}</Title>
+          <Text variant="title"> {ITwinViewerApp.translate("home.learn")}</Text>
           {learnLinks.map((link) => {
             return (
               <Blockquote key={link.url}>
@@ -91,7 +93,9 @@ const Home = () => {
           })}
         </div>
         <div className="home-section recent">
-          <Title>{ITwinViewerApp.translate("home.openRecent")}</Title>
+          <Text variant="title">
+            {ITwinViewerApp.translate("home.openRecent")}
+          </Text>
           <Recents />
         </div>
       </div>
