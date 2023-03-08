@@ -20,8 +20,3 @@ export type WebInitializerParams = ViewerCommonProps & {
 
 export type WebViewerProps = XOR<ConnectedViewerProps, BlankViewerProps> &
   WebInitializerParams;
-
-export interface ItwinViewerParams extends WebInitializerParams {
-  /** id of the html element where the viewer should be rendered */
-  elementId: string;
-}

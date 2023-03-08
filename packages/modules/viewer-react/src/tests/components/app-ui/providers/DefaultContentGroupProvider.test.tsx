@@ -3,7 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { UiFramework } from "@itwin/appui-react";
+import { StandardContentLayouts } from "@itwin/appui-abstract";
+import {
+  ContentGroup,
+  IModelViewportControl,
+  UiFramework,
+} from "@itwin/appui-react";
 import type { IModelConnection } from "@itwin/core-frontend";
 
 import { DefaultContentGroupProvider } from "../../../../components/app-ui/providers";
@@ -113,7 +118,15 @@ describe("DefaultContentGroupProvider", () => {
     } as any);
 
     const contentGroupProvider = new DefaultContentGroupProvider();
-    await contentGroupProvider.provideContentGroup();
+    await contentGroupProvider.contentGroup({
+      contentGroup: new ContentGroup({
+        contents: [{ id: "viewport", classId: IModelViewportControl }],
+        id: "contentGroup",
+        layout: StandardContentLayouts.singleView,
+      }),
+      id: "DefaultContentGroup",
+      version: 1,
+    });
     expect(ViewCreator3d).toHaveBeenCalled();
   });
 
@@ -123,7 +136,15 @@ describe("DefaultContentGroupProvider", () => {
     } as any);
 
     const contentGroupProvider = new DefaultContentGroupProvider();
-    await contentGroupProvider.provideContentGroup();
+    await contentGroupProvider.contentGroup({
+      contentGroup: new ContentGroup({
+        contents: [{ id: "viewport", classId: IModelViewportControl }],
+        id: "contentGroup",
+        layout: StandardContentLayouts.singleView,
+      }),
+      id: "DefaultContentGroup",
+      version: 1,
+    });
     expect(createBlankViewState).toHaveBeenCalled();
   });
 
@@ -143,7 +164,15 @@ describe("DefaultContentGroupProvider", () => {
     const contentGroupProvider = new DefaultContentGroupProvider(
       viewportOptions
     );
-    await contentGroupProvider.provideContentGroup();
+    await contentGroupProvider.contentGroup({
+      contentGroup: new ContentGroup({
+        contents: [{ id: "viewport", classId: IModelViewportControl }],
+        id: "contentGroup",
+        layout: StandardContentLayouts.singleView,
+      }),
+      id: "DefaultContentGroup",
+      version: 1,
+    });
     expect(ViewCreator3d).not.toHaveBeenCalled();
   });
 
@@ -165,7 +194,15 @@ describe("DefaultContentGroupProvider", () => {
     const contentGroupProvider = new DefaultContentGroupProvider(
       viewportOptions
     );
-    await contentGroupProvider.provideContentGroup();
+    await contentGroupProvider.contentGroup({
+      contentGroup: new ContentGroup({
+        contents: [{ id: "viewport", classId: IModelViewportControl }],
+        id: "contentGroup",
+        layout: StandardContentLayouts.singleView,
+      }),
+      id: "DefaultContentGroup",
+      version: 1,
+    });
     expect(mocks.viewState).toHaveBeenCalled();
   });
 
@@ -180,7 +217,15 @@ describe("DefaultContentGroupProvider", () => {
     const contentGroupProvider = new DefaultContentGroupProvider(
       viewportOptions
     );
-    await contentGroupProvider.provideContentGroup();
+    await contentGroupProvider.contentGroup({
+      contentGroup: new ContentGroup({
+        contents: [{ id: "viewport", classId: IModelViewportControl }],
+        id: "contentGroup",
+        layout: StandardContentLayouts.singleView,
+      }),
+      id: "DefaultContentGroup",
+      version: 1,
+    });
     expect(ViewCreator3d).not.toHaveBeenCalled();
   });
 
@@ -195,7 +240,15 @@ describe("DefaultContentGroupProvider", () => {
     const contentGroupProvider = new DefaultContentGroupProvider(
       viewportOptions
     );
-    await contentGroupProvider.provideContentGroup();
+    await contentGroupProvider.contentGroup({
+      contentGroup: new ContentGroup({
+        contents: [{ id: "viewport", classId: IModelViewportControl }],
+        id: "contentGroup",
+        layout: StandardContentLayouts.singleView,
+      }),
+      id: "DefaultContentGroup",
+      version: 1,
+    });
     expect(ViewCreator3d).toHaveBeenCalled();
   });
 
@@ -216,7 +269,15 @@ describe("DefaultContentGroupProvider", () => {
     const contentGroupProvider = new DefaultContentGroupProvider(
       viewportOptions
     );
-    await contentGroupProvider.provideContentGroup();
+    await contentGroupProvider.contentGroup({
+      contentGroup: new ContentGroup({
+        contents: [{ id: "viewport", classId: IModelViewportControl }],
+        id: "contentGroup",
+        layout: StandardContentLayouts.singleView,
+      }),
+      id: "DefaultContentGroup",
+      version: 1,
+    });
     expect(ViewCreator3d).toHaveBeenCalled();
   });
 });

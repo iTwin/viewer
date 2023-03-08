@@ -5,12 +5,8 @@
 
 import "./IModelMergeStatusBarItem.scss";
 
-import type {
-  CommonStatusBarItem,
-  UiItemsProvider,
-} from "@itwin/appui-abstract";
-import { StageUsage, StatusBarSection } from "@itwin/appui-abstract";
-import { FooterSeparator } from "@itwin/appui-layout-react";
+import type { AnyStatusBarItem, UiItemsProvider } from "@itwin/appui-react";
+import { StageUsage, StatusBarSection } from "@itwin/appui-react";
 import {
   StatusBarItemUtilities,
   useActiveIModelConnection,
@@ -31,6 +27,7 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import { BriefcaseStatus } from "../components/modelSelector";
+import { usePullChanges } from "../hooks/usePullChanges";
 
 const ConnectionStatusBarItem = () => {
   const accessToken = useAccessToken();
@@ -72,13 +69,15 @@ const MergeStatusBarItem = () => {
     setMergeStatus(ModelStatus.MERGING);
   };
 
+  const { pullProgress, doPullChanges } = usePullChanges(connection);
+
   const getLatestChangesets = useCallback(async () => {
     if (connection) {
       try {
         connection.txns.onChangesPulled.addOnce(() => {
           IModelApp.viewManager.refreshForModifiedModels(undefined);
         });
-        await connection.pullChanges();
+        await doPullChanges();
         if (isMounted.current) {
           setMergeStatus(ModelStatus.UPTODATE);
         }
@@ -87,7 +86,7 @@ const MergeStatusBarItem = () => {
         setMergeStatus(ModelStatus.ERROR);
       }
     }
-  }, [connection, isMounted]);
+  }, [connection, doPullChanges, isMounted]);
 
   useEffect(() => {
     if (mergeStatus === ModelStatus.MERGING) {
@@ -133,6 +132,7 @@ const MergeStatusBarItem = () => {
       </span>
       <BriefcaseStatus
         mergeStatus={mergeStatus}
+        mergeProgress={pullProgress}
         onMergeClick={onMergeClick}
         className={"status-bar-status"}
       />
@@ -146,11 +146,11 @@ export class IModelMergeItemsProvider implements UiItemsProvider {
   public provideStatusBarItems(
     _stageId: string,
     stageUsage: string
-  ): CommonStatusBarItem[] {
-    const statusBarItems: CommonStatusBarItem[] = [];
+  ): AnyStatusBarItem[] {
+    const statusBarItems: AnyStatusBarItem[] = [];
     if (stageUsage === StageUsage.General) {
       statusBarItems.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "IModelMergeItemsProvider:ConnectionStatusBarItem",
           StatusBarSection.Center,
           1,
@@ -158,15 +158,7 @@ export class IModelMergeItemsProvider implements UiItemsProvider {
         )
       );
       statusBarItems.push(
-        StatusBarItemUtilities.createStatusBarItem(
-          "IModelMergeItemsProvider:PostIModelMergeStatusBarItem",
-          StatusBarSection.Center,
-          2,
-          <FooterSeparator />
-        )
-      );
-      statusBarItems.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "IModelMergeItemsProvider:IModelMergeStatusBarItem",
           StatusBarSection.Center,
           3,

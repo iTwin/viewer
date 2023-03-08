@@ -11,6 +11,7 @@
   "repository": {
     "url": "https://github.com/itwin/viewer"
   },
+  "ensureConsistentVersions": true,
   "projects": [
     {
       "packageName": "@itwin/viewer-scripts",
@@ -20,31 +21,31 @@
     {
       "packageName": "@itwin/viewer-react",
       "projectFolder": "packages/modules/viewer-react",
-      "versionPolicyName": "independentModule",
+      "versionPolicyName": "prerelease-monorepo-lockStep",
       "shouldPublish": true
     },
     {
       "packageName": "@itwin/cra-template-web-viewer",
       "projectFolder": "packages/modules/cra-template-web-viewer",
-      "versionPolicyName": "independentModule",
+      "versionPolicyName": "prerelease-monorepo-lockStep",
       "shouldPublish": true
     },
     {
       "packageName": "@itwin/web-viewer-react",
       "projectFolder": "packages/modules/web-viewer-react",
-      "versionPolicyName": "independentModule",
+      "versionPolicyName": "prerelease-monorepo-lockStep",
       "shouldPublish": true
     },
     {
       "packageName": "@itwin/desktop-viewer-react",
       "projectFolder": "packages/modules/desktop-viewer-react",
-      "versionPolicyName": "independentModule",
+      "versionPolicyName": "prerelease-monorepo-lockStep",
       "shouldPublish": true
     },
     {
       "packageName": "@itwin/cra-template-desktop-viewer",
       "projectFolder": "packages/modules/cra-template-desktop-viewer",
-      "versionPolicyName": "independentModule",
+      "versionPolicyName": "prerelease-monorepo-lockStep",
       "shouldPublish": true
     },
     {

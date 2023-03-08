@@ -3,7 +3,9 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import type { ContentLayoutProps } from "@itwin/appui-abstract";
 import { StandardContentLayouts } from "@itwin/appui-abstract";
+import type { FrontstageConfig } from "@itwin/appui-react";
 import {
   ContentGroup,
   ContentGroupProvider,
@@ -37,7 +39,7 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
     this._viewCreatorOptions = viewCreatorOptions;
   }
 
-  public async provideContentGroup(): Promise<ContentGroup> {
+  public async contentGroup(_config: FrontstageConfig): Promise<ContentGroup> {
     const iModelConnection = UiFramework.getIModelConnection();
     let viewState;
     if (iModelConnection) {
