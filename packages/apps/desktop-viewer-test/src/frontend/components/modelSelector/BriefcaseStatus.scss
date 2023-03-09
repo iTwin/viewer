@@ -2,7 +2,8 @@
 * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
-@import "@itwin/itwinui-css/scss/variables";
+@import '@itwin/itwinui-variables/index.css';
+@import '@itwin/itwinui-css/css/global.css';
 
 .model-status {
   height: 20px;

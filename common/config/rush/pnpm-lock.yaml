@@ -37,6 +37,7 @@ importers:
       '@itwin/itwinui-css': ^1.7.0
       '@itwin/itwinui-icons-react': ^2.1.0
       '@itwin/itwinui-react': ^2.6.0
+      '@itwin/itwinui-variables': ^2.0.0
       '@itwin/presentation-backend': ^4.0.0-dev.37
       '@itwin/presentation-common': ^4.0.0-dev.37
       '@itwin/presentation-components': ^4.0.0-dev.19
@@ -93,6 +94,7 @@ importers:
       '@itwin/itwinui-css': 1.7.0
       '@itwin/itwinui-icons-react': 2.1.0_react-dom@17.0.2+react@17.0.2
       '@itwin/itwinui-react': 2.6.0_react-dom@17.0.2+react@17.0.2
+      '@itwin/itwinui-variables': 2.0.0
       '@itwin/presentation-backend': 4.0.0-dev.37_e49f4149b572a4156bd3cad1a3b9c5e7
       '@itwin/presentation-common': 4.0.0-dev.37_cd8774a01a3f83aae8763e593b1e26e5
       '@itwin/presentation-components': 4.0.0-dev.19_c2ba351823548bfbd90018510149aec7
