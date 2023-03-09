@@ -27,7 +27,7 @@
     "test": ""
   },
   "browserslist": [
-    "electron 23.0.0"
+    "last 1 electron version"
   ],
   "dependencies": {
     "@bentley/icons-generic-webfont": "^1.0.15",
