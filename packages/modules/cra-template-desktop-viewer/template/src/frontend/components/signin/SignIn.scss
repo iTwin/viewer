@@ -16,7 +16,7 @@
   grid-template-rows: 125px 60px 50px;
   .signin-user {
     margin: auto;
-    fill: t(iui-color-foreground-accessory);
+    fill: var(--iui-color-foreground-accessory);
     height: 100px;
     width: 100px;
   }
