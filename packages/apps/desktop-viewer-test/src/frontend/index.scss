@@ -10,10 +10,9 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  @include themed {
-    background-color: t(iui-color-background-2);
-    color: t(iui-color-foreground-primary);
-  }
+  background-color: var(--iui-color-background-2);
+  color:  var(--iui-color-foreground-primary);
+  
 }
 
 .itv-scrolling-container {

@@ -21,7 +21,7 @@
       > .iui-metadata {
         position: absolute;
         bottom: 5px;
-        width: calc(100% - (#{$iui-sm} * 2));
+        width: calc(100% - (#{var(--iui-size-s)} * 2));
       }
     }
 

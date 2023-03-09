@@ -15,7 +15,7 @@
 
 .connection-status-icon {
   height: 20px;
-  fill: t(iui-color-foreground-primary);
+  fill: var(--iui-color-foreground-primary);
   &.actionable {
     cursor: pointer;
   }

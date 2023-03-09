@@ -62,9 +62,7 @@
     padding-left: 0;
     margin-top: -9px;
     padding-top: 9px;
-    @include themed {
-      border-top: 2px solid t(iui-color-background-5);
-    }
+    border-top: 2px solid var(--iui-color-background-5);
   }
 
   ul.grid-holding-tabs {
