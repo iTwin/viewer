@@ -53,14 +53,17 @@ class Frontstage2Provider extends FrontstageProvider {
 
 jest.mock("@itwin/appui-react", () => {
   return {
-    FrontstageManager: {
-      addFrontstageProvider: jest.fn(),
-      getFrontstageDef: jest
-        .fn()
-        .mockResolvedValue({ id: "Frontstage2", frontstage: jest.fn() }),
-      setActiveFrontstageDef: jest.fn().mockResolvedValue(true),
-      clearFrontstageDefs: jest.fn(),
+    UiFramework: {
+      frontstages: {
+        addFrontstageProvider: jest.fn(),
+        getFrontstageDef: jest
+          .fn()
+          .mockResolvedValue({ id: "Frontstage2", frontstage: jest.fn() }),
+        setActiveFrontstageDef: jest.fn().mockResolvedValue(true),
+        clearFrontstageDefs: jest.fn(),
+      },
     },
+
     FrontstageProvider: jest.fn(),
     ThemeManager: jest.fn(() => <div></div>),
     FrameworkVersion: jest.fn(() => <div></div>),
