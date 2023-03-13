@@ -3,9 +3,10 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BackstageItemUtilities } from "@itwin/appui-abstract";
+import { StandardContentLayouts } from "@itwin/appui-abstract";
 import type { FrontstageConfig } from "@itwin/appui-react";
-import { FrontstageProvider } from "@itwin/appui-react";
+import { ContentGroup, IModelViewportControl } from "@itwin/appui-react";
+import { BackstageItemUtilities, FrontstageProvider } from "@itwin/appui-react";
 import { IModelApp } from "@itwin/core-frontend";
 import React from "react";
 
@@ -86,7 +87,17 @@ jest.mock("@itwin/appui-abstract");
 
 class Frontstage1Provider extends FrontstageProvider {
   frontstageConfig(): FrontstageConfig {
-    throw new Error("Method not implemented.");
+    const content = new ContentGroup({
+      id: "content-group",
+      layout: StandardContentLayouts.singleView,
+      contents: [
+        {
+          id: "viewport",
+          classId: IModelViewportControl,
+        },
+      ],
+    });
+    return { id: "Frontstage1", contentGroup: content, version: 1 };
   }
   public id = "Frontstage1";
   // public get frontstage(): React.ReactElement<FrontstageProps> {
@@ -96,12 +107,19 @@ class Frontstage1Provider extends FrontstageProvider {
 
 class Frontstage2Provider extends FrontstageProvider {
   frontstageConfig(): FrontstageConfig {
-    throw new Error("Method not implemented.");
+    const content = new ContentGroup({
+      id: "content-group",
+      layout: StandardContentLayouts.singleView,
+      contents: [
+        {
+          id: "viewport",
+          classId: IModelViewportControl,
+        },
+      ],
+    });
+    return { id: "Frontstage2", contentGroup: content, version: 1 };
   }
   public id = "Frontstage2";
-  // public get frontstage(): React.ReactElement<FrontstageProps> {
-  //   return <div></div>;
-  // }
 }
 
 describe("BackstageItemsProvider", () => {
@@ -135,6 +153,10 @@ describe("BackstageItemsProvider", () => {
       labeli18nKey: "bs2Key",
     };
 
+    const spy1 = jest.spyOn(BackstageItemUtilities, "createStageLauncher");
+
+    const spy2 = jest.spyOn(BackstageItemUtilities, "createActionItem");
+
     const backstageItems: ViewerBackstageItem[] = [actionItem, stageLauncher];
 
     const provider = new BackstageItemsProvider(backstageItems);
@@ -142,8 +164,8 @@ describe("BackstageItemsProvider", () => {
     provider.provideBackstageItems();
 
     // these calls will be doubled. items will be set first without a viewState and reset with one additional translation for the default frontstage once we have a viewState
-    expect(BackstageItemUtilities.createStageLauncher).toHaveBeenCalledTimes(1);
-    expect(BackstageItemUtilities.createActionItem).toHaveBeenCalledTimes(1);
+    expect(spy1).toHaveBeenCalledTimes(1);
+    expect(spy2).toHaveBeenCalledTimes(1);
     expect(IModelApp.localization.getLocalizedString).toHaveBeenCalledWith(
       actionItem.labeli18nKey
     );

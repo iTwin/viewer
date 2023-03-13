@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type {
-  AnyStatusBarItem,
   StatusBarCustomItem,
+  StatusBarItem,
   UiItemsProvider,
 } from "@itwin/appui-react";
 import {
@@ -27,7 +27,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
 
   constructor(private _defaultItems?: ViewerDefaultStatusbarItems) {}
 
-  public provideStatusBarItems(): AnyStatusBarItem[] {
+  public provideStatusBarItems(): StatusBarItem[] {
     const items: StatusBarCustomItem[] = [];
 
     if (!this._defaultItems || this._defaultItems.messageCenter) {

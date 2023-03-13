@@ -5,7 +5,7 @@
 
 import "./IModelMergeStatusBarItem.scss";
 
-import type { AnyStatusBarItem, UiItemsProvider } from "@itwin/appui-react";
+import type { StatusBarItem, UiItemsProvider } from "@itwin/appui-react";
 import { StageUsage, StatusBarSection } from "@itwin/appui-react";
 import {
   StatusBarItemUtilities,
@@ -146,8 +146,8 @@ export class IModelMergeItemsProvider implements UiItemsProvider {
   public provideStatusBarItems(
     _stageId: string,
     stageUsage: string
-  ): AnyStatusBarItem[] {
-    const statusBarItems: AnyStatusBarItem[] = [];
+  ): StatusBarItem[] {
+    const statusBarItems: StatusBarItem[] = [];
     if (stageUsage === StageUsage.General) {
       statusBarItems.push(
         StatusBarItemUtilities.createCustomItem(

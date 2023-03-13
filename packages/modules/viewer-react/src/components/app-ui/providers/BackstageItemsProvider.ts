@@ -3,13 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { UiItemsProvider } from "@itwin/appui-abstract";
 import type {
   BackstageActionItem,
   BackstageStageLauncher,
-} from "@itwin/appui-abstract";
-import { BackstageItemUtilities } from "@itwin/appui-abstract";
-import { UiFramework } from "@itwin/appui-react";
+  UiItemsProvider,
+} from "@itwin/appui-react";
+import { BackstageItemUtilities, UiFramework } from "@itwin/appui-react";
 import { IModelApp } from "@itwin/core-frontend";
 
 import type { ViewerBackstageItem } from "../../../types";
@@ -36,8 +35,8 @@ export class BackstageItemsProvider implements UiItemsProvider {
             IModelApp.localization.getLocalizedString(
               backstageItem.labeli18nKey
             ),
-            backstageItem.subtitle,
-            backstageItem.icon
+            backstageItem.subtitle?.toString(),
+            backstageItem.icon?.toString()
           );
         } else {
           newItem = BackstageItemUtilities.createActionItem(
@@ -48,8 +47,8 @@ export class BackstageItemsProvider implements UiItemsProvider {
             IModelApp.localization.getLocalizedString(
               backstageItem.labeli18nKey
             ),
-            backstageItem.subtitle,
-            backstageItem.icon
+            backstageItem.subtitle?.toString(),
+            backstageItem.icon?.toString()
           );
         }
         allBackstageItems.push(newItem);

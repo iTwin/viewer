@@ -13,12 +13,7 @@ import {
   SvgSearch,
   SvgStarHollow,
 } from "@itwin/itwinui-icons-react";
-import {
-  HorizontalTabs,
-  IconButton,
-  LabeledInput,
-  Tab,
-} from "@itwin/itwinui-react";
+import { IconButton, LabeledInput, Tab, Tabs } from "@itwin/itwinui-react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -54,13 +49,14 @@ export const SelectProject = () => {
   return accessToken ? (
     <>
       <div className="itv-scrolling-container select-project">
-        <HorizontalTabs
+        <Tabs
           labels={tabsWithIcons}
           onTabSelected={setProjectType}
           activeIndex={projectType}
           type={"borderless"}
           contentClassName="grid-holding-tab"
           tabsClassName="grid-holding-tabs"
+          orientation="horizontal"
         >
           <div className={"title-section"}>
             <div className={"inline-input-with-button"}>
@@ -109,7 +105,7 @@ export const SelectProject = () => {
               filterOptions={searchParam}
             />
           </div>
-        </HorizontalTabs>
+        </Tabs>
       </div>
     </>
   ) : (

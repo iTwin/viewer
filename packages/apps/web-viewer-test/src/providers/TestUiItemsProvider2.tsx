@@ -3,11 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type {
-  AbstractWidgetProps,
-  UiItemsProvider,
-} from "@itwin/appui-abstract";
-import { StagePanelLocation } from "@itwin/appui-abstract";
+import type { UiItemsProvider, Widget } from "@itwin/appui-react";
+import { StagePanelLocation } from "@itwin/appui-react";
 import { FillCentered } from "@itwin/core-react";
 import React from "react";
 
@@ -18,17 +15,15 @@ export class TestUiProvider2 implements UiItemsProvider {
     stageId: string,
     _stageUsage: string,
     location: StagePanelLocation
-  ): ReadonlyArray<AbstractWidgetProps> {
-    const widgets: AbstractWidgetProps[] = [];
+  ): ReadonlyArray<Widget> {
+    const widgets: Widget[] = [];
     if (
       stageId === "DefaultFrontstage" &&
       location === StagePanelLocation.Right
     ) {
       widgets.push({
         id: "addonWidget",
-        getWidgetContent: () => (
-          <FillCentered>Addon Widget in panel</FillCentered>
-        ),
+        content: () => <FillCentered>Addon Widget in panel</FillCentered>,
       });
     }
     return widgets;

@@ -3,8 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { UiItemsProvider } from "@itwin/appui-abstract";
-import { UiItemsManager } from "@itwin/appui-abstract";
+import type { UiItemsProvider } from "@itwin/appui-react";
+import { UiItemsManager } from "@itwin/appui-react";
 import { useEffect } from "react";
 
 export function useUiProviders(uiProviders?: UiItemsProvider[]): void {
