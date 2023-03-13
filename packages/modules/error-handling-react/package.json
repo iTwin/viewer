@@ -38,7 +38,7 @@
     "build/**/*"
   ],
   "dependencies": {
-    "@itwin/itwinui-react": "^2.6.0",
+    "@itwin/itwinui-react": "^1.16.2",
     "apollo-client": "^2.6.4",
     "classnames": "^2.3.1",
     "graphql": "^14.4.2",
