@@ -10,7 +10,7 @@ import { getBriefcaseStatus, ModelStatus } from "@itwin/desktop-viewer-react";
 import type { IModelFull, IModelGridProps } from "@itwin/imodel-browser-react";
 import { IModelGrid } from "@itwin/imodel-browser-react";
 import type { TileProps } from "@itwin/itwinui-react";
-import { Title } from "@itwin/itwinui-react";
+import { Text } from "@itwin/itwinui-react";
 import React, {
   useCallback,
   useContext,
@@ -194,7 +194,7 @@ export const SelectIModel = ({
   return (
     <div className="itv-scrolling-container select-imodel">
       <div className={"itv-content-margins"}>
-        <Title>{`iModels for ${projectName}`}</Title>
+        <Text variant="title">{`iModels for ${projectName}`}</Text>
       </div>
       <div className="itv-scrolling-content">
         <IModelGrid
