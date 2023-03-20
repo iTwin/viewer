@@ -53,6 +53,7 @@ importers:
       dotenv-flow: ^3.2.0
       electron: ^23.0.0
       electron-devtools-installer: ^2.2.3
+      eslint: ^7.11.0
       minimist: ^1.2.5
       npm-run-all: ^4.1.5
       react: ^17.0.2
@@ -120,6 +121,7 @@ importers:
       cpx2: 4.2.0
       cross-env: 5.2.1
       electron-devtools-installer: 2.2.4
+      eslint: 7.32.0
       npm-run-all: 4.1.5
       rimraf: 3.0.2
       sass: 1.58.3
@@ -210,12 +212,6 @@ importers:
       '@types/react': 17.0.53
       '@types/react-dom': 17.0.19
       typescript: 4.4.4
-
-  ../../packages/modules/cra-template-desktop-viewer:
-    specifiers: {}
-
-  ../../packages/modules/cra-template-web-viewer:
-    specifiers: {}
 
   ../../packages/modules/desktop-viewer-react:
     specifiers:
@@ -569,6 +565,12 @@ importers:
       rimraf: 3.0.2
       ts-jest: 26.5.6_jest@26.6.3+typescript@4.4.4
       typescript: 4.4.4
+
+  ../../packages/templates/cra-template-desktop-viewer:
+    specifiers: {}
+
+  ../../packages/templates/cra-template-web-viewer:
+    specifiers: {}
 
   ../scripts:
     specifiers:
