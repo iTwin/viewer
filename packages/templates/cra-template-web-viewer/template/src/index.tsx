@@ -2,13 +2,14 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import "./index.scss";
 
-import { BrowserAuthorizationCallbackHandler } from "@itwin/browser-authorization";
 import React from "react";
 import ReactDOM from "react-dom";
 
 import App from "./App";
+import { Auth } from "./Auth";
 import * as serviceWorker from "./serviceWorker";
 
 if (!process.env.IMJS_AUTH_CLIENT_CLIENT_ID) {
@@ -29,9 +30,7 @@ if (!process.env.IMJS_AUTH_CLIENT_REDIRECT_URI) {
 
 const redirectUrl = new URL(process.env.IMJS_AUTH_CLIENT_REDIRECT_URI);
 if (redirectUrl.pathname === window.location.pathname) {
-  BrowserAuthorizationCallbackHandler.handleSigninCallback(
-    redirectUrl.toString()
-  ).catch(console.error);
+  Auth.handleSigninCallback().catch(console.error);
 } else {
   ReactDOM.render(
     <React.StrictMode>

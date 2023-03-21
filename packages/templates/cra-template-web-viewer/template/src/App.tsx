@@ -2,9 +2,9 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import "./App.scss";
 
-import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import type { ScreenViewport } from "@itwin/core-frontend";
 import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
 import { FillCentered } from "@itwin/core-react";
@@ -31,6 +31,7 @@ import {
 } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
+import { Auth } from "./Auth";
 import { history } from "./history";
 
 const App: React.FC = () => {
@@ -41,7 +42,7 @@ const App: React.FC = () => {
 
   const authClient = useMemo(
     () =>
-      new BrowserAuthorizationClient({
+      Auth.initialize({
         scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
         clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
         redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
