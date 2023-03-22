@@ -28,9 +28,18 @@ if (!process.env.IMJS_AUTH_CLIENT_REDIRECT_URI) {
   );
 }
 
+Auth.initialize({
+  scope: process.env.IMJS_AUTH_CLIENT_SCOPES,
+  clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID,
+  redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI,
+  postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
+  responseType: "code",
+  authority: process.env.IMJS_AUTH_AUTHORITY,
+});
+
 const redirectUrl = new URL(process.env.IMJS_AUTH_CLIENT_REDIRECT_URI);
 if (redirectUrl.pathname === window.location.pathname) {
-  Auth.handleSigninCallback().catch(console.error);
+  Auth.handleSigninCallback().then().catch(console.error);
 } else {
   ReactDOM.render(
     <React.StrictMode>

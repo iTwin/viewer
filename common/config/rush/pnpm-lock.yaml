@@ -135,7 +135,7 @@ importers:
       '@itwin/appui-abstract': ^4.0.0-dev.41
       '@itwin/appui-layout-react': ^4.0.0-dev.12
       '@itwin/appui-react': ^4.0.0-dev.12
-      '@itwin/browser-authorization': ^0.5.1
+      '@itwin/browser-authorization': ^0.8.0
       '@itwin/components-react': ^4.0.0-dev.12
       '@itwin/core-bentley': ^4.0.0-dev.41
       '@itwin/core-common': ^4.0.0-dev.41
@@ -175,7 +175,7 @@ importers:
       '@itwin/appui-abstract': 4.0.0-dev.41_@itwin+core-bentley@4.0.0-dev.41
       '@itwin/appui-layout-react': 4.0.0-dev.12_7f3cb7213397ee880b60b443c469a38a
       '@itwin/appui-react': 4.0.0-dev.12_9f09edc7ad3969d6aa76b97bffb33449
-      '@itwin/browser-authorization': 0.5.1_@itwin+core-bentley@4.0.0-dev.41
+      '@itwin/browser-authorization': 0.8.0_@itwin+core-bentley@4.0.0-dev.41
       '@itwin/components-react': 4.0.0-dev.12_7f3cb7213397ee880b60b443c469a38a
       '@itwin/core-bentley': 4.0.0-dev.41
       '@itwin/core-common': 4.0.0-dev.41_b9e92acfed6cba8281e7ca7b80a97161
@@ -2747,13 +2747,13 @@ packages:
     transitivePeerDependencies:
       - debug
 
-  /@itwin/browser-authorization/0.5.1_@itwin+core-bentley@4.0.0-dev.41:
-    resolution: {integrity: sha512-TI7nd4I5Lc9MrJnf40kk+u4bTCym1xH9IBJNkvVt+7unjUSbRuUaPS6wC6WTu2DoYbIocEIEBWTqNOR67lAHGA==}
+  /@itwin/browser-authorization/0.8.0_@itwin+core-bentley@4.0.0-dev.41:
+    resolution: {integrity: sha512-EXiW0Wqapcq6TkxohgMkrsxM/0Em3TOwvejTQhhi5+BDY0L3q0oBp9wlxsYJqDSTxi/Vdo5T0xcSQnCcZxnKBQ==}
     peerDependencies:
       '@itwin/core-bentley': ^3.0.0
     dependencies:
       '@itwin/core-bentley': 4.0.0-dev.41
-      oidc-client: 1.11.5
+      oidc-client-ts: 2.2.2
     dev: false
 
   /@itwin/build-tools/4.0.0-dev.41:
@@ -5541,6 +5541,7 @@ packages:
     resolution: {integrity: sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+    dev: true
 
   /acorn/8.8.2:
     resolution: {integrity: sha512-xjIYgE8HBrkpd/sJqOGNspf8uHG+NOHGOw6a/Urj8taM2EXfdNAH2oFcPeIFfsv3+kz/mJrS5VuMqbNLjCa2vw==}
@@ -7145,6 +7146,7 @@ packages:
   /core-js/3.28.0:
     resolution: {integrity: sha512-GiZn9D4Z/rSYvTeg1ljAIsEqFm0LaN9gVtwDCrKL80zHtS31p9BAjmTxVqTQDMpwlMolJZOFntUG2uwyj7DAqw==}
     requiresBuild: true
+    dev: true
 
   /core-util-is/1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
@@ -12138,6 +12140,10 @@ packages:
       object.assign: 4.1.4
     dev: true
 
+  /jwt-decode/3.1.2:
+    resolution: {integrity: sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==}
+    dev: false
+
   /keytar/7.9.0:
     resolution: {integrity: sha512-VPD8mtVtm5JNtA2AErl6Chp06JBfy7diFQ7TQQhdpWOl6MrCRB+eRbvAZUsbGQS9kiMq0coJsy0W0vHpDCkWsQ==}
     requiresBuild: true
@@ -13306,14 +13312,12 @@ packages:
     resolution: {integrity: sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==}
     dev: true
 
-  /oidc-client/1.11.5:
-    resolution: {integrity: sha512-LcKrKC8Av0m/KD/4EFmo9Sg8fSQ+WFJWBrmtWd+tZkNn3WT/sQG3REmPANE9tzzhbjW6VkTNy4xhAXCfPApAOg==}
+  /oidc-client-ts/2.2.2:
+    resolution: {integrity: sha512-tEpnC1xQX6PMhnDMNEvDhpqnsu0buh29b/sA9a1I5tq6lD87wRAW1rTj49B2+5925I0sQlvU64DoK0Pxeiu7Dg==}
+    engines: {node: '>=12.13.0'}
     dependencies:
-      acorn: 7.4.1
-      base64-js: 1.5.1
-      core-js: 3.28.0
       crypto-js: 4.1.1
-      serialize-javascript: 4.0.0
+      jwt-decode: 3.1.2
     dev: false
 
   /on-finished/2.4.1:
@@ -14827,6 +14831,7 @@ packages:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
     dependencies:
       safe-buffer: 5.2.1
+    dev: true
 
   /randomfill/1.0.4:
     resolution: {integrity: sha512-87lcbR8+MhcWcUiQ+9e+Rwx8MyR2P7qnt15ynUlbm3TU/fjbgz4GsvfSUDTemtCCtVCqb4ZcEFlyPNTh9bBTLw==}
@@ -15770,6 +15775,7 @@ packages:
     resolution: {integrity: sha512-GaNA54380uFefWghODBWEGisLZFj00nS5ACs6yHa9nLqlLpVLO8ChDGeKRjZnV4Nh4n0Qi7nhYZD/9fCPzEqkw==}
     dependencies:
       randombytes: 2.1.0
+    dev: true
 
   /serialize-javascript/6.0.0:
     resolution: {integrity: sha512-Qr3TosvguFt8ePWqsvRfrKyQXIiW+nGbYpy8XK24NQHE83caxWt+mIymTT19DGFbNWNLfEwsrkSmN64lVWB9ag==}
