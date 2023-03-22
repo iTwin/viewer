@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/web-viewer-react",
+      "comment": "Support @itwin/browser-authorization@0.8-1.0",
+      "type": "none"
+    }
+  ],
+  "packageName": "@itwin/web-viewer-react"
+}

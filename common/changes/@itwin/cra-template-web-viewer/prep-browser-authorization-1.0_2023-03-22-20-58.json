@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-web-viewer",
+      "comment": "Support @itwin/browser-authorization@0.8-1.0",
+      "type": "none"
+    }
+  ],
+  "packageName": "@itwin/cra-template-web-viewer"
+}
