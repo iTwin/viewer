@@ -40,7 +40,7 @@ const App: React.FC = () => {
 
   const accessToken = useAccessToken();
 
-  const authClient = useMemo(() => Auth.getClient, []);
+  const authClient = Auth.getClient();
 
   const login = useCallback(async () => {
     try {
