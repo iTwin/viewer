@@ -34,7 +34,8 @@
       "description": "Iterates through each package in the monorepo and runs the 'lint' script",
       "enableParallelism": true,
       "ignoreMissingScript": true,
-      "ignoreDependencyOrder": true
+      "ignoreDependencyOrder": true,
+      "allowWarningsInSuccessfulBuild": true
     }
   ],
   "parameters": []

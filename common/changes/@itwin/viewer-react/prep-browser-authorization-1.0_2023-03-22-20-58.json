@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@itwin/viewer-react",
-      "comment": "Support @itwin/browser-authorization@0.8-1.0",
+      "comment": "",
       "type": "none"
     }
   ],
