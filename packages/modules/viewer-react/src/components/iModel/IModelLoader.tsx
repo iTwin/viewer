@@ -63,10 +63,10 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
 
     if (!requiredConnectionProps) {
       throw new Error(
-        IModelApp.localization.getLocalizedStringWithNamespace(
+        IModelApp.localization.getLocalizedString([
           "iTwinViewer",
-          "missingConnectionProps"
-        )
+          "missingConnectionProps",
+        ])
       );
     }
 
@@ -98,7 +98,14 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       return imodelConnection;
     }
     return;
-  }, [viewerProps, isMounted, onIModelConnected]);
+  }, [
+    viewerProps.iTwinId,
+    viewerProps.iModelId,
+    viewerProps.changeSetId,
+    viewerProps.filePath,
+    isMounted,
+    onIModelConnected,
+  ]);
 
   useEffect(() => {
     let prevConnection: IModelConnection | undefined;
