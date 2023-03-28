@@ -1,0 +1,25 @@
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+@import '@itwin/itwinui-variables/index.css';
+
+.status-bar-status {
+  display: flex;
+}
+
+.status-label {
+  margin: 0 10px 0 10px;
+}
+
+.connection-status-icon {
+  height: 20px;
+  fill: var(--iui-color-foreground-primary);
+  &.actionable {
+    cursor: pointer;
+  }
+  svg {
+    height: 100%;
+  }
+  margin-right: 10px;
+}

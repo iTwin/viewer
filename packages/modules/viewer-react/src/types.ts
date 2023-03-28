@@ -3,18 +3,19 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { BackstageItem, UiItemsProvider } from "@itwin/appui-abstract";
 import type {
+  BackstageItem,
   ColorTheme,
   FrontstageProvider,
   IModelViewportControlOptions,
   StandardFrontstageProps,
+  UiItemsProvider,
 } from "@itwin/appui-react";
 import type {
   Cartographic,
   ColorDef,
   EcefLocationProps,
-  RenderMode,  
+  RenderMode,
 } from "@itwin/core-common";
 import type {
   BlankConnectionProps,

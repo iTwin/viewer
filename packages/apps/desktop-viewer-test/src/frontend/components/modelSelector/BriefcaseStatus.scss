@@ -2,11 +2,12 @@
 * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
-@import "@itwin/itwinui-css/scss/variables";
+@import '@itwin/itwinui-variables/index.css';
+
 
 .model-status {
   height: 20px;
-  fill: t(iui-color-foreground-primary);
+  fill: var(--iui-color-foreground-primary);
   &.actionable {
     cursor: pointer;
   }

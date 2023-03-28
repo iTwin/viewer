@@ -5,8 +5,7 @@
 
 import "@testing-library/jest-dom/extend-expect";
 
-import { UiItemsManager } from "@itwin/appui-abstract";
-import { ColorTheme, UiFramework } from "@itwin/appui-react";
+import { ColorTheme, UiFramework, UiItemsManager } from "@itwin/appui-react";
 import { Cartographic, ColorDef } from "@itwin/core-common";
 import type { BlankConnectionProps } from "@itwin/core-frontend";
 import { BlankConnection, SnapshotConnection } from "@itwin/core-frontend";

@@ -30,7 +30,7 @@ export const Recents = () => {
         let displayValue = recent.displayName;
         // limit display value to 25 chars
         if (displayValue.length > 25) {
-          displayValue = `${displayValue.substr(0, 25)}...`;
+          displayValue = `${displayValue.substring(0, 25)}...`;
         }
         return (
           <span key={recent.path} onClick={() => openFile(recent.path)}>
