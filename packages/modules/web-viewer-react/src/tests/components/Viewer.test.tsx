@@ -6,7 +6,6 @@
 import type { IModelAppOptions } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import type {
-  BackendConfiguration,
   ViewerInitializerParams,
 } from "@itwin/viewer-react";
 import { render, waitFor } from "@testing-library/react";
@@ -15,6 +14,7 @@ import React from "react";
 import { Viewer } from "../../components/Viewer";
 import { WebInitializer } from "../../services/Initializer";
 import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
+import { BackendConfiguration } from "../../types";
 
 jest.mock("@itwin/viewer-react", () => {
   return {

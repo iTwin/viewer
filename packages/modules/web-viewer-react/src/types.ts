@@ -4,7 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type {
-  BackendConfiguration,
+  BentleyCloudRpcParams,
+  RpcInterface,
+  RpcInterfaceDefinition,
+} from "@itwin/core-common";
+import type { RequireAtLeastOne } from "@itwin/core-bentley";
+import type {
   BlankViewerProps,
   ConnectedViewerProps,
   ViewerAuthorizationClient,
@@ -20,3 +25,21 @@ export type WebInitializerParams = ViewerCommonProps & {
 
 export type WebViewerProps = XOR<ConnectedViewerProps, BlankViewerProps> &
   WebInitializerParams;
+
+/**
+ * Custom backend and rpc configuration
+ */
+export type BackendConfiguration = {
+  defaultBackend?: RequireAtLeastOne<DefaultBackend>;
+  customBackends?: CustomBackend[];
+};
+
+export type DefaultBackend = {
+  rpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[]; // will be combined with a set of default interfaces
+  config?: Partial<BentleyCloudRpcParams>;
+};
+
+export type CustomBackend = {
+  rpcInterfaces: RpcInterfaceDefinition<RpcInterface>[]; // will be combined with a set of default interfaces
+  config: BentleyCloudRpcParams;
+};

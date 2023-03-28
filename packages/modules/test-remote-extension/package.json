@@ -16,7 +16,7 @@
     "@esbuild-plugins/node-globals-polyfill": "~0.1.1",
     "@itwin/appui-abstract": "4.0.0-dev.10",
     "@itwin/build-tools": "4.0.0-dev.22",
-    "@itwin/core-bentley": "4.0.0-dev.22",
+    "@itwin/core-bentley": "4.0.0-dev.60",
     "@itwin/core-common": "4.0.0-dev.22",
     "@itwin/core-geometry": "4.0.0-dev.22",
     "@itwin/core-orbitgt": "4.0.0-dev.22",

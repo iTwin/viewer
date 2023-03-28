@@ -11,13 +11,10 @@ import type {
   StandardFrontstageProps,
 } from "@itwin/appui-react";
 import type {
-  BentleyCloudRpcParams,
   Cartographic,
   ColorDef,
   EcefLocationProps,
-  RenderMode,
-  RpcInterface,
-  RpcInterfaceDefinition,
+  RenderMode,  
 } from "@itwin/core-common";
 import type {
   BlankConnectionProps,
@@ -40,17 +37,6 @@ export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
   ? (Without<T1, T2> & T2) | (Without<T2, T1> & T1)
   : T1 | T2;
-
-/**
- * Requires that _at least one_ of the Keys in type T be required
- */
-export type RequireOneOf<T, Keys extends keyof T = keyof T> = Pick<
-  T,
-  Exclude<keyof T, Keys>
-> &
-  {
-    [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>;
-  }[Keys];
 
 /**
  * Converts the following optional arg foo of type T
@@ -255,20 +241,3 @@ export type ViewerDefaultFrontstageConfig = Pick<
   StandardFrontstageProps,
   "hideNavigationAid" | "hideStatusBar" | "hideToolSettings"
 >;
-/**
- * Custom backend and rpc configuration
- */
-export type BackendConfiguration = {
-  defaultBackend?: RequireOneOf<DefaultBackend, "rpcInterfaces" | "config">;
-  customBackends?: CustomBackend[];
-};
-
-export type DefaultBackend = {
-  rpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[]; // will be combined with a set of default interfaces
-  config?: Partial<BentleyCloudRpcParams>;
-};
-
-export type CustomBackend = {
-  rpcInterfaces: RpcInterfaceDefinition<RpcInterface>[]; // will be combined with a set of default interfaces
-  config: BentleyCloudRpcParams;
-};

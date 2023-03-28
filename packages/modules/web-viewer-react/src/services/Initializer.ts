@@ -7,12 +7,12 @@ import { IModelApp } from "@itwin/core-frontend";
 import {
   getIModelAppOptions,
   makeCancellable,
-  RpcInitializer,
   ViewerAuthorization,
   ViewerPerformance,
 } from "@itwin/viewer-react";
 
 import type { WebInitializerParams } from "../types";
+import { RpcInitializer } from "./RpcInitializer";
 
 export class WebInitializer {
   private static _initialized: Promise<void>;
