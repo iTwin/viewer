@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Tue, 28 Mar 2023 19:01:29 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Mar 2023 20:57:53 GMT and should not be manually modified.
+
+## 3.4.1
+Tue, 28 Mar 2023 20:57:53 GMT
+
+### Patches
+
+- Fix Viewer rerendering on sibling component change
 
 ## 3.4.0
 Tue, 28 Mar 2023 19:01:29 GMT
