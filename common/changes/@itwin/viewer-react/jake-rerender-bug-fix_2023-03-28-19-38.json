@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Viewer rerender on sibling component change and web-viewer-test history fix",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
