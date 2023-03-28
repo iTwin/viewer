@@ -21,7 +21,7 @@
     "@itwin/core-telemetry": "^4.0.0-dev.41",
     "@itwin/frontend-devtools": "^4.0.0-dev.41",
     "@itwin/imodel-components-react": "^4.0.0-dev.12",
-    "@itwin/imodels-access-frontend": "^2.2.1",
+    "@itwin/imodels-access-frontend": "^3.0.0",
     "@itwin/itwinui-react": "^2.6.0",
     "@itwin/presentation-common": "^4.0.0-dev.41",
     "@itwin/presentation-components": "^4.0.0-dev.21",
