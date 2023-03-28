@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Expand semver range for `@itwin/imodels-*` peer deps to support 2.x and 3.x. [See their changelog](https://github.com/iTwin/imodels-clients/blob/main/itwin-platform-access/imodels-access-frontend/CHANGELOG.md)",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
