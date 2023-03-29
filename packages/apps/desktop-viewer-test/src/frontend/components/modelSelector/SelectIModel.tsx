@@ -127,7 +127,13 @@ const useProgressIndicator = (iModel: IModelFull) => {
         }
       });
     }
-  }, [modelContext.pendingIModel, iModel.id, navigate, startDownload]);
+  }, [
+    modelContext.pendingIModel,
+    iModel.id,
+    navigate,
+    startDownload,
+    modelContext,
+  ]);
 
   useEffect(() => {
     if (briefcase) {
