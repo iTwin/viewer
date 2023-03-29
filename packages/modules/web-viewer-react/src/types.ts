@@ -17,6 +17,9 @@ import type {
   XOR,
 } from "@itwin/viewer-react";
 
+export type DeepPartial<T> = {
+  [P in keyof T]?: DeepPartial<T[P]>;
+};
 export type WebInitializerParams = ViewerCommonProps & {
   /** authorization configuration */
   authClient: ViewerAuthorizationClient;
@@ -30,13 +33,12 @@ export type WebViewerProps = XOR<ConnectedViewerProps, BlankViewerProps> &
  * Custom backend and rpc configuration
  */
 export type BackendConfiguration = {
-  defaultBackend?: RequireAtLeastOne<Partial<Backend>>;
-  customBackends?: CustomBackend[];
-};
-
-export type CustomBackend = {
-  rpcInterfaces: RpcInterfaceDefinition<RpcInterface>[];
-  config: BentleyCloudRpcParams;
+  defaultBackend?: RequireAtLeastOne<
+    Omit<Backend, "config"> & {
+      config: RequireAtLeastOne<BentleyCloudRpcParams>;
+    }
+  >;
+  customBackends?: Backend[];
 };
 
 type Backend = {
