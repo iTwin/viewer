@@ -32,8 +32,8 @@ importers:
       '@itwin/express-server': ^4.0.0-dev.41
       '@itwin/imodel-browser-react': ^0.12.2
       '@itwin/imodel-components-react': ^4.0.0-dev.12
-      '@itwin/imodels-access-backend': ^2.2.1
-      '@itwin/imodels-access-frontend': ^2.2.1
+      '@itwin/imodels-access-backend': ^3.0.0
+      '@itwin/imodels-access-frontend': ^3.0.0
       '@itwin/itwinui-css': ^1.7.0
       '@itwin/itwinui-icons-react': ^2.1.0
       '@itwin/itwinui-react': ^2.6.0
@@ -93,6 +93,10 @@ importers:
       '@itwin/imodels-access-backend': 2.3.0_ee5db6b414e19c5f4d83e1d7c441145a
       '@itwin/imodels-access-frontend': 2.3.0_cfdac9e1e64134cbe32835ca03b59966
       '@itwin/itwinui-css': 1.8.0
+      '@itwin/imodel-components-react': 4.0.0-dev.12_c1b097ee715932d8ebedafff7e9c4094
+      '@itwin/imodels-access-backend': 3.0.0_a666361ea0bb83f469588ec5bb763916
+      '@itwin/imodels-access-frontend': 3.0.0_c8a8e42cd5d0bc18a4be05cc0d35c3c0
+      '@itwin/itwinui-css': 1.7.0
       '@itwin/itwinui-icons-react': 2.1.0_react-dom@17.0.2+react@17.0.2
       '@itwin/itwinui-react': 2.7.0_react-dom@17.0.2+react@17.0.2
       '@itwin/itwinui-variables': 2.0.0
@@ -149,7 +153,7 @@ importers:
       '@itwin/core-telemetry': ^4.0.0-dev.41
       '@itwin/frontend-devtools': ^4.0.0-dev.41
       '@itwin/imodel-components-react': ^4.0.0-dev.12
-      '@itwin/imodels-access-frontend': ^2.2.1
+      '@itwin/imodels-access-frontend': ^3.0.0
       '@itwin/itwinui-react': ^2.6.0
       '@itwin/presentation-common': ^4.0.0-dev.41
       '@itwin/presentation-components': ^4.0.0-dev.21
@@ -195,6 +199,29 @@ importers:
       '@itwin/presentation-components': 4.0.0-dev.29_e95bd7168eb58d9457c291d41a86dbde
       '@itwin/presentation-frontend': 4.0.0-dev.60_f00f1e9b9bc92841653d514ad1e57a7e
       '@itwin/reality-data-client': 0.9.0_@itwin+core-bentley@4.0.0-dev.60
+      '@itwin/appui-abstract': 4.0.0-dev.41_@itwin+core-bentley@4.0.0-dev.41
+      '@itwin/appui-layout-react': 4.0.0-dev.12_7f3cb7213397ee880b60b443c469a38a
+      '@itwin/appui-react': 4.0.0-dev.12_9f09edc7ad3969d6aa76b97bffb33449
+      '@itwin/browser-authorization': 0.5.1_@itwin+core-bentley@4.0.0-dev.41
+      '@itwin/components-react': 4.0.0-dev.12_7f3cb7213397ee880b60b443c469a38a
+      '@itwin/core-bentley': 4.0.0-dev.41
+      '@itwin/core-common': 4.0.0-dev.41_b9e92acfed6cba8281e7ca7b80a97161
+      '@itwin/core-frontend': 4.0.0-dev.41_9002c5b55f2a35a20c93f5ac618c0a05
+      '@itwin/core-geometry': 4.0.0-dev.41
+      '@itwin/core-i18n': 4.0.0-dev.41_@itwin+core-bentley@4.0.0-dev.41
+      '@itwin/core-markup': 4.0.0-dev.41_e959a9d706a2fc3ab052dfab730689c6
+      '@itwin/core-orbitgt': 4.0.0-dev.41
+      '@itwin/core-quantity': 4.0.0-dev.41_@itwin+core-bentley@4.0.0-dev.41
+      '@itwin/core-react': 4.0.0-dev.12_fa52982eae0b1bddf6c2b3b985158e21
+      '@itwin/core-telemetry': 4.0.0-dev.41_2704b1e6871c04cd339bc3c1dfaf1c29
+      '@itwin/frontend-devtools': 4.0.0-dev.41_f86ec6894c430926b8ced50f2d328ecb
+      '@itwin/imodel-components-react': 4.0.0-dev.12_c1b097ee715932d8ebedafff7e9c4094
+      '@itwin/imodels-access-frontend': 3.0.0_c8a8e42cd5d0bc18a4be05cc0d35c3c0
+      '@itwin/itwinui-react': 2.6.0_react-dom@17.0.2+react@17.0.2
+      '@itwin/presentation-common': 4.0.0-dev.41_a0a33798782685db73e4506e165ac711
+      '@itwin/presentation-components': 4.0.0-dev.21_77daeca1ef60152941b2047d07a8d42e
+      '@itwin/presentation-frontend': 4.0.0-dev.41_05635a8ed76f01b829ce7b8fb831cb61
+      '@itwin/reality-data-client': 0.9.0_@itwin+core-bentley@4.0.0-dev.41
       '@itwin/test-local-extension': link:../../modules/test-local-extension
       '@itwin/web-viewer-react': link:../../modules/web-viewer-react
       '@itwin/webgl-compatibility': 4.0.0-dev.60
@@ -234,7 +261,7 @@ importers:
       '@itwin/ecschema-metadata': ^4.0.0-dev.41
       '@itwin/electron-authorization': ^0.11.0
       '@itwin/imodel-components-react': ^4.0.0-dev.12
-      '@itwin/imodels-client-management': ^2.2.1
+      '@itwin/imodels-client-management': ^3.0.0
       '@itwin/presentation-common': ^4.0.0-dev.41
       '@itwin/presentation-components': ^4.0.0-dev.21
       '@itwin/presentation-frontend': ^4.0.0-dev.41
@@ -261,7 +288,7 @@ importers:
       ts-jest: ^26.1.1
       typescript: ~4.4.0
     dependencies:
-      '@itwin/imodels-client-management': 2.3.0
+      '@itwin/imodels-client-management': 3.0.0
       '@itwin/viewer-react': link:../viewer-react
     devDependencies:
       '@itwin/appui-abstract': 4.0.0-dev.60_@itwin+core-bentley@4.0.0-dev.60
@@ -401,8 +428,8 @@ importers:
       '@itwin/core-react': ^4.0.0-dev.12
       '@itwin/core-telemetry': ^4.0.0-dev.41
       '@itwin/imodel-components-react': ^4.0.0-dev.12
-      '@itwin/imodels-access-frontend': ^2.2.1
-      '@itwin/imodels-client-management': ^2.2.1
+      '@itwin/imodels-access-frontend': ^3.0.0
+      '@itwin/imodels-client-management': ^3.0.0
       '@itwin/itwinui-illustrations-react': ^2.0.1
       '@itwin/itwinui-react': ^2.6.0
       '@itwin/presentation-common': ^4.0.0-dev.41
@@ -460,6 +487,28 @@ importers:
       '@itwin/presentation-components': 4.0.0-dev.29_e95bd7168eb58d9457c291d41a86dbde
       '@itwin/presentation-frontend': 4.0.0-dev.60_f00f1e9b9bc92841653d514ad1e57a7e
       '@itwin/webgl-compatibility': 4.0.0-dev.60
+      '@itwin/appui-abstract': 4.0.0-dev.41_@itwin+core-bentley@4.0.0-dev.41
+      '@itwin/appui-layout-react': 4.0.0-dev.12_7f3cb7213397ee880b60b443c469a38a
+      '@itwin/appui-react': 4.0.0-dev.12_9f09edc7ad3969d6aa76b97bffb33449
+      '@itwin/build-tools': 4.0.0-dev.41
+      '@itwin/components-react': 4.0.0-dev.12_7f3cb7213397ee880b60b443c469a38a
+      '@itwin/core-bentley': 4.0.0-dev.41
+      '@itwin/core-common': 4.0.0-dev.41_b9e92acfed6cba8281e7ca7b80a97161
+      '@itwin/core-frontend': 4.0.0-dev.41_9002c5b55f2a35a20c93f5ac618c0a05
+      '@itwin/core-geometry': 4.0.0-dev.41
+      '@itwin/core-i18n': 4.0.0-dev.41_@itwin+core-bentley@4.0.0-dev.41
+      '@itwin/core-markup': 4.0.0-dev.41_e959a9d706a2fc3ab052dfab730689c6
+      '@itwin/core-orbitgt': 4.0.0-dev.41
+      '@itwin/core-quantity': 4.0.0-dev.41_@itwin+core-bentley@4.0.0-dev.41
+      '@itwin/core-react': 4.0.0-dev.12_fa52982eae0b1bddf6c2b3b985158e21
+      '@itwin/core-telemetry': 4.0.0-dev.41_2704b1e6871c04cd339bc3c1dfaf1c29
+      '@itwin/imodel-components-react': 4.0.0-dev.12_c1b097ee715932d8ebedafff7e9c4094
+      '@itwin/imodels-access-frontend': 3.0.0_c8a8e42cd5d0bc18a4be05cc0d35c3c0
+      '@itwin/imodels-client-management': 3.0.0
+      '@itwin/presentation-common': 4.0.0-dev.41_a0a33798782685db73e4506e165ac711
+      '@itwin/presentation-components': 4.0.0-dev.21_77daeca1ef60152941b2047d07a8d42e
+      '@itwin/presentation-frontend': 4.0.0-dev.41_05635a8ed76f01b829ce7b8fb831cb61
+      '@itwin/webgl-compatibility': 4.0.0-dev.41
       '@testing-library/jest-dom': 4.2.4
       '@testing-library/react': 10.4.9_react-dom@17.0.2+react@17.0.2
       '@testing-library/user-event': 7.2.1
@@ -498,7 +547,7 @@ importers:
       '@itwin/core-react': ^4.0.0-dev.12
       '@itwin/core-telemetry': ^4.0.0-dev.41
       '@itwin/imodel-components-react': ^4.0.0-dev.12
-      '@itwin/imodels-client-management': ^2.2.1
+      '@itwin/imodels-client-management': ^3.0.0
       '@itwin/presentation-common': ^4.0.0-dev.41
       '@itwin/presentation-components': ^4.0.0-dev.21
       '@itwin/presentation-frontend': ^4.0.0-dev.41
@@ -524,7 +573,7 @@ importers:
       ts-jest: ^26.1.1
       typescript: ~4.4.0
     dependencies:
-      '@itwin/imodels-client-management': 2.3.0
+      '@itwin/imodels-client-management': 3.0.0
       '@itwin/viewer-react': link:../viewer-react
     devDependencies:
       '@itwin/appui-abstract': 4.0.0-dev.60_@itwin+core-bentley@4.0.0-dev.60
@@ -3241,16 +3290,22 @@ packages:
 
   /@itwin/imodels-access-backend/2.3.0_ee5db6b414e19c5f4d83e1d7c441145a:
     resolution: {integrity: sha512-g2Bygiu6Is/Xa6OWUxXN/BZwGU2M4izFl8fdgL1cFWxhoWSYL169bN3V4zvRTUJIqtsNaTyOeRu2mjkRgHY9KQ==}
+  /@itwin/imodels-access-backend/3.0.0_a666361ea0bb83f469588ec5bb763916:
+    resolution: {integrity: sha512-kNhwi+qQ28OCGcHvi3/oklb60o1Ziv2zrFwHsrvXZvvCWtxIouMxXKtX30e0R7lByJavXS7g4G/V6Nlo+k0+JQ==}
     peerDependencies:
-      '@itwin/core-backend': ^3.3.0
-      '@itwin/core-bentley': ^3.3.0
-      '@itwin/core-common': ^3.3.0
+      '@itwin/core-backend': ^3.6.0
+      '@itwin/core-bentley': ^3.6.0
+      '@itwin/core-common': ^3.6.0
     dependencies:
       '@azure/abort-controller': 1.1.0
       '@itwin/core-backend': 4.0.0-dev.60_2510e11078ce2b9ca0d2d8bd1661d315
       '@itwin/core-bentley': 4.0.0-dev.60
       '@itwin/core-common': 4.0.0-dev.60_9311b0df419232d4411272a9e1061ae4
       '@itwin/imodels-client-authoring': 2.3.0
+      '@itwin/core-backend': 4.0.0-dev.41_16182b87c269b570de5d8b5da7815392
+      '@itwin/core-bentley': 4.0.0-dev.41
+      '@itwin/core-common': 4.0.0-dev.41_b9e92acfed6cba8281e7ca7b80a97161
+      '@itwin/imodels-client-authoring': 3.0.0
       axios: 0.21.4
     transitivePeerDependencies:
       - debug
@@ -3259,23 +3314,29 @@ packages:
 
   /@itwin/imodels-access-frontend/2.3.0_cfdac9e1e64134cbe32835ca03b59966:
     resolution: {integrity: sha512-plIYjYJMxYh4rTFPmn/8vKRyDQYmdfWK3d6x0hrBEIj9BRMnPqF6QxLwbQNbmipAuTw0avGnYAFA4TS37ppOqA==}
+  /@itwin/imodels-access-frontend/3.0.0_c8a8e42cd5d0bc18a4be05cc0d35c3c0:
+    resolution: {integrity: sha512-b6o5gpx+UfR74qsB6u8r4Ewu/jKDSrWsu7AeBR8WIfubdHFQlat1paODiEcG9RklBNuiD56KkpzxrqB5RRllMA==}
     peerDependencies:
-      '@itwin/core-bentley': ^3.3.0
-      '@itwin/core-common': ^3.3.0
-      '@itwin/core-frontend': ^3.3.0
+      '@itwin/core-bentley': ^3.6.0
+      '@itwin/core-common': ^3.6.0
+      '@itwin/core-frontend': ^3.6.0
     dependencies:
       '@itwin/core-bentley': 4.0.0-dev.60
       '@itwin/core-common': 4.0.0-dev.60_9311b0df419232d4411272a9e1061ae4
       '@itwin/core-frontend': 4.0.0-dev.60_03e91c29528551781ba987597ac08ae2
       '@itwin/imodels-client-management': 2.3.0
+      '@itwin/core-bentley': 4.0.0-dev.41
+      '@itwin/core-common': 4.0.0-dev.41_b9e92acfed6cba8281e7ca7b80a97161
+      '@itwin/core-frontend': 4.0.0-dev.41_9002c5b55f2a35a20c93f5ac618c0a05
+      '@itwin/imodels-client-management': 3.0.0
     transitivePeerDependencies:
       - debug
 
-  /@itwin/imodels-client-authoring/2.3.0:
-    resolution: {integrity: sha512-wsG6TRv+Ss/L9U5T9/nYwlvQBR5mipDqoaKlFcUwxeivTtB9K3YbeUEPdY2TaDsoFwwuM5cQSqcNr6K21GZ0cQ==}
+  /@itwin/imodels-client-authoring/3.0.0:
+    resolution: {integrity: sha512-LqoviR78mJXB//OF6ZYAMGpSQ4IgOWfRVsrEc/JQ1YaTTG0fLquZeNzH2M/jjpLlqwJp9dMDzOzlxJP2om6eUA==}
     dependencies:
       '@azure/storage-blob': 12.7.0
-      '@itwin/imodels-client-management': 2.3.0
+      '@itwin/imodels-client-management': 3.0.0
       '@itwin/object-storage-azure': 1.5.0
       '@itwin/object-storage-core': 1.5.0
     transitivePeerDependencies:
@@ -3283,8 +3344,8 @@ packages:
       - encoding
     dev: false
 
-  /@itwin/imodels-client-management/2.3.0:
-    resolution: {integrity: sha512-dKR5fGaJU66PcQ2H7v4kY9zRGBlH9X1wWuEWNkBiIaSjfsoJ0VXIF0xupD0wa6fHT0jgRlHzvV2qgasxJ3oapg==}
+  /@itwin/imodels-client-management/3.0.0:
+    resolution: {integrity: sha512-yzgizCzXKZ7fyT54DQF+4OE2OCrLgBw10XzNHisDY0kjeXvbxyh5xPdOZf9+rB0nJ5f77RLmEzieqHYrMGvaWw==}
     dependencies:
       axios: 0.21.4
     transitivePeerDependencies:

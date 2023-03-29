@@ -88,11 +88,13 @@ class UserSettings {
       // add to the top (if not already there)
       // use the existing file if one exists as it likely has the iTwin and iModel ids, whereas opening a local file would not
       if (existing !== 0) {
-        this.settings.recents.unshift(existingRecent || file);
+        this.settings.recents.unshift(existingRecent ?? file);
       }
     }
     this._writeSettings();
   }
 }
 
-export default new UserSettings();
+const userSettings = new UserSettings();
+
+export default userSettings;
