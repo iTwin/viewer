@@ -63,7 +63,8 @@ export class WebInitializer {
               .catch((e) => console.log(e));
           });
         }
-        RpcInitializer.registerClients(options.backendConfiguration);
+        const rpcInitializer = new RpcInitializer();
+        rpcInitializer.registerClients(options.backendConfiguration);
         ViewerPerformance.addMark("ViewerStarted");
         ViewerPerformance.addMeasure(
           "ViewerInitialized",

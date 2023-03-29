@@ -21,7 +21,7 @@ import type { BackendConfiguration } from "../types";
  * The RpcInitializer handles registration of backends/instantiates RpcInterface clients.
  */
 export class RpcInitializer {
-  static readonly orchestratorUrl = `https://${
+  readonly orchestratorUrl = `https://${
     (globalThis as any).IMJS_URL_PREFIX as string
   }api.bentley.com`;
 
@@ -31,7 +31,7 @@ export class RpcInitializer {
    * @param options: BackendConfiguration
    * @returns void
    */
-  public static registerClients(options?: BackendConfiguration) {
+  public registerClients(options?: BackendConfiguration) {
     const formattedOptions = this.formatDefaultBackendOptions(options);
 
     BentleyCloudRpcManager.initializeClient(
@@ -53,7 +53,7 @@ export class RpcInitializer {
    * @param additionalRpcInterfaces
    * @returns RpcInterfaceDefinition<RpcInterface>
    */
-  public static getSupportedRpcs = (
+  public getSupportedRpcs = (
     additionalRpcInterfaces: RpcInterfaceDefinition<RpcInterface>[] = []
   ): RpcInterfaceDefinition<RpcInterface>[] => {
     return [
@@ -69,7 +69,7 @@ export class RpcInitializer {
    * @param options: BackendConfiguration
    * @returns BentleyCloudRpcParams
    */
-  private static formatDefaultBackendOptions(
+  private formatDefaultBackendOptions(
     options?: BackendConfiguration
   ): BentleyCloudRpcParams {
     const userUriPrefix = options?.defaultBackend?.config?.uriPrefix;
@@ -86,7 +86,7 @@ export class RpcInitializer {
     };
   }
 
-  private static getDefaultInfo() {
+  private getDefaultInfo() {
     return {
       info: { title: "imodel/rpc", version: "" },
       uriPrefix: this.orchestratorUrl,
