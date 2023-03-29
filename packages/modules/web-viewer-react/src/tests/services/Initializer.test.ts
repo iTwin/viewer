@@ -87,9 +87,6 @@ jest.mock("@itwin/viewer-react", () => {
     makeCancellable: jest.requireActual(
       "@itwin/viewer-react/lib/cjs/utilities/MakeCancellable"
     ).makeCancellable,
-    RpcInitializer: jest.requireActual(
-      "@itwin/viewer-react/lib/cjs/services/RpcInitializer"
-    ).RpcInitializer,
     useBaseViewerInitializer: jest.fn().mockReturnValue(true),
     getInitializationOptions: jest.fn().mockReturnValue({}),
     isEqual: jest.fn().mockReturnValue(true),
