@@ -19,7 +19,7 @@
       "@itwin/core-quantity": "^4.0.0-dev.41",
       "@itwin/core-react": "^4.0.0-dev.12",
       "@itwin/imodel-components-react": "^4.0.0-dev.12",
-      "@itwin/imodels-access-frontend": "^2.2.1",
+      "@itwin/imodels-access-frontend": "^3.0.0",
       "@itwin/itwinui-react": "^1.16.2",
       "@itwin/measure-tools-react": "^0.7.3",
       "@itwin/presentation-common": "^4.0.0-dev.41",
