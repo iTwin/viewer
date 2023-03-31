@@ -7,26 +7,26 @@ import type { BrowserAuthorizationClientConfiguration } from "@itwin/browser-aut
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 
 export class Auth {
-  private static client: BrowserAuthorizationClient;
+  private static _client: BrowserAuthorizationClient;
 
   public static initialize(
     options: BrowserAuthorizationClientConfiguration
   ): BrowserAuthorizationClient {
-    this.client = new BrowserAuthorizationClient(options);
-    return this.client;
+    this._client = new BrowserAuthorizationClient(options);
+    return this._client;
   }
 
   public static getClient(): BrowserAuthorizationClient {
-    if (!this.client) {
+    if (!this._client) {
       throw new Error(
         "Client not initialized. Please call `Auth.initialize(BrowserAuthorizationClientConfiguration)`"
       );
     }
-    return this.client;
+    return this._client;
   }
 
   public static async handleSigninCallback(): Promise<void> {
-    const client = this.getClient();
+    const client = this.client;
     client.handleSigninCallback();
   }
 }
