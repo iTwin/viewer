@@ -4,10 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
-import {
-  BrowserAuthorizationCallbackHandler,
-  BrowserAuthorizationClient,
-} from "@itwin/browser-authorization";
+import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 
 import { RedirectKey } from "./";
 
@@ -39,11 +36,9 @@ export class AuthorizationClient {
       authority,
     };
 
-    await BrowserAuthorizationCallbackHandler.handleSigninCallback(
-      oidcConfiguration.redirectUri
-    );
-
     this._oidcClient = new BrowserAuthorizationClient(oidcConfiguration);
+
+    await this._oidcClient.handleSigninCallback();
   }
 
   public static async signIn(redirectPath?: string): Promise<void> {
