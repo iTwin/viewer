@@ -26,7 +26,6 @@ export class Auth {
   }
 
   public static async handleSigninCallback(): Promise<void> {
-    const client = this.client;
-    client.handleSigninCallback();
+    this._client.handleSigninCallback();
   }
 }
