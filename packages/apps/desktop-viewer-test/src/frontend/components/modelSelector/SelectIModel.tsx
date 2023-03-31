@@ -50,7 +50,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
         );
       });
     }
-  }, [userSettings]);
+  }, [userSettings, iModel.id, iModel.projectId]);
 
   const getBriefcase = useCallback(async () => {
     // if there is a local file, open a briefcase connection and store it in state
@@ -64,7 +64,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
     } else {
       setStatus(ModelStatus.ONLINE);
     }
-  }, []);
+  }, [getLocal]);
 
   const { progress, doDownload } = useDownload(
     iModel.id,
@@ -86,7 +86,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
       console.log(error);
       setStatus(ModelStatus.ERROR);
     }
-  }, []);
+  }, [doDownload]);
 
   const { pullProgress, doPullChanges } = usePullChanges(briefcase);
 
@@ -116,7 +116,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
         void briefcase.close();
       }
     };
-  }, [briefcase]);
+  }, [briefcase, getBriefcase]);
 
   useEffect(() => {
     if (modelContext.pendingIModel === iModel.id) {
@@ -127,7 +127,13 @@ const useProgressIndicator = (iModel: IModelFull) => {
         }
       });
     }
-  }, [modelContext.pendingIModel]);
+  }, [
+    modelContext.pendingIModel,
+    iModel.id,
+    navigate,
+    startDownload,
+    modelContext,
+  ]);
 
   useEffect(() => {
     if (briefcase) {
@@ -156,7 +162,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
         </div>
       ),
     };
-  }, [progress, pullProgress, status]);
+  }, [progress, pullProgress, status, mergeChanges, startDownload]);
   return { tileProps };
 };
 

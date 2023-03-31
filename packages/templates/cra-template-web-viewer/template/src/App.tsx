@@ -10,18 +10,6 @@ import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
 import { FillCentered } from "@itwin/core-react";
 import { ProgressLinear } from "@itwin/itwinui-react";
 import {
-  MeasureTools,
-  MeasureToolsUiItemsProvider,
-} from "@itwin/measure-tools-react";
-import {
-  PropertyGridManager,
-  PropertyGridUiItemsProvider,
-} from "@itwin/property-grid-react";
-import {
-  TreeWidget,
-  TreeWidgetUiItemsProvider,
-} from "@itwin/tree-widget-react";
-import {
   useAccessToken,
   Viewer,
   ViewerContentToolsProvider,
@@ -126,9 +114,7 @@ const App: React.FC = () => {
   );
 
   const onIModelAppInit = useCallback(async () => {
-    await TreeWidget.initialize();
-    await PropertyGridManager.initialize();
-    await MeasureTools.startup();
+    // iModel now initialized
   }, []);
 
   return (
@@ -149,17 +135,8 @@ const App: React.FC = () => {
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
           new ViewerNavigationToolsProvider(),
-          new ViewerContentToolsProvider({
-            vertical: {
-              measureGroup: false,
-            },
-          }),
+          new ViewerContentToolsProvider(),
           new ViewerStatusbarItemsProvider(),
-          new TreeWidgetUiItemsProvider(),
-          new PropertyGridUiItemsProvider({
-            enableCopyingPropertyText: true,
-          }),
-          new MeasureToolsUiItemsProvider(),
         ]}
       />
     </div>

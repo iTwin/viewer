@@ -19,9 +19,12 @@ export const useDownload = (
   const [progress, setProgress] = useState<number>();
   const userSettings = useContext(SettingsContext);
 
-  const addRecent = useCallback(async (fileName: string) => {
-    await userSettings.addRecent(fileName, iModelName, iTwinId, iModelId);
-  }, []);
+  const addRecent = useCallback(
+    async (fileName: string) => {
+      await userSettings.addRecent(fileName, iModelName, iTwinId, iModelId);
+    },
+    [iModelName, iModelId, iTwinId, userSettings]
+  );
 
   const doDownload = useCallback(async () => {
     const fileName = await ITwinViewerApp.saveBriefcase(iModelName);
@@ -46,7 +49,7 @@ export const useDownload = (
       await addRecent(fileName);
       return fileName;
     }
-  }, [iModelId, iModelName, iTwinId]);
+  }, [iModelId, iModelName, iTwinId, addRecent]);
 
   return { progress, doDownload };
 };
