@@ -12,7 +12,10 @@ export class Auth {
   public static initialize(
     options: BrowserAuthorizationClientConfiguration
   ): BrowserAuthorizationClient {
-    this._client = new BrowserAuthorizationClient(options);
+    if (!this._client) {
+      this._client = new BrowserAuthorizationClient(options);
+    }
+
     return this._client;
   }
 
@@ -26,6 +29,11 @@ export class Auth {
   }
 
   public static async handleSigninCallback(): Promise<void> {
+    if (!this._client) {
+      throw new Error(
+        "Client not initialized. Please call `Auth.initialize(BrowserAuthorizationClientConfiguration)`"
+      );
+    }
     this._client.handleSigninCallback();
   }
 }

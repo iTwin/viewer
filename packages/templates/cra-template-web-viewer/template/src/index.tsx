@@ -39,7 +39,7 @@ Auth.initialize({
 
 const redirectUrl = new URL(process.env.IMJS_AUTH_CLIENT_REDIRECT_URI);
 if (redirectUrl.pathname === window.location.pathname) {
-  Auth.handleSigninCallback().then().catch(console.error);
+  Auth.handleSigninCallback().catch(console.error);
 } else {
   ReactDOM.render(
     <React.StrictMode>
