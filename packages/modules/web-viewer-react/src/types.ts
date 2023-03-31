@@ -17,9 +17,6 @@ import type {
   XOR,
 } from "@itwin/viewer-react";
 
-export type DeepPartial<T> = {
-  [P in keyof T]?: DeepPartial<T[P]>;
-};
 export type WebInitializerParams = ViewerCommonProps & {
   /** authorization configuration */
   authClient: ViewerAuthorizationClient;

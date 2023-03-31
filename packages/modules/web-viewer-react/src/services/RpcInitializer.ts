@@ -21,9 +21,7 @@ import type { BackendConfiguration } from "../types";
  * The RpcInitializer handles registration of backends/instantiates RpcInterface clients.
  */
 export class RpcInitializer {
-  readonly orchestratorUrl = `https://${
-    (globalThis as any).IMJS_URL_PREFIX as string
-  }api.bentley.com`;
+  readonly orchestratorUrl = `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com`;
 
   /**
    * Instantiates a `DefaultBackend` and optional `CustomBackend`s. The `DefaultBackend`

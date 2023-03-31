@@ -40,19 +40,29 @@ export class WebInitializer {
     if (!IModelApp.initialized && !this._initializing) {
       console.log("starting web viewer");
       this._initializing = true;
-      const iModelAppOptions = getIModelAppOptions(options);
-      console.log(iModelAppOptions);
+
+      const {
+        backendConfiguration,
+        authClient,
+        extensions,
+        ...optionsForIModelApp
+      } = options;
+
+      const enablePerformanceMonitors = options.enablePerformanceMonitors;
+      const iModelAppOptions = getIModelAppOptions(optionsForIModelApp);
+
       const cancellable = makeCancellable(function* () {
-        ViewerPerformance.enable(options.enablePerformanceMonitors);
+        ViewerPerformance.enable(enablePerformanceMonitors);
         ViewerPerformance.addMark("ViewerStarting");
-        iModelAppOptions.authorizationClient = options.authClient;
-        ViewerAuthorization.client = options.authClient;
+
+        iModelAppOptions.authorizationClient = authClient;
+        ViewerAuthorization.client = authClient;
 
         yield IModelApp.startup(iModelAppOptions);
 
         // register extensions after startup
-        if (options?.extensions) {
-          options.extensions.forEach((extension) => {
+        if (extensions) {
+          extensions.forEach((extension) => {
             if (extension.hostname) {
               IModelApp.extensionAdmin.registerHost(
                 `https://${extension.hostname}`
@@ -63,8 +73,10 @@ export class WebInitializer {
               .catch((e) => console.log(e));
           });
         }
+
         const rpcInitializer = new RpcInitializer();
-        rpcInitializer.registerClients(options.backendConfiguration);
+        rpcInitializer.registerClients(backendConfiguration);
+
         ViewerPerformance.addMark("ViewerStarted");
         ViewerPerformance.addMeasure(
           "ViewerInitialized",
