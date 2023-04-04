@@ -60,8 +60,8 @@ export class BackstageItemsProvider implements UiItemsProvider {
     // add a launcher item for the built-in frontstage if there is an active connection and other backstage items
     if (allBackstageItems?.length > 0 && UiFramework.getIModelConnection()) {
       allBackstageItems.unshift({
-        stageId: "DefaultFrontstage",
-        id: "DefaultFrontstage",
+        stageId: "iTwinViewer.DefaultFrontstage",
+        id: "iTwinViewer.DefaultFrontstage",
         groupPriority: 100,
         itemPriority: 10,
         label: IModelApp.localization.getLocalizedString(
