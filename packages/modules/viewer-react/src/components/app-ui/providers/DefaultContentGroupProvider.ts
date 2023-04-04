@@ -50,11 +50,11 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
       );
     }
     return new ContentGroup({
-      id: "content-group",
+      id: "iTwinViewer.default-content-group",
       layout: StandardContentLayouts.singleView,
       contents: [
         {
-          id: "viewport",
+          id: "iTwinViewer.UnifiedSelectionViewport",
           classId: UnifiedSelectionViewportControl,
           applicationData: {
             ...this._viewportOptions,

@@ -2,6 +2,7 @@
  * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
+
 import {
   IModelConnectedViewport,
   IModelViewportControl,
@@ -18,6 +19,9 @@ const UnifiedSelectionIModelConnectedViewport = viewWithUnifiedSelection(
   IModelConnectedViewport
 );
 
+/** @internal fork of IModelViewportControl from AppUI, to provide Unified Selection
+ * https://github.com/iTwin/appui/blob/master/ui/appui-react/src/appui-react/content/IModelViewport.tsx
+ */
 export class UnifiedSelectionViewportControl extends IModelViewportControl {
   public static override get id() {
     return "iTwinViewer.UnifiedSelectionViewportControl";
