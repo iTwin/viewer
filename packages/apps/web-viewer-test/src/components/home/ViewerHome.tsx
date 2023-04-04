@@ -15,10 +15,10 @@ import {
   PropertyGridUiItemsProvider,
 } from "@itwin/property-grid-react";
 // import LocalExtension from "@itwin/test-local-extension";
-// import {
-//   TreeWidget,
-//   TreeWidgetUiItemsProvider,
-// } from "@itwin/tree-widget-react";
+import {
+  TreeWidget,
+  TreeWidgetUiItemsProvider,
+} from "@itwin/tree-widget-react";
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
 import {
   Viewer,
@@ -98,7 +98,7 @@ const ViewerHome: React.FC = () => {
   };
 
   const onIModelAppInit = useCallback(async () => {
-    // await TreeWidget.initialize();
+    await TreeWidget.initialize();
     await PropertyGridManager.initialize();
     // await MeasureTools.startup();
   }, []);
@@ -147,7 +147,7 @@ const ViewerHome: React.FC = () => {
             },
           }),
           new ViewerStatusbarItemsProvider(),
-          // new TreeWidgetUiItemsProvider(),
+          new TreeWidgetUiItemsProvider(),
           new PropertyGridUiItemsProvider({
             enableCopyingPropertyText: true,
           }),
@@ -165,6 +165,12 @@ const ViewerHome: React.FC = () => {
         // ]}
         backstageItems={backstageItems}
         // renderSys={{doIdleWork: true}}
+        backend={{
+          hostedBackend: {
+            title: "imodel/rpc",
+            version: "v4",
+          },
+        }}
       />
     </div>
   );

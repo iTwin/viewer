@@ -157,6 +157,7 @@ importers:
       '@itwin/property-grid-react': latest
       '@itwin/reality-data-client': ^0.9.0
       '@itwin/test-local-extension': workspace:*
+      '@itwin/tree-widget-react': latest
       '@itwin/web-viewer-react': workspace:*
       '@itwin/webgl-compatibility': ^4.0.0-dev.61
       '@remix-run/router': ^1.3.2
@@ -198,6 +199,7 @@ importers:
       '@itwin/property-grid-react': 0.9.0_917a889af7b792c6e58f4fb9f3ca283f
       '@itwin/reality-data-client': 0.9.0_@itwin+core-bentley@4.0.0-dev.61
       '@itwin/test-local-extension': link:../../modules/test-local-extension
+      '@itwin/tree-widget-react': 0.8.0_c631936767fac74b856a79374fd3e511
       '@itwin/web-viewer-react': link:../../modules/web-viewer-react
       '@itwin/webgl-compatibility': 4.0.0-dev.61
       '@remix-run/router': 1.5.0
@@ -3558,6 +3560,38 @@ packages:
       axios: 0.25.0
     transitivePeerDependencies:
       - debug
+    dev: false
+
+  /@itwin/tree-widget-react/0.8.0_c631936767fac74b856a79374fd3e511:
+    resolution: {integrity: sha512-H6Rt30lhy+5uzjD029n4NHpXCAdE83AGFbc957T0aetVlzZzseP47ggyNkAp+RSKjInHsvD0/ugYY7wExtwvMw==}
+    peerDependencies:
+      '@itwin/appui-abstract': ^3.7.0
+      '@itwin/appui-react': ^4.0.0-dev.13
+      '@itwin/components-react': ^4.0.0-dev.13
+      '@itwin/core-frontend': ^3.7.0
+      '@itwin/core-react': ^4.0.0-dev.13
+      '@itwin/presentation-components': ^4.0.0-dev.31
+      react: ^17.0.2
+      react-dom: ^17.0.2
+    dependencies:
+      '@itwin/appui-abstract': 4.0.0-dev.61_@itwin+core-bentley@4.0.0-dev.61
+      '@itwin/appui-react': 4.0.0-dev.15_55fa651b83e0a69dce576a7d3eb6844b
+      '@itwin/components-react': 4.0.0-dev.15_ef6c7d6cbe3aea9c4faf3a5029e27919
+      '@itwin/core-frontend': 4.0.0-dev.61_099d7c01c4a8ea293f04c9028e02db55
+      '@itwin/core-react': 4.0.0-dev.15_51d5975a075f415e1e2ad60e5fd3ddff
+      '@itwin/itwinui-icons-react': 2.1.0_react-dom@17.0.2+react@17.0.2
+      '@itwin/itwinui-react': 2.7.0_react-dom@17.0.2+react@17.0.2
+      '@itwin/itwinui-variables': 2.0.0
+      '@itwin/presentation-components': 4.0.0-dev.31_dd3f3016584f6119355d9ee845953e26
+      classnames: 2.3.2
+      i18next: 10.6.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-redux: 7.2.9_react-dom@17.0.2+react@17.0.2
+      redux: 4.2.1
+      rxjs: 6.6.7
+    transitivePeerDependencies:
+      - react-native
     dev: false
 
   /@itwin/webgl-compatibility/4.0.0-dev.61:
