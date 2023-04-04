@@ -3,13 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { ContentLayoutProps } from "@itwin/appui-abstract";
 import { StandardContentLayouts } from "@itwin/appui-abstract";
 import type { FrontstageConfig } from "@itwin/appui-react";
 import {
   ContentGroup,
   ContentGroupProvider,
-  IModelViewportControl,
   UiFramework,
 } from "@itwin/appui-react";
 
@@ -19,6 +17,7 @@ import type {
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
 } from "../../../types";
+import { UnifiedSelectionViewportControl } from "./UnifiedSelectionViewportControl";
 
 /**
  * Provide a default content group to the default frontstage
@@ -56,7 +55,7 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
       contents: [
         {
           id: "viewport",
-          classId: IModelViewportControl,
+          classId: UnifiedSelectionViewportControl,
           applicationData: {
             ...this._viewportOptions,
             viewState,

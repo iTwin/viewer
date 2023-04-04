@@ -10,10 +10,10 @@ import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 //   MeasureTools,
 //   MeasureToolsUiItemsProvider,
 // } from "@itwin/measure-tools-react";
-// import {
-//   PropertyGridManager,
-//   PropertyGridUiItemsProvider,
-// } from "@itwin/property-grid-react";
+import {
+  PropertyGridManager,
+  PropertyGridUiItemsProvider,
+} from "@itwin/property-grid-react";
 // import LocalExtension from "@itwin/test-local-extension";
 // import {
 //   TreeWidget,
@@ -99,7 +99,7 @@ const ViewerHome: React.FC = () => {
 
   const onIModelAppInit = useCallback(async () => {
     // await TreeWidget.initialize();
-    // await PropertyGridManager.initialize();
+    await PropertyGridManager.initialize();
     // await MeasureTools.startup();
   }, []);
 
@@ -148,9 +148,9 @@ const ViewerHome: React.FC = () => {
           }),
           new ViewerStatusbarItemsProvider(),
           // new TreeWidgetUiItemsProvider(),
-          // new PropertyGridUiItemsProvider({
-          //   enableCopyingPropertyText: true,
-          // }),
+          new PropertyGridUiItemsProvider({
+            enableCopyingPropertyText: true,
+          }),
           // new MeasureToolsUiItemsProvider(),
         ]}
         // extensions={[
