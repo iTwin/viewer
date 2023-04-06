@@ -63,7 +63,7 @@
     "redux": "^4.0.5",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.1.1",
-    "typescript": "~4.4.0"
+    "typescript": "~5.0.2"
   },
   "peerDependencies": {
     "@itwin/core-bentley": "^3.7.0 || ^4.0.0-dev.61",
