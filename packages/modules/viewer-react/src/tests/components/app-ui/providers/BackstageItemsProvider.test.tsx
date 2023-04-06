@@ -3,15 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { StandardContentLayouts } from "@itwin/appui-abstract";
-import type { FrontstageConfig } from "@itwin/appui-react";
-import { ContentGroup, IModelViewportControl } from "@itwin/appui-react";
-import { BackstageItemUtilities, FrontstageProvider } from "@itwin/appui-react";
+import { BackstageItemUtilities } from "@itwin/appui-react";
 import { IModelApp } from "@itwin/core-frontend";
-import React from "react";
 
 import { BackstageItemsProvider } from "../../../../components/app-ui/providers";
-import type { ViewerBackstageItem, ViewerFrontstage } from "../../../../types";
+import type { ViewerBackstageItem } from "../../../../types";
 
 jest.mock("@itwin/core-frontend", () => {
   return {
@@ -85,56 +81,8 @@ jest.mock("@itwin/core-frontend", () => {
 });
 jest.mock("@itwin/appui-abstract");
 
-class Frontstage1Provider extends FrontstageProvider {
-  frontstageConfig(): FrontstageConfig {
-    const content = new ContentGroup({
-      id: "content-group",
-      layout: StandardContentLayouts.singleView,
-      contents: [
-        {
-          id: "viewport",
-          classId: IModelViewportControl,
-        },
-      ],
-    });
-    return { id: "Frontstage1", contentGroup: content, version: 1 };
-  }
-  public id = "Frontstage1";
-  // public get frontstage(): React.ReactElement<FrontstageProps> {
-  //   return <div></div>;
-  // }
-}
-
-class Frontstage2Provider extends FrontstageProvider {
-  frontstageConfig(): FrontstageConfig {
-    const content = new ContentGroup({
-      id: "content-group",
-      layout: StandardContentLayouts.singleView,
-      contents: [
-        {
-          id: "viewport",
-          classId: IModelViewportControl,
-        },
-      ],
-    });
-    return { id: "Frontstage2", contentGroup: content, version: 1 };
-  }
-  public id = "Frontstage2";
-}
-
 describe("BackstageItemsProvider", () => {
   it("adds backstage items and translates their labels", async () => {
-    const fs1 = new Frontstage1Provider();
-    const fs2 = new Frontstage2Provider();
-    const frontstages: ViewerFrontstage[] = [
-      {
-        provider: fs1,
-      },
-      {
-        provider: fs2,
-      },
-    ];
-
     const actionItem = {
       id: "bs1",
       execute: jest.fn(),

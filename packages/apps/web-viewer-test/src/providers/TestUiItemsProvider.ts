@@ -3,21 +3,20 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type {
-  CommonStatusBarItem,
-  CommonToolbarItem,
-  UiItemsProvider,
-} from "@itwin/appui-abstract";
+import type { CommonToolbarItem } from "@itwin/appui-abstract";
 import {
-  AbstractStatusBarItemUtilities,
   ConditionalBooleanValue,
   ConditionalStringValue,
-  StageUsage,
-  StatusBarSection,
   ToolbarItemUtilities,
+} from "@itwin/appui-abstract";
+import type { StatusBarItem, UiItemsProvider } from "@itwin/appui-react";
+import {
+  StageUsage,
+  StatusBarItemUtilities,
+  StatusBarSection,
   ToolbarOrientation,
   ToolbarUsage,
-} from "@itwin/appui-abstract";
+} from "@itwin/appui-react";
 import { SyncUiEventDispatcher } from "@itwin/appui-react";
 
 export class TestUiProvider implements UiItemsProvider {
@@ -77,12 +76,12 @@ export class TestUiProvider implements UiItemsProvider {
   public provideStatusBarItems(
     _stageId: string,
     stageUsage: string
-  ): CommonStatusBarItem[] {
-    const statusBarItems: CommonStatusBarItem[] = [];
+  ): StatusBarItem[] {
+    const statusBarItems: StatusBarItem[] = [];
 
     if (stageUsage === StageUsage.General) {
       statusBarItems.push(
-        AbstractStatusBarItemUtilities.createActionItem(
+        StatusBarItemUtilities.createActionItem(
           "alert-statusbar-item",
           StatusBarSection.Center,
           100,
