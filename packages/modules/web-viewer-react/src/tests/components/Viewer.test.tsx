@@ -5,16 +5,14 @@
 
 import type { IModelAppOptions } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
-import type {
-  ViewerInitializerParams,
-} from "@itwin/viewer-react";
+import type { ViewerInitializerParams } from "@itwin/viewer-react";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
 import { Viewer } from "../../components/Viewer";
 import { WebInitializer } from "../../services/Initializer";
+import type { BackendConfiguration } from "../../types";
 import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
-import { BackendConfiguration } from "../../types";
 
 jest.mock("@itwin/viewer-react", () => {
   return {
@@ -35,9 +33,8 @@ jest.mock("@itwin/viewer-react", () => {
     makeCancellable: jest.requireActual(
       "@itwin/viewer-react/lib/cjs/utilities/MakeCancellable"
     ).makeCancellable,
-    RpcInitializer: jest.requireActual(
-      "@itwin/viewer-react/lib/cjs/services/RpcInitializer"
-    ).RpcInitializer,
+    RpcInitializer: jest.requireActual("../../services/RpcInitializer")
+      .RpcInitializer,
     useBaseViewerInitializer: jest.fn().mockReturnValue(true),
     getInitializationOptions: jest.fn().mockReturnValue({}),
     isEqual: jest.fn().mockReturnValue(true),
