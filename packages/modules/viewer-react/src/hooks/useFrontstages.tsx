@@ -69,7 +69,7 @@ export const useFrontstages = ({
       );
 
       const defaultFrontstageProvider = new StandardFrontstageProvider({
-        id: "DefaultFrontstage",
+        id: "iTwinViewer.DefaultFrontstage",
         usage: StageUsage.General,
         contentGroupProps: contentGroup,
         ...defaultUiConfig,
