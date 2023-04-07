@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { StageUsage } from "@itwin/appui-abstract";
+import { StageUsage } from "@itwin/appui-react";
 import { StandardFrontstageProvider } from "@itwin/appui-react";
 import { useEffect, useState } from "react";
 
@@ -70,7 +70,7 @@ export const useFrontstages = ({
       );
 
       const defaultFrontstageProvider = new StandardFrontstageProvider({
-        id: "DefaultFrontstage",
+        id: "iTwinViewer.DefaultFrontstage",
         usage: StageUsage.General,
         contentGroupProps: contentGroup,
         ...defaultUiConfig,
