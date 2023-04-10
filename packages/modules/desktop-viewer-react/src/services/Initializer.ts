@@ -57,9 +57,7 @@ export class DesktopInitializer {
           additionalRpcInterfaces,
         });
 
-        const authClient = new ElectronRendererAuthorization({ 
-          clientId: options.clientId,
-        });
+        const authClient = new ElectronRendererAuthorization({ clientId: options.clientId });
         iModelAppOpts.authorizationClient = authClient;
         ViewerAuthorization.client = authClient;
 

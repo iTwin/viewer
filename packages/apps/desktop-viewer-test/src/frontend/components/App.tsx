@@ -32,6 +32,7 @@ const App = () => {
 
   const desktopInitializerProps = useMemo<DesktopInitializerParams>(
     () => ({
+      clientId: process.env.REACT_APP_VIEWER_CLIENT_ID ?? "",
       additionalI18nNamespaces: ["iTwinDesktopViewer"],
       enablePerformanceMonitors: true,
       onIModelAppInit,

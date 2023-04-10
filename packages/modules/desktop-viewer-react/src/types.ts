@@ -11,7 +11,7 @@ import type {
   XOR,
 } from "@itwin/viewer-react";
 
-export type DesktopInitializerParams = ViewerCommonProps;
+export type DesktopInitializerParams = ViewerCommonProps & { clientId: string };
 
 /** Desktop Viewer can open local (snapshot/briefcase), connected or blank connection models */
 export type DesktopViewerProps = XOR<
