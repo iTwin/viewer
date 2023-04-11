@@ -34,7 +34,7 @@ export const ViewerRoute = () => {
 
   return filePath ? (
     <Viewer
-      clientId={process.env.REACT_APP_VIEWER_CLIENT_ID ?? ""}
+      clientId={process.env.IMJS_VIEWER_CLIENT_ID ?? ""}
       filePath={filePath}
       uiProviders={[
         new ViewerNavigationToolsProvider(),
