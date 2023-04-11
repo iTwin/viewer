@@ -15,8 +15,8 @@
     "start": "concurrently \"npm:build:cjs -- -w\" \"npm:build:esm -- -w\"",
     "build": "npm run -s build:cjs && npm run -s build:esm",
     "build:cjs": "tsc 1>&2 --outDir lib/cjs",
-    "build:esm": "tsc 1>&2 --module ES2020 --outDir lib/esm",
-    "test": "ts-jest",
+    "build:esm": "tsc 1>&2 --module es2020 --outDir lib/esm",
+    "test": "jest",
     "test-watch": "jest --watch",
     "clean": "rimraf lib",
     "rebuild": "npm run clean && npm run build"
@@ -57,6 +57,7 @@
     "copyfiles": "^2.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.1.0",
+    "jest-environment-jsdom": "^29.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.0",
@@ -99,7 +100,8 @@
     ],
     "collectCoverageFrom": [
       "<rootDir>/src/**"
-    ]
+    ],
+    "testEnvironment": "jsdom"
   },
   "keywords": [
     "Bentley",
