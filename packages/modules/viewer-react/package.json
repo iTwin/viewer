@@ -23,7 +23,7 @@
     "dev-build-scss": "copyfiles -u1 \"./src/**/*.scss\" ./lib/cjs",
     "prod-build-scss": "copyfiles -u1 \"./src/**/*.scss\" ./lib/esm",
     "copy-public": "copyfiles -u1 \"./public/**/*\" ./lib/public",
-    "test": "jest",
+    "test": "ts-jest --verbose",
     "test-watch": "jest --watch",
     "clean": "rimraf lib",
     "rebuild": "npm run clean && npm run build"

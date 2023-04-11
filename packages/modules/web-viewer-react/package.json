@@ -16,7 +16,7 @@
     "build": "npm run -s build:cjs && npm run -s build:esm",
     "build:cjs": "tsc 1>&2 --outDir lib/cjs",
     "build:esm": "tsc 1>&2 --module ES2020 --outDir lib/esm",
-    "test": "jest --env=jsdom",
+    "test": "ts-jest",
     "test-watch": "jest --watch",
     "clean": "rimraf lib",
     "rebuild": "npm run clean && npm run build"
