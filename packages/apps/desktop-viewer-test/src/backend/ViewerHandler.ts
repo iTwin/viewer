@@ -100,14 +100,14 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
       if (!ViewerHandler._authInitialized) {
         // we are online now and were not before so configure the auth backend
         const clientId = getAppEnvVar("CLIENT_ID") ?? "";
-        const scope = getAppEnvVar("SCOPE") ?? "";
-        const redirectUri = getAppEnvVar("REDIRECT_URI");
+        const scopes = getAppEnvVar("SCOPE") ?? "";
+        const redirectUri = getAppEnvVar("REDIRECT_URI") ?? "";
         const issuerUrl = getAppEnvVar("ISSUER_URL");
 
         const authClient = new ElectronMainAuthorization({
           clientId,
-          scope,
-          redirectUri: redirectUri || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+          scopes,
+          redirectUris: [redirectUri],
           issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
         });
         await authClient.signInSilent();

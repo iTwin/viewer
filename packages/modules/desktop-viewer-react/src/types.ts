@@ -14,6 +14,7 @@ import type {
 
 export type DesktopInitializerParams = ViewerCommonProps & {
   additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
+  clientId: string;
 };
 
 /** Desktop Viewer can open local (snapshot/briefcase), connected or blank connection models */
