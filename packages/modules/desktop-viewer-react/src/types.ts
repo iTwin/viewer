@@ -3,6 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import type { RpcInterface, RpcInterfaceDefinition } from "@itwin/core-common";
 import type {
   BlankViewerProps,
   ConnectedViewerProps,
@@ -11,7 +12,10 @@ import type {
   XOR,
 } from "@itwin/viewer-react";
 
-export type DesktopInitializerParams = ViewerCommonProps & { clientId: string };
+export type DesktopInitializerParams = ViewerCommonProps & {
+  additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
+  clientId: string;
+};
 
 /** Desktop Viewer can open local (snapshot/briefcase), connected or blank connection models */
 export type DesktopViewerProps = XOR<
