@@ -3,8 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { BentleyCloudRpcParams } from "@itwin/core-common";
-import { BentleyCloudRpcManager } from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import {
   getIModelAppOptions,
@@ -13,48 +11,8 @@ import {
   ViewerPerformance,
 } from "@itwin/viewer-react";
 
-import type { IModelBackendOptions, WebInitializerParams } from "../types";
-
-const getHostedConnectionInfo = (
-  backendOptions?: IModelBackendOptions
-): BentleyCloudRpcParams => {
-  const orchestratorUrl = `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com`;
-
-  if (backendOptions?.hostedBackend) {
-    if (!backendOptions.hostedBackend.title) {
-      //TODO localize
-      throw new Error("Please provide the title for the iTwin.js backend");
-    }
-    if (!backendOptions.hostedBackend.version) {
-      //TODO localize
-      throw new Error("Please provide a version for the iTwin.js backend");
-    }
-    return {
-      info: {
-        title: backendOptions.hostedBackend.title,
-        version: backendOptions.hostedBackend.version,
-      },
-      uriPrefix: orchestratorUrl,
-    };
-  } else {
-    return {
-      info: { title: "imodel/rpc", version: "" },
-      uriPrefix: orchestratorUrl,
-    };
-  }
-};
-
-const initializeRpcParams = (
-  backendOptions?: IModelBackendOptions
-): BentleyCloudRpcParams => {
-  // if rpc params for a custom backend are provided, use those
-  if (backendOptions?.customBackend && backendOptions.customBackend.rpcParams) {
-    return backendOptions.customBackend.rpcParams;
-  } else {
-    // otherwise construct params for a hosted connection
-    return getHostedConnectionInfo(backendOptions);
-  }
-};
+import type { WebInitializerParams } from "../types";
+import { RpcInitializer } from "./RpcInitializer";
 
 export class WebInitializer {
   private static _initialized: Promise<void>;
@@ -82,19 +40,29 @@ export class WebInitializer {
     if (!IModelApp.initialized && !this._initializing) {
       console.log("starting web viewer");
       this._initializing = true;
+
+      const {
+        backendConfiguration,
+        authClient,
+        extensions,
+        ...optionsForIModelApp
+      } = options;
+
+      const enablePerformanceMonitors = options.enablePerformanceMonitors;
+      const iModelAppOptions = getIModelAppOptions(optionsForIModelApp);
+
       const cancellable = makeCancellable(function* () {
-        ViewerPerformance.enable(options.enablePerformanceMonitors);
+        ViewerPerformance.enable(enablePerformanceMonitors);
         ViewerPerformance.addMark("ViewerStarting");
-        const iModelAppOptions = getIModelAppOptions(options);
-        iModelAppOptions.authorizationClient = options.authClient;
-        ViewerAuthorization.client = options.authClient;
-        const rpcParams: BentleyCloudRpcParams = initializeRpcParams(
-          options?.backend
-        );
+
+        iModelAppOptions.authorizationClient = authClient;
+        ViewerAuthorization.client = authClient;
+
         yield IModelApp.startup(iModelAppOptions);
+
         // register extensions after startup
-        if (options?.extensions) {
-          options.extensions.forEach((extension) => {
+        if (extensions) {
+          extensions.forEach((extension) => {
             if (extension.hostname) {
               IModelApp.extensionAdmin.registerHost(
                 `https://${extension.hostname}`
@@ -105,11 +73,10 @@ export class WebInitializer {
               .catch((e) => console.log(e));
           });
         }
-        BentleyCloudRpcManager.initializeClient(
-          rpcParams,
-          iModelAppOptions.rpcInterfaces ?? []
-        );
-        console.log("web viewer started");
+
+        const rpcInitializer = new RpcInitializer();
+        rpcInitializer.registerClients(backendConfiguration);
+
         ViewerPerformance.addMark("ViewerStarted");
         ViewerPerformance.addMeasure(
           "ViewerInitialized",

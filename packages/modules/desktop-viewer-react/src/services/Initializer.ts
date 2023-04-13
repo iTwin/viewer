@@ -52,17 +52,21 @@ export class DesktopInitializer {
         const additionalRpcInterfaces = options?.additionalRpcInterfaces ?? [];
         additionalRpcInterfaces.push(SnapshotIModelRpcInterface);
 
-        const iModelAppOpts = getIModelAppOptions({
-          ...options,
-          additionalRpcInterfaces,
-        });
+        const iModelAppOpts = getIModelAppOptions(options);
 
-        const authClient = new ElectronRendererAuthorization();
+        const iModelAppOptsWithRpcs = {
+          ...iModelAppOpts,
+          rpcInterfaces: additionalRpcInterfaces,
+        };
+
+        const authClient = new ElectronRendererAuthorization({
+          clientId: options.clientId,
+        });
         iModelAppOpts.authorizationClient = authClient;
         ViewerAuthorization.client = authClient;
 
         const electronViewerOpts: ElectronAppOpts = {
-          iModelApp: iModelAppOpts,
+          iModelApp: iModelAppOptsWithRpcs,
         };
         // this is a hack to workaround a bug in ITJS 2.x where browser connectivity events are not registered
         // TODO next verify and remove if no longer needed

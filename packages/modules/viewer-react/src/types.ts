@@ -16,8 +16,6 @@ import type {
   ColorDef,
   EcefLocationProps,
   RenderMode,
-  RpcInterface,
-  RpcInterfaceDefinition,
 } from "@itwin/core-common";
 import type {
   BlankConnectionProps,
@@ -134,8 +132,6 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   onIModelAppInit?: () => void;
   /** additional i18n namespaces to register */
   additionalI18nNamespaces?: string[];
-  /** custom rpc interfaces (assumes that they are supported in your backend) */
-  additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
   /** array of iTwin.js Extensions */
   extensions?: ExtensionProvider[];
 }
@@ -190,7 +186,6 @@ const iTwinViewerInitializerParamSample: OptionalToUndefinedUnion<ViewerInitiali
     i18nUrlTemplate: undefined,
     onIModelAppInit: undefined,
     additionalI18nNamespaces: undefined,
-    additionalRpcInterfaces: undefined,
     extensions: undefined,
   };
 
