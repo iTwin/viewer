@@ -3,11 +3,15 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { SnapshotIModelRpcInterface } from "@itwin/core-common";
-import type { ElectronAppOpts } from "@itwin/core-electron/lib/cjs/ElectronFrontend";
+import {
+  IModelReadRpcInterface,
+  IModelTileRpcInterface,
+  SnapshotIModelRpcInterface,
+} from "@itwin/core-common";
 import { ElectronApp } from "@itwin/core-electron/lib/cjs/ElectronFrontend";
 import { IModelApp, NativeAppLogger } from "@itwin/core-frontend";
 import { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
 import {
   getIModelAppOptions,
   makeCancellable,
@@ -49,15 +53,8 @@ export class DesktopInitializer {
       const cancellable = makeCancellable(function* () {
         ViewerPerformance.enable(options?.enablePerformanceMonitors);
         ViewerPerformance.addMark("ViewerStarting");
-        const additionalRpcInterfaces = options?.additionalRpcInterfaces ?? [];
-        additionalRpcInterfaces.push(SnapshotIModelRpcInterface);
 
         const iModelAppOpts = getIModelAppOptions(options);
-
-        const iModelAppOptsWithRpcs = {
-          ...iModelAppOpts,
-          rpcInterfaces: additionalRpcInterfaces,
-        };
 
         const authClient = new ElectronRendererAuthorization({
           clientId: options.clientId,
@@ -65,9 +62,15 @@ export class DesktopInitializer {
         iModelAppOpts.authorizationClient = authClient;
         ViewerAuthorization.client = authClient;
 
-        const electronViewerOpts: ElectronAppOpts = {
-          iModelApp: iModelAppOptsWithRpcs,
-        };
+        // eslint-disable-next-line deprecation/deprecation
+        iModelAppOpts.rpcInterfaces = [
+          IModelReadRpcInterface,
+          IModelTileRpcInterface,
+          SnapshotIModelRpcInterface,
+          PresentationRpcInterface,
+          ...(options?.additionalRpcInterfaces ?? []),
+        ];
+
         // this is a hack to workaround a bug in ITJS 2.x where browser connectivity events are not registered
         // TODO next verify and remove if no longer needed
         window.ononline = () => {
@@ -76,7 +79,9 @@ export class DesktopInitializer {
         window.onoffline = () => {
           /* nop */
         };
-        yield ElectronApp.startup(electronViewerOpts);
+        yield ElectronApp.startup({
+          iModelApp: iModelAppOpts,
+        });
         // register extensions after startup
         if (options?.extensions) {
           options.extensions.forEach((extension) => {
