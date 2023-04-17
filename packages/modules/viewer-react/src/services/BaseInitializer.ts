@@ -5,7 +5,6 @@
 
 import {
   AppNotificationManager,
-  ConfigurableUiManager,
   FrameworkReducer,
   FrameworkUiAdmin,
   StateManager,
@@ -144,8 +143,6 @@ export class BaseInitializer {
 
       // allow uiAdmin to open key-in palette when Ctrl+F2 is pressed - good for manually loading UI providers
       IModelApp.uiAdmin.updateFeatureFlags({ allowKeyinPalette: true });
-
-      ConfigurableUiManager.initialize();
 
       ViewerPerformance.addMark("BaseViewerStarted");
       ViewerPerformance.addMeasure(

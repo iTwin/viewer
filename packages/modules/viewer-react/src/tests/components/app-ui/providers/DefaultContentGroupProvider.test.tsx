@@ -105,7 +105,6 @@ jest.mock("../../../../services/iModel/ViewCreator3d", () => {
 
 jest.mock("@itwin/appui-react");
 
-const mockITwinId = "mockITwinId";
 const mockIModelId = "mockIModelId";
 
 describe("DefaultContentGroupProvider", () => {
