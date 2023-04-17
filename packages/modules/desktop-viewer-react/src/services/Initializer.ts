@@ -3,15 +3,9 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  IModelReadRpcInterface,
-  IModelTileRpcInterface,
-  SnapshotIModelRpcInterface,
-} from "@itwin/core-common";
 import { ElectronApp } from "@itwin/core-electron/lib/cjs/ElectronFrontend";
 import { IModelApp, NativeAppLogger } from "@itwin/core-frontend";
 import { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
-import { PresentationRpcInterface } from "@itwin/presentation-common";
 import {
   getIModelAppOptions,
   makeCancellable,
@@ -63,13 +57,7 @@ export class DesktopInitializer {
         ViewerAuthorization.client = authClient;
 
         // eslint-disable-next-line deprecation/deprecation
-        iModelAppOpts.rpcInterfaces = [
-          IModelReadRpcInterface,
-          IModelTileRpcInterface,
-          SnapshotIModelRpcInterface,
-          PresentationRpcInterface,
-          ...(options?.additionalRpcInterfaces ?? []),
-        ];
+        iModelAppOpts.rpcInterfaces = options?.rpcInterfaces;
 
         yield ElectronApp.startup({
           iModelApp: iModelAppOpts,

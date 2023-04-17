@@ -13,7 +13,7 @@ import type {
 } from "@itwin/viewer-react";
 
 export type DesktopInitializerParams = ViewerCommonProps & {
-  additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
+  rpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
   clientId: string;
 };
 
