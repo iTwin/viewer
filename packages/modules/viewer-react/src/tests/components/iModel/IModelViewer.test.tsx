@@ -29,9 +29,6 @@ class Frontstage1Provider extends FrontstageProvider {
     return { id: "Frontstage1", contentGroup: content, version: 1 };
   }
   public id = "Frontstage1";
-  // public get frontstage(): React.ReactElement<FrontstageProps> {
-  //   return <div></div>;
-  // }
 }
 
 class Frontstage2Provider extends FrontstageProvider {

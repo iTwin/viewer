@@ -3,11 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type {
-  AbstractWidgetProps,
-  UiItemsProvider,
-} from "@itwin/appui-abstract";
-import { StagePanelLocation, WidgetState } from "@itwin/appui-abstract";
+import type { UiItemsProvider, Widget } from "@itwin/appui-react";
+import { StagePanelLocation, WidgetState } from "@itwin/appui-react";
 import { useActiveViewport } from "@itwin/appui-react";
 import { Button } from "@itwin/itwinui-react";
 import React, { useEffect } from "react";
@@ -60,15 +57,14 @@ export class ViewportWidgetProvider implements UiItemsProvider {
     _stageId: string,
     _stageUsage: string,
     location: StagePanelLocation
-  ): ReadonlyArray<AbstractWidgetProps> {
-    const widgets: AbstractWidgetProps[] = [];
+  ): ReadonlyArray<Widget> {
+    const widgets: Widget[] = [];
     if (location === StagePanelLocation.Right) {
       widgets.push({
         id: "ViewportWidgetProvider",
         label: "Viewport Widget Selector",
         defaultState: WidgetState.Floating,
-        // eslint-disable-next-line react/display-name
-        getWidgetContent: () => (
+        content: (
           <ViewportOnlyWidget
             onSampleIModelChange={this._onSampleiModelInfoChange}
           />

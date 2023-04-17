@@ -3,8 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { StageUsage } from "@itwin/appui-react";
-import { StandardFrontstageProvider } from "@itwin/appui-react";
+import { StageUsage, StandardFrontstageProvider } from "@itwin/appui-react";
 import { useEffect, useState } from "react";
 
 import { DefaultContentGroupProvider } from "../components/app-ui/providers";
