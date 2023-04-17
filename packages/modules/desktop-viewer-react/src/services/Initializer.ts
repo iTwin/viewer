@@ -71,14 +71,6 @@ export class DesktopInitializer {
           ...(options?.additionalRpcInterfaces ?? []),
         ];
 
-        // this is a hack to workaround a bug in ITJS 2.x where browser connectivity events are not registered
-        // TODO next verify and remove if no longer needed
-        window.ononline = () => {
-          /* nop */
-        };
-        window.onoffline = () => {
-          /* nop */
-        };
         yield ElectronApp.startup({
           iModelApp: iModelAppOpts,
         });
