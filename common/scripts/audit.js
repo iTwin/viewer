@@ -48,9 +48,7 @@ const rushCommonDir = path.join(__dirname, "../");
   // All security issues should be addressed asap.
   const excludedAdvisories = [
     "GHSA-ww39-953v-wcq6", // https://github.com/advisories/GHSA-ww39-953v-wcq6, desktop-viewer-test>webpack>watchpack>watchpack-chokidar2>chokidar>glob-parent
-    "GHSA-f8q6-p94x-37v3", // https://github.com/advisories/GHSA-f8q6-p94x-37v3, cdn-viewer>@bentley/react-scripts>react-dev-utils>recursive-readdir>minimatch (regex dos)
-    "GHSA-76p3-8jx3-jpfq", // https://github.com/advisories/GHSA-76p3-8jx3-jpfq, desktop-viewer-test>@bentley/react-scripts>fast-sass-loader>loader-utils
-    "GHSA-9c47-m6qq-7p4h", // https://github.com/advisories/GHSA-9c47-m6qq-7p4h, desktop-viewer-test>@bentley/react-scripts>eslint-config-react-app>eslint-plugin-import>tsconfig-paths>json5
+    "GHSA-776f-qx25-q3cc", // https://github.com/advisories/GHSA-776f-qx25-q3cc, desktop-viewer-test>@itwin/core-backend>@itwin/object-storage-azure>@azure/storage-blob>@azure/core-http>xml2js
   ];
 
   let shouldFailBuild = false;
