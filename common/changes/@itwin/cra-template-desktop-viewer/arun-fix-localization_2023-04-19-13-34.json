@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-desktop-viewer",
+      "comment": "Update readme",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/cra-template-desktop-viewer"
+}
