@@ -36,6 +36,10 @@ Compiles the backend.
 
 Compiles and bundles the frontend.
 
+## Notes
+
+If you are not using NPM, remove the `USING_NPM` env var from [.env](./.env)
+
 ## Next Steps
 
 - There is a sample snapshot file in the "samples" directory that can be used for testing application features
