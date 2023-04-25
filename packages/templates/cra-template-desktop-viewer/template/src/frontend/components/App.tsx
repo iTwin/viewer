@@ -6,7 +6,10 @@
 import type { DesktopInitializerParams } from "@itwin/desktop-viewer-react";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
-import { MeasureTools } from "@itwin/measure-tools-react";
+import {
+  MeasurementActionToolbar,
+  MeasureTools,
+} from "@itwin/measure-tools-react";
 import { PropertyGridManager } from "@itwin/property-grid-react";
 import { TreeWidget } from "@itwin/tree-widget-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
@@ -28,6 +31,7 @@ const App = () => {
     await TreeWidget.initialize();
     await PropertyGridManager.initialize();
     await MeasureTools.startup();
+    MeasurementActionToolbar.setDefaultActionProvider();
   }, []);
 
   const desktopInitializerProps = useMemo<DesktopInitializerParams>(
