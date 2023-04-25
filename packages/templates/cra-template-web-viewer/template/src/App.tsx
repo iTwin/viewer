@@ -18,7 +18,6 @@ import {
   PropertyGridManager,
   PropertyGridUiItemsProvider,
 } from "@itwin/property-grid-react";
-// import LocalExtension from "@itwin/test-local-extension";
 import {
   TreeWidget,
   TreeWidgetUiItemsProvider,
