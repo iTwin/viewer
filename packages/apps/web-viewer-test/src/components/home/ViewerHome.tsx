@@ -6,10 +6,10 @@
 import { ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 // import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
-// import {
-//   MeasureTools,
-//   MeasureToolsUiItemsProvider,
-// } from "@itwin/measure-tools-react";
+import {
+  MeasureTools,
+  MeasureToolsUiItemsProvider,
+} from "@itwin/measure-tools-react";
 import {
   PropertyGridManager,
   PropertyGridUiItemsProvider,
@@ -100,7 +100,7 @@ const ViewerHome: React.FC = () => {
   const onIModelAppInit = useCallback(async () => {
     await TreeWidget.initialize();
     await PropertyGridManager.initialize();
-    // await MeasureTools.startup();
+    await MeasureTools.startup();
   }, []);
 
   const backstageItems: ViewerBackstageItem[] = [
@@ -151,7 +151,7 @@ const ViewerHome: React.FC = () => {
           new PropertyGridUiItemsProvider({
             enableCopyingPropertyText: true,
           }),
-          // new MeasureToolsUiItemsProvider(),
+          new MeasureToolsUiItemsProvider(),
         ]}
         // extensions={[
         //   new LocalExtensionProvider({
@@ -165,10 +165,14 @@ const ViewerHome: React.FC = () => {
         // ]}
         backstageItems={backstageItems}
         // renderSys={{doIdleWork: true}}
-        backend={{
-          hostedBackend: {
-            title: "imodel/rpc",
-            version: "v4",
+        backendConfiguration={{
+          defaultBackend: {
+            config: {
+              info: {
+                title: "imodel/rpc",
+                version: "v4",
+              },
+            },
           },
         }}
       />
