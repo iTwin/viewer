@@ -13,6 +13,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import type { ViewerSettings } from "../../common/ViewerConfig";
+import { viewerRpcs } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import {
   addRecent as addRecentClient,
@@ -33,6 +34,7 @@ const App = () => {
   const desktopInitializerProps = useMemo<DesktopInitializerParams>(
     () => ({
       clientId: process.env.IMJS_VIEWER_CLIENT_ID ?? "",
+      rpcInterfaces: viewerRpcs,
       additionalI18nNamespaces: ["iTwinDesktopViewer"],
       enablePerformanceMonitors: true,
       onIModelAppInit,
