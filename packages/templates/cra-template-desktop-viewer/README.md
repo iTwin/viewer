@@ -8,10 +8,6 @@ For example:
 
 ```sh
 npx create-react-app my-app-name --template @itwin/desktop-viewer --scripts-version @bentley/react-scripts
-
-# or
-
-yarn create react-app my-app-name --template @itwin/desktop-viewer --scripts-version @bentley/react-scripts
 ```
 
 For more information, please refer to:

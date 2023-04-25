@@ -1,6 +1,20 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Thu, 19 Jan 2023 13:51:30 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Mar 2023 20:57:53 GMT and should not be manually modified.
+
+## 3.4.1
+Tue, 28 Mar 2023 20:57:53 GMT
+
+### Patches
+
+- Fix Viewer rerendering on sibling component change
+
+## 3.4.0
+Tue, 28 Mar 2023 19:01:29 GMT
+
+### Minor changes
+
+- Expand semver range for `@itwin/imodels-*` peer deps to support 2.x and 3.x. [See their changelog](https://github.com/iTwin/imodels-clients/blob/main/itwin-platform-access/imodels-access-frontend/CHANGELOG.md)
 
 ## 3.3.2
 Thu, 19 Jan 2023 13:51:30 GMT
