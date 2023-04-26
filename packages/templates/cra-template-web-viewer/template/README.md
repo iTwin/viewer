@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+To run the application and install dependencies, use pnpm. Information on installing pnpm can be found [here](https://pnpm.io/installation).
+
 ## Environment Variables
 
 Prior to running the app, you will need to add OIDC client configuration to the variables in the .env file:
