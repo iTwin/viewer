@@ -12,6 +12,8 @@ import App from "./App";
 import { Auth } from "./Auth";
 import * as serviceWorker from "./serviceWorker";
 
+globalThis.IMJS_URL_PREFIX = process.env.IMJS_URL_PREFIX || "";
+
 if (!process.env.IMJS_AUTH_CLIENT_CLIENT_ID) {
   throw new Error(
     "Please add a valid OIDC client id to the .env file and restart the application. See the README for more information."
@@ -29,9 +31,9 @@ if (!process.env.IMJS_AUTH_CLIENT_REDIRECT_URI) {
 }
 
 Auth.initialize({
-  scope: process.env.IMJS_AUTH_CLIENT_SCOPES,
-  clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID,
-  redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI,
+  scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
+  clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
+  redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
   postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
   responseType: "code",
   authority: process.env.IMJS_AUTH_AUTHORITY,
