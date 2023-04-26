@@ -20,7 +20,7 @@
       "@itwin/core-quantity": "^4.0.0-dev.86",
       "@itwin/core-react": "rc",
       "@itwin/core-telemetry": "^4.0.0-dev.86",
-      "@itwin/desktop-viewer-react": "^3.0.0",
+      "@itwin/desktop-viewer-react": "next",
       "@itwin/ecschema-metadata": "^4.0.0-dev.86",
       "@itwin/electron-authorization": "^0.8.3",
       "@itwin/express-server": "^4.0.0-dev.86",
@@ -28,16 +28,16 @@
       "@itwin/imodel-components-react": "rc",
       "@itwin/imodels-access-backend": "^3.0.0",
       "@itwin/imodels-access-frontend": "^3.0.0",
-      "@itwin/itwinui-css": "^0.18.1",
-      "@itwin/itwinui-icons-react": "^1.2.0",
-      "@itwin/itwinui-react": "^1.16.2",
-      "@itwin/measure-tools-react": "^0.7.3",
+      "@itwin/itwinui-icons-react": "^2.1.0",
+      "@itwin/itwinui-react": "^2.6.0",
+      "@itwin/itwinui-variables": "^2.0.0",
+      "@itwin/measure-tools-react": "^0.11.0-dev.4",
       "@itwin/presentation-backend": "^4.0.0-dev.86",
       "@itwin/presentation-common": "^4.0.0-dev.86",
       "@itwin/presentation-components": "^4.0.0-dev.40",
       "@itwin/presentation-frontend": "^4.0.0-dev.86",
-      "@itwin/property-grid-react": "^0.5.4",
-      "@itwin/tree-widget-react": "^0.4.7",
+      "@itwin/property-grid-react": "^0.10.0-dev.4",
+      "@itwin/tree-widget-react": "^0.9.0-dev.4",
       "@itwin/webgl-compatibility": "^4.0.0-dev.86",
       "@types/electron-devtools-installer": "^2.2.0",
       "@types/minimist": "^1.2.0",
@@ -67,6 +67,11 @@
       "electron:debug": "cross-env NODE_ENV=development electron lib/backend/main.js",
       "start": "npm run build:backend && run-p \"start:frontend\" \"electron:debug\"",
       "start:frontend": "react-scripts start"
+    },
+    "pnpm": {
+      "overrides": {
+        "semver": "7.4.0"
+      }
     },
     "browserslist": ["electron 23.0.0"]
   }
