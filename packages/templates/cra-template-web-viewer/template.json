@@ -1,35 +1,35 @@
 {
   "package": {
     "dependencies": {
-      "@bentley/icons-generic": "1.0.13",
-      "@bentley/react-scripts": "5.0.4",
-      "@itwin/appui-abstract": "4.0.0-dev.86",
+      "@bentley/icons-generic": "^1.0.13",
+      "@bentley/react-scripts": "^5.0.4",
+      "@itwin/appui-abstract": "^4.0.0-dev.86",
       "@itwin/appui-layout-react": "rc",
       "@itwin/appui-react": "rc",
-      "@itwin/browser-authorization": "0.8.0",
+      "@itwin/browser-authorization": "^0.8.0",
       "@itwin/components-react": "rc",
-      "@itwin/core-bentley": "4.0.0-dev.86",
-      "@itwin/core-common": "4.0.0-dev.86",
-      "@itwin/core-frontend": "4.0.0-dev.86",
-      "@itwin/core-geometry": "4.0.0-dev.86",
-      "@itwin/core-i18n": "4.0.0-dev.86",
-      "@itwin/core-markup": "4.0.0-dev.86",
-      "@itwin/core-orbitgt": "4.0.0-dev.86",
-      "@itwin/core-quantity": "4.0.0-dev.86",
+      "@itwin/core-bentley": "^4.0.0-dev.86",
+      "@itwin/core-common": "^4.0.0-dev.86",
+      "@itwin/core-frontend": "^4.0.0-dev.86",
+      "@itwin/core-geometry": "^4.0.0-dev.86",
+      "@itwin/core-i18n": "^4.0.0-dev.86",
+      "@itwin/core-markup": "^4.0.0-dev.86",
+      "@itwin/core-orbitgt": "^4.0.0-dev.86",
+      "@itwin/core-quantity": "^4.0.0-dev.86",
       "@itwin/core-react": "rc",
-      "@itwin/core-telemetry": "4.0.0-dev.86",
+      "@itwin/core-telemetry": "^4.0.0-dev.86",
       "@itwin/ecschema-metadata": "^4.0.0-dev.86",
       "@itwin/imodel-components-react": "rc",
-      "@itwin/imodels-access-frontend": "3.0.0",
-      "@itwin/itwinui-react": "2.7.0",
-      "@itwin/measure-tools-react": "0.11.0-dev.4", 
-      "@itwin/presentation-common": "4.0.0-dev.86",
-      "@itwin/presentation-components": "4.0.0-dev.40",
-      "@itwin/presentation-frontend": "4.0.0-dev.86",
-      "@itwin/property-grid-react": "0.10.0-dev.4",
-      "@itwin/tree-widget-react": "0.9.0-dev.4",
+      "@itwin/imodels-access-frontend": "^3.0.0",
+      "@itwin/itwinui-react": "^2.7.0",
+      "@itwin/measure-tools-react": "^0.11.0-dev.4", 
+      "@itwin/presentation-common": "^4.0.0-dev.86",
+      "@itwin/presentation-components": "^4.0.0-dev.40",
+      "@itwin/presentation-frontend": "^4.0.0-dev.86",
+      "@itwin/property-grid-react": "^0.10.0-dev.4",
+      "@itwin/tree-widget-react": "^0.9.0-dev.4",
       "@itwin/web-viewer-react": "next",
-      "@itwin/webgl-compatibility": "4.0.0-dev.86",
+      "@itwin/webgl-compatibility": "^4.0.0-dev.86",
       "@remix-run/router": "^1.3.2",
       "@types/history": "^4.7.6",
       "@types/node": "^14.0.19",
@@ -48,9 +48,6 @@
       "test": "react-scripts --max_old_space_size=4096 test",
       "eject": "react-scripts eject"
     },
-    "resolutions": {
-      "semver": "7.4.0"
-    },
     "pnpm": {
       "overrides": {
         "semver": "7.4.0"
@@ -63,11 +60,14 @@
       ]
     },
     "browserslist": [
-      ">0.2%",
+      "last 4 chrome version",
+      "last 4 firefox version",
+      "last 4 safari version",
+      "last 4 ios version",
+      "last 4 ChromeAndroid version",
+      "last 4 edge version",
       "not dead",
-      "not edge > 0",
-      "not ie > 0",
-      "not op_mini all"
+      "not <0.2%"
     ]
   }
 }
