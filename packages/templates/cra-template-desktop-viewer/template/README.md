@@ -23,16 +23,16 @@ ITWIN_VIEWER_CLIENT_ID="native-xxxxxxxx"
 
 In the project directory, you can run:
 
-### `npm start`
+### `pnpm start`
 
 Runs the Electron app in the development mode.\
 The page will reload if you make edits.
 
-### `npm run build:backend`
+### `pnpm run build:backend`
 
 Compiles the backend.
 
-### `npm run build:frontend`
+### `pnpm run build:frontend`
 
 Compiles and bundles the frontend.
 

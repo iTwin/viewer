@@ -15,6 +15,7 @@ import { TreeWidgetUiItemsProvider } from "@itwin/tree-widget-react";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
+import { viewerRpcs } from "../../../common/ViewerConfig";
 import { IModelMergeItemsProvider } from "../../extensions";
 
 export interface ViewerRouteState {
@@ -35,6 +36,7 @@ export const ViewerRoute = () => {
   return filePath ? (
     <Viewer
       clientId={process.env.IMJS_VIEWER_CLIENT_ID ?? ""}
+      rpcInterfaces={viewerRpcs}
       filePath={filePath}
       uiProviders={[
         new ViewerNavigationToolsProvider(),

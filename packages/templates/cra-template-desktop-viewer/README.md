@@ -7,7 +7,7 @@ To use this template, add `--template @itwin/desktop-viewer` when creating a new
 For example:
 
 ```sh
-npx create-react-app my-app-name --template @itwin/desktop-viewer --scripts-version @bentley/react-scripts
+pnpm dlx create-react-app my-app-name --template @itwin/desktop-viewer --scripts-version @bentley/react-scripts
 
 # or
 
