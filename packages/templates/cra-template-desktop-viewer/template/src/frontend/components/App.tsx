@@ -36,6 +36,7 @@ const App = () => {
 
   const desktopInitializerProps = useMemo<DesktopInitializerParams>(
     () => ({
+      clientId: process.env.IMJS_VIEWER_CLIENT_ID ?? "",
       additionalI18nNamespaces: ["iTwinDesktopViewer"],
       enablePerformanceMonitors: true,
       onIModelAppInit,
