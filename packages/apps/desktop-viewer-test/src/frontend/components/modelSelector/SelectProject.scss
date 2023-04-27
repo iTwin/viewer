@@ -18,6 +18,8 @@
     .inline-input-with-button {
       display: flex;
       flex-direction: row;
+      margin-bottom: 5px;
+      width: 95%;
 
       .iui-input-container.iui-inline > .iui-input:last-child {
         min-width: 300px;
@@ -25,10 +27,26 @@
       }
 
       .iui-input-container {
-        grid-template: "label inputs icon" / auto minmax(50px, 290px) auto;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        > .iui-label {
+          display: flex;
+          margin-left: 10px;
+          margin-right: 10px;
+          flex-wrap: wrap;
+          align-content: center;  
+        }
+        > .iui-input {
+          border: 2px solid var(--iui-text-color-muted);
+          background-color: var(--iui-color-background-1);
+          width: 100%;
+          padding: 10px;
+        }
       }
 
       .iui-button {
+        background: 0;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         margin-left: -50px;
@@ -46,7 +64,29 @@
     flex-direction: column;
     margin: 0 20px 0 20px;
     > .iui-tabs {
-      margin-top: 20px;
+      margin-top: 10px;
+      margin-bottom: 8px;
+      border: 0;
+      > li {
+        > .iui-tab {
+          display: flex;
+          flex-direction: row;
+          background: 0;
+          min-width: 140px;
+          color: var(--iui-text-color);
+          padding: 10px;
+          border-width: 0;
+          > .iui-tab-label {
+            margin-left: 10px;
+            margin-right: 5px;
+          }
+        }
+        > .iui-active {
+          background: rgb(104, 121, 135);
+          color: var(--iui-color-foreground-primary);
+          border-bottom: 2px solid var(--iui-color-foreground-primary);
+        }
+      }
     }
     > .iui-tab-stripe {
       margin-top: 20px;
@@ -62,10 +102,13 @@
     padding-left: 0;
     margin-top: -9px;
     padding-top: 9px;
-    border-top: 2px solid var(--iui-color-background-5);
+    border-top: 2px solid var(--iui-text-color-muted);
   }
 
   ul.grid-holding-tabs {
-    padding-left: calc(var(--responsive-grid-margin, 64px) - 3px);
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    padding-left: calc(var(--responsive-grid-margin, 10px) - 3px);
   }
 }
