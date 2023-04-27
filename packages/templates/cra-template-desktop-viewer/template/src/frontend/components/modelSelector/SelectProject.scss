@@ -18,6 +18,7 @@
     .inline-input-with-button {
       display: flex;
       flex-direction: row;
+      justify-content: flex-end;
       margin: 10px 61px;
       width: 95%;
 
@@ -30,12 +31,8 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        font-family: "Open Sans",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Helvetica Neue",Arial,sans-serif;
-        font-size: 14px;
           > .iui-label {
           color: var(--iui-text-color);
-          font-family: inherit;
-          font-size: inherit;
           font-weight: 600;
           margin: 0 12px 3px 0;
           cursor: pointer;
@@ -47,7 +44,6 @@
           color: var(--iui-text-color);
           font-family: inherit;
           font-size: inherit;
-          font-weight: 400;
           box-sizing: border-box;
           padding: 7px 12px;
           min-height: 38px;
@@ -102,17 +98,17 @@
       border: 0;
       > li {
         > .iui-tab {
-          font-family: "Open Sans",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Helvetica Neue",Arial,sans-serif;
           display: flex;
           flex-direction: row;
           align-items: center;
-          background: 0;
+          background-color: var(--iui-color-background-2);
+          font-family: inherit;
+          font-size: inherit;
           min-width: 140px;
           color: var(--iui-text-color);
           padding: 0 24px;
           height: 38px;
-          border-width: 0;
-          text-align: left;
+          border: 0;
           cursor: pointer;
           > .iui-tab-label {
             margin: 0 5px 0 10px;
