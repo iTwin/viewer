@@ -18,7 +18,7 @@
     .inline-input-with-button {
       display: flex;
       flex-direction: row;
-      margin-bottom: 5px;
+      margin: 10px 61px;
       width: 95%;
 
       .iui-input-container.iui-inline > .iui-input:last-child {
@@ -59,8 +59,8 @@
         }
         .iui-input:focus{
           outline: 0;
-          border-color:rgba(var(--iui-color-foreground-body-rgb), var(--iui-opacity-4));
-          box-shadow:var(--iui-focus-box-shadow); 
+          border-color: rgba(var(--iui-color-foreground-body-rgb),var(--iui-opacity-4));
+          box-shadow: rgba(var(--iui-color-foreground-primary-rgb),var(--iui-opacity-5)) 0 0 0 2px;;
         }
         > .iui-input:hover { 
           border-color: rgba(var(--iui-color-foreground-body-rgb),var(--iui-opacity-2));
@@ -68,7 +68,6 @@
         ::placeholder {
           color: var(--iui-text-color-muted);
         }
-        //TODO: translucent border for focused input
       }
 
       .iui-button {
@@ -98,9 +97,9 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin: 0 20px 0 20px;
+    margin: 0 20px;
     > .iui-tabs {
-      margin: 10px 0 7px 0;
+      margin: 7px 0;
       border: 0;
       > li {
         > .iui-tab {
@@ -138,7 +137,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    padding: 18px 0 0 0;
+    padding: 9px 0 0 0;
     margin-top: -9px;
     border-top: 2px solid var(--iui-text-color-muted);
     .iui-tile >.iui-tile-thumbnail >.iui-thumbnail-icon {
@@ -146,7 +145,7 @@
       height: 100%;
       position: absolute;
       @media (prefers-reduced-motion: no-preference) {
-        transition: transform .4s ease;
+        transition: .4s ease;
       }
     }
     .iui-tile:hover {
@@ -155,7 +154,6 @@
         height: 110%;
       }
     }
-
   }
 
   ul.grid-holding-tabs {
