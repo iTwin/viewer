@@ -18,6 +18,9 @@
     .inline-input-with-button {
       display: flex;
       flex-direction: row;
+      justify-content: flex-end;
+      margin: 10px 61px;
+      width: 95%;
 
       .iui-input-container.iui-inline > .iui-input:last-child {
         min-width: 300px;
@@ -25,13 +28,58 @@
       }
 
       .iui-input-container {
-        grid-template: "label inputs icon" / auto minmax(50px, 290px) auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+          > .iui-label {
+          color: var(--iui-text-color);
+          font-weight: 600;
+          margin: 0 12px 3px 0;
+          cursor: pointer;
+        }
+        > .iui-input {
+          border: 1px solid rgba(var(--iui-color-foreground-body-rgb),var(--iui-opacity-4));
+          border-radius: 3px;
+          background-color: var(--iui-color-background-1);
+          color: var(--iui-text-color);
+          font-family: inherit;
+          font-size: inherit;
+          box-sizing: border-box;
+          padding: 7px 12px;
+          min-height: 38px;
+          min-width: 300px;
+          @media (prefers-reduced-motion: no-preference) {
+            transition: border-color .2s ease-out;
+          }
+        }
+        .iui-input:focus{
+          outline: 0;
+          border-color: rgba(var(--iui-color-foreground-body-rgb),var(--iui-opacity-4));
+          box-shadow: rgba(var(--iui-color-foreground-primary-rgb),var(--iui-opacity-5)) 0 0 0 2px;;
+        }
+        > .iui-input:hover { 
+          border-color: rgba(var(--iui-color-foreground-body-rgb),var(--iui-opacity-2));
+        }
+        ::placeholder {
+          color: var(--iui-text-color-muted);
+        }
       }
 
       .iui-button {
+        border: 1px solid rgba(var(--iui-color-foreground-body-rgb),var(--iui-opacity-4));
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         margin-left: -50px;
+        background-color: var(--iui-color-background-1);
+        color: rgba(var(--iui-color-foreground-body-rgb),var(--iui-opacity-2));
+      }
+      .iui-button:enabled:active, .iui-button:enabled:hover, .iui-button:focus-visible {
+        border-color: rgba(var(--iui-color-foreground-body-rgb),var(--iui-opacity-1));
+        background-color: var(--iui-color-background-1-overlay);
+        color: rgba(var(--iui-color-foreground-body-rgb),var(--iui-opacity-1));
+        @media (prefers-reduced-motion: no-preference) {
+          transition: color .2s ease-out, background-color .2s ease-out, border-color .2s ease-out;
+        }
       }
     }
 
@@ -40,13 +88,40 @@
     }
   }
 
-  > .iui-tabs-wrapper {
+  .iui-tabs-wrapper {
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin: 0 20px 0 20px;
+    margin: 0 20px;
     > .iui-tabs {
-      margin-top: 20px;
+      margin: 7px 0;
+      border: 0;
+      > li {
+        > .iui-tab {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          background-color: var(--iui-color-background-2);
+          font-family: inherit;
+          font-size: inherit;
+          min-width: 140px;
+          color: var(--iui-text-color);
+          padding: 0 24px;
+          height: 38px;
+          border: 0;
+          cursor: pointer;
+          > .iui-tab-label {
+            margin: 0 5px 0 10px;
+          }
+        }
+        > .iui-active {
+          color: var(--iui-color-foreground-primary);
+          border-bottom: 2px solid var(--iui-color-foreground-primary);
+        }
+        > .iui-active, .iui-tab:hover {
+          background-color: rgba(var(--iui-color-foreground-primary-rgb),var(--iui-opacity-6));
+        }
+      }
     }
     > .iui-tab-stripe {
       margin-top: 20px;
@@ -57,15 +132,29 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    padding-bottom: 0;
-    padding-right: 0;
-    padding-left: 0;
+    padding: 9px 0 0 0;
     margin-top: -9px;
-    padding-top: 9px;
-    border-top: 2px solid var(--iui-color-background-5);
+    border-top: 2px solid var(--iui-text-color-muted);
+    .iui-tile >.iui-tile-thumbnail >.iui-thumbnail-icon {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      @media (prefers-reduced-motion: no-preference) {
+        transition: .4s ease;
+      }
+    }
+    .iui-tile:hover {
+      >.iui-tile-thumbnail >.iui-thumbnail-icon {
+        width: 110%;
+        height: 110%;
+      }
+    }
   }
 
   ul.grid-holding-tabs {
-    padding-left: calc(var(--responsive-grid-margin, 64px) - 3px);
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    padding-left: calc(var(--responsive-grid-margin, 16px) - 3px);
   }
 }
