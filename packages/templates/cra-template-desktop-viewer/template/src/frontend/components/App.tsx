@@ -6,13 +6,17 @@
 import type { DesktopInitializerParams } from "@itwin/desktop-viewer-react";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
-import { MeasureTools } from "@itwin/measure-tools-react";
+import {
+  MeasurementActionToolbar,
+  MeasureTools,
+} from "@itwin/measure-tools-react";
 import { PropertyGridManager } from "@itwin/property-grid-react";
 import { TreeWidget } from "@itwin/tree-widget-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import type { ViewerSettings } from "../../common/ViewerConfig";
+import { viewerRpcs } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import {
   addRecent as addRecentClient,
@@ -28,10 +32,13 @@ const App = () => {
     await TreeWidget.initialize();
     await PropertyGridManager.initialize();
     await MeasureTools.startup();
+    MeasurementActionToolbar.setDefaultActionProvider();
   }, []);
 
   const desktopInitializerProps = useMemo<DesktopInitializerParams>(
     () => ({
+      clientId: process.env.IMJS_VIEWER_CLIENT_ID ?? "",
+      rpcInterfaces: viewerRpcs,
       additionalI18nNamespaces: ["iTwinDesktopViewer"],
       enablePerformanceMonitors: true,
       onIModelAppInit,
