@@ -29,27 +29,63 @@
       .iui-input-container {
         display: flex;
         flex-direction: row;
+        align-items: center;
         width: 100%;
-        > .iui-label {
-          display: flex;
-          margin-left: 10px;
-          margin-right: 10px;
-          flex-wrap: wrap;
-          align-content: center;  
+        font-family: "Open Sans",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Helvetica Neue",Arial,sans-serif;
+        font-size: 14px;
+          > .iui-label {
+          color: var(--iui-text-color);
+          font-family: inherit;
+          font-size: inherit;
+          font-weight: 600;
+          margin: 0 12px 3px 0;
+          cursor: pointer;
         }
         > .iui-input {
-          border: 2px solid var(--iui-text-color-muted);
+          border: 1px solid rgba(var(--iui-color-foreground-body-rgb),var(--iui-opacity-4));
+          border-radius: 3px;
           background-color: var(--iui-color-background-1);
+          color: var(--iui-text-color);
+          font-family: inherit;
+          font-size: inherit;
+          font-weight: 400;
+          box-sizing: border-box;
+          padding: 7px 12px;
+          min-height: 38px;
           width: 100%;
-          padding: 10px;
+          @media (prefers-reduced-motion: no-preference) {
+            transition: border-color .2s ease-out;
+          }
         }
+        .iui-input:focus{
+          outline: 0;
+          border-color:rgba(var(--iui-color-foreground-body-rgb), var(--iui-opacity-4));
+          box-shadow:var(--iui-focus-box-shadow); 
+        }
+        > .iui-input:hover { 
+          border-color: rgba(var(--iui-color-foreground-body-rgb),var(--iui-opacity-2));
+        }
+        ::placeholder {
+          color: var(--iui-text-color-muted);
+        }
+        //TODO: translucent border for focused input
       }
 
       .iui-button {
-        background: 0;
+        border: 1px solid rgba(var(--iui-color-foreground-body-rgb),var(--iui-opacity-4));
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         margin-left: -50px;
+        background-color: var(--iui-color-background-1);
+        color: rgba(var(--iui-color-foreground-body-rgb),var(--iui-opacity-2));
+      }
+      .iui-button:enabled:active, .iui-button:enabled:hover, .iui-button:focus-visible {
+        border-color: rgba(var(--iui-color-foreground-body-rgb),var(--iui-opacity-1));
+        background-color: var(--iui-color-background-1-overlay);
+        color: rgba(var(--iui-color-foreground-body-rgb),var(--iui-opacity-1));
+        @media (prefers-reduced-motion: no-preference) {
+          transition: color .2s ease-out, background-color .2s ease-out, border-color .2s ease-out;
+        }
       }
     }
 
@@ -64,27 +100,32 @@
     flex-direction: column;
     margin: 0 20px 0 20px;
     > .iui-tabs {
-      margin-top: 10px;
-      margin-bottom: 8px;
+      margin: 10px 0 7px 0;
       border: 0;
       > li {
         > .iui-tab {
+          font-family: "Open Sans",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Helvetica Neue",Arial,sans-serif;
           display: flex;
           flex-direction: row;
+          align-items: center;
           background: 0;
           min-width: 140px;
           color: var(--iui-text-color);
-          padding: 10px;
+          padding: 0 24px;
+          height: 38px;
           border-width: 0;
+          text-align: left;
+          cursor: pointer;
           > .iui-tab-label {
-            margin-left: 10px;
-            margin-right: 5px;
+            margin: 0 5px 0 10px;
           }
         }
         > .iui-active {
-          background: rgb(104, 121, 135);
           color: var(--iui-color-foreground-primary);
           border-bottom: 2px solid var(--iui-color-foreground-primary);
+        }
+        > .iui-active, .iui-tab:hover {
+          background-color: rgba(var(--iui-color-foreground-primary-rgb),var(--iui-opacity-6));
         }
       }
     }
@@ -97,11 +138,8 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    padding-bottom: 0;
-    padding-right: 0;
-    padding-left: 0;
+    padding: 18px 0 0 0;
     margin-top: -9px;
-    padding-top: 9px;
     border-top: 2px solid var(--iui-text-color-muted);
   }
 
@@ -109,6 +147,6 @@
     display: flex;
     flex-direction: row;
     list-style-type: none;
-    padding-left: calc(var(--responsive-grid-margin, 10px) - 3px);
+    padding-left: calc(var(--responsive-grid-margin, 0px) - 3px);
   }
 }
