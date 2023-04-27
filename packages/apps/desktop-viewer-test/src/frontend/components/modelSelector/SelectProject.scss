@@ -30,7 +30,6 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        width: 100%;
         font-family: "Open Sans",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Helvetica Neue",Arial,sans-serif;
         font-size: 14px;
           > .iui-label {
@@ -52,7 +51,7 @@
           box-sizing: border-box;
           padding: 7px 12px;
           min-height: 38px;
-          width: 100%;
+          min-width: 300px;
           @media (prefers-reduced-motion: no-preference) {
             transition: border-color .2s ease-out;
           }
@@ -160,6 +159,6 @@
     display: flex;
     flex-direction: row;
     list-style-type: none;
-    padding-left: calc(var(--responsive-grid-margin, 0px) - 3px);
+    padding-left: calc(var(--responsive-grid-margin, 16px) - 3px);
   }
 }
