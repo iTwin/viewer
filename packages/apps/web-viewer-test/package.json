@@ -19,6 +19,7 @@
     "@itwin/core-quantity": "^4.0.0-dev.86",
     "@itwin/core-react": "^4.0.0",
     "@itwin/core-telemetry": "^4.0.0-dev.86",
+    "@itwin/ecschema-metadata": "^4.0.0-dev.86",
     "@itwin/frontend-devtools": "^4.0.0-dev.86",
     "@itwin/imodel-components-react": "^4.0.0",
     "@itwin/imodels-access-frontend": "^3.0.0",
@@ -44,7 +45,7 @@
   },
   "devDependencies": {
     "@bentley/react-scripts": "^5.0.0",
-    "@types/node": "^14.0.19",
+    "@types/node": "^18.12.0",
     "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
     "typescript": "~5.0.2"
