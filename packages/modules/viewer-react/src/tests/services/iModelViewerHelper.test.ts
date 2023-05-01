@@ -148,35 +148,16 @@ describe("iModelViewerHelper", () => {
     expect(openLocalSpy).toHaveBeenCalledTimes(1);
 
     await openConnection({
-      blankConnection: {
-        extents: new Range3d(10, 10, 10),
-        location: Cartographic.createZero(),
-        iTwinId: "iTwinId",
-        name: "Blank Connection",
-      },
-    });
-
-    expect(BlankConnection.create).toHaveBeenCalledTimes(1);
-
-    await openConnection({
       extents: new Range3d(10, 10, 10),
       location: Cartographic.createZero(),
       iTwinId: "iTwinId",
     });
 
-    expect(BlankConnection.create).toHaveBeenCalledTimes(2);
+    expect(BlankConnection.create).toHaveBeenCalledTimes(1);
   });
 
   it("gatherRequiredViewerProps narrows required viewer properties", async () => {
     const validConnectedProps = { iTwinId: "iTwinId", iModelId: "iModelId" };
-    const validDeprecatedBlankConnectionProps = {
-      blankConnection: {
-        name: "Blank Connection",
-        extents: new Range3d(10, 10, 10),
-        location: Cartographic.createZero(),
-        iTwinId: "mockITwinId",
-      },
-    };
     const validBlankConnectionProps = {
       extents: new Range3d(10, 10, 10),
       location: Cartographic.createZero(),
@@ -187,9 +168,6 @@ describe("iModelViewerHelper", () => {
     expect(gatherRequiredViewerProps(validConnectedProps)).toEqual(
       validConnectedProps
     );
-    expect(
-      gatherRequiredViewerProps(validDeprecatedBlankConnectionProps)
-    ).toEqual(validDeprecatedBlankConnectionProps);
     expect(gatherRequiredViewerProps(validBlankConnectionProps)).toEqual(
       validBlankConnectionProps
     );

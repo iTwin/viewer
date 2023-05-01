@@ -18,7 +18,6 @@ import type {
   RenderMode,
 } from "@itwin/core-common";
 import type {
-  BlankConnectionProps,
   ExtensionProvider,
   IModelAppOptions,
   IModelConnection,
@@ -160,8 +159,6 @@ export type FileViewerProps = {
 
 // it's fine to say that if either location or extents is defined, then both have to be defined.
 export type BlankViewerProps = {
-  /** @deprecated specify location and extents instead. */
-  blankConnection?: BlankConnectionProps;
   blankConnectionViewState?: BlankConnectionViewState;
   location?: Cartographic | EcefLocationProps;
   extents?: Range3dProps;
