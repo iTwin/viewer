@@ -197,7 +197,10 @@ describe("IModelLoader", () => {
 
     await waitFor(() => getByTestId("viewer"));
 
-    expect(BlankConnection.create).toHaveBeenCalledWith(blankConnectionProps);
+    expect(BlankConnection.create).toHaveBeenCalledWith({
+      ...blankConnectionProps,
+      name: "Blank Connection",
+    });
   });
 
   it("creates a blank connection with iTwinId passed separate from blankConnection", async () => {
@@ -230,6 +233,7 @@ describe("IModelLoader", () => {
     expect(BlankConnection.create).toHaveBeenCalledWith({
       ...blankConnectionProps,
       iTwinId: mockITwinId,
+      name: "Blank Connection",
     });
   });
 
