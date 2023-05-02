@@ -7,7 +7,6 @@ import "@testing-library/jest-dom/extend-expect";
 
 import { ColorTheme, UiFramework, UiItemsManager } from "@itwin/appui-react";
 import { Cartographic, ColorDef } from "@itwin/core-common";
-import type { BlankConnectionProps } from "@itwin/core-frontend";
 import { BlankConnection, SnapshotConnection } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
 import { render, waitFor } from "@testing-library/react";
@@ -18,6 +17,7 @@ import IModelLoader from "../../../components/iModel/IModelLoader";
 import * as IModelServices from "../../../services/iModel/IModelService";
 import type {
   BlankConnectionViewState,
+  BlankViewerProps,
   ViewerFrontstage,
 } from "../../../types";
 import { TestUiProvider, TestUiProvider2 } from "../../mocks/MockUiProviders";
@@ -171,8 +171,7 @@ describe("IModelLoader", () => {
   });
 
   it("creates a blank connection with iTwinId passed in blankConnection", async () => {
-    const blankConnection = {
-      name: "GeometryConnection",
+    const blankConnectionProps = {
       location: Cartographic.fromDegrees({
         longitude: 0,
         latitude: 0,
@@ -191,19 +190,21 @@ describe("IModelLoader", () => {
 
     const { getByTestId } = render(
       <IModelLoader
-        blankConnection={blankConnection}
+        {...blankConnectionProps}
         blankConnectionViewState={blankConnectionViewState}
       />
     );
 
     await waitFor(() => getByTestId("viewer"));
 
-    expect(BlankConnection.create).toHaveBeenCalledWith(blankConnection);
+    expect(BlankConnection.create).toHaveBeenCalledWith({
+      ...blankConnectionProps,
+      name: "Blank Connection",
+    });
   });
 
   it("creates a blank connection with iTwinId passed separate from blankConnection", async () => {
-    const blankConnection: BlankConnectionProps = {
-      name: "GeometryConnection",
+    const blankConnectionProps: BlankViewerProps = {
       location: Cartographic.fromDegrees({
         longitude: 0,
         latitude: 0,
@@ -221,7 +222,7 @@ describe("IModelLoader", () => {
 
     const { getByTestId } = render(
       <IModelLoader
-        blankConnection={blankConnection}
+        {...blankConnectionProps}
         blankConnectionViewState={blankConnectionViewState}
         iTwinId={mockITwinId}
       />
@@ -230,8 +231,9 @@ describe("IModelLoader", () => {
     await waitFor(() => getByTestId("viewer"));
 
     expect(BlankConnection.create).toHaveBeenCalledWith({
-      ...blankConnection,
+      ...blankConnectionProps,
       iTwinId: mockITwinId,
+      name: "Blank Connection",
     });
   });
 
