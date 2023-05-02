@@ -43,7 +43,7 @@
     "@itwin/ecschema-metadata": "^4.0.0-dev.86",
     "@itwin/imodel-components-react": "^4.0.0",
     "@itwin/presentation-common": "^4.0.0-dev.86",
-    "@itwin/presentation-components": "^4.0.0-dev.40",
+    "@itwin/presentation-components": "^4.0.0",
     "@itwin/presentation-frontend": "^4.0.0-dev.86",
     "@itwin/webgl-compatibility": "^4.0.0-dev.86",
     "@testing-library/jest-dom": "^4.2.4",

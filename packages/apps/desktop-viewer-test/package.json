@@ -62,7 +62,7 @@
     "@itwin/itwinui-variables": "^2.0.0",
     "@itwin/presentation-backend": "^4.0.0-dev.86",
     "@itwin/presentation-common": "^4.0.0-dev.86",
-    "@itwin/presentation-components": "^4.0.0-dev.40",
+    "@itwin/presentation-components": "^4.0.0",
     "@itwin/presentation-frontend": "^4.0.0-dev.86",
     "@itwin/webgl-compatibility": "^4.0.0-dev.86",
     "dotenv-flow": "^3.2.0",
