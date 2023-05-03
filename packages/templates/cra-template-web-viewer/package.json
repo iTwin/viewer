@@ -23,7 +23,8 @@
   },
   "files": [
     "template",
-    "template.json"
+    "template.json",
+    "template/.npmrc"
   ],
   "main": "template.json",
   "scripts": {
