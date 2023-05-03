@@ -6,9 +6,12 @@
 import type { DesktopInitializerParams } from "@itwin/desktop-viewer-react";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
-// import { MeasureTools } from "@itwin/measure-tools-react";
-// import { PropertyGridManager } from "@itwin/property-grid-react";
-// import { TreeWidget } from "@itwin/tree-widget-react";
+import {
+  MeasurementActionToolbar,
+  MeasureTools,
+} from "@itwin/measure-tools-react";
+import { PropertyGridManager } from "@itwin/property-grid-react";
+import { TreeWidget } from "@itwin/tree-widget-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -26,9 +29,10 @@ const App = () => {
   window.ITWIN_VIEWER_HOME = window.location.origin;
 
   const onIModelAppInit = useCallback(async () => {
-    // await TreeWidget.initialize();
-    // await PropertyGridManager.initialize();
-    // await MeasureTools.startup();
+    await TreeWidget.initialize();
+    await PropertyGridManager.initialize();
+    await MeasureTools.startup();
+    MeasurementActionToolbar.setDefaultActionProvider();
   }, []);
 
   const desktopInitializerProps = useMemo<DesktopInitializerParams>(
