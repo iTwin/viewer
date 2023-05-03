@@ -9,9 +9,9 @@ import {
   ViewerNavigationToolsProvider,
   ViewerStatusbarItemsProvider,
 } from "@itwin/desktop-viewer-react";
-// import { MeasureToolsUiItemsProvider } from "@itwin/measure-tools-react";
-// import { PropertyGridUiItemsProvider } from "@itwin/property-grid-react";
-// import { TreeWidgetUiItemsProvider } from "@itwin/tree-widget-react";
+import { MeasureToolsUiItemsProvider } from "@itwin/measure-tools-react";
+import { PropertyGridUiItemsProvider } from "@itwin/property-grid-react";
+import { TreeWidgetUiItemsProvider } from "@itwin/tree-widget-react";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -46,11 +46,11 @@ export const ViewerRoute = () => {
           },
         }),
         new ViewerStatusbarItemsProvider(),
-        // new TreeWidgetUiItemsProvider(),
-        // new PropertyGridUiItemsProvider({
-        //   enableCopyingPropertyText: true,
-        // }),
-        // new MeasureToolsUiItemsProvider(),
+        new TreeWidgetUiItemsProvider(),
+        new PropertyGridUiItemsProvider({
+          enableCopyingPropertyText: true,
+        }),
+        new MeasureToolsUiItemsProvider(),
         new IModelMergeItemsProvider(),
       ]}
       enablePerformanceMonitors={true}
