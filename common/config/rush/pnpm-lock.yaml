@@ -141,7 +141,7 @@ importers:
       '@itwin/appui-abstract': ^4.0.0-dev.86
       '@itwin/appui-layout-react': ^4.0.0
       '@itwin/appui-react': ^4.0.0
-      '@itwin/browser-authorization': ^0.8.0
+      '@itwin/browser-authorization': ^1.0.0
       '@itwin/components-react': ^4.0.0
       '@itwin/core-bentley': ^4.0.0-dev.86
       '@itwin/core-common': ^4.0.0-dev.86
@@ -185,7 +185,7 @@ importers:
       '@itwin/appui-abstract': 4.0.0-dev.86_@itwin+core-bentley@4.0.0-dev.86
       '@itwin/appui-layout-react': 4.0.0_c123f039e30c7950e65e426bd2a04b7c
       '@itwin/appui-react': 4.0.0_4fc3b2ffeb1323393f33bef92e22377b
-      '@itwin/browser-authorization': 0.8.0_@itwin+core-bentley@4.0.0-dev.86
+      '@itwin/browser-authorization': 1.0.0_e205445ef2353db2f88b25d6f2f1a583
       '@itwin/components-react': 4.0.0_c123f039e30c7950e65e426bd2a04b7c
       '@itwin/core-bentley': 4.0.0-dev.86
       '@itwin/core-common': 4.0.0-dev.86_e205445ef2353db2f88b25d6f2f1a583
@@ -2770,13 +2770,17 @@ packages:
       redux: 4.2.1
       rxjs: 6.6.7
 
-  /@itwin/browser-authorization/0.8.0_@itwin+core-bentley@4.0.0-dev.86:
-    resolution: {integrity: sha512-EXiW0Wqapcq6TkxohgMkrsxM/0Em3TOwvejTQhhi5+BDY0L3q0oBp9wlxsYJqDSTxi/Vdo5T0xcSQnCcZxnKBQ==}
+  /@itwin/browser-authorization/1.0.0_e205445ef2353db2f88b25d6f2f1a583:
+    resolution: {integrity: sha512-EgHznaSF2KrHILrMfnlSIoYIXPL5LoO+aI2jwhElU5jhFlmoJuge1LI1CCGmvg9F3dNZwUJM3ZlazbmTAcFeNQ==}
     peerDependencies:
-      '@itwin/core-bentley': ^3.0.0
+      '@itwin/core-bentley': '>=3.3.0'
     dependencies:
       '@itwin/core-bentley': 4.0.0-dev.86
+      '@itwin/core-common': 3.7.3_e205445ef2353db2f88b25d6f2f1a583
       oidc-client-ts: 2.2.2
+    transitivePeerDependencies:
+      - '@itwin/core-geometry'
+      - debug
     dev: false
 
   /@itwin/build-tools/4.0.0-dev.86:
@@ -2913,6 +2917,22 @@ packages:
       '@itwin/core-geometry': ^3.7.3
     dependencies:
       '@itwin/core-bentley': 3.7.3
+      '@itwin/core-geometry': 4.0.0-dev.86
+      '@itwin/object-storage-core': 1.5.0
+      flatbuffers: 1.12.0
+      js-base64: 3.7.5
+      semver: 7.3.8
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /@itwin/core-common/3.7.3_e205445ef2353db2f88b25d6f2f1a583:
+    resolution: {integrity: sha512-LakJIV0Df5Gq4jOHnQrqQvlKTTqssyhe6eLg4Xi9Ro9+0rM6fvXhMNPrPbMsUI+7Enn8LbVqZcv1VY/y6sisKg==}
+    peerDependencies:
+      '@itwin/core-bentley': ^3.7.3
+      '@itwin/core-geometry': ^3.7.3
+    dependencies:
+      '@itwin/core-bentley': 4.0.0-dev.86
       '@itwin/core-geometry': 4.0.0-dev.86
       '@itwin/object-storage-core': 1.5.0
       flatbuffers: 1.12.0
