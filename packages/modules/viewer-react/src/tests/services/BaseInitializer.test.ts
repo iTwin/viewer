@@ -4,15 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { StateManager } from "@itwin/appui-react";
-import {
-  DevToolsRpcInterface,
-  IModelReadRpcInterface,
-  IModelTileRpcInterface,
-} from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
-import { PresentationRpcInterface } from "@itwin/presentation-common";
 
 import {
   BaseInitializer,
@@ -39,6 +33,8 @@ jest.mock("@itwin/appui-react", () => {
       ...jest.createMockFromModule<any>("@itwin/appui-react").UiFramework,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
+    FrameworkAccuDraw:
+      jest.createMockFromModule<any>("@itwin/appui-react").FrameworkAccuDraw,
   };
 });
 
@@ -125,6 +121,7 @@ describe("BaseInitializer", () => {
     expect(appOptions).toEqual({
       applicationId: "3098",
       accuSnap: expect.anything(),
+      accuDraw: expect.anything(),
       notifications: expect.anything(),
       uiAdmin: expect.anything(),
       localization: expect.anything(),
@@ -133,6 +130,8 @@ describe("BaseInitializer", () => {
       mapLayerOptions: undefined,
       publicPath: "",
       realityDataAccess: expect.anything(),
+      renderSys: undefined,
+      tileAdmin: undefined,
     });
   });
 
