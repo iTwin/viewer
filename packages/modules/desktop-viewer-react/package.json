@@ -72,11 +72,11 @@
     "typescript": "~5.0.2"
   },
   "peerDependencies": {
-    "@itwin/core-bentley": "^3.7.0 || ^4.0.0-dev.104",
-    "@itwin/core-common": "^3.7.0 || ^4.0.0-dev.104",
-    "@itwin/core-electron": "^3.7.0 || ^4.0.0-dev.104",
-    "@itwin/core-frontend": "^3.7.0 || ^4.0.0-dev.104",
-    "@itwin/ecschema-metadata": "^3.7.0 || ^4.0.0-dev.104",
+    "@itwin/core-bentley": "^4.0.0-dev.104",
+    "@itwin/core-common": "^4.0.0-dev.104",
+    "@itwin/core-electron": "^4.0.0-dev.104",
+    "@itwin/core-frontend": "^4.0.0-dev.104",
+    "@itwin/ecschema-metadata": "^4.0.0-dev.104",
     "@itwin/electron-authorization": "^0.13.0",
     "electron": "^23.0.0",
     "react": "^17.0.2",

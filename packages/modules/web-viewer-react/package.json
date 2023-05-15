@@ -68,11 +68,11 @@
     "typescript": "~5.0.2"
   },
   "peerDependencies": {
-    "@itwin/core-bentley": "^3.7.0 || ^4.0.0-dev.104",
-    "@itwin/core-common": "^3.7.0 || ^4.0.0-dev.104",
-    "@itwin/core-frontend": "^3.7.0 || ^4.0.0-dev.104",
-    "@itwin/core-react": "^3.7.0 || ^4.0.0-dev.104",
-    "@itwin/presentation-common": "^3.7.0 || ^4.0.0-dev.104",
+    "@itwin/core-bentley": "^4.0.0-dev.104",
+    "@itwin/core-common": "^4.0.0-dev.104",
+    "@itwin/core-frontend": "^4.0.0-dev.104",
+    "@itwin/core-react": "^4.0.0-dev.104",
+    "@itwin/presentation-common": "^4.0.0-dev.104",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.0",
