@@ -4,15 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { StateManager } from "@itwin/appui-react";
-import {
-  DevToolsRpcInterface,
-  IModelReadRpcInterface,
-  IModelTileRpcInterface,
-} from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
-import { PresentationRpcInterface } from "@itwin/presentation-common";
 
 import {
   BaseInitializer,
