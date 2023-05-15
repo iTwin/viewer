@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Add default instance of AccuDraw",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
