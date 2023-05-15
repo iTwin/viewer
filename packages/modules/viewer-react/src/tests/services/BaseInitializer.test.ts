@@ -38,6 +38,8 @@ jest.mock("@itwin/appui-react", () => {
       ...jest.createMockFromModule<any>("@itwin/appui-react").UiFramework,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
+    FrameworkAccuDraw:
+      jest.createMockFromModule<any>("@itwin/appui-react").FrameworkAccuDraw,
   };
 });
 jest.mock("@itwin/presentation-frontend", () => {
@@ -121,6 +123,7 @@ describe("BaseInitializer", () => {
     expect(appOptions).toEqual({
       applicationId: "3098",
       accuSnap: expect.anything(),
+      accuDraw: expect.anything(),
       notifications: expect.anything(),
       uiAdmin: expect.anything(),
       rpcInterfaces: [
@@ -134,6 +137,8 @@ describe("BaseInitializer", () => {
       mapLayerOptions: undefined,
       publicPath: "",
       realityDataAccess: expect.anything(),
+      renderSys: undefined,
+      tileAdmin: undefined,
     });
   });
   it("sets the applicationId", () => {
@@ -150,6 +155,7 @@ describe("BaseInitializer", () => {
       additionalRpcInterfaces: additionalRpcInterfaces,
       enablePerformanceMonitors: false,
     });
+    // eslint-disable-next-line deprecation/deprecation
     expect(appOptions.rpcInterfaces).toEqual([
       IModelReadRpcInterface,
       IModelTileRpcInterface,
