@@ -6,6 +6,7 @@
 import {
   AppNotificationManager,
   ConfigurableUiManager,
+  FrameworkAccuDraw,
   FrameworkReducer,
   FrameworkUiAdmin,
   StateManager,
@@ -233,6 +234,7 @@ export const getIModelAppOptions = (
   return {
     applicationId: options?.productId ?? "3098",
     accuSnap: new ViewerAccuSnap(),
+    accuDraw: new FrameworkAccuDraw(),
     notifications: new AppNotificationManager(),
     uiAdmin: new FrameworkUiAdmin(),
     rpcInterfaces: getSupportedRpcs(options?.additionalRpcInterfaces ?? []),
