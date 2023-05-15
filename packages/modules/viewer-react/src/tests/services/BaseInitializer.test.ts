@@ -39,6 +39,8 @@ jest.mock("@itwin/appui-react", () => {
       ...jest.createMockFromModule<any>("@itwin/appui-react").UiFramework,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
+    FrameworkAccuDraw:
+      jest.createMockFromModule<any>("@itwin/appui-react").FrameworkAccuDraw,
   };
 });
 
@@ -125,6 +127,7 @@ describe("BaseInitializer", () => {
     expect(appOptions).toEqual({
       applicationId: "3098",
       accuSnap: expect.anything(),
+      accuDraw: expect.anything(),
       notifications: expect.anything(),
       uiAdmin: expect.anything(),
       localization: expect.anything(),
@@ -133,6 +136,8 @@ describe("BaseInitializer", () => {
       mapLayerOptions: undefined,
       publicPath: "",
       realityDataAccess: expect.anything(),
+      renderSys: undefined,
+      tileAdmin: undefined,
     });
   });
 

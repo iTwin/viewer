@@ -1,6 +1,20 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Fri, 06 Jan 2023 14:28:28 GMT and should not be manually modified.
+This log was last generated on Wed, 19 Apr 2023 13:42:11 GMT and should not be manually modified.
+
+## 3.2.2
+Wed, 19 Apr 2023 13:42:11 GMT
+
+### Patches
+
+- Update readme
+
+## 3.2.1
+Wed, 19 Apr 2023 13:30:41 GMT
+
+### Patches
+
+- Add `USING_NPM` env var and default to true. Will be the case if bootstrapped using npx
 
 ## 3.2.0
 Fri, 06 Jan 2023 14:28:28 GMT
