@@ -160,16 +160,6 @@ const App: React.FC = () => {
           }),
           new MeasureToolsUiItemsProvider(),
         ]}
-        backendConfiguration={{
-          defaultBackend: {
-            config: {
-              info: {
-                title: "imodel/rpc",
-                version: "v4",
-              },
-            },
-          },
-        }}
       />
     </div>
   );

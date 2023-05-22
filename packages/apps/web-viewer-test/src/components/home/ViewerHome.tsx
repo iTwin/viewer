@@ -165,16 +165,6 @@ const ViewerHome: React.FC = () => {
         // ]}
         backstageItems={backstageItems}
         // renderSys={{doIdleWork: true}}
-        backendConfiguration={{
-          defaultBackend: {
-            config: {
-              info: {
-                title: "imodel/rpc",
-                version: "v4",
-              },
-            },
-          },
-        }}
       />
     </div>
   );
