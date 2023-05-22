@@ -134,7 +134,7 @@ describe("Initializer", () => {
       {
         info: {
           title: "imodel/rpc",
-          version: "",
+          version: "v4",
         },
         uriPrefix: "https://undefinedapi.bentley.com",
       },
@@ -161,7 +161,7 @@ describe("Initializer", () => {
       {
         info: {
           title: "imodel/rpc",
-          version: "",
+          version: "v4",
         },
         uriPrefix: "https://alteredBackendUrl.bentley",
       },
@@ -216,7 +216,7 @@ describe("Initializer", () => {
       {
         info: {
           title: "imodel/rpc",
-          version: "",
+          version: "v4",
         },
         uriPrefix: "https://undefinedapi.bentley.com",
       },
@@ -246,7 +246,7 @@ describe("Initializer", () => {
       {
         info: {
           title: "imodel/rpc",
-          version: "",
+          version: "v4",
         },
         uriPrefix: "https://undefinedapi.bentley.com",
       },
