@@ -22,12 +22,13 @@
       "@itwin/core-telemetry": "^4.0.0",
       "@itwin/desktop-viewer-react": "next",
       "@itwin/ecschema-metadata": "^4.0.0",
-      "@itwin/electron-authorization": "^0.8.3",
+      "@itwin/electron-authorization": "^0.14.0",
       "@itwin/express-server": "^4.0.0",
       "@itwin/imodel-browser-react": "^0.12.2",
       "@itwin/imodel-components-react": "^4.0.0",
       "@itwin/imodels-access-backend": "^4.0.0",
       "@itwin/imodels-access-frontend": "^4.0.0",
+      "@itwin/itwinui-css": "^1.7.0",
       "@itwin/itwinui-icons-react": "^2.1.0",
       "@itwin/itwinui-react": "^2.6.0",
       "@itwin/itwinui-variables": "^2.0.0",
@@ -73,6 +74,8 @@
         "semver": "7.4.0"
       }
     },
-    "browserslist": ["electron 23.0.0"]
+    "browserslist": [
+      "electron 23.0.0"
+    ]
   }
 }
