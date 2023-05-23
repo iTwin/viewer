@@ -38,18 +38,18 @@ export class ITwinViewerApp {
     get(_target, key: keyof IpcMethods): AsyncFunction {
       const makeIpcCall =
         <T extends keyof IpcMethods>(methodName: T) =>
-        async (...args: Parameters<IpcMethods[T]>) =>
+        async (args: Parameters<IpcMethods[T]>) =>
           IpcApp.callIpcChannel(
             channelName,
             methodName,
-            ...args
+            args
           ) as PromiseReturnType<ViewerIpc[T]>;
 
       switch (key) {
         case "getConfig":
           return async () => {
             if (!ITwinViewerApp._config) {
-              ITwinViewerApp._config = await makeIpcCall("getConfig")();
+              ITwinViewerApp._config = await makeIpcCall("getConfig")([]);
             }
             return ITwinViewerApp._config;
           };
