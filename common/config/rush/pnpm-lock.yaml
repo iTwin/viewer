@@ -141,7 +141,7 @@ importers:
       '@itwin/appui-abstract': ^4.0.0
       '@itwin/appui-layout-react': ^4.0.0
       '@itwin/appui-react': ^4.0.0
-      '@itwin/browser-authorization': ^0.8.0
+      '@itwin/browser-authorization': ^1.0.0
       '@itwin/components-react': ^4.0.0
       '@itwin/core-bentley': ^4.0.0
       '@itwin/core-common': ^4.0.0
@@ -185,7 +185,7 @@ importers:
       '@itwin/appui-abstract': 4.0.0_@itwin+core-bentley@4.0.0
       '@itwin/appui-layout-react': 4.0.0_1bf60842fe8effcafac7d20bcfbcc9cd
       '@itwin/appui-react': 4.0.0_9aa3f5f36e1f94973cadac728ef1c06a
-      '@itwin/browser-authorization': 0.8.0_@itwin+core-bentley@4.0.0
+      '@itwin/browser-authorization': 1.0.0_8b973855e889ff8da4ca85bd3eac12bb
       '@itwin/components-react': 4.0.0_1bf60842fe8effcafac7d20bcfbcc9cd
       '@itwin/core-bentley': 4.0.0
       '@itwin/core-common': 4.0.0_8b973855e889ff8da4ca85bd3eac12bb
@@ -2808,13 +2808,17 @@ packages:
       redux: 4.2.1
       rxjs: 6.6.7
 
-  /@itwin/browser-authorization/0.8.0_@itwin+core-bentley@4.0.0:
-    resolution: {integrity: sha512-EXiW0Wqapcq6TkxohgMkrsxM/0Em3TOwvejTQhhi5+BDY0L3q0oBp9wlxsYJqDSTxi/Vdo5T0xcSQnCcZxnKBQ==}
+  /@itwin/browser-authorization/1.0.0_8b973855e889ff8da4ca85bd3eac12bb:
+    resolution: {integrity: sha512-EgHznaSF2KrHILrMfnlSIoYIXPL5LoO+aI2jwhElU5jhFlmoJuge1LI1CCGmvg9F3dNZwUJM3ZlazbmTAcFeNQ==}
     peerDependencies:
-      '@itwin/core-bentley': ^3.0.0
+      '@itwin/core-bentley': '>=3.3.0'
     dependencies:
       '@itwin/core-bentley': 4.0.0
+      '@itwin/core-common': 4.0.0_8b973855e889ff8da4ca85bd3eac12bb
       oidc-client-ts: 2.2.2
+    transitivePeerDependencies:
+      - '@itwin/core-geometry'
+      - debug
     dev: false
 
   /@itwin/build-tools/4.0.0:

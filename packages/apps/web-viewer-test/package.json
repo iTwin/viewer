@@ -7,7 +7,7 @@
     "@itwin/appui-abstract": "^4.0.0",
     "@itwin/appui-layout-react": "^4.0.0",
     "@itwin/appui-react": "^4.0.0",
-    "@itwin/browser-authorization": "^0.8.0",
+    "@itwin/browser-authorization": "^1.0.0",
     "@itwin/components-react": "^4.0.0",
     "@itwin/core-bentley": "^4.0.0",
     "@itwin/core-common": "^4.0.0",
