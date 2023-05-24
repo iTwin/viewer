@@ -10,7 +10,6 @@ import { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib
 import { SvgUser } from "@itwin/itwinui-icons-react";
 import { Button } from "@itwin/itwinui-react";
 import React, { useState } from "react";
-
 export const SignIn = () => {
   const [signingIn, setSigningIn] = useState(false);
 
