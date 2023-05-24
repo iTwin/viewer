@@ -135,11 +135,6 @@ const createMenu = () => {
       label: "Window",
       submenu: windowMenu,
     });
-
-    template.push({
-      label: "Window",
-      submenu: windowMenu,
-    });
     template.unshift({
       label: "iTwin Viewer",
       role: "appMenu",
