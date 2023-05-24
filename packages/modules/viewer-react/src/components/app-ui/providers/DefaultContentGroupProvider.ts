@@ -4,10 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { StandardContentLayouts } from "@itwin/appui-abstract";
+import type { FrontstageConfig } from "@itwin/appui-react";
 import {
   ContentGroup,
   ContentGroupProvider,
-  IModelViewportControl,
   UiFramework,
 } from "@itwin/appui-react";
 
@@ -17,6 +17,7 @@ import type {
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
 } from "../../../types";
+import { UnifiedSelectionViewportControl } from "./UnifiedSelectionViewportControl";
 
 /**
  * Provide a default content group to the default frontstage
@@ -37,7 +38,7 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
     this._viewCreatorOptions = viewCreatorOptions;
   }
 
-  public async provideContentGroup(): Promise<ContentGroup> {
+  public async contentGroup(_config: FrontstageConfig): Promise<ContentGroup> {
     const iModelConnection = UiFramework.getIModelConnection();
     let viewState;
     if (iModelConnection) {
@@ -49,12 +50,12 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
       );
     }
     return new ContentGroup({
-      id: "content-group",
+      id: "iTwinViewer.default-content-group",
       layout: StandardContentLayouts.singleView,
       contents: [
         {
-          id: "viewport",
-          classId: IModelViewportControl,
+          id: "iTwinViewer.UnifiedSelectionViewport",
+          classId: UnifiedSelectionViewportControl,
           applicationData: {
             ...this._viewportOptions,
             viewState,

@@ -3,13 +3,10 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { StageUsage } from "@itwin/appui-abstract";
+import { StageUsage, StandardFrontstageProvider } from "@itwin/appui-react";
 import { useEffect, useState } from "react";
 
-import {
-  DefaultContentGroupProvider,
-  StandardFrontstageProvider,
-} from "../components/app-ui/providers";
+import { DefaultContentGroupProvider } from "../components/app-ui/providers";
 import type {
   BlankConnectionViewState,
   ViewerDefaultFrontstageConfig,
@@ -72,7 +69,7 @@ export const useFrontstages = ({
       );
 
       const defaultFrontstageProvider = new StandardFrontstageProvider({
-        id: "DefaultFrontstage",
+        id: "iTwinViewer.DefaultFrontstage",
         usage: StageUsage.General,
         contentGroupProps: contentGroup,
         ...defaultUiConfig,

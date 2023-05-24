@@ -3,13 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { BackstageItem } from "@itwin/appui-abstract";
-import type { FrontstageProvider } from "@itwin/appui-react";
+import type { BackstageItem, FrontstageProvider } from "@itwin/appui-react";
+import { UiFramework } from "@itwin/appui-react";
 import {
   BackstageComposer,
   ConfigurableUiContent,
-  FrameworkVersion,
-  FrontstageManager,
   ThemeManager,
 } from "@itwin/appui-react";
 import React, { useEffect } from "react";
@@ -28,7 +26,7 @@ export const IModelViewer: React.FC<ModelProps> = ({
     let defaultFrontstage: FrontstageProvider | undefined;
     frontstages.forEach((viewerFrontstage) => {
       // register the provider
-      FrontstageManager.addFrontstageProvider(viewerFrontstage.provider);
+      UiFramework.frontstages.addFrontstageProvider(viewerFrontstage.provider);
       // override the default (last wins)
       if (viewerFrontstage.default) {
         defaultFrontstage = viewerFrontstage.provider;
@@ -37,31 +35,26 @@ export const IModelViewer: React.FC<ModelProps> = ({
     // set the active frontstage to the current default
     if (defaultFrontstage) {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      void FrontstageManager.getFrontstageDef(defaultFrontstage.id).then(
-        (frontstageDef) => {
-          void FrontstageManager.setActiveFrontstageDef(frontstageDef);
-        }
-      );
+      void UiFramework.frontstages
+        .getFrontstageDef(defaultFrontstage.id)
+        .then((frontstageDef) => {
+          void UiFramework.frontstages.setActiveFrontstageDef(frontstageDef);
+        });
     }
     return () => {
-      void FrontstageManager.setActiveFrontstageDef(undefined);
-      FrontstageManager.clearFrontstageDefs();
-      // TODO next replace the above with the below
-      // FrontstageManager.clearFrontstageProviders();
+      UiFramework.frontstages.clearFrontstageProviders();
     };
   }, [frontstages]);
 
   // there will always be at least one (for the default frontstage). Wait for it to be loaded into the list before rendering the content
   return (
     <ThemeManager>
-      <FrameworkVersion>
-        <ConfigurableUiContent
-          appBackstage={
-            backstageItems &&
-            backstageItems.length > 0 && <BackstageComposer items={[]} />
-          }
-        />
-      </FrameworkVersion>
+      <ConfigurableUiContent
+        appBackstage={
+          backstageItems &&
+          backstageItems.length > 0 && <BackstageComposer items={[]} />
+        }
+      />
     </ThemeManager>
   );
 };

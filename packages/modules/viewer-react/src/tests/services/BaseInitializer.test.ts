@@ -4,15 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { StateManager } from "@itwin/appui-react";
-import {
-  DevToolsRpcInterface,
-  IModelReadRpcInterface,
-  IModelTileRpcInterface,
-} from "@itwin/core-common";
 import { IModelApp } from "@itwin/core-frontend";
 import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
-import { PresentationRpcInterface } from "@itwin/presentation-common";
 
 import {
   BaseInitializer,
@@ -31,6 +25,7 @@ jest.mock("../../services/iModel/ViewCreator3d", () => {
 });
 
 jest.mock("@itwin/core-i18n");
+
 jest.mock("@itwin/appui-react", () => {
   return {
     ...jest.createMockFromModule<any>("@itwin/appui-react"),
@@ -42,6 +37,7 @@ jest.mock("@itwin/appui-react", () => {
       jest.createMockFromModule<any>("@itwin/appui-react").FrameworkAccuDraw,
   };
 });
+
 jest.mock("@itwin/presentation-frontend", () => {
   return {
     ...jest.createMockFromModule<any>("@itwin/presentation-frontend"),
@@ -52,6 +48,7 @@ jest.mock("@itwin/presentation-frontend", () => {
     },
   };
 });
+
 jest.mock("@itwin/core-frontend", () => {
   return {
     IModelApp: {
@@ -118,6 +115,7 @@ describe("BaseInitializer", () => {
       configurable: true,
     });
   });
+
   it("gets default iModelApp options", () => {
     const appOptions = getIModelAppOptions();
     expect(appOptions).toEqual({
@@ -126,11 +124,6 @@ describe("BaseInitializer", () => {
       accuDraw: expect.anything(),
       notifications: expect.anything(),
       uiAdmin: expect.anything(),
-      rpcInterfaces: [
-        IModelReadRpcInterface,
-        IModelTileRpcInterface,
-        PresentationRpcInterface,
-      ],
       localization: expect.anything(),
       toolAdmin: undefined,
       hubAccess: expect.anything(),
@@ -141,6 +134,7 @@ describe("BaseInitializer", () => {
       tileAdmin: undefined,
     });
   });
+
   it("sets the applicationId", () => {
     const productId = "1234";
     const appOptions = getIModelAppOptions({
@@ -149,20 +143,7 @@ describe("BaseInitializer", () => {
     });
     expect(appOptions.applicationId).toEqual(productId);
   });
-  it("registers additional rpcInterfaces", () => {
-    const additionalRpcInterfaces = [DevToolsRpcInterface];
-    const appOptions = getIModelAppOptions({
-      additionalRpcInterfaces: additionalRpcInterfaces,
-      enablePerformanceMonitors: false,
-    });
-    // eslint-disable-next-line deprecation/deprecation
-    expect(appOptions.rpcInterfaces).toEqual([
-      IModelReadRpcInterface,
-      IModelTileRpcInterface,
-      PresentationRpcInterface,
-      DevToolsRpcInterface,
-    ]);
-  });
+
   it("registers a toolAdmin", () => {
     const toolAdmin = new MockToolAdmin();
     const appOptions = getIModelAppOptions({
@@ -171,6 +152,7 @@ describe("BaseInitializer", () => {
     });
     expect(appOptions.toolAdmin).toEqual(toolAdmin);
   });
+
   it("overrides the i18n url template", () => {
     const i18nUrlTemplate = "host/route";
     getIModelAppOptions({
@@ -181,6 +163,7 @@ describe("BaseInitializer", () => {
       urlTemplate: i18nUrlTemplate,
     });
   });
+
   it("registers additional i18n namespaces", async () => {
     await BaseInitializer.initialize({
       additionalI18nNamespaces: ["test1", "test2"],
@@ -194,6 +177,7 @@ describe("BaseInitializer", () => {
       "test2"
     );
   });
+
   it("fails to initialize if iModelApp has not been initialized", async () => {
     // override the return value of the getter function
     Object.defineProperty(IModelApp, "initialized", {
@@ -212,6 +196,7 @@ describe("BaseInitializer", () => {
       );
     }
   });
+
   it("executes a callback after IModelApp is initialized", async () => {
     const callbacks = {
       onIModelAppInit: jest.fn(),
@@ -223,6 +208,7 @@ describe("BaseInitializer", () => {
     await BaseInitializer.initialized;
     expect(callbacks.onIModelAppInit).toHaveBeenCalled();
   });
+
   it("uses the TileAdmin options that are provided", () => {
     const cesiumIonKey = "testKey";
     const appOptions = getIModelAppOptions({
@@ -231,11 +217,13 @@ describe("BaseInitializer", () => {
     });
     expect(appOptions.tileAdmin).toEqual({ cesiumIonKey });
   });
+
   it("initializes StateManager", async () => {
     await BaseInitializer.initialize();
     await BaseInitializer.initialized;
     expect(StateManager).toHaveBeenCalledTimes(1);
   });
+
   it("should not re-initialize StateManager", async () => {
     jest.spyOn(StateManager, "isInitialized").mockReturnValue(true);
     await BaseInitializer.initialize();

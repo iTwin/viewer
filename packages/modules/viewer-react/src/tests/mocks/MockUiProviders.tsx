@@ -3,25 +3,27 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type {
-  AbstractWidgetProps,
-  CommonStatusBarItem,
-  CommonToolbarItem,
-  StagePanelSection,
-  UiItemsProvider,
-} from "@itwin/appui-abstract";
 import {
-  AbstractStatusBarItemUtilities,
   ConditionalBooleanValue,
   ConditionalStringValue,
+} from "@itwin/appui-abstract";
+import type {
+  StagePanelSection,
+  StatusBarItem,
+  ToolbarItem,
+  UiItemsProvider,
+  Widget,
+} from "@itwin/appui-react";
+import {
   StagePanelLocation,
   StageUsage,
+  StatusBarItemUtilities,
   StatusBarSection,
+  SyncUiEventDispatcher,
   ToolbarItemUtilities,
   ToolbarOrientation,
   ToolbarUsage,
-} from "@itwin/appui-abstract";
-import { SyncUiEventDispatcher } from "@itwin/appui-react";
+} from "@itwin/appui-react";
 import { FillCentered } from "@itwin/core-react";
 import React from "react";
 
@@ -35,7 +37,7 @@ export class TestUiProvider implements UiItemsProvider {
     stageUsage: string,
     toolbarUsage: ToolbarUsage,
     toolbarOrientation: ToolbarOrientation
-  ): CommonToolbarItem[] {
+  ): ToolbarItem[] {
     if (
       stageUsage === StageUsage.General &&
       toolbarUsage === ToolbarUsage.ContentManipulation &&
@@ -51,7 +53,7 @@ export class TestUiProvider implements UiItemsProvider {
         [this.syncEventId]
       );
 
-      const visibilityActionSpec = ToolbarItemUtilities.createActionButton(
+      const visibilityActionSpec = ToolbarItemUtilities.createActionItem(
         "visibility-action-tool",
         200,
         iconCondition,
@@ -63,7 +65,7 @@ export class TestUiProvider implements UiItemsProvider {
         }
       );
 
-      const alertActionSpec = ToolbarItemUtilities.createActionButton(
+      const alertActionSpec = ToolbarItemUtilities.createActionItem(
         "alert-action-tool",
         210,
         "icon-developer",
@@ -82,12 +84,12 @@ export class TestUiProvider implements UiItemsProvider {
   public provideStatusBarItems(
     _stageId: string,
     stageUsage: string
-  ): CommonStatusBarItem[] {
-    const statusBarItems: CommonStatusBarItem[] = [];
+  ): StatusBarItem[] {
+    const statusBarItems: StatusBarItem[] = [];
 
     if (stageUsage === StageUsage.General) {
       statusBarItems.push(
-        AbstractStatusBarItemUtilities.createActionItem(
+        StatusBarItemUtilities.createActionItem(
           "alert-statusbar-item",
           StatusBarSection.Center,
           100,
@@ -112,17 +114,15 @@ export class TestUiProvider2 implements UiItemsProvider {
     _stageUsage: string,
     location: StagePanelLocation,
     _section?: StagePanelSection | undefined
-  ): ReadonlyArray<AbstractWidgetProps> {
-    const widgets: AbstractWidgetProps[] = [];
+  ): ReadonlyArray<Widget> {
+    const widgets: Widget[] = [];
     if (
       stageId === "DefaultFrontstage" &&
       location === StagePanelLocation.Right
     ) {
       widgets.push({
         id: "addonWidget",
-        getWidgetContent: () => (
-          <FillCentered>Addon Widget in panel</FillCentered>
-        ),
+        content: () => <FillCentered>Addon Widget in panel</FillCentered>,
       });
     }
     return widgets;

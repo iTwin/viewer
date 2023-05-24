@@ -17,7 +17,6 @@ export const BaseViewer = ({
   i18nUrlTemplate,
   onIModelAppInit,
   additionalI18nNamespaces,
-  additionalRpcInterfaces,
   enablePerformanceMonitors,
   ...loaderProps
 }: ViewerProps) => {
@@ -26,7 +25,6 @@ export const BaseViewer = ({
     i18nUrlTemplate,
     onIModelAppInit,
     additionalI18nNamespaces,
-    additionalRpcInterfaces,
     enablePerformanceMonitors,
   });
 

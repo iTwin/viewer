@@ -1,0 +1,34 @@
+{
+  "name": "@itwin/cra-template-web-viewer",
+  "version": "4.0.0-dev.15",
+  "keywords": [
+    "react",
+    "create-react-app",
+    "template",
+    "typescript",
+    "iModel",
+    "iTwinJs",
+    "iTwin",
+    "iTwin Viewer"
+  ],
+  "description": "The iTwin Viewer template for Create React App web applications.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itwin/viewer.git",
+    "directory": "packages/modules/cra-template-web-viewer"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/itwin/viewer/issues"
+  },
+  "files": [
+    "template",
+    "template.json",
+    "template/.npmrc"
+  ],
+  "main": "template.json",
+  "scripts": {
+    "build": "",
+    "test": ""
+  }
+}

@@ -5,7 +5,6 @@
 
 import {
   AppNotificationManager,
-  ConfigurableUiManager,
   FrameworkAccuDraw,
   FrameworkReducer,
   FrameworkUiAdmin,
@@ -13,11 +12,6 @@ import {
   UiFramework,
 } from "@itwin/appui-react";
 import { UiComponents } from "@itwin/components-react";
-import type { RpcInterface, RpcInterfaceDefinition } from "@itwin/core-common";
-import {
-  IModelReadRpcInterface,
-  IModelTileRpcInterface,
-} from "@itwin/core-common";
 import type { IModelAppOptions } from "@itwin/core-frontend";
 import { AccuSnap, SnapMode } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
@@ -25,7 +19,6 @@ import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
 import { FrontendIModelsAccess } from "@itwin/imodels-access-frontend";
 import { IModelsClient } from "@itwin/imodels-client-management";
-import { PresentationRpcInterface } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
 
@@ -152,8 +145,6 @@ export class BaseInitializer {
       // allow uiAdmin to open key-in palette when Ctrl+F2 is pressed - good for manually loading UI providers
       IModelApp.uiAdmin.updateFeatureFlags({ allowKeyinPalette: true });
 
-      ConfigurableUiManager.initialize();
-
       ViewerPerformance.addMark("BaseViewerStarted");
       ViewerPerformance.addMeasure(
         "BaseViewerInitialized",
@@ -176,22 +167,6 @@ export class BaseInitializer {
       });
   }
 }
-
-/**
- * Get complete list of default + additional rpcInterfaces
- * @param additionalRpcInterfaces
- * @returns
- */
-const getSupportedRpcs = (
-  additionalRpcInterfaces: RpcInterfaceDefinition<RpcInterface>[]
-): RpcInterfaceDefinition<RpcInterface>[] => {
-  return [
-    IModelReadRpcInterface,
-    IModelTileRpcInterface,
-    PresentationRpcInterface,
-    ...additionalRpcInterfaces,
-  ];
-};
 
 /**
  * Generate default iModelApp options
@@ -237,7 +212,6 @@ export const getIModelAppOptions = (
     accuDraw: new FrameworkAccuDraw(),
     notifications: new AppNotificationManager(),
     uiAdmin: new FrameworkUiAdmin(),
-    rpcInterfaces: getSupportedRpcs(options?.additionalRpcInterfaces ?? []),
     publicPath: viewerHome ? `${viewerHome}/` : "",
     hubAccess,
     localization,

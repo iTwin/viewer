@@ -5,10 +5,7 @@
 
 import { ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
-import {
-  LocalExtensionProvider,
-  RemoteExtensionProvider,
-} from "@itwin/core-frontend";
+// import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
 import {
   MeasureTools,
   MeasureToolsUiItemsProvider,
@@ -17,7 +14,7 @@ import {
   PropertyGridManager,
   PropertyGridUiItemsProvider,
 } from "@itwin/property-grid-react";
-import LocalExtension from "@itwin/test-local-extension";
+// import LocalExtension from "@itwin/test-local-extension";
 import {
   TreeWidget,
   TreeWidgetUiItemsProvider,
@@ -85,16 +82,15 @@ const ViewerHome: React.FC = () => {
 
   useEffect(() => {
     let url = `viewer?iTwinId=${iTwinId}`;
-    
+
     if (iModelId) {
-       url = `${url}&ModelId=${iModelId}`
+      url = `${url}&ModelId=${iModelId}`;
     }
-   
+
     if (changesetId) {
-       url = `${url}&changesetId=${changesetId}`;
+      url = `${url}&changesetId=${changesetId}`;
     }
     history.push(url);
-
   }, [iTwinId, iModelId, changesetId]);
 
   const Loader = () => {
@@ -157,16 +153,16 @@ const ViewerHome: React.FC = () => {
           }),
           new MeasureToolsUiItemsProvider(),
         ]}
-        extensions={[
-          new LocalExtensionProvider({
-            manifestPromise: LocalExtension.manifestPromise,
-            main: LocalExtension.main,
-          }),
-          new RemoteExtensionProvider({
-            jsUrl: "http://localhost:3001/dist/index.js",
-            manifestUrl: "http://localhost:3001/package.json",
-          }),
-        ]}
+        // extensions={[
+        //   new LocalExtensionProvider({
+        //     manifestPromise: LocalExtension.manifestPromise,
+        //     main: LocalExtension.main,
+        //   }),
+        //   new RemoteExtensionProvider({
+        //     jsUrl: "http://localhost:3001/dist/index.js",
+        //     manifestUrl: "http://localhost:3001/package.json",
+        //   }),
+        // ]}
         backstageItems={backstageItems}
         // renderSys={{doIdleWork: true}}
       />

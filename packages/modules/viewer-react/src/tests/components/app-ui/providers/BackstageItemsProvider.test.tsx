@@ -3,14 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BackstageItemUtilities } from "@itwin/appui-abstract";
-import type { FrontstageProps } from "@itwin/appui-react";
-import { FrontstageProvider } from "@itwin/appui-react";
+import { BackstageItemUtilities } from "@itwin/appui-react";
 import { IModelApp } from "@itwin/core-frontend";
-import React from "react";
 
 import { BackstageItemsProvider } from "../../../../components/app-ui/providers";
-import type { ViewerBackstageItem, ViewerFrontstage } from "../../../../types";
+import type { ViewerBackstageItem } from "../../../../types";
 
 jest.mock("@itwin/core-frontend", () => {
   return {
@@ -84,33 +81,8 @@ jest.mock("@itwin/core-frontend", () => {
 });
 jest.mock("@itwin/appui-abstract");
 
-class Frontstage1Provider extends FrontstageProvider {
-  public id = "Frontstage1";
-  public get frontstage(): React.ReactElement<FrontstageProps> {
-    return <div></div>;
-  }
-}
-
-class Frontstage2Provider extends FrontstageProvider {
-  public id = "Frontstage2";
-  public get frontstage(): React.ReactElement<FrontstageProps> {
-    return <div></div>;
-  }
-}
-
 describe("BackstageItemsProvider", () => {
   it("adds backstage items and translates their labels", async () => {
-    const fs1 = new Frontstage1Provider();
-    const fs2 = new Frontstage2Provider();
-    const frontstages: ViewerFrontstage[] = [
-      {
-        provider: fs1,
-      },
-      {
-        provider: fs2,
-      },
-    ];
-
     const actionItem = {
       id: "bs1",
       execute: jest.fn(),
@@ -129,6 +101,10 @@ describe("BackstageItemsProvider", () => {
       labeli18nKey: "bs2Key",
     };
 
+    const spy1 = jest.spyOn(BackstageItemUtilities, "createStageLauncher");
+
+    const spy2 = jest.spyOn(BackstageItemUtilities, "createActionItem");
+
     const backstageItems: ViewerBackstageItem[] = [actionItem, stageLauncher];
 
     const provider = new BackstageItemsProvider(backstageItems);
@@ -136,8 +112,8 @@ describe("BackstageItemsProvider", () => {
     provider.provideBackstageItems();
 
     // these calls will be doubled. items will be set first without a viewState and reset with one additional translation for the default frontstage once we have a viewState
-    expect(BackstageItemUtilities.createStageLauncher).toHaveBeenCalledTimes(1);
-    expect(BackstageItemUtilities.createActionItem).toHaveBeenCalledTimes(1);
+    expect(spy1).toHaveBeenCalledTimes(1);
+    expect(spy2).toHaveBeenCalledTimes(1);
     expect(IModelApp.localization.getLocalizedString).toHaveBeenCalledWith(
       actionItem.labeli18nKey
     );

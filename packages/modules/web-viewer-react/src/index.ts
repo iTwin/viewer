@@ -5,6 +5,5 @@
 
 export * from "@itwin/viewer-react";
 export * from "./components/Viewer";
-export * from "./services/ItwinViewer";
 export * from "./types";
 export * from "./hooks";

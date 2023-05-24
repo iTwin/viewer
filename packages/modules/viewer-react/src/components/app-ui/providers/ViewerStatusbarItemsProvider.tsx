@@ -4,23 +4,19 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type {
-  CommonStatusBarItem,
+  StatusBarCustomItem,
+  StatusBarItem,
   UiItemsProvider,
-} from "@itwin/appui-abstract";
-import { StatusBarSection } from "@itwin/appui-abstract";
-import { FooterSeparator } from "@itwin/appui-layout-react";
-import type { StatusBarItem } from "@itwin/appui-react";
+} from "@itwin/appui-react";
 import {
-  FooterModeField,
   MessageCenterField,
   SelectionInfoField,
   SelectionScopeField,
   SnapModeField,
   StatusBarItemUtilities,
+  StatusBarSection,
   TileLoadingIndicator,
   ToolAssistanceField,
-  withMessageCenterFieldProps,
-  withStatusFieldProps,
 } from "@itwin/appui-react";
 import * as React from "react";
 
@@ -28,105 +24,69 @@ import type { ViewerDefaultStatusbarItems } from "../../../types";
 
 export class ViewerStatusbarItemsProvider implements UiItemsProvider {
   public readonly id = "ViewerDefaultStatusbar";
-  private _footerModeOnlySeparator: () => React.ReactNode;
 
-  constructor(private _defaultItems?: ViewerDefaultStatusbarItems) {
-    const FooterOnlyDisplay = withStatusFieldProps(FooterModeField);
-    this._footerModeOnlySeparator = (): React.ReactNode => {
-      return (
-        <FooterOnlyDisplay>
-          <FooterSeparator />
-        </FooterOnlyDisplay>
-      );
-    };
-  }
+  constructor(private _defaultItems?: ViewerDefaultStatusbarItems) {}
 
-  public provideStatusBarItems(): CommonStatusBarItem[] {
-    const items: StatusBarItem[] = [];
+  public provideStatusBarItems(): StatusBarItem[] {
+    const items: StatusBarCustomItem[] = [];
 
     if (!this._defaultItems || this._defaultItems.messageCenter) {
-      const MessageCenter = withMessageCenterFieldProps(MessageCenterField);
       items.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "MessageCenter",
           StatusBarSection.Left,
           10,
-          <MessageCenter />
-        )
-      );
-    }
-    if (!this._defaultItems || this._defaultItems.preToolAssistanceSeparator) {
-      items.push(
-        StatusBarItemUtilities.createStatusBarItem(
-          "PreToolAssistance",
-          StatusBarSection.Left,
-          15,
-          this._footerModeOnlySeparator()
+          <MessageCenterField />
         )
       );
     }
     if (!this._defaultItems || this._defaultItems.toolAssistance) {
-      const ToolAssistance = withStatusFieldProps(ToolAssistanceField);
       items.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "ToolAssistance",
           StatusBarSection.Left,
           20,
-          <ToolAssistance />
-        )
-      );
-    }
-    if (!this._defaultItems || this._defaultItems.postToolAssistanceSeparator) {
-      items.push(
-        StatusBarItemUtilities.createStatusBarItem(
-          "PostToolAssistance",
-          StatusBarSection.Left,
-          25,
-          this._footerModeOnlySeparator()
+          <ToolAssistanceField />
         )
       );
     }
     if (!this._defaultItems || this._defaultItems.tileLoadIndicator) {
-      const TileLoadIndicator = withStatusFieldProps(TileLoadingIndicator);
       items.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "TileLoadIndicator",
           StatusBarSection.Right,
           10,
-          <TileLoadIndicator />
+          <TileLoadingIndicator />
         )
       );
     }
     if (!this._defaultItems || this._defaultItems.accuSnapModePicker) {
-      const SnapMode = withStatusFieldProps(SnapModeField);
       items.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "SnapModeField",
           StatusBarSection.Right,
           20,
-          <SnapMode />
+          <SnapModeField />
         )
       );
     }
     if (!this._defaultItems || this._defaultItems.selectionScope) {
-      const SelectionScope = withStatusFieldProps(SelectionScopeField);
       items.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "SelectionScope",
           StatusBarSection.Right,
           30,
-          <SelectionScope />
+          <SelectionScopeField />
         )
       );
     }
     if (!this._defaultItems || this._defaultItems.selectionInfo) {
-      const SelectionInfo = withStatusFieldProps(SelectionInfoField);
       items.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "SelectionInfo",
           StatusBarSection.Right,
           40,
-          <SelectionInfo />
+          <SelectionInfoField />
         )
       );
     }

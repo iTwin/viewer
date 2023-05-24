@@ -1,0 +1,17 @@
+{
+  "extends": "./node_modules/@itwin/build-tools/tsconfig-base.json",
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "commonjs",
+    "outDir": "./lib"
+  },
+  "include": [
+    "./src/backend/*.ts",
+    "./src/common/*.ts"
+  ],
+  "exclude": [
+    "build",
+    "lib",
+    "node_modules"
+  ]
+}

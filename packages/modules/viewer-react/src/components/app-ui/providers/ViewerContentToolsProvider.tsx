@@ -3,14 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { CommonStatusBarItem } from "@itwin/appui-abstract";
-import { StatusBarSection } from "@itwin/appui-abstract";
-import type { DefaultContentTools } from "@itwin/appui-react";
+import type { DefaultContentTools, StatusBarItem } from "@itwin/appui-react";
 import {
   SectionsStatusField,
   StandardContentToolsProvider,
   StatusBarItemUtilities,
-  withStatusFieldProps,
+  StatusBarSection,
 } from "@itwin/appui-react";
 import * as React from "react";
 
@@ -35,21 +33,20 @@ export class ViewerContentToolsProvider extends StandardContentToolsProvider {
   }
 
   // need to override this method to move sectioning "clear" tool to its proper position on the left
-  public override provideStatusBarItems(): CommonStatusBarItem[] {
-    const statusBarItems: CommonStatusBarItem[] = [];
+  public override provideStatusBarItems(): StatusBarItem[] {
+    const statusBarItems: StatusBarItem[] = [];
 
     // if the sectionGroup tools are to be shown then we want the status field added to allow clearing or manipulation the section
     if (
       !this._defaultItems?.vertical ||
       this._defaultItems.vertical.sectionGroup
     ) {
-      const Sections = withStatusFieldProps(SectionsStatusField);
       statusBarItems.push(
-        StatusBarItemUtilities.createStatusBarItem(
+        StatusBarItemUtilities.createCustomItem(
           "Sections",
           StatusBarSection.Left,
           30,
-          <Sections hideWhenUnused />
+          <SectionsStatusField hideWhenUnused />
         )
       );
     }

@@ -3,22 +3,21 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { BackstageItem, UiItemsProvider } from "@itwin/appui-abstract";
 import type {
+  BackstageItem,
   ColorTheme,
   FrontstageProvider,
   IModelViewportControlOptions,
+  StandardFrontstageProps,
+  UiItemsProvider,
 } from "@itwin/appui-react";
 import type {
   Cartographic,
   ColorDef,
   EcefLocationProps,
   RenderMode,
-  RpcInterface,
-  RpcInterfaceDefinition,
 } from "@itwin/core-common";
 import type {
-  BlankConnectionProps,
   ExtensionProvider,
   IModelAppOptions,
   IModelConnection,
@@ -33,8 +32,6 @@ import type {
   XAndY,
   XYAndZ,
 } from "@itwin/core-geometry";
-
-import type { StandardFrontstageProps } from "./components/app-ui/providers";
 
 export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
@@ -134,8 +131,6 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   onIModelAppInit?: () => void;
   /** additional i18n namespaces to register */
   additionalI18nNamespaces?: string[];
-  /** custom rpc interfaces (assumes that they are supported in your backend) */
-  additionalRpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
   /** array of iTwin.js Extensions */
   extensions?: ExtensionProvider[];
 }
@@ -164,8 +159,6 @@ export type FileViewerProps = {
 
 // it's fine to say that if either location or extents is defined, then both have to be defined.
 export type BlankViewerProps = {
-  /** @deprecated specify location and extents instead. */
-  blankConnection?: BlankConnectionProps;
   blankConnectionViewState?: BlankConnectionViewState;
   location?: Cartographic | EcefLocationProps;
   extents?: Range3dProps;
@@ -190,7 +183,6 @@ const iTwinViewerInitializerParamSample: OptionalToUndefinedUnion<ViewerInitiali
     i18nUrlTemplate: undefined,
     onIModelAppInit: undefined,
     additionalI18nNamespaces: undefined,
-    additionalRpcInterfaces: undefined,
     extensions: undefined,
   };
 

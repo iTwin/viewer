@@ -3,8 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { FrontstageProps } from "@itwin/appui-react";
-import { FrontstageManager, FrontstageProvider } from "@itwin/appui-react";
+import { StandardContentLayouts } from "@itwin/appui-abstract";
+import type { FrontstageConfig } from "@itwin/appui-react";
+import { ContentGroup, IModelViewportControl } from "@itwin/appui-react";
+import { FrontstageProvider } from "@itwin/appui-react";
+import { UiFramework } from "@itwin/appui-react";
 import { render } from "@testing-library/react";
 import React from "react";
 
@@ -12,29 +15,52 @@ import { IModelViewer } from "../../../components/iModel/IModelViewer";
 import type { ViewerFrontstage } from "../../../types";
 
 class Frontstage1Provider extends FrontstageProvider {
-  public id = "Frontstage1";
-  public get frontstage(): React.ReactElement<FrontstageProps> {
-    return <div></div>;
+  frontstageConfig(): FrontstageConfig {
+    const content = new ContentGroup({
+      id: "content-group",
+      layout: StandardContentLayouts.singleView,
+      contents: [
+        {
+          id: "viewport",
+          classId: IModelViewportControl,
+        },
+      ],
+    });
+    return { id: "Frontstage1", contentGroup: content, version: 1 };
   }
+  public id = "Frontstage1";
 }
 
 class Frontstage2Provider extends FrontstageProvider {
-  public id = "Frontstage2";
-  public get frontstage(): React.ReactElement<FrontstageProps> {
-    return <div></div>;
+  frontstageConfig(): FrontstageConfig {
+    const content = new ContentGroup({
+      id: "content-group",
+      layout: StandardContentLayouts.singleView,
+      contents: [
+        {
+          id: "viewport",
+          classId: IModelViewportControl,
+        },
+      ],
+    });
+    return { id: "Frontstage2", contentGroup: content, version: 1 };
   }
+  public id = "Frontstage2";
 }
 
 jest.mock("@itwin/appui-react", () => {
   return {
-    FrontstageManager: {
-      addFrontstageProvider: jest.fn(),
-      getFrontstageDef: jest
-        .fn()
-        .mockResolvedValue({ id: "Frontstage2", frontstage: jest.fn() }),
-      setActiveFrontstageDef: jest.fn().mockResolvedValue(true),
-      clearFrontstageDefs: jest.fn(),
+    UiFramework: {
+      frontstages: {
+        addFrontstageProvider: jest.fn(),
+        getFrontstageDef: jest
+          .fn()
+          .mockResolvedValue({ id: "Frontstage2", frontstage: jest.fn() }),
+        setActiveFrontstageDef: jest.fn().mockResolvedValue(true),
+        clearFrontstageDefs: jest.fn(),
+      },
     },
+
     FrontstageProvider: jest.fn(),
     ThemeManager: jest.fn(() => <div></div>),
     FrameworkVersion: jest.fn(() => <div></div>),
@@ -60,9 +86,13 @@ describe("IModelViewer", () => {
     ];
 
     render(<IModelViewer frontstages={frontstages} backstageItems={[]} />);
-    expect(FrontstageManager.addFrontstageProvider).toHaveBeenCalledTimes(2);
+    expect(UiFramework.frontstages.addFrontstageProvider).toHaveBeenCalledTimes(
+      2
+    );
     // expect(BackstageItemUtilities.createStageLauncher).toHaveBeenCalledTimes(2);
     await flushPromises();
-    expect(FrontstageManager.setActiveFrontstageDef).toHaveBeenCalledTimes(1);
+    expect(
+      UiFramework.frontstages.setActiveFrontstageDef
+    ).toHaveBeenCalledTimes(1);
   });
 });

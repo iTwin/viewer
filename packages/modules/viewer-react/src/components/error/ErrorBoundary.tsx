@@ -3,7 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ErrorPage } from "@itwin/itwinui-react";
+import { SvgError } from "@itwin/itwinui-illustrations-react";
+import { NonIdealState } from "@itwin/itwinui-react";
 import type { PropsWithChildren } from "react";
 import React, { Component } from "react";
 
@@ -31,10 +32,7 @@ export class ErrorBoundary extends Component<
   override render(): JSX.Element {
     if (this.state.fallback) {
       return (
-        <ErrorPage
-          errorType="generic"
-          errorMessage={this.state.error.message}
-        />
+        <NonIdealState svg={<SvgError />} heading={this.state.error.message} />
       );
     } else {
       return <>{this.props.children}</>;

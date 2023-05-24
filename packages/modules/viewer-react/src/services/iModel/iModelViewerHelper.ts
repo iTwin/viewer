@@ -61,14 +61,6 @@ export const openConnection = async (
       },
     });
   }
-  /* eslint-disable-next-line deprecation/deprecation */
-  if (options.blankConnection) {
-    return createBlankConnection({
-      iTwinId: options.iTwinId,
-      blankConnectionProps:
-        options.blankConnection /* eslint-disable-line deprecation/deprecation */,
-    });
-  }
 
   return;
 };
@@ -77,7 +69,6 @@ export const gatherRequiredViewerProps = ({
   iTwinId,
   iModelId,
   filePath,
-  blankConnection /* eslint-disable-line deprecation/deprecation */,
   extents,
   location,
   changeSetId,
@@ -90,14 +81,8 @@ export const gatherRequiredViewerProps = ({
     return { iModelId, iTwinId, changeSetId };
   }
 
-  /* eslint-disable-next-line deprecation/deprecation */
-  if (
-    blankConnection?.iTwinId ||
-    (blankConnection && iTwinId) ||
-    (extents && location && iTwinId)
-  ) {
-    /* eslint-disable-next-line deprecation/deprecation */
-    return { blankConnection, iTwinId, extents, location };
+  if (extents && location && iTwinId) {
+    return { iTwinId, extents, location };
   }
 
   return;

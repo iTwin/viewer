@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -36,6 +36,9 @@ jobs:
 
           echo 'Building...'
           node common/scripts/install-run-rush.js rebuild
+
+          echo 'Linting...'
+          node common/scripts/install-run-rush.js lint
 
           echo 'Testing...'
           node common/scripts/install-run-rush.js test --verbose
