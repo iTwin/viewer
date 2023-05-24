@@ -2,8 +2,6 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-To run the application and install dependencies, use pnpm. Information on installing pnpm can be found [here](https://pnpm.io/installation).
-
 ## Environment Variables
 
 Prior to running the app, you will need to add OIDC client configuration to the variables in the .env file:
@@ -25,16 +23,16 @@ ITWIN_VIEWER_CLIENT_ID="native-xxxxxxxx"
 
 In the project directory, you can run:
 
-### `pnpm start`
+### `npm start`
 
 Runs the Electron app in the development mode.\
 The page will reload if you make edits.
 
-### `pnpm run build:backend`
+### `npm run build:backend`
 
 Compiles the backend.
 
-### `pnpm run build:frontend`
+### `npm run build:frontend`
 
 Compiles and bundles the frontend.
 
