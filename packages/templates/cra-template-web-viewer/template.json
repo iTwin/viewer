@@ -48,9 +48,6 @@
       "test": "react-scripts --max_old_space_size=4096 test",
       "eject": "react-scripts eject"
     },
-    "overrides": {
-      "semver": "7.4.0"
-    },
     "eslintConfig": {
       "extends": [
         "react-app",
