@@ -69,10 +69,8 @@
       "start": "npm run build:backend && run-p \"start:frontend\" \"electron:debug\"",
       "start:frontend": "react-scripts start"
     },
-    "pnpm": {
-      "overrides": {
-        "semver": "7.4.0"
-      }
+    "overrides": {
+      "semver": "7.4.0"
     },
     "browserslist": [
       "last 1 electron version"
