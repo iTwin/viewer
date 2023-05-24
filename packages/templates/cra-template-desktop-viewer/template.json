@@ -75,7 +75,7 @@
       }
     },
     "browserslist": [
-      "electron 23.0.0"
+      "last 1 electron version"
     ]
   }
 }
