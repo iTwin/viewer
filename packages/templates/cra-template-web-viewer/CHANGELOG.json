@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "4.0.0",
+      "tag": "@itwin/cra-template-web-viewer_v4.0.0",
+      "date": "Wed, 24 May 2023 21:22:26 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "See [release notes](https://github.com/iTwin/viewer/blob/master/releases/CHANGELOG-4.0.md)."
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.2",
       "tag": "@itwin/cra-template-web-viewer_v3.2.2",
       "date": "Wed, 19 Apr 2023 13:42:11 GMT",
