@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/viewer-react",
       "comment": "Adding @itwin/presentation-components to peerDependencies in viewer-react",
-      "type": "none"
+      "type": "patch"
     }
   ],
   "packageName": "@itwin/viewer-react"
