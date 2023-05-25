@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Adding @itwin/presentation-components to peerDependencies in viewer-react",
+      "type": "none"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
