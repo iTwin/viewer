@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Wed, 24 May 2023 21:22:26 GMT and should not be manually modified.
+This log was last generated on Fri, 26 May 2023 12:04:29 GMT and should not be manually modified.
+
+## 4.0.1
+Fri, 26 May 2023 12:04:29 GMT
+
+### Patches
+
+- Adding @itwin/presentation-components to peerDependencies in @itwin/viewer-react
 
 ## 4.0.0
 Wed, 24 May 2023 21:22:26 GMT
