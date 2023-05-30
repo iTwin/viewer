@@ -23,6 +23,9 @@ export interface UseFrontstagesProps {
   blankConnectionViewState?: BlankConnectionViewState;
 }
 
+export const ViewerDefaultFrontstageProviderId =
+  "iTwinViewer.DefaultFrontstage";
+
 export const useFrontstages = ({
   frontstages,
   blankConnectionViewState,
@@ -69,7 +72,7 @@ export const useFrontstages = ({
       );
 
       const defaultFrontstageProvider = new StandardFrontstageProvider({
-        id: "iTwinViewer.DefaultFrontstage",
+        id: ViewerDefaultFrontstageProviderId,
         usage: StageUsage.General,
         contentGroupProps: contentGroup,
         ...defaultUiConfig,

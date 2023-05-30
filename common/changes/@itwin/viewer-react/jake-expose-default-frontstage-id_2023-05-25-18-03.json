@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Exposing default frontstage id as a const",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
