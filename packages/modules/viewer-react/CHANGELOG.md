@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Fri, 26 May 2023 12:04:29 GMT and should not be manually modified.
+This log was last generated on Tue, 30 May 2023 14:17:32 GMT and should not be manually modified.
+
+## 4.0.2
+Tue, 30 May 2023 14:17:32 GMT
+
+### Patches
+
+- Exposing default frontstage id as a const
 
 ## 4.0.1
 Fri, 26 May 2023 12:04:29 GMT

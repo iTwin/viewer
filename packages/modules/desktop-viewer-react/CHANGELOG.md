@@ -1,6 +1,11 @@
 # Change Log - @itwin/desktop-viewer-react
 
-This log was last generated on Fri, 26 May 2023 12:04:29 GMT and should not be manually modified.
+This log was last generated on Tue, 30 May 2023 14:17:32 GMT and should not be manually modified.
+
+## 4.0.2
+Tue, 30 May 2023 14:17:32 GMT
+
+_Version update only_
 
 ## 4.0.1
 Fri, 26 May 2023 12:04:29 GMT
