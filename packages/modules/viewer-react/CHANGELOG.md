@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Tue, 30 May 2023 14:17:32 GMT and should not be manually modified.
+This log was last generated on Thu, 01 Jun 2023 13:42:05 GMT and should not be manually modified.
+
+## 4.0.3
+Thu, 01 Jun 2023 13:42:05 GMT
+
+### Patches
+
+- Use itwin/reality-data-client@1.0.0
 
 ## 4.0.2
 Tue, 30 May 2023 14:17:32 GMT
