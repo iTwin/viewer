@@ -32,7 +32,7 @@
     "@bentley/icons-generic-webfont": "^1.0.15",
     "@itwin/itwinui-illustrations-react": "^2.0.1",
     "@itwin/itwinui-react": "^2.6.0",
-    "@itwin/reality-data-client": "^1.0.0-dev.2",
+    "@itwin/reality-data-client": "^1.0.0",
     "lodash.isequal": "^4.5.0"
   },
   "devDependencies": {
