@@ -31,7 +31,7 @@
     "@itwin/property-grid-react": "^0.11.0",
     "@itwin/reality-data-client": "^1.0.0",
     "@itwin/test-local-extension": "workspace:*",
-    "@itwin/tree-widget-react": "^0.10.0",
+    "@itwin/tree-widget-react": "^1.0.0-dev.1",
     "@itwin/web-viewer-react": "workspace:*",
     "@itwin/webgl-compatibility": "^4.0.0",
     "@remix-run/router": "^1.3.2",
