@@ -10,6 +10,7 @@ import { FrontstageProvider } from "@itwin/appui-react";
 import { UiFramework } from "@itwin/appui-react";
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { act } from "react-dom/test-utils";
 
 import { IModelViewer } from "../../../components/iModel/IModelViewer";
 import type { ViewerFrontstage } from "../../../types";
@@ -91,7 +92,11 @@ describe("IModelViewer", () => {
     const container = document.getElementById("root");
     const root = createRoot(container!); // createRoot(container!) if you use TypeScript
 
-    root.render(<IModelViewer frontstages={frontstages} backstageItems={[]} />);
+    act(() =>
+      root.render(
+        <IModelViewer frontstages={frontstages} backstageItems={[]} />
+      )
+    );
     expect(UiFramework.frontstages.addFrontstageProvider).toHaveBeenCalledTimes(
       2
     );
