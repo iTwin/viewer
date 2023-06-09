@@ -6,11 +6,12 @@
 import "./index.scss";
 
 import React from "react";
-import ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+
+globalThis.IMJS_URL_PREFIX = process.env.IMJS_URL_PREFIX || "";
 
 const container = document.getElementById("root");
 const root = createRoot(container!); // createRoot(container!) if you use TypeScript
