@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Wed, 24 May 2023 21:22:26 GMT and should not be manually modified.
+This log was last generated on Tue, 06 Jun 2023 15:05:19 GMT and should not be manually modified.
+
+## 4.0.1
+Tue, 06 Jun 2023 15:05:19 GMT
+
+### Patches
+
+- Ugrading @itwin/tree-widget-react version
 
 ## 4.0.0
 Wed, 24 May 2023 21:22:26 GMT
