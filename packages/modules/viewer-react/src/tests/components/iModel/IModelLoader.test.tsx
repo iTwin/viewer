@@ -11,6 +11,8 @@ import { BlankConnection, SnapshotConnection } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
+import { createRoot } from "react-dom/client";
+import { act } from "react-dom/test-utils";
 
 import { IModelViewer } from "../../../components/iModel";
 import IModelLoader from "../../../components/iModel/IModelLoader";
@@ -115,6 +117,12 @@ jest.mock("../../../components/iModel/IModelViewer", () => ({
   IModelViewer: jest.fn(() => <div data-testid="viewer"></div>),
 }));
 
+const basic = document.createElement("div");
+basic.id = "root";
+document.body.appendChild(basic);
+const container = document.getElementById("root");
+const root = createRoot(container!);
+
 const mockITwinId = "mockITwinId";
 const mockIModelId = "mockIModelId";
 
@@ -147,6 +155,15 @@ describe("IModelLoader", () => {
     jest.spyOn(UiItemsManager, "register");
     jest.spyOn(UiItemsManager, "unregister");
 
+    act(() =>
+      root.render(
+        <IModelLoader
+          iTwinId={mockITwinId}
+          iModelId={mockIModelId}
+          uiProviders={[new TestUiProvider()]}
+        />
+      )
+    );
     const result = render(
       <IModelLoader
         iTwinId={mockITwinId}
