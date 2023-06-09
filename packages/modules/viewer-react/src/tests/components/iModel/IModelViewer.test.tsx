@@ -10,6 +10,7 @@ import { FrontstageProvider } from "@itwin/appui-react";
 import { UiFramework } from "@itwin/appui-react";
 import { render } from "@testing-library/react";
 import React from "react";
+import { createRoot } from "react-dom/client";
 
 import { IModelViewer } from "../../../components/iModel/IModelViewer";
 import type { ViewerFrontstage } from "../../../types";

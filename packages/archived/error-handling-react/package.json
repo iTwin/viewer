@@ -55,11 +55,11 @@
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
     "@svgr/cli": "^5.3.1",
-    "@testing-library/react": "^10.4.4",
+    "@testing-library/react": "^14.0.0",
     "@types/jest": "^26.0.4",
     "@types/node": "^18.12.0",
-    "@types/react": "^17.0.19",
-    "@types/react-dom": "^17.0.9",
+    "@types/react": "^18.2.9",
+    "@types/react-dom": "^18.2.4",
     "@types/react-transition-group": "^4.4.0",
     "babel-jest": "^25.2.6",
     "babel-plugin-import-remove-resource-query": "^1.0.0",
@@ -69,8 +69,8 @@
     "jest": "^26.1.0",
     "jest-mock-console": "^1.0.0",
     "nodemon": "^1.19.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-test-renderer": "16.13.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.1.1",
@@ -78,7 +78,7 @@
     "@types/sanitize-html": "^1.27.1"
   },
   "peerDependencies": {
-    "react": "^17.0.2",
+    "react": "^18.2.0",
     "react-dom": "^17.0.2"
   },
   "jest": {
