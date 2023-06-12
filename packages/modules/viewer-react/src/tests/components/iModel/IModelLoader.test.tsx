@@ -164,26 +164,19 @@ describe("IModelLoader", () => {
         />
       )
     );
-    const result = render(
-      <IModelLoader
-        iTwinId={mockITwinId}
-        iModelId={mockIModelId}
-        uiProviders={[new TestUiProvider()]}
-      />
-    );
 
-    await waitFor(() => result.getByTestId("loader-wrapper"));
     expect(UiItemsManager.register).toHaveBeenCalledTimes(1);
 
-    result.rerender(
-      <IModelLoader
-        iTwinId={mockITwinId}
-        iModelId={mockIModelId}
-        uiProviders={[new TestUiProvider2()]}
-      />
+    act(() =>
+      root.render(
+        <IModelLoader
+          iTwinId={mockITwinId}
+          iModelId={mockIModelId}
+          uiProviders={[new TestUiProvider2()]}
+        />
+      )
     );
 
-    await waitFor(() => result.getByTestId("viewer"));
     expect(UiItemsManager.unregister).toHaveBeenCalledTimes(1);
   });
 
@@ -205,22 +198,30 @@ describe("IModelLoader", () => {
       },
     };
 
-    const { getByTestId } = render(
-      <IModelLoader
-        {...blankConnectionProps}
-        blankConnectionViewState={blankConnectionViewState}
-      />
+    act(() =>
+      root.render(
+        <IModelLoader
+          {...blankConnectionProps}
+          blankConnectionViewState={blankConnectionViewState}
+        />
+      )
     );
-
-    await waitFor(() => getByTestId("viewer"));
 
     expect(BlankConnection.create).toHaveBeenCalledWith({
       ...blankConnectionProps,
       name: "Blank Connection",
     });
+
+    root.unmount();
   });
 
   it("creates a blank connection with iTwinId passed separate from blankConnection", async () => {
+    const basic = document.createElement("div");
+    basic.id = "root";
+    document.body.appendChild(basic);
+    const container = document.getElementById("root");
+    const root = createRoot(container!);
+
     const blankConnectionProps: BlankViewerProps = {
       location: Cartographic.fromDegrees({
         longitude: 0,
@@ -237,15 +238,15 @@ describe("IModelLoader", () => {
       },
     };
 
-    const { getByTestId } = render(
-      <IModelLoader
-        {...blankConnectionProps}
-        blankConnectionViewState={blankConnectionViewState}
-        iTwinId={mockITwinId}
-      />
+    act(() =>
+      root.render(
+        <IModelLoader
+          {...blankConnectionProps}
+          blankConnectionViewState={blankConnectionViewState}
+          iTwinId={mockITwinId}
+        />
+      )
     );
-
-    await waitFor(() => getByTestId("viewer"));
 
     expect(BlankConnection.create).toHaveBeenCalledWith({
       ...blankConnectionProps,
@@ -255,11 +256,17 @@ describe("IModelLoader", () => {
   });
 
   it("creates a remote connection from iModelId and iTwinId", async () => {
-    const { getByTestId } = render(
-      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
-    );
+    const basic = document.createElement("div");
+    basic.id = "root";
+    document.body.appendChild(basic);
+    const container = document.getElementById("root");
+    const root = createRoot(container!);
 
-    await waitFor(() => getByTestId("viewer"));
+    act(() =>
+      root.render(
+        <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
+      )
+    );
 
     expect(IModelServices.openRemoteIModel).toHaveBeenCalledWith(
       mockITwinId,
@@ -269,42 +276,61 @@ describe("IModelLoader", () => {
   });
 
   it("creates a local connection from filePath", async () => {
-    const { getByTestId } = render(<IModelLoader filePath="x://iModel" />);
+    const basic = document.createElement("div");
+    basic.id = "root";
+    document.body.appendChild(basic);
+    const container = document.getElementById("root");
+    const root = createRoot(container!);
 
-    await waitFor(() => getByTestId("viewer"));
+    act(() => root.render(<IModelLoader filePath="x://iModel" />));
 
     expect(IModelServices.openLocalIModel).toHaveBeenCalledWith("x://iModel");
   });
 
   it("sets the theme to the provided theme", async () => {
-    const { getByTestId } = render(
-      <IModelLoader
-        iTwinId={mockITwinId}
-        iModelId={mockIModelId}
-        theme={ColorTheme.Dark}
-      />
-    );
+    const basic = document.createElement("div");
+    basic.id = "root";
+    document.body.appendChild(basic);
+    const container = document.getElementById("root");
+    const root = createRoot(container!);
 
-    await waitFor(() => getByTestId("loader-wrapper"));
+    act(() =>
+      root.render(
+        <IModelLoader
+          iTwinId={mockITwinId}
+          iModelId={mockIModelId}
+          theme={ColorTheme.Dark}
+        />
+      )
+    );
 
     expect(UiFramework.setColorTheme).toHaveBeenCalledWith(ColorTheme.Dark);
   });
 
   it("renders without a viewState if the default frontstage does not require a connection", async () => {
+    const basic = document.createElement("div");
+    basic.id = "root";
+    document.body.appendChild(basic);
+    const container = document.getElementById("root");
+    const root = createRoot(container!);
+
     const frontstages: ViewerFrontstage[] = [
       {
         default: true,
         provider: {} as any,
       },
     ];
-    const result = render(
-      <IModelLoader
-        iTwinId={mockITwinId}
-        iModelId={mockIModelId}
-        frontstages={frontstages}
-      />
+
+    act(() =>
+      root.render(
+        <IModelLoader
+          iTwinId={mockITwinId}
+          iModelId={mockIModelId}
+          frontstages={frontstages}
+        />
+      )
     );
-    await waitFor(() => result.getByTestId("viewer"));
+
     expect(IModelViewer).toHaveBeenCalledWith(
       { backstageItems: undefined, frontstages },
       {}
@@ -312,25 +338,40 @@ describe("IModelLoader", () => {
   });
 
   it("closes connection on unmount", async () => {
+    const basic = document.createElement("div");
+    basic.id = "root";
+    document.body.appendChild(basic);
+    const container = document.getElementById("root");
+    const root = createRoot(container!);
+
     const connection = {
       isBlankConnection: () => false,
       iModelId: mockIModelId,
       close: jest.fn(),
     };
+
     jest
       .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
-    const result = render(
-      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
-    );
-    await waitFor(() => result.getByTestId("viewer"));
 
-    result.unmount();
+    act(() =>
+      root.render(
+        <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
+      )
+    );
+
+    root.unmount();
 
     expect(connection.close).toHaveBeenCalled();
   });
 
   it("closes connection between model ids change", async () => {
+    const basic = document.createElement("div");
+    basic.id = "root";
+    document.body.appendChild(basic);
+    const container = document.getElementById("root");
+    const root = createRoot(container!);
+
     const connection = {
       isBlankConnection: () => false,
       iModelId: mockIModelId,
@@ -339,21 +380,29 @@ describe("IModelLoader", () => {
     jest
       .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
-    const result = render(
-      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
+
+    act(() =>
+      root.render(
+        <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
+      )
     );
 
-    await waitFor(() => result.getByTestId("viewer"));
-
-    result.rerender(
-      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId + "1"} />
+    act(() =>
+      root.render(
+        <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId + "1"} />
+      )
     );
 
-    await waitFor(() => result.getByTestId("viewer"));
     expect(connection.close).toHaveBeenCalled();
   });
 
   it("closes connection between iTwin ids change", async () => {
+    const basic = document.createElement("div");
+    basic.id = "root";
+    document.body.appendChild(basic);
+    const container = document.getElementById("root");
+    const root = createRoot(container!);
+
     const connection = {
       isBlankConnection: () => false,
       iModelId: mockIModelId,
@@ -362,21 +411,29 @@ describe("IModelLoader", () => {
     jest
       .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
-    const result = render(
-      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
+
+    act(() =>
+      root.render(
+        <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
+      )
     );
 
-    await waitFor(() => result.getByTestId("viewer"));
-
-    result.rerender(
-      <IModelLoader iTwinId={mockITwinId + "1"} iModelId={mockIModelId} />
+    act(() =>
+      root.render(
+        <IModelLoader iTwinId={mockITwinId + "1"} iModelId={mockIModelId} />
+      )
     );
 
-    await waitFor(() => result.getByTestId("viewer"));
     expect(connection.close).toHaveBeenCalled();
   });
 
   it("renders a custom loading component", async () => {
+    const basic = document.createElement("div");
+    basic.id = "root";
+    document.body.appendChild(basic);
+    const container = document.getElementById("root");
+    const root = createRoot(container!);
+
     jest.spyOn(IModelServices, "openRemoteIModel").mockImplementation(
       () =>
         new Promise((resolve) =>
@@ -394,19 +451,20 @@ describe("IModelLoader", () => {
     );
 
     const Loader = () => {
-      return <div>Things are happening</div>;
+      return <div id="loadingComponent">Things are happening</div>;
     };
-    const result = render(
-      <IModelLoader
-        iTwinId={mockITwinId}
-        iModelId={mockIModelId}
-        loadingComponent={<Loader />}
-      />
+
+    act(() =>
+      root.render(
+        <IModelLoader
+          iTwinId={mockITwinId}
+          iModelId={mockIModelId}
+          loadingComponent={<Loader />}
+        />
+      )
     );
 
-    const loadingComponent = await waitFor(() =>
-      result.getByText("Things are happening")
-    );
+    const loadingComponent = document.getElementById("loadingComponent");
 
     expect(loadingComponent).toBeInTheDocument();
   });
