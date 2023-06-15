@@ -155,6 +155,8 @@ export type ConnectedViewerProps = {
 export type FileViewerProps = {
   /** Path to local snapshot or briefcase */
   filePath: string;
+  /** @alpha If false, open the briefcase in write mode; defaults to true */
+  readonly?: boolean;
 };
 
 // it's fine to say that if either location or extents is defined, then both have to be defined.

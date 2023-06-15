@@ -71,12 +71,12 @@ export const openRemoteIModel = async (
  * @param fileName
  * @returns
  */
-export const openLocalIModel = async (fileName: string) => {
+export const openLocalIModel = async (fileName: string, readonly = true) => {
   try {
     // attempt to open as a briefcase
     const connection = await BriefcaseConnection.openFile({
       fileName,
-      readonly: true,
+      readonly,
     });
     if (connection.iTwinId === Guid.empty) {
       // assume snapshot if there is no context id

@@ -48,7 +48,7 @@ export const openConnection = async (
   }
 
   if (options.filePath) {
-    return await openLocalIModel(options.filePath);
+    return await openLocalIModel(options.filePath, options.readonly);
   }
 
   if (options.extents && options.location) {
