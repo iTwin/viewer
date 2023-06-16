@@ -154,10 +154,12 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
         (connection || noConnectionRequired) &&
         StateManager.store ? (
           <Provider store={StateManager.store}>
-            <IModelViewer
-              frontstages={finalFrontstages}
-              backstageItems={backstageItems}
-            />
+            <React.StrictMode>
+              <IModelViewer
+                frontstages={finalFrontstages}
+                backstageItems={backstageItems}
+              />
+            </React.StrictMode>
           </Provider>
         ) : (
           <div className="itwin-viewer-loading-container">

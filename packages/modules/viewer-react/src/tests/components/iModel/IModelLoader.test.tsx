@@ -392,8 +392,9 @@ describe("IModelLoader", () => {
         <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId + "1"} />
       )
     );
-
-    expect(connection.close).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(connection.close).toHaveBeenCalled();
+    }, {});
   });
 
   it("closes connection between iTwin ids change", async () => {

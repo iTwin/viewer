@@ -3,14 +3,18 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { BackstageItem, FrontstageProvider } from "@itwin/appui-react";
+import type {
+  BackstageItem,
+  FrontstageDef,
+  FrontstageProvider,
+} from "@itwin/appui-react";
 import { UiFramework } from "@itwin/appui-react";
 import {
   BackstageComposer,
   ConfigurableUiContent,
   ThemeManager,
 } from "@itwin/appui-react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import type { ViewerFrontstage } from "../../types";
 interface ModelProps {
@@ -22,6 +26,15 @@ export const IModelViewer: React.FC<ModelProps> = ({
   frontstages,
   backstageItems,
 }: ModelProps) => {
+  const [defaultFrontstageDef, setDefaultFrontstageDef] =
+    useState<FrontstageDef>();
+
+  useEffect(() => {
+    if (defaultFrontstageDef) {
+      void UiFramework.frontstages.setActiveFrontstageDef(defaultFrontstageDef);
+    }
+  }, [defaultFrontstageDef]);
+
   useEffect(() => {
     let defaultFrontstage: FrontstageProvider | undefined;
     frontstages.forEach((viewerFrontstage) => {
@@ -34,13 +47,15 @@ export const IModelViewer: React.FC<ModelProps> = ({
     });
     // set the active frontstage to the current default
     if (defaultFrontstage) {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       void UiFramework.frontstages
         .getFrontstageDef(defaultFrontstage.id)
-        .then((frontstageDef) => {
-          void UiFramework.frontstages.setActiveFrontstageDef(frontstageDef);
+        .then((def) => {
+          if (def) {
+            setDefaultFrontstageDef(def);
+          }
         });
     }
+
     return () => {
       UiFramework.frontstages.clearFrontstageProviders();
     };
