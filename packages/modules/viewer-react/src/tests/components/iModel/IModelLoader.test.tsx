@@ -212,14 +212,12 @@ describe("IModelLoader", () => {
       name: "Blank Connection",
     });
 
-    root.unmount();
+    act(() => {
+      root.unmount();
+    });
   });
 
   it("creates a blank connection with iTwinId passed separate from blankConnection", async () => {
-    const basic = document.createElement("div");
-    basic.id = "root";
-    document.body.appendChild(basic);
-    const container = document.getElementById("root");
     const root = createRoot(container!);
 
     const blankConnectionProps: BlankViewerProps = {
@@ -248,18 +246,16 @@ describe("IModelLoader", () => {
       )
     );
 
-    expect(BlankConnection.create).toHaveBeenCalledWith({
-      ...blankConnectionProps,
-      iTwinId: mockITwinId,
-      name: "Blank Connection",
+    await waitFor(() => {
+      expect(BlankConnection.create).toHaveBeenCalledWith({
+        ...blankConnectionProps,
+        iTwinId: mockITwinId,
+        name: "Blank Connection",
+      });
     });
   });
 
   it("creates a remote connection from iModelId and iTwinId", async () => {
-    const basic = document.createElement("div");
-    basic.id = "root";
-    document.body.appendChild(basic);
-    const container = document.getElementById("root");
     const root = createRoot(container!);
 
     act(() =>
@@ -276,10 +272,6 @@ describe("IModelLoader", () => {
   });
 
   it("creates a local connection from filePath", async () => {
-    const basic = document.createElement("div");
-    basic.id = "root";
-    document.body.appendChild(basic);
-    const container = document.getElementById("root");
     const root = createRoot(container!);
 
     act(() => root.render(<IModelLoader filePath="x://iModel" />));
@@ -288,10 +280,6 @@ describe("IModelLoader", () => {
   });
 
   it("sets the theme to the provided theme", async () => {
-    const basic = document.createElement("div");
-    basic.id = "root";
-    document.body.appendChild(basic);
-    const container = document.getElementById("root");
     const root = createRoot(container!);
 
     act(() =>
@@ -308,10 +296,6 @@ describe("IModelLoader", () => {
   });
 
   it("renders without a viewState if the default frontstage does not require a connection", async () => {
-    const basic = document.createElement("div");
-    basic.id = "root";
-    document.body.appendChild(basic);
-    const container = document.getElementById("root");
     const root = createRoot(container!);
 
     const frontstages: ViewerFrontstage[] = [
@@ -338,10 +322,6 @@ describe("IModelLoader", () => {
   });
 
   it("closes connection on unmount", async () => {
-    const basic = document.createElement("div");
-    basic.id = "root";
-    document.body.appendChild(basic);
-    const container = document.getElementById("root");
     const root = createRoot(container!);
 
     const connection = {
@@ -360,16 +340,16 @@ describe("IModelLoader", () => {
       )
     );
 
-    root.unmount();
+    act(() => {
+      root.unmount();
+    });
 
-    expect(connection.close).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(connection.close).toHaveBeenCalled();
+    }, {});
   });
 
   it("closes connection between model ids change", async () => {
-    const basic = document.createElement("div");
-    basic.id = "root";
-    document.body.appendChild(basic);
-    const container = document.getElementById("root");
     const root = createRoot(container!);
 
     const connection = {
@@ -398,12 +378,6 @@ describe("IModelLoader", () => {
   });
 
   it("closes connection between iTwin ids change", async () => {
-    const basic = document.createElement("div");
-    basic.id = "root";
-    document.body.appendChild(basic);
-    const container = document.getElementById("root");
-    const root = createRoot(container!);
-
     const connection = {
       isBlankConnection: () => false,
       iModelId: mockIModelId,
@@ -429,10 +403,6 @@ describe("IModelLoader", () => {
   });
 
   it("renders a custom loading component", async () => {
-    const basic = document.createElement("div");
-    basic.id = "root";
-    document.body.appendChild(basic);
-    const container = document.getElementById("root");
     const root = createRoot(container!);
 
     jest.spyOn(IModelServices, "openRemoteIModel").mockImplementation(
