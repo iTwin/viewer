@@ -354,16 +354,16 @@ describe("IModelLoader", () => {
       )
     );
 
+    act(() => {
+      root.unmount();
+    });
+
     await waitFor(
       () => {
         expect(connection.close).toHaveBeenCalled();
       },
       { timeout: 9000 }
     );
-
-    act(() => {
-      root.unmount();
-    });
   }, 9000);
   // it("closes connection between model ids change", async () => {
 
@@ -463,40 +463,44 @@ describe("IModelLoader", () => {
   //   expect(connection.close).toHaveBeenCalled();
   // });
 
-  // it("renders a custom loading component", async () => {
-
-  //   jest.spyOn(IModelServices, "openRemoteIModel").mockImplementation(
-  //     () =>
-  //       new Promise((resolve) =>
-  //         setTimeout(
-  //           () =>
-  //             resolve({
-  //               isBlankConnection: () => false,
-  //               iModelId: mockIModelId,
-  //               close: jest.fn(),
-  //               isOpen: true,
-  //             } as any),
-  //           500
+  //   it("renders a custom loading component", async () => {
+  //     const root = createRoot(container!);
+  //     jest.spyOn(IModelServices, "openRemoteIModel").mockImplementation(
+  //       () =>
+  //         new Promise((resolve) =>
+  //           setTimeout(
+  //             () =>
+  //               resolve({
+  //                 isBlankConnection: () => false,
+  //                 iModelId: mockIModelId,
+  //                 close: jest.fn(),
+  //                 isOpen: true,
+  //               } as any),
+  //             500
+  //           )
   //         )
+  //     );
+
+  //     const Loader = () => {
+  //       return <div id="loadingComponent">Things are happening</div>;
+  //     };
+
+  //     act(() =>
+  //       root.render(
+  //         <IModelLoader
+  //           iTwinId={mockITwinId}
+  //           iModelId={mockIModelId}
+  //           loadingComponent={<Loader />}
+  //         />
   //       )
-  //   );
+  //     );
 
-  //   const Loader = () => {
-  //     return <div id="loadingComponent">Things are happening</div>;
-  //   };
+  //     const loadingComponent = document.getElementById("loadingComponent");
 
-  //   act(() =>
-  //     root.render(
-  //       <IModelLoader
-  //         iTwinId={mockITwinId}
-  //         iModelId={mockIModelId}
-  //         loadingComponent={<Loader />}
-  //       />
-  //     )
-  //   );
+  //     expect(loadingComponent).toBeInTheDocument();
 
-  //   const loadingComponent = document.getElementById("loadingComponent");
-
-  //   expect(loadingComponent).toBeInTheDocument();
-  // });
+  //     act(() => {
+  //       root.unmount();
+  //     });
+  //   });
 });
