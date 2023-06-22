@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Thu, 01 Jun 2023 13:42:05 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Jun 2023 22:45:53 GMT and should not be manually modified.
+
+## 4.1.0
+Thu, 22 Jun 2023 22:45:53 GMT
+
+### Minor changes
+
+- Expose option to open up a local briefcase in write-mode via `readonly` `@alpha` prop which can be removed at any time
 
 ## 4.0.3
 Thu, 01 Jun 2023 13:42:05 GMT

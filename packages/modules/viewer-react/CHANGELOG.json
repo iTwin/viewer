@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "4.1.0",
+      "tag": "@itwin/viewer-react_v4.1.0",
+      "date": "Thu, 22 Jun 2023 22:45:53 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Expose option to open up a local briefcase in write-mode via `readonly` `@alpha` prop which can be removed at any time"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.0.3",
       "tag": "@itwin/viewer-react_v4.0.3",
       "date": "Thu, 01 Jun 2023 13:42:05 GMT",
