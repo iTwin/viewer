@@ -256,7 +256,10 @@ describe("IModelLoader", () => {
 
     await waitFor(() => getByTestId("viewer"));
 
-    expect(IModelServices.openLocalIModel).toHaveBeenCalledWith("x://iModel");
+    expect(IModelServices.openLocalIModel).toHaveBeenCalledWith(
+      "x://iModel",
+      undefined
+    );
   });
 
   it("sets the theme to the provided theme", async () => {
