@@ -283,7 +283,10 @@ describe("IModelLoader", () => {
     const root = createRoot(container!);
     act(() => root.render(<IModelLoader filePath="x://iModel" />));
 
-    expect(IModelServices.openLocalIModel).toHaveBeenCalledWith("x://iModel");
+    expect(IModelServices.openLocalIModel).toHaveBeenCalledWith(
+      "x://iModel",
+      undefined
+    );
     act(() => {
       root.unmount();
     });

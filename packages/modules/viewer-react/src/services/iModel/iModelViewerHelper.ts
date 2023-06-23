@@ -48,7 +48,7 @@ export const openConnection = async (
   }
 
   if (options.filePath) {
-    return await openLocalIModel(options.filePath);
+    return await openLocalIModel(options.filePath, options.readonly);
   }
 
   if (options.extents && options.location) {
@@ -69,12 +69,13 @@ export const gatherRequiredViewerProps = ({
   iTwinId,
   iModelId,
   filePath,
+  readonly,
   extents,
   location,
   changeSetId,
 }: ModelLoaderProps): RequiredViewerProps | undefined => {
   if (filePath) {
-    return { filePath };
+    return { filePath, readonly };
   }
 
   if (iModelId && iTwinId) {

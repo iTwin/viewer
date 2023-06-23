@@ -162,6 +162,26 @@ describe("BaseViewer", () => {
     const loader = await waitFor(() => getByTestId("loader-wrapper"));
 
     expect(loader).toBeInTheDocument();
-    expect(IModelService.openLocalIModel).toHaveBeenCalledWith(fileName);
+    expect(IModelService.openLocalIModel).toHaveBeenCalledWith(
+      fileName,
+      undefined
+    );
+  });
+
+  it("renders and attempts to create a briefcase connection in write mode", async () => {
+    const fileName = "/path/to/snapshot";
+
+    const { getByTestId } = render(
+      <BaseViewer
+        filePath={fileName}
+        readonly={false}
+        enablePerformanceMonitors={false}
+      />
+    );
+
+    const loader = await waitFor(() => getByTestId("loader-wrapper"));
+
+    expect(loader).toBeInTheDocument();
+    expect(IModelService.openLocalIModel).toHaveBeenCalledWith(fileName, false);
   });
 });
