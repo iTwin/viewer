@@ -10,11 +10,13 @@ import { AllRoutes } from "./components/routing";
 
 function App() {
   return (
-    <React.Suspense fallback={<></>}>
-      <BrowserRouter>
-        <AllRoutes />
-      </BrowserRouter>
-    </React.Suspense>
+    <React.StrictMode>
+      <React.Suspense fallback={<></>}>
+        <BrowserRouter>
+          <AllRoutes />
+        </BrowserRouter>
+      </React.Suspense>
+    </React.StrictMode>
   );
 }
 
