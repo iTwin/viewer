@@ -22,6 +22,12 @@ interface ModelProps {
   backstageItems?: BackstageItem[]; // TODO next remove this and just use the UiItemsManager to get the items in the next major version
 }
 
+/*
+In the upgrade to react 18 and enabling StrictMode, the setting of frontstages started failing 50% of the time. From investigation,
+the new rendering behavior from react 18 where components are mounted, unmounted, then mounted again and how react now batches useEffect 
+hooks was causing a race condition. By adding a state variable and moving the call to setActiveFrontstageDef to its own useEffect hook, 
+the issue is no longer occuring.
+*/
 export const IModelViewer: React.FC<ModelProps> = ({
   frontstages,
   backstageItems,
