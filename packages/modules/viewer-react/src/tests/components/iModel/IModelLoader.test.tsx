@@ -119,9 +119,9 @@ jest.mock("../../../components/iModel/IModelViewer", () => ({
 const mockITwinId = "mockITwinId";
 const mockIModelId = "mockIModelId";
 
-const basic = document.createElement("div");
-basic.id = "root";
-document.body.appendChild(basic);
+const root_div = document.createElement("div");
+root_div.id = "root";
+document.body.appendChild(root_div);
 const container = document.getElementById("root");
 
 describe("IModelLoader", () => {
