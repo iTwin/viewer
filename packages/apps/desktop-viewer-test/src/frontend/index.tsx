@@ -7,7 +7,6 @@ import "./index.scss";
 
 import { Logger, LogLevel } from "@itwin/core-bentley";
 import React from "react";
-import * as ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";
@@ -24,9 +23,13 @@ const viewerFrontendMain = async () => {
 
   // when initialization is complete, render
   const container = document.getElementById("root");
-  const root = createRoot(container!); // createRoot(container!) if you use TypeScript
+  const root = createRoot(container!);
 
-  root.render(<App />);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
 };
 
 viewerFrontendMain(); // eslint-disable-line @typescript-eslint/no-floating-promises

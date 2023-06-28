@@ -8,9 +8,8 @@ import type { FrontstageConfig } from "@itwin/appui-react";
 import { ContentGroup, IModelViewportControl } from "@itwin/appui-react";
 import { FrontstageProvider } from "@itwin/appui-react";
 import { UiFramework } from "@itwin/appui-react";
+import { render, waitFor } from "@testing-library/react";
 import React from "react";
-import { createRoot } from "react-dom/client";
-import { act } from "react-dom/test-utils";
 
 import { IModelViewer } from "../../../components/iModel/IModelViewer";
 import type { ViewerFrontstage } from "../../../types";
@@ -59,6 +58,7 @@ jest.mock("@itwin/appui-react", () => {
           .mockResolvedValue({ id: "Frontstage2", frontstage: jest.fn() }),
         setActiveFrontstageDef: jest.fn().mockResolvedValue(true),
         clearFrontstageDefs: jest.fn(),
+        clearFrontstageProviders: jest.fn(),
       },
     },
 
@@ -74,34 +74,32 @@ const flushPromises = () => new Promise((res) => setTimeout(res, 0));
 
 describe("IModelViewer", () => {
   it("loads all frontstages", async () => {
-    // const fs1 = new Frontstage1Provider();
-    // const fs2 = new Frontstage2Provider();
-    // const frontstages: ViewerFrontstage[] = [
-    //   {
-    //     provider: fs1,
-    //   },
-    //   {
-    //     provider: fs2,
-    //     default: true,
-    //   },
-    // ];
-    // const basic = document.createElement("div");
-    // basic.id = "root";
-    // document.body.appendChild(basic);
-    // const container = document.getElementById("root");
-    // const root = createRoot(container!); // createRoot(container!) if you use TypeScript
-    // act(() =>
-    //   root.render(
-    //     <IModelViewer frontstages={frontstages} backstageItems={[]} />
-    //   )
-    // );
-    // expect(UiFramework.frontstages.addFrontstageProvider).toHaveBeenCalledTimes(
-    //   2
-    // );
-    // // expect(BackstageItemUtilities.createStageLauncher).toHaveBeenCalledTimes(2);
-    // await flushPromises();
-    // expect(
-    //   UiFramework.frontstages.setActiveFrontstageDef
-    // ).toHaveBeenCalledTimes(1);
-  });
+    const fs1 = new Frontstage1Provider();
+    const fs2 = new Frontstage2Provider();
+    const frontstages: ViewerFrontstage[] = [
+      {
+        provider: fs1,
+      },
+      {
+        provider: fs2,
+        default: true,
+      },
+    ];
+
+    render(<IModelViewer frontstages={frontstages} backstageItems={[]} />);
+
+    expect(UiFramework.frontstages.addFrontstageProvider).toHaveBeenCalledTimes(
+      2
+    );
+    // expect(BackstageItemUtilities.createStageLauncher).toHaveBeenCalledTimes(2);
+    await flushPromises();
+    await waitFor(
+      () => {
+        expect(
+          UiFramework.frontstages.setActiveFrontstageDef
+        ).toHaveBeenCalledTimes(1);
+      },
+      { timeout: 10000 }
+    );
+  }, 10000);
 });
