@@ -41,7 +41,7 @@ export const IModelsRoute = () => {
       {accessToken ? (
         <SelectIModel
           accessToken={accessToken}
-          projectId={iTwinId}
+          iTwinId={iTwinId}
           projectName={projectName}
         />
       ) : (

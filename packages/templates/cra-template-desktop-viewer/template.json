@@ -24,7 +24,7 @@
       "@itwin/ecschema-metadata": "^4.0.0",
       "@itwin/electron-authorization": "^0.14.0",
       "@itwin/express-server": "^4.0.0",
-      "@itwin/imodel-browser-react": "^0.12.2",
+      "@itwin/imodel-browser-react": "^1.0.0",
       "@itwin/imodel-components-react": "^4.0.0",
       "@itwin/imodels-access-backend": "^4.0.0",
       "@itwin/imodels-access-frontend": "^4.0.0",

@@ -8,7 +8,7 @@ import "./SelectIModel.scss";
 import { BriefcaseConnection } from "@itwin/core-frontend";
 import { getBriefcaseStatus, ModelStatus } from "@itwin/desktop-viewer-react";
 import type { IModelFull, IModelGridProps } from "@itwin/imodel-browser-react";
-import { IModelGrid } from "@itwin/imodel-browser-react";
+import { ITwinGrid } from "@itwin/imodel-browser-react";
 import type { TileProps } from "@itwin/itwinui-react";
 import { Text } from "@itwin/itwinui-react";
 import React, {
@@ -46,11 +46,11 @@ const useProgressIndicator = (iModel: IModelFull) => {
     if (recents) {
       return recents.find((recent) => {
         return (
-          recent.iTwinId === iModel.projectId && recent.iModelId === iModel.id
+          recent.iTwinId === iModel.iTwinId && recent.iModelId === iModel.id
         );
       });
     }
-  }, [userSettings, iModel.id, iModel.projectId]);
+  }, [userSettings, iModel.id, iModel.iTwinId]);
 
   const getBriefcase = useCallback(async () => {
     // if there is a local file, open a briefcase connection and store it in state
@@ -69,7 +69,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
   const { progress, doDownload } = useDownload(
     iModel.id,
     iModel.name ?? iModel.id,
-    iModel.projectId ?? ""
+    iModel.iTwinId ?? ""
   );
 
   const startDownload = useCallback(async () => {
@@ -168,7 +168,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
 
 export const SelectIModel = ({
   accessToken,
-  projectId: iTwinId,
+  iTwinId,
   projectName,
 }: SelectIModelProps) => {
   const navigate = useNavigate();
@@ -184,7 +184,7 @@ export const SelectIModel = ({
     if (recents) {
       const local = recents.find((recent) => {
         return (
-          recent.iTwinId === iModel.projectId && recent.iModelId === iModel.id
+          recent.iTwinId === iModel.iTwinId && recent.iModelId === iModel.id
         );
       });
       if (local?.path) {
@@ -203,9 +203,8 @@ export const SelectIModel = ({
         <Text variant="title">{`iModels for ${projectName}`}</Text>
       </div>
       <div className="itv-scrolling-content">
-        <IModelGrid
+        <ITwinGrid
           accessToken={accessToken}
-          projectId={iTwinId}
           onThumbnailClick={selectIModel}
           useIndividualState={useProgressIndicator}
         />

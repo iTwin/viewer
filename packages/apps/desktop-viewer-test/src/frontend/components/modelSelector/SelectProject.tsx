@@ -6,7 +6,7 @@
 import "./SelectProject.scss";
 
 import { useAccessToken } from "@itwin/desktop-viewer-react";
-import { ProjectGrid } from "@itwin/imodel-browser-react";
+import { ITwinGrid } from "@itwin/imodel-browser-react";
 import {
   SvgCalendar,
   SvgList,
@@ -87,7 +87,7 @@ export const SelectProject = () => {
             </div>
           </div>
           <div className="itv-scrolling-content">
-            <ProjectGrid
+            <ITwinGrid
               accessToken={accessToken}
               requestType={
                 projectType === 0
