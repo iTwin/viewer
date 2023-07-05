@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/desktop-viewer-react",
+      "comment": "Upgrading to react 18",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/desktop-viewer-react"
+}
