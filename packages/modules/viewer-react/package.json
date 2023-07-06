@@ -125,9 +125,6 @@
     "collectCoverageFrom": [
       "<rootDir>/src/**"
     ],
-    "globals": {
-      "IS_REACT_ACT_ENVIRONMENT": true
-    },
     "testEnvironment": "jsdom"
   },
   "keywords": [
