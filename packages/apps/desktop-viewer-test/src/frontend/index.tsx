@@ -22,8 +22,8 @@ const viewerFrontendMain = async () => {
   document.documentElement.classList.add(`iui-theme-dark`);
 
   // when initialization is complete, render
-  const container = document.getElementById("root");
-  const root = createRoot(container!);
+  const container = document.getElementById("root") as HTMLElement;
+  const root = createRoot(container);
 
   root.render(
     <React.StrictMode>
