@@ -2,8 +2,8 @@
   "changes": [
     {
       "packageName": "@itwin/desktop-viewer-react",
-      "comment": "Upgrading to react 18",
-      "type": "patch"
+      "comment": "Update peers to now allow support React 18, see [their changelog](https://github.com/facebook/react/blob/main/CHANGELOG.md)",
+      "type": "minor"
     }
   ],
   "packageName": "@itwin/desktop-viewer-react"
