@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@itwin/viewer-react",
-      "comment": "Update peers to now allow support React 18, see [their changelog](https://github.com/facebook/react/blob/main/CHANGELOG.md)",
+      "comment": "Update peers to now allow support of React 18, see [their changelog](https://github.com/facebook/react/blob/main/CHANGELOG.md)",
       "type": "minor"
     }
   ],
