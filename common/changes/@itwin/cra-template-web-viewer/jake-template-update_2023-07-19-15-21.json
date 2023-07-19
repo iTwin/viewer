@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-web-viewer",
+      "comment": "Update to React 18, see [their changelog](https://github.com/facebook/react/blob/main/CHANGELOG.md)",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/cra-template-web-viewer"
+}
