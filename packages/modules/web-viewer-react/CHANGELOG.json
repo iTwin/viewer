@@ -2,6 +2,23 @@
   "name": "@itwin/web-viewer-react",
   "entries": [
     {
+      "version": "4.1.0",
+      "tag": "@itwin/web-viewer-react_v4.1.0",
+      "date": "Wed, 19 Jul 2023 13:01:25 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update peers to now allow support of React 18, see [their changelog](https://github.com/facebook/react/blob/main/CHANGELOG.md)"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" to `4.2.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.0.4",
       "tag": "@itwin/web-viewer-react_v4.0.4",
       "date": "Thu, 22 Jun 2023 22:45:53 GMT",
