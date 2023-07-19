@@ -5,9 +5,10 @@
 
 import "./index.scss";
 
+import { UiFramework } from "@itwin/appui-react";
 import { Logger, LogLevel } from "@itwin/core-bentley";
 import React from "react";
-import * as ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";
 import App from "./components/App";
@@ -22,7 +23,15 @@ const viewerFrontendMain = async () => {
   document.documentElement.classList.add(`iui-theme-dark`);
 
   // when initialization is complete, render
-  ReactDOM.render(<App />, document.getElementById("root"));
+  const container = document.getElementById("root");
+  const root = createRoot(container!); // createRoot(container!) if you use TypeScript
+  UiFramework.childWindows.useCreateRoot(createRoot);
+
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
 };
 
 viewerFrontendMain(); // eslint-disable-line @typescript-eslint/no-floating-promises
