@@ -205,6 +205,7 @@ export const SelectIModel = ({
       <div className="itv-scrolling-content">
         <IModelGrid
           accessToken={accessToken}
+          iTwinId={iTwinId}
           onThumbnailClick={selectIModel}
           useIndividualState={useProgressIndicator}
         />
