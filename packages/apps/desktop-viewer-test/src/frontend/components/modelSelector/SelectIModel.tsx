@@ -8,7 +8,7 @@ import "./SelectIModel.scss";
 import { BriefcaseConnection } from "@itwin/core-frontend";
 import { getBriefcaseStatus, ModelStatus } from "@itwin/desktop-viewer-react";
 import type { IModelFull, IModelGridProps } from "@itwin/imodel-browser-react";
-import { ITwinGrid } from "@itwin/imodel-browser-react";
+import { IModelGrid } from "@itwin/imodel-browser-react";
 import type { TileProps } from "@itwin/itwinui-react";
 import { Text } from "@itwin/itwinui-react";
 import React, {
@@ -203,7 +203,7 @@ export const SelectIModel = ({
         <Text variant="title">{`iModels for ${projectName}`}</Text>
       </div>
       <div className="itv-scrolling-content">
-        <ITwinGrid
+        <IModelGrid
           accessToken={accessToken}
           onThumbnailClick={selectIModel}
           useIndividualState={useProgressIndicator}
