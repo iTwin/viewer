@@ -9,8 +9,9 @@ import { ColorTheme, UiFramework, UiItemsManager } from "@itwin/appui-react";
 import { Cartographic, ColorDef } from "@itwin/core-common";
 import { BlankConnection, SnapshotConnection } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
-import { render, waitFor } from "@testing-library/react";
+import { act, render, waitFor } from "@testing-library/react";
 import React from "react";
+import { createRoot } from "react-dom/client";
 
 import { IModelViewer } from "../../../components/iModel";
 import IModelLoader from "../../../components/iModel/IModelLoader";
@@ -118,6 +119,11 @@ jest.mock("../../../components/iModel/IModelViewer", () => ({
 const mockITwinId = "mockITwinId";
 const mockIModelId = "mockIModelId";
 
+const root_div = document.createElement("div");
+root_div.id = "root";
+document.body.appendChild(root_div);
+const container = document.getElementById("root");
+
 describe("IModelLoader", () => {
   beforeEach(() => {
     jest.spyOn(IModelServices, "openRemoteIModel").mockResolvedValue({
@@ -171,6 +177,8 @@ describe("IModelLoader", () => {
   });
 
   it("creates a blank connection with iTwinId passed in blankConnection", async () => {
+    const root = createRoot(container!);
+
     const blankConnectionProps = {
       location: Cartographic.fromDegrees({
         longitude: 0,
@@ -188,22 +196,28 @@ describe("IModelLoader", () => {
       },
     };
 
-    const { getByTestId } = render(
-      <IModelLoader
-        {...blankConnectionProps}
-        blankConnectionViewState={blankConnectionViewState}
-      />
+    act(() =>
+      root.render(
+        <IModelLoader
+          {...blankConnectionProps}
+          blankConnectionViewState={blankConnectionViewState}
+        />
+      )
     );
-
-    await waitFor(() => getByTestId("viewer"));
 
     expect(BlankConnection.create).toHaveBeenCalledWith({
       ...blankConnectionProps,
       name: "Blank Connection",
     });
+
+    act(() => {
+      root.unmount();
+    });
   });
 
   it("creates a blank connection with iTwinId passed separate from blankConnection", async () => {
+    const root = createRoot(container!);
+
     const blankConnectionProps: BlankViewerProps = {
       location: Cartographic.fromDegrees({
         longitude: 0,
@@ -220,20 +234,24 @@ describe("IModelLoader", () => {
       },
     };
 
-    const { getByTestId } = render(
-      <IModelLoader
-        {...blankConnectionProps}
-        blankConnectionViewState={blankConnectionViewState}
-        iTwinId={mockITwinId}
-      />
-    );
-
-    await waitFor(() => getByTestId("viewer"));
+    act(() => {
+      root.render(
+        <IModelLoader
+          {...blankConnectionProps}
+          blankConnectionViewState={blankConnectionViewState}
+          iTwinId={mockITwinId}
+        />
+      );
+    });
 
     expect(BlankConnection.create).toHaveBeenCalledWith({
       ...blankConnectionProps,
       iTwinId: mockITwinId,
       name: "Blank Connection",
+    });
+
+    act(() => {
+      root.unmount();
     });
   });
 

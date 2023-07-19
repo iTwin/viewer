@@ -36,8 +36,8 @@
     "@itwin/webgl-compatibility": "^4.0.0",
     "@remix-run/router": "^1.3.2",
     "history": "^5.3.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-redux": "^7.2.0",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
@@ -46,8 +46,8 @@
   "devDependencies": {
     "@bentley/react-scripts": "^5.0.0",
     "@types/node": "^18.12.0",
-    "@types/react": "^17.0.19",
-    "@types/react-dom": "^17.0.9",
+    "@types/react": "^18.2.9",
+    "@types/react-dom": "^18.2.4",
     "typescript": "~5.0.2"
   },
   "browserslist": [

@@ -1,6 +1,13 @@
 # Change Log - @itwin/web-viewer-react
 
-This log was last generated on Thu, 22 Jun 2023 22:45:53 GMT and should not be manually modified.
+This log was last generated on Wed, 19 Jul 2023 13:01:25 GMT and should not be manually modified.
+
+## 4.1.0
+Wed, 19 Jul 2023 13:01:25 GMT
+
+### Minor changes
+
+- Update peers to now allow support of React 18, see [their changelog](https://github.com/facebook/react/blob/main/CHANGELOG.md)
 
 ## 4.0.4
 Thu, 22 Jun 2023 22:45:53 GMT

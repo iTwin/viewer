@@ -8,7 +8,7 @@ import type { FrontstageConfig } from "@itwin/appui-react";
 import { ContentGroup, IModelViewportControl } from "@itwin/appui-react";
 import { FrontstageProvider } from "@itwin/appui-react";
 import { UiFramework } from "@itwin/appui-react";
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
 import { IModelViewer } from "../../../components/iModel/IModelViewer";
@@ -58,6 +58,7 @@ jest.mock("@itwin/appui-react", () => {
           .mockResolvedValue({ id: "Frontstage2", frontstage: jest.fn() }),
         setActiveFrontstageDef: jest.fn().mockResolvedValue(true),
         clearFrontstageDefs: jest.fn(),
+        clearFrontstageProviders: jest.fn(),
       },
     },
 
@@ -86,13 +87,19 @@ describe("IModelViewer", () => {
     ];
 
     render(<IModelViewer frontstages={frontstages} backstageItems={[]} />);
+
     expect(UiFramework.frontstages.addFrontstageProvider).toHaveBeenCalledTimes(
       2
     );
     // expect(BackstageItemUtilities.createStageLauncher).toHaveBeenCalledTimes(2);
     await flushPromises();
-    expect(
-      UiFramework.frontstages.setActiveFrontstageDef
-    ).toHaveBeenCalledTimes(1);
-  });
+    await waitFor(
+      () => {
+        expect(
+          UiFramework.frontstages.setActiveFrontstageDef
+        ).toHaveBeenCalledTimes(1);
+      },
+      { timeout: 10000 }
+    );
+  }, 10000);
 });

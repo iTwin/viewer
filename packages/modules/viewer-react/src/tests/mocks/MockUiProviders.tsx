@@ -122,7 +122,7 @@ export class TestUiProvider2 implements UiItemsProvider {
     ) {
       widgets.push({
         id: "addonWidget",
-        content: () => <FillCentered>Addon Widget in panel</FillCentered>,
+        content: <FillCentered>Addon Widget in panel</FillCentered>,
       });
     }
     return widgets;
