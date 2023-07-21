@@ -13,7 +13,7 @@
 
 .connection-status-icon {
   height: 20px;
-  fill: var(--iui-color-foreground-primary);
+  fill: var(--iui-color-border-accent);
   &.actionable {
     cursor: pointer;
   }

@@ -7,7 +7,6 @@ import "./index.scss";
 
 import { UiFramework } from "@itwin/appui-react";
 import { Logger, LogLevel } from "@itwin/core-bentley";
-import { ThemeProvider } from "@itwin/itwinui-react";
 import React from "react";
 import { createRoot } from "react-dom/client";
 
@@ -28,11 +27,9 @@ const viewerFrontendMain = async () => {
   document.documentElement.classList.add(`iui-theme-dark`);
 
   root.render(
-    <ThemeProvider theme="dark">
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </ThemeProvider>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
   );
 };
 

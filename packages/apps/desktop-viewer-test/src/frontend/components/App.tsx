@@ -6,6 +6,7 @@
 import type { DesktopInitializerParams } from "@itwin/desktop-viewer-react";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
+import { ThemeProvider } from "@itwin/itwinui-react";
 import {
   MeasurementActionToolbar,
   MeasureTools,
@@ -81,18 +82,20 @@ const App = () => {
   );
 
   return initialized && settings ? (
-    <div style={{ height: "100%" }}>
-      <SettingsContext.Provider value={{ settings, addRecent }}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomeRoute />} />
-            <Route path="/itwins/:iTwinId" element={<IModelsRoute />} />
-            <Route path="/itwins" element={<ITwinsRoute />} />
-            <Route path="/viewer" element={<ViewerRoute />} />
-          </Routes>
-        </BrowserRouter>
-      </SettingsContext.Provider>
-    </div>
+    <ThemeProvider theme="dark">
+      <div style={{ height: "100%" }}>
+        <SettingsContext.Provider value={{ settings, addRecent }}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<HomeRoute />} />
+              <Route path="/itwins/:iTwinId" element={<IModelsRoute />} />
+              <Route path="/itwins" element={<ITwinsRoute />} />
+              <Route path="/viewer" element={<ViewerRoute />} />
+            </Routes>
+          </BrowserRouter>
+        </SettingsContext.Provider>
+      </div>
+    </ThemeProvider>
   ) : (
     <></>
   );
