@@ -7,6 +7,7 @@ import "./index.scss";
 
 import { UiFramework } from "@itwin/appui-react";
 import { Logger, LogLevel } from "@itwin/core-bentley";
+import { ThemeProvider } from "@itwin/itwinui-react";
 import React from "react";
 import { createRoot } from "react-dom/client";
 
@@ -19,18 +20,19 @@ const viewerFrontendMain = async () => {
   Logger.setLevelDefault(LogLevel.Trace);
   Logger.setLevel(AppLoggerCategory.Frontend, LogLevel.Info);
 
-  // TODO add theme toggle
-  document.documentElement.classList.add(`iui-theme-dark`);
-
   // when initialization is complete, render
   const container = document.getElementById("root") as HTMLElement;
   const root = createRoot(container);
   UiFramework.childWindows.useCreateRoot(createRoot);
 
+  document.documentElement.classList.add(`iui-theme-dark`);
+
   root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <ThemeProvider theme="dark">
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </ThemeProvider>
   );
 };
 
