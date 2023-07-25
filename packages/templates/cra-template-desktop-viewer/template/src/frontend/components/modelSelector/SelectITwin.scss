@@ -50,7 +50,7 @@
         .iui-input:focus{
           outline: 0;
           border-color: rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-4));
-          box-shadow: rgba(var(----iui-color-accent-hsl),var(--iui-opacity-5)) 0 0 0 2px;;
+          box-shadow: rgba(var(--iui-color-accent-hsl),var(--iui-opacity-5)) 0 0 0 2px;;
         }
         > .iui-input:hover { 
           border-color: rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-2));
@@ -91,7 +91,7 @@
     > .iui-tabs {
       margin: 7px 0;
       border: 0;
-      > li {olor-accent-hsl
+      > li {
         > .iui-tab {
           display: flex;
           flex-direction: row;
@@ -112,7 +112,7 @@
           border-bottom: 2px solid var(--iui-color-text-accent);
         }
         > .iui-active, .iui-tab:hover {
-          background-color: rgba(var(----iui-color-accent-hsl),var(--iui-opacity-6));
+          background-color: rgba(var(--iui-color-accent-hsl),var(--iui-opacity-6));
         }
       }
     }
