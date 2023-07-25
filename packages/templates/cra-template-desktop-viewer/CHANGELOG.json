@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-desktop-viewer",
   "entries": [
     {
+      "version": "4.1.0",
+      "tag": "@itwin/cra-template-desktop-viewer_v4.1.0",
+      "date": "Tue, 25 Jul 2023 18:09:32 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Changing from projects API to itwins API"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.0.1",
       "tag": "@itwin/cra-template-desktop-viewer_v4.0.1",
       "date": "Tue, 06 Jun 2023 15:05:19 GMT",
