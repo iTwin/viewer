@@ -6,6 +6,7 @@
 import type { DesktopInitializerParams } from "@itwin/desktop-viewer-react";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
+import { ThemeProvider } from "@itwin/itwinui-react";
 import {
   MeasurementActionToolbar,
   MeasureTools,
@@ -81,7 +82,7 @@ const App = () => {
   );
 
   return initialized && settings ? (
-    <div style={{ height: "100%" }}>
+    <ThemeProvider theme="dark" style={{ height: "100%" }}>
       <SettingsContext.Provider value={{ settings, addRecent }}>
         <BrowserRouter>
           <Routes>
@@ -92,7 +93,7 @@ const App = () => {
           </Routes>
         </BrowserRouter>
       </SettingsContext.Provider>
-    </div>
+    </ThemeProvider>
   ) : (
     <></>
   );

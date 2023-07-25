@@ -12,7 +12,7 @@ import { SelectIModel } from "../modelSelector";
 import { SignIn } from "../signin/SignIn";
 
 interface IModelsRouteState {
-  projectName?: string;
+  iTwinName?: string;
 }
 
 export interface IModelContextOptions {
@@ -25,14 +25,14 @@ export const IModelContext = createContext({} as IModelContextOptions);
 export const IModelsRoute = () => {
   const { iTwinId } = useParams();
   const location = useLocation();
-  const [projectName, setProjectName] = useState<string>();
+  const [iTwinName, setITwinName] = useState<string>();
   const [pendingIModel, setPendingIModel] = useState<string>();
   const accessToken = useAccessToken();
 
   useEffect(() => {
     const routeState = location?.state as IModelsRouteState | undefined;
-    if (routeState?.projectName) {
-      setProjectName(routeState?.projectName);
+    if (routeState?.iTwinName) {
+      setITwinName(routeState?.iTwinName);
     }
   }, [location?.state]);
 
@@ -41,8 +41,8 @@ export const IModelsRoute = () => {
       {accessToken ? (
         <SelectIModel
           accessToken={accessToken}
-          projectId={iTwinId}
-          projectName={projectName}
+          iTwinId={iTwinId}
+          iTwinName={iTwinName}
         />
       ) : (
         <SignIn />

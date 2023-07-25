@@ -6,14 +6,14 @@
 import { useAccessToken } from "@itwin/desktop-viewer-react";
 import React from "react";
 
-import { SelectProject } from "../modelSelector";
+import { SelectITwin } from "../modelSelector";
 import { SignIn } from "../signin/SignIn";
 
 export const ITwinsRoute = () => {
   const accessToken = useAccessToken();
 
   if (accessToken) {
-    return <SelectProject />;
+    return <SelectITwin />;
   } else {
     return <SignIn />;
   }

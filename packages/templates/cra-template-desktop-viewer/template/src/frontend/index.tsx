@@ -19,19 +19,14 @@ const viewerFrontendMain = async () => {
   Logger.setLevelDefault(LogLevel.Trace);
   Logger.setLevel(AppLoggerCategory.Frontend, LogLevel.Info);
 
-  // TODO add theme toggle
-  document.documentElement.classList.add(`iui-theme-dark`);
-
   // when initialization is complete, render
   const container = document.getElementById("root") as HTMLElement;
   const root = createRoot(container);
   UiFramework.childWindows.useCreateRoot(createRoot);
 
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
+  document.documentElement.classList.add(`iui-theme-dark`);
+
+  root.render(<App />);
 };
 
 viewerFrontendMain(); // eslint-disable-line @typescript-eslint/no-floating-promises

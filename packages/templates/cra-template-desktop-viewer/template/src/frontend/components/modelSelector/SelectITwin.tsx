@@ -3,10 +3,10 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import "./SelectProject.scss";
+import "./SelectITwin.scss";
 
 import { useAccessToken } from "@itwin/desktop-viewer-react";
-import { ProjectGrid } from "@itwin/imodel-browser-react";
+import { ITwinGrid } from "@itwin/imodel-browser-react";
 import {
   SvgCalendar,
   SvgList,
@@ -19,22 +19,18 @@ import { useNavigate } from "react-router-dom";
 
 import { SignIn } from "../signin/SignIn";
 
-const PROJECT_TYPE_MAP = ["", "?recents", "?myprojects"];
+const ITWIN_TYPE_MAP = ["", "?recents", "?myitwins"];
 
 const tabsWithIcons = [
-  <Tab
-    key="favorite"
-    label="Favorite projects"
-    startIcon={<SvgStarHollow />}
-  />,
-  <Tab key="recents" label="Recent projects" startIcon={<SvgCalendar />} />,
-  <Tab key="all" label="My projects" startIcon={<SvgList />} />,
+  <Tab key="favorite" label="Favorite iTwins" startIcon={<SvgStarHollow />} />,
+  <Tab key="recents" label="Recent iTwins" startIcon={<SvgCalendar />} />,
+  <Tab key="all" label="My iTwins" startIcon={<SvgList />} />,
 ];
 
-export const SelectProject = () => {
-  const [projectType, setProjectType] = useState(() =>
-    PROJECT_TYPE_MAP.includes(window.location.search)
-      ? PROJECT_TYPE_MAP.indexOf(window.location.search)
+export const SelectITwin = () => {
+  const [iTwinType, setITwinType] = useState(() =>
+    ITWIN_TYPE_MAP.includes(window.location.search)
+      ? ITWIN_TYPE_MAP.indexOf(window.location.search)
       : 0
   );
 
@@ -48,11 +44,11 @@ export const SelectProject = () => {
 
   return accessToken ? (
     <>
-      <div className="itv-scrolling-container select-project">
+      <div className="itv-scrolling-container select-itwin">
         <Tabs
           labels={tabsWithIcons}
-          onTabSelected={setProjectType}
-          activeIndex={projectType}
+          onTabSelected={setITwinType}
+          activeIndex={iTwinType}
           type={"borderless"}
           contentClassName="grid-holding-tab"
           tabsClassName="grid-holding-tabs"
@@ -87,21 +83,21 @@ export const SelectProject = () => {
             </div>
           </div>
           <div className="itv-scrolling-content">
-            <ProjectGrid
+            <ITwinGrid
               accessToken={accessToken}
               requestType={
-                projectType === 0
+                iTwinType === 0
                   ? "favorites"
-                  : projectType === 1
+                  : iTwinType === 1
                   ? "recents"
                   : (searchParam as any) ?? ""
               }
-              onThumbnailClick={(project) => {
-                void navigate(`/itwins/${project.id}`, {
-                  state: { projectName: project.displayName },
+              onThumbnailClick={(itwin) => {
+                void navigate(`/itwins/${itwin.id}`, {
+                  state: { iTwinName: itwin.displayName },
                 });
               }}
-              stringsOverrides={{ noIModels: "No projects found" } as any}
+              stringsOverrides={{ noIModels: "No iTwins found" } as any}
               filterOptions={searchParam}
             />
           </div>

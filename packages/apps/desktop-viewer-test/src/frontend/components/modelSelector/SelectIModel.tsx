@@ -27,7 +27,7 @@ import { IModelContext } from "../routes";
 import { BriefcaseStatus } from "./BriefcaseStatus";
 
 interface SelectIModelProps extends IModelGridProps {
-  projectName?: string;
+  iTwinName?: string;
 }
 
 const useProgressIndicator = (iModel: IModelFull) => {
@@ -46,11 +46,11 @@ const useProgressIndicator = (iModel: IModelFull) => {
     if (recents) {
       return recents.find((recent) => {
         return (
-          recent.iTwinId === iModel.projectId && recent.iModelId === iModel.id
+          recent.iTwinId === iModel.iTwinId && recent.iModelId === iModel.id
         );
       });
     }
-  }, [userSettings, iModel.id, iModel.projectId]);
+  }, [userSettings, iModel.id, iModel.iTwinId]);
 
   const getBriefcase = useCallback(async () => {
     // if there is a local file, open a briefcase connection and store it in state
@@ -69,7 +69,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
   const { progress, doDownload } = useDownload(
     iModel.id,
     iModel.name ?? iModel.id,
-    iModel.projectId ?? ""
+    iModel.iTwinId ?? ""
   );
 
   const startDownload = useCallback(async () => {
@@ -168,8 +168,8 @@ const useProgressIndicator = (iModel: IModelFull) => {
 
 export const SelectIModel = ({
   accessToken,
-  projectId: iTwinId,
-  projectName,
+  iTwinId,
+  iTwinName,
 }: SelectIModelProps) => {
   const navigate = useNavigate();
   const userSettings = useContext(SettingsContext);
@@ -184,7 +184,7 @@ export const SelectIModel = ({
     if (recents) {
       const local = recents.find((recent) => {
         return (
-          recent.iTwinId === iModel.projectId && recent.iModelId === iModel.id
+          recent.iTwinId === iModel.iTwinId && recent.iModelId === iModel.id
         );
       });
       if (local?.path) {
@@ -200,12 +200,12 @@ export const SelectIModel = ({
   return (
     <div className="itv-scrolling-container select-imodel">
       <div className={"itv-content-margins"}>
-        <Text variant="title">{`iModels for ${projectName}`}</Text>
+        <Text variant="title">{`iModels for ${iTwinName}`}</Text>
       </div>
       <div className="itv-scrolling-content">
         <IModelGrid
           accessToken={accessToken}
-          projectId={iTwinId}
+          iTwinId={iTwinId}
           onThumbnailClick={selectIModel}
           useIndividualState={useProgressIndicator}
         />

@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Tue, 06 Jun 2023 15:05:19 GMT and should not be manually modified.
+This log was last generated on Tue, 25 Jul 2023 18:09:32 GMT and should not be manually modified.
+
+## 4.1.0
+Tue, 25 Jul 2023 18:09:32 GMT
+
+### Minor changes
+
+- Changing from projects API to itwins API
 
 ## 4.0.1
 Tue, 06 Jun 2023 15:05:19 GMT
