@@ -82,19 +82,17 @@ const App = () => {
   );
 
   return initialized && settings ? (
-    <ThemeProvider theme="dark">
-      <div style={{ height: "100%" }}>
-        <SettingsContext.Provider value={{ settings, addRecent }}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<HomeRoute />} />
-              <Route path="/itwins/:iTwinId" element={<IModelsRoute />} />
-              <Route path="/itwins" element={<ITwinsRoute />} />
-              <Route path="/viewer" element={<ViewerRoute />} />
-            </Routes>
-          </BrowserRouter>
-        </SettingsContext.Provider>
-      </div>
+    <ThemeProvider theme="dark" style={{ height: "100%" }}>
+      <SettingsContext.Provider value={{ settings, addRecent }}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomeRoute />} />
+            <Route path="/itwins/:iTwinId" element={<IModelsRoute />} />
+            <Route path="/itwins" element={<ITwinsRoute />} />
+            <Route path="/viewer" element={<ViewerRoute />} />
+          </Routes>
+        </BrowserRouter>
+      </SettingsContext.Provider>
     </ThemeProvider>
   ) : (
     <></>
