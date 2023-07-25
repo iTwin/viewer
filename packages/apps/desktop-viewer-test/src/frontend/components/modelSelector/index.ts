@@ -3,6 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-export * from "./SelectProject";
+export * from "./SelectITwin";
 export * from "./SelectIModel";
 export * from "./BriefcaseStatus";

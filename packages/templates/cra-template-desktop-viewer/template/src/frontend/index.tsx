@@ -5,9 +5,10 @@
 
 import "./index.scss";
 
+import { UiFramework } from "@itwin/appui-react";
 import { Logger, LogLevel } from "@itwin/core-bentley";
 import React from "react";
-import * as ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";
 import App from "./components/App";
@@ -18,11 +19,14 @@ const viewerFrontendMain = async () => {
   Logger.setLevelDefault(LogLevel.Trace);
   Logger.setLevel(AppLoggerCategory.Frontend, LogLevel.Info);
 
-  // TODO add theme toggle
+  // when initialization is complete, render
+  const container = document.getElementById("root") as HTMLElement;
+  const root = createRoot(container);
+  UiFramework.childWindows.useCreateRoot(createRoot);
+
   document.documentElement.classList.add(`iui-theme-dark`);
 
-  // when initialization is complete, render
-  ReactDOM.render(<App />, document.getElementById("root"));
+  root.render(<App />);
 };
 
 viewerFrontendMain(); // eslint-disable-line @typescript-eslint/no-floating-promises

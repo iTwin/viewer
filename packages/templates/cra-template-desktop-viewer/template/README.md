@@ -17,7 +17,7 @@ ITWIN_VIEWER_CLIENT_ID="native-xxxxxxxx"
   - **Visualization**: `imodelaccess:read`
   - **iModels**: `imodels:read`
   - **Reality Data**: `realitydata:read`
-  - **Projects**: `projects:read`
+  - **itwins**: `itwins:read`
 
 ## Available Scripts
 

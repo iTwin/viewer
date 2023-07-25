@@ -27,7 +27,7 @@ import { IModelContext } from "../routes";
 import { BriefcaseStatus } from "./BriefcaseStatus";
 
 interface SelectIModelProps extends IModelGridProps {
-  projectName?: string;
+  iTwinName?: string;
 }
 
 const useProgressIndicator = (iModel: IModelFull) => {
@@ -169,7 +169,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
 export const SelectIModel = ({
   accessToken,
   iTwinId,
-  projectName,
+  iTwinName,
 }: SelectIModelProps) => {
   const navigate = useNavigate();
   const userSettings = useContext(SettingsContext);
@@ -200,7 +200,7 @@ export const SelectIModel = ({
   return (
     <div className="itv-scrolling-container select-imodel">
       <div className={"itv-content-margins"}>
-        <Text variant="title">{`iModels for ${projectName}`}</Text>
+        <Text variant="title">{`iModels for ${iTwinName}`}</Text>
       </div>
       <div className="itv-scrolling-content">
         <IModelGrid
