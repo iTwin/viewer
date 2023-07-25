@@ -5,7 +5,7 @@
 
 .model-status {
   height: 20px;
-  fill: var(--iui-color-foreground-primary);
+  fill: var(--iui-color-text-informational);
   &.actionable {
     cursor: pointer;
   }
