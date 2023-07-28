@@ -5,11 +5,6 @@
 
 import { AppNotificationManager, ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
-import {
-  IModelApp,
-  NotifyMessageDetails,
-  OutputMessagePriority,
-} from "@itwin/core-frontend";
 // import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
 import {
   MeasureTools,
