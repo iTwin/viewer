@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Allow a notification manager to be configured on the <WebViewer> component",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
