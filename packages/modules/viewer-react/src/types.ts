@@ -109,6 +109,7 @@ export type ViewerIModelAppOptions = Pick<
   | "hubAccess"
   | "localization"
   | "mapLayerOptions"
+  | "notifications"
   | "tileAdmin"
   | "toolAdmin"
   | "renderSys"
@@ -176,6 +177,7 @@ const iTwinViewerInitializerParamSample: OptionalToUndefinedUnion<ViewerInitiali
     hubAccess: undefined,
     localization: undefined,
     mapLayerOptions: undefined,
+    notifications: undefined,
     tileAdmin: undefined,
     toolAdmin: undefined,
     renderSys: undefined,

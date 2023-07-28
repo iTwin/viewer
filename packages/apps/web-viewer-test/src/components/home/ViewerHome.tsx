@@ -3,8 +3,13 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ColorTheme } from "@itwin/appui-react";
+import { AppNotificationManager, ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
+import {
+  IModelApp,
+  NotifyMessageDetails,
+  OutputMessagePriority,
+} from "@itwin/core-frontend";
 // import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
 import {
   MeasureTools,
@@ -137,6 +142,7 @@ const ViewerHome: React.FC = () => {
             value: process.env.IMJS_BING_MAPS_KEY ?? "",
           },
         }}
+        notifications={new AppNotificationManager()}
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
