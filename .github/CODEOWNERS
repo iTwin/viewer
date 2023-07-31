@@ -5,4 +5,4 @@
 
 # These owners will be the default owners for everything in
 # the repo, unless a later match takes precedence.
-*       @aruniverse @ben-polinsky @calebmshafer @iTwin/itwinjs-core-ui
+*       @aruniverse @ben-polinsky @calebmshafer
