@@ -114,6 +114,7 @@ describe("BaseInitializer", () => {
       },
       configurable: true,
     });
+    globalThis.IMJS_URL_PREFIX = "";
   });
 
   it("gets default iModelApp options", () => {

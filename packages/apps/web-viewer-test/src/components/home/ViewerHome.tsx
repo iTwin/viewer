@@ -140,7 +140,7 @@ const ViewerHome: React.FC = () => {
             value: process.env.IMJS_BING_MAPS_KEY ?? "",
           },
         }}
-        // notifications={new AppNotificationManager()}
+        notifications={new AppNotificationManager()}
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
