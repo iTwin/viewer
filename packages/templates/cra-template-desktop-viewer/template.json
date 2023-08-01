@@ -32,7 +32,7 @@
       "@itwin/itwinui-icons-react": "^2.1.0",
       "@itwin/itwinui-react": "^2.11.4",
       "@itwin/itwinui-variables": "^2.0.0",
-      "@itwin/measure-tools-react": "^0.12.0",
+      "@itwin/measure-tools-react": "^0.13.0",
       "@itwin/presentation-backend": "^4.0.0",
       "@itwin/presentation-common": "^4.0.0",
       "@itwin/presentation-components": "^4.0.0",
