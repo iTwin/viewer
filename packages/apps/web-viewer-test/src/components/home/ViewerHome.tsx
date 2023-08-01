@@ -11,8 +11,11 @@ import {
   MeasureToolsUiItemsProvider,
 } from "@itwin/measure-tools-react";
 import {
+  AncestorsNavigationControls,
+  CopyPropertyTextContextMenuItem,
   PropertyGridManager,
   PropertyGridUiItemsProvider,
+  ShowHideNullValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
 // import LocalExtension from "@itwin/test-local-extension";
 import {
@@ -137,7 +140,7 @@ const ViewerHome: React.FC = () => {
             value: process.env.IMJS_BING_MAPS_KEY ?? "",
           },
         }}
-        notifications={new AppNotificationManager()}
+        // notifications={new AppNotificationManager()}
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
@@ -150,7 +153,23 @@ const ViewerHome: React.FC = () => {
           new ViewerStatusbarItemsProvider(),
           new TreeWidgetUiItemsProvider(),
           new PropertyGridUiItemsProvider({
-            enableCopyingPropertyText: true,
+            propertyGridProps: {
+              autoExpandChildCategories: true,
+              ancestorsNavigationControls: (props) => (
+                <AncestorsNavigationControls {...props} />
+              ),
+              contextMenuItems: [
+                (props) => <CopyPropertyTextContextMenuItem {...props} />,
+              ],
+              settingsMenuItems: [
+                (props) => (
+                  <ShowHideNullValuesSettingsMenuItem
+                    {...props}
+                    persist={true}
+                  />
+                ),
+              ],
+            },
           }),
           new MeasureToolsUiItemsProvider(),
         ]}

@@ -10,7 +10,12 @@ import {
   ViewerStatusbarItemsProvider,
 } from "@itwin/desktop-viewer-react";
 import { MeasureToolsUiItemsProvider } from "@itwin/measure-tools-react";
-import { PropertyGridUiItemsProvider } from "@itwin/property-grid-react";
+import {
+  AncestorsNavigationControls,
+  CopyPropertyTextContextMenuItem,
+  PropertyGridUiItemsProvider,
+  ShowHideNullValuesSettingsMenuItem,
+} from "@itwin/property-grid-react";
 import { TreeWidgetUiItemsProvider } from "@itwin/tree-widget-react";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -48,7 +53,20 @@ export const ViewerRoute = () => {
         new ViewerStatusbarItemsProvider(),
         new TreeWidgetUiItemsProvider(),
         new PropertyGridUiItemsProvider({
-          enableCopyingPropertyText: true,
+          propertyGridProps: {
+            autoExpandChildCategories: true,
+            ancestorsNavigationControls: (props) => (
+              <AncestorsNavigationControls {...props} />
+            ),
+            contextMenuItems: [
+              (props) => <CopyPropertyTextContextMenuItem {...props} />,
+            ],
+            settingsMenuItems: [
+              (props) => (
+                <ShowHideNullValuesSettingsMenuItem {...props} persist={true} />
+              ),
+            ],
+          },
         }),
         new MeasureToolsUiItemsProvider(),
         new IModelMergeItemsProvider(),
