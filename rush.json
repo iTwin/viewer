@@ -9,9 +9,9 @@
   "projectFolderMinDepth": 2,
   "projectFolderMaxDepth": 3,
   "repository": {
-    "url": "https://github.com/itwin/viewer"
+    "url": "https://github.com/itwin/viewer",
+    "defaultBranch": "master"
   },
-  // "ensureConsistentVersions": true,
   "projects": [
     {
       "packageName": "@itwin/viewer-scripts",
