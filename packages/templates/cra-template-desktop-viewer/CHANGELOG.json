@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-desktop-viewer",
   "entries": [
     {
+      "version": "4.2.0",
+      "tag": "@itwin/cra-template-desktop-viewer_v4.2.0",
+      "date": "Wed, 02 Aug 2023 12:31:38 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Consume itwin/tree-widget-react@1.0.0 and itwin/property-grid-react@1.0.0"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.1.0",
       "tag": "@itwin/cra-template-desktop-viewer_v4.1.0",
       "date": "Tue, 25 Jul 2023 18:09:32 GMT",

@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Tue, 25 Jul 2023 18:09:32 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Aug 2023 12:31:38 GMT and should not be manually modified.
+
+## 4.2.0
+Wed, 02 Aug 2023 12:31:38 GMT
+
+### Minor changes
+
+- Consume itwin/tree-widget-react@1.0.0 and itwin/property-grid-react@1.0.0
 
 ## 4.1.0
 Tue, 25 Jul 2023 18:09:32 GMT
