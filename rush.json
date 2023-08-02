@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
-  "rushVersion": "5.58.0",
+  "rushVersion": "5.100.1",
   "pnpmVersion": "6.24.4",
   "pnpmOptions": {
     "useWorkspaces": true
@@ -9,9 +9,9 @@
   "projectFolderMinDepth": 2,
   "projectFolderMaxDepth": 3,
   "repository": {
-    "url": "https://github.com/itwin/viewer"
+    "url": "https://github.com/itwin/viewer",
+    "defaultBranch": "master"
   },
-  "ensureConsistentVersions": true,
   "projects": [
     {
       "packageName": "@itwin/viewer-scripts",
