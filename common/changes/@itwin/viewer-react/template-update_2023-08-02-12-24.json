@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Export `UnifiedSelectionViewportControl`",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
