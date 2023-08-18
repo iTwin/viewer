@@ -8,7 +8,7 @@ import type {
   FrontstageDef,
   FrontstageProvider,
 } from "@itwin/appui-react";
-import { UiFramework } from "@itwin/appui-react";
+import { UiFramework, UiItemsManager } from "@itwin/appui-react";
 import {
   BackstageComposer,
   ConfigurableUiContent,
@@ -32,6 +32,10 @@ export const IModelViewer: React.FC<ModelProps> = ({
   frontstages,
   backstageItems,
 }: ModelProps) => {
+  const backstageItemsProvided = UiItemsManager.getBackstageItems();
+  const hasBackstageItems = backstageItemsProvided || (backstageItems &&
+    backstageItems.length > 0)
+
   const [defaultFrontstageDef, setDefaultFrontstageDef] =
     useState<FrontstageDef>();
 
@@ -72,8 +76,7 @@ export const IModelViewer: React.FC<ModelProps> = ({
     <ThemeManager>
       <ConfigurableUiContent
         appBackstage={
-          backstageItems &&
-          backstageItems.length > 0 && <BackstageComposer items={[]} />
+          hasBackstageItems && <BackstageComposer items={backstageItems} />
         }
       />
     </ThemeManager>

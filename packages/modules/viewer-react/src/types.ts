@@ -241,5 +241,5 @@ export interface ViewerDefaultStatusbarItems {
 
 export type ViewerDefaultFrontstageConfig = Pick<
   StandardFrontstageProps,
-  "hideNavigationAid" | "hideStatusBar" | "hideToolSettings"
+  "hideNavigationAid" | "hideStatusBar" | "hideToolSettings" | "cornerButton"
 >;

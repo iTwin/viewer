@@ -11,6 +11,7 @@ import { useBaseViewerInitializer } from "../hooks/useBaseViewerInitializer";
 import type { ViewerProps } from "../types";
 import { ErrorBoundary } from "./error/ErrorBoundary";
 import IModelLoader from "./iModel/IModelLoader";
+import { BackstageAppButton, UiItemsManager } from "@itwin/appui-react";
 
 export const BaseViewer = ({
   productId,
@@ -29,11 +30,13 @@ export const BaseViewer = ({
   });
 
   const accessToken = useAccessToken();
+  const hasBackstageItems = loaderProps.backstageItems ? (loaderProps.backstageItems.length > 0 || UiItemsManager.getBackstageItems().length > 0) : UiItemsManager.getBackstageItems().length > 0;
+  const cornerButton = hasBackstageItems ? <BackstageAppButton /> : undefined
   return (
     <ErrorBoundary>
       {loaderProps.filePath || accessToken ? (
         viewerInitialized ? (
-          <IModelLoader {...loaderProps} />
+          <IModelLoader defaultUiConfig={{cornerButton}} {...loaderProps}  />
         ) : (
           <FillCentered>Initializing...</FillCentered>
         )

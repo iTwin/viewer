@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { AppNotificationManager, ColorTheme } from "@itwin/appui-react";
+import { AppNotificationManager, BackstageAppButton, ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 // import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
 import {
@@ -25,6 +25,7 @@ import {
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
 import {
   Viewer,
+  BackstageItemsProvider,
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
   ViewerStatusbarItemsProvider,
@@ -123,6 +124,33 @@ const ViewerHome: React.FC = () => {
       labeli18nKey: "iTwinViewer:backstage.mainFrontstage",
       label: "",
     },
+    {
+      id: "BS3",
+      execute: () => console.log("BS3"),
+      groupPriority: 10,
+      itemPriority: 90,
+      labeli18nKey: "iTwinViewer:backstage.mainFrontstage",
+      label: "",
+    },
+  ];
+
+  const backstageItems2: ViewerBackstageItem[] = [
+    {
+      id: "BS4",
+      execute: () => console.log("BS4"),
+      groupPriority: 20,
+      itemPriority: 100,
+      labeli18nKey: "iTwinViewer:backstage.mainFrontstage",
+      label: "Main Frontstage 1",
+    },
+    {
+      id: "BS5",
+      execute: () => console.log("BS5"),
+      groupPriority: 20,
+      itemPriority: 110,
+      labeli18nKey: "iTwinViewer:backstage.mainFrontstage",
+      label: "Main Frontstage 2",
+    },
   ];
 
   return (
@@ -144,6 +172,7 @@ const ViewerHome: React.FC = () => {
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
+          new BackstageItemsProvider(backstageItems),
           new ViewerNavigationToolsProvider(),
           new ViewerContentToolsProvider({
             vertical: {
@@ -183,7 +212,7 @@ const ViewerHome: React.FC = () => {
         //     manifestUrl: "http://localhost:3001/package.json",
         //   }),
         // ]}
-        backstageItems={backstageItems}
+        backstageItems={backstageItems2}
         // renderSys={{doIdleWork: true}}
       />
     </div>
