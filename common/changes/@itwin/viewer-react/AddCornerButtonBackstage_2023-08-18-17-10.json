@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/viewer-react",
       "comment": "Expose corner button for defaultUiConfig and add backstage corner button when there are backstage items provided",
-      "type": "patch"
+      "type": "minor"
     }
   ],
   "packageName": "@itwin/viewer-react"
