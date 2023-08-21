@@ -20,6 +20,7 @@ import type { ViewerFrontstage } from "../../types";
 interface ModelProps {
   frontstages: ViewerFrontstage[];
   backstageItems?: BackstageItem[]; // TODO next remove this and just use the UiItemsManager to get the items in the next major version
+  hasBackstageItems?: number;
 }
 
 /*
@@ -31,11 +32,8 @@ the issue is no longer occuring.
 export const IModelViewer: React.FC<ModelProps> = ({
   frontstages,
   backstageItems,
+  hasBackstageItems
 }: ModelProps) => {
-  const backstageItemsProvided = UiItemsManager.getBackstageItems();
-  const hasBackstageItems = backstageItemsProvided || (backstageItems &&
-    backstageItems.length > 0)
-
   const [defaultFrontstageDef, setDefaultFrontstageDef] =
     useState<FrontstageDef>();
 
@@ -75,9 +73,7 @@ export const IModelViewer: React.FC<ModelProps> = ({
   return (
     <ThemeManager>
       <ConfigurableUiContent
-        appBackstage={
-          hasBackstageItems && <BackstageComposer items={backstageItems} />
-        }
+        appBackstage={hasBackstageItems ? <BackstageComposer items={backstageItems}/> : undefined}
       />
     </ThemeManager>
   );

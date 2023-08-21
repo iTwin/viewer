@@ -3,8 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { StageUsage, StandardFrontstageProvider } from "@itwin/appui-react";
-import { useEffect, useState } from "react";
+import { BackstageAppButton, StageUsage, StandardFrontstageProvider, UiItemsManager } from "@itwin/appui-react";
+import React, { useEffect, useState } from "react";
 
 import { DefaultContentGroupProvider } from "../components/app-ui/providers";
 import type {
@@ -14,13 +14,13 @@ import type {
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
 } from "../types";
-
 export interface UseFrontstagesProps {
   frontstages?: ViewerFrontstage[];
   defaultUiConfig?: ViewerDefaultFrontstageConfig;
   viewportOptions?: ViewerViewportControlOptions;
   viewCreatorOptions?: ViewerViewCreator3dOptions;
   blankConnectionViewState?: BlankConnectionViewState;
+  hasBackstageItems?: number;
 }
 
 export const ViewerDefaultFrontstageProviderId =
@@ -32,6 +32,7 @@ export const useFrontstages = ({
   defaultUiConfig,
   viewCreatorOptions,
   viewportOptions,
+  hasBackstageItems
 }: UseFrontstagesProps) => {
   const [finalFrontstages, setFinalFrontstages] =
     useState<ViewerFrontstage[]>();
@@ -44,6 +45,7 @@ export const useFrontstages = ({
     let allFrontstages: ViewerFrontstage[] = [];
     let defaultExists = false;
     let requiresConnection = true;
+
     if (frontstages) {
       allFrontstages = [...frontstages];
       const defaultFrontstages = frontstages.filter(
@@ -75,6 +77,7 @@ export const useFrontstages = ({
         id: ViewerDefaultFrontstageProviderId,
         usage: StageUsage.General,
         contentGroupProps: contentGroup,
+        cornerButton: hasBackstageItems ? <BackstageAppButton /> : undefined,
         ...defaultUiConfig,
       });
 
@@ -92,6 +95,7 @@ export const useFrontstages = ({
     viewCreatorOptions,
     viewportOptions,
     blankConnectionViewState,
+    hasBackstageItems,
   ]);
 
   return { finalFrontstages, noConnectionRequired, customDefaultFrontstage };

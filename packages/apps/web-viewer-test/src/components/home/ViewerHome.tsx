@@ -6,6 +6,7 @@
 import { AppNotificationManager, ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 // import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
+// import { ReactComponent as Itwin } from "../../images/itwin.svg";
 import {
   MeasureTools,
   MeasureToolsUiItemsProvider,
@@ -113,43 +114,21 @@ const ViewerHome: React.FC = () => {
       execute: () => console.log("BS1"),
       groupPriority: 10,
       itemPriority: 30,
-      labeli18nKey: "iTwinViewer:backstage.mainFrontstage",
-      label: "",
+      label: "Frontstage 1",
     },
     {
       id: "BS2",
       execute: () => console.log("BS2"),
       groupPriority: 10,
       itemPriority: 60,
-      labeli18nKey: "iTwinViewer:backstage.mainFrontstage",
-      label: "",
+      label: "Frontstage 2",
     },
     {
       id: "BS3",
       execute: () => console.log("BS3"),
       groupPriority: 10,
       itemPriority: 90,
-      labeli18nKey: "iTwinViewer:backstage.mainFrontstage",
-      label: "",
-    },
-  ];
-
-  const backstageItems2: ViewerBackstageItem[] = [
-    {
-      id: "BS4",
-      execute: () => console.log("BS4"),
-      groupPriority: 20,
-      itemPriority: 100,
-      labeli18nKey: "iTwinViewer:backstage.mainFrontstage",
-      label: "Main Frontstage 1",
-    },
-    {
-      id: "BS5",
-      execute: () => console.log("BS5"),
-      groupPriority: 20,
-      itemPriority: 110,
-      labeli18nKey: "iTwinViewer:backstage.mainFrontstage",
-      label: "Main Frontstage 2",
+      label: "Frontstage 3",
     },
   ];
 
@@ -212,7 +191,8 @@ const ViewerHome: React.FC = () => {
         //     manifestUrl: "http://localhost:3001/package.json",
         //   }),
         // ]}
-        backstageItems={backstageItems2}
+        backstageItems={backstageItems}
+        // defaultUiConfig={{cornerButton: <Itwin />, hideNavigationAid: true}}
         // renderSys={{doIdleWork: true}}
       />
     </div>

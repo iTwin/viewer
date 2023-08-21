@@ -6,7 +6,7 @@
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
-import { StateManager, UiFramework } from "@itwin/appui-react";
+import { StateManager, UiFramework, UiItemsManager } from "@itwin/appui-react";
 import type { IModelConnection } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
@@ -44,6 +44,8 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     backstageItems,
     loadingComponent,
   } = viewerProps;
+  const backstageItemsProvided = UiItemsManager.getBackstageItems();
+  const hasBackstageItems = backstageItems?.length || backstageItemsProvided.length;
   const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
     useFrontstages({
       frontstages,
@@ -51,6 +53,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       viewportOptions,
       viewCreatorOptions,
       blankConnectionViewState,
+      hasBackstageItems
     });
 
   useUiProviders(uiProviders);
@@ -157,6 +160,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
             <IModelViewer
               frontstages={finalFrontstages}
               backstageItems={backstageItems}
+              hasBackstageItems={hasBackstageItems}
             />
           </Provider>
         ) : (
