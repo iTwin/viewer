@@ -27,6 +27,8 @@ import {
 import { ViewerPerformance } from "../../services/telemetry";
 import type { ModelLoaderProps } from "../../types";
 import { IModelViewer } from "./";
+import { BackstageItemsProvider } from "../app-ui/providers";
+
 
 const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   const [error, setError] = useState<Error>();
@@ -44,6 +46,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     backstageItems,
     loadingComponent,
   } = viewerProps;
+  
   const backstageItemsProvided = UiItemsManager.getBackstageItems();
   const hasBackstageItems = backstageItems?.length || backstageItemsProvided.length;
   const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
@@ -56,7 +59,16 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       hasBackstageItems
     });
 
-  useUiProviders(uiProviders);
+  if (backstageItems && uiProviders) {
+    const backstageItemsProvider = new BackstageItemsProvider(backstageItems);
+    const providers = [...uiProviders, backstageItemsProvider]
+    useUiProviders(providers);
+  }
+
+  else {
+    useUiProviders(uiProviders);
+  }
+  
   useTheme(theme);
 
   const getModelConnection = useCallback(async (): Promise<
@@ -160,7 +172,6 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
             <IModelViewer
               frontstages={finalFrontstages}
               backstageItems={backstageItems}
-              hasBackstageItems={hasBackstageItems}
             />
           </Provider>
         ) : (

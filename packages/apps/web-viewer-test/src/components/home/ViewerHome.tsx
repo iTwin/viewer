@@ -114,20 +114,44 @@ const ViewerHome: React.FC = () => {
       execute: () => console.log("BS1"),
       groupPriority: 10,
       itemPriority: 30,
-      label: "Frontstage 1",
+      label: "Frontstage Provided 1",
     },
     {
       id: "BS2",
       execute: () => console.log("BS2"),
       groupPriority: 10,
       itemPriority: 60,
-      label: "Frontstage 2",
+      label: "Frontstage Provided 2",
     },
     {
       id: "BS3",
       execute: () => console.log("BS3"),
       groupPriority: 10,
       itemPriority: 90,
+      label: "Frontstage Provided 3",
+    },
+  ];
+
+  const backstageItems2: ViewerBackstageItem[] = [
+    {
+      id: "BS4",
+      execute: () => console.log("BS1"),
+      groupPriority: 20,
+      itemPriority: 100,
+      label: "Frontstage 1",
+    },
+    {
+      id: "BS5",
+      execute: () => console.log("BS2"),
+      groupPriority: 20,
+      itemPriority: 110,
+      label: "Frontstage 2",
+    },
+    {
+      id: "BS6",
+      execute: () => console.log("BS3"),
+      groupPriority: 20,
+      itemPriority: 120,
       label: "Frontstage 3",
     },
   ];
@@ -191,7 +215,7 @@ const ViewerHome: React.FC = () => {
         //     manifestUrl: "http://localhost:3001/package.json",
         //   }),
         // ]}
-        backstageItems={backstageItems}
+        backstageItems={backstageItems2}
         // defaultUiConfig={{cornerButton: <Itwin />, hideNavigationAid: true}}
         // renderSys={{doIdleWork: true}}
       />
