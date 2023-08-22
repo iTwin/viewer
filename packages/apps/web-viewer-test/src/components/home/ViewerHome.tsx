@@ -114,21 +114,7 @@ const ViewerHome: React.FC = () => {
       execute: () => console.log("BS1"),
       groupPriority: 10,
       itemPriority: 30,
-      label: "Frontstage Provided 1",
-    },
-    {
-      id: "BS2",
-      execute: () => console.log("BS2"),
-      groupPriority: 10,
-      itemPriority: 60,
-      label: "Frontstage Provided 2",
-    },
-    {
-      id: "BS3",
-      execute: () => console.log("BS3"),
-      groupPriority: 10,
-      itemPriority: 90,
-      label: "Frontstage Provided 3",
+      label: "Backstage Items Provider 1",
     },
   ];
 
@@ -138,22 +124,8 @@ const ViewerHome: React.FC = () => {
       execute: () => console.log("BS1"),
       groupPriority: 20,
       itemPriority: 100,
-      label: "Frontstage 1",
-    },
-    {
-      id: "BS5",
-      execute: () => console.log("BS2"),
-      groupPriority: 20,
-      itemPriority: 110,
-      label: "Frontstage 2",
-    },
-    {
-      id: "BS6",
-      execute: () => console.log("BS3"),
-      groupPriority: 20,
-      itemPriority: 120,
-      label: "Frontstage 3",
-    },
+      label: "BackstageItems 1",
+    }
   ];
 
   return (

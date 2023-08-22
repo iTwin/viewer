@@ -30,7 +30,6 @@ the issue is no longer occuring.
 */
 export const IModelViewer: React.FC<ModelProps> = ({
   frontstages,
-  backstageItems,
 }: ModelProps) => {
   const [defaultFrontstageDef, setDefaultFrontstageDef] =
     useState<FrontstageDef>();
@@ -40,8 +39,6 @@ export const IModelViewer: React.FC<ModelProps> = ({
       void UiFramework.frontstages.setActiveFrontstageDef(defaultFrontstageDef);
     }
   }, [defaultFrontstageDef]);
-  const backstageItemsProvided = UiItemsManager.getBackstageItems();
-  const hasBackstageItems = backstageItems?.length || backstageItemsProvided.length;
 
   useEffect(() => {
     let defaultFrontstage: FrontstageProvider | undefined;
@@ -73,7 +70,7 @@ export const IModelViewer: React.FC<ModelProps> = ({
   return (
     <ThemeManager>
       <ConfigurableUiContent
-        appBackstage={hasBackstageItems ? <BackstageComposer /> : undefined}
+        appBackstage={<BackstageComposer />}
       />
     </ThemeManager>
   );

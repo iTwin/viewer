@@ -20,7 +20,6 @@ export interface UseFrontstagesProps {
   viewportOptions?: ViewerViewportControlOptions;
   viewCreatorOptions?: ViewerViewCreator3dOptions;
   blankConnectionViewState?: BlankConnectionViewState;
-  hasBackstageItems?: number;
 }
 
 export const ViewerDefaultFrontstageProviderId =
@@ -32,7 +31,6 @@ export const useFrontstages = ({
   defaultUiConfig,
   viewCreatorOptions,
   viewportOptions,
-  hasBackstageItems
 }: UseFrontstagesProps) => {
   const [finalFrontstages, setFinalFrontstages] =
     useState<ViewerFrontstage[]>();
@@ -41,6 +39,7 @@ export const useFrontstages = ({
   const [customDefaultFrontstage, setCustomDefaultFrontstage] =
     useState<boolean>(false);
 
+  
   useEffect(() => {
     let allFrontstages: ViewerFrontstage[] = [];
     let defaultExists = false;
@@ -77,7 +76,7 @@ export const useFrontstages = ({
         id: ViewerDefaultFrontstageProviderId,
         usage: StageUsage.General,
         contentGroupProps: contentGroup,
-        cornerButton: hasBackstageItems ? <BackstageAppButton /> : undefined,
+        cornerButton: UiItemsManager.getBackstageItems().length ? <BackstageAppButton /> : undefined,
         ...defaultUiConfig,
       });
 
@@ -95,7 +94,6 @@ export const useFrontstages = ({
     viewCreatorOptions,
     viewportOptions,
     blankConnectionViewState,
-    hasBackstageItems,
   ]);
 
   return { finalFrontstages, noConnectionRequired, customDefaultFrontstage };

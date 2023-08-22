@@ -14,11 +14,16 @@ import { IModelApp } from "@itwin/core-frontend";
 import type { ViewerBackstageItem } from "../../../types";
 
 export class BackstageItemsProvider implements UiItemsProvider {
-  public readonly id = "BackstageItemsProvider";
+  public static providerId = "BackstageItemsProvider";
+  public readonly id = BackstageItemsProvider.providerId;
+
   private _backstageItems: ViewerBackstageItem[];
 
-  constructor(backstageItems: ViewerBackstageItem[]) {
+  constructor(backstageItems: ViewerBackstageItem[], id?: string) {
     this._backstageItems = backstageItems;
+    if (id) {
+      this.id = id;
+    }
   }
 
   public provideBackstageItems() {

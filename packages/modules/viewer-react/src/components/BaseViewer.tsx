@@ -29,7 +29,6 @@ export const BaseViewer = ({
   });
 
   const accessToken = useAccessToken();
-
   return (
     <ErrorBoundary>
       {loaderProps.filePath || accessToken ? (
