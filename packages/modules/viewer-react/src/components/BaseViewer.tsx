@@ -33,7 +33,7 @@ export const BaseViewer = ({
     <ErrorBoundary>
       {loaderProps.filePath || accessToken ? (
         viewerInitialized ? (
-          <IModelLoader {...loaderProps}  />
+          <IModelLoader {...loaderProps} />
         ) : (
           <FillCentered>Initializing...</FillCentered>
         )
