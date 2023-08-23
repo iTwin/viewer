@@ -35,6 +35,10 @@ jest.mock("@itwin/appui-react", () => {
       ...jest.createMockFromModule<any>("@itwin/appui-react").StateManager,
       store: jest.fn(),
     },
+    UiItemsManager: {
+      ...jest.createMockFromModule<any>("@itwin/appui-react").UiItemsManager,
+      getBackstageItems: jest.fn().mockReturnValue([])
+    }
   };
 });
 jest.mock("@itwin/appui-abstract");

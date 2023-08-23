@@ -6,6 +6,7 @@
 import { AppNotificationManager, ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 // import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
+import { ReactComponent as Itwin } from "../../images/itwin.svg";
 import {
   MeasureTools,
   MeasureToolsUiItemsProvider,
@@ -25,6 +26,7 @@ import {
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
 import {
   Viewer,
+  BackstageItemsProvider,
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
   ViewerStatusbarItemsProvider,
@@ -112,17 +114,18 @@ const ViewerHome: React.FC = () => {
       execute: () => console.log("BS1"),
       groupPriority: 10,
       itemPriority: 30,
-      labeli18nKey: "iTwinViewer:backstage.mainFrontstage",
-      label: "",
+      label: "Backstage Items Provider 1",
     },
+  ];
+
+  const backstageItems2: ViewerBackstageItem[] = [
     {
-      id: "BS2",
-      execute: () => console.log("BS2"),
-      groupPriority: 10,
-      itemPriority: 60,
-      labeli18nKey: "iTwinViewer:backstage.mainFrontstage",
-      label: "",
-    },
+      id: "BS4",
+      execute: () => console.log("BS1"),
+      groupPriority: 20,
+      itemPriority: 100,
+      label: "BackstageItems 1",
+    }
   ];
 
   return (
@@ -144,6 +147,7 @@ const ViewerHome: React.FC = () => {
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
+          new BackstageItemsProvider(backstageItems, "BackstageItemsProvider1"),
           new ViewerNavigationToolsProvider(),
           new ViewerContentToolsProvider({
             vertical: {
@@ -183,7 +187,8 @@ const ViewerHome: React.FC = () => {
         //     manifestUrl: "http://localhost:3001/package.json",
         //   }),
         // ]}
-        backstageItems={backstageItems}
+        backstageItems={backstageItems2}
+        defaultUiConfig={{cornerButton: <Itwin />}}
         // renderSys={{doIdleWork: true}}
       />
     </div>

@@ -8,7 +8,7 @@ import type {
   FrontstageDef,
   FrontstageProvider,
 } from "@itwin/appui-react";
-import { UiFramework } from "@itwin/appui-react";
+import { UiFramework, UiItemsManager } from "@itwin/appui-react";
 import {
   BackstageComposer,
   ConfigurableUiContent,
@@ -30,7 +30,6 @@ the issue is no longer occuring.
 */
 export const IModelViewer: React.FC<ModelProps> = ({
   frontstages,
-  backstageItems,
 }: ModelProps) => {
   const [defaultFrontstageDef, setDefaultFrontstageDef] =
     useState<FrontstageDef>();
@@ -71,10 +70,7 @@ export const IModelViewer: React.FC<ModelProps> = ({
   return (
     <ThemeManager>
       <ConfigurableUiContent
-        appBackstage={
-          backstageItems &&
-          backstageItems.length > 0 && <BackstageComposer items={[]} />
-        }
+        appBackstage={<BackstageComposer />}
       />
     </ThemeManager>
   );

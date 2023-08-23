@@ -89,7 +89,9 @@ export interface LoaderProps {
     | ((iModel: IModelConnection) => Promise<void>);
   /** additional frontstages to register */
   frontstages?: ViewerFrontstage[];
-  /** menu items for the backstage */
+  /** menu items for the backstage 
+   * @deprecated in 4.x. Use [UiItemsProvider.provideBackstageItems](https://www.itwinjs.org/reference/appui-react/uiprovider/uiitemsprovider/).
+  */
   backstageItems?: ViewerBackstageItem[];
   /** additional viewport options for the default frontstage's viewport control */
   viewportOptions?: ViewerViewportControlOptions;
@@ -241,5 +243,5 @@ export interface ViewerDefaultStatusbarItems {
 
 export type ViewerDefaultFrontstageConfig = Pick<
   StandardFrontstageProps,
-  "hideNavigationAid" | "hideStatusBar" | "hideToolSettings"
+  "hideNavigationAid" | "hideStatusBar" | "hideToolSettings" | "cornerButton"
 >;

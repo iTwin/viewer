@@ -3,8 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { StageUsage, StandardFrontstageProvider } from "@itwin/appui-react";
-import { useEffect, useState } from "react";
+import { BackstageAppButton, StageUsage, StandardFrontstageProvider, UiItemsManager } from "@itwin/appui-react";
+import React, { useEffect, useState } from "react";
 
 import { DefaultContentGroupProvider } from "../components/app-ui/providers";
 import type {
@@ -14,7 +14,6 @@ import type {
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
 } from "../types";
-
 export interface UseFrontstagesProps {
   frontstages?: ViewerFrontstage[];
   defaultUiConfig?: ViewerDefaultFrontstageConfig;
@@ -40,10 +39,12 @@ export const useFrontstages = ({
   const [customDefaultFrontstage, setCustomDefaultFrontstage] =
     useState<boolean>(false);
 
+  
   useEffect(() => {
     let allFrontstages: ViewerFrontstage[] = [];
     let defaultExists = false;
     let requiresConnection = true;
+
     if (frontstages) {
       allFrontstages = [...frontstages];
       const defaultFrontstages = frontstages.filter(
@@ -75,6 +76,7 @@ export const useFrontstages = ({
         id: ViewerDefaultFrontstageProviderId,
         usage: StageUsage.General,
         contentGroupProps: contentGroup,
+        cornerButton: UiItemsManager.getBackstageItems().length ? <BackstageAppButton /> : undefined,
         ...defaultUiConfig,
       });
 

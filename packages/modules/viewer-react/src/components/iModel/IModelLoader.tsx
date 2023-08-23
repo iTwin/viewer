@@ -6,11 +6,11 @@
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
-import { StateManager, UiFramework } from "@itwin/appui-react";
+import { StateManager, UiFramework, UiItemsProvider } from "@itwin/appui-react";
 import type { IModelConnection } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Provider } from "react-redux";
 
 import {
@@ -27,6 +27,7 @@ import {
 import { ViewerPerformance } from "../../services/telemetry";
 import type { ModelLoaderProps } from "../../types";
 import { IModelViewer } from "./";
+import { BackstageItemsProvider } from "../app-ui/providers";
 
 const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   const [error, setError] = useState<Error>();
@@ -44,6 +45,17 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     backstageItems,
     loadingComponent,
   } = viewerProps;
+
+  const providers = useMemo<UiItemsProvider[]>(() => {
+    const providers = [...(uiProviders || [])];
+    if (backstageItems?.length) {
+      providers.push(new BackstageItemsProvider(backstageItems));
+    }
+    return providers;
+  }, [uiProviders, backstageItems])
+
+  useUiProviders(providers);
+
   const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
     useFrontstages({
       frontstages,
@@ -53,7 +65,6 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       blankConnectionViewState,
     });
 
-  useUiProviders(uiProviders);
   useTheme(theme);
 
   const getModelConnection = useCallback(async (): Promise<

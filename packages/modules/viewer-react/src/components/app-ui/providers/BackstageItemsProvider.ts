@@ -14,12 +14,7 @@ import { IModelApp } from "@itwin/core-frontend";
 import type { ViewerBackstageItem } from "../../../types";
 
 export class BackstageItemsProvider implements UiItemsProvider {
-  public readonly id = "BackstageItemsProvider";
-  private _backstageItems: ViewerBackstageItem[];
-
-  constructor(backstageItems: ViewerBackstageItem[]) {
-    this._backstageItems = backstageItems;
-  }
+  constructor(private _backstageItems: ViewerBackstageItem[], public readonly id = "iTwinViewer.BackstageItemsProvider") { }
 
   public provideBackstageItems() {
     const allBackstageItems: ViewerBackstageItem[] = [];

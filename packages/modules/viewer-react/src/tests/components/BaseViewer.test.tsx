@@ -20,6 +20,10 @@ jest.mock("@itwin/appui-react", () => {
       ...jest.createMockFromModule<any>("@itwin/appui-react").UiFramework,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
+    UiItemsManager: {
+      ...jest.createMockFromModule<any>("@itwin/appui-react").UiItemsManager,
+      getBackstageItems: jest.fn().mockReturnValue([])
+    }
   };
 });
 jest.mock("@itwin/presentation-frontend", () => {
