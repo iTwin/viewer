@@ -89,7 +89,9 @@ export interface LoaderProps {
     | ((iModel: IModelConnection) => Promise<void>);
   /** additional frontstages to register */
   frontstages?: ViewerFrontstage[];
-  /** menu items for the backstage */
+  /** menu items for the backstage 
+   * @deprecated in 4.x. Use UiItemsProvider.provideBackstageItems.
+  */
   backstageItems?: ViewerBackstageItem[];
   /** additional viewport options for the default frontstage's viewport control */
   viewportOptions?: ViewerViewportControlOptions;
