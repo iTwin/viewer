@@ -46,15 +46,21 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     loadingComponent,
   } = viewerProps;
 
-  const newUiProviders = useMemo<UiItemsProvider[]>(() => {
-    if (backstageItems && uiProviders) {
-       const backstageItemsProvider = new BackstageItemsProvider(backstageItems, "BackstageItemsArrayProvider");
-       return [...uiProviders, backstageItemsProvider]
+  const providers = useMemo<UiItemsProvider[]>(() => {
+    if (backstageItems) {
+      const backstageItemsProvider = new BackstageItemsProvider(backstageItems, "BackstageItemsArrayProvider"); 
+
+      if (uiProviders) {
+        return [...uiProviders, backstageItemsProvider]
+      }
+
+      return [backstageItemsProvider]
     }
+
     return uiProviders ?? [];
   }, [uiProviders, backstageItems])
 
-  useUiProviders(newUiProviders);
+  useUiProviders(providers);
 
   const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
     useFrontstages({
