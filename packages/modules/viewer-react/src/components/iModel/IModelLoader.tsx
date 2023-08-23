@@ -47,10 +47,10 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   } = viewerProps;
 
   const providers = useMemo<UiItemsProvider[]>(() => {
-    if (backstageItems) {
-      const backstageItemsProvider = new BackstageItemsProvider(backstageItems, "BackstageItemsArrayProvider"); 
+    if (backstageItems?.length) {
+      const backstageItemsProvider = new BackstageItemsProvider(backstageItems); 
 
-      if (uiProviders) {
+      if (uiProviders?.length) {
         return [...uiProviders, backstageItemsProvider]
       }
 

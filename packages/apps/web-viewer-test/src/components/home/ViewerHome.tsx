@@ -147,7 +147,7 @@ const ViewerHome: React.FC = () => {
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
-          new BackstageItemsProvider(backstageItems),
+          new BackstageItemsProvider(backstageItems, "BackstageItemsProvider1"),
           new ViewerNavigationToolsProvider(),
           new ViewerContentToolsProvider({
             vertical: {
