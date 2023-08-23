@@ -6,7 +6,7 @@
 import { AppNotificationManager, ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 // import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
-// import { ReactComponent as Itwin } from "../../images/itwin.svg";
+import { ReactComponent as Itwin } from "../../images/itwin.svg";
 import {
   MeasureTools,
   MeasureToolsUiItemsProvider,
@@ -188,7 +188,7 @@ const ViewerHome: React.FC = () => {
         //   }),
         // ]}
         backstageItems={backstageItems2}
-        // defaultUiConfig={{cornerButton: <Itwin />, hideNavigationAid: true}}
+        defaultUiConfig={{cornerButton: <Itwin />}}
         // renderSys={{doIdleWork: true}}
       />
     </div>
