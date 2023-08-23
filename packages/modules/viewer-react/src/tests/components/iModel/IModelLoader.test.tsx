@@ -314,7 +314,7 @@ describe("IModelLoader", () => {
     );
     await waitFor(() => result.getByTestId("viewer"));
     expect(IModelViewer).toHaveBeenCalledWith(
-      { backstageItems: undefined, frontstages, hasBackstageItems: 0 },
+      { backstageItems: undefined, frontstages },
       {}
     );
   });
