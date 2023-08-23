@@ -90,7 +90,7 @@ export interface LoaderProps {
   /** additional frontstages to register */
   frontstages?: ViewerFrontstage[];
   /** menu items for the backstage 
-   * @deprecated in 4.x. Use UiItemsProvider.provideBackstageItems.
+   * @deprecated in 4.x. Use [UiItemsProvider.provideBackstageItems](https://www.itwinjs.org/reference/appui-react/uiprovider/uiitemsprovider/).
   */
   backstageItems?: ViewerBackstageItem[];
   /** additional viewport options for the default frontstage's viewport control */
