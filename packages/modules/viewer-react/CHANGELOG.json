@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "4.4.0",
+      "tag": "@itwin/viewer-react_v4.4.0",
+      "date": "Wed, 23 Aug 2023 21:29:07 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Expose corner button for defaultUiConfig and add backstage corner button when there are backstage items provided"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.3.0",
       "tag": "@itwin/viewer-react_v4.3.0",
       "date": "Wed, 02 Aug 2023 12:31:38 GMT",

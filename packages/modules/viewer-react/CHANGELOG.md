@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Wed, 02 Aug 2023 12:31:38 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Aug 2023 21:29:07 GMT and should not be manually modified.
+
+## 4.4.0
+Wed, 23 Aug 2023 21:29:07 GMT
+
+### Minor changes
+
+- Expose corner button for defaultUiConfig and add backstage corner button when there are backstage items provided
 
 ## 4.3.0
 Wed, 02 Aug 2023 12:31:38 GMT
