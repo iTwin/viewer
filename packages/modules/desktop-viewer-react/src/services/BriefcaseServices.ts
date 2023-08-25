@@ -4,25 +4,26 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Guid } from "@itwin/core-bentley";
-import { IModelVersion } from "@itwin/core-common";
 import type { BriefcaseConnection } from "@itwin/core-frontend";
-import { CheckpointConnection } from "@itwin/core-frontend";
+import { IModelApp } from "@itwin/core-frontend";
 
 import { ModelStatus } from "../types";
 
-export const getBriefcaseStatus = async (
-  briefcase: BriefcaseConnection
-): Promise<ModelStatus> => {
-  if (briefcase.iTwinId !== Guid.empty) {
+export const getBriefcaseStatus = async ({
+  iTwinId,
+  iModelId,
+  changeset,
+}: BriefcaseConnection): Promise<ModelStatus> => {
+  if (iTwinId !== Guid.empty) {
     try {
+      const accessToken = await IModelApp.getAccessToken();
       // get the online version
-      const remoteConnection = await CheckpointConnection.openRemote(
-        briefcase.iTwinId,
-        briefcase.iModelId,
-        IModelVersion.latest()
-      );
-      const hasChanges =
-        briefcase.changeset.id !== remoteConnection.changeset.id;
+      const remoteChangeset = await IModelApp.hubAccess?.getLatestChangeset({
+        iModelId,
+        accessToken,
+      });
+
+      const hasChanges = changeset.id !== remoteChangeset?.id;
       if (hasChanges) {
         return ModelStatus.OUTDATED;
       } else {
