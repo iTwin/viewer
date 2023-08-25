@@ -82,7 +82,7 @@ export const gatherRequiredViewerProps = ({
     return { iModelId, iTwinId, changeSetId };
   }
 
-  if (extents && location && iTwinId) {
+  if (extents && location) {
     return { iTwinId, extents, location };
   }
 
