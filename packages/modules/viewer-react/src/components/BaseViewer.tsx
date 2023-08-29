@@ -29,7 +29,7 @@ export const BaseViewer = ({
   });
 
   const accessToken = useAccessToken();
-  const isBlankConnection = loaderProps.extents && loaderProps.location;
+  const isBlankConnection = loaderProps.extents && loaderProps.location && !loaderProps.iTwinId;
   return (
     <ErrorBoundary>
       {loaderProps.filePath || accessToken || isBlankConnection ? (
