@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "`useAccessToken` will always return a string, `\"\"` denotes an invalid token.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
