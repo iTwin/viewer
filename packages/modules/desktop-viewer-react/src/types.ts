@@ -24,6 +24,7 @@ export type DesktopViewerProps = XOR<
 > &
   DesktopInitializerParams;
 
+// todo: rm enum in favor of as const
 export enum ModelStatus {
   ONLINE,
   OUTDATED,

@@ -32,13 +32,13 @@ import { usePullChanges } from "../hooks/usePullChanges";
 const ConnectionStatusBarItem = () => {
   const accessToken = useAccessToken();
   const connectivityStatus = useConnectivity();
-  const onLoginClick = async () => {
+  const onLoginClick = useCallback(async () => {
     if (
       IModelApp.authorizationClient instanceof ElectronRendererAuthorization
     ) {
       await IModelApp.authorizationClient?.signIn();
     }
-  };
+  }, []);
   return (
     <div className="status-bar-status">
       <span className="status-label">
@@ -74,7 +74,7 @@ const MergeStatusBarItem = () => {
   const getLatestChangesets = useCallback(async () => {
     if (connection) {
       try {
-        connection.txns.onChangesPulled.addOnce(() => {
+        connection.txns.onChangesPulled.addListener(() => {
           IModelApp.viewManager.refreshForModifiedModels(undefined);
         });
         await doPullChanges();
