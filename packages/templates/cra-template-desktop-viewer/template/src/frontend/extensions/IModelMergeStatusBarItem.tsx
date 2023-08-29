@@ -65,28 +65,26 @@ const MergeStatusBarItem = () => {
   const iModelConnection = useActiveIModelConnection();
   const isMounted = useIsMounted();
 
-  const onMergeClick = async () => {
-    setMergeStatus(ModelStatus.MERGING);
-  };
-
   const { pullProgress, doPullChanges } = usePullChanges(connection);
 
+  useEffect(() => {
+    const rmListener = connection?.txns.onChangesPulled.addListener(() => {
+      IModelApp.viewManager.refreshForModifiedModels(undefined);
+    });
+    return () => rmListener?.();
+  }, [connection]);
+
   const getLatestChangesets = useCallback(async () => {
-    if (connection) {
-      try {
-        connection.txns.onChangesPulled.addListener(() => {
-          IModelApp.viewManager.refreshForModifiedModels(undefined);
-        });
-        await doPullChanges();
-        if (isMounted.current) {
-          setMergeStatus(ModelStatus.UPTODATE);
-        }
-      } catch (error) {
-        console.error(error);
-        setMergeStatus(ModelStatus.ERROR);
+    try {
+      await doPullChanges();
+      if (isMounted.current) {
+        setMergeStatus(ModelStatus.UPTODATE);
       }
+    } catch (error) {
+      console.error(error);
+      setMergeStatus(ModelStatus.ERROR);
     }
-  }, [connection, doPullChanges, isMounted]);
+  }, [doPullChanges, isMounted]);
 
   useEffect(() => {
     if (mergeStatus === ModelStatus.MERGING) {
@@ -108,7 +106,7 @@ const MergeStatusBarItem = () => {
         }
       });
     }
-  }, [accessToken, connectivityStatus, connection, isMounted]);
+  }, [connectivityStatus, accessToken, connection, isMounted]);
 
   useEffect(() => {
     if (isMounted.current) {
@@ -133,7 +131,9 @@ const MergeStatusBarItem = () => {
       <BriefcaseStatus
         mergeStatus={mergeStatus}
         mergeProgress={pullProgress}
-        onMergeClick={onMergeClick}
+        onMergeClick={() => {
+          setMergeStatus(ModelStatus.MERGING);
+        }}
         className={"status-bar-status"}
       />
     </div>
