@@ -2,6 +2,26 @@
   "name": "@itwin/desktop-viewer-react",
   "entries": [
     {
+      "version": "4.1.4",
+      "tag": "@itwin/desktop-viewer-react_v4.1.4",
+      "date": "Tue, 29 Aug 2023 20:16:30 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "No need to open a remote connection to get latest changeset id."
+          },
+          {
+            "comment": "Fix bug where vp would not correctly refresh after pulling in new changes."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" to `4.4.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.1.3",
       "tag": "@itwin/desktop-viewer-react_v4.1.3",
       "date": "Wed, 23 Aug 2023 21:29:07 GMT",

@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Wed, 23 Aug 2023 21:29:07 GMT and should not be manually modified.
+This log was last generated on Tue, 29 Aug 2023 20:16:30 GMT and should not be manually modified.
+
+## 4.4.1
+Tue, 29 Aug 2023 20:16:30 GMT
+
+### Patches
+
+- `useAccessToken` will always return a string, `""` denotes an invalid token.
 
 ## 4.4.0
 Wed, 23 Aug 2023 21:29:07 GMT

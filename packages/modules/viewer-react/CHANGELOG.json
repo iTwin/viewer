@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "4.4.1",
+      "tag": "@itwin/viewer-react_v4.4.1",
+      "date": "Tue, 29 Aug 2023 20:16:30 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "`useAccessToken` will always return a string, `\"\"` denotes an invalid token."
+          }
+        ]
+      }
+    },
+    {
       "version": "4.4.0",
       "tag": "@itwin/viewer-react_v4.4.0",
       "date": "Wed, 23 Aug 2023 21:29:07 GMT",
