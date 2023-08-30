@@ -36,7 +36,7 @@ export const useWebViewerInitializer = (options: WebViewerProps) => {
     ) {
       setWebViewerInitalized(false);
       setWebViewerInitOptions(initializationOptions);
-      void WebInitializer.startWebViewer(options).then(() => {
+      void WebInitializer.startWebViewer(options, options.authClient).then(() => {
         void WebInitializer.initialized.then(() => {
           setWebViewerInitalized(true);
         });

@@ -116,18 +116,18 @@ describe("Initializer", () => {
 
   it("initializes iModelApp", async () => {
     await WebInitializer.startWebViewer({
-      authClient: new MockAuthorizationClient(),
       enablePerformanceMonitors: false,
-    });
+    },      new MockAuthorizationClient(),
+    );
     await WebInitializer.initialized;
     expect(IModelApp.startup).toHaveBeenCalled();
   });
 
   it("initializes default RPC interfaces", async () => {
     await WebInitializer.startWebViewer({
-      authClient: new MockAuthorizationClient(),
       enablePerformanceMonitors: false,
-    });
+    },      new MockAuthorizationClient(),
+    );
     await WebInitializer.initialized;
     expect(initClientSpy).toHaveBeenCalledTimes(1);
     expect(initClientSpy).toHaveBeenCalledWith(
@@ -144,7 +144,6 @@ describe("Initializer", () => {
 
   it("initializes default RPC interfaces with altered default backend url", async () => {
     await WebInitializer.startWebViewer({
-      authClient: new MockAuthorizationClient(),
       enablePerformanceMonitors: false,
       backendConfiguration: {
         defaultBackend: {
@@ -153,7 +152,7 @@ describe("Initializer", () => {
           },
         },
       },
-    });
+    }, new MockAuthorizationClient());
 
     await WebInitializer.initialized;
     expect(initClientSpy).toHaveBeenCalledTimes(1);
@@ -171,7 +170,6 @@ describe("Initializer", () => {
 
   it("initializes default RPC interfaces with altered title and version", async () => {
     await WebInitializer.startWebViewer({
-      authClient: new MockAuthorizationClient(),
       enablePerformanceMonitors: false,
       backendConfiguration: {
         defaultBackend: {
@@ -183,7 +181,7 @@ describe("Initializer", () => {
           },
         },
       },
-    });
+    }, new MockAuthorizationClient());
 
     await WebInitializer.initialized;
     expect(initClientSpy).toHaveBeenCalledTimes(1);
@@ -201,14 +199,13 @@ describe("Initializer", () => {
 
   it("initializes default RPC interfaces with additional rpcs", async () => {
     await WebInitializer.startWebViewer({
-      authClient: new MockAuthorizationClient(),
       enablePerformanceMonitors: false,
       backendConfiguration: {
         defaultBackend: {
           rpcInterfaces: [TestRpcInterface],
         },
       },
-    });
+    }, new MockAuthorizationClient());
 
     await WebInitializer.initialized;
     expect(initClientSpy).toHaveBeenCalledTimes(1);
@@ -226,7 +223,6 @@ describe("Initializer", () => {
 
   it("initializes multiple backends - specified custom (default included by default)", async () => {
     await WebInitializer.startWebViewer({
-      authClient: new MockAuthorizationClient(),
       enablePerformanceMonitors: false,
       backendConfiguration: {
         customBackends: [
@@ -239,7 +235,7 @@ describe("Initializer", () => {
           },
         ],
       },
-    });
+    }, new MockAuthorizationClient());
 
     expect(initClientSpy).toHaveBeenNthCalledWith(
       1,
@@ -265,7 +261,6 @@ describe("Initializer", () => {
 
   it("initializes multiple backends - specified custom and specified default", async () => {
     await WebInitializer.startWebViewer({
-      authClient: new MockAuthorizationClient(),
       enablePerformanceMonitors: false,
       backendConfiguration: {
         customBackends: [
@@ -286,7 +281,7 @@ describe("Initializer", () => {
           },
         },
       },
-    });
+    }, new MockAuthorizationClient());
 
     expect(initClientSpy).toHaveBeenNthCalledWith(
       1,
@@ -312,7 +307,6 @@ describe("Initializer", () => {
 
   it("initializes many backends - multiple custom and specified default", async () => {
     await WebInitializer.startWebViewer({
-      authClient: new MockAuthorizationClient(),
       enablePerformanceMonitors: false,
       backendConfiguration: {
         customBackends: [
@@ -340,7 +334,7 @@ describe("Initializer", () => {
           },
         },
       },
-    });
+    }, new MockAuthorizationClient());
 
     expect(initClientSpy).toHaveBeenNthCalledWith(
       1,

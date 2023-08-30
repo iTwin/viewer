@@ -19,11 +19,24 @@ import type {
 
 export type WebInitializerParams = ViewerCommonProps & {
   /** authorization configuration */
-  authClient: ViewerAuthorizationClient;
   backendConfiguration?: BackendConfiguration;
 };
 
-export type WebViewerProps = XOR<ConnectedViewerProps, BlankViewerProps> &
+export type AuthClientRequiredProps = {
+  authClient: ViewerAuthorizationClient;
+  iTwinId: string;
+}
+
+export type AuthClientProps = AuthClientRequiredProps
+| {
+  authClient?: ViewerAuthorizationClient;
+  iTwinId?: never;
+}
+
+export type ConnectedViewerWebProps = ConnectedViewerProps & AuthClientRequiredProps;
+export type BlankViewerWebProps = BlankViewerProps & AuthClientProps;
+
+export type WebViewerProps = XOR<ConnectedViewerWebProps, BlankViewerWebProps> &
   WebInitializerParams;
 
 /**

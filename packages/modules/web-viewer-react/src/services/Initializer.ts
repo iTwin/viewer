@@ -8,6 +8,7 @@ import {
   getIModelAppOptions,
   makeCancellable,
   ViewerAuthorization,
+  ViewerAuthorizationClient,
   ViewerPerformance,
 } from "@itwin/viewer-react";
 
@@ -36,14 +37,13 @@ export class WebInitializer {
   };
 
   /** Web viewer startup */
-  public static async startWebViewer(options: WebInitializerParams) {
+  public static async startWebViewer(options: WebInitializerParams, authClient?: ViewerAuthorizationClient) {
     if (!IModelApp.initialized && !this._initializing) {
       console.log("starting web viewer");
       this._initializing = true;
 
       const {
         backendConfiguration,
-        authClient,
         extensions,
         ...optionsForIModelApp
       } = options;
