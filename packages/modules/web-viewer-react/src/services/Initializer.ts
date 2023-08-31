@@ -37,7 +37,7 @@ export class WebInitializer {
   };
 
   /** Web viewer startup */
-  public static async startWebViewer(options: WebInitializerParams & {authClient?: ViewerAuthorizationClient}) {
+  public static async startWebViewer(options: WebInitializerParams) {
     if (!IModelApp.initialized && !this._initializing) {
       console.log("starting web viewer");
       this._initializing = true;

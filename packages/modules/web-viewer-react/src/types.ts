@@ -20,6 +20,7 @@ import type {
 export type WebInitializerParams = ViewerCommonProps & {
   /** authorization configuration */
   backendConfiguration?: BackendConfiguration;
+  authClient?: ViewerAuthorizationClient;
 };
 
 export type AuthClientRequiredProps = {
