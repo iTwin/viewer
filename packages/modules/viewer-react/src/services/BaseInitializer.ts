@@ -8,23 +8,27 @@ import {
   FrameworkAccuDraw,
   FrameworkReducer,
   FrameworkUiAdmin,
+  SessionStateActionId,
   StateManager,
+  SyncUiEventDispatcher,
   UiFramework,
 } from "@itwin/appui-react";
 import { UiComponents } from "@itwin/components-react";
-import type { IModelAppOptions } from "@itwin/core-frontend";
+import type { IModelAppOptions, IModelConnection } from "@itwin/core-frontend";
 import { AccuSnap, SnapMode } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
 import { FrontendIModelsAccess } from "@itwin/imodels-access-frontend";
 import { IModelsClient } from "@itwin/imodels-client-management";
-import { Presentation } from "@itwin/presentation-frontend";
+import { ISelectionProvider, Presentation, SelectionChangeEventArgs } from "@itwin/presentation-frontend";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
 
 import { ViewerPerformance } from "../services/telemetry";
 import type { ViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
+import { UiSyncEventArgs } from "@itwin/appui-abstract";
+import { getInstancesCount } from "@itwin/presentation-common";
 
 // initialize required iTwin.js services
 export class BaseInitializer {
@@ -142,6 +146,14 @@ export class BaseInitializer {
         },
       });
 
+      syncSelectionCount();
+      syncActiveSelectionScope();
+
+      const iModelConnection = UiFramework.getIModelConnection();
+      if (iModelConnection) {
+        syncSelectionScopeList(iModelConnection);
+      }
+
       // allow uiAdmin to open key-in palette when Ctrl+F2 is pressed - good for manually loading UI providers
       IModelApp.uiAdmin.updateFeatureFlags({ allowKeyinPalette: true });
 
@@ -252,3 +264,55 @@ class ViewerAccuSnap extends AccuSnap {
     return snaps;
   }
 }
+
+const syncSelectionCount = () => {
+  Presentation.selection.selectionChange.addListener(
+    (args: SelectionChangeEventArgs, provider: ISelectionProvider) => {
+      if (args.level !== 0) {
+        // don't need to handle sub-selections
+        return;
+      }
+      const selection = provider.getSelection(args.imodel, args.level);
+      const numSelected = getInstancesCount(selection);
+
+      UiFramework.dispatchActionToStore(
+        SessionStateActionId.SetNumItemsSelected,
+        numSelected
+      );
+
+      // NOTE: add a one time event listener to the iModel.seletionSet.onChanged to restore the numSelected to the value that we
+      //   extracted from the Presentation.selection.selectionChange event in order to override the numSelected AppUi sets from
+      //   the iModel.selectionSet.onChanged that will treat assemblies as a collection of elements instead of a single one
+      UiFramework.getIModelConnection()?.selectionSet.onChanged.addOnce(
+        (_ev) => {
+          UiFramework.dispatchActionToStore(
+            SessionStateActionId.SetNumItemsSelected,
+            numSelected
+          );
+        }
+      );
+    }
+  );
+};
+
+// This preserves how the list of selection scopes was synced between Presentation and AppUi before its removal in 4.x
+const syncSelectionScopeList = async (iModel: IModelConnection) => {
+// Fetch the available selection scopes and add them to the redux store
+const availableScopes =
+  await Presentation.selection.scopes.getSelectionScopes(iModel);
+UiFramework.dispatchActionToStore(
+  SessionStateActionId.SetAvailableSelectionScopes,
+  availableScopes
+);
+};
+
+// This preserves how the active selection scope was synced between Presentation and AppUi before its removal in 4.x
+const syncActiveSelectionScope = () => {
+SyncUiEventDispatcher.onSyncUiEvent.addListener((args: UiSyncEventArgs) => {
+  if (args.eventIds.has(SessionStateActionId.SetSelectionScope)) {
+      // After 4.x the appui no longer has a presentation  dep and therefore we have the responsibility of
+      // syncing the Presetnation.selection.scopes.activeScope with the AppUi's UiSyncEvent for SetSelectionScope
+      Presentation.selection.scopes.activeScope = UiFramework.getActiveSelectionScope();
+  }
+  });
+};
