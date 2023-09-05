@@ -149,10 +149,6 @@ export class BaseInitializer {
       syncSelectionCount();
       syncActiveSelectionScope();
 
-      const iModelConnection = UiFramework.getIModelConnection();
-      if (iModelConnection) {
-        syncSelectionScopeList(iModelConnection);
-      }
 
       // allow uiAdmin to open key-in palette when Ctrl+F2 is pressed - good for manually loading UI providers
       IModelApp.uiAdmin.updateFeatureFlags({ allowKeyinPalette: true });
@@ -295,23 +291,14 @@ const syncSelectionCount = () => {
   );
 };
 
-// This preserves how the list of selection scopes was synced between Presentation and AppUi before its removal in 4.x
-const syncSelectionScopeList = async (iModel: IModelConnection) => {
-// Fetch the available selection scopes and add them to the redux store
-const availableScopes =
-  await Presentation.selection.scopes.getSelectionScopes(iModel);
-UiFramework.dispatchActionToStore(
-  SessionStateActionId.SetAvailableSelectionScopes,
-  availableScopes
-);
-};
+
 
 // This preserves how the active selection scope was synced between Presentation and AppUi before its removal in 4.x
 const syncActiveSelectionScope = () => {
 SyncUiEventDispatcher.onSyncUiEvent.addListener((args: UiSyncEventArgs) => {
   if (args.eventIds.has(SessionStateActionId.SetSelectionScope)) {
       // After 4.x the appui no longer has a presentation  dep and therefore we have the responsibility of
-      // syncing the Presetnation.selection.scopes.activeScope with the AppUi's UiSyncEvent for SetSelectionScope
+      // syncing the Presentation.selection.scopes.activeScope with the AppUi's UiSyncEvent for SetSelectionScope
       Presentation.selection.scopes.activeScope = UiFramework.getActiveSelectionScope();
   }
   });
