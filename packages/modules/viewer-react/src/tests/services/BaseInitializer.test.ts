@@ -35,6 +35,13 @@ jest.mock("@itwin/appui-react", () => {
     },
     FrameworkAccuDraw:
       jest.createMockFromModule<any>("@itwin/appui-react").FrameworkAccuDraw,
+    SyncUiEventDispatcher: {
+      ...jest.createMockFromModule<any>("@itwin/appui-react")
+        .SyncUiEventDispatcher,
+      onSyncUiEvent: {
+        addListener: jest.fn(),
+      },
+    },
   };
 });
 
@@ -45,6 +52,12 @@ jest.mock("@itwin/presentation-frontend", () => {
       ...jest.createMockFromModule<any>("@itwin/presentation-frontend")
         .Presentation,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+      selection: {
+        selectionChange : {
+          addListener: jest.fn()
+        },
+        scopes: {},
+      },
     },
   };
 });
