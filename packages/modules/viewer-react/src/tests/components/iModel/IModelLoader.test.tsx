@@ -42,6 +42,21 @@ jest.mock("@itwin/appui-react", () => {
   };
 });
 jest.mock("@itwin/appui-abstract");
+jest.mock("@itwin/presentation-frontend", () => {
+  return {
+    ...jest.createMockFromModule<any>("@itwin/presentation-frontend"),
+    Presentation: {
+      ...jest.createMockFromModule<any>("@itwin/presentation-frontend")
+        .Presentation,
+      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+      selection: {
+        scopes: {
+          getSelectionScopes: jest.fn(),
+        },
+      },
+    },
+  };
+});
 jest.mock("@itwin/core-frontend", () => {
   return {
     IModelApp: {
