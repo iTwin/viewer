@@ -45,9 +45,9 @@ const syncSelectionCount = () => {
         numSelected
       );
 
-      // NOTE: add a one time event listener to the iModel.seletionSet.onChanged to restore the numSelected to the value that we
-      //   extracted from the Presentation.selection.selectionChange event in order to override the numSelected AppUi sets from
-      //   the iModel.selectionSet.onChanged that will treat assemblies as a collection of elements instead of a single one
+      // NOTE: add a one time event listener to the iModelConnection.selectionSet.onChanged to restore the numSelected to the value that we
+      // extracted from the Presentation.selection.selectionChange event in order to override the numSelected AppUi sets from
+      // the iModelConnection.selectionSet.onChanged that will treat assemblies as a collection of elements instead of a single one
       UiFramework.getIModelConnection()?.selectionSet.onChanged.addOnce(
         (_ev) => {
           UiFramework.dispatchActionToStore(
@@ -191,6 +191,7 @@ export class BaseInitializer {
         },
       });
 
+      // Sync selection count & active selection scope between Presentation and AppUi. Runs after the Presentation is initialized.
       syncSelectionCount();
       syncActiveSelectionScope();
 

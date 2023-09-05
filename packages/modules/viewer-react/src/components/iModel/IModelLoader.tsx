@@ -119,6 +119,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       }
       setConnection(imodelConnection);
 
+      // Syncs selection scope list between AppUi and Presentation after connecting to iModel
       syncSelectionScopeList(imodelConnection);
 
       return imodelConnection;
