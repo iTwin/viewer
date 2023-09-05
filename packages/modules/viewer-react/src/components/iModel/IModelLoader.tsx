@@ -39,7 +39,7 @@ const syncSelectionScopeList = async (iModel: IModelConnection) => {
     SessionStateActionId.SetAvailableSelectionScopes,
     availableScopes
   );
-  };
+};
   
 const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   const [error, setError] = useState<Error>();

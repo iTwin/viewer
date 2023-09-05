@@ -14,7 +14,7 @@ import {
   UiFramework,
 } from "@itwin/appui-react";
 import { UiComponents } from "@itwin/components-react";
-import type { IModelAppOptions, IModelConnection } from "@itwin/core-frontend";
+import type { IModelAppOptions } from "@itwin/core-frontend";
 import { AccuSnap, SnapMode } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { ITwinLocalization } from "@itwin/core-i18n";
@@ -29,6 +29,51 @@ import type { ViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
 import { UiSyncEventArgs } from "@itwin/appui-abstract";
 import { getInstancesCount } from "@itwin/presentation-common";
+
+const syncSelectionCount = () => {
+  Presentation.selection.selectionChange.addListener(
+    (args: SelectionChangeEventArgs, provider: ISelectionProvider) => {
+      if (args.level !== 0) {
+        // don't need to handle sub-selections
+        return;
+      }
+      const selection = provider.getSelection(args.imodel, args.level);
+      const numSelected = getInstancesCount(selection);
+
+      UiFramework.dispatchActionToStore(
+        SessionStateActionId.SetNumItemsSelected,
+        numSelected
+      );
+
+      // NOTE: add a one time event listener to the iModel.seletionSet.onChanged to restore the numSelected to the value that we
+      //   extracted from the Presentation.selection.selectionChange event in order to override the numSelected AppUi sets from
+      //   the iModel.selectionSet.onChanged that will treat assemblies as a collection of elements instead of a single one
+      UiFramework.getIModelConnection()?.selectionSet.onChanged.addOnce(
+        (_ev) => {
+          UiFramework.dispatchActionToStore(
+            SessionStateActionId.SetNumItemsSelected,
+            numSelected
+          );
+        }
+      );
+    }
+  );
+};
+
+// This preserves how the active selection scope was synced between Presentation and AppUi before its removal in 4.x
+const syncActiveSelectionScope = () => {
+  // If the user doesn't set any active scope and uses the default scope, then the Presentation active scope would be undefined. 
+  // Thus, we have to sync it for the first time here.
+  Presentation.selection.scopes.activeScope = UiFramework.getActiveSelectionScope();
+  
+  SyncUiEventDispatcher.onSyncUiEvent.addListener((args: UiSyncEventArgs) => {
+    if (args.eventIds.has(SessionStateActionId.SetSelectionScope)) {
+      // After 4.x the AppUI no longer has a presentation dep and therefore we have the responsibility of
+      // syncing the Presentation.selection.scopes.activeScope with the AppUi's UiSyncEvent for SetSelectionScope
+      Presentation.selection.scopes.activeScope = UiFramework.getActiveSelectionScope();
+    }
+  });
+};
 
 // initialize required iTwin.js services
 export class BaseInitializer {
@@ -149,7 +194,6 @@ export class BaseInitializer {
       syncSelectionCount();
       syncActiveSelectionScope();
 
-
       // allow uiAdmin to open key-in palette when Ctrl+F2 is pressed - good for manually loading UI providers
       IModelApp.uiAdmin.updateFeatureFlags({ allowKeyinPalette: true });
 
@@ -260,46 +304,3 @@ class ViewerAccuSnap extends AccuSnap {
     return snaps;
   }
 }
-
-const syncSelectionCount = () => {
-  Presentation.selection.selectionChange.addListener(
-    (args: SelectionChangeEventArgs, provider: ISelectionProvider) => {
-      if (args.level !== 0) {
-        // don't need to handle sub-selections
-        return;
-      }
-      const selection = provider.getSelection(args.imodel, args.level);
-      const numSelected = getInstancesCount(selection);
-
-      UiFramework.dispatchActionToStore(
-        SessionStateActionId.SetNumItemsSelected,
-        numSelected
-      );
-
-      // NOTE: add a one time event listener to the iModel.seletionSet.onChanged to restore the numSelected to the value that we
-      //   extracted from the Presentation.selection.selectionChange event in order to override the numSelected AppUi sets from
-      //   the iModel.selectionSet.onChanged that will treat assemblies as a collection of elements instead of a single one
-      UiFramework.getIModelConnection()?.selectionSet.onChanged.addOnce(
-        (_ev) => {
-          UiFramework.dispatchActionToStore(
-            SessionStateActionId.SetNumItemsSelected,
-            numSelected
-          );
-        }
-      );
-    }
-  );
-};
-
-
-
-// This preserves how the active selection scope was synced between Presentation and AppUi before its removal in 4.x
-const syncActiveSelectionScope = () => {
-SyncUiEventDispatcher.onSyncUiEvent.addListener((args: UiSyncEventArgs) => {
-  if (args.eventIds.has(SessionStateActionId.SetSelectionScope)) {
-      // After 4.x the appui no longer has a presentation  dep and therefore we have the responsibility of
-      // syncing the Presentation.selection.scopes.activeScope with the AppUi's UiSyncEvent for SetSelectionScope
-      Presentation.selection.scopes.activeScope = UiFramework.getActiveSelectionScope();
-  }
-  });
-};
