@@ -10,6 +10,6 @@ import { useDesktopViewerInitializer } from "../hooks";
 import type { DesktopViewerProps } from "../types";
 
 export const Viewer = (props: DesktopViewerProps) => {
-  const initialized = useDesktopViewerInitializer(props);
+  const initialized = useDesktopViewerInitializer({...props, clientId: ""});
   return initialized ? <BaseViewer {...props} /> : null;
 };

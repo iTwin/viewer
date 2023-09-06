@@ -22,7 +22,7 @@ export type DesktopViewerProps = XOR<
   XOR<FileViewerProps, BlankViewerProps>,
   ConnectedViewerProps
 > &
-  DesktopInitializerParams;
+  Omit<DesktopInitializerParams, "clientId">;
 
 export enum ModelStatus {
   ONLINE,
