@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/web-viewer-react",
+      "comment": "Make authClient prop optional unless iTwinId is supplied",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/web-viewer-react"
+}
