@@ -8,7 +8,6 @@ import {
   getIModelAppOptions,
   makeCancellable,
   ViewerAuthorization,
-  ViewerAuthorizationClient,
   ViewerPerformance,
 } from "@itwin/viewer-react";
 
@@ -44,8 +43,8 @@ export class WebInitializer {
 
       const {
         backendConfiguration,
-        extensions,
         authClient,
+        extensions,
         ...optionsForIModelApp
       } = options;
 
