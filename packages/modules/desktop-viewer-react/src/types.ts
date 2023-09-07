@@ -3,6 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { MarkRequired, Optional } from "@itwin/core-bentley";
 import type { RpcInterface, RpcInterfaceDefinition } from "@itwin/core-common";
 import type {
   BlankViewerProps,
@@ -17,28 +18,23 @@ export type DesktopInitializerParams = ViewerCommonProps & {
   clientId?: string;
 };
 
-export type ClientIdRequiredProps = {
+export type ClientIdProps = {
   clientId: string;
   iTwinId: string;
-}
-
-export type ClientIdOptionalProps = {
+} | {
   clientId?: string;
   iTwinId?: never;
-}
+};
 
-export type ClientIdProps = ClientIdRequiredProps | ClientIdOptionalProps;
-
-export type ConnectedViewerDesktopProps = ConnectedViewerProps & ClientIdRequiredProps;
-export type BlankViewerDesktopProps = BlankViewerProps & ClientIdProps;
-export type FileViewerDesktopProps = FileViewerProps & ClientIdOptionalProps;
+type ConnectedViewerDesktopProps = ConnectedViewerProps & Required<Pick<DesktopInitializerParams, "clientId">>
+type BlankViewerDesktopProps = BlankViewerProps & ClientIdProps;
+type FileViewerDesktopProps = FileViewerProps & Pick<DesktopInitializerParams, "clientId">;
 
 /** Desktop Viewer can open local (snapshot/briefcase), connected or blank connection models */
-export type DesktopViewerProps = XOR<
+export type DesktopViewerProps = DesktopInitializerParams & XOR<
   XOR<FileViewerDesktopProps, BlankViewerDesktopProps>,
   ConnectedViewerDesktopProps
-> &
-  DesktopInitializerParams;
+>;
 
 export enum ModelStatus {
   ONLINE,
