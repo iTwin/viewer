@@ -17,7 +17,7 @@ export type DesktopInitializerParams = ViewerCommonProps & {
   clientId?: string;
 };
 
-export type ClientIdProps = {
+type ClientIdProps = {
   clientId: string;
   iTwinId: string;
 } | {

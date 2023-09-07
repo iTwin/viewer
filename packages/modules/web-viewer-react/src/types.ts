@@ -23,7 +23,7 @@ export type WebInitializerParams = ViewerCommonProps & {
   authClient?: ViewerAuthorizationClient;
 };
 
-export type AuthClientProps = {
+type AuthClientProps = {
   authClient: ViewerAuthorizationClient;
   iTwinId: string;
 }
@@ -32,8 +32,8 @@ export type AuthClientProps = {
   iTwinId?: never;
 }
 
-export type ConnectedViewerWebProps = ConnectedViewerProps & Required<Pick<WebInitializerParams, "authClient">>;
-export type BlankViewerWebProps = BlankViewerProps & AuthClientProps;
+type ConnectedViewerWebProps = ConnectedViewerProps & Required<Pick<WebInitializerParams, "authClient">>;
+type BlankViewerWebProps = BlankViewerProps & AuthClientProps;
 
 export type WebViewerProps = XOR<ConnectedViewerWebProps, BlankViewerWebProps> &
   WebInitializerParams;
