@@ -6,7 +6,7 @@
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
-import { StateManager, UiFramework, UiItemsProvider } from "@itwin/appui-react";
+import { SessionStateActionId, StateManager, UiFramework, UiItemsProvider } from "@itwin/appui-react";
 import type { IModelConnection } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
@@ -28,7 +28,19 @@ import { ViewerPerformance } from "../../services/telemetry";
 import type { ModelLoaderProps } from "../../types";
 import { IModelViewer } from "./";
 import { BackstageItemsProvider } from "../app-ui/providers";
+import { Presentation } from "@itwin/presentation-frontend";
 
+// This preserves how the list of selection scopes was synced between Presentation and AppUi before its removal in 4.x
+const syncSelectionScopeList = async (iModel: IModelConnection) => {
+  // Fetch the available selection scopes and add them to the redux store
+  const availableScopes =
+    await Presentation.selection.scopes.getSelectionScopes(iModel);
+  UiFramework.dispatchActionToStore(
+    SessionStateActionId.SetAvailableSelectionScopes,
+    availableScopes
+  );
+};
+  
 const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   const [error, setError] = useState<Error>();
   const [connection, setConnection] = useState<IModelConnection>();
@@ -106,6 +118,10 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
         await onIModelConnected(imodelConnection);
       }
       setConnection(imodelConnection);
+
+      // Syncs selection scope list between AppUi and Presentation after connecting to iModel
+      syncSelectionScopeList(imodelConnection);
+
       return imodelConnection;
     }
     return;
