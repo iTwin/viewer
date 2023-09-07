@@ -1,6 +1,20 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Wed, 23 Aug 2023 21:29:07 GMT and should not be manually modified.
+This log was last generated on Tue, 05 Sep 2023 20:23:39 GMT and should not be manually modified.
+
+## 4.4.2
+Tue, 05 Sep 2023 20:23:39 GMT
+
+### Patches
+
+- Sync Selection Scope List, Active Selection Scope & Selection Count between Presentation and AppUI
+
+## 4.4.1
+Tue, 29 Aug 2023 20:16:30 GMT
+
+### Patches
+
+- `useAccessToken` will always return a string, `""` denotes an invalid token.
 
 ## 4.4.0
 Wed, 23 Aug 2023 21:29:07 GMT

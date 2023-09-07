@@ -10,13 +10,14 @@ import { ViewerAuthorization } from "../services/auth";
 import { useIsMounted } from "./useIsMounted";
 
 export const useAccessToken = () => {
-  const [accessToken, setAccessToken] = useState<AccessToken>();
+  const [accessToken, setAccessToken] = useState<AccessToken>("");
   const isMounted = useIsMounted();
 
   useEffect(() => {
     const getAccessToken = async () => {
       try {
-        const token = await ViewerAuthorization.client?.getAccessToken();
+        const token =
+          (await ViewerAuthorization.client?.getAccessToken()) ?? "";
         setAccessToken(token);
       } catch {}
     };
@@ -32,11 +33,7 @@ export const useAccessToken = () => {
           }
         }
       );
-    return () => {
-      if (removeListener) {
-        removeListener();
-      }
-    };
+    return () => removeListener?.();
   }, [isMounted]);
 
   return accessToken;

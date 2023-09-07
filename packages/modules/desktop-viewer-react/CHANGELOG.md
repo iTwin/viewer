@@ -1,6 +1,19 @@
 # Change Log - @itwin/desktop-viewer-react
 
-This log was last generated on Wed, 23 Aug 2023 21:29:07 GMT and should not be manually modified.
+This log was last generated on Tue, 05 Sep 2023 20:23:39 GMT and should not be manually modified.
+
+## 4.1.5
+Tue, 05 Sep 2023 20:23:39 GMT
+
+_Version update only_
+
+## 4.1.4
+Tue, 29 Aug 2023 20:16:30 GMT
+
+### Patches
+
+- No need to open a remote connection to get latest changeset id.
+- Fix bug where vp would not correctly refresh after pulling in new changes.
 
 ## 4.1.3
 Wed, 23 Aug 2023 21:29:07 GMT
