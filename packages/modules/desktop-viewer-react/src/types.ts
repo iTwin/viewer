@@ -14,15 +14,31 @@ import type {
 
 export type DesktopInitializerParams = ViewerCommonProps & {
   rpcInterfaces?: RpcInterfaceDefinition<RpcInterface>[];
-  clientId: string;
+  clientId?: string;
 };
+
+export type ClientIdRequiredProps = {
+  clientId: string;
+  iTwinId: string;
+}
+
+export type ClientIdOptionalProps = {
+  clientId?: string;
+  iTwinId?: never;
+}
+
+export type ClientIdProps = ClientIdRequiredProps | ClientIdOptionalProps;
+
+export type ConnectedViewerDesktopProps = ConnectedViewerProps & ClientIdRequiredProps;
+export type BlankViewerDesktopProps = BlankViewerProps & ClientIdProps;
+export type FileViewerDesktopProps = FileViewerProps & ClientIdOptionalProps;
 
 /** Desktop Viewer can open local (snapshot/briefcase), connected or blank connection models */
 export type DesktopViewerProps = XOR<
-  XOR<FileViewerProps, BlankViewerProps>,
-  ConnectedViewerProps
+  XOR<FileViewerDesktopProps, BlankViewerDesktopProps>,
+  ConnectedViewerDesktopProps
 > &
-  Omit<DesktopInitializerParams, "clientId">;
+  DesktopInitializerParams;
 
 export enum ModelStatus {
   ONLINE,
