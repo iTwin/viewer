@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@itwin/desktop-viewer-react",
-      "comment": "Remove clientId as ViewerProps",
+      "comment": "Make clientId optional unless iTwinId is supplied",
       "type": "minor"
     }
   ],
