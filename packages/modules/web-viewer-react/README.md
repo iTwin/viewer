@@ -74,7 +74,12 @@ export const MyViewerComponent = () => {
 
 ##### Blank Connections
 
-- `blankConnection` - Data to use to create the BlankConnection (name, location, extents, etc.). Note that this can't be used in conjunction with the iTwinId or iModelId prop.
+- `location` - The spatial location for the blank connection.
+- `extents` - The volume of interest, in meters, centered around location
+- `iTwinId` - GUID for the iTwin (project, asset, etc.) that contains the iModel that you wish to views
+- **Note**: The props above cannot be used in conjunction with iModelId
+- **Note**: `authClient` props will be optional if only `location` and `extents` props are supplied. However, if the `iTwinId` prop also is passed into the Viewer component, `authClient` will be required.
+
 
 #### Optional
 
@@ -107,7 +112,7 @@ export const MyViewerComponent = () => {
 
 ## Blank Viewer
 
-For cases where you would prefer to use a [Blank iModelConnection](https://www.itwinjs.org/learning/frontend/blankconnection/), you should supply the `location` and `extents` props to the Viewer React component.
+For cases where you would prefer to use a [Blank iModelConnection](https://www.itwinjs.org/learning/frontend/blankconnection/), you should supply the `location` and `extents` props to the Viewer React component. The `authClient` props will be optional unless the `iTwinId` prop is also supplied.
 
 ```javascript
 import React, { useState, useEffect } from "react";

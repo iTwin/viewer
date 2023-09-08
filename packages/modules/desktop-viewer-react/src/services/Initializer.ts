@@ -51,7 +51,7 @@ export class DesktopInitializer {
         const iModelAppOpts = getIModelAppOptions(options);
 
         const authClient = new ElectronRendererAuthorization({
-          clientId: options.clientId,
+          clientId: options.clientId ?? "",
         });
         iModelAppOpts.authorizationClient = authClient;
         ViewerAuthorization.client = authClient;

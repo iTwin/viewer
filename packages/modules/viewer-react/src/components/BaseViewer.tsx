@@ -29,9 +29,10 @@ export const BaseViewer = ({
   });
 
   const accessToken = useAccessToken();
+  const isBlankConnection = loaderProps.extents && loaderProps.location && !loaderProps.iTwinId;
   return (
     <ErrorBoundary>
-      {loaderProps.filePath || accessToken ? (
+      {loaderProps.filePath || accessToken || isBlankConnection ? (
         viewerInitialized ? (
           <IModelLoader {...loaderProps} />
         ) : (
