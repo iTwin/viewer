@@ -1,6 +1,13 @@
 # Change Log - @itwin/web-viewer-react
 
-This log was last generated on Tue, 05 Sep 2023 20:23:39 GMT and should not be manually modified.
+This log was last generated on Fri, 08 Sep 2023 17:51:30 GMT and should not be manually modified.
+
+## 4.2.0
+Fri, 08 Sep 2023 17:51:30 GMT
+
+### Minor changes
+
+- Make authClient prop optional unless iTwinId is supplied
 
 ## 4.1.5
 Tue, 05 Sep 2023 20:23:39 GMT

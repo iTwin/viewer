@@ -2,6 +2,23 @@
   "name": "@itwin/web-viewer-react",
   "entries": [
     {
+      "version": "4.2.0",
+      "tag": "@itwin/web-viewer-react_v4.2.0",
+      "date": "Fri, 08 Sep 2023 17:51:30 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Make authClient prop optional unless iTwinId is supplied"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@itwin/viewer-react\" to `4.5.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.1.5",
       "tag": "@itwin/web-viewer-react_v4.1.5",
       "date": "Tue, 05 Sep 2023 20:23:39 GMT",

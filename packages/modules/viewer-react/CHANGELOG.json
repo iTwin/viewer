@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "4.5.0",
+      "tag": "@itwin/viewer-react_v4.5.0",
+      "date": "Fri, 08 Sep 2023 17:51:30 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Remove auth check when viewing BlankConnections, removed iTwinId requirements when creating Viewer for BlankConnection"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.4.2",
       "tag": "@itwin/viewer-react_v4.4.2",
       "date": "Tue, 05 Sep 2023 20:23:39 GMT",
