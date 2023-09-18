@@ -3,12 +3,15 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import "@itwin/itwinui-layouts-css/styles.css";
+
 import {
   Viewer,
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
   ViewerStatusbarItemsProvider,
 } from "@itwin/desktop-viewer-react";
+import { PageLayout } from "@itwin/itwinui-layouts-react";
 import { MeasureToolsUiItemsProvider } from "@itwin/measure-tools-react";
 import {
   AncestorsNavigationControls,
@@ -39,39 +42,44 @@ export const ViewerRoute = () => {
   }, [location?.state]);
 
   return filePath ? (
-    <Viewer
-      clientId={process.env.IMJS_VIEWER_CLIENT_ID ?? ""}
-      rpcInterfaces={viewerRpcs}
-      filePath={filePath}
-      uiProviders={[
-        new ViewerNavigationToolsProvider(),
-        new ViewerContentToolsProvider({
-          vertical: {
-            measureGroup: false,
-          },
-        }),
-        new ViewerStatusbarItemsProvider(),
-        new TreeWidgetUiItemsProvider(),
-        new PropertyGridUiItemsProvider({
-          propertyGridProps: {
-            autoExpandChildCategories: true,
-            ancestorsNavigationControls: (props) => (
-              <AncestorsNavigationControls {...props} />
-            ),
-            contextMenuItems: [
-              (props) => <CopyPropertyTextContextMenuItem {...props} />,
-            ],
-            settingsMenuItems: [
-              (props) => (
-                <ShowHideNullValuesSettingsMenuItem {...props} persist={true} />
+    <PageLayout.Content>
+      <Viewer
+        clientId={process.env.IMJS_VIEWER_CLIENT_ID ?? ""}
+        rpcInterfaces={viewerRpcs}
+        filePath={filePath}
+        uiProviders={[
+          new ViewerNavigationToolsProvider(),
+          new ViewerContentToolsProvider({
+            vertical: {
+              measureGroup: false,
+            },
+          }),
+          new ViewerStatusbarItemsProvider(),
+          new TreeWidgetUiItemsProvider(),
+          new PropertyGridUiItemsProvider({
+            propertyGridProps: {
+              autoExpandChildCategories: true,
+              ancestorsNavigationControls: (props) => (
+                <AncestorsNavigationControls {...props} />
               ),
-            ],
-          },
-        }),
-        new MeasureToolsUiItemsProvider(),
-        new IModelMergeItemsProvider(),
-      ]}
-      enablePerformanceMonitors={true}
-    />
+              contextMenuItems: [
+                (props) => <CopyPropertyTextContextMenuItem {...props} />,
+              ],
+              settingsMenuItems: [
+                (props) => (
+                  <ShowHideNullValuesSettingsMenuItem
+                    {...props}
+                    persist={true}
+                  />
+                ),
+              ],
+            },
+          }),
+          new MeasureToolsUiItemsProvider(),
+          new IModelMergeItemsProvider(),
+        ]}
+        enablePerformanceMonitors={true}
+      />
+    </PageLayout.Content>
   ) : null;
 };

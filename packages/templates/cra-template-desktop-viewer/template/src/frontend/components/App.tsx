@@ -3,9 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import "@itwin/itwinui-layouts-css/styles.css";
+
 import type { DesktopInitializerParams } from "@itwin/desktop-viewer-react";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
+import { PageLayout } from "@itwin/itwinui-layouts-react";
 import { ThemeProvider } from "@itwin/itwinui-react";
 import {
   MeasurementActionToolbar,
@@ -85,12 +88,14 @@ const App = () => {
     <ThemeProvider theme="dark" style={{ height: "100%" }}>
       <SettingsContext.Provider value={{ settings, addRecent }}>
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomeRoute />} />
-            <Route path="/itwins/:iTwinId" element={<IModelsRoute />} />
-            <Route path="/itwins" element={<ITwinsRoute />} />
-            <Route path="/viewer" element={<ViewerRoute />} />
-          </Routes>
+          <PageLayout>
+            <Routes>
+              <Route path="/" element={<HomeRoute />} />
+              <Route path="/itwins/:iTwinId" element={<IModelsRoute />} />
+              <Route path="/itwins" element={<ITwinsRoute />} />
+              <Route path="/viewer" element={<ViewerRoute />} />
+            </Routes>
+          </PageLayout>
         </BrowserRouter>
       </SettingsContext.Provider>
     </ThemeProvider>

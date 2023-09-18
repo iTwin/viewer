@@ -36,6 +36,8 @@ importers:
       '@itwin/imodels-access-frontend': ^4.0.4
       '@itwin/itwinui-css': ^1.12.0
       '@itwin/itwinui-icons-react': ^2.4.0
+      '@itwin/itwinui-layouts-css': ^0.2.0
+      '@itwin/itwinui-layouts-react': ^0.2.0
       '@itwin/itwinui-react': ^2.12.0
       '@itwin/itwinui-variables': ^2.0.0
       '@itwin/measure-tools-react': ^0.13.0
@@ -97,6 +99,8 @@ importers:
       '@itwin/imodels-access-frontend': 4.0.4_87470ce6503c5fb6443995f18c22e7bd
       '@itwin/itwinui-css': 1.12.0
       '@itwin/itwinui-icons-react': 2.4.0_react-dom@18.2.0+react@18.2.0
+      '@itwin/itwinui-layouts-css': 0.2.0
+      '@itwin/itwinui-layouts-react': 0.2.0_react-dom@18.2.0+react@18.2.0
       '@itwin/itwinui-react': 2.12.0_react-dom@18.2.0+react@18.2.0
       '@itwin/itwinui-variables': 2.0.0
       '@itwin/measure-tools-react': 0.13.0_79417f4e3fee4c20d0c727ac1c2b176d
@@ -3270,6 +3274,24 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
 
+  /@itwin/itwinui-layouts-css/0.2.0:
+    resolution: {integrity: sha512-grConweXD1Q+yJt8i1Urqf2XAQc4RlBO/+xXo06hx8uV2ros6+wjjbWhDN0n9VdXogEEGJu+GNdxkWgjUEqIzw==}
+    dependencies:
+      '@itwin/itwinui-variables': 1.0.0
+    dev: false
+
+  /@itwin/itwinui-layouts-react/0.2.0_react-dom@18.2.0+react@18.2.0:
+    resolution: {integrity: sha512-nMaSNas1iApFbcaO68lOhK6HuYXAzRb8I+KcSfPbD9Xhq3ZBsyHi0Dvw4pFeqB1MWhrpmxLrQdojWcoDn3F8rA==}
+    peerDependencies:
+      react: '>=16.8.6'
+      react-dom: '>=16.8.6'
+    dependencies:
+      '@itwin/itwinui-layouts-css': 0.2.0
+      classnames: 2.3.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /@itwin/itwinui-react/2.12.0_react-dom@18.2.0+react@18.2.0:
     resolution: {integrity: sha512-owXvQ4qX6fkPFRS46BSMmhM1eHjJ/jfhdAkQTKYK7He+14gcyaBHrSBIiRNKILFHSyBQXE2FjD6wwoAjS/lnDA==}
     peerDependencies:
@@ -3285,6 +3307,10 @@ packages:
       react-table: 7.8.0_react@18.2.0
       react-transition-group: 4.4.5_react-dom@18.2.0+react@18.2.0
       tippy.js: 6.3.7
+
+  /@itwin/itwinui-variables/1.0.0:
+    resolution: {integrity: sha512-f78S401k1romzL6jgJuNZTe8P0/PCtrKUDVZwMsIJHLlgwyMKGR7nqDWQBV03tY2/TF/qMLt9S96Tej4f1Xrtg==}
+    dev: false
 
   /@itwin/itwinui-variables/2.0.0:
     resolution: {integrity: sha512-fifv56z4pIVNA7KucfFiDdLThOFOLUF7MYY6VQclfF5uju0Jzl3JmnlTbmBiYlOo9oVn3drtHsA356UWIKclNQ==}
@@ -6474,6 +6500,7 @@ packages:
 
   /bindings/1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
+    requiresBuild: true
     dependencies:
       file-uri-to-path: 1.0.0
     dev: true
@@ -9599,6 +9626,7 @@ packages:
 
   /file-uri-to-path/1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -13262,6 +13290,7 @@ packages:
 
   /nan/2.17.0:
     resolution: {integrity: sha512-2ZTgtl0nJsO0KQCjEpxcIr5D+Yv90plTitZt9JBfQvVJDS5seMl3FOvsh3+9CoYWXf/1l5OaZzzF6nDm4cagaQ==}
+    requiresBuild: true
     dev: true
     optional: true
 
