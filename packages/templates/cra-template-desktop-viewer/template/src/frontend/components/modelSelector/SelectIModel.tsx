@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import "./SelectIModel.scss";
-import "@itwin/itwinui-layouts-css/styles.css";
 
 import { BriefcaseConnection } from "@itwin/core-frontend";
 import { getBriefcaseStatus, ModelStatus } from "@itwin/desktop-viewer-react";

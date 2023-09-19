@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import "./Home.scss";
-import "@itwin/itwinui-layouts-css/styles.css";
 
 import { InternetConnectivityStatus } from "@itwin/core-common";
 import { useConnectivity } from "@itwin/desktop-viewer-react";

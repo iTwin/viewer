@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import "./SelectITwin.scss";
-import "@itwin/itwinui-layouts-css/styles.css";
 
 import { useAccessToken } from "@itwin/desktop-viewer-react";
 import { ITwinGrid } from "@itwin/imodel-browser-react";
