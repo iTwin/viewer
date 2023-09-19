@@ -143,11 +143,4 @@
       }
     }
   }
-
-  ul.grid-holding-tabs {
-    display: grid;
-    flex-direction: row;
-    list-style-type: none;
-    padding-left: calc(var(--responsive-grid-margin, 16px) - 3px);
-  }
 }
