@@ -57,7 +57,7 @@ const Home = () => {
 
   return (
     <div>
-      <PageLayout.TitleArea className="home-title">
+      <PageLayout.TitleArea>
         <Text variant="headline">iTwin Viewer for Desktop</Text>
       </PageLayout.TitleArea>
       <div className="home">

@@ -44,67 +44,63 @@ export const SelectITwin = () => {
   const navigate = useNavigate();
 
   return accessToken ? (
-    <>
-      <div className="itv-scrolling-container select-itwin">
-        <Tabs
-          labels={tabsWithIcons}
-          onTabSelected={setITwinType}
-          activeIndex={iTwinType}
-          type={"borderless"}
-          contentClassName="grid-holding-tab"
-          tabsClassName="grid-holding-tabs"
-          orientation="horizontal"
-        >
-          <PageLayout.TitleArea className={"title-section"}>
-            <div className={"inline-input-with-button"}>
-              <LabeledInput
-                label={"Search"}
-                placeholder={"Will search in name or number"}
-                displayStyle={"inline"}
-                value={searchValue}
-                onChange={(event) => {
-                  const {
-                    target: { value },
-                  } = event;
-                  setSearchValue(value);
-                }}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter") {
-                    startSearch();
-                  }
-                  if (event.key === "Escape") {
-                    setSearchValue("");
-                    setSearchParam("");
-                  }
-                }}
-              />
-              <IconButton onClick={startSearch}>
-                <SvgSearch />
-              </IconButton>
-            </div>
-          </PageLayout.TitleArea>
-          <div className="itv-scrolling-content">
-            <ITwinGrid
-              accessToken={accessToken}
-              requestType={
-                iTwinType === 0
-                  ? "favorites"
-                  : iTwinType === 1
-                  ? "recents"
-                  : (searchParam as any) ?? ""
-              }
-              onThumbnailClick={(itwin) => {
-                void navigate(`/itwins/${itwin.id}`, {
-                  state: { iTwinName: itwin.displayName },
-                });
+    <div className="select-itwin">
+      <Tabs
+        labels={tabsWithIcons}
+        onTabSelected={setITwinType}
+        activeIndex={iTwinType}
+        type={"borderless"}
+        contentClassName="grid-holding-tab"
+        tabsClassName="grid-holding-tabs"
+        orientation="horizontal"
+      >
+        <PageLayout.TitleArea className={"title-section"}>
+          <div className={"inline-input-with-button"}>
+            <LabeledInput
+              label={"Search"}
+              placeholder={"Will search in name or number"}
+              displayStyle={"inline"}
+              value={searchValue}
+              onChange={(event) => {
+                const {
+                  target: { value },
+                } = event;
+                setSearchValue(value);
               }}
-              stringsOverrides={{ noIModels: "No iTwins found" } as any}
-              filterOptions={searchParam}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  startSearch();
+                }
+                if (event.key === "Escape") {
+                  setSearchValue("");
+                  setSearchParam("");
+                }
+              }}
             />
+            <IconButton onClick={startSearch}>
+              <SvgSearch />
+            </IconButton>
           </div>
-        </Tabs>
-      </div>
-    </>
+        </PageLayout.TitleArea>
+        <ITwinGrid
+          accessToken={accessToken}
+          requestType={
+            iTwinType === 0
+              ? "favorites"
+              : iTwinType === 1
+              ? "recents"
+              : (searchParam as any) ?? ""
+          }
+          onThumbnailClick={(itwin) => {
+            void navigate(`/itwins/${itwin.id}`, {
+              state: { iTwinName: itwin.displayName },
+            });
+          }}
+          stringsOverrides={{ noIModels: "No iTwins found" } as any}
+          filterOptions={searchParam}
+        />
+      </Tabs>
+    </div>
   ) : (
     <SignIn />
   );

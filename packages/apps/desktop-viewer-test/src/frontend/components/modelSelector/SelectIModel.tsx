@@ -199,19 +199,20 @@ export const SelectIModel = ({
   };
 
   return (
-    <div className="itv-scrolling-container select-imodel">
-      <PageLayout.TitleArea className={"itv-content-margins"}>
-        <Text variant="title">{`iModels for ${iTwinName}`}</Text>
+    <>
+      <PageLayout.TitleArea>
+        <Text
+          className={"select-imodel-title"}
+          variant="title"
+        >{`iModels for ${iTwinName}`}</Text>
       </PageLayout.TitleArea>
 
-      <div className="itv-scrolling-content">
-        <IModelGrid
-          accessToken={accessToken}
-          iTwinId={iTwinId}
-          onThumbnailClick={selectIModel}
-          useIndividualState={useProgressIndicator}
-        />
-      </div>
-    </div>
+      <IModelGrid
+        accessToken={accessToken}
+        iTwinId={iTwinId}
+        onThumbnailClick={selectIModel}
+        useIndividualState={useProgressIndicator}
+      />
+    </>
   );
 };
