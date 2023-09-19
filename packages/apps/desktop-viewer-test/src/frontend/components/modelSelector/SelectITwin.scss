@@ -9,8 +9,7 @@
     flex-direction: row;
     align-items: center;
     gap: 16px;
-    justify-content: space-between;
-    flex-wrap: wrap-reverse;
+    margin-bottom: 0;
 
     .inline-input-with-button {
       display: flex;
@@ -18,11 +17,6 @@
       justify-content: flex-end;
       margin: 10px 61px;
       width: 95%;
-
-      .iui-input-container.iui-inline > .iui-input:last-child {
-        min-width: 300px;
-        padding-right: 61px;
-      }
 
       .iui-input-container {
         display: flex;
@@ -76,10 +70,6 @@
           transition: color .2s ease-out, background-color .2s ease-out, border-color .2s ease-out;
         }
       }
-    }
-
-    .iui-input-container.iui-inline {
-      margin: 0;
     }
   }
 

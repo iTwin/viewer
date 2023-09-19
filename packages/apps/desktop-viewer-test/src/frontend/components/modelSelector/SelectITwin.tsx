@@ -13,6 +13,7 @@ import {
   SvgSearch,
   SvgStarHollow,
 } from "@itwin/itwinui-icons-react";
+import { PageLayout } from "@itwin/itwinui-layouts-react";
 import { IconButton, LabeledInput, Tab, Tabs } from "@itwin/itwinui-react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -54,7 +55,7 @@ export const SelectITwin = () => {
           tabsClassName="grid-holding-tabs"
           orientation="horizontal"
         >
-          <div className={"title-section"}>
+          <PageLayout.TitleArea className={"title-section"}>
             <div className={"inline-input-with-button"}>
               <LabeledInput
                 label={"Search"}
@@ -81,7 +82,7 @@ export const SelectITwin = () => {
                 <SvgSearch />
               </IconButton>
             </div>
-          </div>
+          </PageLayout.TitleArea>
           <div className="itv-scrolling-content">
             <ITwinGrid
               accessToken={accessToken}

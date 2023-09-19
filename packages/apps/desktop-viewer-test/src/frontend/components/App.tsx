@@ -3,8 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import "@itwin/itwinui-layouts-css/styles.css";
-
 import type { DesktopInitializerParams } from "@itwin/desktop-viewer-react";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
