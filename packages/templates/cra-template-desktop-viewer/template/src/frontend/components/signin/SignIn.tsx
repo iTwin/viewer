@@ -8,7 +8,6 @@ import "./SignIn.scss";
 import { IModelApp } from "@itwin/core-frontend";
 import { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
 import { SvgUser } from "@itwin/itwinui-icons-react";
-import { PageLayout } from "@itwin/itwinui-layouts-react";
 import { Button } from "@itwin/itwinui-react";
 import React, { useState } from "react";
 export const SignIn = () => {
@@ -24,7 +23,7 @@ export const SignIn = () => {
   };
 
   return (
-    <PageLayout.Content className="signin-container">
+    <div className="signin-container">
       <div className="signin">
         <SvgUser className="signin-user" />
         <Button
@@ -39,6 +38,6 @@ export const SignIn = () => {
           <span>Please switch to your browser and enter your credentials</span>
         )}
       </div>
-    </PageLayout.Content>
+    </div>
   );
 };

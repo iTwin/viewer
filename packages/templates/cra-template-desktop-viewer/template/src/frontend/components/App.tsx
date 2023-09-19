@@ -89,12 +89,14 @@ const App = () => {
       <SettingsContext.Provider value={{ settings, addRecent }}>
         <BrowserRouter>
           <PageLayout>
-            <Routes>
-              <Route path="/" element={<HomeRoute />} />
-              <Route path="/itwins/:iTwinId" element={<IModelsRoute />} />
-              <Route path="/itwins" element={<ITwinsRoute />} />
-              <Route path="/viewer" element={<ViewerRoute />} />
-            </Routes>
+            <PageLayout.Content>
+              <Routes>
+                <Route path="/" element={<HomeRoute />} />
+                <Route path="/itwins/:iTwinId" element={<IModelsRoute />} />
+                <Route path="/itwins" element={<ITwinsRoute />} />
+                <Route path="/viewer" element={<ViewerRoute />} />
+              </Routes>
+            </PageLayout.Content>
           </PageLayout>
         </BrowserRouter>
       </SettingsContext.Provider>

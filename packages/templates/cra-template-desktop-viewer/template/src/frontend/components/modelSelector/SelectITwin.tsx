@@ -13,7 +13,6 @@ import {
   SvgSearch,
   SvgStarHollow,
 } from "@itwin/itwinui-icons-react";
-import { PageLayout } from "@itwin/itwinui-layouts-react";
 import { IconButton, LabeledInput, Tab, Tabs } from "@itwin/itwinui-react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -44,7 +43,7 @@ export const SelectITwin = () => {
   const navigate = useNavigate();
 
   return accessToken ? (
-    <PageLayout.Content>
+    <>
       <div className="itv-scrolling-container select-itwin">
         <Tabs
           labels={tabsWithIcons}
@@ -104,7 +103,7 @@ export const SelectITwin = () => {
           </div>
         </Tabs>
       </div>
-    </PageLayout.Content>
+    </>
   ) : (
     <SignIn />
   );
