@@ -11,19 +11,14 @@
     gap: 16px;
     justify-content: space-between;
     flex-wrap: wrap-reverse;
-
+  
     .inline-input-with-button {
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
       margin: 10px 61px;
       width: 95%;
-
-      .iui-input-container.iui-inline > .iui-input:last-child {
-        min-width: 300px;
-        padding-right: 61px;
-      }
-
+  
       .iui-input-container {
         display: flex;
         flex-direction: row;
@@ -59,7 +54,7 @@
           color: var(--iui-color-text-muted);
         }
       }
-
+  
       .iui-button {
         border: 1px solid rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-4));
         border-top-left-radius: 0;
@@ -77,56 +72,9 @@
         }
       }
     }
-
-    .iui-input-container.iui-inline {
-      margin: 0;
-    }
-  }
-
-  .iui-tabs-wrapper {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    margin: 0 20px;
-    > .iui-tabs {
-      margin: 7px 0;
-      border: 0;
-      > li {
-        > .iui-tab {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          background-color: var(--iui-color-background-backdrop);
-          min-width: 140px;
-          color: var(--iui-color-text);
-          padding: 0 24px;
-          height: 38px;
-          border: 0;
-          cursor: pointer;
-          > .iui-tab-label {
-            margin: 0 5px 0 10px;
-          }
-        }
-        > .iui-active {
-          color: var(--iui-color-text-accent);
-        }
-        > .iui-active, .iui-tab:hover {
-          background-color: rgba(var(--iui-color-accent-hsl),var(--iui-opacity-6));
-        }
-      }
-    }
-    > .iui-tab-stripe {
-      margin-top: 20px;
-    }
   }
 
   .grid-holding-tab {
-    display: grid;
-    flex-direction: column;
-    overflow: hidden;
-    padding: 9px 0 0 0;
-    margin-top: -9px;
-    border-top: 2px solid var(--iui-color-text-muted);
     .iui-tile >.iui-tile-thumbnail >.iui-thumbnail-icon {
       width: 45%;
       height: 45%;
@@ -142,5 +90,9 @@
         height: 50%;
       }
     }
+  }
+
+  .iac-no-results {
+    position: fixed;
   }
 }

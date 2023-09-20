@@ -3,38 +3,6 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
-.select-imodel {
-  margin: 0 20px 0 20px;
-  .tile-with-status.iui-tile {
-    position: relative;
-
-    &.hollow-shell * {
-      pointer-events: none;
-    }
-
-    > .iui-content {
-      position: unset;
-
-      > .iui-metadata {
-        position: absolute;
-        bottom: 5px;
-        width: calc(100% - (#{var(--iui-size-s)} * 2));
-      }
-    }
-
-    .tile-status {
-      border-top: 1px solid gray;
-      margin-bottom: -12px;
-      margin-left: -12px;
-      margin-right: -12px;
-      padding: 12px;
-      box-sizing: border-box;
-
-      .iui-text-block {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-    }
-  }
+.select-imodel-title {
+  margin-left: calc(var(--responsive-grid-margin, 64px) - 3px)
 }

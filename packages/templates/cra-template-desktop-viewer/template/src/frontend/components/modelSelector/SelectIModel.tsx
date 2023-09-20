@@ -9,6 +9,7 @@ import { BriefcaseConnection } from "@itwin/core-frontend";
 import { getBriefcaseStatus, ModelStatus } from "@itwin/desktop-viewer-react";
 import type { IModelFull, IModelGridProps } from "@itwin/imodel-browser-react";
 import { IModelGrid } from "@itwin/imodel-browser-react";
+import { PageLayout } from "@itwin/itwinui-layouts-react";
 import type { TileProps } from "@itwin/itwinui-react";
 import { Text } from "@itwin/itwinui-react";
 import React, {
@@ -198,18 +199,20 @@ export const SelectIModel = ({
   };
 
   return (
-    <div className="itv-scrolling-container select-imodel">
-      <div className={"itv-content-margins"}>
-        <Text variant="title">{`iModels for ${iTwinName}`}</Text>
-      </div>
-      <div className="itv-scrolling-content">
-        <IModelGrid
-          accessToken={accessToken}
-          iTwinId={iTwinId}
-          onThumbnailClick={selectIModel}
-          useIndividualState={useProgressIndicator}
-        />
-      </div>
-    </div>
+    <PageLayout.Content padded>
+      <PageLayout.TitleArea>
+        <Text
+          className={"select-imodel-title"}
+          variant="title"
+        >{`iModels for ${iTwinName}`}</Text>
+      </PageLayout.TitleArea>
+
+      <IModelGrid
+        accessToken={accessToken}
+        iTwinId={iTwinId}
+        onThumbnailClick={selectIModel}
+        useIndividualState={useProgressIndicator}
+      />
+    </PageLayout.Content>
   );
 };
