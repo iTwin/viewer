@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@itwin/desktop-viewer-react",
-      "comment": "CVE-2023-4863 - bump electron to 24.8.3",
+      "comment": "",
       "type": "none"
     }
   ],
