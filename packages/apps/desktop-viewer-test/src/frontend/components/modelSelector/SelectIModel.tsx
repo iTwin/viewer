@@ -199,7 +199,7 @@ export const SelectIModel = ({
   };
 
   return (
-    <>
+    <PageLayout.Content padded>
       <PageLayout.TitleArea>
         <Text
           className={"select-imodel-title"}
@@ -213,6 +213,6 @@ export const SelectIModel = ({
         onThumbnailClick={selectIModel}
         useIndividualState={useProgressIndicator}
       />
-    </>
+    </PageLayout.Content>
   );
 };
