@@ -81,7 +81,7 @@
     "redux": "^4.2.1"
   },
   "devDependencies": {
-    "@bentley/react-scripts": "^5.0.4",
+    "@bentley/react-scripts": "^5.0.5",
     "@itwin/build-tools": "^4.0.6",
     "@types/electron-devtools-installer": "^2.2.2",
     "@types/minimist": "^1.2.2",
