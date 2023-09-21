@@ -2,16 +2,15 @@
 * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
-
 .home-title {
-  padding: 100px 100px 50px 100px !important;
+  margin-top: var(--iui-size-m);
   font-weight: 900;
 }
+
 .home {
   display: grid;
   grid-template-rows: 250px auto;
   grid-template-columns: minmax(300px, 50%) 50%;
-  padding: 0 100px 100px 100px;
   .home-section {
     a,
     span {

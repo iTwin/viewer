@@ -4,129 +4,21 @@
 *--------------------------------------------------------------------------------------------*/
 
 .select-itwin {
-  .title-section {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
-    justify-content: space-between;
-    flex-wrap: wrap-reverse;
-
-    .inline-input-with-button {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      margin: 10px 61px;
-      width: 95%;
-
-      .iui-input-container.iui-inline > .iui-input:last-child {
-        min-width: 300px;
-        padding-right: 61px;
-      }
-
-      .iui-input-container {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-          > .iui-label {
-          color: var(--iui-color-text);
-          font-weight: 600;
-          margin: 0 12px 3px 0;
-          cursor: pointer;
-        }
-        > .iui-input {
-          border: 1px solid rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-4));
-          border-radius: 3px;
-          background-color: var(--iui-color-background);
-          color: var(--iui-color-text);
-          box-sizing: border-box;
-          padding: 7px 12px;
-          min-height: 38px;
-          min-width: 300px;
-          @media (prefers-reduced-motion: no-preference) {
-            transition: border-color .2s ease-out;
-          }
-        }
-        .iui-input:focus{
-          outline: 0;
-          border-color: rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-4));
-          box-shadow: rgba(var(--iui-color-accent-hsl),var(--iui-opacity-5)) 0 0 0 2px;;
-        }
-        > .iui-input:hover { 
-          border-color: rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-2));
-        }
-        ::placeholder {
-          color: var(--iui-color-text-muted);
-        }
-      }
-
-      .iui-button {
-        border: 1px solid rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-4));
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        margin-left: -50px;
-        background-color: var(--iui-color-background);
-        color: rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-2));
-      }
-      .iui-button:enabled:active, .iui-button:enabled:hover, .iui-button:focus-visible {
-        border-color: rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-1));
-        background-color: var(--iui-color-background-hover);
-        color: rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-1));
-        @media (prefers-reduced-motion: no-preference) {
-          transition: color .2s ease-out, background-color .2s ease-out, border-color .2s ease-out;
-        }
-      }
-    }
-
-    .iui-input-container.iui-inline {
-      margin: 0;
-    }
+  .select-itwin-title {
+    margin-bottom: var(--iui-size-s);
   }
 
-  .iui-tabs-wrapper {
-    height: 100%;
+  .inline-input-with-button {
     display: flex;
-    flex-direction: column;
-    margin: 0 20px;
-    > .iui-tabs {
-      margin: 7px 0;
-      border: 0;
-      > li {
-        > .iui-tab {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          background-color: var(--iui-color-background-backdrop);
-          min-width: 140px;
-          color: var(--iui-color-text);
-          padding: 0 24px;
-          height: 38px;
-          border: 0;
-          cursor: pointer;
-          > .iui-tab-label {
-            margin: 0 5px 0 10px;
-          }
-        }
-        > .iui-active {
-          color: var(--iui-color-text-accent);
-        }
-        > .iui-active, .iui-tab:hover {
-          background-color: rgba(var(--iui-color-accent-hsl),var(--iui-opacity-6));
-        }
-      }
-    }
-    > .iui-tab-stripe {
-      margin-top: 20px;
+    align-items: center;
+    justify-content: flex-end;
+
+    .iui-searchbox {
+      width: 25%;
     }
   }
 
   .grid-holding-tab {
-    display: grid;
-    flex-direction: column;
-    overflow: hidden;
-    padding: 9px 0 0 0;
-    margin-top: -9px;
-    border-top: 2px solid var(--iui-color-text-muted);
     .iui-tile >.iui-tile-thumbnail >.iui-thumbnail-icon {
       width: 45%;
       height: 45%;
@@ -144,10 +36,7 @@
     }
   }
 
-  ul.grid-holding-tabs {
-    display: grid;
-    flex-direction: row;
-    list-style-type: none;
-    padding-left: calc(var(--responsive-grid-margin, 16px) - 3px);
+  .iac-no-results {
+    position: fixed;
   }
 }

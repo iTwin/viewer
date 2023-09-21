@@ -3,12 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import "./SelectIModel.scss";
-
 import { BriefcaseConnection } from "@itwin/core-frontend";
 import { getBriefcaseStatus, ModelStatus } from "@itwin/desktop-viewer-react";
 import type { IModelFull, IModelGridProps } from "@itwin/imodel-browser-react";
 import { IModelGrid } from "@itwin/imodel-browser-react";
+import { PageLayout } from "@itwin/itwinui-layouts-react";
 import type { TileProps } from "@itwin/itwinui-react";
 import { Text } from "@itwin/itwinui-react";
 import React, {
@@ -198,18 +197,17 @@ export const SelectIModel = ({
   };
 
   return (
-    <div className="itv-scrolling-container select-imodel">
-      <div className={"itv-content-margins"}>
+    <>
+      <PageLayout.TitleArea>
         <Text variant="title">{`iModels for ${iTwinName}`}</Text>
-      </div>
-      <div className="itv-scrolling-content">
-        <IModelGrid
-          accessToken={accessToken}
-          iTwinId={iTwinId}
-          onThumbnailClick={selectIModel}
-          useIndividualState={useProgressIndicator}
-        />
-      </div>
-    </div>
+      </PageLayout.TitleArea>
+
+      <IModelGrid
+        accessToken={accessToken}
+        iTwinId={iTwinId}
+        onThumbnailClick={selectIModel}
+        useIndividualState={useProgressIndicator}
+      />
+    </>
   );
 };

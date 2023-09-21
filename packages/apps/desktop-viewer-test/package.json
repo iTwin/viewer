@@ -58,6 +58,8 @@
     "@itwin/imodels-access-frontend": "^4.0.4",
     "@itwin/itwinui-css": "^1.12.0",
     "@itwin/itwinui-icons-react": "^2.4.0",
+    "@itwin/itwinui-layouts-css": "^0.2.0",
+    "@itwin/itwinui-layouts-react": "^0.2.0",
     "@itwin/itwinui-react": "^2.12.0",
     "@itwin/itwinui-variables": "^2.0.0",
     "@itwin/measure-tools-react": "^0.13.0",
@@ -69,7 +71,7 @@
     "@itwin/tree-widget-react": "^1.0.0",
     "@itwin/webgl-compatibility": "^4.0.6",
     "dotenv-flow": "^3.2.0",
-    "electron": "^24.6.5",
+    "electron": "^24.8.3",
     "minimist": "^1.2.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -79,7 +81,7 @@
     "redux": "^4.2.1"
   },
   "devDependencies": {
-    "@bentley/react-scripts": "^5.0.4",
+    "@bentley/react-scripts": "^5.0.5",
     "@itwin/build-tools": "^4.0.6",
     "@types/electron-devtools-installer": "^2.2.2",
     "@types/minimist": "^1.2.2",

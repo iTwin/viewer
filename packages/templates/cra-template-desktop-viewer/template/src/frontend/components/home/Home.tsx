@@ -8,6 +8,7 @@ import "./Home.scss";
 import { InternetConnectivityStatus } from "@itwin/core-common";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { SvgFolderOpened, SvgImodel } from "@itwin/itwinui-icons-react";
+import { PageLayout } from "@itwin/itwinui-layouts-react";
 import { Blockquote, Text } from "@itwin/itwinui-react";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -55,10 +56,12 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <Text className="home-title" variant="headline">
-        iTwin Viewer for Desktop
-      </Text>
+    <>
+      <PageLayout.TitleArea>
+        <Text className="home-title" variant="headline">
+          iTwin Viewer for Desktop
+        </Text>
+      </PageLayout.TitleArea>
       <div className="home">
         <div className="home-section start">
           <Text variant="title"> {ITwinViewerApp.translate("home.start")}</Text>
@@ -99,7 +102,7 @@ const Home = () => {
           <Recents />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
