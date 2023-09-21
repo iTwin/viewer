@@ -3,6 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import type { UiSyncEventArgs } from "@itwin/appui-abstract";
 import {
   AppNotificationManager,
   FrameworkAccuDraw,
@@ -21,14 +22,17 @@ import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
 import { FrontendIModelsAccess } from "@itwin/imodels-access-frontend";
 import { IModelsClient } from "@itwin/imodels-client-management";
-import { ISelectionProvider, Presentation, SelectionChangeEventArgs } from "@itwin/presentation-frontend";
+import { getInstancesCount } from "@itwin/presentation-common";
+import type {
+  ISelectionProvider,
+  SelectionChangeEventArgs,
+} from "@itwin/presentation-frontend";
+import { Presentation } from "@itwin/presentation-frontend";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
 
 import { ViewerPerformance } from "../services/telemetry";
 import type { ViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
-import { UiSyncEventArgs } from "@itwin/appui-abstract";
-import { getInstancesCount } from "@itwin/presentation-common";
 
 const syncSelectionCount = () => {
   Presentation.selection.selectionChange.addListener(
@@ -62,15 +66,17 @@ const syncSelectionCount = () => {
 
 // This preserves how the active selection scope was synced between Presentation and AppUi before its removal in 4.x
 const syncActiveSelectionScope = () => {
-  // If the user doesn't set any active scope and uses the default scope, then the Presentation active scope would be undefined. 
+  // If the user doesn't set any active scope and uses the default scope, then the Presentation active scope would be undefined.
   // Thus, we have to sync it for the first time here.
-  Presentation.selection.scopes.activeScope = UiFramework.getActiveSelectionScope();
-  
+  Presentation.selection.scopes.activeScope =
+    UiFramework.getActiveSelectionScope();
+
   SyncUiEventDispatcher.onSyncUiEvent.addListener((args: UiSyncEventArgs) => {
     if (args.eventIds.has(SessionStateActionId.SetSelectionScope)) {
       // After 4.x the AppUI no longer has a presentation dep and therefore we have the responsibility of
       // syncing the Presentation.selection.scopes.activeScope with the AppUi's UiSyncEvent for SetSelectionScope
-      Presentation.selection.scopes.activeScope = UiFramework.getActiveSelectionScope();
+      Presentation.selection.scopes.activeScope =
+        UiFramework.getActiveSelectionScope();
     }
   });
 };
@@ -273,6 +279,7 @@ export const getIModelAppOptions = (
     toolAdmin: options?.toolAdmin,
     renderSys: options?.renderSys,
     realityDataAccess,
+    userPreferences: options?.userPreferences,
   };
 };
 

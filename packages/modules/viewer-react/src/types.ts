@@ -89,9 +89,9 @@ export interface LoaderProps {
     | ((iModel: IModelConnection) => Promise<void>);
   /** additional frontstages to register */
   frontstages?: ViewerFrontstage[];
-  /** menu items for the backstage 
+  /** menu items for the backstage
    * @deprecated in 4.x. Use [UiItemsProvider.provideBackstageItems](https://www.itwinjs.org/reference/appui-react/uiprovider/uiitemsprovider/).
-  */
+   */
   backstageItems?: ViewerBackstageItem[];
   /** additional viewport options for the default frontstage's viewport control */
   viewportOptions?: ViewerViewportControlOptions;
@@ -116,6 +116,7 @@ export type ViewerIModelAppOptions = Pick<
   | "toolAdmin"
   | "renderSys"
   | "realityDataAccess"
+  | "userPreferences"
 >;
 
 export interface ViewerInitializerParams extends ViewerIModelAppOptions {
@@ -190,6 +191,7 @@ const iTwinViewerInitializerParamSample: OptionalToUndefinedUnion<ViewerInitiali
     onIModelAppInit: undefined,
     additionalI18nNamespaces: undefined,
     extensions: undefined,
+    userPreferences: undefined,
   };
 
 export const iTwinViewerInitializerParamList = Object.keys(
