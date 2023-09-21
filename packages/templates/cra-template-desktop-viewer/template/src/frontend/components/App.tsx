@@ -6,6 +6,7 @@
 import type { DesktopInitializerParams } from "@itwin/desktop-viewer-react";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
+import { PageLayout } from "@itwin/itwinui-layouts-react";
 import { ThemeProvider } from "@itwin/itwinui-react";
 import {
   MeasurementActionToolbar,
@@ -14,7 +15,7 @@ import {
 import { PropertyGridManager } from "@itwin/property-grid-react";
 import { TreeWidget } from "@itwin/tree-widget-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import type { ViewerSettings } from "../../common/ViewerConfig";
 import { viewerRpcs } from "../../common/ViewerConfig";
@@ -85,12 +86,30 @@ const App = () => {
     <ThemeProvider theme="dark" style={{ height: "100%" }}>
       <SettingsContext.Provider value={{ settings, addRecent }}>
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomeRoute />} />
-            <Route path="/itwins/:iTwinId" element={<IModelsRoute />} />
-            <Route path="/itwins" element={<ITwinsRoute />} />
-            <Route path="/viewer" element={<ViewerRoute />} />
-          </Routes>
+          <PageLayout>
+            <Routes>
+              <Route
+                element={
+                  <PageLayout.Content padded>
+                    <Outlet />
+                  </PageLayout.Content>
+                }
+              >
+                <Route path="/" element={<HomeRoute />} />
+                <Route path="/itwins/:iTwinId" element={<IModelsRoute />} />
+                <Route path="/itwins" element={<ITwinsRoute />} />
+              </Route>
+              <Route
+                element={
+                  <PageLayout.Content>
+                    <Outlet />
+                  </PageLayout.Content>
+                }
+              >
+                <Route path="/viewer" element={<ViewerRoute />} />
+              </Route>
+            </Routes>
+          </PageLayout>
         </BrowserRouter>
       </SettingsContext.Provider>
     </ThemeProvider>
