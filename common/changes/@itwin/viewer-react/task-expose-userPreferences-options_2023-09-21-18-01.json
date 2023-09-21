@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Expose the userPreferences initialization option from IModelApp.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
