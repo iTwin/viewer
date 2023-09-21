@@ -8,69 +8,10 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 16px;
     justify-content: space-between;
-    flex-wrap: wrap-reverse;
   
     .inline-input-with-button {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      margin: 10px 61px;
-      width: 95%;
-  
-      .iui-input-container {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-          > .iui-label {
-          color: var(--iui-color-text);
-          font-weight: 600;
-          margin: 0 12px 3px 0;
-          cursor: pointer;
-        }
-        > .iui-input {
-          border: 1px solid rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-4));
-          border-radius: 3px;
-          background-color: var(--iui-color-background);
-          color: var(--iui-color-text);
-          box-sizing: border-box;
-          padding: 7px 12px;
-          min-height: 38px;
-          min-width: 300px;
-          @media (prefers-reduced-motion: no-preference) {
-            transition: border-color .2s ease-out;
-          }
-        }
-        .iui-input:focus{
-          outline: 0;
-          border-color: rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-4));
-          box-shadow: rgba(var(--iui-color-accent-hsl),var(--iui-opacity-5)) 0 0 0 2px;;
-        }
-        > .iui-input:hover { 
-          border-color: rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-2));
-        }
-        ::placeholder {
-          color: var(--iui-color-text-muted);
-        }
-      }
-  
-      .iui-button {
-        border: 1px solid rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-4));
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        margin-left: -50px;
-        background-color: var(--iui-color-background);
-        color: rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-2));
-      }
-      .iui-button:enabled:active, .iui-button:enabled:hover, .iui-button:focus-visible {
-        border-color: rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-1));
-        background-color: var(--iui-color-background-hover);
-        color: rgba(var(--iui-color-foreground-hsl),var(--iui-opacity-1));
-        @media (prefers-reduced-motion: no-preference) {
-          transition: color .2s ease-out, background-color .2s ease-out, border-color .2s ease-out;
-        }
-      }
+      width: 25%;
     }
   }
 

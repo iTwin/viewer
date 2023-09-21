@@ -2,6 +2,10 @@
 * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
+.home-title {
+  margin-top: var(--iui-size-m);
+  font-weight: 900;
+}
 
 .home {
   display: grid;

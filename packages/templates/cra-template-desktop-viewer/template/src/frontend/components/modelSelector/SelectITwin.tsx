@@ -10,11 +10,10 @@ import { ITwinGrid } from "@itwin/imodel-browser-react";
 import {
   SvgCalendar,
   SvgList,
-  SvgSearch,
   SvgStarHollow,
 } from "@itwin/itwinui-icons-react";
 import { PageLayout } from "@itwin/itwinui-layouts-react";
-import { IconButton, LabeledInput, Tab, Tabs } from "@itwin/itwinui-react";
+import { SearchBox, Tab, Tabs, Text } from "@itwin/itwinui-react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -55,31 +54,30 @@ export const SelectITwin = () => {
         orientation="horizontal"
       >
         <PageLayout.TitleArea className={"title-section"}>
+          <Text variant="title">Select Itwin</Text>
           <div className={"inline-input-with-button"}>
-            <LabeledInput
-              label={"Search"}
-              placeholder={"Will search in name or number"}
-              displayStyle={"inline"}
-              value={searchValue}
-              onChange={(event) => {
-                const {
-                  target: { value },
-                } = event;
-                setSearchValue(value);
-              }}
-              onKeyDown={(event) => {
-                if (event.key === "Enter") {
-                  startSearch();
-                }
-                if (event.key === "Escape") {
-                  setSearchValue("");
-                  setSearchParam("");
-                }
-              }}
-            />
-            <IconButton onClick={startSearch}>
-              <SvgSearch />
-            </IconButton>
+            <SearchBox>
+              <SearchBox.Input
+                onChange={(event) => {
+                  const {
+                    target: { value },
+                  } = event;
+                  setSearchValue(value);
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    startSearch();
+                  }
+                  if (event.key === "Escape") {
+                    setSearchValue("");
+                    setSearchParam("");
+                  }
+                }}
+                placeholder={"Search by name or number"}
+                title={"Search"}
+              />
+              <SearchBox.Button title="Search button" onClick={startSearch} />
+            </SearchBox>
           </div>
         </PageLayout.TitleArea>
         <ITwinGrid

@@ -3,8 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import "./SelectIModel.scss";
-
 import { BriefcaseConnection } from "@itwin/core-frontend";
 import { getBriefcaseStatus, ModelStatus } from "@itwin/desktop-viewer-react";
 import type { IModelFull, IModelGridProps } from "@itwin/imodel-browser-react";
@@ -201,10 +199,7 @@ export const SelectIModel = ({
   return (
     <PageLayout.Content padded>
       <PageLayout.TitleArea>
-        <Text
-          className={"select-imodel-title"}
-          variant="title"
-        >{`iModels for ${iTwinName}`}</Text>
+        <Text variant="title">{`iModels for ${iTwinName}`}</Text>
       </PageLayout.TitleArea>
 
       <IModelGrid

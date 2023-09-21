@@ -56,9 +56,11 @@ const Home = () => {
   };
 
   return (
-    <PageLayout.Content padded>
+    <>
       <PageLayout.TitleArea>
-        <Text variant="headline">iTwin Viewer for Desktop</Text>
+        <Text className="home-title" variant="headline">
+          iTwin Viewer for Desktop
+        </Text>
       </PageLayout.TitleArea>
       <div className="home">
         <div className="home-section start">
@@ -100,7 +102,7 @@ const Home = () => {
           <Recents />
         </div>
       </div>
-    </PageLayout.Content>
+    </>
   );
 };
 
