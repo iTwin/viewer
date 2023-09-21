@@ -197,7 +197,7 @@ export const SelectIModel = ({
   };
 
   return (
-    <PageLayout.Content padded>
+    <>
       <PageLayout.TitleArea>
         <Text variant="title">{`iModels for ${iTwinName}`}</Text>
       </PageLayout.TitleArea>
@@ -208,6 +208,6 @@ export const SelectIModel = ({
         onThumbnailClick={selectIModel}
         useIndividualState={useProgressIndicator}
       />
-    </PageLayout.Content>
+    </>
   );
 };

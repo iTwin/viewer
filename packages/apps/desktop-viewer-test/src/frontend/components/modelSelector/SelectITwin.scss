@@ -4,13 +4,16 @@
 *--------------------------------------------------------------------------------------------*/
 
 .select-itwin {
-  .title-section {
+  .select-itwin-title {
+    margin-bottom: var(--iui-size-s);
+  }
+
+  .inline-input-with-button {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-  
-    .inline-input-with-button {
+    justify-content: flex-end;
+
+    .iui-searchbox {
       width: 25%;
     }
   }

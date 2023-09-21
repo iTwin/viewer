@@ -44,6 +44,9 @@ export const SelectITwin = () => {
 
   return accessToken ? (
     <div className="select-itwin">
+      <PageLayout.TitleArea className="select-itwin-title">
+        <Text variant="title">Select iTwin</Text>
+      </PageLayout.TitleArea>
       <Tabs
         labels={tabsWithIcons}
         onTabSelected={setITwinType}
@@ -53,33 +56,30 @@ export const SelectITwin = () => {
         tabsClassName="grid-holding-tabs"
         orientation="horizontal"
       >
-        <PageLayout.TitleArea className={"title-section"}>
-          <Text variant="title">Select Itwin</Text>
-          <div className={"inline-input-with-button"}>
-            <SearchBox>
-              <SearchBox.Input
-                onChange={(event) => {
-                  const {
-                    target: { value },
-                  } = event;
-                  setSearchValue(value);
-                }}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter") {
-                    startSearch();
-                  }
-                  if (event.key === "Escape") {
-                    setSearchValue("");
-                    setSearchParam("");
-                  }
-                }}
-                placeholder={"Search by name or number"}
-                title={"Search"}
-              />
-              <SearchBox.Button title="Search button" onClick={startSearch} />
-            </SearchBox>
-          </div>
-        </PageLayout.TitleArea>
+        <div className={"inline-input-with-button"}>
+          <SearchBox>
+            <SearchBox.Input
+              onChange={(event) => {
+                const {
+                  target: { value },
+                } = event;
+                setSearchValue(value);
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  startSearch();
+                }
+                if (event.key === "Escape") {
+                  setSearchValue("");
+                  setSearchParam("");
+                }
+              }}
+              placeholder={"Search by name or number"}
+              title={"Search"}
+            />
+            <SearchBox.Button title="Search button" onClick={startSearch} />
+          </SearchBox>
+        </div>
         <ITwinGrid
           accessToken={accessToken}
           requestType={
