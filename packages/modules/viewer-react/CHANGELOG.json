@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "4.6.0",
+      "tag": "@itwin/viewer-react_v4.6.0",
+      "date": "Thu, 21 Sep 2023 19:31:41 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Expose the userPreferences initialization option from IModelApp."
+          }
+        ]
+      }
+    },
+    {
       "version": "4.5.0",
       "tag": "@itwin/viewer-react_v4.5.0",
       "date": "Fri, 08 Sep 2023 17:51:30 GMT",
