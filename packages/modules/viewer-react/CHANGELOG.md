@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Thu, 21 Sep 2023 19:31:41 GMT and should not be manually modified.
+This log was last generated on Fri, 22 Sep 2023 16:46:01 GMT and should not be manually modified.
+
+## 4.6.1
+Fri, 22 Sep 2023 16:46:01 GMT
+
+### Patches
+
+- Fix sync selection scope error when the iModelConnection is blank
 
 ## 4.6.0
 Thu, 21 Sep 2023 19:31:41 GMT

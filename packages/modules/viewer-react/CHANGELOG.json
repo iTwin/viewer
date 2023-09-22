@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "4.6.1",
+      "tag": "@itwin/viewer-react_v4.6.1",
+      "date": "Fri, 22 Sep 2023 16:46:01 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix sync selection scope error when the iModelConnection is blank"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.6.0",
       "tag": "@itwin/viewer-react_v4.6.0",
       "date": "Thu, 21 Sep 2023 19:31:41 GMT",
