@@ -74,25 +74,28 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   useTheme(theme);
 
   // This preserves how the list of selection scopes was synced between Presentation and AppUi before its removal in 4.x
-  const syncSelectionScopeList = async (iModelConnection: IModelConnection) => {
-    if (iModelConnection.isBlankConnection() || !iModelConnection.isOpen) {
-      return;
-    }
+  const syncSelectionScopeList = useCallback(
+    async (iModelConnection: IModelConnection) => {
+      if (iModelConnection.isBlankConnection() || !iModelConnection.isOpen) {
+        return;
+      }
 
-    // Fetch the available selection scopes and add them to the redux store
-    try {
-      const availableScopes =
-        await Presentation.selection.scopes.getSelectionScopes(
-          iModelConnection
+      // Fetch the available selection scopes and add them to the redux store
+      try {
+        const availableScopes =
+          await Presentation.selection.scopes.getSelectionScopes(
+            iModelConnection
+          );
+        UiFramework.dispatchActionToStore(
+          SessionStateActionId.SetAvailableSelectionScopes,
+          availableScopes
         );
-      UiFramework.dispatchActionToStore(
-        SessionStateActionId.SetAvailableSelectionScopes,
-        availableScopes
-      );
-    } catch {
-      console.log("Error syncing selection scope list.");
-    }
-  };
+      } catch {
+        console.log("Error syncing selection scope list.");
+      }
+    },
+    []
+  );
 
   const getModelConnection = useCallback(async (): Promise<
     IModelConnection | undefined
