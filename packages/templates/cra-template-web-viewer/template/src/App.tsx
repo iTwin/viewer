@@ -78,7 +78,7 @@ const App: React.FC = () => {
     let url = `viewer?iTwinId=${iTwinId}`;
 
     if (iModelId) {
-      url = `${url}&ModelId=${iModelId}`;
+      url = `${url}&iModelId=${iModelId}`;
     }
 
     if (changesetId) {
