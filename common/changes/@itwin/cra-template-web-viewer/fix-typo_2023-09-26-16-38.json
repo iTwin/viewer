@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-web-viewer",
+      "comment": "Fixed typo when pushing new URL with provided iModelId.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/cra-template-web-viewer"
+}
