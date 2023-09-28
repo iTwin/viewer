@@ -13,6 +13,7 @@ import type {
   SaveDialogReturnValue,
 } from "electron";
 import { dialog, Menu } from "electron";
+import { existsSync } from "fs";
 import * as minimist from "minimist";
 
 import type {
@@ -80,6 +81,22 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
    */
   public async addRecentFile(file: ViewerFile): Promise<void> {
     UserSettings.addRecent(file);
+  }
+
+  /**
+   * Remove file from recent settings
+   * @param file
+   */
+  public async removeRecentFile(file: ViewerFile): Promise<void> {
+    UserSettings.removeRecent(file);
+  }
+
+  /**
+   * Check if file exists in the given path
+   * @param file
+   */
+  public async checkFileExists(file: ViewerFile): Promise<boolean> {
+    return existsSync(file.path);
   }
 
   /**

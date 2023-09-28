@@ -5,7 +5,7 @@
 
 import { createContext } from "react";
 
-import type { ViewerSettings } from "../../common/ViewerConfig";
+import type { ViewerFile, ViewerSettings } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 
 export const getUserSettings = async () => {
@@ -32,6 +32,16 @@ export const addRecent = async (
   return await getUserSettings();
 };
 
+export const removeRecent = async (file: ViewerFile) => {
+  await ITwinViewerApp.ipcCall.removeRecentFile(file);
+  const userSettings = await getUserSettings();
+  return userSettings;
+};
+
+export const checkFileExists = async (file: ViewerFile) => {
+  return await ITwinViewerApp.ipcCall.checkFileExists(file);
+};
+
 export interface Settings {
   settings: ViewerSettings;
   addRecent: (
@@ -40,9 +50,13 @@ export interface Settings {
     iTwinId?: string,
     iModelId?: string
   ) => Promise<ViewerSettings>;
+  removeRecent: (file: ViewerFile) => Promise<ViewerSettings>;
+  checkFileExists: (file: ViewerFile) => Promise<boolean>;
 }
 
 export const SettingsContext = createContext({
   settings: {} as ViewerSettings,
   addRecent,
+  removeRecent,
+  checkFileExists,
 } as Settings);

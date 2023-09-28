@@ -3,20 +3,20 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import type { InternetConnectivityStatus } from "@itwin/core-common";
 import {
   IModelReadRpcInterface,
   IModelTileRpcInterface,
-  InternetConnectivityStatus,
   iTwinChannel,
   SnapshotIModelRpcInterface,
 } from "@itwin/core-common";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
 import type {
   OpenDialogOptions,
   OpenDialogReturnValue,
   SaveDialogOptions,
   SaveDialogReturnValue,
 } from "electron";
-import { PresentationRpcInterface } from "@itwin/presentation-common";
 
 export const channelName = iTwinChannel("desktop-viewer");
 
@@ -25,6 +25,8 @@ export interface ViewerIpc {
   openFile: (options: OpenDialogOptions) => Promise<OpenDialogReturnValue>;
   getSettings: () => Promise<ViewerSettings>;
   addRecentFile: (file: ViewerFile) => Promise<void>;
+  removeRecentFile: (file: ViewerFile) => Promise<void>;
+  checkFileExists: (file: ViewerFile) => Promise<boolean>;
   saveFile: (options: SaveDialogOptions) => Promise<SaveDialogReturnValue>;
   setConnectivity: (
     connectivityStatus: InternetConnectivityStatus

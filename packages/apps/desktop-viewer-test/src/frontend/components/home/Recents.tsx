@@ -20,8 +20,14 @@ export const Recents = () => {
     }
   }, [userSettings]);
 
-  const openFile = async (filePath?: string) => {
-    await navigate(`/viewer`, { state: { filePath } });
+  const openFile = async (file?: ViewerFile) => {
+    if (file) {
+      if (await userSettings.checkFileExists(file)) {
+        await navigate(`/viewer`, { state: { filePath: file.path } });
+      } else {
+        await userSettings.removeRecent(file);
+      }
+    }
   };
 
   return (
@@ -33,7 +39,7 @@ export const Recents = () => {
           displayValue = `${displayValue.substring(0, 25)}...`;
         }
         return (
-          <span key={recent.path} onClick={() => openFile(recent.path)}>
+          <span key={recent.path} onClick={() => openFile(recent)}>
             {displayValue}
           </span>
         );

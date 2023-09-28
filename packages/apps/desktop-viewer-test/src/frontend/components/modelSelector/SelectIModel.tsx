@@ -30,13 +30,26 @@ interface SelectIModelProps extends IModelGridProps {
   iTwinName?: string;
 }
 
-// Check if the IModel is downloaded by the user recently
-const getLocal = (userSettings: Settings, iModel: IModelFull) => {
+// Check if the IModel is downloaded by the user recently and remove from recent if the file doesn't exist anymore
+const getLocal = async (userSettings: Settings, iModel: IModelFull) => {
   const recents = userSettings.settings.recents;
   if (recents) {
-    return recents.find((recent) => {
+    const file = recents.find((recent) => {
       return recent.iTwinId === iModel.iTwinId && recent.iModelId === iModel.id;
     });
+
+    if (!file) {
+      return;
+    }
+
+    // If there is file in recent settings, check if it exists on disk,
+    // if not remove it from the recent settings
+    const exists = await userSettings.checkFileExists(file);
+    if (!exists) {
+      await userSettings.removeRecent(file);
+      return;
+    }
+    return file;
   }
 };
 
@@ -49,7 +62,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
 
   const getBriefcase = useCallback(async () => {
     // if there is a local file, open a briefcase connection and store it in state
-    const local = getLocal(userSettings, iModel);
+    const local = await getLocal(userSettings, iModel);
     if (local?.path) {
       const connection = await BriefcaseConnection.openFile({
         fileName: local.path,
@@ -170,7 +183,7 @@ export const SelectIModel = ({
         return;
       }
 
-      const local = getLocal(userSettings, iModel);
+      const local = await getLocal(userSettings, iModel);
       if (local?.path) {
         // already downloaded, navigate
         void navigate("/viewer", { state: { filePath: local.path } });

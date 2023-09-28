@@ -17,12 +17,14 @@ import { TreeWidget } from "@itwin/tree-widget-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 
-import type { ViewerSettings } from "../../common/ViewerConfig";
+import type { ViewerFile, ViewerSettings } from "../../common/ViewerConfig";
 import { viewerRpcs } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import {
   addRecent as addRecentClient,
+  checkFileExists as checkFileExistsClient,
   getUserSettings,
+  removeRecent as removeRecentClient,
   SettingsContext,
 } from "../services/SettingsClient";
 import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
@@ -82,9 +84,21 @@ const App = () => {
     []
   );
 
+  const removeRecent = useCallback(async (file: ViewerFile) => {
+    const updatedSettings = await removeRecentClient(file);
+    setSettings(updatedSettings);
+    return updatedSettings;
+  }, []);
+
+  const checkFileExists = useCallback(async (file: ViewerFile) => {
+    return await checkFileExistsClient(file);
+  }, []);
+
   return initialized && settings ? (
     <ThemeProvider theme="dark" style={{ height: "100%" }}>
-      <SettingsContext.Provider value={{ settings, addRecent }}>
+      <SettingsContext.Provider
+        value={{ settings, addRecent, removeRecent, checkFileExists }}
+      >
         <BrowserRouter>
           <PageLayout>
             <Routes>
