@@ -14,7 +14,7 @@ import {
   SvgSyncDisabled,
 } from "@itwin/itwinui-icons-react";
 import { ProgressRadial } from "@itwin/itwinui-react";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 
 import { ITwinViewerApp } from "../../app/ITwinViewerApp";
 
@@ -33,12 +33,9 @@ export const BriefcaseStatus = ({
   onDownloadClick,
   className,
 }: BriefcaseStatusProps) => {
-  const [title, setTitle] = useState<string>();
-  const [classNames, setClassNames] = useState<string>();
-
   const isDownloading = !!mergeProgress && mergeProgress < 100;
 
-  useEffect(() => {
+  const getTitleAndClass = useCallback(() => {
     let titleKey = "";
     let allClassNames = className
       ? `${className} model-status`
@@ -70,10 +67,10 @@ export const BriefcaseStatus = ({
         allClassNames += " actionable";
         break;
     }
+    return [ITwinViewerApp.translate(titleKey), allClassNames];
+  }, [mergeStatus]);
 
-    setTitle(ITwinViewerApp.translate(titleKey));
-    setClassNames(allClassNames);
-  }, [mergeStatus, className, isDownloading]);
+  const [title, classNames] = getTitleAndClass();
 
   const statusComponent = useCallback(() => {
     switch (mergeStatus) {
