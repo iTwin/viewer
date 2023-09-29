@@ -21,7 +21,6 @@ import { useNavigate } from "react-router-dom";
 
 import { useDownload } from "../../hooks/useDownload";
 import { usePullChanges } from "../../hooks/usePullChanges";
-import type { Settings } from "../../services/SettingsClient";
 import { SettingsContext } from "../../services/SettingsClient";
 import { IModelContext } from "../routes";
 import { BriefcaseStatus } from "./BriefcaseStatus";
