@@ -31,7 +31,7 @@ export const useDownload = (
     if (fileName) {
       const progressCallback: OnDownloadProgress = (progress) => {
         const { loaded, total } = progress;
-        const percent = loaded / total;
+        const percent = (loaded / total) * 100;
 
         setProgress(percent);
         console.log(

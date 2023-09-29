@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useDownload } from "../../hooks/useDownload";
 import { usePullChanges } from "../../hooks/usePullChanges";
+import type { Settings } from "../../services/SettingsClient";
 import { SettingsContext } from "../../services/SettingsClient";
 import { IModelContext } from "../routes";
 import { BriefcaseStatus } from "./BriefcaseStatus";
@@ -40,30 +41,50 @@ const useProgressIndicator = (iModel: IModelFull) => {
    * Get the local file from settings
    * @returns
    */
-  const getLocal = useCallback(() => {
+  const getLocal = useCallback(async () => {
     const recents = userSettings.settings.recents;
     if (recents) {
-      return recents.find((recent) => {
+      const file = recents.find((recent) => {
         return (
           recent.iTwinId === iModel.iTwinId && recent.iModelId === iModel.id
         );
       });
+
+      if (!file) {
+        return;
+      }
+
+      // If there is file in recent settings, check if it exists on disk,
+      // if not remove it from the recent settings
+      const exists = await userSettings.checkFileExists(file);
+      if (!exists) {
+        await userSettings.removeRecent(file);
+        return;
+      }
+      return file;
     }
   }, [userSettings, iModel.id, iModel.iTwinId]);
 
   const getBriefcase = useCallback(async () => {
     // if there is a local file, open a briefcase connection and store it in state
-    const local = getLocal();
+    const local = await getLocal();
     if (local?.path) {
       const connection = await BriefcaseConnection.openFile({
         fileName: local.path,
         readonly: true,
       });
-      setBriefcase(connection);
+      const briefcaseStatus = await getBriefcaseStatus(connection);
+
+      if (briefcaseStatus === ModelStatus.UPTODATE) {
+        await connection.close();
+      } else {
+        setBriefcase(connection);
+      }
+      setStatus(briefcaseStatus);
     } else {
       setStatus(ModelStatus.ONLINE);
     }
-  }, [getLocal]);
+  }, [userSettings, iModel.id, iModel.iTwinId]);
 
   const { progress, doDownload } = useDownload(
     iModel.id,
@@ -89,27 +110,25 @@ const useProgressIndicator = (iModel: IModelFull) => {
 
   const { pullProgress, doPullChanges } = usePullChanges(briefcase);
 
-  const mergeChanges = useCallback(() => {
+  const mergeChanges = useCallback(async () => {
     setStatus(ModelStatus.MERGING);
-  }, []);
-
-  useEffect(() => {
-    if (status === ModelStatus.MERGING) {
-      doPullChanges()
-        .then(() => {
-          setStatus(ModelStatus.UPTODATE);
-        })
-        .catch((error) => {
-          console.error(error);
-          setStatus(ModelStatus.ERROR);
-        });
+    try {
+      await doPullChanges();
+      if (briefcase) {
+        await briefcase.close();
+      }
+      setStatus(ModelStatus.UPTODATE);
+    } catch (error) {
+      console.error(error);
+      setStatus(ModelStatus.ERROR);
     }
-  }, [status, doPullChanges]);
+  }, [doPullChanges]);
 
   useEffect(() => {
     if (!briefcase) {
       void getBriefcase();
     }
+
     return () => {
       if (briefcase) {
         void briefcase.close();
@@ -118,14 +137,17 @@ const useProgressIndicator = (iModel: IModelFull) => {
   }, [briefcase, getBriefcase]);
 
   useEffect(() => {
-    if (modelContext.pendingIModel === iModel.id) {
-      void startDownload().then((filePath) => {
+    const downloadAndNavigate = async () => {
+      if (modelContext.pendingIModel === iModel.id) {
+        const filePath = await startDownload();
         modelContext.setPendingIModel(undefined);
         if (filePath) {
           void navigate("/viewer", { state: { filePath } });
         }
-      });
-    }
+      }
+    };
+
+    void downloadAndNavigate();
   }, [
     modelContext.pendingIModel,
     iModel.id,
@@ -133,14 +155,6 @@ const useProgressIndicator = (iModel: IModelFull) => {
     startDownload,
     modelContext,
   ]);
-
-  useEffect(() => {
-    if (briefcase) {
-      void getBriefcaseStatus(briefcase).then((briefcaseStatus) => {
-        setStatus(briefcaseStatus);
-      });
-    }
-  }, [briefcase]);
 
   const tileProps = useMemo<Partial<TileProps>>(() => {
     return {
@@ -174,27 +188,39 @@ export const SelectIModel = ({
   const userSettings = useContext(SettingsContext);
   const modelContext = useContext(IModelContext);
 
-  const selectIModel = async (iModel: IModelFull) => {
-    if (modelContext.pendingIModel) {
-      // there is already a pending selection. disallow
-      return;
-    }
-    const recents = userSettings.settings.recents;
-    if (recents) {
-      const local = recents.find((recent) => {
-        return (
-          recent.iTwinId === iModel.iTwinId && recent.iModelId === iModel.id
-        );
-      });
-      if (local?.path) {
-        // already downloaded, navigate
-        void navigate("/viewer", { state: { filePath: local.path } });
+  const selectIModel = useCallback(
+    async (iModel: IModelFull) => {
+      if (modelContext.pendingIModel) {
+        // there is already a pending selection. disallow
         return;
       }
-    }
-    // trigger a download/view
-    modelContext.setPendingIModel(iModel.id);
-  };
+
+      const recents = userSettings.settings.recents;
+      if (recents) {
+        const local = recents.find((recent) => {
+          return (
+            recent.iTwinId === iModel.iTwinId && recent.iModelId === iModel.id
+          );
+        });
+
+        if (local) {
+          // If there is file in recent settings, check if it exists on disk,
+          // if not remove it from the recent settings
+          const exists = await userSettings.checkFileExists(local);
+          if (exists) {
+            void navigate("/viewer", { state: { filePath: local.path } });
+            return;
+          }
+
+          await userSettings.removeRecent(local);
+        }
+      }
+
+      // trigger a download/view
+      modelContext.setPendingIModel(iModel.id);
+    },
+    [modelContext, userSettings, navigate]
+  );
 
   return (
     <>

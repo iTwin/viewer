@@ -93,6 +93,19 @@ class UserSettings {
     }
     this._writeSettings();
   }
+
+  public removeRecent(file: ViewerFile) {
+    if (this.settings.recents) {
+      this.settings.recents = this.settings.recents.filter(
+        (existingFile) =>
+          (file.path && existingFile.path !== file.path) ||
+          (file.iModelId &&
+            existingFile.iTwinId !== file.iTwinId &&
+            existingFile.iModelId !== file.iModelId)
+      );
+      this._writeSettings();
+    }
+  }
 }
 
 const userSettings = new UserSettings();

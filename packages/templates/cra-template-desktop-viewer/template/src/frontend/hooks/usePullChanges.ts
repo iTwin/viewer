@@ -15,7 +15,7 @@ export const usePullChanges = (connection?: BriefcaseConnection) => {
   const downloadProgressCallback: OnDownloadProgress = useCallback(
     (progress) => {
       const { loaded, total } = progress;
-      const percent = loaded / total;
+      const percent = (loaded / total) * 100;
 
       setPullProgress(percent);
 

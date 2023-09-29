@@ -25,6 +25,8 @@ export interface ViewerIpc {
   openFile: (options: OpenDialogOptions) => Promise<OpenDialogReturnValue>;
   getSettings: () => Promise<ViewerSettings>;
   addRecentFile: (file: ViewerFile) => Promise<void>;
+  removeRecentFile: (file: ViewerFile) => Promise<void>;
+  checkFileExists: (file: ViewerFile) => Promise<boolean>;
   saveFile: (options: SaveDialogOptions) => Promise<SaveDialogReturnValue>;
   setConnectivity: (
     connectivityStatus: InternetConnectivityStatus
