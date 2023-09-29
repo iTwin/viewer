@@ -30,29 +30,6 @@ interface SelectIModelProps extends IModelGridProps {
   iTwinName?: string;
 }
 
-// Check if the IModel is downloaded by the user recently and remove from recent if the file doesn't exist anymore
-const getLocal = async (userSettings: Settings, iModel: IModelFull) => {
-  const recents = userSettings.settings.recents;
-  if (recents) {
-    const file = recents.find((recent) => {
-      return recent.iTwinId === iModel.iTwinId && recent.iModelId === iModel.id;
-    });
-
-    if (!file) {
-      return;
-    }
-
-    // If there is file in recent settings, check if it exists on disk,
-    // if not remove it from the recent settings
-    const exists = await userSettings.checkFileExists(file);
-    if (!exists) {
-      await userSettings.removeRecent(file);
-      return;
-    }
-    return file;
-  }
-};
-
 const useProgressIndicator = (iModel: IModelFull) => {
   const userSettings = useContext(SettingsContext);
   const [status, setStatus] = useState<ModelStatus>();
@@ -60,9 +37,37 @@ const useProgressIndicator = (iModel: IModelFull) => {
   const modelContext = useContext(IModelContext);
   const navigate = useNavigate();
 
+  /**
+   * Get the local file from settings
+   * @returns
+   */
+  const getLocal = useCallback(async () => {
+    const recents = userSettings.settings.recents;
+    if (recents) {
+      const file = recents.find((recent) => {
+        return (
+          recent.iTwinId === iModel.iTwinId && recent.iModelId === iModel.id
+        );
+      });
+
+      if (!file) {
+        return;
+      }
+
+      // If there is file in recent settings, check if it exists on disk,
+      // if not remove it from the recent settings
+      const exists = await userSettings.checkFileExists(file);
+      if (!exists) {
+        await userSettings.removeRecent(file);
+        return;
+      }
+      return file;
+    }
+  }, [userSettings, iModel.id, iModel.iTwinId]);
+
   const getBriefcase = useCallback(async () => {
     // if there is a local file, open a briefcase connection and store it in state
-    const local = await getLocal(userSettings, iModel);
+    const local = await getLocal();
     if (local?.path) {
       const connection = await BriefcaseConnection.openFile({
         fileName: local.path,
@@ -190,12 +195,27 @@ export const SelectIModel = ({
         return;
       }
 
-      const local = await getLocal(userSettings, iModel);
-      if (local?.path) {
-        // already downloaded, navigate
-        void navigate("/viewer", { state: { filePath: local.path } });
-        return;
+      const recents = userSettings.settings.recents;
+      if (recents) {
+        const local = recents.find((recent) => {
+          return (
+            recent.iTwinId === iModel.iTwinId && recent.iModelId === iModel.id
+          );
+        });
+
+        if (local) {
+          // If there is file in recent settings, check if it exists on disk,
+          // if not remove it from the recent settings
+          const exists = await userSettings.checkFileExists(local);
+          if (exists) {
+            void navigate("/viewer", { state: { filePath: local.path } });
+            return;
+          }
+
+          await userSettings.removeRecent(local);
+        }
       }
+
       // trigger a download/view
       modelContext.setPendingIModel(iModel.id);
     },
