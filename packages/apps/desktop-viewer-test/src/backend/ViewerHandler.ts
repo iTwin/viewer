@@ -72,6 +72,11 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
    * @returns ViewerSettings
    */
   public async getSettings(): Promise<ViewerSettings> {
+    UserSettings.settings.recents = UserSettings.settings.recents?.filter(
+      (file) => {
+        return existsSync(file.path);
+      }
+    );
     return UserSettings.settings;
   }
 

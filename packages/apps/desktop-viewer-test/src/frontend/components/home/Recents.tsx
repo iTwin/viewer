@@ -15,18 +15,34 @@ export const Recents = () => {
   const userSettings = useContext(SettingsContext);
 
   useEffect(() => {
+    const removeDeletedFiles = async () => {
+      const newRecent = [];
+      if (userSettings.settings?.recents) {
+        for (const file of userSettings.settings?.recents) {
+          const exists = await userSettings.checkFileExists(file);
+          if (!exists) {
+            await userSettings.removeRecent(file);
+            continue;
+          }
+          newRecent.push(file);
+        }
+        setRecents(newRecent.slice(0, 5) || []);
+      }
+    };
+    void removeDeletedFiles();
+  }, []);
+
+  useEffect(() => {
     if (userSettings.settings?.recents) {
       setRecents(userSettings.settings?.recents.slice(0, 5) || []);
     }
   }, [userSettings]);
 
-  const openFile = async (file?: ViewerFile) => {
-    if (file) {
-      if (await userSettings.checkFileExists(file)) {
-        await navigate(`/viewer`, { state: { filePath: file.path } });
-      } else {
-        await userSettings.removeRecent(file);
-      }
+  const openFile = async (file: ViewerFile) => {
+    if (await userSettings.checkFileExists(file)) {
+      await navigate(`/viewer`, { state: { filePath: file.path } });
+    } else {
+      await userSettings.removeRecent(file);
     }
   };
 
@@ -38,6 +54,7 @@ export const Recents = () => {
         if (displayValue.length > 25) {
           displayValue = `${displayValue.substring(0, 25)}...`;
         }
+
         return (
           <span key={recent.path} onClick={() => openFile(recent)}>
             {displayValue}

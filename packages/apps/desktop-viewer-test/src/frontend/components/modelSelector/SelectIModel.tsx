@@ -70,7 +70,11 @@ const useProgressIndicator = (iModel: IModelFull) => {
       });
       const briefcaseStatus = await getBriefcaseStatus(connection);
 
-      setBriefcase(connection);
+      if (briefcaseStatus === ModelStatus.UPTODATE) {
+        await connection.close();
+      } else {
+        setBriefcase(connection);
+      }
       setStatus(briefcaseStatus);
     } else {
       setStatus(ModelStatus.ONLINE);
@@ -105,6 +109,9 @@ const useProgressIndicator = (iModel: IModelFull) => {
     setStatus(ModelStatus.MERGING);
     try {
       await doPullChanges();
+      if (briefcase) {
+        await briefcase.close();
+      }
       setStatus(ModelStatus.UPTODATE);
     } catch (error) {
       console.error(error);
