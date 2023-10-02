@@ -180,7 +180,7 @@ export const SelectIModel = ({
     };
 
     void getUserSettings();
-  }, [userSettings]);
+  }, []);
 
   const selectIModel = useCallback(
     async (iModel: IModelFull) => {
