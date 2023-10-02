@@ -79,6 +79,20 @@ class UserSettings {
         readFileSync(join(this.dataPath, "settings.json"), "utf8")
       ) as ViewerSettings;
     }
+
+    if (this._settings.recents) {
+      const newRecent: ViewerFile[] = [];
+      for (const file of this._settings.recents) {
+        if (existsSync(file.path)) {
+          newRecent.push(file);
+        }
+      }
+      if (newRecent.length !== this._settings.recents.length) {
+        this._settings.recents = newRecent;
+        this._writeSettings();
+      }
+    }
+
     return this._settings;
   }
 

@@ -52,6 +52,7 @@ export interface Settings {
   ) => Promise<ViewerSettings>;
   removeRecent: (file: ViewerFile) => Promise<ViewerSettings>;
   checkFileExists: (file: ViewerFile) => Promise<boolean>;
+  getUserSettings: () => Promise<ViewerSettings>;
 }
 
 export const SettingsContext = createContext({
@@ -59,4 +60,5 @@ export const SettingsContext = createContext({
   addRecent,
   removeRecent,
   checkFileExists,
+  getUserSettings,
 } as Settings);
