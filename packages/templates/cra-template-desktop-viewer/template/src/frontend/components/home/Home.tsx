@@ -44,7 +44,7 @@ const Home = () => {
       await userSettings.getUserSettings();
     };
     void getUserSettings();
-  }, [userSettings]);
+  }, []);
 
   useEffect(() => {
     setLinkClass(
