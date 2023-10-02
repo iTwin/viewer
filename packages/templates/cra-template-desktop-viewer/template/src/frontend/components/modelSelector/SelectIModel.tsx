@@ -54,7 +54,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
   const getBriefcase = useCallback(async () => {
     // if there is a local file, open a briefcase connection and store it in state
     const local = await getLocal();
-    if (local?.path) {
+    if (local?.path && !local.deleted) {
       const connection = await BriefcaseConnection.openFile({
         fileName: local.path,
         readonly: true,

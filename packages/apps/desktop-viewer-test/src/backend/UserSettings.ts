@@ -38,7 +38,7 @@ class UserSettings {
     this._writeSettings();
   }
 
-  private removeExistingFile(file: ViewerFile) {
+  private removeExistingFile(file: ViewerFile, isDeleting?: boolean) {
     if (this.settings.recents) {
       const existing = this.settings.recents.findIndex(
         (existingFile) =>
@@ -47,12 +47,17 @@ class UserSettings {
             existingFile.iTwinId === file.iTwinId &&
             existingFile.iModelId === file.iModelId)
       );
-
-      let existingRecent: ViewerFile | undefined;
-      if (existing > 0) {
-        existingRecent = this.settings.recents[existing];
-        this.settings.recents.splice(existing, 1);
-        return existingRecent;
+      if (isDeleting) {
+        this.settings.recents[existing].deleted = true;
+        return this.settings.recents[existing];
+      } else {
+        let existingRecent: ViewerFile | undefined;
+        if (existing >= 0) {
+          existingRecent = this.settings.recents[existing];
+          existingRecent.deleted = false;
+          this.settings.recents.splice(existing, 1);
+          return existingRecent;
+        }
       }
     }
     return;
@@ -81,15 +86,10 @@ class UserSettings {
     }
 
     if (this._settings.recents) {
-      const newRecent: ViewerFile[] = [];
       for (const file of this._settings.recents) {
-        if (existsSync(file.path)) {
-          newRecent.push(file);
+        if (!existsSync(file.path)) {
+          file.deleted = true;
         }
-      }
-      if (newRecent.length !== this._settings.recents.length) {
-        this._settings.recents = newRecent;
-        this._writeSettings();
       }
     }
 
@@ -105,7 +105,7 @@ class UserSettings {
       this._settings.recents = [file];
     } else {
       // remove if it already exists to keep recents unique
-      const existingRecent = this.removeExistingFile(file);
+      const existingRecent = this.removeExistingFile(file, false);
 
       // add to the top (if not already there)
       // use the existing file if one exists as it likely has the iTwin and iModel ids, whereas opening a local file would not
@@ -116,7 +116,7 @@ class UserSettings {
 
   public removeRecent(file: ViewerFile) {
     if (this.settings.recents) {
-      this.removeExistingFile(file);
+      this.removeExistingFile(file, true);
       this._writeSettings();
     }
   }

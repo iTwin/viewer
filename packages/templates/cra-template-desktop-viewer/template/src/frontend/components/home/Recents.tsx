@@ -38,7 +38,11 @@ export const Recents = () => {
         }
 
         return (
-          <span key={recent.path} onClick={() => openFile(recent)}>
+          <span
+            key={recent.path}
+            onClick={() => openFile(recent)}
+            className={recent.deleted ? "disabled-link" : ""}
+          >
             {displayValue}
           </span>
         );
