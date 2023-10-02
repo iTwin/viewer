@@ -70,7 +70,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
     } else {
       setStatus(ModelStatus.ONLINE);
     }
-  }, [userSettings, iModel.id, iModel.iTwinId]);
+  }, [userSettings, iModel.id, iModel.iTwinId, getLocal]);
 
   const { progress, doDownload } = useDownload(
     iModel.id,
@@ -108,7 +108,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
       console.error(error);
       setStatus(ModelStatus.ERROR);
     }
-  }, [doPullChanges]);
+  }, [doPullChanges, briefcase]);
 
   useEffect(() => {
     if (!briefcase) {
@@ -180,7 +180,7 @@ export const SelectIModel = ({
     };
 
     void getUserSettings();
-  }, []);
+  }, [userSettings]);
 
   const selectIModel = useCallback(
     async (iModel: IModelFull) => {

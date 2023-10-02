@@ -63,7 +63,7 @@ export const BriefcaseStatus = ({
         break;
     }
     return ITwinViewerApp.translate(titleKey);
-  }, [mergeStatus]);
+  }, [mergeStatus, isDownloading]);
 
   const title = getLocalizedTitle();
 
