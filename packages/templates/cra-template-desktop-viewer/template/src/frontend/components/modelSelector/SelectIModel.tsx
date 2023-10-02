@@ -70,7 +70,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
     } else {
       setStatus(ModelStatus.ONLINE);
     }
-  }, [userSettings, iModel.id, iModel.iTwinId, getLocal]);
+  }, [getLocal]);
 
   const { progress, doDownload } = useDownload(
     iModel.id,
