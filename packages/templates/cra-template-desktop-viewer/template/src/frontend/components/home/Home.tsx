@@ -40,6 +40,13 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    const getUserSettings = async () => {
+      await userSettings.getUserSettings();
+    };
+    void getUserSettings();
+  }, []);
+
+  useEffect(() => {
     setLinkClass(
       connectivityStatus === InternetConnectivityStatus.Offline
         ? "disabled-link"

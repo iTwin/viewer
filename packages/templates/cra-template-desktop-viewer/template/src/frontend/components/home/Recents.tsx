@@ -15,24 +15,6 @@ export const Recents = () => {
   const userSettings = useContext(SettingsContext);
 
   useEffect(() => {
-    const removeDeletedFiles = async () => {
-      const newRecent = [];
-      if (userSettings.settings?.recents) {
-        for (const file of userSettings.settings?.recents) {
-          const exists = await userSettings.checkFileExists(file);
-          if (!exists) {
-            await userSettings.removeRecent(file);
-            continue;
-          }
-          newRecent.push(file);
-        }
-        setRecents(newRecent.slice(0, 5) || []);
-      }
-    };
-    void removeDeletedFiles();
-  }, []);
-
-  useEffect(() => {
     if (userSettings.settings?.recents) {
       setRecents(userSettings.settings?.recents.slice(0, 5) || []);
     }

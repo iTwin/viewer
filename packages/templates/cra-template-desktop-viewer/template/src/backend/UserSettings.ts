@@ -38,6 +38,26 @@ class UserSettings {
     this._writeSettings();
   }
 
+  private removeExistingFile(file: ViewerFile) {
+    if (this.settings.recents) {
+      const existing = this.settings.recents.findIndex(
+        (existingFile) =>
+          (file.path && existingFile.path === file.path) ||
+          (file.iModelId &&
+            existingFile.iTwinId === file.iTwinId &&
+            existingFile.iModelId === file.iModelId)
+      );
+
+      let existingRecent: ViewerFile | undefined;
+      if (existing > 0) {
+        existingRecent = this.settings.recents[existing];
+        this.settings.recents.splice(existing, 1);
+        return existingRecent;
+      }
+    }
+    return;
+  }
+
   public get dataPath() {
     if (!this._dataPath) {
       this._dataPath = ElectronHost.app
@@ -59,6 +79,20 @@ class UserSettings {
         readFileSync(join(this.dataPath, "settings.json"), "utf8")
       ) as ViewerSettings;
     }
+
+    if (this._settings.recents) {
+      const newRecent: ViewerFile[] = [];
+      for (const file of this._settings.recents) {
+        if (existsSync(file.path)) {
+          newRecent.push(file);
+        }
+      }
+      if (newRecent.length !== this._settings.recents.length) {
+        this._settings.recents = newRecent;
+        this._writeSettings();
+      }
+    }
+
     return this._settings;
   }
 
@@ -71,38 +105,18 @@ class UserSettings {
       this._settings.recents = [file];
     } else {
       // remove if it already exists to keep recents unique
-      const existing = this.settings.recents.findIndex(
-        (existingFile) =>
-          (file.path && existingFile.path === file.path) ||
-          (file.iModelId &&
-            existingFile.iTwinId === file.iTwinId &&
-            existingFile.iModelId === file.iModelId)
-      );
-
-      let existingRecent: ViewerFile | undefined;
-      if (existing > 0) {
-        existingRecent = this.settings.recents[existing];
-        this.settings.recents.splice(existing, 1);
-      }
+      const existingRecent = this.removeExistingFile(file);
 
       // add to the top (if not already there)
       // use the existing file if one exists as it likely has the iTwin and iModel ids, whereas opening a local file would not
-      if (existing !== 0) {
-        this.settings.recents.unshift(existingRecent ?? file);
-      }
+      this.settings.recents.unshift(existingRecent ?? file);
     }
     this._writeSettings();
   }
 
   public removeRecent(file: ViewerFile) {
     if (this.settings.recents) {
-      this.settings.recents = this.settings.recents.filter(
-        (existingFile) =>
-          (file.path && existingFile.path !== file.path) ||
-          (file.iModelId &&
-            existingFile.iTwinId !== file.iTwinId &&
-            existingFile.iModelId !== file.iModelId)
-      );
+      this.removeExistingFile(file);
       this._writeSettings();
     }
   }

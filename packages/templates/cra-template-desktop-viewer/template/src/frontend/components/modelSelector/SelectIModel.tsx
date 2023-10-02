@@ -43,24 +43,11 @@ const useProgressIndicator = (iModel: IModelFull) => {
   const getLocal = useCallback(async () => {
     const recents = userSettings.settings.recents;
     if (recents) {
-      const file = recents.find((recent) => {
+      return recents.find((recent) => {
         return (
           recent.iTwinId === iModel.iTwinId && recent.iModelId === iModel.id
         );
       });
-
-      if (!file) {
-        return;
-      }
-
-      // If there is file in recent settings, check if it exists on disk,
-      // if not remove it from the recent settings
-      const exists = await userSettings.checkFileExists(file);
-      if (!exists) {
-        await userSettings.removeRecent(file);
-        return;
-      }
-      return file;
     }
   }, [userSettings, iModel.id, iModel.iTwinId]);
 
@@ -186,6 +173,14 @@ export const SelectIModel = ({
   const navigate = useNavigate();
   const userSettings = useContext(SettingsContext);
   const modelContext = useContext(IModelContext);
+
+  useEffect(() => {
+    const getUserSettings = async () => {
+      await userSettings.getUserSettings();
+    };
+
+    void getUserSettings();
+  }, []);
 
   const selectIModel = useCallback(
     async (iModel: IModelFull) => {

@@ -23,7 +23,7 @@ import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import {
   addRecent as addRecentClient,
   checkFileExists as checkFileExistsClient,
-  getUserSettings,
+  getUserSettings as getUserSettingsClient,
   removeRecent as removeRecentClient,
   SettingsContext,
 } from "../services/SettingsClient";
@@ -59,7 +59,7 @@ const App = () => {
     if (initialized) {
       // setup connectivity events to let the backend know the status
       void ITwinViewerApp.ipcCall.setConnectivity(connectivityStatus);
-      void getUserSettings().then((userSettings) => {
+      void getUserSettingsClient().then((userSettings) => {
         setSettings(userSettings);
       });
     }
@@ -94,10 +94,22 @@ const App = () => {
     return await checkFileExistsClient(file);
   }, []);
 
+  const getUserSettings = useCallback(async () => {
+    const updatedSettings = await getUserSettingsClient();
+    setSettings(updatedSettings);
+    return updatedSettings;
+  }, []);
+
   return initialized && settings ? (
     <ThemeProvider theme="dark" style={{ height: "100%" }}>
       <SettingsContext.Provider
-        value={{ settings, addRecent, removeRecent, checkFileExists }}
+        value={{
+          settings,
+          addRecent,
+          removeRecent,
+          checkFileExists,
+          getUserSettings,
+        }}
       >
         <BrowserRouter>
           <PageLayout>
