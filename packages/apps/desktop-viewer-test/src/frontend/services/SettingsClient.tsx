@@ -63,15 +63,18 @@ export const SettingsContextProvider = ({
       setSettings(updatedSettings);
       return updatedSettings;
     },
-    []
+    [getUserSettings]
   );
 
-  const removeRecent = useCallback(async (file: ViewerFile) => {
-    await ITwinViewerApp.ipcCall.removeRecentFile(file);
-    const updatedSettings = await getUserSettings();
-    setSettings(updatedSettings);
-    return updatedSettings;
-  }, []);
+  const removeRecent = useCallback(
+    async (file: ViewerFile) => {
+      await ITwinViewerApp.ipcCall.removeRecentFile(file);
+      const updatedSettings = await getUserSettings();
+      setSettings(updatedSettings);
+      return updatedSettings;
+    },
+    [getUserSettings]
+  );
 
   const checkFileExists = useCallback(async (file: ViewerFile) => {
     return await ITwinViewerApp.ipcCall.checkFileExists(file);
