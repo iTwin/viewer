@@ -14,19 +14,12 @@ import {
 } from "@itwin/measure-tools-react";
 import { PropertyGridManager } from "@itwin/property-grid-react";
 import { TreeWidget } from "@itwin/tree-widget-react";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 
-import type { ViewerFile, ViewerSettings } from "../../common/ViewerConfig";
 import { viewerRpcs } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
-import {
-  addRecent as addRecentClient,
-  checkFileExists,
-  getUserSettings as getUserSettingsClient,
-  removeRecent as removeRecentClient,
-  SettingsContext,
-} from "../services/SettingsClient";
+import { SettingsContextProvider } from "../services/SettingsClient";
 import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
 
 const App = () => {
@@ -53,59 +46,18 @@ const App = () => {
   const initialized = useDesktopViewerInitializer(desktopInitializerProps);
   const connectivityStatus = useConnectivity();
 
-  const [settings, setSettings] = useState<ViewerSettings>();
-
   useEffect(() => {
     if (initialized) {
       // setup connectivity events to let the backend know the status
       void ITwinViewerApp.ipcCall.setConnectivity(connectivityStatus);
-      void getUserSettingsClient().then((userSettings) => {
-        setSettings(userSettings);
-      });
     }
   }, [initialized, connectivityStatus]);
 
-  const addRecent = useCallback(
-    async (
-      path: string,
-      iModelName?: string,
-      iTwinId?: string,
-      iModelId?: string
-    ) => {
-      const updatedSettings = await addRecentClient(
-        path,
-        iModelName,
-        iTwinId,
-        iModelId
-      );
-      setSettings(updatedSettings);
-      return updatedSettings;
-    },
-    []
-  );
-
-  const removeRecent = useCallback(async (file: ViewerFile) => {
-    const updatedSettings = await removeRecentClient(file);
-    setSettings(updatedSettings);
-    return updatedSettings;
-  }, []);
-
-  const getUserSettings = useCallback(async () => {
-    const updatedSettings = await getUserSettingsClient();
-    setSettings(updatedSettings);
-    return updatedSettings;
-  }, []);
-
-  return initialized && settings ? (
+  return initialized ? (
     <ThemeProvider theme="dark" style={{ height: "100%" }}>
-      <SettingsContext.Provider
-        value={{
-          settings,
-          addRecent,
-          removeRecent,
-          checkFileExists,
-          getUserSettings,
-        }}
+      <SettingsContextProvider
+        initialized={initialized}
+        connectivity={connectivityStatus}
       >
         <BrowserRouter>
           <PageLayout>
@@ -133,7 +85,7 @@ const App = () => {
             </Routes>
           </PageLayout>
         </BrowserRouter>
-      </SettingsContext.Provider>
+      </SettingsContextProvider>
     </ThemeProvider>
   ) : (
     <></>

@@ -173,12 +173,15 @@ export const SelectIModel = ({
   const userSettings = useContext(SettingsContext);
   const modelContext = useContext(IModelContext);
 
+  // Get latest recent user settings on mount
+  // to make sure that the deleted files are being checked and handled correctly.
   useEffect(() => {
     const getUserSettings = async () => {
       await userSettings.getUserSettings();
     };
 
     void getUserSettings();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const selectIModel = useCallback(
