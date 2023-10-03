@@ -22,7 +22,7 @@ import { viewerRpcs } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import {
   addRecent as addRecentClient,
-  checkFileExists as checkFileExistsClient,
+  checkFileExists,
   getUserSettings as getUserSettingsClient,
   removeRecent as removeRecentClient,
   SettingsContext,
@@ -88,10 +88,6 @@ const App = () => {
     const updatedSettings = await removeRecentClient(file);
     setSettings(updatedSettings);
     return updatedSettings;
-  }, []);
-
-  const checkFileExists = useCallback(async (file: ViewerFile) => {
-    return await checkFileExistsClient(file);
   }, []);
 
   const getUserSettings = useCallback(async () => {

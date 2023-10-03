@@ -6,9 +6,6 @@
 .model-status {
   height: 20px;
   fill: var(--iui-color-text-informational);
-  &.actionable {
-    cursor: pointer;
-  }
   svg {
     height: 100%;
   }

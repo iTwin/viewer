@@ -3,6 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { SvgStatusError } from "@itwin/itwinui-icons-react";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -41,8 +42,10 @@ export const Recents = () => {
           <span
             key={recent.path}
             onClick={() => openFile(recent)}
-            className={recent.deleted ? "disabled-link" : ""}
+            className={!recent.path ? "disabled-link-recent" : ""}
+            title={!recent.path ? "Deleted" : ""}
           >
+            {!recent.path && <SvgStatusError />}
             {displayValue}
           </span>
         );

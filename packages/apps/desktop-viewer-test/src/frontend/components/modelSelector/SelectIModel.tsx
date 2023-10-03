@@ -40,7 +40,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
    * Get the local file from settings
    * @returns
    */
-  const getLocal = useCallback(async () => {
+  const getLocal = useCallback(() => {
     const recents = userSettings.settings.recents;
     if (recents) {
       return recents.find((recent) => {
@@ -53,8 +53,8 @@ const useProgressIndicator = (iModel: IModelFull) => {
 
   const getBriefcase = useCallback(async () => {
     // if there is a local file, open a briefcase connection and store it in state
-    const local = await getLocal();
-    if (local?.path && !local.deleted) {
+    const local = getLocal();
+    if (local?.path) {
       const connection = await BriefcaseConnection.openFile({
         fileName: local.path,
         readonly: true,
@@ -114,7 +114,6 @@ const useProgressIndicator = (iModel: IModelFull) => {
     if (!briefcase) {
       void getBriefcase();
     }
-
     return () => {
       if (briefcase) {
         void briefcase.close();
@@ -188,7 +187,6 @@ export const SelectIModel = ({
         // there is already a pending selection. disallow
         return;
       }
-
       const recents = userSettings.settings.recents;
       if (recents) {
         const local = recents.find((recent) => {
@@ -209,7 +207,6 @@ export const SelectIModel = ({
           await userSettings.removeRecent(local);
         }
       }
-
       // trigger a download/view
       modelContext.setPendingIModel(iModel.id);
     },

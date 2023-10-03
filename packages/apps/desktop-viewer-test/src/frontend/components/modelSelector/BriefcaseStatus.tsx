@@ -109,10 +109,7 @@ export const BriefcaseStatus = ({
   ]);
 
   return (
-    <div
-      title={title}
-      className={className ? `${className} model-status` : "model-status"}
-    >
+    <div title={title} className={`${className ?? ""} model-status`}>
       {statusComponent()}
     </div>
   );

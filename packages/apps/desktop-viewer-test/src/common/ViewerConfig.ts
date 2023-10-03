@@ -53,7 +53,6 @@ export interface ViewerFile {
   path: string;
   iTwinId?: string;
   iModelId?: string;
-  deleted?: boolean;
 }
 
 export interface ViewerSettings {
