@@ -33,6 +33,15 @@
       color: var(--iui-color-icon-disabled);
       fill: var(--iui-color-icon-disabled);
     }
+
+    .disabled-link-recent {
+      color: var(--iui-color-icon-disabled);
+      fill: var(--iui-color-icon-disabled);
+
+      svg {
+        fill: var(--iui-color-icon-disabled);
+      }
+    }
   }
   .start {
     grid-row: 1;

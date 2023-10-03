@@ -96,7 +96,7 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
    * @param file
    */
   public async checkFileExists(file: ViewerFile): Promise<boolean> {
-    return existsSync(file.path);
+    return file.path ? existsSync(file.path) : false;
   }
 
   /**
