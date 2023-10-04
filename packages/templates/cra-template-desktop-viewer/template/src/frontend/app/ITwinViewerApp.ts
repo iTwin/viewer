@@ -11,7 +11,7 @@ import type { NavigateFunction } from "react-router-dom";
 
 import type { ViewerConfig, ViewerIpc } from "../../common/ViewerConfig";
 import { channelName } from "../../common/ViewerConfig";
-import type { Settings } from "../services/SettingsClient";
+import type { Settings } from "../services/SettingsContext";
 
 export declare type PickAsyncMethods<T> = {
   [P in keyof T]: T[P] extends AsyncFunction ? T[P] : never;

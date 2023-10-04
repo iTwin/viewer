@@ -13,8 +13,8 @@ import type {
   SaveDialogReturnValue,
 } from "electron";
 import { dialog, Menu } from "electron";
-import { existsSync } from "fs";
 import * as minimist from "minimist";
+import { existsSync } from "node:fs";
 
 import type {
   ViewerConfig,

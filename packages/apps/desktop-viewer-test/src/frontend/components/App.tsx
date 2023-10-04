@@ -19,7 +19,7 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import { viewerRpcs } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
-import { SettingsContextProvider } from "../services/SettingsClient";
+import { SettingsContextProvider } from "../services/SettingsContext";
 import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
 
 const App = () => {
@@ -55,10 +55,7 @@ const App = () => {
 
   return initialized ? (
     <ThemeProvider theme="dark" style={{ height: "100%" }}>
-      <SettingsContextProvider
-        initialized={initialized}
-        connectivity={connectivityStatus}
-      >
+      <SettingsContextProvider>
         <BrowserRouter>
           <PageLayout>
             <Routes>

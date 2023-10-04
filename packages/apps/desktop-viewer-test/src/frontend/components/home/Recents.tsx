@@ -3,12 +3,14 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import "./Home.scss";
+
 import { SvgStatusError } from "@itwin/itwinui-icons-react";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import type { ViewerFile } from "../../../common/ViewerConfig";
-import { SettingsContext } from "../../services/SettingsClient";
+import { SettingsContext } from "../../services/SettingsContext";
 
 export const Recents = () => {
   const [recents, setRecents] = useState<ViewerFile[]>();

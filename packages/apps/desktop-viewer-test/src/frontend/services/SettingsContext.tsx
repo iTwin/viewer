@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { InternetConnectivityStatus } from "@itwin/core-common";
 import React, { createContext, useCallback, useEffect, useState } from "react";
 
 import type { ViewerFile, ViewerSettings } from "../../common/ViewerConfig";
@@ -16,22 +15,18 @@ export interface Settings {
     iModelName?: string,
     iTwinId?: string,
     iModelId?: string
-  ) => Promise<ViewerSettings>;
-  removeRecent: (file: ViewerFile) => Promise<ViewerSettings>;
+  ) => Promise<void>;
+  removeRecent: (file: ViewerFile) => Promise<void>;
   checkFileExists: (file: ViewerFile) => Promise<boolean>;
   getUserSettings: () => Promise<ViewerSettings>;
 }
 
-export interface SettingsContextProviderProps {
+interface SettingsContextProviderProps {
   children: React.ReactNode;
-  initialized: boolean;
-  connectivity: InternetConnectivityStatus;
 }
 
 export const SettingsContextProvider = ({
   children,
-  initialized,
-  connectivity,
 }: SettingsContextProviderProps) => {
   const [settings, setSettings] = useState<ViewerSettings>();
 
@@ -41,11 +36,6 @@ export const SettingsContextProvider = ({
     return updatedSettings;
   }, []);
 
-  const getFileNameFromPath = (path: string) => {
-    const sections = path.split("/");
-    return sections[sections.length - 1];
-  };
-
   const addRecent = useCallback(
     async (
       path: string,
@@ -53,15 +43,18 @@ export const SettingsContextProvider = ({
       iTwinId?: string,
       iModelId?: string
     ) => {
+      // Getting file name from path incase there is no iModel name.
+      const sections = path.split("/");
+      const fileName = sections[sections.length - 1];
+
       await ITwinViewerApp.ipcCall.addRecentFile({
         iTwinId,
         iModelId,
-        displayName: iModelName ?? getFileNameFromPath(path),
+        displayName: iModelName ?? fileName,
         path: path,
       });
       const updatedSettings = await getUserSettings();
       setSettings(updatedSettings);
-      return updatedSettings;
     },
     [getUserSettings]
   );
@@ -71,7 +64,6 @@ export const SettingsContextProvider = ({
       await ITwinViewerApp.ipcCall.removeRecentFile(file);
       const updatedSettings = await getUserSettings();
       setSettings(updatedSettings);
-      return updatedSettings;
     },
     [getUserSettings]
   );
@@ -86,12 +78,10 @@ export const SettingsContextProvider = ({
       setSettings(userSettings);
     };
 
-    if (initialized) {
-      void getInitialSettings();
-    }
-  }, [initialized, connectivity, getUserSettings]);
+    void getInitialSettings();
+  }, [getUserSettings]);
 
-  return initialized && settings ? (
+  return settings ? (
     <SettingsContext.Provider
       value={{
         settings,
