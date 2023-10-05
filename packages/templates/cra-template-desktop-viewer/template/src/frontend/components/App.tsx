@@ -3,8 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import "./App.scss";
-
 import type { DesktopInitializerParams } from "@itwin/desktop-viewer-react";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
@@ -58,16 +56,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme="dark" style={{ height: "100%" }}>
-      {!initialized && (
-        <Flex justifyContent="center" style={{ height: "100%" }}>
-          <SvgIModelLoader
-            data-testid="loader-wrapper"
-            className="loading-icon"
-          />
-        </Flex>
-      )}
-
-      {initialized && (
+      {initialized ? (
         <BrowserRouter>
           <SettingsContextProvider>
             <PageLayout>
@@ -96,6 +85,16 @@ const App = () => {
             </PageLayout>
           </SettingsContextProvider>
         </BrowserRouter>
+      ) : (
+        <Flex justifyContent="center" style={{ height: "100%" }}>
+          <SvgIModelLoader
+            data-testid="loader-wrapper"
+            style={{
+              height: "64px",
+              width: "64px",
+            }}
+          />
+        </Flex>
       )}
     </ThemeProvider>
   );

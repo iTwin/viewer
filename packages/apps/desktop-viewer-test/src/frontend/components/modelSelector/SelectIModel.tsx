@@ -41,7 +41,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
    * @returns
    */
   const getLocal = useCallback(() => {
-    const recents = userSettings.recentSettings.recents;
+    const recents = userSettings.settings.recents;
     if (recents) {
       return recents.find((recent) => {
         return (
@@ -179,7 +179,7 @@ export const SelectIModel = ({
         // there is already a pending selection. disallow
         return;
       }
-      const recents = userSettings.recentSettings.recents;
+      const recents = userSettings.settings.recents;
       if (recents) {
         const local = recents.find((recent) => {
           return (

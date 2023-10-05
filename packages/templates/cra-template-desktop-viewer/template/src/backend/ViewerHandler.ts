@@ -17,10 +17,10 @@ import * as minimist from "minimist";
 import { existsSync } from "node:fs";
 
 import type {
-  RecentSettings,
   ViewerConfig,
   ViewerFile,
   ViewerIpc,
+  ViewerSettings,
 } from "../common/ViewerConfig";
 import { channelName } from "../common/ViewerConfig";
 import { getAppEnvVar } from "./AppInfo";
@@ -69,9 +69,9 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
 
   /**
    * Get user settings
-   * @returns RecentSettings
+   * @returns ViewerSettings
    */
-  public async getSettings(): Promise<RecentSettings> {
+  public async getSettings(): Promise<ViewerSettings> {
     return UserSettings.settings;
   }
 

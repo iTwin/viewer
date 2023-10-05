@@ -6,11 +6,11 @@
 import React, { createContext, useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
-import type { RecentSettings, ViewerFile } from "../../common/ViewerConfig";
+import type { ViewerFile, ViewerSettings } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 
-export interface Settings {
-  recentSettings: RecentSettings;
+interface ISettingsContext {
+  settings: ViewerSettings;
   addRecent: (
     path: string,
     iModelName?: string,
@@ -27,13 +27,12 @@ interface SettingsContextProviderProps {
 export const SettingsContextProvider = ({
   children,
 }: SettingsContextProviderProps) => {
-  const [recentSettings, setRecentSettings] = useState<RecentSettings>({});
+  const [settings, setSettings] = useState<ViewerSettings>({});
   const location = useLocation();
 
   const getRecentSettings = useCallback(async () => {
     const updatedSettings = await ITwinViewerApp.ipcCall.getSettings();
-    setRecentSettings(updatedSettings);
-    return updatedSettings;
+    setSettings(updatedSettings);
   }, []);
 
   const addRecent = useCallback(
@@ -53,17 +52,7 @@ export const SettingsContextProvider = ({
         displayName: iModelName ?? fileName,
         path: path,
       });
-      const updatedSettings = await getRecentSettings();
-      setRecentSettings(updatedSettings);
-    },
-    [getRecentSettings]
-  );
-
-  const removeRecent = useCallback(
-    async (file: ViewerFile) => {
-      await ITwinViewerApp.ipcCall.removeRecentFile(file);
-      const updatedSettings = await getRecentSettings();
-      setRecentSettings(updatedSettings);
+      await getRecentSettings();
     },
     [getRecentSettings]
   );
@@ -72,26 +61,22 @@ export const SettingsContextProvider = ({
     async (file: ViewerFile) => {
       const exists = await ITwinViewerApp.ipcCall.checkFileExists(file);
       if (!exists) {
-        await removeRecent(file);
+        await ITwinViewerApp.ipcCall.removeRecentFile(file);
+        await getRecentSettings();
       }
       return exists;
     },
-    [removeRecent]
+    [getRecentSettings]
   );
 
   useEffect(() => {
-    const getInitialSettings = async () => {
-      const recentSettings = await getRecentSettings();
-      setRecentSettings(recentSettings);
-    };
-
-    void getInitialSettings();
+    void getRecentSettings();
   }, [getRecentSettings, location]);
 
   return (
     <SettingsContext.Provider
       value={{
-        recentSettings,
+        settings,
         addRecent,
         checkFileExists,
       }}
@@ -101,4 +86,6 @@ export const SettingsContextProvider = ({
   );
 };
 
-export const SettingsContext = createContext<Settings>({} as Settings);
+export const SettingsContext = createContext<ISettingsContext>(
+  {} as ISettingsContext
+);

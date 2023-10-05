@@ -18,8 +18,8 @@ export const Recents = () => {
   const userSettings = useContext(SettingsContext);
 
   useEffect(() => {
-    if (userSettings.recentSettings?.recents) {
-      setRecents(userSettings.recentSettings?.recents.slice(0, 5) || []);
+    if (userSettings.settings?.recents) {
+      setRecents(userSettings.settings?.recents.slice(0, 5) || []);
     }
   }, [userSettings]);
 

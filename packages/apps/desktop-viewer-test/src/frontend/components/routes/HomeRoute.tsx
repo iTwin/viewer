@@ -16,7 +16,7 @@ export const HomeRoute = () => {
 
   useEffect(() => {
     // must be initialized here (child of the Router) in order to use the navigate function
-    ITwinViewerApp.initializeMenuListeners(navigate, userSettings);
+    ITwinViewerApp.initializeMenuListeners(navigate, userSettings.addRecent);
   }, [navigate, userSettings]);
 
   return <Home />;
