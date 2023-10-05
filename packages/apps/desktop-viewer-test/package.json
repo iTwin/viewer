@@ -58,6 +58,7 @@
     "@itwin/imodels-access-frontend": "^4.0.4",
     "@itwin/itwinui-css": "^1.12.0",
     "@itwin/itwinui-icons-react": "^2.4.0",
+    "@itwin/itwinui-illustrations-react": "^2.0.1",
     "@itwin/itwinui-layouts-css": "^0.2.0",
     "@itwin/itwinui-layouts-react": "^0.2.0",
     "@itwin/itwinui-react": "^2.12.0",

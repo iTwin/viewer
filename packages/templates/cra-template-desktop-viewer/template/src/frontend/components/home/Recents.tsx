@@ -18,16 +18,14 @@ export const Recents = () => {
   const userSettings = useContext(SettingsContext);
 
   useEffect(() => {
-    if (userSettings.settings?.recents) {
-      setRecents(userSettings.settings?.recents.slice(0, 5) || []);
+    if (userSettings.recentSettings?.recents) {
+      setRecents(userSettings.recentSettings?.recents.slice(0, 5) || []);
     }
   }, [userSettings]);
 
   const openFile = async (file: ViewerFile) => {
     if (await userSettings.checkFileExists(file)) {
       await navigate(`/viewer`, { state: { filePath: file.path } });
-    } else {
-      await userSettings.removeRecent(file);
     }
   };
 
@@ -42,7 +40,7 @@ export const Recents = () => {
 
         return (
           <span
-            key={recent.path}
+            key={recent.displayName}
             onClick={() => openFile(recent)}
             className={!recent.path ? "disabled-link-recent" : ""}
             title={!recent.path ? "Deleted" : ""}

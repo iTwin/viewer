@@ -7,10 +7,10 @@ import { ElectronHost } from "@itwin/core-electron/lib/cjs/ElectronBackend";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 
-import type { ViewerFile, ViewerSettings } from "../common/ViewerConfig";
+import type { RecentSettings, ViewerFile } from "../common/ViewerConfig";
 
 class UserSettings {
-  private _settings: ViewerSettings;
+  private _settings: RecentSettings;
   private _dataPath: string;
 
   constructor() {
@@ -71,7 +71,7 @@ class UserSettings {
       }
       this._settings = JSON.parse(
         readFileSync(join(this.dataPath, "settings.json"), "utf8")
-      ) as ViewerSettings;
+      ) as RecentSettings;
     }
 
     // Go through the recent entries and set the file path to blank

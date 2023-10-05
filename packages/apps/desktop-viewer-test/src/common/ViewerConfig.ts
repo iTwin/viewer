@@ -23,7 +23,7 @@ export const channelName = iTwinChannel("desktop-viewer");
 export interface ViewerIpc {
   getConfig: () => Promise<ViewerConfig>;
   openFile: (options: OpenDialogOptions) => Promise<OpenDialogReturnValue>;
-  getSettings: () => Promise<ViewerSettings>;
+  getSettings: () => Promise<RecentSettings>;
   addRecentFile: (file: ViewerFile) => Promise<void>;
   removeRecentFile: (file: ViewerFile) => Promise<void>;
   checkFileExists: (file: ViewerFile) => Promise<boolean>;
@@ -55,7 +55,7 @@ export interface ViewerFile {
   iModelId?: string;
 }
 
-export interface ViewerSettings {
+export interface RecentSettings {
   defaultRecent?: boolean;
   recents?: ViewerFile[];
 }

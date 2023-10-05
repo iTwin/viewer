@@ -3,11 +3,14 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import "./App.scss";
+
 import type { DesktopInitializerParams } from "@itwin/desktop-viewer-react";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { useDesktopViewerInitializer } from "@itwin/desktop-viewer-react";
+import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
 import { PageLayout } from "@itwin/itwinui-layouts-react";
-import { ThemeProvider } from "@itwin/itwinui-react";
+import { Flex, ThemeProvider } from "@itwin/itwinui-react";
 import {
   MeasurementActionToolbar,
   MeasureTools,
@@ -53,39 +56,48 @@ const App = () => {
     }
   }, [initialized, connectivityStatus]);
 
-  return initialized ? (
+  return (
     <ThemeProvider theme="dark" style={{ height: "100%" }}>
-      <SettingsContextProvider>
+      {!initialized && (
+        <Flex justifyContent="center" style={{ height: "100%" }}>
+          <SvgIModelLoader
+            data-testid="loader-wrapper"
+            className="loading-icon"
+          />
+        </Flex>
+      )}
+
+      {initialized && (
         <BrowserRouter>
-          <PageLayout>
-            <Routes>
-              <Route
-                element={
-                  <PageLayout.Content padded>
-                    <Outlet />
-                  </PageLayout.Content>
-                }
-              >
-                <Route path="/" element={<HomeRoute />} />
-                <Route path="/itwins/:iTwinId" element={<IModelsRoute />} />
-                <Route path="/itwins" element={<ITwinsRoute />} />
-              </Route>
-              <Route
-                element={
-                  <PageLayout.Content>
-                    <Outlet />
-                  </PageLayout.Content>
-                }
-              >
-                <Route path="/viewer" element={<ViewerRoute />} />
-              </Route>
-            </Routes>
-          </PageLayout>
+          <SettingsContextProvider>
+            <PageLayout>
+              <Routes>
+                <Route
+                  element={
+                    <PageLayout.Content padded>
+                      <Outlet />
+                    </PageLayout.Content>
+                  }
+                >
+                  <Route path="/" element={<HomeRoute />} />
+                  <Route path="/itwins/:iTwinId" element={<IModelsRoute />} />
+                  <Route path="/itwins" element={<ITwinsRoute />} />
+                </Route>
+                <Route
+                  element={
+                    <PageLayout.Content>
+                      <Outlet />
+                    </PageLayout.Content>
+                  }
+                >
+                  <Route path="/viewer" element={<ViewerRoute />} />
+                </Route>
+              </Routes>
+            </PageLayout>
+          </SettingsContextProvider>
         </BrowserRouter>
-      </SettingsContextProvider>
+      )}
     </ThemeProvider>
-  ) : (
-    <></>
   );
 };
 

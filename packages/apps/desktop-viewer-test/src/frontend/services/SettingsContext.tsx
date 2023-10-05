@@ -4,21 +4,20 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React, { createContext, useCallback, useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
-import type { ViewerFile, ViewerSettings } from "../../common/ViewerConfig";
+import type { RecentSettings, ViewerFile } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 
 export interface Settings {
-  settings: ViewerSettings;
+  recentSettings: RecentSettings;
   addRecent: (
     path: string,
     iModelName?: string,
     iTwinId?: string,
     iModelId?: string
   ) => Promise<void>;
-  removeRecent: (file: ViewerFile) => Promise<void>;
   checkFileExists: (file: ViewerFile) => Promise<boolean>;
-  getUserSettings: () => Promise<ViewerSettings>;
 }
 
 interface SettingsContextProviderProps {
@@ -28,11 +27,12 @@ interface SettingsContextProviderProps {
 export const SettingsContextProvider = ({
   children,
 }: SettingsContextProviderProps) => {
-  const [settings, setSettings] = useState<ViewerSettings>();
+  const [recentSettings, setRecentSettings] = useState<RecentSettings>({});
+  const location = useLocation();
 
-  const getUserSettings = useCallback(async () => {
+  const getRecentSettings = useCallback(async () => {
     const updatedSettings = await ITwinViewerApp.ipcCall.getSettings();
-    setSettings(updatedSettings);
+    setRecentSettings(updatedSettings);
     return updatedSettings;
   }, []);
 
@@ -53,48 +53,51 @@ export const SettingsContextProvider = ({
         displayName: iModelName ?? fileName,
         path: path,
       });
-      const updatedSettings = await getUserSettings();
-      setSettings(updatedSettings);
+      const updatedSettings = await getRecentSettings();
+      setRecentSettings(updatedSettings);
     },
-    [getUserSettings]
+    [getRecentSettings]
   );
 
   const removeRecent = useCallback(
     async (file: ViewerFile) => {
       await ITwinViewerApp.ipcCall.removeRecentFile(file);
-      const updatedSettings = await getUserSettings();
-      setSettings(updatedSettings);
+      const updatedSettings = await getRecentSettings();
+      setRecentSettings(updatedSettings);
     },
-    [getUserSettings]
+    [getRecentSettings]
   );
 
-  const checkFileExists = useCallback(async (file: ViewerFile) => {
-    return await ITwinViewerApp.ipcCall.checkFileExists(file);
-  }, []);
+  const checkFileExists = useCallback(
+    async (file: ViewerFile) => {
+      const exists = await ITwinViewerApp.ipcCall.checkFileExists(file);
+      if (!exists) {
+        await removeRecent(file);
+      }
+      return exists;
+    },
+    [removeRecent]
+  );
 
   useEffect(() => {
     const getInitialSettings = async () => {
-      const userSettings = await getUserSettings();
-      setSettings(userSettings);
+      const recentSettings = await getRecentSettings();
+      setRecentSettings(recentSettings);
     };
 
     void getInitialSettings();
-  }, [getUserSettings]);
+  }, [getRecentSettings, location]);
 
-  return settings ? (
+  return (
     <SettingsContext.Provider
       value={{
-        settings,
+        recentSettings: recentSettings,
         addRecent,
-        removeRecent,
         checkFileExists,
-        getUserSettings,
       }}
     >
       {children}
     </SettingsContext.Provider>
-  ) : (
-    <></>
   );
 };
 

@@ -17,10 +17,10 @@ import * as minimist from "minimist";
 import { existsSync } from "node:fs";
 
 import type {
+  RecentSettings,
   ViewerConfig,
   ViewerFile,
   ViewerIpc,
-  ViewerSettings,
 } from "../common/ViewerConfig";
 import { channelName } from "../common/ViewerConfig";
 import { getAppEnvVar } from "./AppInfo";
@@ -69,9 +69,9 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
 
   /**
    * Get user settings
-   * @returns ViewerSettings
+   * @returns RecentSettings
    */
-  public async getSettings(): Promise<ViewerSettings> {
+  public async getSettings(): Promise<RecentSettings> {
     return UserSettings.settings;
   }
 
@@ -92,7 +92,7 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
   }
 
   /**
-   * Check if file exists in the given path
+   * Check if file exists in the given path, returns false if path is blank
    * @param file
    */
   public async checkFileExists(file: ViewerFile): Promise<boolean> {

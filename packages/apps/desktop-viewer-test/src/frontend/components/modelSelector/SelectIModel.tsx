@@ -41,7 +41,7 @@ const useProgressIndicator = (iModel: IModelFull) => {
    * @returns
    */
   const getLocal = useCallback(() => {
-    const recents = userSettings.settings.recents;
+    const recents = userSettings.recentSettings.recents;
     if (recents) {
       return recents.find((recent) => {
         return (
@@ -173,24 +173,13 @@ export const SelectIModel = ({
   const userSettings = useContext(SettingsContext);
   const modelContext = useContext(IModelContext);
 
-  // Get latest recent user settings on mount
-  // to make sure that the deleted files are being checked and handled correctly.
-  useEffect(() => {
-    const getUserSettings = async () => {
-      await userSettings.getUserSettings();
-    };
-
-    void getUserSettings();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const selectIModel = useCallback(
     async (iModel: IModelFull) => {
       if (modelContext.pendingIModel) {
         // there is already a pending selection. disallow
         return;
       }
-      const recents = userSettings.settings.recents;
+      const recents = userSettings.recentSettings.recents;
       if (recents) {
         const local = recents.find((recent) => {
           return (
@@ -200,14 +189,12 @@ export const SelectIModel = ({
 
         if (local) {
           // If there is file in recent settings, check if it exists on disk,
-          // if not remove it from the recent settings
+          // and navigate to path if it exists
           const exists = await userSettings.checkFileExists(local);
           if (exists) {
             void navigate("/viewer", { state: { filePath: local.path } });
             return;
           }
-
-          await userSettings.removeRecent(local);
         }
       }
       // trigger a download/view

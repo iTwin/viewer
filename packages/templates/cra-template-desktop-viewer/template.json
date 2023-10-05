@@ -30,6 +30,7 @@
       "@itwin/imodels-access-frontend": "^4.0.0",
       "@itwin/itwinui-css": "^1.7.0",
       "@itwin/itwinui-icons-react": "^2.1.0",
+      "@itwin/itwinui-illustrations-react": "^2.0.1",
       "@itwin/itwinui-layouts-css": "^0.2.0",
       "@itwin/itwinui-layouts-react": "^0.2.0",
       "@itwin/itwinui-react": "^2.11.4",
