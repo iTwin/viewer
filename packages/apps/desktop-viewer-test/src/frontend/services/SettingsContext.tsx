@@ -91,7 +91,7 @@ export const SettingsContextProvider = ({
   return (
     <SettingsContext.Provider
       value={{
-        recentSettings: recentSettings,
+        recentSettings,
         addRecent,
         checkFileExists,
       }}
