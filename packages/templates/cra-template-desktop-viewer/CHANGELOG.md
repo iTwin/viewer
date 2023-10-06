@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Thu, 21 Sep 2023 19:08:24 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Oct 2023 16:41:20 GMT and should not be manually modified.
+
+## 4.3.1
+Fri, 06 Oct 2023 16:41:20 GMT
+
+### Patches
+
+- Refactor SelectIModel, fix missing file error
 
 ## 4.3.0
 Thu, 21 Sep 2023 19:08:24 GMT
