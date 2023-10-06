@@ -14,7 +14,7 @@ import {
   SvgSyncDisabled,
 } from "@itwin/itwinui-icons-react";
 import { ProgressRadial } from "@itwin/itwinui-react";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 
 import { ITwinViewerApp } from "../../app/ITwinViewerApp";
 
@@ -33,16 +33,10 @@ export const BriefcaseStatus = ({
   onDownloadClick,
   className,
 }: BriefcaseStatusProps) => {
-  const [title, setTitle] = useState<string>();
-  const [classNames, setClassNames] = useState<string>();
-
   const isDownloading = !!mergeProgress && mergeProgress < 100;
 
-  useEffect(() => {
+  const getLocalizedTitle = useCallback(() => {
     let titleKey = "";
-    let allClassNames = className
-      ? `${className} model-status`
-      : "model-status";
     switch (mergeStatus) {
       case ModelStatus.COMPARING:
         titleKey = "briefcaseStatusTitle.comparing";
@@ -57,7 +51,6 @@ export const BriefcaseStatus = ({
         break;
       case ModelStatus.OUTDATED:
         titleKey = "briefcaseStatusTitle.outdated";
-        allClassNames += " actionable";
         break;
       case ModelStatus.UPTODATE:
         titleKey = "briefcaseStatusTitle.upToDate";
@@ -67,13 +60,12 @@ export const BriefcaseStatus = ({
         break;
       case ModelStatus.ONLINE:
         titleKey = "briefcaseStatusTitle.online";
-        allClassNames += " actionable";
         break;
     }
+    return ITwinViewerApp.translate(titleKey);
+  }, [mergeStatus, isDownloading]);
 
-    setTitle(ITwinViewerApp.translate(titleKey));
-    setClassNames(allClassNames);
-  }, [mergeStatus, className, isDownloading]);
+  const title = getLocalizedTitle();
 
   const statusComponent = useCallback(() => {
     switch (mergeStatus) {
@@ -98,13 +90,13 @@ export const BriefcaseStatus = ({
           />
         );
       case ModelStatus.OUTDATED:
-        return <SvgSync onClick={onMergeClick} />;
+        return <SvgSync onClick={onMergeClick} cursor={"pointer"} />;
       case ModelStatus.UPTODATE:
         return <SvgStatusSuccess />;
       case ModelStatus.ERROR:
         return <SvgStatusError />;
       case ModelStatus.ONLINE:
-        return <SvgDownload onClick={onDownloadClick} />;
+        return <SvgDownload onClick={onDownloadClick} cursor={"pointer"} />;
       default:
         return <SvgSyncDisabled />;
     }
@@ -117,7 +109,7 @@ export const BriefcaseStatus = ({
   ]);
 
   return (
-    <div title={title} className={classNames}>
+    <div title={title} className={`${className ?? ""} model-status`}>
       {statusComponent()}
     </div>
   );

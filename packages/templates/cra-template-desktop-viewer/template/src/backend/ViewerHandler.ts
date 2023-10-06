@@ -14,6 +14,7 @@ import type {
 } from "electron";
 import { dialog, Menu } from "electron";
 import * as minimist from "minimist";
+import { existsSync } from "node:fs";
 
 import type {
   ViewerConfig,
@@ -80,6 +81,22 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
    */
   public async addRecentFile(file: ViewerFile): Promise<void> {
     UserSettings.addRecent(file);
+  }
+
+  /**
+   * Remove file from recent settings
+   * @param file
+   */
+  public async removeRecentFile(file: ViewerFile): Promise<void> {
+    UserSettings.removeRecent(file);
+  }
+
+  /**
+   * Check if file exists in the given path, returns false if path is blank
+   * @param file
+   */
+  public async checkFileExists(file: ViewerFile): Promise<boolean> {
+    return file.path ? existsSync(file.path) : false;
   }
 
   /**

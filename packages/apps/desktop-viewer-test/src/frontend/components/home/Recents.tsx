@@ -3,11 +3,14 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import "./Home.scss";
+
+import { SvgStatusError } from "@itwin/itwinui-icons-react";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import type { ViewerFile } from "../../../common/ViewerConfig";
-import { SettingsContext } from "../../services/SettingsClient";
+import { SettingsContext } from "../../services/SettingsContext";
 
 export const Recents = () => {
   const [recents, setRecents] = useState<ViewerFile[]>();
@@ -20,8 +23,10 @@ export const Recents = () => {
     }
   }, [userSettings]);
 
-  const openFile = async (filePath?: string) => {
-    await navigate(`/viewer`, { state: { filePath } });
+  const openFile = async (file: ViewerFile) => {
+    if (await userSettings.checkFileExists(file)) {
+      await navigate(`/viewer`, { state: { filePath: file.path } });
+    }
   };
 
   return (
@@ -32,8 +37,15 @@ export const Recents = () => {
         if (displayValue.length > 25) {
           displayValue = `${displayValue.substring(0, 25)}...`;
         }
+
         return (
-          <span key={recent.path} onClick={() => openFile(recent.path)}>
+          <span
+            key={recent.displayName}
+            onClick={() => openFile(recent)}
+            className={!recent.path ? "disabled-link-recent" : ""}
+            title={!recent.path ? "Deleted" : ""}
+          >
+            {!recent.path && <SvgStatusError />}
             {displayValue}
           </span>
         );

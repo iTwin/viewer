@@ -14,7 +14,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { ITwinViewerApp } from "../../app/ITwinViewerApp";
-import { SettingsContext } from "../../services/SettingsClient";
+import { SettingsContext } from "../../services/SettingsContext";
 import { Recents } from "./Recents";
 
 interface LearnLink {

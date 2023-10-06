@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-desktop-viewer",
+      "comment": "Refactor SelectIModel, fix missing file error",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/cra-template-desktop-viewer"
+}

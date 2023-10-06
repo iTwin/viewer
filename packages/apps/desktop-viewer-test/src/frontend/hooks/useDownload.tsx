@@ -9,7 +9,7 @@ import { NativeApp } from "@itwin/core-frontend";
 import { useCallback, useContext, useState } from "react";
 
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
-import { SettingsContext } from "../services/SettingsClient";
+import { SettingsContext } from "../services/SettingsContext";
 
 export const useDownload = (
   iModelId: string,
@@ -31,7 +31,7 @@ export const useDownload = (
     if (fileName) {
       const progressCallback: OnDownloadProgress = (progress) => {
         const { loaded, total } = progress;
-        const percent = loaded / total;
+        const percent = (loaded / total) * 100;
 
         setProgress(percent);
         console.log(

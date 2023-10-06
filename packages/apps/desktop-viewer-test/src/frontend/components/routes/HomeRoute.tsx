@@ -7,7 +7,7 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { ITwinViewerApp } from "../../app/ITwinViewerApp";
-import { SettingsContext } from "../../services/SettingsClient";
+import { SettingsContext } from "../../services/SettingsContext";
 import Home from "../home/Home";
 
 export const HomeRoute = () => {
@@ -16,7 +16,7 @@ export const HomeRoute = () => {
 
   useEffect(() => {
     // must be initialized here (child of the Router) in order to use the navigate function
-    ITwinViewerApp.initializeMenuListeners(navigate, userSettings);
+    ITwinViewerApp.initializeMenuListeners(navigate, userSettings.addRecent);
   }, [navigate, userSettings]);
 
   return <Home />;

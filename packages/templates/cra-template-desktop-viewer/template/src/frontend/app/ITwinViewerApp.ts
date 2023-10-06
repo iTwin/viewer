@@ -11,7 +11,6 @@ import type { NavigateFunction } from "react-router-dom";
 
 import type { ViewerConfig, ViewerIpc } from "../../common/ViewerConfig";
 import { channelName } from "../../common/ViewerConfig";
-import type { Settings } from "../services/SettingsClient";
 
 export declare type PickAsyncMethods<T> = {
   [P in keyof T]: T[P] extends AsyncFunction ? T[P] : never;
@@ -74,7 +73,12 @@ export class ITwinViewerApp {
 
   public static initializeMenuListeners(
     navigate: NavigateFunction,
-    userSettings: Settings
+    addRecent: (
+      path: string,
+      iModelName?: string,
+      iTwinId?: string,
+      iModelId?: string
+    ) => Promise<void>
   ) {
     if (this._menuListener) {
       // initialize only once
@@ -85,7 +89,7 @@ export class ITwinViewerApp {
         case "open":
           const filePath = await ITwinViewerApp.getFile();
           if (filePath) {
-            void userSettings.addRecent(filePath);
+            void addRecent(filePath);
             await navigate(`/viewer`, { state: { filePath } });
           }
           break;
