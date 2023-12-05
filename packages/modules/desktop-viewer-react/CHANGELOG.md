@@ -1,6 +1,13 @@
 # Change Log - @itwin/desktop-viewer-react
 
-This log was last generated on Fri, 22 Sep 2023 16:46:01 GMT and should not be manually modified.
+This log was last generated on Tue, 05 Dec 2023 22:00:43 GMT and should not be manually modified.
+
+## 4.2.3
+Tue, 05 Dec 2023 22:00:43 GMT
+
+### Patches
+
+- increase support peer range of @itwin/electron-authorization
 
 ## 4.2.2
 Fri, 22 Sep 2023 16:46:01 GMT

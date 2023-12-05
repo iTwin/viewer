@@ -2,6 +2,18 @@
   "name": "@itwin/desktop-viewer-react",
   "entries": [
     {
+      "version": "4.2.3",
+      "tag": "@itwin/desktop-viewer-react_v4.2.3",
+      "date": "Tue, 05 Dec 2023 22:00:43 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "increase support peer range of @itwin/electron-authorization"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.2.2",
       "tag": "@itwin/desktop-viewer-react_v4.2.2",
       "date": "Fri, 22 Sep 2023 16:46:01 GMT",
