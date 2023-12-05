@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/desktop-viewer-react",
+      "comment": "increase support peer range of @itwin/electron-authorization",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/desktop-viewer-react"
+}
