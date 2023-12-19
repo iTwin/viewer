@@ -30,23 +30,23 @@ jest.mock("react-redux", () => ({
 
 jest.mock("@itwin/appui-react", () => {
   return {
-    ...jest.createMockFromModule<any>("@itwin/appui-react"),
+    ...jest.genMockFromModule<any>("@itwin/appui-react"),
     StateManager: {
-      ...jest.createMockFromModule<any>("@itwin/appui-react").StateManager,
+      ...jest.genMockFromModule<any>("@itwin/appui-react").StateManager,
       store: jest.fn(),
     },
     UiItemsManager: {
-      ...jest.createMockFromModule<any>("@itwin/appui-react").UiItemsManager,
-      getBackstageItems: jest.fn().mockReturnValue([])
-    }
+      ...jest.genMockFromModule<any>("@itwin/appui-react").UiItemsManager,
+      getBackstageItems: jest.fn().mockReturnValue([]),
+    },
   };
 });
 jest.mock("@itwin/appui-abstract");
 jest.mock("@itwin/presentation-frontend", () => {
   return {
-    ...jest.createMockFromModule<any>("@itwin/presentation-frontend"),
+    ...jest.genMockFromModule<any>("@itwin/presentation-frontend"),
     Presentation: {
-      ...jest.createMockFromModule<any>("@itwin/presentation-frontend")
+      ...jest.genMockFromModule<any>("@itwin/presentation-frontend")
         .Presentation,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
       selection: {

@@ -15,22 +15,22 @@ import * as IModelService from "../../services/iModel/IModelService";
 jest.mock("../../services/iModel/IModelService");
 jest.mock("@itwin/appui-react", () => {
   return {
-    ...jest.createMockFromModule<any>("@itwin/appui-react"),
+    ...jest.genMockFromModule<any>("@itwin/appui-react"),
     UiFramework: {
-      ...jest.createMockFromModule<any>("@itwin/appui-react").UiFramework,
+      ...jest.genMockFromModule<any>("@itwin/appui-react").UiFramework,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
     UiItemsManager: {
-      ...jest.createMockFromModule<any>("@itwin/appui-react").UiItemsManager,
-      getBackstageItems: jest.fn().mockReturnValue([])
-    }
+      ...jest.genMockFromModule<any>("@itwin/appui-react").UiItemsManager,
+      getBackstageItems: jest.fn().mockReturnValue([]),
+    },
   };
 });
 jest.mock("@itwin/presentation-frontend", () => {
   return {
-    ...jest.createMockFromModule<any>("@itwin/presentation-frontend"),
+    ...jest.genMockFromModule<any>("@itwin/presentation-frontend"),
     Presentation: {
-      ...jest.createMockFromModule<any>("@itwin/presentation-frontend")
+      ...jest.genMockFromModule<any>("@itwin/presentation-frontend")
         .Presentation,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
@@ -39,7 +39,7 @@ jest.mock("@itwin/presentation-frontend", () => {
 
 jest.mock("@itwin/core-frontend", () => {
   return {
-    ...jest.createMockFromModule<any>("@itwin/core-frontend"),
+    ...jest.genMockFromModule<any>("@itwin/core-frontend"),
     IModelApp: {
       initialized: true,
       startup: jest.fn(),

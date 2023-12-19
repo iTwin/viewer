@@ -28,15 +28,15 @@ jest.mock("@itwin/core-i18n");
 
 jest.mock("@itwin/appui-react", () => {
   return {
-    ...jest.createMockFromModule<any>("@itwin/appui-react"),
+    ...jest.genMockFromModule<any>("@itwin/appui-react"),
     UiFramework: {
-      ...jest.createMockFromModule<any>("@itwin/appui-react").UiFramework,
+      ...jest.genMockFromModule<any>("@itwin/appui-react").UiFramework,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
     },
     FrameworkAccuDraw:
-      jest.createMockFromModule<any>("@itwin/appui-react").FrameworkAccuDraw,
+      jest.genMockFromModule<any>("@itwin/appui-react").FrameworkAccuDraw,
     SyncUiEventDispatcher: {
-      ...jest.createMockFromModule<any>("@itwin/appui-react")
+      ...jest.genMockFromModule<any>("@itwin/appui-react")
         .SyncUiEventDispatcher,
       onSyncUiEvent: {
         addListener: jest.fn(),
@@ -47,14 +47,14 @@ jest.mock("@itwin/appui-react", () => {
 
 jest.mock("@itwin/presentation-frontend", () => {
   return {
-    ...jest.createMockFromModule<any>("@itwin/presentation-frontend"),
+    ...jest.genMockFromModule<any>("@itwin/presentation-frontend"),
     Presentation: {
-      ...jest.createMockFromModule<any>("@itwin/presentation-frontend")
+      ...jest.genMockFromModule<any>("@itwin/presentation-frontend")
         .Presentation,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
       selection: {
-        selectionChange : {
-          addListener: jest.fn()
+        selectionChange: {
+          addListener: jest.fn(),
         },
         scopes: {},
       },
