@@ -3,6 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { IModelApp } from "@itwin/core-frontend";
 import { FillCentered } from "@itwin/core-react";
 import React from "react";
 
@@ -29,17 +30,27 @@ export const BaseViewer = ({
   });
 
   const accessToken = useAccessToken();
-  const isBlankConnection = loaderProps.extents && loaderProps.location && !loaderProps.iTwinId;
+  const isBlankConnection =
+    loaderProps.extents && loaderProps.location && !loaderProps.iTwinId;
+
   return (
     <ErrorBoundary>
       {loaderProps.filePath || accessToken || isBlankConnection ? (
         viewerInitialized ? (
           <IModelLoader {...loaderProps} />
         ) : (
-          <FillCentered>Initializing...</FillCentered>
+          <FillCentered>
+            {IModelApp.localization.getLocalizedString(
+              "iTwinViewer:baseViewerInitializer.baseViewerInitializing"
+            )}
+          </FillCentered>
         )
       ) : (
-        <FillCentered>Please provide a valid access token.</FillCentered>
+        <FillCentered>
+          {IModelApp.localization.getLocalizedString(
+            "iTwinViewer:baseViewerInitializer.validTokenNeeded"
+          )}
+        </FillCentered>
       )}
     </ErrorBoundary>
   );
