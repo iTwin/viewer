@@ -4,13 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IModelApp } from "@itwin/core-frontend";
-import { ITwinLocalization } from "@itwin/core-i18n";
 import { FillCentered } from "@itwin/core-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { useAccessToken } from "../hooks/useAccessToken";
 import { useBaseViewerInitializer } from "../hooks/useBaseViewerInitializer";
-import { getIModelAppOptions } from "../services/BaseInitializer";
 import type { ViewerProps } from "../types";
 import { ErrorBoundary } from "./error/ErrorBoundary";
 import IModelLoader from "./iModel/IModelLoader";
