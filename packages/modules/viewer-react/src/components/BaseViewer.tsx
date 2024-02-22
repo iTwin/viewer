@@ -5,7 +5,7 @@
 
 import { IModelApp } from "@itwin/core-frontend";
 import { FillCentered } from "@itwin/core-react";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React from "react";
 
 import { useAccessToken } from "../hooks/useAccessToken";
 import { useBaseViewerInitializer } from "../hooks/useBaseViewerInitializer";
