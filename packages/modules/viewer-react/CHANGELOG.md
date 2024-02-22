@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Fri, 22 Sep 2023 16:46:01 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Feb 2024 19:25:13 GMT and should not be manually modified.
+
+## 4.6.2
+Thu, 22 Feb 2024 19:25:13 GMT
+
+### Patches
+
+- Localized BaseViewer strings.
 
 ## 4.6.1
 Fri, 22 Sep 2023 16:46:01 GMT

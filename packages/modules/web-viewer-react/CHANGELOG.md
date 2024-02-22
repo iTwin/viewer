@@ -1,6 +1,11 @@
 # Change Log - @itwin/web-viewer-react
 
-This log was last generated on Fri, 22 Sep 2023 16:46:01 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Feb 2024 19:25:13 GMT and should not be manually modified.
+
+## 4.2.3
+Thu, 22 Feb 2024 19:25:13 GMT
+
+_Version update only_
 
 ## 4.2.2
 Fri, 22 Sep 2023 16:46:01 GMT
