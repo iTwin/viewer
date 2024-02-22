@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Localized BaseViewer strings.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
