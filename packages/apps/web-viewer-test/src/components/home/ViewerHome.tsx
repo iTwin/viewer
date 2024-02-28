@@ -33,7 +33,9 @@ import {
 } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
+import { EcsqlWidgetProvider } from "../../providers/EcsqlWidgetProvider";
 import { history } from "../routing";
+
 /**
  * Test a viewer that uses auth configuration provided at startup
  * @returns
@@ -176,6 +178,7 @@ const ViewerHome: React.FC = () => {
             },
           }),
           new MeasureToolsUiItemsProvider(),
+          new EcsqlWidgetProvider(),
         ]}
         // extensions={[
         //   new LocalExtensionProvider({
