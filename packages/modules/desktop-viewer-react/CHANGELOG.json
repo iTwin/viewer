@@ -2,6 +2,18 @@
   "name": "@itwin/desktop-viewer-react",
   "entries": [
     {
+      "version": "4.2.5",
+      "tag": "@itwin/desktop-viewer-react_v4.2.5",
+      "date": "Mon, 04 Mar 2024 20:13:48 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add IModelApp.shutdown() on page unload"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.2.4",
       "tag": "@itwin/desktop-viewer-react_v4.2.4",
       "date": "Thu, 22 Feb 2024 19:25:13 GMT",

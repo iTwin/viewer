@@ -1,6 +1,13 @@
 # Change Log - @itwin/desktop-viewer-react
 
-This log was last generated on Thu, 22 Feb 2024 19:25:13 GMT and should not be manually modified.
+This log was last generated on Mon, 04 Mar 2024 20:13:48 GMT and should not be manually modified.
+
+## 4.2.5
+Mon, 04 Mar 2024 20:13:48 GMT
+
+### Patches
+
+- Add IModelApp.shutdown() on page unload
 
 ## 4.2.4
 Thu, 22 Feb 2024 19:25:13 GMT
