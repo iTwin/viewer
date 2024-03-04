@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/desktop-viewer-react",
+      "comment": "Add IModelApp.shutdown() on page unload",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/desktop-viewer-react"
+}

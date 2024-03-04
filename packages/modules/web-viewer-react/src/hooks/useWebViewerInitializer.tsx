@@ -17,10 +17,10 @@ import type { WebViewerProps } from "../types";
 export const useWebViewerInitializer = (options: WebViewerProps) => {
   const [webViewerInitOptions, setWebViewerInitOptions] =
     useState<ViewerInitializerParams>();
-  const [webViewerInitalized, setWebViewerInitalized] = useState(false);
+  const [webViewerInitialized, setWebViewerInitialized] = useState(false);
   const baseViewerInitialized = useBaseViewerInitializer(
     options,
-    !webViewerInitalized
+    !webViewerInitialized
   );
 
   // only re-initialize when initialize options change
@@ -34,15 +34,15 @@ export const useWebViewerInitializer = (options: WebViewerProps) => {
       !webViewerInitOptions ||
       !isEqual(initializationOptions, webViewerInitOptions)
     ) {
-      setWebViewerInitalized(false);
+      setWebViewerInitialized(false);
       setWebViewerInitOptions(initializationOptions);
       void WebInitializer.startWebViewer(options).then(() => {
         void WebInitializer.initialized.then(() => {
-          setWebViewerInitalized(true);
+          setWebViewerInitialized(true);
         });
       });
     }
   }, [options, webViewerInitOptions, initializationOptions]);
 
-  return baseViewerInitialized && webViewerInitalized;
+  return baseViewerInitialized && webViewerInitialized;
 };
