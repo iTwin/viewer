@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IModelApp } from "@itwin/core-frontend";
+import { Presentation } from "@itwin/presentation-frontend";
 import { BaseViewer } from "@itwin/viewer-react";
 import React, { useEffect } from "react";
 
@@ -14,6 +15,7 @@ export const Viewer = (props: WebViewerProps) => {
   const initialized = useWebViewerInitializer(props);
   useEffect(() => {
     const handleBeforeUnload = async () => {
+      Presentation.terminate();
       IModelApp.shutdown()
         .then(() => console.log("Shutdown success."))
         .catch(() => console.warn("Shutdown failed."));
