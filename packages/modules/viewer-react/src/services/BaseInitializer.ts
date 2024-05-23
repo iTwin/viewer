@@ -191,11 +191,7 @@ export class BaseInitializer {
       yield UiFramework.initialize(undefined);
 
       // initialize Presentation
-      yield Presentation.initialize({
-        presentation: {
-          activeLocale: IModelApp.localization.getLanguageList()[0],
-        },
-      });
+      yield Presentation.initialize(viewerOptions?.presentationProps);
 
       // Sync selection count & active selection scope between Presentation and AppUi. Runs after the Presentation is initialized.
       syncSelectionCount();
