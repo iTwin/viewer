@@ -32,6 +32,7 @@ import type {
   XAndY,
   XYAndZ,
 } from "@itwin/core-geometry";
+import { PresentationProps } from "@itwin/presentation-frontend";
 
 export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
@@ -137,6 +138,8 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   additionalI18nNamespaces?: string[];
   /** array of iTwin.js Extensions */
   extensions?: ExtensionProvider[];
+  /** Props for presentation initialization */
+  presentationProps?: PresentationProps
 }
 export type RequiredViewerProps = XOR<
   XOR<ConnectedViewerProps, FileViewerProps>,
@@ -192,6 +195,7 @@ const iTwinViewerInitializerParamSample: OptionalToUndefinedUnion<ViewerInitiali
     additionalI18nNamespaces: undefined,
     extensions: undefined,
     userPreferences: undefined,
+    presentationProps: undefined,
   };
 
 export const iTwinViewerInitializerParamList = Object.keys(
