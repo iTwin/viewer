@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Thu, 22 Feb 2024 19:25:13 GMT and should not be manually modified.
+This log was last generated on Fri, 24 May 2024 16:04:17 GMT and should not be manually modified.
+
+## 4.7.0
+Fri, 24 May 2024 16:04:17 GMT
+
+### Minor changes
+
+- Added ability to supply custom Presentation initialization props
 
 ## 4.6.2
 Thu, 22 Feb 2024 19:25:13 GMT

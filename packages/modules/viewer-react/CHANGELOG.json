@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "4.7.0",
+      "tag": "@itwin/viewer-react_v4.7.0",
+      "date": "Fri, 24 May 2024 16:04:17 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added ability to supply custom Presentation initialization props"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.6.2",
       "tag": "@itwin/viewer-react_v4.6.2",
       "date": "Thu, 22 Feb 2024 19:25:13 GMT",
