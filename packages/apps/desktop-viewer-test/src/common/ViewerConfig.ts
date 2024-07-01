@@ -17,6 +17,7 @@ import type {
   SaveDialogOptions,
   SaveDialogReturnValue,
 } from "electron";
+import { ECSchemaRpcInterface } from "@itwin/ecschema-rpcinterface-common";
 
 export const channelName = iTwinChannel("desktop-viewer");
 
@@ -46,6 +47,7 @@ export const viewerRpcs = [
   IModelTileRpcInterface,
   PresentationRpcInterface,
   SnapshotIModelRpcInterface,
+  ECSchemaRpcInterface,
 ];
 
 export interface ViewerFile {

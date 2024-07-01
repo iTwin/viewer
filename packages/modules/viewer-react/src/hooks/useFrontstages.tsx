@@ -14,12 +14,16 @@ import type {
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
 } from "../types";
+import { IModelConnection } from "@itwin/core-frontend";
+
 export interface UseFrontstagesProps {
   frontstages?: ViewerFrontstage[];
   defaultUiConfig?: ViewerDefaultFrontstageConfig;
   viewportOptions?: ViewerViewportControlOptions;
   viewCreatorOptions?: ViewerViewCreator3dOptions;
   blankConnectionViewState?: BlankConnectionViewState;
+  syncWithUnifiedSelectionStorage?: boolean;
+  iModelConnection?: IModelConnection;
 }
 
 export const ViewerDefaultFrontstageProviderId =
@@ -31,6 +35,8 @@ export const useFrontstages = ({
   defaultUiConfig,
   viewCreatorOptions,
   viewportOptions,
+  syncWithUnifiedSelectionStorage,
+  iModelConnection,
 }: UseFrontstagesProps) => {
   const [finalFrontstages, setFinalFrontstages] =
     useState<ViewerFrontstage[]>();
@@ -69,7 +75,9 @@ export const useFrontstages = ({
       const contentGroup = new DefaultContentGroupProvider(
         viewportOptions,
         viewCreatorOptions,
-        blankConnectionViewState
+        blankConnectionViewState,
+        syncWithUnifiedSelectionStorage,
+        iModelConnection,
       );
 
       const defaultFrontstageProvider = new StandardFrontstageProvider({
@@ -94,6 +102,7 @@ export const useFrontstages = ({
     viewCreatorOptions,
     viewportOptions,
     blankConnectionViewState,
+    iModelConnection,
   ]);
 
   return { finalFrontstages, noConnectionRequired, customDefaultFrontstage };

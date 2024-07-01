@@ -37,6 +37,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Auth } from "./Auth";
 import { history } from "./history";
+import { unifiedSelectionStorage } from "./selectionStorage";
 
 const App: React.FC = () => {
   const [iModelId, setIModelId] = useState(process.env.IMJS_IMODEL_ID);
@@ -183,6 +184,7 @@ const App: React.FC = () => {
           }),
           new MeasureToolsUiItemsProvider(),
         ]}
+        selectionStorage={unifiedSelectionStorage}
       />
     </div>
   );

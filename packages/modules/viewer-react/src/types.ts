@@ -33,6 +33,7 @@ import type {
   XYAndZ,
 } from "@itwin/core-geometry";
 import { PresentationProps } from "@itwin/presentation-frontend";
+import { SelectionStorage } from "@itwin/unified-selection";
 
 export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
@@ -102,6 +103,8 @@ export interface LoaderProps {
   viewCreatorOptions?: ViewerViewCreator3dOptions;
   /** Component to show when loading iModel key */
   loadingComponent?: React.ReactNode;
+  /** unified selection storage to synchronize with */
+  selectionStorage?: SelectionStorage;
 }
 
 export type ViewerCommonProps = ViewerInitializerParams & LoaderProps;
@@ -139,7 +142,9 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   /** array of iTwin.js Extensions */
   extensions?: ExtensionProvider[];
   /** Props for presentation initialization */
-  presentationProps?: PresentationProps
+  presentationProps?: PresentationProps;
+  /** unified selection storage to synchronize with */
+  selectionStorage?: SelectionStorage;
 }
 export type RequiredViewerProps = XOR<
   XOR<ConnectedViewerProps, FileViewerProps>,
@@ -196,6 +201,7 @@ const iTwinViewerInitializerParamSample: OptionalToUndefinedUnion<ViewerInitiali
     extensions: undefined,
     userPreferences: undefined,
     presentationProps: undefined,
+    selectionStorage: undefined,
   };
 
 export const iTwinViewerInitializerParamList = Object.keys(

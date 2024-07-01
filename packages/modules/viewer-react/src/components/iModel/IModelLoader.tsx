@@ -34,6 +34,7 @@ import { ViewerPerformance } from "../../services/telemetry";
 import type { ModelLoaderProps } from "../../types";
 import { BackstageItemsProvider } from "../app-ui/providers";
 import { IModelViewer } from "./IModelViewer";
+import { useUnifiedSelectionSync } from "../../hooks/useUnifiedSelectionSync";
 
 const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   const [error, setError] = useState<Error>();
@@ -50,6 +51,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     onIModelConnected,
     backstageItems, // eslint-disable-line deprecation/deprecation
     loadingComponent,
+    selectionStorage,
   } = viewerProps;
 
   const providers = useMemo<UiItemsProvider[]>(() => {
@@ -61,6 +63,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   }, [uiProviders, backstageItems]);
 
   useUiProviders(providers);
+  useUnifiedSelectionSync({ iModelConnection: connection, selectionStorage })
 
   const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
     useFrontstages({
@@ -69,6 +72,8 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       viewportOptions,
       viewCreatorOptions,
       blankConnectionViewState,
+      syncWithUnifiedSelectionStorage: !!selectionStorage,
+      iModelConnection: connection,
     });
 
   useTheme(theme);

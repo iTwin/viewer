@@ -8,6 +8,7 @@ import { Logger, LogLevel } from "@itwin/core-bentley";
 import type { ElectronHostOptions } from "@itwin/core-electron/lib/cjs/ElectronBackend";
 import { ElectronHost } from "@itwin/core-electron/lib/cjs/ElectronBackend";
 import { BackendIModelsAccess } from "@itwin/imodels-access-backend";
+import { ECSchemaRpcImpl } from "@itwin/ecschema-rpcinterface-impl";
 import { Presentation } from "@itwin/presentation-backend";
 import { Menu, shell } from "electron";
 import type { MenuItemConstructorOptions } from "electron/main";
@@ -52,6 +53,8 @@ const viewerMain = async () => {
     title: appInfo.title,
     autoHideMenuBar: false,
   });
+
+  ECSchemaRpcImpl.register();
 
   if (process.env.NODE_ENV === "development") {
     ElectronHost.mainWindow?.webContents.toggleDevTools();
