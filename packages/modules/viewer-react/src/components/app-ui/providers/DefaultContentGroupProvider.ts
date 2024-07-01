@@ -9,6 +9,7 @@ import {
   ContentGroup,
   ContentGroupProvider,
   IModelViewportControl,
+  UiFramework,
 } from "@itwin/appui-react";
 
 import { getAndSetViewState } from "../../../services/iModel";
@@ -46,10 +47,11 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
   }
 
   public async contentGroup(_config: FrontstageConfig): Promise<ContentGroup> {
+    const iModelConnection = this._iModelConnection ?? UiFramework.getIModelConnection(); 
     let viewState;
-    if (this._iModelConnection) {
+    if (iModelConnection) {
       viewState = await getAndSetViewState(
-        this._iModelConnection,
+        iModelConnection,
         this._viewportOptions,
         this._viewCreatorOptions,
         this._blankConnectionViewState
@@ -65,7 +67,7 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
           applicationData: {
             ...this._viewportOptions,
             viewState,
-            iModelConnection: this._iModelConnection,
+            iModelConnection,
           },
         },
       ],
