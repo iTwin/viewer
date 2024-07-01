@@ -37,7 +37,7 @@ export const BaseViewer = ({
     <ErrorBoundary>
       {loaderProps.filePath || accessToken || isBlankConnection ? (
         viewerInitialized ? (
-          <IModelLoader {...loaderProps} />
+          <IModelLoader {...loaderProps} selectionStorage={loaderProps.selectionStorage} />
         ) : (
           <FillCentered>
             {IModelApp.localization.getLocalizedString(

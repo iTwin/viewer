@@ -22,6 +22,7 @@ import { useLocation } from "react-router-dom";
 
 import { viewerRpcs } from "../../../common/ViewerConfig";
 import { IModelMergeItemsProvider } from "../../extensions";
+import { unifiedSelectionStorage } from "../../selectionStorage";
 
 export interface ViewerRouteState {
   filePath?: string;
@@ -72,6 +73,7 @@ export const ViewerRoute = () => {
         new IModelMergeItemsProvider(),
       ]}
       enablePerformanceMonitors={true}
+      selectionStorage={unifiedSelectionStorage}
     />
   ) : null;
 };

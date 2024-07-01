@@ -8,7 +8,7 @@ import type { FrontstageConfig } from "@itwin/appui-react";
 import {
   ContentGroup,
   ContentGroupProvider,
-  UiFramework,
+  IModelViewportControl,
 } from "@itwin/appui-react";
 
 import { getAndSetViewState } from "../../../services/iModel";
@@ -18,6 +18,7 @@ import type {
   ViewerViewportControlOptions,
 } from "../../../types";
 import { UnifiedSelectionViewportControl } from "./UnifiedSelectionViewportControl";
+import { IModelConnection } from "@itwin/core-frontend";
 
 /**
  * Provide a default content group to the default frontstage
@@ -26,24 +27,29 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
   private _viewportOptions: ViewerViewportControlOptions | undefined;
   private _blankConnectionViewState: BlankConnectionViewState | undefined;
   private _viewCreatorOptions: ViewerViewCreator3dOptions | undefined;
+  private _syncWithUnifiedSelectionStorage: boolean | undefined;
+  private _iModelConnection: IModelConnection | undefined;
 
   constructor(
     viewportOptions?: ViewerViewportControlOptions,
     viewCreatorOptions?: ViewerViewCreator3dOptions,
-    blankConnectionViewStateOptions?: BlankConnectionViewState
+    blankConnectionViewStateOptions?: BlankConnectionViewState,
+    syncWithUnifiedSelectionStorage?: boolean,
+    iModelConnection?: IModelConnection,
   ) {
     super();
     this._viewportOptions = viewportOptions;
     this._blankConnectionViewState = blankConnectionViewStateOptions;
     this._viewCreatorOptions = viewCreatorOptions;
+    this._syncWithUnifiedSelectionStorage = syncWithUnifiedSelectionStorage;
+    this._iModelConnection = iModelConnection;
   }
 
   public async contentGroup(_config: FrontstageConfig): Promise<ContentGroup> {
-    const iModelConnection = UiFramework.getIModelConnection();
     let viewState;
-    if (iModelConnection) {
+    if (this._iModelConnection) {
       viewState = await getAndSetViewState(
-        iModelConnection,
+        this._iModelConnection,
         this._viewportOptions,
         this._viewCreatorOptions,
         this._blankConnectionViewState
@@ -55,11 +61,11 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
       contents: [
         {
           id: "iTwinViewer.UnifiedSelectionViewport",
-          classId: UnifiedSelectionViewportControl,
+          classId: this._syncWithUnifiedSelectionStorage ? IModelViewportControl : UnifiedSelectionViewportControl,
           applicationData: {
             ...this._viewportOptions,
             viewState,
-            iModelConnection,
+            iModelConnection: this._iModelConnection,
           },
         },
       ],

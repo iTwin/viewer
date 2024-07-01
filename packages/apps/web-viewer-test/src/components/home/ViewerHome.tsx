@@ -34,6 +34,9 @@ import {
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";
+import { ECSchemaRpcInterface } from "@itwin/ecschema-rpcinterface-common";
+import { unifiedSelectionStorage } from "../../selectionStorage";
+
 /**
  * Test a viewer that uses auth configuration provided at startup
  * @returns
@@ -143,6 +146,11 @@ const ViewerHome: React.FC = () => {
             value: process.env.IMJS_BING_MAPS_KEY ?? "",
           },
         }}
+        backendConfiguration={{
+          defaultBackend: {
+            rpcInterfaces: [ECSchemaRpcInterface],
+          },
+        }}
         notifications={new AppNotificationManager()}
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
@@ -190,6 +198,7 @@ const ViewerHome: React.FC = () => {
         backstageItems={backstageItems2}
         defaultUiConfig={{cornerButton: <Itwin />}}
         // renderSys={{doIdleWork: true}}
+        selectionStorage={unifiedSelectionStorage}
       />
     </div>
   );
