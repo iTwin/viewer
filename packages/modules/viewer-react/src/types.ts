@@ -49,6 +49,8 @@ export type OptionalToUndefinedUnion<T> = {
   [P in keyof Required<T>]: T[P] | undefined;
 };
 
+
+
 /**
  * options for configuration of 3D view
  */
@@ -158,6 +160,9 @@ export type ConnectedViewerProps = {
   iTwinId: string;
   iModelId: string;
   changeSetId?: string;
+  context?: string,
+  document?: string
+  component?: string
 };
 export type FileViewerProps = {
   /** Path to local snapshot or briefcase */

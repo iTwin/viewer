@@ -32,7 +32,7 @@ type AuthClientProps = {
   iTwinId?: never;
 }
 
-type ConnectedViewerWebProps = ConnectedViewerProps & Required<Pick<WebInitializerParams, "authClient">>;
+type ConnectedViewerWebProps = ConnectedViewerProps & Required<Pick<WebInitializerParams, "authClient">> & {context?: string, component?: string, document?: string}
 type BlankViewerWebProps = BlankViewerProps & AuthClientProps;
 
 export type WebViewerProps = XOR<ConnectedViewerWebProps, BlankViewerWebProps> &

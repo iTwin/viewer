@@ -34,6 +34,8 @@ import {
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";
+import { PresentationRpcInterface } from "@itwin/presentation-common";
+import { BentleyCloudRpcManager } from "@itwin/core-common";
 /**
  * Test a viewer that uses auth configuration provided at startup
  * @returns
@@ -106,6 +108,19 @@ const ViewerHome: React.FC = () => {
     await TreeWidget.initialize();
     await PropertyGridManager.initialize();
     await MeasureTools.startup();
+    const client = BentleyCloudRpcManager.getClientForInterface(PresentationRpcInterface);
+    
+    // const changeset = "a718eb55-ad62-41a0-8dee-54d657442d03" // document
+    // const iModelId =  "a5a4da4b-a2a8-4511-b05d-d97d02da86ff" // component
+
+  //   const response = client.getSelectionScopes({iTwinId: "72adad30-c07c-465d-a1fe-2f2dfac950a4", iModelId, changeset: {id: changeset}, key: `${iModelId}:${changeset}`}, {}).then(res => { 
+  //     console.log("selection scope")
+  //     console.log(res)
+  //    }).catch(err => {
+  //     console.log("IN ERR")
+  //       console.log(err)
+  //    })
+  //   console.log(client)
   }, []);
 
   const backstageItems: ViewerBackstageItem[] = [
@@ -131,12 +146,16 @@ const ViewerHome: React.FC = () => {
   return (
     <div style={{ height: "100vh" }}>
       <Viewer
+        context="72adad30-c07c-465d-a1fe-2f2dfac950a4"
+        document="a640fdfd-f50e-4682-bc28-f61bd5de4fba"
+        component="6a08ee60-8ae8-4356-972e-f0fed625db59"
         authClient={authClient}
         iTwinId={iTwinId ?? ""}
         iModelId={iModelId ?? ""}
         changeSetId={changesetId}
         theme={ColorTheme.Dark}
         loadingComponent={<Loader />}
+        // hubAccess={}
         mapLayerOptions={{
           BingMaps: {
             key: "key",
@@ -189,6 +208,18 @@ const ViewerHome: React.FC = () => {
         // ]}
         backstageItems={backstageItems2}
         defaultUiConfig={{cornerButton: <Itwin />}}
+        backendConfiguration={
+         {defaultBackend: {
+          config: {
+            info: {
+              title: "visualization",
+              version: "v4components"
+            },
+            uriPrefix: "http://localhost:3001"
+          }
+        },
+      }
+        }
         // renderSys={{doIdleWork: true}}
       />
     </div>

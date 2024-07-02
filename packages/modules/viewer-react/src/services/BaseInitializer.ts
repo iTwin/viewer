@@ -33,6 +33,7 @@ import { RealityDataAccessClient } from "@itwin/reality-data-client";
 import { ViewerPerformance } from "../services/telemetry";
 import type { ViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
+import { ChangesetIndexAndId } from "@itwin/core-common";
 
 const syncSelectionCount = () => {
   Presentation.selection.selectionChange.addListener(
@@ -237,15 +238,24 @@ export const getIModelAppOptions = (
     console.log(`resources served from: ${viewerHome}`);
   }
 
+  const changeset: ChangesetIndexAndId = {
+    id: "a718eb55-ad62-41a0-8dee-54d657442d03",
+    index: 0
+  }
+
   const hubAccess =
-    options?.hubAccess ??
-    new FrontendIModelsAccess(
-      new IModelsClient({
-        api: {
-          baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/imodels`,
-        },
-      })
-    );
+    options?.hubAccess ?? {
+      getChangesetFromNamedVersion: async () => changeset,
+      getLatestChangeset: async () => changeset,
+      getChangesetFromVersion: async () => changeset,
+    }
+    // new FrontendIModelsAccess(
+    //   new IModelsClient({
+    //     api: {
+    //       baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/imodels`,
+    //     },
+    //   })
+    // );
 
   const localization =
     options?.localization ??
