@@ -5,8 +5,6 @@
 
 import { AppNotificationManager, ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
-// import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
-import { ReactComponent as Itwin } from "../../images/itwin.svg";
 import {
   MeasureTools,
   MeasureToolsUiItemsProvider,
@@ -25,17 +23,17 @@ import {
 } from "@itwin/tree-widget-react";
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
 import {
-  Viewer,
   BackstageItemsProvider,
+  Viewer,
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
   ViewerStatusbarItemsProvider,
 } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
+// import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
+import { ReactComponent as Itwin } from "../../images/itwin.svg";
 import { history } from "../routing";
-import { PresentationRpcInterface } from "@itwin/presentation-common";
-import { BentleyCloudRpcManager } from "@itwin/core-common";
 /**
  * Test a viewer that uses auth configuration provided at startup
  * @returns
@@ -108,19 +106,6 @@ const ViewerHome: React.FC = () => {
     await TreeWidget.initialize();
     await PropertyGridManager.initialize();
     await MeasureTools.startup();
-    const client = BentleyCloudRpcManager.getClientForInterface(PresentationRpcInterface);
-    
-    // const changeset = "a718eb55-ad62-41a0-8dee-54d657442d03" // document
-    // const iModelId =  "a5a4da4b-a2a8-4511-b05d-d97d02da86ff" // component
-
-  //   const response = client.getSelectionScopes({iTwinId: "72adad30-c07c-465d-a1fe-2f2dfac950a4", iModelId, changeset: {id: changeset}, key: `${iModelId}:${changeset}`}, {}).then(res => { 
-  //     console.log("selection scope")
-  //     console.log(res)
-  //    }).catch(err => {
-  //     console.log("IN ERR")
-  //       console.log(err)
-  //    })
-  //   console.log(client)
   }, []);
 
   const backstageItems: ViewerBackstageItem[] = [
@@ -140,7 +125,7 @@ const ViewerHome: React.FC = () => {
       groupPriority: 20,
       itemPriority: 100,
       label: "BackstageItems 1",
-    }
+    },
   ];
 
   return (
@@ -207,19 +192,19 @@ const ViewerHome: React.FC = () => {
         //   }),
         // ]}
         backstageItems={backstageItems2}
-        defaultUiConfig={{cornerButton: <Itwin />}}
-        backendConfiguration={
-         {defaultBackend: {
-          config: {
-            info: {
-              title: "visualization",
-              version: "v4components"
+        defaultUiConfig={{ cornerButton: <Itwin /> }}
+        backendConfiguration={{
+          defaultBackend: {
+            config: {
+              info: {
+                title: "visualization",
+                version: "v4components",
+              },
+              uriPrefix: "http://localhost:3001",
             },
-            uriPrefix: "http://localhost:3001"
-          }
-        },
-      }
-        }
+            rpcInterfaces: [],
+          },
+        }}
         // renderSys={{doIdleWork: true}}
       />
     </div>

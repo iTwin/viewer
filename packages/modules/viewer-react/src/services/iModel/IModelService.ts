@@ -5,6 +5,7 @@
 
 import { UiFramework } from "@itwin/appui-react";
 import { Guid } from "@itwin/core-bentley";
+import type { IModelRpcProps } from "@itwin/core-common";
 import { IModelVersion } from "@itwin/core-common";
 import type { IModelConnection, ViewState } from "@itwin/core-frontend";
 import {
@@ -32,7 +33,6 @@ const getVersion = async (
   if (changeSetId) {
     return IModelVersion.asOfChangeSet(changeSetId);
   }
-
   const accessToken = await IModelApp.authorizationClient?.getAccessToken();
   if (accessToken && IModelApp.hubAccess) {
     try {
@@ -59,7 +59,11 @@ export const openRemoteIModel = async (
     // get the version to query
     const version = await getVersion(iModelId, changeSetId);
     // create a new connection
-    return await CheckpointConnection.openRemote(iTwinId, iModelId, version);
+    return await ComponentCheckpointConnection.openRemote(
+      iTwinId,
+      iModelId,
+      version
+    );
   } catch (error) {
     console.log(`Error opening the iModel connection: ${error}`);
     throw error;
@@ -156,3 +160,34 @@ export const getViewState = async (
   }
   return view;
 };
+
+class ComponentCheckpointConnection extends CheckpointConnection {
+  private static myProps: Partial<IModelRpcProps> = {};
+
+  public static override async openRemote(
+    iTwinId: string,
+    iModelId: string,
+    version: IModelVersion = IModelVersion.latest()
+  ): Promise<CheckpointConnection> {
+    const accessToken = await IModelApp.getAccessToken();
+    const changeset = await IModelApp.hubAccess!.getLatestChangeset({
+      iModelId,
+      accessToken,
+    });
+
+    this.myProps = {
+      iTwinId,
+      iModelId,
+      changeset,
+    };
+
+    return super.openRemote(iTwinId, iModelId, version);
+  }
+
+  public override getRpcProps(): IModelRpcProps {
+    return {
+      key: this._fileKey,
+      ...ComponentCheckpointConnection.myProps,
+    };
+  }
+}
