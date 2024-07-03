@@ -243,19 +243,20 @@ export const getIModelAppOptions = (
     index: 0
   }
 
-  const hubAccess =
-    options?.hubAccess ?? {
+    const hubAccessClient = options?.isComponent ?     {
       getChangesetFromNamedVersion: async () => changeset,
       getLatestChangeset: async () => changeset,
       getChangesetFromVersion: async () => changeset,
-    }
-    // new FrontendIModelsAccess(
-    //   new IModelsClient({
-    //     api: {
-    //       baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/imodels`,
-    //     },
-    //   })
-    // );
+    } :new FrontendIModelsAccess(
+      new IModelsClient({
+        api: {
+          baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/imodels`,
+        },
+      })
+    );
+
+  const hubAccess =
+    options?.hubAccess ?? hubAccessClient;
 
   const localization =
     options?.localization ??

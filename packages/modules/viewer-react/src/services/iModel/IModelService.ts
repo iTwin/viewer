@@ -5,7 +5,7 @@
 
 import { UiFramework } from "@itwin/appui-react";
 import { Guid } from "@itwin/core-bentley";
-import type { IModelRpcProps } from "@itwin/core-common";
+import type { ChangesetIndexAndId, IModelRpcProps } from "@itwin/core-common";
 import { IModelVersion } from "@itwin/core-common";
 import type { IModelConnection, ViewState } from "@itwin/core-frontend";
 import {
@@ -59,6 +59,10 @@ export const openRemoteIModel = async (
     // get the version to query
     const version = await getVersion(iModelId, changeSetId);
     // create a new connection
+    ComponentCheckpointConnection.changeset = {
+      index: 0,
+      id: changeSetId!
+    }
     return await ComponentCheckpointConnection.openRemote(
       iTwinId,
       iModelId,
@@ -163,17 +167,14 @@ export const getViewState = async (
 
 class ComponentCheckpointConnection extends CheckpointConnection {
   private static myProps: Partial<IModelRpcProps> = {};
+  public static changeset: ChangesetIndexAndId;
 
   public static override async openRemote(
     iTwinId: string,
     iModelId: string,
     version: IModelVersion = IModelVersion.latest()
   ): Promise<CheckpointConnection> {
-    const accessToken = await IModelApp.getAccessToken();
-    const changeset = await IModelApp.hubAccess!.getLatestChangeset({
-      iModelId,
-      accessToken,
-    });
+    const changeset = ComponentCheckpointConnection.changeset;
 
     this.myProps = {
       iTwinId,

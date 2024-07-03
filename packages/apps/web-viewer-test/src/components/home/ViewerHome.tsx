@@ -131,16 +131,12 @@ const ViewerHome: React.FC = () => {
   return (
     <div style={{ height: "100vh" }}>
       <Viewer
-        context="72adad30-c07c-465d-a1fe-2f2dfac950a4"
-        document="a640fdfd-f50e-4682-bc28-f61bd5de4fba"
-        component="6a08ee60-8ae8-4356-972e-f0fed625db59"
         authClient={authClient}
         iTwinId={iTwinId ?? ""}
         iModelId={iModelId ?? ""}
         changeSetId={changesetId}
         theme={ColorTheme.Dark}
         loadingComponent={<Loader />}
-        // hubAccess={}
         mapLayerOptions={{
           BingMaps: {
             key: "key",
@@ -193,6 +189,7 @@ const ViewerHome: React.FC = () => {
         // ]}
         backstageItems={backstageItems2}
         defaultUiConfig={{ cornerButton: <Itwin /> }}
+      
         backendConfiguration={{
           defaultBackend: {
             config: {
@@ -205,6 +202,7 @@ const ViewerHome: React.FC = () => {
             rpcInterfaces: [],
           },
         }}
+        isComponent={true}
         // renderSys={{doIdleWork: true}}
       />
     </div>

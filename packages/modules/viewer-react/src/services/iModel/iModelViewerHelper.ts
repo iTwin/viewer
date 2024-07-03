@@ -73,20 +73,7 @@ export const gatherRequiredViewerProps = ({
   extents,
   location,
   changeSetId,
-  context,
-  component,
-  document
 }: ModelLoaderProps & any): RequiredViewerProps | undefined => {
-  return {iTwinId,
-  iModelId,
-  filePath,
-  readonly,
-  extents,
-  location,
-  changeSetId,
-  context,
-  component,
-  document}
   if (filePath) {
     return { filePath, readonly };
   }

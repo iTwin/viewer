@@ -36,11 +36,66 @@ export class RpcInitializer {
    * @param options: BackendConfiguration
    * @returns void
    */
-  public registerClients(options?: BackendConfiguration) {
+  public registerClients(options?: BackendConfiguration & {isComponent?: boolean}) {
     const formattedOptions = this.formatDefaultBackendOptions(options);
-    const protocol = class ComponentRpcProtocol extends BentleyCloudRpcProtocol {
-      public override pathPrefix: string = formattedOptions.uriPrefix!;
-      public info = formattedOptions.info;
+    
+    BentleyCloudRpcManager.initializeClient(
+      formattedOptions,
+      this.getSupportedRpcs(options?.defaultBackend?.rpcInterfaces)
+    );
+
+    if (!options?.customBackends) {
+      return;
+    }
+
+    for (const { config, rpcInterfaces } of options.customBackends) {
+      BentleyCloudRpcManager.initializeClient(config, rpcInterfaces);
+    }
+  }
+
+  /**
+   * Merges user-supplied RpcInterfaces with default RpcInterfaces
+   * @param additionalRpcInterfaces
+   * @returns RpcInterfaceDefinition<RpcInterface>
+   */
+  public getSupportedRpcs = (
+    additionalRpcInterfaces: RpcInterfaceDefinition<RpcInterface>[] = []
+  ): RpcInterfaceDefinition<RpcInterface>[] => {
+    return [
+      IModelReadRpcInterface,
+      IModelTileRpcInterface,
+      PresentationRpcInterface,
+      ...additionalRpcInterfaces,
+    ];
+  };
+
+  /**
+   * Reconciles user provided rpc configuration with default values.
+   * @param options: BackendConfiguration
+   * @returns BentleyCloudRpcParams
+   */
+  private formatDefaultBackendOptions(
+    options?: BackendConfiguration & {isComponent?: boolean}
+  ): BentleyCloudRpcParams &
+    Required<Pick<BentleyCloudRpcParams, "uriPrefix">> &
+    Required<Pick<BentleyCloudRpcParams, "info">>  & {protocol?: RpcProtocol}{
+
+    const userUriPrefix = options?.defaultBackend?.config?.uriPrefix;
+    const userTitle = options?.defaultBackend?.config?.info?.title;
+    const userVersion = options?.defaultBackend?.config?.info?.version;
+    const { info, uriPrefix } = this.getDefaultInfo();
+    const _options = {
+      ...options,
+      info: {
+        title: userTitle ?? info.title,
+        version: userVersion ?? info.version,
+      },
+      uriPrefix: userUriPrefix ?? uriPrefix,
+      protocol: undefined
+    } 
+    const componentProtocol = class ComponentRpcProtocol extends BentleyCloudRpcProtocol {
+      public override pathPrefix: string = _options.uriPrefix!;
+      public info = _options.info;
 
       public override supplyPathForOperation(
         operation: RpcOperation,
@@ -92,55 +147,12 @@ export class RpcInitializer {
         return `${prefix}/${appTitle}/${appVersion}/mode/1/imodel/context/${context}/component/${component}/document/${document}/${operationId}`;
       }
     };
-    BentleyCloudRpcManager.initializeClient(
-      { ...formattedOptions, protocol },
-      this.getSupportedRpcs(options?.defaultBackend?.rpcInterfaces)
-    );
 
-    if (!options?.customBackends) {
-      return;
+    if (options?.isComponent) {
+      (_options.protocol as unknown as typeof BentleyCloudRpcProtocol) = componentProtocol;
     }
-  }
 
-  /**
-   * Merges user-supplied RpcInterfaces with default RpcInterfaces
-   * @param additionalRpcInterfaces
-   * @returns RpcInterfaceDefinition<RpcInterface>
-   */
-  public getSupportedRpcs = (
-    additionalRpcInterfaces: RpcInterfaceDefinition<RpcInterface>[] = []
-  ): RpcInterfaceDefinition<RpcInterface>[] => {
-    return [
-      IModelReadRpcInterface,
-      IModelTileRpcInterface,
-      PresentationRpcInterface,
-      ...additionalRpcInterfaces,
-    ];
-  };
-
-  /**
-   * Reconciles user provided rpc configuration with default values.
-   * @param options: BackendConfiguration
-   * @returns BentleyCloudRpcParams
-   */
-  private formatDefaultBackendOptions(
-    options?: BackendConfiguration
-  ): BentleyCloudRpcParams &
-    Required<Pick<BentleyCloudRpcParams, "uriPrefix">> &
-    Required<Pick<BentleyCloudRpcParams, "info">> {
-    const userUriPrefix = options?.defaultBackend?.config?.uriPrefix;
-    const userTitle = options?.defaultBackend?.config?.info?.title;
-    const userVersion = options?.defaultBackend?.config?.info?.version;
-    const { info, uriPrefix } = this.getDefaultInfo();
-
-    return {
-      ...options,
-      info: {
-        title: userTitle ?? info.title,
-        version: userVersion ?? info.version,
-      },
-      uriPrefix: userUriPrefix ?? uriPrefix,
-    };
+    return _options;
   }
 
   private getDefaultInfo() {

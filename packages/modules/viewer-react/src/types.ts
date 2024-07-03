@@ -142,6 +142,8 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   extensions?: ExtensionProvider[];
   /** Props for presentation initialization */
   presentationProps?: PresentationProps
+  /** Set to true to view a component */
+  isComponent?: boolean;
 }
 export type RequiredViewerProps = XOR<
   XOR<ConnectedViewerProps, FileViewerProps>,
@@ -160,9 +162,6 @@ export type ConnectedViewerProps = {
   iTwinId: string;
   iModelId: string;
   changeSetId?: string;
-  context?: string,
-  document?: string
-  component?: string
 };
 export type FileViewerProps = {
   /** Path to local snapshot or briefcase */
@@ -201,6 +200,7 @@ const iTwinViewerInitializerParamSample: OptionalToUndefinedUnion<ViewerInitiali
     extensions: undefined,
     userPreferences: undefined,
     presentationProps: undefined,
+    isComponent: undefined
   };
 
 export const iTwinViewerInitializerParamList = Object.keys(
