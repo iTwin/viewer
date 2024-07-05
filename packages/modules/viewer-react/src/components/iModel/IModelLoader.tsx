@@ -73,7 +73,6 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       viewCreatorOptions,
       blankConnectionViewState,
       syncWithUnifiedSelectionStorage: !!selectionStorage,
-      iModelConnection: connection,
     });
 
   useTheme(theme);
