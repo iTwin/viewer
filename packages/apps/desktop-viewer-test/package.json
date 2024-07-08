@@ -96,7 +96,8 @@
     "rimraf": "^3.0.2",
     "sass": "^1.64.2",
     "typescript": "~5.0.4",
-    "webpack": "^5.1.2"
+    "webpack": "^5.1.2",
+    "ws": "^7.5.10"
   },
   "eslintConfig": {
     "extends": [
