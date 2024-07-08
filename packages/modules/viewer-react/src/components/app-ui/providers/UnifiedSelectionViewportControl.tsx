@@ -3,11 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  IModelConnectedViewport,
-  IModelViewportControl,
-  UiFramework,
-} from "@itwin/appui-react";
+import { IModelViewportControl, UiFramework } from "@itwin/appui-react";
 import type { IModelConnection, ScreenViewport } from "@itwin/core-frontend";
 import type { ViewStateProp } from "@itwin/imodel-components-react";
 import { ViewportComponent } from "@itwin/imodel-components-react";
@@ -15,9 +11,8 @@ import { viewWithUnifiedSelection } from "@itwin/presentation-components";
 import * as React from "react";
 
 const UnifiedSelectionViewport = viewWithUnifiedSelection(ViewportComponent);
-const UnifiedSelectionIModelConnectedViewport = viewWithUnifiedSelection(
-  IModelConnectedViewport
-);
+const UnifiedSelectionIModelConnectedViewport =
+  viewWithUnifiedSelection(ViewportComponent);
 
 /** @internal fork of IModelViewportControl from AppUI, to provide Unified Selection
  * https://github.com/iTwin/appui/blob/master/ui/appui-react/src/appui-react/content/IModelViewport.tsx
@@ -29,8 +24,9 @@ export class UnifiedSelectionViewportControl extends IModelViewportControl {
 
   /** Get the React component that will contain the Viewport */
   protected override getImodelConnectedViewportReactElement(): React.ReactNode {
-    return (
+    return this._iModelConnection ? (
       <UnifiedSelectionIModelConnectedViewport
+        imodel={this._iModelConnection}
         viewportRef={(v: ScreenViewport) => {
           this.viewport = v;
           // for convenience, if window defined bind viewport to window
@@ -45,7 +41,7 @@ export class UnifiedSelectionViewportControl extends IModelViewportControl {
         }}
         getViewOverlay={this._getViewOverlay}
       />
-    );
+    ) : null;
   }
 
   protected override getImodelViewportReactElement(
