@@ -7,11 +7,10 @@ import "@testing-library/jest-dom/extend-expect";
 
 import { ColorTheme, UiFramework, UiItemsManager } from "@itwin/appui-react";
 import { Cartographic, ColorDef } from "@itwin/core-common";
-import { BlankConnection, SnapshotConnection } from "@itwin/core-frontend";
+import { BlankConnection } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
-import { act, render, waitFor } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import React from "react";
-import { createRoot } from "react-dom/client";
 
 import { IModelViewer } from "../../../components/iModel";
 import IModelLoader from "../../../components/iModel/IModelLoader";
@@ -37,8 +36,8 @@ jest.mock("@itwin/appui-react", () => {
     },
     UiItemsManager: {
       ...jest.createMockFromModule<any>("@itwin/appui-react").UiItemsManager,
-      getBackstageItems: jest.fn().mockReturnValue([])
-    }
+      getBackstageItems: jest.fn().mockReturnValue([]),
+    },
   };
 });
 jest.mock("@itwin/appui-abstract");
@@ -101,6 +100,7 @@ jest.mock("@itwin/core-frontend", () => {
       create: jest.fn().mockReturnValue({
         isBlankConnection: () => true,
         isOpen: true,
+        close: jest.fn(),
       } as any),
     },
     ItemField: {},
@@ -138,21 +138,12 @@ jest.mock("../../../components/iModel/IModelViewer", () => ({
 const mockITwinId = "mockITwinId";
 const mockIModelId = "mockIModelId";
 
-const root_div = document.createElement("div");
-root_div.id = "root";
-document.body.appendChild(root_div);
-const container = document.getElementById("root");
-
 describe("IModelLoader", () => {
   beforeEach(() => {
     jest.spyOn(IModelServices, "openRemoteIModel").mockResolvedValue({
       isBlankConnection: () => false,
       iModelId: mockIModelId,
       close: jest.fn(),
-      isOpen: true,
-    } as any);
-    jest.spyOn(SnapshotConnection, "openFile").mockResolvedValue({
-      isBlankConnection: () => true,
       isOpen: true,
     } as any);
 
@@ -196,8 +187,6 @@ describe("IModelLoader", () => {
   });
 
   it("creates a blank connection with iTwinId passed in blankConnection", async () => {
-    const root = createRoot(container!);
-
     const blankConnectionProps = {
       location: Cartographic.fromDegrees({
         longitude: 0,
@@ -215,28 +204,21 @@ describe("IModelLoader", () => {
       },
     };
 
-    act(() =>
-      root.render(
-        <IModelLoader
-          {...blankConnectionProps}
-          blankConnectionViewState={blankConnectionViewState}
-        />
-      )
+    const { getByTestId } = render(
+      <IModelLoader
+        {...blankConnectionProps}
+        blankConnectionViewState={blankConnectionViewState}
+      />
     );
 
+    await waitFor(() => getByTestId("viewer"));
     expect(BlankConnection.create).toHaveBeenCalledWith({
       ...blankConnectionProps,
       name: "Blank Connection",
     });
-
-    act(() => {
-      root.unmount();
-    });
   });
 
   it("creates a blank connection with iTwinId passed separate from blankConnection", async () => {
-    const root = createRoot(container!);
-
     const blankConnectionProps: BlankViewerProps = {
       location: Cartographic.fromDegrees({
         longitude: 0,
@@ -253,24 +235,19 @@ describe("IModelLoader", () => {
       },
     };
 
-    act(() => {
-      root.render(
-        <IModelLoader
-          {...blankConnectionProps}
-          blankConnectionViewState={blankConnectionViewState}
-          iTwinId={mockITwinId}
-        />
-      );
-    });
+    const { getByTestId } = render(
+      <IModelLoader
+        {...blankConnectionProps}
+        blankConnectionViewState={blankConnectionViewState}
+        iTwinId={mockITwinId}
+      />
+    );
 
+    await waitFor(() => getByTestId("viewer"));
     expect(BlankConnection.create).toHaveBeenCalledWith({
       ...blankConnectionProps,
       iTwinId: mockITwinId,
       name: "Blank Connection",
-    });
-
-    act(() => {
-      root.unmount();
     });
   });
 
@@ -350,7 +327,9 @@ describe("IModelLoader", () => {
 
     result.unmount();
 
-    expect(connection.close).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(connection.close).toHaveBeenCalled();
+    });
   });
 
   it("closes connection between model ids change", async () => {
@@ -373,7 +352,10 @@ describe("IModelLoader", () => {
     );
 
     await waitFor(() => result.getByTestId("viewer"));
-    expect(connection.close).toHaveBeenCalled();
+
+    await waitFor(() => {
+      expect(connection.close).toHaveBeenCalled();
+    });
   });
 
   it("closes connection between iTwin ids change", async () => {
@@ -396,7 +378,9 @@ describe("IModelLoader", () => {
     );
 
     await waitFor(() => result.getByTestId("viewer"));
-    expect(connection.close).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(connection.close).toHaveBeenCalled();
+    });
   });
 
   it("renders a custom loading component", async () => {

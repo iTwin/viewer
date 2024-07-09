@@ -27,7 +27,11 @@ const viewerFrontendMain = async () => {
 
   document.documentElement.classList.add(`iui-theme-dark`);
 
-  root.render(<App />);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
 };
 
 viewerFrontendMain(); // eslint-disable-line @typescript-eslint/no-floating-promises

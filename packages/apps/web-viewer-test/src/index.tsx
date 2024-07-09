@@ -19,9 +19,9 @@ const root = createRoot(container!); // createRoot(container!) if you use TypeSc
 UiFramework.childWindows.useCreateRoot(createRoot);
 
 root.render(
-  // <React.StrictMode>
-  <App />
-  // </React.StrictMode>
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change
