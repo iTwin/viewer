@@ -5,7 +5,6 @@
 
 import React from "react";
 import { SchemaContext } from "@itwin/ecschema-metadata";
-import { ECSchemaRpcLocater } from "@itwin/ecschema-rpcinterface-common";
 import { SelectionStorage, enableUnifiedSelectionSyncWithIModel } from "@itwin/unified-selection";
 import { createCachingECClassHierarchyInspector } from "@itwin/presentation-shared";
 import { createECSchemaProvider, createECSqlQueryExecutor } from "@itwin/presentation-core-interop";
@@ -17,15 +16,15 @@ type SelectionScope = ReturnType<Parameters<typeof enableUnifiedSelectionSyncWit
 interface UseUnifiedSelectionSyncProps {
   iModelConnection?: IModelConnection;
   selectionStorage?: SelectionStorage;
+  getSchemaContext?: (imodel: IModelConnection) => SchemaContext;
 }
 
-export function useUnifiedSelectionSync({ iModelConnection, selectionStorage }: UseUnifiedSelectionSyncProps) {
+export function useUnifiedSelectionSync({ iModelConnection, selectionStorage, getSchemaContext }: UseUnifiedSelectionSyncProps) {
   React.useEffect(() => {
-    if (!iModelConnection || !selectionStorage) {
+    if (!iModelConnection || !selectionStorage || !getSchemaContext) {
       return;
     }
-    const schemaContext = new SchemaContext();
-    schemaContext.addLocater(new ECSchemaRpcLocater(iModelConnection.getRpcProps()));
+    const schemaContext = getSchemaContext(iModelConnection);
     return enableUnifiedSelectionSyncWithIModel({
       imodelAccess: {
         ...createECSqlQueryExecutor(iModelConnection),

@@ -52,6 +52,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     backstageItems, // eslint-disable-line deprecation/deprecation
     loadingComponent,
     selectionStorage,
+    getSchemaContext,
   } = viewerProps;
 
   const providers = useMemo<UiItemsProvider[]>(() => {
@@ -63,7 +64,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   }, [uiProviders, backstageItems]);
 
   useUiProviders(providers);
-  useUnifiedSelectionSync({ iModelConnection: connection, selectionStorage })
+  useUnifiedSelectionSync({ iModelConnection: connection, selectionStorage, getSchemaContext })
 
   const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
     useFrontstages({

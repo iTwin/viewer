@@ -32,8 +32,9 @@ import type {
   XAndY,
   XYAndZ,
 } from "@itwin/core-geometry";
-import { PresentationProps } from "@itwin/presentation-frontend";
-import { SelectionStorage } from "@itwin/unified-selection";
+import type { SchemaContext } from "@itwin/ecschema-metadata";
+import type { PresentationProps } from "@itwin/presentation-frontend";
+import type { SelectionStorage } from "@itwin/unified-selection";
 
 export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
@@ -103,8 +104,10 @@ export interface LoaderProps {
   viewCreatorOptions?: ViewerViewCreator3dOptions;
   /** Component to show when loading iModel key */
   loadingComponent?: React.ReactNode;
-  /** unified selection storage to synchronize with */
+  /** unified selection storage to synchronize with. Should be passed together with `getSchemaContext` */
   selectionStorage?: SelectionStorage;
+  /** function for getting a schema context for an iModel. Should be passed together with `selectionStorage` */
+  getSchemaContext?: (imodel: IModelConnection) => SchemaContext
 }
 
 export type ViewerCommonProps = ViewerInitializerParams & LoaderProps;
@@ -143,8 +146,10 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   extensions?: ExtensionProvider[];
   /** Props for presentation initialization */
   presentationProps?: PresentationProps;
-  /** unified selection storage to synchronize with */
+  /** unified selection storage to synchronize with. Should be passed together with `getSchemaContext` */
   selectionStorage?: SelectionStorage;
+  /** function for getting a schema context for an iModel. Should be passed together with `selectionStorage` */
+  getSchemaContext?: (imodel: IModelConnection) => SchemaContext
 }
 export type RequiredViewerProps = XOR<
   XOR<ConnectedViewerProps, FileViewerProps>,
@@ -202,6 +207,7 @@ const iTwinViewerInitializerParamSample: OptionalToUndefinedUnion<ViewerInitiali
     userPreferences: undefined,
     presentationProps: undefined,
     selectionStorage: undefined,
+    getSchemaContext: undefined,
   };
 
 export const iTwinViewerInitializerParamList = Object.keys(

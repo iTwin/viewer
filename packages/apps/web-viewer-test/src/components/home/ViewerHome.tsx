@@ -35,7 +35,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "../routing";
 import { ECSchemaRpcInterface } from "@itwin/ecschema-rpcinterface-common";
-import { unifiedSelectionStorage } from "../../selectionStorage";
+import { getSchemaContext, unifiedSelectionStorage } from "../../selectionStorage";
 
 /**
  * Test a viewer that uses auth configuration provided at startup
@@ -199,6 +199,7 @@ const ViewerHome: React.FC = () => {
         defaultUiConfig={{cornerButton: <Itwin />}}
         // renderSys={{doIdleWork: true}}
         selectionStorage={unifiedSelectionStorage}
+        getSchemaContext={getSchemaContext}
       />
     </div>
   );
