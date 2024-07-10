@@ -22,7 +22,9 @@ function getSchemaContext(imodel: IModelConnection) {
     context = new SchemaContext();
     context.addLocater(new ECSchemaRpcLocater(imodel.getRpcProps()));
     imodelSchemaContextsCache.set(imodel.key, context);
-    imodel.onClose.addListener(() => imodelSchemaContextsCache.delete(imodel.key));
+    imodel.onClose.addListener(() => {
+      imodelSchemaContextsCache.delete(imodel.key);
+    });
   }
   return context;
 }

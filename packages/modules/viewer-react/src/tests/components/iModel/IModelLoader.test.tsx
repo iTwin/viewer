@@ -23,6 +23,7 @@ import type {
 } from "../../../types";
 import { TestUiProvider, TestUiProvider2 } from "../../mocks/MockUiProviders";
 import * as unifiedSelection from "@itwin/unified-selection";
+import { SchemaContext } from "@itwin/ecschema-metadata";
 
 jest.mock("react-redux", () => ({
   ...jest.requireActual<any>("react-redux"),
@@ -327,7 +328,7 @@ describe("IModelLoader", () => {
       .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
     const result = render(
-      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} selectionStorage={unifiedSelection.createStorage()} />
+      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} selectionStorage={unifiedSelection.createStorage()} getSchemaContext={() => new SchemaContext()} />
     );
     await waitFor(() => result.getByTestId("viewer"));
 
