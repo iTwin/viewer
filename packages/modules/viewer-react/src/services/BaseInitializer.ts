@@ -52,12 +52,14 @@ const syncSelectionCount = () => {
       // NOTE: add a one time event listener to the iModelConnection.selectionSet.onChanged to restore the numSelected to the value that we
       // extracted from the Presentation.selection.selectionChange event in order to override the numSelected AppUi sets from
       // the iModelConnection.selectionSet.onChanged that will treat assemblies as a collection of elements instead of a single one
-      UiFramework.getIModelConnection()?.selectionSet.onChanged.addOnce((_) => {
-        UiFramework.dispatchActionToStore(
-          SessionStateActionId.SetNumItemsSelected,
-          numSelected
-        );
-      });
+      UiFramework.getIModelConnection()?.selectionSet.onChanged.addOnce(
+        (_ev) => {
+          UiFramework.dispatchActionToStore(
+            SessionStateActionId.SetNumItemsSelected,
+            numSelected
+          );
+        }
+      );
     }
   );
 };
@@ -236,15 +238,15 @@ export const getIModelAppOptions = (
     console.log(`resources served from: ${viewerHome}`);
   }
 
-  const hubAccessClient = new FrontendIModelsAccess(
-    new IModelsClient({
-      api: {
-        baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/imodels`,
-      },
-    })
-  );
-
-  const hubAccess = options?.hubAccess ?? hubAccessClient;
+  const hubAccess =
+    options?.hubAccess ??
+    new FrontendIModelsAccess(
+      new IModelsClient({
+        api: {
+          baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/imodels`,
+        },
+      })
+    );
 
   const localization =
     options?.localization ??
