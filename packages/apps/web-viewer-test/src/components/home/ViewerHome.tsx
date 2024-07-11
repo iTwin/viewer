@@ -221,18 +221,6 @@ const ViewerHome: React.FC = () => {
         // ]}
         backstageItems={backstageItems2}
         defaultUiConfig={{ cornerButton: <Itwin /> }}
-        backendConfiguration={{
-          defaultBackend: {
-            config: {
-              info: {
-                title: "visualization",
-                version: "v4components",
-              },
-              uriPrefix: "http://localhost:3001",
-            },
-            rpcInterfaces: [],
-          },
-        }}
         // renderSys={{doIdleWork: true}}
       />
     </div>
