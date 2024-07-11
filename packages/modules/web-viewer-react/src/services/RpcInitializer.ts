@@ -4,25 +4,20 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type {
-  BentleyCloudRpcParams,
+  BentleyCloudRpcProtocol,
   RpcInterface,
   RpcInterfaceDefinition,
-  RpcRequest,
 } from "@itwin/core-common";
-import { RpcOperation } from "@itwin/core-common";
 import {
   BentleyCloudRpcManager,
-  BentleyCloudRpcProtocol,
-  BentleyStatus,
-  IModelError,
   IModelReadRpcInterface,
   IModelTileRpcInterface,
-  RpcConfiguration,
   RpcProtocol,
 } from "@itwin/core-common";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 
-import type { BackendConfiguration } from "../types";
+import type { BackendConfiguration, DefaultBackendOptions } from "../types";
+import { createComponentRpcProtocol } from "./ComponentRpcProtocol";
 
 /**
  * The RpcInitializer handles registration of backends/instantiates RpcInterface clients.
@@ -36,9 +31,8 @@ export class RpcInitializer {
    * @param options: BackendConfiguration
    * @returns void
    */
-  public registerClients(options?: BackendConfiguration & {isComponent?: boolean}) {
+  public registerClients(options?: BackendConfiguration) {
     const formattedOptions = this.formatDefaultBackendOptions(options);
-    
     BentleyCloudRpcManager.initializeClient(
       formattedOptions,
       this.getSupportedRpcs(options?.defaultBackend?.rpcInterfaces)
@@ -75,11 +69,8 @@ export class RpcInitializer {
    * @returns BentleyCloudRpcParams
    */
   private formatDefaultBackendOptions(
-    options?: BackendConfiguration & {isComponent?: boolean}
-  ): BentleyCloudRpcParams &
-    Required<Pick<BentleyCloudRpcParams, "uriPrefix">> &
-    Required<Pick<BentleyCloudRpcParams, "info">>  & {protocol?: RpcProtocol}{
-
+    options?: BackendConfiguration
+  ): DefaultBackendOptions {
     const userUriPrefix = options?.defaultBackend?.config?.uriPrefix;
     const userTitle = options?.defaultBackend?.config?.info?.title;
     const userVersion = options?.defaultBackend?.config?.info?.version;
@@ -91,65 +82,12 @@ export class RpcInitializer {
         version: userVersion ?? info.version,
       },
       uriPrefix: userUriPrefix ?? uriPrefix,
-      protocol: undefined
-    } 
-    const componentProtocol = class ComponentRpcProtocol extends BentleyCloudRpcProtocol {
-      public override pathPrefix: string = _options.uriPrefix!;
-      public info = _options.info;
-
-      public override supplyPathForOperation(
-        operation: RpcOperation,
-        request: RpcRequest<any> | undefined
-      ): string {
-        const prefix = this.pathPrefix;
-        const appTitle = this.info.title;
-        const appVersion = this.info.version;
-        const operationId = `${operation.interfaceDefinition.interfaceName}-${operation.interfaceVersion}-${operation.operationName}`;
-
-        let appMode = "";
-        let context = "";
-        let component = "";
-        let document = "";
-
-        /* Note: The changesetId field is omitted in the route in the case of ReadWrite connections since the connection is generally expected to be at the
-         * latest version and not some specific changeset. Also, for the first version (before any changesets), the changesetId in the route is arbitrarily
-         * set to "0" instead of an empty string, since the latter is more un-intuitive for a route. However, in all other use cases, including the changesetId
-         * held by the IModelRpcProps itself, the changesetId of "" (i.e., empty string) signifies the first version - this is more intuitive and retains
-         * compatibility with the majority of use cases. */
-
-        if (request === undefined) {
-          appMode = "{modeId}";
-          context = "{iTwinId}";
-          component = "{iModelId}";
-          document = "{changeSetId}";
-        } else {
-          let token =
-            operation.policy.token(request) || RpcOperation.fallbackToken;
-
-          if (!token || !token.iModelId) {
-            if (RpcConfiguration.disableRoutingValidation) {
-              token = { key: "" };
-            } else {
-              throw new IModelError(
-                BentleyStatus.ERROR,
-                "Invalid iModelToken for RPC operation request"
-              );
-            }
-          }
-
-          context = encodeURIComponent(token.iTwinId || "");
-          component = encodeURIComponent(token.iModelId!);
-
-          document = token.changeset?.id || "0";
-          appMode = "1";
-        }
-
-        return `${prefix}/${appTitle}/${appVersion}/mode/1/imodel/context/${context}/component/${component}/document/${document}/${operationId}`;
-      }
+      protocol: undefined,
     };
 
     if (options?.isComponent) {
-      (_options.protocol as unknown as typeof BentleyCloudRpcProtocol) = componentProtocol;
+      (_options.protocol as unknown as typeof BentleyCloudRpcProtocol) =
+        createComponentRpcProtocol(uriPrefix, info);
     }
 
     return _options;

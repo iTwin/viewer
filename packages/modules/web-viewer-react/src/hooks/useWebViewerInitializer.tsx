@@ -36,6 +36,11 @@ export const useWebViewerInitializer = (options: WebViewerProps) => {
     ) {
       setWebViewerInitialized(false);
       setWebViewerInitOptions(initializationOptions);
+
+      if (options.backendConfiguration) {
+        options.backendConfiguration.isComponent = true;
+      }
+
       void WebInitializer.startWebViewer(options).then(() => {
         void WebInitializer.initialized.then(() => {
           setWebViewerInitialized(true);

@@ -8,9 +8,11 @@ import type {
   BentleyCloudRpcParams,
   RpcInterface,
   RpcInterfaceDefinition,
+  RpcProtocol,
 } from "@itwin/core-common";
 import type {
   BlankViewerProps,
+  ComponentProps,
   ConnectedViewerProps,
   ViewerAuthorizationClient,
   ViewerCommonProps,
@@ -23,19 +25,23 @@ export type WebInitializerParams = ViewerCommonProps & {
   authClient?: ViewerAuthorizationClient;
 };
 
-type AuthClientProps = {
-  authClient: ViewerAuthorizationClient;
-  iTwinId: string;
-}
-| {
-  authClient?: ViewerAuthorizationClient;
-  iTwinId?: never;
-}
+type AuthClientProps =
+  | {
+      authClient: ViewerAuthorizationClient;
+      iTwinId: string;
+    }
+  | {
+      authClient?: ViewerAuthorizationClient;
+      iTwinId?: never;
+    };
 
-type ConnectedViewerWebProps = ConnectedViewerProps & Required<Pick<WebInitializerParams, "authClient">> & {context?: string, component?: string, document?: string}
+type ConnectedViewerWebProps = ConnectedViewerProps & ViewerAuthorizationClient;
 type BlankViewerWebProps = BlankViewerProps & AuthClientProps;
 
-export type WebViewerProps = XOR<ConnectedViewerWebProps, BlankViewerWebProps> &
+export type WebViewerProps = XOR<
+  XOR<ConnectedViewerWebProps, BlankViewerWebProps>,
+  ComponentProps & ViewerAuthorizationClient
+> &
   WebInitializerParams;
 
 /**
@@ -48,9 +54,15 @@ export type BackendConfiguration = {
     }
   >;
   customBackends?: Backend[];
+  isComponent?: boolean;
 };
 
 type Backend = {
   rpcInterfaces: RpcInterfaceDefinition<RpcInterface>[];
   config: BentleyCloudRpcParams;
 };
+
+export type DefaultBackendOptions = BentleyCloudRpcParams &
+  Required<Pick<BentleyCloudRpcParams, "uriPrefix" | "info">> & {
+    protocol?: RpcProtocol;
+  };

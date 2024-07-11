@@ -33,7 +33,6 @@ import { RealityDataAccessClient } from "@itwin/reality-data-client";
 import { ViewerPerformance } from "../services/telemetry";
 import type { ViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
-import { ChangesetIndexAndId } from "@itwin/core-common";
 
 const syncSelectionCount = () => {
   Presentation.selection.selectionChange.addListener(
@@ -53,14 +52,12 @@ const syncSelectionCount = () => {
       // NOTE: add a one time event listener to the iModelConnection.selectionSet.onChanged to restore the numSelected to the value that we
       // extracted from the Presentation.selection.selectionChange event in order to override the numSelected AppUi sets from
       // the iModelConnection.selectionSet.onChanged that will treat assemblies as a collection of elements instead of a single one
-      UiFramework.getIModelConnection()?.selectionSet.onChanged.addOnce(
-        (_ev) => {
-          UiFramework.dispatchActionToStore(
-            SessionStateActionId.SetNumItemsSelected,
-            numSelected
-          );
-        }
-      );
+      UiFramework.getIModelConnection()?.selectionSet.onChanged.addOnce((_) => {
+        UiFramework.dispatchActionToStore(
+          SessionStateActionId.SetNumItemsSelected,
+          numSelected
+        );
+      });
     }
   );
 };
@@ -72,6 +69,7 @@ const syncActiveSelectionScope = () => {
   Presentation.selection.scopes.activeScope =
     UiFramework.getActiveSelectionScope();
 
+  // eslint-disable-next-line deprecation/deprecation
   SyncUiEventDispatcher.onSyncUiEvent.addListener((args: UiSyncEventArgs) => {
     if (args.eventIds.has(SessionStateActionId.SetSelectionScope)) {
       // After 4.x the AppUI no longer has a presentation dep and therefore we have the responsibility of
@@ -238,25 +236,15 @@ export const getIModelAppOptions = (
     console.log(`resources served from: ${viewerHome}`);
   }
 
-  const changeset: ChangesetIndexAndId = {
-    id: "a718eb55-ad62-41a0-8dee-54d657442d03",
-    index: 0
-  }
+  const hubAccessClient = new FrontendIModelsAccess(
+    new IModelsClient({
+      api: {
+        baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/imodels`,
+      },
+    })
+  );
 
-    const hubAccessClient = options?.isComponent ?     {
-      getChangesetFromNamedVersion: async () => changeset,
-      getLatestChangeset: async () => changeset,
-      getChangesetFromVersion: async () => changeset,
-    } :new FrontendIModelsAccess(
-      new IModelsClient({
-        api: {
-          baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/imodels`,
-        },
-      })
-    );
-
-  const hubAccess =
-    options?.hubAccess ?? hubAccessClient;
+  const hubAccess = options?.hubAccess ?? hubAccessClient;
 
   const localization =
     options?.localization ??

@@ -22,8 +22,8 @@ jest.mock("@itwin/appui-react", () => {
     },
     UiItemsManager: {
       ...jest.createMockFromModule<any>("@itwin/appui-react").UiItemsManager,
-      getBackstageItems: jest.fn().mockReturnValue([])
-    }
+      getBackstageItems: jest.fn().mockReturnValue([]),
+    },
   };
 });
 jest.mock("@itwin/presentation-frontend", () => {
@@ -87,6 +87,8 @@ jest.mock("@itwin/core-frontend", () => {
     BriefcaseConnection: {
       openFile: jest.fn(),
     },
+    FrontendLoggerCategory: {},
+    IModelConnection: jest.fn(),
   };
 });
 
@@ -187,5 +189,25 @@ describe("BaseViewer", () => {
 
     expect(loader).toBeInTheDocument();
     expect(IModelService.openLocalIModel).toHaveBeenCalledWith(fileName, false);
+  });
+
+  it("attempts to load a component ", async () => {
+    const { getByTestId } = render(
+      <BaseViewer
+        componentId="mockComponentId"
+        contextId="mockContextId"
+        documentId="mockDocumentId"
+        enablePerformanceMonitors={false}
+      />
+    );
+
+    const loader = await waitFor(() => getByTestId("loader-wrapper"));
+
+    expect(loader).toBeInTheDocument();
+    expect(IModelService.openRemoteComponent).toHaveBeenCalledWith(
+      "mockContextId",
+      "mockComponentId",
+      "mockDocumentId"
+    );
   });
 });

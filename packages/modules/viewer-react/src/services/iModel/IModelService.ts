@@ -5,7 +5,6 @@
 
 import { UiFramework } from "@itwin/appui-react";
 import { Guid } from "@itwin/core-bentley";
-import type { ChangesetIndexAndId, IModelRpcProps } from "@itwin/core-common";
 import { IModelVersion } from "@itwin/core-common";
 import type { IModelConnection, ViewState } from "@itwin/core-frontend";
 import {
@@ -21,6 +20,7 @@ import type {
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
 } from "../../types";
+import { ComponentConnection } from "./ComponentConnection";
 
 /** determine the proper version of the iModel to open
  * 1. If named versions exist, get the named version that contains the latest changeset
@@ -33,6 +33,7 @@ const getVersion = async (
   if (changeSetId) {
     return IModelVersion.asOfChangeSet(changeSetId);
   }
+
   const accessToken = await IModelApp.authorizationClient?.getAccessToken();
   if (accessToken && IModelApp.hubAccess) {
     try {
@@ -59,19 +60,23 @@ export const openRemoteIModel = async (
     // get the version to query
     const version = await getVersion(iModelId, changeSetId);
     // create a new connection
-    ComponentCheckpointConnection.changeset = {
-      index: 0,
-      id: changeSetId!
-    }
-    return await ComponentCheckpointConnection.openRemote(
-      iTwinId,
-      iModelId,
-      version
-    );
+    return await CheckpointConnection.openRemote(iTwinId, iModelId, version);
   } catch (error) {
     console.log(`Error opening the iModel connection: ${error}`);
     throw error;
   }
+};
+
+export const openRemoteComponent = async (
+  contextId: string,
+  componentId: string,
+  documentId: string
+): Promise<ComponentConnection> => {
+  return await ComponentConnection.openRemote(
+    contextId,
+    componentId,
+    documentId
+  );
 };
 
 /**
@@ -164,31 +169,3 @@ export const getViewState = async (
   }
   return view;
 };
-
-class ComponentCheckpointConnection extends CheckpointConnection {
-  private static myProps: Partial<IModelRpcProps> = {};
-  public static changeset: ChangesetIndexAndId;
-
-  public static override async openRemote(
-    iTwinId: string,
-    iModelId: string,
-    version: IModelVersion = IModelVersion.latest()
-  ): Promise<CheckpointConnection> {
-    const changeset = ComponentCheckpointConnection.changeset;
-
-    this.myProps = {
-      iTwinId,
-      iModelId,
-      changeset,
-    };
-
-    return super.openRemote(iTwinId, iModelId, version);
-  }
-
-  public override getRpcProps(): IModelRpcProps {
-    return {
-      key: this._fileKey,
-      ...ComponentCheckpointConnection.myProps,
-    };
-  }
-}

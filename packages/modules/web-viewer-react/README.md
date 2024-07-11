@@ -67,19 +67,24 @@ export const MyViewerComponent = () => {
   - Duration of startup to the creation of a view state for the iModel
   - Duration of startup until the last tile is loaded and rendered for the initial iModel view
 
-##### Connected iModel
+#### Connected iModel
 
-- `iTwinId` - GUID for the iTwin (project, asset, etc.) that contains the iModel that you wish to view
+- `iTwinId` - GUID for the iTwin that contains the iModel that you wish to view
 - `iModelId` - GUID for the iModel that you wish to view
 
-##### Blank Connections
+#### Connected Component (from component center)
+
+- `contextId` - GUID for the context that contains the below component
+- `componentId` - GUID for the component to view
+- `documentId` - GUID to the document containing a model design file.
+
+#### Blank Connections
 
 - `location` - The spatial location for the blank connection.
 - `extents` - The volume of interest, in meters, centered around location
 - `iTwinId` - GUID for the iTwin (project, asset, etc.) that contains the iModel that you wish to views
 - **Note**: The props above cannot be used in conjunction with iModelId
 - **Note**: `authClient` props will be optional if only `location` and `extents` props are supplied. However, if the `iTwinId` prop also is passed into the Viewer component, `authClient` will be required.
-
 
 #### Optional
 

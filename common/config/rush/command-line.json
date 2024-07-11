@@ -36,6 +36,16 @@
       "ignoreMissingScript": true,
       "ignoreDependencyOrder": true,
       "allowWarningsInSuccessfulBuild": true
+    },
+    {
+      "name": "lint:fix",
+      "commandKind": "bulk",
+      "summary": "Runs lint with --fix within each package",
+      "description": "Iterates through each package in the monorepo and runs the 'lint:fix' script",
+      "enableParallelism": true,
+      "ignoreMissingScript": true,
+      "ignoreDependencyOrder": true,
+      "allowWarningsInSuccessfulBuild": true
     }
   ],
   "parameters": []

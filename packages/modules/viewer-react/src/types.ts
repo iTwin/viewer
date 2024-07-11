@@ -32,7 +32,7 @@ import type {
   XAndY,
   XYAndZ,
 } from "@itwin/core-geometry";
-import { PresentationProps } from "@itwin/presentation-frontend";
+import type { PresentationProps } from "@itwin/presentation-frontend";
 
 export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
@@ -48,8 +48,6 @@ export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
 export type OptionalToUndefinedUnion<T> = {
   [P in keyof Required<T>]: T[P] | undefined;
 };
-
-
 
 /**
  * options for configuration of 3D view
@@ -141,15 +139,12 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   /** array of iTwin.js Extensions */
   extensions?: ExtensionProvider[];
   /** Props for presentation initialization */
-  presentationProps?: PresentationProps
-  /** Set to true to view a component */
-  isComponent?: boolean;
+  presentationProps?: PresentationProps;
 }
 export type RequiredViewerProps = XOR<
-  XOR<ConnectedViewerProps, FileViewerProps>,
+  XOR<XOR<ConnectedViewerProps, FileViewerProps>, ComponentProps>,
   BlankViewerProps
 >;
-
 export type ModelLoaderProps = Partial<
   ConnectedViewerProps & FileViewerProps & BlankViewerProps
 > &
@@ -178,6 +173,11 @@ export type BlankViewerProps = {
   iTwinId?: string;
 };
 
+export type ComponentProps = {
+  componentId: string;
+  contextId: string;
+  documentId: string;
+};
 /**
  * Maintain a list of initializer params for use in useBaseViewerInitializer
  * This list MUST match what is in the ViewerInitializerParams interface and should be updated as new properties are added/removed
@@ -200,7 +200,6 @@ const iTwinViewerInitializerParamSample: OptionalToUndefinedUnion<ViewerInitiali
     extensions: undefined,
     userPreferences: undefined,
     presentationProps: undefined,
-    isComponent: undefined
   };
 
 export const iTwinViewerInitializerParamList = Object.keys(

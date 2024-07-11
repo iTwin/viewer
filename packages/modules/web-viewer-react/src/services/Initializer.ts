@@ -75,7 +75,7 @@ export class WebInitializer {
         }
 
         const rpcInitializer = new RpcInitializer();
-        rpcInitializer.registerClients({...backendConfiguration, isComponent: optionsForIModelApp.isComponent}, );
+        rpcInitializer.registerClients({ ...backendConfiguration });
 
         ViewerPerformance.addMark("ViewerStarted");
         ViewerPerformance.addMeasure(
