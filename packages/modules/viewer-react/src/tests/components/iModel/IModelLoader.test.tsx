@@ -37,8 +37,8 @@ jest.mock("@itwin/appui-react", () => {
     },
     UiItemsManager: {
       ...jest.createMockFromModule<any>("@itwin/appui-react").UiItemsManager,
-      getBackstageItems: jest.fn().mockReturnValue([])
-    }
+      getBackstageItems: jest.fn().mockReturnValue([]),
+    },
   };
 });
 jest.mock("@itwin/appui-abstract");
@@ -126,6 +126,8 @@ jest.mock("@itwin/core-frontend", () => {
     SheetViewState: {
       className: "",
     },
+    FrontendLoggerCategory: {},
+    IModelConnection: jest.fn(),
   };
 });
 jest.mock("../../../services/iModel/IModelService");

@@ -84,6 +84,8 @@ jest.mock("@itwin/core-frontend", () => {
     SheetViewState: {
       className: "",
     },
+    FrontendLoggerCategory: {},
+    IModelConnection: jest.fn(),
   };
 });
 

@@ -20,6 +20,7 @@ import type {
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
 } from "../../types";
+import { ComponentConnection } from "./ComponentConnection";
 
 /** determine the proper version of the iModel to open
  * 1. If named versions exist, get the named version that contains the latest changeset
@@ -64,6 +65,18 @@ export const openRemoteIModel = async (
     console.log(`Error opening the iModel connection: ${error}`);
     throw error;
   }
+};
+
+export const openRemoteComponent = async (
+  contextId: string,
+  componentId: string,
+  documentId: string
+): Promise<ComponentConnection> => {
+  return await ComponentConnection.openRemote(
+    contextId,
+    componentId,
+    documentId
+  );
 };
 
 /**

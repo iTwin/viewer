@@ -5,8 +5,6 @@
 
 import { AppNotificationManager, ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
-// import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
-import { ReactComponent as Itwin } from "../../images/itwin.svg";
 import {
   MeasureTools,
   MeasureToolsUiItemsProvider,
@@ -18,34 +16,54 @@ import {
   PropertyGridUiItemsProvider,
   ShowHideNullValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
-// import LocalExtension from "@itwin/test-local-extension";
 import {
   TreeWidget,
   TreeWidgetUiItemsProvider,
 } from "@itwin/tree-widget-react";
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
 import {
-  Viewer,
   BackstageItemsProvider,
+  Viewer,
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
   ViewerStatusbarItemsProvider,
 } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
+import { ReactComponent as Itwin } from "../../images/itwin.svg";
 import { history } from "../routing";
+// import LocalExtension from "@itwin/test-local-extension";
+// import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
 /**
  * Test a viewer that uses auth configuration provided at startup
  * @returns
  */
 const ViewerHome: React.FC = () => {
-  const [iTwinId, setITwinId] = useState(process.env.IMJS_AUTH_CLIENT_ITWIN_ID);
+  const [iTwinId, setITwinId] = useState(
+    process.env.IMJS_AUTH_CLIENT_ITWIN_ID ?? ""
+  );
   const [iModelId, setIModelId] = useState(
-    process.env.IMJS_AUTH_CLIENT_IMODEL_ID
+    process.env.IMJS_AUTH_CLIENT_IMODEL_ID ?? ""
   );
   const [changesetId, setChangesetId] = useState(
     process.env.IMJS_AUTH_CLIENT_CHANGESET_ID
   );
+  const [documentId, setDocumentId] = useState(
+    process.env.IMJS_DOCUMENT_ID ?? ""
+  );
+  const [componentId, setComponentId] = useState(
+    process.env.IMJS_COMPONENT_ID ?? ""
+  );
+  const [contextId, setContextId] = useState(process.env.IMJS_CONTEXT_ID ?? "");
+
+  const allParams: Record<string, string | undefined> = {
+    iTwinId,
+    iModelId,
+    changesetId,
+    contextId,
+    componentId,
+    documentId,
+  };
 
   const authClient = useMemo(
     () =>
@@ -74,6 +92,7 @@ const ViewerHome: React.FC = () => {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
+
     if (urlParams.has("iTwinId")) {
       setITwinId(urlParams.get("iTwinId") as string);
     }
@@ -83,20 +102,30 @@ const ViewerHome: React.FC = () => {
     if (urlParams.has("changesetId")) {
       setChangesetId(urlParams.get("changesetId") as string);
     }
+
+    if (urlParams.has("contextId")) {
+      setContextId(urlParams.get("contextId") as string);
+    }
+
+    if (urlParams.has("componentId")) {
+      setComponentId(urlParams.get("componentId") as string);
+    }
+
+    if (urlParams.has("documentId")) {
+      setDocumentId(urlParams.get("documentId") as string);
+    }
   }, []);
 
   useEffect(() => {
-    let url = `viewer?iTwinId=${iTwinId}`;
-
-    if (iModelId) {
-      url = `${url}&iModelId=${iModelId}`;
+    let url = `viewer?`;
+    for (const param in allParams) {
+      if (allParams[param]) {
+        url += `${param}=${allParams[param]}&`;
+      }
     }
 
-    if (changesetId) {
-      url = `${url}&changesetId=${changesetId}`;
-    }
     history.push(url);
-  }, [iTwinId, iModelId, changesetId]);
+  }, [allParams]);
 
   const Loader = () => {
     return <div>Things are happening...</div>;
@@ -125,16 +154,20 @@ const ViewerHome: React.FC = () => {
       groupPriority: 20,
       itemPriority: 100,
       label: "BackstageItems 1",
-    }
+    },
   ];
 
   return (
     <div style={{ height: "100vh" }}>
       <Viewer
         authClient={authClient}
-        iTwinId={iTwinId ?? ""}
-        iModelId={iModelId ?? ""}
+        iTwinId={iTwinId}
+        iModelId={iModelId}
         changeSetId={changesetId}
+        // component props:
+        // contextId={contextId}
+        // componentId={componentId}
+        // documentId={documentId}
         theme={ColorTheme.Dark}
         loadingComponent={<Loader />}
         mapLayerOptions={{
@@ -188,7 +221,7 @@ const ViewerHome: React.FC = () => {
         //   }),
         // ]}
         backstageItems={backstageItems2}
-        defaultUiConfig={{cornerButton: <Itwin />}}
+        defaultUiConfig={{ cornerButton: <Itwin /> }}
         // renderSys={{doIdleWork: true}}
       />
     </div>

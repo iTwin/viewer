@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type {
-  BentleyCloudRpcParams,
+  BentleyCloudRpcProtocol,
   RpcInterface,
   RpcInterfaceDefinition,
 } from "@itwin/core-common";
@@ -12,10 +12,12 @@ import {
   BentleyCloudRpcManager,
   IModelReadRpcInterface,
   IModelTileRpcInterface,
+  RpcProtocol,
 } from "@itwin/core-common";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 
-import type { BackendConfiguration } from "../types";
+import type { BackendConfiguration, DefaultBackendOptions } from "../types";
+import { createComponentRpcProtocol } from "./ComponentRpcProtocol";
 
 /**
  * The RpcInitializer handles registration of backends/instantiates RpcInterface clients.
@@ -31,7 +33,6 @@ export class RpcInitializer {
    */
   public registerClients(options?: BackendConfiguration) {
     const formattedOptions = this.formatDefaultBackendOptions(options);
-
     BentleyCloudRpcManager.initializeClient(
       formattedOptions,
       this.getSupportedRpcs(options?.defaultBackend?.rpcInterfaces)
@@ -69,19 +70,27 @@ export class RpcInitializer {
    */
   private formatDefaultBackendOptions(
     options?: BackendConfiguration
-  ): BentleyCloudRpcParams {
+  ): DefaultBackendOptions {
     const userUriPrefix = options?.defaultBackend?.config?.uriPrefix;
     const userTitle = options?.defaultBackend?.config?.info?.title;
     const userVersion = options?.defaultBackend?.config?.info?.version;
     const { info, uriPrefix } = this.getDefaultInfo();
-
-    return {
+    const _options = {
+      ...options,
       info: {
         title: userTitle ?? info.title,
         version: userVersion ?? info.version,
       },
       uriPrefix: userUriPrefix ?? uriPrefix,
+      protocol: undefined,
     };
+
+    if (options?.isComponent) {
+      (_options.protocol as unknown as typeof BentleyCloudRpcProtocol) =
+        createComponentRpcProtocol(uriPrefix, info);
+    }
+
+    return _options;
   }
 
   private getDefaultInfo() {

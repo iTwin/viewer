@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { UiSyncEventArgs } from "@itwin/appui-abstract";
 import {
   AppNotificationManager,
   FrameworkAccuDraw,
@@ -71,7 +70,7 @@ const syncActiveSelectionScope = () => {
   Presentation.selection.scopes.activeScope =
     UiFramework.getActiveSelectionScope();
 
-  SyncUiEventDispatcher.onSyncUiEvent.addListener((args: UiSyncEventArgs) => {
+  SyncUiEventDispatcher.onSyncUiEvent.addListener((args) => {
     if (args.eventIds.has(SessionStateActionId.SetSelectionScope)) {
       // After 4.x the AppUI no longer has a presentation dep and therefore we have the responsibility of
       // syncing the Presentation.selection.scopes.activeScope with the AppUi's UiSyncEvent for SetSelectionScope
