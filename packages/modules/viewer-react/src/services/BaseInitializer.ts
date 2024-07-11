@@ -71,8 +71,7 @@ const syncActiveSelectionScope = () => {
   Presentation.selection.scopes.activeScope =
     UiFramework.getActiveSelectionScope();
 
-  // eslint-disable-next-line deprecation/deprecation
-  SyncUiEventDispatcher.onSyncUiEvent.addListener((args: UiSyncEventArgs) => {
+  SyncUiEventDispatcher.onSyncUiEvent.addListener((args) => {
     if (args.eventIds.has(SessionStateActionId.SetSelectionScope)) {
       // After 4.x the AppUI no longer has a presentation dep and therefore we have the responsibility of
       // syncing the Presentation.selection.scopes.activeScope with the AppUi's UiSyncEvent for SetSelectionScope
