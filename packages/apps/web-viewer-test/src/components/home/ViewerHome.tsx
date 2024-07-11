@@ -43,7 +43,7 @@ const ViewerHome: React.FC = () => {
     process.env.IMJS_AUTH_CLIENT_ITWIN_ID ?? ""
   );
   const [iModelId, setIModelId] = useState(
-    process.env.IMJS_AUTH_CLIENT_IMODEL_ID
+    process.env.IMJS_AUTH_CLIENT_IMODEL_ID ?? ""
   );
   const [changesetId, setChangesetId] = useState(
     process.env.IMJS_AUTH_CLIENT_CHANGESET_ID
@@ -56,14 +56,15 @@ const ViewerHome: React.FC = () => {
   );
   const [contextId, setContextId] = useState(process.env.IMJS_CONTEXT_ID ?? "");
 
-  const allParams = [
+  const allParams: Record<string, string | undefined> = {
     iTwinId,
     iModelId,
     changesetId,
     contextId,
     componentId,
     documentId,
-  ];
+  };
+
   const authClient = useMemo(
     () =>
       new BrowserAuthorizationClient({
@@ -117,15 +118,14 @@ const ViewerHome: React.FC = () => {
 
   useEffect(() => {
     let url = `viewer?`;
-    allParams.forEach((param) => {
-      const sep = url.endsWith("?") ? "" : "&";
-      if (param) {
-        url += `${sep}${param}`;
+    for (const param in allParams) {
+      if (allParams[param]) {
+        url += `${param}=${allParams[param]}&`;
       }
-    });
+    }
 
     history.push(url);
-  }, allParams);
+  }, [allParams]);
 
   const Loader = () => {
     return <div>Things are happening...</div>;
@@ -163,6 +163,7 @@ const ViewerHome: React.FC = () => {
         authClient={authClient}
         iTwinId={iTwinId}
         iModelId={iModelId}
+        changeSetId={changesetId}
         // component props:
         // contextId={contextId}
         // componentId={componentId}
