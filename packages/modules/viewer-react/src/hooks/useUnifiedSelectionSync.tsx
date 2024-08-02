@@ -11,7 +11,7 @@ import {
 } from "@itwin/presentation-core-interop";
 import { Presentation } from "@itwin/presentation-frontend";
 import { createCachingECClassHierarchyInspector } from "@itwin/presentation-shared";
-import type { type SelectionStorage } from "@itwin/unified-selection";
+import type { SelectionStorage } from "@itwin/unified-selection";
 import { enableUnifiedSelectionSyncWithIModel } from "@itwin/unified-selection";
 import React from "react";
 
