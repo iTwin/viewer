@@ -3,15 +3,23 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import React from "react";
-import type { SchemaContext } from "@itwin/ecschema-metadata";
-import { type SelectionStorage, enableUnifiedSelectionSyncWithIModel } from "@itwin/unified-selection";
-import { createCachingECClassHierarchyInspector } from "@itwin/presentation-shared";
-import { createECSchemaProvider, createECSqlQueryExecutor } from "@itwin/presentation-core-interop";
 import type { IModelConnection } from "@itwin/core-frontend";
+import type { SchemaContext } from "@itwin/ecschema-metadata";
+import {
+  createECSchemaProvider,
+  createECSqlQueryExecutor,
+} from "@itwin/presentation-core-interop";
 import { Presentation } from "@itwin/presentation-frontend";
+import { createCachingECClassHierarchyInspector } from "@itwin/presentation-shared";
+import type { type SelectionStorage } from "@itwin/unified-selection";
+import { enableUnifiedSelectionSyncWithIModel } from "@itwin/unified-selection";
+import React from "react";
 
-type SelectionScope = ReturnType<Parameters<typeof enableUnifiedSelectionSyncWithIModel>[0]["activeScopeProvider"]>;
+type SelectionScope = ReturnType<
+  Parameters<
+    typeof enableUnifiedSelectionSyncWithIModel
+  >[0]["activeScopeProvider"]
+>;
 
 interface UseUnifiedSelectionSyncProps {
   iModelConnection?: IModelConnection;
@@ -19,7 +27,11 @@ interface UseUnifiedSelectionSyncProps {
   getSchemaContext?: (imodel: IModelConnection) => SchemaContext;
 }
 
-export function useUnifiedSelectionSync({ iModelConnection, selectionStorage, getSchemaContext }: UseUnifiedSelectionSyncProps) {
+export function useUnifiedSelectionSync({
+  iModelConnection,
+  selectionStorage,
+  getSchemaContext,
+}: UseUnifiedSelectionSyncProps) {
   React.useEffect(() => {
     if (!iModelConnection || !selectionStorage || !getSchemaContext) {
       return;
@@ -28,7 +40,9 @@ export function useUnifiedSelectionSync({ iModelConnection, selectionStorage, ge
     return enableUnifiedSelectionSyncWithIModel({
       imodelAccess: {
         ...createECSqlQueryExecutor(iModelConnection),
-        ...createCachingECClassHierarchyInspector({ schemaProvider: createECSchemaProvider(schemaContext) }),
+        ...createCachingECClassHierarchyInspector({
+          schemaProvider: createECSchemaProvider(schemaContext),
+        }),
         key: iModelConnection.key,
         hiliteSet: iModelConnection.hilited,
         selectionSet: iModelConnection.selectionSet,
@@ -36,7 +50,7 @@ export function useUnifiedSelectionSync({ iModelConnection, selectionStorage, ge
       selectionStorage,
       activeScopeProvider: getActiveScope,
     });
-  }, [iModelConnection, selectionStorage]);
+  }, [iModelConnection, selectionStorage, getSchemaContext]);
 }
 
 function getActiveScope(): SelectionScope {
@@ -48,25 +62,30 @@ function getActiveScope(): SelectionScope {
     return convertActiveScope(activeScope);
   }
   const convertedScope = convertActiveScope(activeScope.id);
-  if (typeof convertedScope !== "string" || convertedScope === "category" || convertedScope === "model") {
+  if (
+    typeof convertedScope !== "string" ||
+    convertedScope === "category" ||
+    convertedScope === "model"
+  ) {
     return convertedScope;
   }
   return {
     id: convertedScope,
-    ancestorLevel: "ancestorLevel" in activeScope ? activeScope.ancestorLevel : undefined,
-  }
+    ancestorLevel:
+      "ancestorLevel" in activeScope ? activeScope.ancestorLevel : undefined,
+  };
 }
 
 function convertActiveScope(scope: string): SelectionScope {
-  switch(scope) {
+  switch (scope) {
     case "assembly":
-      return { id: "element", ancestorLevel: 1 }
+      return { id: "element", ancestorLevel: 1 };
     case "top-assembly":
-      return { id: "element", ancestorLevel: -1 }
+      return { id: "element", ancestorLevel: -1 };
     case "functional-assembly":
-      return { id: "functional", ancestorLevel: 1 }
+      return { id: "functional", ancestorLevel: 1 };
     case "functional-top-assembly":
-      return { id: "functional", ancestorLevel: -1 }
+      return { id: "functional", ancestorLevel: -1 };
     case "functional-element":
       return "functional";
     case "element":
