@@ -4,11 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from "react";
-import { SchemaContext } from "@itwin/ecschema-metadata";
-import { SelectionStorage, enableUnifiedSelectionSyncWithIModel } from "@itwin/unified-selection";
+import type { SchemaContext } from "@itwin/ecschema-metadata";
+import { type SelectionStorage, enableUnifiedSelectionSyncWithIModel } from "@itwin/unified-selection";
 import { createCachingECClassHierarchyInspector } from "@itwin/presentation-shared";
 import { createECSchemaProvider, createECSqlQueryExecutor } from "@itwin/presentation-core-interop";
-import { IModelConnection } from "@itwin/core-frontend";
+import type { IModelConnection } from "@itwin/core-frontend";
 import { Presentation } from "@itwin/presentation-frontend";
 
 type SelectionScope = ReturnType<Parameters<typeof enableUnifiedSelectionSyncWithIModel>[0]["activeScopeProvider"]>;
