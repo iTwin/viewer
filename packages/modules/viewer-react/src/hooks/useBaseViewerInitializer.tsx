@@ -16,7 +16,7 @@ export const useBaseViewerInitializer = (
 ) => {
   const [baseViewerInitOptions, setBaseViewerInitOptions] =
     useState<ViewerCommonProps>();
-  const [baseViewerInitalized, setBaseViewerInitalized] = useState(false);
+  const [baseViewerInitialized, setBaseViewerInitialized] = useState(false);
   const isMounted = useIsMounted();
 
   // only re-initialize when initialize options change
@@ -32,10 +32,10 @@ export const useBaseViewerInitializer = (
         !isEqual(initializationOptions, baseViewerInitOptions))
     ) {
       setBaseViewerInitOptions(initializationOptions);
-      setBaseViewerInitalized(false);
+      setBaseViewerInitialized(false);
       void BaseInitializer.initialize(options).then(() => {
         void BaseInitializer.initialized.then(() => {
-          setBaseViewerInitalized(true);
+          setBaseViewerInitialized(true);
         });
       });
     }
@@ -44,5 +44,5 @@ export const useBaseViewerInitializer = (
     }
   }, [options, delay, baseViewerInitOptions, initializationOptions, isMounted]);
 
-  return baseViewerInitalized;
+  return baseViewerInitialized;
 };
