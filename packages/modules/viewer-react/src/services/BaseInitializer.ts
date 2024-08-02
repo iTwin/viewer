@@ -193,17 +193,7 @@ export class BaseInitializer {
       yield UiFramework.initialize(undefined);
 
       // initialize Presentation
-      yield Presentation.initialize({
-        ...viewerOptions?.presentationProps,
-        ...(viewerOptions?.selectionStorage
-          ? {
-              selection: {
-                ...viewerOptions.presentationProps?.selection,
-                selectionStorage: viewerOptions.selectionStorage,
-              },
-            }
-          : {}),
-      });
+      yield Presentation.initialize(viewerOptions?.presentationProps);
 
       // Sync selection count & active selection scope between Presentation and AppUi. Runs after the Presentation is initialized.
       syncSelectionCount();

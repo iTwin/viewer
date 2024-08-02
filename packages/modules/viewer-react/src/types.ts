@@ -81,6 +81,13 @@ export interface ViewerViewportControlOptions
     | ((iModelConnection: IModelConnection) => Promise<ViewState>);
 }
 
+export interface UnifiedSelectionProps {
+  /** Unified selection storage to synchronize with. Requires `getSchemaContext` prop to also be supplied. */
+  selectionStorage?: SelectionStorage;
+  /** Function for getting schema context for an iModel. */
+  getSchemaContext?: (imodel: IModelConnection) => SchemaContext;
+}
+
 export interface LoaderProps {
   /** color theme */
   theme?: ColorTheme | string;
@@ -104,13 +111,9 @@ export interface LoaderProps {
   viewCreatorOptions?: ViewerViewCreator3dOptions;
   /** Component to show when loading iModel key */
   loadingComponent?: React.ReactNode;
-  /** unified selection storage to synchronize with. Should be passed together with `getSchemaContext` */
-  selectionStorage?: SelectionStorage;
-  /** function for getting a schema context for an iModel. Should be passed together with `selectionStorage` */
-  getSchemaContext?: (imodel: IModelConnection) => SchemaContext
 }
 
-export type ViewerCommonProps = ViewerInitializerParams & LoaderProps;
+export type ViewerCommonProps = ViewerInitializerParams & LoaderProps & UnifiedSelectionProps;
 
 // Note: When updating this, also update getIModelAppOptions
 export type ViewerIModelAppOptions = Pick<
@@ -146,10 +149,6 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   extensions?: ExtensionProvider[];
   /** Props for presentation initialization */
   presentationProps?: PresentationProps;
-  /** unified selection storage to synchronize with. Should be passed together with `getSchemaContext` */
-  selectionStorage?: SelectionStorage;
-  /** function for getting a schema context for an iModel. Should be passed together with `selectionStorage` */
-  getSchemaContext?: (imodel: IModelConnection) => SchemaContext
 }
 export type RequiredViewerProps = XOR<
   XOR<ConnectedViewerProps, FileViewerProps>,
@@ -159,7 +158,8 @@ export type RequiredViewerProps = XOR<
 export type ModelLoaderProps = Partial<
   ConnectedViewerProps & FileViewerProps & BlankViewerProps
 > &
-  LoaderProps;
+  LoaderProps &
+  UnifiedSelectionProps;
 
 export type ViewerProps = RequiredViewerProps & ViewerCommonProps;
 export type ViewerLoaderProps = RequiredViewerProps & LoaderProps;
@@ -206,8 +206,6 @@ const iTwinViewerInitializerParamSample: OptionalToUndefinedUnion<ViewerInitiali
     extensions: undefined,
     userPreferences: undefined,
     presentationProps: undefined,
-    selectionStorage: undefined,
-    getSchemaContext: undefined,
   };
 
 export const iTwinViewerInitializerParamList = Object.keys(

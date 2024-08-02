@@ -4,11 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { useEffect, useMemo, useState } from "react";
-
 import { BaseInitializer } from "../services/BaseInitializer";
-import type { ViewerCommonProps } from "../types";
 import { getInitializationOptions, isEqual } from "../utilities";
 import { useIsMounted } from "./useIsMounted";
+
+import type { ViewerCommonProps, ViewerInitializerParams } from "../types";
 
 export const useBaseViewerInitializer = (
   options?: ViewerCommonProps,
@@ -33,7 +33,8 @@ export const useBaseViewerInitializer = (
     ) {
       setBaseViewerInitOptions(initializationOptions);
       setBaseViewerInitialized(false);
-      void BaseInitializer.initialize(options).then(() => {
+      const initializerParams = overridePresentationProps(options);
+      void BaseInitializer.initialize(initializerParams).then(() => {
         void BaseInitializer.initialized.then(() => {
           setBaseViewerInitialized(true);
         });
@@ -46,3 +47,22 @@ export const useBaseViewerInitializer = (
 
   return baseViewerInitialized;
 };
+
+function overridePresentationProps(inputProps: ViewerCommonProps | undefined): ViewerInitializerParams | undefined {
+  return inputProps
+    ? {
+        ...inputProps,
+        presentationProps: {
+          ...inputProps.presentationProps,
+          ...(inputProps.selectionStorage
+            ? {
+                selection: {
+                  ...inputProps.presentationProps?.selection,
+                  selectionStorage: inputProps.selectionStorage,
+                },
+              }
+            : {}),
+        },
+      }
+    : undefined;
+}
