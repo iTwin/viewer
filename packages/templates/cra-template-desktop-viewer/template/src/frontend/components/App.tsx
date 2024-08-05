@@ -22,6 +22,7 @@ import { viewerRpcs } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import { SettingsContextProvider } from "../services/SettingsContext";
 import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
+import { unifiedSelectionStorage } from "../selectionStorage";
 
 const App = () => {
   window.ITWIN_VIEWER_HOME = window.location.origin;
@@ -39,6 +40,7 @@ const App = () => {
       rpcInterfaces: viewerRpcs,
       additionalI18nNamespaces: ["iTwinDesktopViewer"],
       enablePerformanceMonitors: true,
+      selectionStorage: unifiedSelectionStorage,
       onIModelAppInit,
     }),
     [onIModelAppInit]

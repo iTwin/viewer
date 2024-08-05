@@ -8,6 +8,7 @@ import type { FrontstageConfig } from "@itwin/appui-react";
 import {
   ContentGroup,
   ContentGroupProvider,
+  IModelViewportControl,
   UiFramework,
 } from "@itwin/appui-react";
 
@@ -26,16 +27,19 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
   private _viewportOptions: ViewerViewportControlOptions | undefined;
   private _blankConnectionViewState: BlankConnectionViewState | undefined;
   private _viewCreatorOptions: ViewerViewCreator3dOptions | undefined;
+  private _syncWithUnifiedSelectionStorage: boolean | undefined;
 
   constructor(
     viewportOptions?: ViewerViewportControlOptions,
     viewCreatorOptions?: ViewerViewCreator3dOptions,
-    blankConnectionViewStateOptions?: BlankConnectionViewState
+    blankConnectionViewStateOptions?: BlankConnectionViewState,
+    syncWithUnifiedSelectionStorage?: boolean,
   ) {
     super();
     this._viewportOptions = viewportOptions;
     this._blankConnectionViewState = blankConnectionViewStateOptions;
     this._viewCreatorOptions = viewCreatorOptions;
+    this._syncWithUnifiedSelectionStorage = syncWithUnifiedSelectionStorage;
   }
 
   public async contentGroup(_config: FrontstageConfig): Promise<ContentGroup> {
@@ -55,7 +59,7 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
       contents: [
         {
           id: "iTwinViewer.UnifiedSelectionViewport",
-          classId: UnifiedSelectionViewportControl,
+          classId: this._syncWithUnifiedSelectionStorage ? IModelViewportControl : UnifiedSelectionViewportControl,
           applicationData: {
             ...this._viewportOptions,
             viewState,

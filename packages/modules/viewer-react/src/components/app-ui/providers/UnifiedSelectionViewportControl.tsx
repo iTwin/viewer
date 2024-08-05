@@ -15,9 +15,6 @@ import { viewWithUnifiedSelection } from "@itwin/presentation-components";
 import * as React from "react";
 
 const UnifiedSelectionViewport = viewWithUnifiedSelection(ViewportComponent);
-const UnifiedSelectionIModelConnectedViewport = viewWithUnifiedSelection(
-  IModelConnectedViewport
-);
 
 /** @internal fork of IModelViewportControl from AppUI, to provide Unified Selection
  * https://github.com/iTwin/appui/blob/master/ui/appui-react/src/appui-react/content/IModelViewport.tsx
@@ -30,7 +27,7 @@ export class UnifiedSelectionViewportControl extends IModelViewportControl {
   /** Get the React component that will contain the Viewport */
   protected override getImodelConnectedViewportReactElement(): React.ReactNode {
     return (
-      <UnifiedSelectionIModelConnectedViewport
+      <IModelConnectedViewport
         viewportRef={(v: ScreenViewport) => {
           this.viewport = v;
           // for convenience, if window defined bind viewport to window

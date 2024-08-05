@@ -4,11 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { useEffect, useMemo, useState } from "react";
-
 import { BaseInitializer } from "../services/BaseInitializer";
-import type { ViewerCommonProps } from "../types";
 import { getInitializationOptions, isEqual } from "../utilities";
 import { useIsMounted } from "./useIsMounted";
+
+import type { ViewerCommonProps, ViewerInitializerParams } from "../types";
 
 export const useBaseViewerInitializer = (
   options?: ViewerCommonProps,
@@ -16,7 +16,7 @@ export const useBaseViewerInitializer = (
 ) => {
   const [baseViewerInitOptions, setBaseViewerInitOptions] =
     useState<ViewerCommonProps>();
-  const [baseViewerInitalized, setBaseViewerInitalized] = useState(false);
+  const [baseViewerInitialized, setBaseViewerInitialized] = useState(false);
   const isMounted = useIsMounted();
 
   // only re-initialize when initialize options change
@@ -32,10 +32,11 @@ export const useBaseViewerInitializer = (
         !isEqual(initializationOptions, baseViewerInitOptions))
     ) {
       setBaseViewerInitOptions(initializationOptions);
-      setBaseViewerInitalized(false);
-      void BaseInitializer.initialize(options).then(() => {
+      setBaseViewerInitialized(false);
+      const initializerParams = overridePresentationProps(options);
+      void BaseInitializer.initialize(initializerParams).then(() => {
         void BaseInitializer.initialized.then(() => {
-          setBaseViewerInitalized(true);
+          setBaseViewerInitialized(true);
         });
       });
     }
@@ -44,5 +45,24 @@ export const useBaseViewerInitializer = (
     }
   }, [options, delay, baseViewerInitOptions, initializationOptions, isMounted]);
 
-  return baseViewerInitalized;
+  return baseViewerInitialized;
 };
+
+function overridePresentationProps(inputProps: ViewerCommonProps | undefined): ViewerInitializerParams | undefined {
+  return inputProps
+    ? {
+        ...inputProps,
+        presentationProps: {
+          ...inputProps.presentationProps,
+          ...(inputProps.selectionStorage
+            ? {
+                selection: {
+                  ...inputProps.presentationProps?.selection,
+                  selectionStorage: inputProps.selectionStorage,
+                },
+              }
+            : {}),
+        },
+      }
+    : undefined;
+}

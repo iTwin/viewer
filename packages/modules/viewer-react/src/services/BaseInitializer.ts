@@ -35,8 +35,10 @@ import type { ViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
 
 const syncSelectionCount = () => {
+  let removeListenerFunc: (() => void) | undefined;
   Presentation.selection.selectionChange.addListener(
     (args: SelectionChangeEventArgs, provider: ISelectionProvider) => {
+      removeListenerFunc?.();
       if (args.level !== 0) {
         // don't need to handle sub-selections
         return;
@@ -49,10 +51,10 @@ const syncSelectionCount = () => {
         numSelected
       );
 
-      // NOTE: add a one time event listener to the iModelConnection.selectionSet.onChanged to restore the numSelected to the value that we
+      // NOTE: add an event listener to the iModelConnection.selectionSet.onChanged to restore the numSelected to the value that we
       // extracted from the Presentation.selection.selectionChange event in order to override the numSelected AppUi sets from
       // the iModelConnection.selectionSet.onChanged that will treat assemblies as a collection of elements instead of a single one
-      UiFramework.getIModelConnection()?.selectionSet.onChanged.addOnce(
+      removeListenerFunc = UiFramework.getIModelConnection()?.selectionSet.onChanged.addListener(
         (_ev) => {
           UiFramework.dispatchActionToStore(
             SessionStateActionId.SetNumItemsSelected,
