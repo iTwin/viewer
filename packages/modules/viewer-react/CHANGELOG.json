@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "4.8.0",
+      "tag": "@itwin/viewer-react_v4.8.0",
+      "date": "Mon, 05 Aug 2024 06:05:01 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Integrated `@itwin/unified-selection` for unified selection handling when `SelectionStorage` is provided."
+          }
+        ]
+      }
+    },
+    {
       "version": "4.7.0",
       "tag": "@itwin/viewer-react_v4.7.0",
       "date": "Fri, 24 May 2024 16:04:17 GMT",

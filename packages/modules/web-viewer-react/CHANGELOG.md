@@ -1,6 +1,13 @@
 # Change Log - @itwin/web-viewer-react
 
-This log was last generated on Fri, 24 May 2024 16:04:17 GMT and should not be manually modified.
+This log was last generated on Mon, 05 Aug 2024 06:05:01 GMT and should not be manually modified.
+
+## 4.3.0
+Mon, 05 Aug 2024 06:05:01 GMT
+
+### Minor changes
+
+- Integrated `@itwin/unified-selection` for unified selection handling when `SelectionStorage` is provided.
 
 ## 4.2.5
 Fri, 24 May 2024 16:04:17 GMT
