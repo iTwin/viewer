@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Modifty accepted version for the peerDependency @itwin/presentation-components to allow version ^5.0.0 (^4.0.0 || ^5.0.0)",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
