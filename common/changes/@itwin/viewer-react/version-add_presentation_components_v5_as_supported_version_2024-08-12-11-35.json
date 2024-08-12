@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Bump @itwin/presentation-components from v4 to v5",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
