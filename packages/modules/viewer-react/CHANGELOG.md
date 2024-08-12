@@ -1,6 +1,14 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Mon, 05 Aug 2024 06:05:01 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Aug 2024 15:19:39 GMT and should not be manually modified.
+
+## 4.8.1
+Mon, 12 Aug 2024 15:19:39 GMT
+
+### Patches
+
+- Modifty accepted version for the peerDependency @itwin/presentation-components to allow version ^5.0.0 (^4.0.0 || ^5.0.0)
+- Bump @itwin/presentation-components from v4 to v5
 
 ## 4.8.0
 Mon, 05 Aug 2024 06:05:01 GMT
