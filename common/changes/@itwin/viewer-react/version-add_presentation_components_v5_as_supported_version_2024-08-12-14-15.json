@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Update lock file",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
