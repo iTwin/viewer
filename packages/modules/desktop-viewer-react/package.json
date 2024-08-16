@@ -23,7 +23,7 @@
     "rebuild": "npm run clean && npm run build"
   },
   "dependencies": {
-    "@itwin/imodels-client-management": "^4.0.0",
+    "@itwin/imodels-client-management": "^5.2.1",
     "@itwin/viewer-react": "workspace:*"
   },
   "devDependencies": {
@@ -47,7 +47,7 @@
     "@itwin/electron-authorization": "^0.15.0",
     "@itwin/imodel-components-react": "^4.0.0",
     "@itwin/presentation-common": "^4.7.3",
-    "@itwin/presentation-components": "^4.0.0",
+    "@itwin/presentation-components": "^5.0.0",
     "@itwin/presentation-frontend": "^4.7.3",
     "@itwin/webgl-compatibility": "^4.7.3",
     "@testing-library/jest-dom": "^4.2.4",
