@@ -3,6 +3,7 @@
     "useWorkspaces": true,
     "globalOverrides": {
       "braces": "^3.0.3",
-      "postcss": "^8.4.31"
+      "postcss": "^8.4.31",
+      "axios": "^1.7.4"
     }
   }

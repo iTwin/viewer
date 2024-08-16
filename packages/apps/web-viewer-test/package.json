@@ -24,7 +24,7 @@
     "@itwin/ecschema-rpcinterface-common": "^4.7.3",
     "@itwin/frontend-devtools": "^4.7.3",
     "@itwin/imodel-components-react": "^4.3.0",
-    "@itwin/imodels-access-frontend": "^4.0.4",
+    "@itwin/imodels-access-frontend": "^5.2.1",
     "@itwin/itwinui-react": "^2.12.0",
     "@itwin/measure-tools-react": "^0.13.0",
     "@itwin/presentation-common": "^4.7.3",
