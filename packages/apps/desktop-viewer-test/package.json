@@ -69,7 +69,7 @@
     "@itwin/measure-tools-react": "^0.13.0",
     "@itwin/presentation-backend": "^4.7.3",
     "@itwin/presentation-common": "^4.7.3",
-    "@itwin/presentation-components": "^4.0.1",
+    "@itwin/presentation-components": "^5.0.0",
     "@itwin/presentation-frontend": "^4.7.3",
     "@itwin/property-grid-react": "^1.0.0",
     "@itwin/tree-widget-react": "^1.0.0",
