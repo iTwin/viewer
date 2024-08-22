@@ -32,7 +32,9 @@ import type {
   XAndY,
   XYAndZ,
 } from "@itwin/core-geometry";
-import { PresentationProps } from "@itwin/presentation-frontend";
+import type { SchemaContext } from "@itwin/ecschema-metadata";
+import type { PresentationProps } from "@itwin/presentation-frontend";
+import type { SelectionStorage } from "@itwin/unified-selection";
 
 export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
@@ -79,6 +81,13 @@ export interface ViewerViewportControlOptions
     | ((iModelConnection: IModelConnection) => Promise<ViewState>);
 }
 
+export interface UnifiedSelectionProps {
+  /** Unified selection storage to synchronize with. Requires `getSchemaContext` prop to also be supplied. */
+  selectionStorage?: SelectionStorage;
+  /** Function for getting schema context for an iModel. */
+  getSchemaContext?: (imodel: IModelConnection) => SchemaContext;
+}
+
 export interface LoaderProps {
   /** color theme */
   theme?: ColorTheme | string;
@@ -104,7 +113,7 @@ export interface LoaderProps {
   loadingComponent?: React.ReactNode;
 }
 
-export type ViewerCommonProps = ViewerInitializerParams & LoaderProps;
+export type ViewerCommonProps = ViewerInitializerParams & LoaderProps & UnifiedSelectionProps;
 
 // Note: When updating this, also update getIModelAppOptions
 export type ViewerIModelAppOptions = Pick<
@@ -139,7 +148,7 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   /** array of iTwin.js Extensions */
   extensions?: ExtensionProvider[];
   /** Props for presentation initialization */
-  presentationProps?: PresentationProps
+  presentationProps?: PresentationProps;
 }
 export type RequiredViewerProps = XOR<
   XOR<ConnectedViewerProps, FileViewerProps>,
@@ -149,7 +158,8 @@ export type RequiredViewerProps = XOR<
 export type ModelLoaderProps = Partial<
   ConnectedViewerProps & FileViewerProps & BlankViewerProps
 > &
-  LoaderProps;
+  LoaderProps &
+  UnifiedSelectionProps;
 
 export type ViewerProps = RequiredViewerProps & ViewerCommonProps;
 export type ViewerLoaderProps = RequiredViewerProps & LoaderProps;

@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Tue, 26 Sep 2023 16:55:17 GMT and should not be manually modified.
+This log was last generated on Mon, 05 Aug 2024 06:05:01 GMT and should not be manually modified.
+
+## 4.2.0
+Mon, 05 Aug 2024 06:05:01 GMT
+
+### Minor changes
+
+- Integrated `@itwin/unified-selection` for unified selection handling when `SelectionStorage` is provided.
 
 ## 4.1.1
 Tue, 26 Sep 2023 16:55:17 GMT

@@ -14,12 +14,14 @@ import type {
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
 } from "../types";
+
 export interface UseFrontstagesProps {
   frontstages?: ViewerFrontstage[];
   defaultUiConfig?: ViewerDefaultFrontstageConfig;
   viewportOptions?: ViewerViewportControlOptions;
   viewCreatorOptions?: ViewerViewCreator3dOptions;
   blankConnectionViewState?: BlankConnectionViewState;
+  syncWithUnifiedSelectionStorage?: boolean;
 }
 
 export const ViewerDefaultFrontstageProviderId =
@@ -31,6 +33,7 @@ export const useFrontstages = ({
   defaultUiConfig,
   viewCreatorOptions,
   viewportOptions,
+  syncWithUnifiedSelectionStorage,
 }: UseFrontstagesProps) => {
   const [finalFrontstages, setFinalFrontstages] =
     useState<ViewerFrontstage[]>();
@@ -69,7 +72,8 @@ export const useFrontstages = ({
       const contentGroup = new DefaultContentGroupProvider(
         viewportOptions,
         viewCreatorOptions,
-        blankConnectionViewState
+        blankConnectionViewState,
+        syncWithUnifiedSelectionStorage,
       );
 
       const defaultFrontstageProvider = new StandardFrontstageProvider({

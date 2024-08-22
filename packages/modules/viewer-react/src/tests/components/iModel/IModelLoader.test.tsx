@@ -21,6 +21,8 @@ import type {
   ViewerFrontstage,
 } from "../../../types";
 import { TestUiProvider, TestUiProvider2 } from "../../mocks/MockUiProviders";
+import * as unifiedSelection from "@itwin/unified-selection";
+import { SchemaContext } from "@itwin/ecschema-metadata";
 
 jest.mock("react-redux", () => ({
   ...jest.requireActual<any>("react-redux"),
@@ -290,6 +292,26 @@ describe("IModelLoader", () => {
     expect(UiFramework.setColorTheme).toHaveBeenCalledWith(ColorTheme.Dark);
   });
 
+  it("synchronizes with unified selection storage when storage provided", async () => {
+    const enableUnifiedSelectionSyncWithIModelSpy = jest.spyOn(unifiedSelection, 'enableUnifiedSelectionSyncWithIModel');
+    enableUnifiedSelectionSyncWithIModelSpy.mockReturnValue(jest.fn());
+    const connection = {
+      isBlankConnection: () => false,
+      iModelId: mockIModelId,
+      close: jest.fn(),
+      getRpcProps: jest.fn(),
+    };
+    jest
+      .spyOn(IModelServices, "openRemoteIModel")
+      .mockResolvedValue(connection as any);
+    const result = render(
+      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} selectionStorage={unifiedSelection.createStorage()} getSchemaContext={() => new SchemaContext()} />
+    );
+    await waitFor(() => result.getByTestId("viewer"));
+
+    expect(enableUnifiedSelectionSyncWithIModelSpy).toHaveBeenCalled();
+  });
+
   it("renders without a viewState if the default frontstage does not require a connection", async () => {
     const frontstages: ViewerFrontstage[] = [
       {
@@ -312,6 +334,8 @@ describe("IModelLoader", () => {
   });
 
   it("closes connection on unmount", async () => {
+    const enableUnifiedSelectionSyncWithIModelSpy = jest.spyOn(unifiedSelection, 'enableUnifiedSelectionSyncWithIModel');
+    enableUnifiedSelectionSyncWithIModelSpy.mockReturnValue(jest.fn());
     const connection = {
       isBlankConnection: () => false,
       iModelId: mockIModelId,
@@ -325,6 +349,7 @@ describe("IModelLoader", () => {
     );
     await waitFor(() => result.getByTestId("viewer"));
 
+    expect(enableUnifiedSelectionSyncWithIModelSpy).not.toHaveBeenCalled()
     result.unmount();
 
     await waitFor(() => {
