@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Mon, 12 Aug 2024 15:19:39 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Aug 2024 08:01:56 GMT and should not be manually modified.
+
+## 4.8.2
+Thu, 22 Aug 2024 08:01:56 GMT
+
+### Patches
+
+- Fixed possible race condition when opening iModelConnection in React StrictMode.
 
 ## 4.8.1
 Mon, 12 Aug 2024 15:19:39 GMT
