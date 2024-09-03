@@ -21,9 +21,11 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import { viewerRpcs } from "../../../common/ViewerConfig";
+import {
+  getSchemaContext,
+  unifiedSelectionStorage,
+} from "../../../selectionStorage";
 import { IModelMergeItemsProvider } from "../../extensions";
-import { unifiedSelectionStorage, getSchemaContext } from "../../selectionStorage";
-
 export interface ViewerRouteState {
   filePath?: string;
 }
