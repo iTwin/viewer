@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Tue, 03 Sep 2024 13:38:39 GMT and should not be manually modified.
+This log was last generated on Tue, 03 Sep 2024 18:26:05 GMT and should not be manually modified.
+
+## 4.4.2
+Tue, 03 Sep 2024 18:26:05 GMT
+
+### Patches
+
+- fix unified selection storage imports
 
 ## 4.4.1
 Tue, 03 Sep 2024 13:38:39 GMT
