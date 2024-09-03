@@ -20,7 +20,7 @@
       "@itwin/core-quantity": "^4.7.3",
       "@itwin/core-react": "^4.3.0",
       "@itwin/core-telemetry": "^4.7.3",
-      "@itwin/desktop-viewer-react": "^4.7.3",
+      "@itwin/desktop-viewer-react": "^4.3.2",
       "@itwin/ecschema-metadata": "^4.7.3",
       "@itwin/ecschema-rpcinterface-common": "^4.7.3",
       "@itwin/ecschema-rpcinterface-impl": "^4.7.3",
@@ -77,8 +77,6 @@
       "start": "npm run build:backend && run-p \"start:frontend\" \"electron:debug\"",
       "start:frontend": "react-scripts start"
     },
-    "browserslist": [
-      "last 1 electron version"
-    ]
+    "browserslist": ["last 1 electron version"]
   }
 }
