@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Mon, 05 Aug 2024 06:05:01 GMT and should not be manually modified.
+This log was last generated on Tue, 03 Sep 2024 13:38:39 GMT and should not be manually modified.
+
+## 4.4.1
+Tue, 03 Sep 2024 13:38:39 GMT
+
+### Patches
+
+- Fix @itwin/desktop-viewer-react package version
 
 ## 4.4.0
 Mon, 05 Aug 2024 06:05:01 GMT
