@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-desktop-viewer",
+      "comment": "fix desktop-viewer-react dependency version",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/cra-template-desktop-viewer"
+}
