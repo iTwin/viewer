@@ -8,6 +8,7 @@ import "./App.scss";
 import type { ScreenViewport } from "@itwin/core-frontend";
 import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
 import { FillCentered } from "@itwin/core-react";
+import { ECSchemaRpcInterface } from "@itwin/ecschema-rpcinterface-common";
 import { ProgressLinear } from "@itwin/itwinui-react";
 import {
   MeasurementActionToolbar,
@@ -37,10 +38,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Auth } from "./Auth";
 import { history } from "./history";
-import {
-  unifiedSelectionStorage,
-  getSchemaContext,
-} from "./selectionStorage";
+import { getSchemaContext, unifiedSelectionStorage } from "./selectionStorage";
 
 const App: React.FC = () => {
   const [iModelId, setIModelId] = useState(process.env.IMJS_IMODEL_ID);
@@ -157,6 +155,17 @@ const App: React.FC = () => {
         viewCreatorOptions={viewCreatorOptions}
         enablePerformanceMonitors={true} // see description in the README (https://www.npmjs.com/package/@itwin/web-viewer-react)
         onIModelAppInit={onIModelAppInit}
+        mapLayerOptions={{
+          BingMaps: {
+            key: "key",
+            value: process.env.IMJS_BING_MAPS_KEY ?? "",
+          },
+        }}
+        backendConfiguration={{
+          defaultBackend: {
+            rpcInterfaces: [ECSchemaRpcInterface],
+          },
+        }}
         uiProviders={[
           new ViewerNavigationToolsProvider(),
           new ViewerContentToolsProvider({
