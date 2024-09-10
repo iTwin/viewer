@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-web-viewer",
+      "comment": "register ecschemarpcinterface to prevent error on element selection in web",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/cra-template-web-viewer"
+}
