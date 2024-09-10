@@ -2,8 +2,10 @@
     "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/pnpm-config.schema.json",
     "useWorkspaces": true,
     "globalOverrides": {
+      "body-parser@<1.20.3": "^1.20.3",
       "braces": "^3.0.3",
-      "postcss": "^8.4.31",
-      "axios": "^1.7.4"
+      "path-to-regexp@>=0.2.0": "^8.0.0",
+      "path-to-regexp@<0.1.10": "^0.1.10",
+      "postcss": "^8.4.31"
     }
   }
