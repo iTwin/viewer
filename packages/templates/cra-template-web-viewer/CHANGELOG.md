@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Mon, 05 Aug 2024 06:05:01 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Sep 2024 16:25:04 GMT and should not be manually modified.
+
+## 4.2.1
+Tue, 10 Sep 2024 16:25:04 GMT
+
+### Patches
+
+- register ecschemarpcinterface to prevent error on element selection in web
 
 ## 4.2.0
 Mon, 05 Aug 2024 06:05:01 GMT
