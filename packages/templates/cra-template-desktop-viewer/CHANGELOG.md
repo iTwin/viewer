@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Tue, 03 Sep 2024 18:26:05 GMT and should not be manually modified.
+This log was last generated on Thu, 31 Oct 2024 13:22:46 GMT and should not be manually modified.
+
+## 4.4.3
+Thu, 31 Oct 2024 13:22:46 GMT
+
+### Patches
+
+- Updated .env file in CRA template to have the `itwin-platform` scope.
 
 ## 4.4.2
 Tue, 03 Sep 2024 18:26:05 GMT
