@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Update Presentation packages to ^1.0.0",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
