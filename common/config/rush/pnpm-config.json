@@ -6,6 +6,8 @@
       "braces": "^3.0.3",
       "path-to-regexp@>=0.2.0": "^8.0.0",
       "path-to-regexp@<0.1.10": "^0.1.10",
-      "postcss": "^8.4.31"
+      "postcss": "^8.4.31",
+      "http-proxy-middleware": "^2.0.7",
+      "rollup": "^2.79.2"
     }
   }
