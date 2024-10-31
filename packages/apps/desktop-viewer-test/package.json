@@ -35,7 +35,7 @@
     "@itwin/appui-abstract": "^4.7.3",
     "@itwin/appui-layout-react": "^4.3.0",
     "@itwin/appui-react": "^4.3.0",
-    "@itwin/unified-selection": "^0.4.5",
+    "@itwin/unified-selection": "^1.0.0",
     "@itwin/components-react": "^4.3.0",
     "@itwin/core-backend": "^4.7.3",
     "@itwin/core-bentley": "^4.7.3",
