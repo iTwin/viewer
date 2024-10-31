@@ -46,7 +46,7 @@
       "@itwin/presentation-shared": "^1.0.0",
       "@itwin/unified-selection": "^1.0.0",
       "@itwin/property-grid-react": "^1.0.0",
-      "@itwin/tree-widget-react": "^1.0.0",
+      "@itwin/tree-widget-react": "^3.0.0",
       "@itwin/webgl-compatibility": "^4.7.3",
       "@types/electron-devtools-installer": "^2.2.0",
       "@types/minimist": "^1.2.0",
