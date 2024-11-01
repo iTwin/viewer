@@ -23,8 +23,10 @@ import {
   ShowHideNullValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
 import {
+  CategoriesTreeComponent,
+  createTreeWidget,
+  ModelsTreeComponent,
   TreeWidget,
-  TreeWidgetUiItemsProvider,
 } from "@itwin/tree-widget-react";
 import {
   useAccessToken,
@@ -174,7 +176,42 @@ const App: React.FC = () => {
             },
           }),
           new ViewerStatusbarItemsProvider(),
-          new TreeWidgetUiItemsProvider(),
+          {
+            id: "TreeWidgetUIProvider",
+            getWidgets: () => [
+              createTreeWidget({
+                trees: [
+                  {
+                    id: ModelsTreeComponent.id,
+                    getLabel: () => ModelsTreeComponent.getLabel(),
+                    render: (props) => (
+                      <ModelsTreeComponent
+                        getSchemaContext={getSchemaContext}
+                        density={props.density}
+                        selectionStorage={unifiedSelectionStorage}
+                        selectionMode={"extended"}
+                        onPerformanceMeasured={props.onPerformanceMeasured}
+                        onFeatureUsed={props.onFeatureUsed}
+                      />
+                    ),
+                  },
+                  {
+                    id: CategoriesTreeComponent.id,
+                    getLabel: () => CategoriesTreeComponent.getLabel(),
+                    render: (props) => (
+                      <CategoriesTreeComponent
+                        getSchemaContext={getSchemaContext}
+                        density={props.density}
+                        selectionStorage={unifiedSelectionStorage}
+                        onPerformanceMeasured={props.onPerformanceMeasured}
+                        onFeatureUsed={props.onFeatureUsed}
+                      />
+                    ),
+                  },
+                ],
+              }),
+            ],
+          },
           new PropertyGridUiItemsProvider({
             propertyGridProps: {
               autoExpandChildCategories: true,

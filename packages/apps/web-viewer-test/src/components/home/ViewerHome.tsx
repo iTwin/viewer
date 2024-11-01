@@ -5,8 +5,7 @@
 
 import { AppNotificationManager, ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
-// import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
-import { ReactComponent as Itwin } from "../../images/itwin.svg";
+import { ECSchemaRpcInterface } from "@itwin/ecschema-rpcinterface-common";
 import {
   MeasureTools,
   MeasureToolsUiItemsProvider,
@@ -20,22 +19,28 @@ import {
 } from "@itwin/property-grid-react";
 // import LocalExtension from "@itwin/test-local-extension";
 import {
+  CategoriesTreeComponent,
+  createTreeWidget,
+  ModelsTreeComponent,
   TreeWidget,
-  TreeWidgetUiItemsProvider,
 } from "@itwin/tree-widget-react";
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
 import {
-  Viewer,
   BackstageItemsProvider,
+  Viewer,
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
   ViewerStatusbarItemsProvider,
 } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
+// import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
+import { ReactComponent as Itwin } from "../../images/itwin.svg";
+import {
+  getSchemaContext,
+  unifiedSelectionStorage,
+} from "../../selectionStorage";
 import { history } from "../routing";
-import { ECSchemaRpcInterface } from "@itwin/ecschema-rpcinterface-common";
-import { getSchemaContext, unifiedSelectionStorage } from "../../selectionStorage";
 
 /**
  * Test a viewer that uses auth configuration provided at startup
@@ -128,7 +133,7 @@ const ViewerHome: React.FC = () => {
       groupPriority: 20,
       itemPriority: 100,
       label: "BackstageItems 1",
-    }
+    },
   ];
 
   return (
@@ -163,7 +168,48 @@ const ViewerHome: React.FC = () => {
             },
           }),
           new ViewerStatusbarItemsProvider(),
-          new TreeWidgetUiItemsProvider(),
+          {
+            id: "TreeWidgetUIProvider",
+            getWidgets: () => [
+              createTreeWidget({
+                trees: [
+                  {
+                    id: ModelsTreeComponent.id,
+                    getLabel: () => ModelsTreeComponent.getLabel(),
+                    render: (props) => (
+                      <ModelsTreeComponent
+                        getSchemaContext={getSchemaContext}
+                        density={props.density}
+                        selectionStorage={unifiedSelectionStorage}
+                        selectionMode={"extended"}
+                        onPerformanceMeasured={props.onPerformanceMeasured}
+                        onFeatureUsed={props.onFeatureUsed}
+                      />
+                    ),
+                  },
+                  {
+                    id: CategoriesTreeComponent.id,
+                    getLabel: () => CategoriesTreeComponent.getLabel(),
+                    render: (props) => (
+                      <CategoriesTreeComponent
+                        getSchemaContext={getSchemaContext}
+                        density={props.density}
+                        selectionStorage={unifiedSelectionStorage}
+                        onPerformanceMeasured={props.onPerformanceMeasured}
+                        onFeatureUsed={props.onFeatureUsed}
+                      />
+                    ),
+                  },
+                ],
+                onPerformanceMeasured: (feature, elapsedTime) => {
+                  console.log(`TreeWidget [${feature}] took ${elapsedTime} ms`);
+                },
+                onFeatureUsed: (feature) => {
+                  console.log(`TreeWidget [${feature}] used`);
+                },
+              }),
+            ],
+          },
           new PropertyGridUiItemsProvider({
             propertyGridProps: {
               autoExpandChildCategories: true,
@@ -196,7 +242,7 @@ const ViewerHome: React.FC = () => {
         //   }),
         // ]}
         backstageItems={backstageItems2}
-        defaultUiConfig={{cornerButton: <Itwin />}}
+        defaultUiConfig={{ cornerButton: <Itwin /> }}
         // renderSys={{doIdleWork: true}}
         selectionStorage={unifiedSelectionStorage}
         getSchemaContext={getSchemaContext}

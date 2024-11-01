@@ -16,7 +16,11 @@ import {
   PropertyGridUiItemsProvider,
   ShowHideNullValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
-import { TreeWidgetUiItemsProvider } from "@itwin/tree-widget-react";
+import {
+  CategoriesTreeComponent,
+  createTreeWidget,
+  ModelsTreeComponent,
+} from "@itwin/tree-widget-react";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -54,7 +58,42 @@ export const ViewerRoute = () => {
           },
         }),
         new ViewerStatusbarItemsProvider(),
-        new TreeWidgetUiItemsProvider(),
+        {
+          id: "TreeWidgetUIProvider",
+          getWidgets: () => [
+            createTreeWidget({
+              trees: [
+                {
+                  id: ModelsTreeComponent.id,
+                  getLabel: () => ModelsTreeComponent.getLabel(),
+                  render: (props) => (
+                    <ModelsTreeComponent
+                      getSchemaContext={getSchemaContext}
+                      density={props.density}
+                      selectionStorage={unifiedSelectionStorage}
+                      selectionMode={"extended"}
+                      onPerformanceMeasured={props.onPerformanceMeasured}
+                      onFeatureUsed={props.onFeatureUsed}
+                    />
+                  ),
+                },
+                {
+                  id: CategoriesTreeComponent.id,
+                  getLabel: () => CategoriesTreeComponent.getLabel(),
+                  render: (props) => (
+                    <CategoriesTreeComponent
+                      getSchemaContext={getSchemaContext}
+                      density={props.density}
+                      selectionStorage={unifiedSelectionStorage}
+                      onPerformanceMeasured={props.onPerformanceMeasured}
+                      onFeatureUsed={props.onFeatureUsed}
+                    />
+                  ),
+                },
+              ],
+            }),
+          ],
+        },
         new PropertyGridUiItemsProvider({
           propertyGridProps: {
             autoExpandChildCategories: true,
