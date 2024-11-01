@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "4.8.3",
+      "tag": "@itwin/viewer-react_v4.8.3",
+      "date": "Fri, 01 Nov 2024 14:07:47 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update Presentation packages to ^1.0.0"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.8.2",
       "tag": "@itwin/viewer-react_v4.8.2",
       "date": "Thu, 22 Aug 2024 08:01:56 GMT",

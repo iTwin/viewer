@@ -1,6 +1,17 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Thu, 31 Oct 2024 13:22:46 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Nov 2024 14:07:47 GMT and should not be manually modified.
+
+## 4.3.0
+Fri, 01 Nov 2024 14:07:47 GMT
+
+### Minor changes
+
+- Update tree-widget to 3.0
+
+### Patches
+
+- Update Presentation packages to ^1.0.0
 
 ## 4.2.2
 Thu, 31 Oct 2024 13:22:46 GMT
