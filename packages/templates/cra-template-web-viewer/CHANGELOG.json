@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "4.4.0",
+      "tag": "@itwin/cra-template-web-viewer_v4.4.0",
+      "date": "Fri, 01 Nov 2024 21:36:57 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "update to use React18, presentation-components@5, and measure-tools@latest"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.3.0",
       "tag": "@itwin/cra-template-web-viewer_v4.3.0",
       "date": "Fri, 01 Nov 2024 14:07:47 GMT",

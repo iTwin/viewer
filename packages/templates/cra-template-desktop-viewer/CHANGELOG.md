@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Fri, 01 Nov 2024 14:07:47 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Nov 2024 21:36:57 GMT and should not be manually modified.
+
+## 4.5.1
+Fri, 01 Nov 2024 21:36:57 GMT
+
+### Patches
+
+- update presentation-components and measure-tools to latest
 
 ## 4.5.0
 Fri, 01 Nov 2024 14:07:47 GMT

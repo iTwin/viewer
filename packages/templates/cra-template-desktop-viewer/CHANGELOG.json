@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-desktop-viewer",
   "entries": [
     {
+      "version": "4.5.1",
+      "tag": "@itwin/cra-template-desktop-viewer_v4.5.1",
+      "date": "Fri, 01 Nov 2024 21:36:57 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update presentation-components and measure-tools to latest"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.5.0",
       "tag": "@itwin/cra-template-desktop-viewer_v4.5.0",
       "date": "Fri, 01 Nov 2024 14:07:47 GMT",

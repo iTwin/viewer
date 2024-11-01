@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Fri, 01 Nov 2024 14:07:47 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Nov 2024 21:36:57 GMT and should not be manually modified.
+
+## 4.4.0
+Fri, 01 Nov 2024 21:36:57 GMT
+
+### Minor changes
+
+- update to use React18, presentation-components@5, and measure-tools@latest
 
 ## 4.3.0
 Fri, 01 Nov 2024 14:07:47 GMT
