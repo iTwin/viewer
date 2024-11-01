@@ -6,7 +6,7 @@
 import "./index.scss";
 
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import App from "./App";
 import { Auth } from "./Auth";
@@ -37,15 +37,17 @@ Auth.initialize({
   authority: process.env.IMJS_AUTH_AUTHORITY,
 });
 
+const container = document.getElementById("root");
+const root = createRoot(container!);
+
 const redirectUrl = new URL(process.env.IMJS_AUTH_CLIENT_REDIRECT_URI);
 if (redirectUrl.pathname === window.location.pathname) {
   Auth.handleSigninCallback().catch(console.error);
 } else {
-  ReactDOM.render(
+  root.render(
     <React.StrictMode>
       <App />
-    </React.StrictMode>,
-    document.getElementById("root")
+    </React.StrictMode>
   );
 }
 

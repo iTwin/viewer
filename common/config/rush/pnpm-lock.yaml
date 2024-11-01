@@ -52,7 +52,7 @@ importers:
       '@itwin/itwinui-layouts-react': ^0.2.0
       '@itwin/itwinui-react': ^2.12.0
       '@itwin/itwinui-variables': ^2.0.0
-      '@itwin/measure-tools-react': ^0.13.0
+      '@itwin/measure-tools-react': ^0.23.2
       '@itwin/presentation-backend': ^4.7.3
       '@itwin/presentation-common': ^4.7.3
       '@itwin/presentation-components': ^5.0.0
@@ -118,7 +118,7 @@ importers:
       '@itwin/itwinui-layouts-react': 0.2.0_nnrd3gsncyragczmpvfhocinkq
       '@itwin/itwinui-react': 2.12.26_nnrd3gsncyragczmpvfhocinkq
       '@itwin/itwinui-variables': 2.1.2
-      '@itwin/measure-tools-react': 0.13.0_hhvtoxm2vupiyzv3tuuiwwirjq
+      '@itwin/measure-tools-react': 0.23.2_hhvtoxm2vupiyzv3tuuiwwirjq
       '@itwin/presentation-backend': 4.7.4_nztxufmverfbgaq2tic42bdzqu
       '@itwin/presentation-common': 4.7.4_jrcxtioaccikuahb3i3h6f5rhe
       '@itwin/presentation-components': 5.4.1_coeiqitrdc3kbyoxwt3ak4fycm
@@ -178,7 +178,7 @@ importers:
       '@itwin/imodel-components-react': ^4.3.0
       '@itwin/imodels-access-frontend': ^5.2.1
       '@itwin/itwinui-react': ^2.12.0
-      '@itwin/measure-tools-react': ^0.13.0
+      '@itwin/measure-tools-react': ^0.23.2
       '@itwin/presentation-common': ^4.7.3
       '@itwin/presentation-components': ^5.0.0
       '@itwin/presentation-frontend': ^4.7.3
@@ -224,7 +224,7 @@ importers:
       '@itwin/imodel-components-react': 4.15.1_avm2jbcgpodgccdhk4zetypeem
       '@itwin/imodels-access-frontend': 5.2.1_r7pomf6q3izykcd6xffknqbpim
       '@itwin/itwinui-react': 2.12.26_nnrd3gsncyragczmpvfhocinkq
-      '@itwin/measure-tools-react': 0.13.0_hhvtoxm2vupiyzv3tuuiwwirjq
+      '@itwin/measure-tools-react': 0.23.2_hhvtoxm2vupiyzv3tuuiwwirjq
       '@itwin/presentation-common': 4.7.4_jrcxtioaccikuahb3i3h6f5rhe
       '@itwin/presentation-components': 5.4.1_coeiqitrdc3kbyoxwt3ak4fycm
       '@itwin/presentation-frontend': 4.7.4_lbci6e5ivpkspr33wpe53pcp5i
@@ -3593,18 +3593,18 @@ packages:
   /@itwin/itwinui-variables/3.2.0:
     resolution: {integrity: sha512-YuJ3IyqRRynQRKPiTz6odF8hVxmAVABxitrqj2VZ1ZtKRVO6EyrWMgZP90cYF1l0EjqzOxG71focaHcZH5C6Ow==}
 
-  /@itwin/measure-tools-react/0.13.0_hhvtoxm2vupiyzv3tuuiwwirjq:
-    resolution: {integrity: sha512-Gdog3IxNUR+bU5LZ7FDvUOVUbPOdPrWA0xPfrhhk5bQ7benzT9poU/kZx4R2tAvH/UmJ1/wn80ZLiXCNsJtCBQ==}
+  /@itwin/measure-tools-react/0.23.2_hhvtoxm2vupiyzv3tuuiwwirjq:
+    resolution: {integrity: sha512-CqkJW8hY2YHlcJCoH2dabUNp0t0jxjzaJZmsvYKqGr+wmjp5j4lhOSwtHDfVBTE6a9/pWQS+/yVou/9rTt4TLg==}
     peerDependencies:
-      '@itwin/appui-abstract': ^4.0.0
-      '@itwin/appui-layout-react': ^4.0.0
-      '@itwin/appui-react': ^4.0.0
-      '@itwin/components-react': ^4.0.0
-      '@itwin/core-bentley': ^4.0.0
-      '@itwin/core-common': ^4.0.0
-      '@itwin/core-frontend': ^4.0.0
-      '@itwin/core-geometry': ^4.0.0
-      '@itwin/core-react': ^4.0.0
+      '@itwin/appui-abstract': ^4.7.0
+      '@itwin/appui-layout-react': ^4.4.0
+      '@itwin/appui-react': ^4.4.0
+      '@itwin/components-react': ^4.4.0
+      '@itwin/core-bentley': ^4.7.0
+      '@itwin/core-common': ^4.7.0
+      '@itwin/core-frontend': ^4.7.0
+      '@itwin/core-geometry': ^4.7.0
+      '@itwin/core-react': ^4.4.0
       react: ^17.0.0
       react-dom: ^17.0.0
       redux: ^4.2.1
@@ -3620,6 +3620,8 @@ packages:
       '@itwin/core-geometry': 4.7.4
       '@itwin/core-react': 4.15.1_bpptdsfauwdziiwg4uklizbr74
       '@itwin/core-telemetry': 4.7.4_@itwin+core-geometry@4.7.4
+      '@itwin/itwinui-icons-react': 2.8.0_nnrd3gsncyragczmpvfhocinkq
+      '@itwin/itwinui-react': 2.12.26_nnrd3gsncyragczmpvfhocinkq
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
       redux: 4.2.1
