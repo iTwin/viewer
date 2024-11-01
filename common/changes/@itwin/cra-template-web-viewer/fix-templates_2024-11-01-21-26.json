@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-web-viewer",
+      "comment": "update to use React18, presentation-components@5, and measure-tools@latest",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/cra-template-web-viewer"
+}
