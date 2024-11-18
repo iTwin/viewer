@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "4.4.2",
+      "tag": "@itwin/cra-template-web-viewer_v4.4.2",
+      "date": "Mon, 18 Nov 2024 21:55:11 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Remove React.StrictMode Wrapper"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.4.1",
       "tag": "@itwin/cra-template-web-viewer_v4.4.1",
       "date": "Mon, 18 Nov 2024 15:26:35 GMT",

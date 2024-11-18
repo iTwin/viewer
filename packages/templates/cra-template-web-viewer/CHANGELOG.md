@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Mon, 18 Nov 2024 15:26:35 GMT and should not be manually modified.
+This log was last generated on Mon, 18 Nov 2024 21:55:11 GMT and should not be manually modified.
+
+## 4.4.2
+Mon, 18 Nov 2024 21:55:11 GMT
+
+### Patches
+
+- Remove React.StrictMode Wrapper
 
 ## 4.4.1
 Mon, 18 Nov 2024 15:26:35 GMT
