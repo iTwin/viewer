@@ -29,7 +29,7 @@
       "@itwin/presentation-frontend": "^4.7.3",
       "@itwin/presentation-core-interop": "^1.0.0",
       "@itwin/presentation-shared": "^1.0.0",
-      "@itwin/unified-selection": "^1.0.0",
+      "@itwin/unified-selection": "^1.1.1",
       "@itwin/property-grid-react": "^1.0.0",
       "@itwin/tree-widget-react": "^3.0.0",
       "@itwin/web-viewer-react": "^4.0.0",
