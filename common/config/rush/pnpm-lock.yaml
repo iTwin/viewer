@@ -59,7 +59,7 @@ importers:
       '@itwin/presentation-frontend': ^4.7.3
       '@itwin/property-grid-react': ^1.0.0
       '@itwin/tree-widget-react': ^3.0.0
-      '@itwin/unified-selection': ^1.0.0
+      '@itwin/unified-selection': ^1.1.1
       '@itwin/webgl-compatibility': ^4.7.3
       '@types/electron-devtools-installer': ^2.2.2
       '@types/minimist': ^1.2.2
@@ -125,7 +125,7 @@ importers:
       '@itwin/presentation-frontend': 4.7.4_lbci6e5ivpkspr33wpe53pcp5i
       '@itwin/property-grid-react': 1.10.0_qjr4doayn7cutuokumbiwhomja
       '@itwin/tree-widget-react': 3.0.1_i672swagn374al3m4ors5guk4q
-      '@itwin/unified-selection': 1.1.0
+      '@itwin/unified-selection': 1.1.1
       '@itwin/webgl-compatibility': 4.7.4
       dotenv-flow: 3.3.0
       electron: 24.8.8
@@ -186,7 +186,7 @@ importers:
       '@itwin/reality-data-client': ^1.1.0
       '@itwin/test-local-extension': workspace:*
       '@itwin/tree-widget-react': ^3.0.0
-      '@itwin/unified-selection': ^1.0.0
+      '@itwin/unified-selection': ^1.1.1
       '@itwin/web-viewer-react': workspace:*
       '@itwin/webgl-compatibility': ^4.7.3
       '@remix-run/router': ^1.7.2
@@ -232,7 +232,7 @@ importers:
       '@itwin/reality-data-client': 1.2.1_@itwin+core-bentley@4.7.4
       '@itwin/test-local-extension': link:../../modules/test-local-extension
       '@itwin/tree-widget-react': 3.0.1_i672swagn374al3m4ors5guk4q
-      '@itwin/unified-selection': 1.1.0
+      '@itwin/unified-selection': 1.1.1
       '@itwin/web-viewer-react': link:../../modules/web-viewer-react
       '@itwin/webgl-compatibility': 4.7.4
       '@remix-run/router': 1.17.1
@@ -3875,7 +3875,7 @@ packages:
       '@itwin/itwinui-react': 2.12.26_nnrd3gsncyragczmpvfhocinkq
       '@itwin/presentation-hierarchies': 1.2.1
       '@itwin/presentation-shared': 1.1.0
-      '@itwin/unified-selection': 1.1.0
+      '@itwin/unified-selection': 1.1.1
       classnames: 2.5.1
       immer: 10.1.1
       react: 18.3.1
@@ -3974,7 +3974,7 @@ packages:
       '@itwin/presentation-hierarchies': 1.2.1
       '@itwin/presentation-hierarchies-react': 1.1.1_qnkn5lfpltqtw66hig7mudvuci
       '@itwin/presentation-shared': 1.1.0
-      '@itwin/unified-selection': 1.1.0
+      '@itwin/unified-selection': 1.1.1
       classnames: 2.5.1
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
@@ -3992,6 +3992,15 @@ packages:
 
   /@itwin/unified-selection/1.1.0:
     resolution: {integrity: sha512-9AE/zTczExDQlSheverk+FPhl/cMVT+PKnnGbN/awDAIxxxpjUTb7+x1eA9fDT7cV2NxbZvDzG3CZxXeXSDG/g==}
+    dependencies:
+      '@itwin/core-bentley': 4.9.5
+      '@itwin/presentation-shared': 1.1.0
+      rxjs: 7.8.1
+      rxjs-for-await: 1.0.0_rxjs@7.8.1
+    dev: false
+
+  /@itwin/unified-selection/1.1.1:
+    resolution: {integrity: sha512-myygzispTehbgeZBFbOipyt3AvTr9Lx+QvP5hPG3YKyEvGimAtO3Mh6unwmdCxrM9Ue9w5El63Jbr0N+f+ZdVg==}
     dependencies:
       '@itwin/core-bentley': 4.9.5
       '@itwin/presentation-shared': 1.1.0
