@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Fri, 01 Nov 2024 21:36:57 GMT and should not be manually modified.
+This log was last generated on Mon, 18 Nov 2024 15:26:35 GMT and should not be manually modified.
+
+## 4.5.2
+Mon, 18 Nov 2024 15:26:35 GMT
+
+### Patches
+
+- Updated unified-selection version for template
 
 ## 4.5.1
 Fri, 01 Nov 2024 21:36:57 GMT
