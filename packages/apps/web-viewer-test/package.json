@@ -5,7 +5,6 @@
   "dependencies": {
     "@bentley/icons-generic": "^1.0.34",
     "@itwin/appui-abstract": "^4.7.3",
-    "@itwin/appui-layout-react": "^4.3.0",
     "@itwin/appui-react": "^4.3.0",
     "@itwin/unified-selection": "^1.1.1",
     "@itwin/browser-authorization": "^1.0.1",
