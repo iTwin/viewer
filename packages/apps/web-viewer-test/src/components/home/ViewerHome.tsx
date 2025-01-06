@@ -126,16 +126,6 @@ const ViewerHome: React.FC = () => {
     },
   ];
 
-  const backstageItems2: ViewerBackstageItem[] = [
-    {
-      id: "BS4",
-      execute: () => console.log("BS1"),
-      groupPriority: 20,
-      itemPriority: 100,
-      label: "BackstageItems 1",
-    },
-  ];
-
   return (
     <div style={{ height: "100vh" }}>
       <Viewer
@@ -241,7 +231,6 @@ const ViewerHome: React.FC = () => {
         //     manifestUrl: "http://localhost:3001/package.json",
         //   }),
         // ]}
-        backstageItems={backstageItems2}
         defaultUiConfig={{ cornerButton: <Itwin /> }}
         // renderSys={{doIdleWork: true}}
         selectionStorage={unifiedSelectionStorage}

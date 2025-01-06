@@ -151,7 +151,7 @@ export const getViewState = async (
       // attempt to construct a default viewState
       const viewCreator = new ViewCreator3d(connection);
       view = await viewCreator.createDefaultView(viewCreatorOptions);
-      UiFramework.setActiveSelectionScope("top-assembly");
+      UiFramework.setActiveSelectionScope("top-assembly"); // eslint-disable-line deprecation/deprecation
     }
   }
   return view;

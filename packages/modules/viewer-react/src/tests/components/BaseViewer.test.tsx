@@ -1,7 +1,8 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import "@testing-library/jest-dom/extend-expect";
 
@@ -22,8 +23,8 @@ jest.mock("@itwin/appui-react", () => {
     },
     UiItemsManager: {
       ...jest.createMockFromModule<any>("@itwin/appui-react").UiItemsManager,
-      getBackstageItems: jest.fn().mockReturnValue([])
-    }
+      getBackstageItems: jest.fn().mockReturnValue([]),
+    },
   };
 });
 jest.mock("@itwin/presentation-frontend", () => {

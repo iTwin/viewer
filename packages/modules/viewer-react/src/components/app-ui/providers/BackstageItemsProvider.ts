@@ -13,38 +13,42 @@ import { IModelApp } from "@itwin/core-frontend";
 
 import type { ViewerBackstageItem } from "../../../types";
 
+// todo remove icon in favor of iconNode
 export class BackstageItemsProvider implements UiItemsProvider {
-  constructor(private _backstageItems: ViewerBackstageItem[], public readonly id = "iTwinViewer.BackstageItemsProvider") { }
+  constructor(
+    private _backstageItems: ViewerBackstageItem[],
+    public readonly id = "iTwinViewer.BackstageItemsProvider"
+  ) {}
 
-  public provideBackstageItems() {
+  public getBackstageItems() {
     const allBackstageItems: ViewerBackstageItem[] = [];
     this._backstageItems.forEach((backstageItem) => {
       // check for label i18n key and translate if needed
       if (backstageItem.labeli18nKey) {
         let newItem;
         if ((backstageItem as BackstageStageLauncher).stageId) {
-          newItem = BackstageItemUtilities.createStageLauncher(
-            (backstageItem as BackstageStageLauncher).stageId,
-            backstageItem.groupPriority,
-            backstageItem.itemPriority,
-            IModelApp.localization.getLocalizedString(
+          newItem = BackstageItemUtilities.createStageLauncher({
+            stageId: (backstageItem as BackstageStageLauncher).stageId,
+            groupPriority: backstageItem.groupPriority,
+            itemPriority: backstageItem.itemPriority,
+            label: IModelApp.localization.getLocalizedString(
               backstageItem.labeli18nKey
             ),
-            backstageItem.subtitle?.toString(),
-            backstageItem.icon?.toString()
-          );
+            subtitle: backstageItem.subtitle?.toString(),
+            icon: backstageItem.icon?.toString(), // eslint-disable-line deprecation/deprecation
+          });
         } else {
-          newItem = BackstageItemUtilities.createActionItem(
-            backstageItem.id,
-            backstageItem.groupPriority,
-            backstageItem.itemPriority,
-            (backstageItem as BackstageActionItem).execute,
-            IModelApp.localization.getLocalizedString(
+          newItem = BackstageItemUtilities.createActionItem({
+            id: backstageItem.id,
+            groupPriority: backstageItem.groupPriority,
+            itemPriority: backstageItem.itemPriority,
+            execute: (backstageItem as BackstageActionItem).execute,
+            label: IModelApp.localization.getLocalizedString(
               backstageItem.labeli18nKey
             ),
-            backstageItem.subtitle?.toString(),
-            backstageItem.icon?.toString()
-          );
+            subtitle: backstageItem.subtitle?.toString(),
+            icon: backstageItem.icon?.toString(), // eslint-disable-line deprecation/deprecation
+          });
         }
         allBackstageItems.push(newItem);
       } else {

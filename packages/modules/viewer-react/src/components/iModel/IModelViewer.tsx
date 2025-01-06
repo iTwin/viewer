@@ -7,6 +7,7 @@ import type {
   BackstageItem,
   FrontstageDef,
   FrontstageProvider,
+  ThemeId,
 } from "@itwin/appui-react";
 import { UiFramework, UiItemsManager } from "@itwin/appui-react";
 import {
@@ -19,7 +20,7 @@ import React, { useEffect, useState } from "react";
 import type { ViewerFrontstage } from "../../types";
 interface ModelProps {
   frontstages: ViewerFrontstage[];
-  backstageItems?: BackstageItem[]; // TODO next remove this and just use the UiItemsManager to get the items in the next major version
+  theme?: ThemeId;
 }
 
 /*
@@ -30,6 +31,7 @@ the issue is no longer occuring.
 */
 export const IModelViewer: React.FC<ModelProps> = ({
   frontstages,
+  theme,
 }: ModelProps) => {
   const [defaultFrontstageDef, setDefaultFrontstageDef] =
     useState<FrontstageDef>();
@@ -41,10 +43,10 @@ export const IModelViewer: React.FC<ModelProps> = ({
   }, [defaultFrontstageDef]);
 
   useEffect(() => {
-    let defaultFrontstage: FrontstageProvider | undefined;
+    let defaultFrontstage: FrontstageProvider | undefined; // eslint-disable-line deprecation/deprecation
     frontstages.forEach((viewerFrontstage) => {
       // register the provider
-      UiFramework.frontstages.addFrontstageProvider(viewerFrontstage.provider);
+      UiFramework.frontstages.addFrontstageProvider(viewerFrontstage.provider); // eslint-disable-line deprecation/deprecation
       // override the default (last wins)
       if (viewerFrontstage.default) {
         defaultFrontstage = viewerFrontstage.provider;
@@ -62,16 +64,14 @@ export const IModelViewer: React.FC<ModelProps> = ({
     }
 
     return () => {
-      UiFramework.frontstages.clearFrontstageProviders();
+      UiFramework.frontstages.clearFrontstageProviders(); // eslint-disable-line deprecation/deprecation
     };
   }, [frontstages]);
 
   // there will always be at least one (for the default frontstage). Wait for it to be loaded into the list before rendering the content
   return (
-    <ThemeManager>
-      <ConfigurableUiContent
-        appBackstage={<BackstageComposer />}
-      />
+    <ThemeManager theme={theme}>
+      <ConfigurableUiContent appBackstage={<BackstageComposer />} />
     </ThemeManager>
   );
 };
