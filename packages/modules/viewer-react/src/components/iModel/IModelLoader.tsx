@@ -28,7 +28,6 @@ import {
 } from "../../services/iModel";
 import { ViewerPerformance } from "../../services/telemetry";
 import type { ModelLoaderProps } from "../../types";
-import { BackstageItemsProvider } from "../app-ui/providers";
 import { IModelViewer } from "./IModelViewer";
 
 const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
@@ -45,14 +44,6 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     getSchemaContext,
   } = viewerProps;
   const { error, connection } = useConnection(viewerProps);
-
-  // const providers = useMemo<UiItemsProvider[]>(() => {
-  //   const providers = [...(uiProviders || [])];
-  //   if (backstageItems?.length) {
-  //     providers.push(new BackstageItemsProvider(backstageItems));
-  //   }
-  //   return providers;
-  // }, [uiProviders, backstageItems]);
 
   useUiProviders(uiProviders);
   useUnifiedSelectionSync({

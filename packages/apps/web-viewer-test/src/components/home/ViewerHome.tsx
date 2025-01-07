@@ -26,7 +26,7 @@ import {
 } from "@itwin/tree-widget-react";
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
 import {
-  BackstageItemsProvider,
+  // BackstageItemsProvider,
   Viewer,
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
@@ -150,7 +150,7 @@ const ViewerHome: React.FC = () => {
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
-          new BackstageItemsProvider(backstageItems, "BackstageItemsProvider1"),
+          // new BackstageItemsProvider(backstageItems, "BackstageItemsProvider1"),
           new ViewerNavigationToolsProvider(),
           new ViewerContentToolsProvider({
             vertical: {

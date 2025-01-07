@@ -12,6 +12,8 @@ import {
   UiFramework,
 } from "@itwin/appui-react";
 import { ScreenViewport } from "@itwin/core-frontend";
+import { ViewportComponent } from "@itwin/imodel-components-react";
+import { viewWithUnifiedSelection } from "@itwin/presentation-components";
 import React from "react";
 
 import { getAndSetViewState } from "../../../services/iModel";
@@ -20,10 +22,8 @@ import type {
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
 } from "../../../types";
-import {
-  UnifiedSelectionViewport,
-  UnifiedSelectionViewportControl,
-} from "./UnifiedSelectionViewportControl";
+
+const UnifiedSelectionViewport = viewWithUnifiedSelection(ViewportComponent);
 
 /**
  * Provide a default content group to the default frontstage
@@ -67,13 +67,6 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
         {
           id: "iTwinViewer.UnifiedSelectionViewport",
           classId: "",
-          // content: <UnifiedSelectionViewportControl  />,
-          // classId: UnifiedSelectionViewportControl,
-          // applicationData: {
-          //   ...this._viewportOptions,
-          //   viewState,
-          //   iModelConnection,
-          // },
           content: (
             <UnifiedSelectionViewport
               viewState={viewState}
