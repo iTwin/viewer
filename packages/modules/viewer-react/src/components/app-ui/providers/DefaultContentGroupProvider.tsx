@@ -4,14 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { StandardContentLayouts } from "@itwin/appui-abstract";
-import type { FrontstageConfig } from "@itwin/appui-react";
 import {
   ContentGroup,
   ContentGroupProvider,
-  IModelViewportControl,
   UiFramework,
 } from "@itwin/appui-react";
-import { ScreenViewport } from "@itwin/core-frontend";
 import { ViewportComponent } from "@itwin/imodel-components-react";
 import { viewWithUnifiedSelection } from "@itwin/presentation-components";
 import React from "react";
@@ -32,19 +29,16 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
   private _viewportOptions: ViewerViewportControlOptions | undefined;
   private _blankConnectionViewState: BlankConnectionViewState | undefined;
   private _viewCreatorOptions: ViewerViewCreator3dOptions | undefined;
-  // private _syncWithUnifiedSelectionStorage: boolean | undefined;
 
   constructor(
     viewportOptions?: ViewerViewportControlOptions,
     viewCreatorOptions?: ViewerViewCreator3dOptions,
     blankConnectionViewStateOptions?: BlankConnectionViewState
-    // syncWithUnifiedSelectionStorage?: boolean
   ) {
     super();
     this._viewportOptions = viewportOptions;
     this._blankConnectionViewState = blankConnectionViewStateOptions;
     this._viewCreatorOptions = viewCreatorOptions;
-    // this._syncWithUnifiedSelectionStorage = syncWithUnifiedSelectionStorage;
   }
 
   public async contentGroup(): Promise<ContentGroup> {
@@ -72,19 +66,6 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
               viewState={viewState}
               imodel={iModelConnection}
               controlId={"iTwinViewer.UnifiedSelectionViewportControl"}
-              // viewportRef={(v: ScreenViewport) => {
-              //   // this.viewport = v;
-              //   // for convenience, if window defined bind viewport to window
-              //   if (undefined !== window) {
-              //     (window as any).viewport = v;
-              //   }
-              //   if (!UiFramework.frontstages.isLoading) {
-              //     UiFramework.frontstages.activeFrontstageDef?.setActiveViewFromViewport(
-              //       v
-              //     );
-              //   }
-              // }}
-              // getViewOverlay={this._getViewOverlay}
             />
           ),
         },

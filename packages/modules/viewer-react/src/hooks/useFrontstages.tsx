@@ -26,7 +26,6 @@ export interface UseFrontstagesProps {
   viewportOptions?: ViewerViewportControlOptions;
   viewCreatorOptions?: ViewerViewCreator3dOptions;
   blankConnectionViewState?: BlankConnectionViewState;
-  // syncWithUnifiedSelectionStorage?: boolean;
 }
 
 export const ViewerDefaultFrontstageProviderId =
@@ -38,8 +37,7 @@ export const useFrontstages = ({
   defaultUiConfig,
   viewCreatorOptions,
   viewportOptions,
-}: // syncWithUnifiedSelectionStorage,
-UseFrontstagesProps) => {
+}: UseFrontstagesProps) => {
   const [finalFrontstages, setFinalFrontstages] =
     useState<ViewerFrontstage[]>();
   const [noConnectionRequired, setNoConnectionRequired] =
@@ -77,7 +75,6 @@ UseFrontstagesProps) => {
         viewportOptions,
         viewCreatorOptions,
         blankConnectionViewState
-        // syncWithUnifiedSelectionStorage
       );
 
       //eslint-disable-next-line deprecation/deprecation

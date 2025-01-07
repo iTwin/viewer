@@ -59,7 +59,6 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       viewportOptions,
       viewCreatorOptions,
       blankConnectionViewState,
-      // syncWithUnifiedSelectionStorage: !!selectionStorage,
     });
 
   useEffect(() => {
