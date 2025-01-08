@@ -1,6 +1,6 @@
 {
   "name": "@itwin/cra-template-web-viewer",
-  "version": "4.4.2",
+  "version": "5.0.0-dev.0",
   "keywords": [
     "react",
     "create-react-app",
