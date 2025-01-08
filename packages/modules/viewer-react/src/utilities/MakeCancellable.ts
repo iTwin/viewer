@@ -28,7 +28,7 @@ export function makeCancellable(
         } catch (e) {
           return reject(e);
         }
-        next(result);
+        void next(result);
         return null;
       }
     }
@@ -40,7 +40,7 @@ export function makeCancellable(
       } catch (e) {
         return reject(e);
       }
-      next(result);
+      void next(result);
     }
 
     function next({

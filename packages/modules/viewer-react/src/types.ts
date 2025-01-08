@@ -61,7 +61,7 @@ export interface ViewerViewCreator3dOptions extends ViewCreator3dOptions {
 
 export interface ViewerFrontstage {
   /** frontstage provider to register */
-  provider: FrontstageProvider;
+  provider: FrontstageProvider; //eslint-disable-line deprecation/deprecation
   /** should this be the default frontstage? If multiple are defined as default, the last will be used */
   default?: boolean;
   /** the frontstage requires an iModel connection */
@@ -73,6 +73,7 @@ export type ViewerBackstageItem = BackstageItem & {
 };
 
 export interface ViewerViewportControlOptions
+  //eslint-disable-next-line deprecation/deprecation
   extends Omit<IModelViewportControlOptions, "viewState"> {
   /** ViewState or a function to return a ViewState */
   viewState?:
@@ -99,10 +100,6 @@ export interface LoaderProps {
     | ((iModel: IModelConnection) => Promise<void>);
   /** additional frontstages to register */
   frontstages?: ViewerFrontstage[];
-  /** menu items for the backstage
-   * @deprecated in 4.x. Use [UiItemsProvider.provideBackstageItems](https://www.itwinjs.org/reference/appui-react/uiprovider/uiitemsprovider/).
-   */
-  backstageItems?: ViewerBackstageItem[];
   /** additional viewport options for the default frontstage's viewport control */
   viewportOptions?: ViewerViewportControlOptions;
   /** [UI Providers](https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/) to register */
@@ -113,7 +110,9 @@ export interface LoaderProps {
   loadingComponent?: React.ReactNode;
 }
 
-export type ViewerCommonProps = ViewerInitializerParams & LoaderProps & UnifiedSelectionProps;
+export type ViewerCommonProps = ViewerInitializerParams &
+  LoaderProps &
+  UnifiedSelectionProps;
 
 // Note: When updating this, also update getIModelAppOptions
 export type ViewerIModelAppOptions = Pick<

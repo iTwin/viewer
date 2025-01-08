@@ -19,7 +19,8 @@ import { Presentation } from "@itwin/presentation-frontend";
 import React, { useEffect, useMemo, useState } from "react";
 import { Provider } from "react-redux";
 
-import { useFrontstages, useTheme, useUiProviders } from "../../hooks";
+import { useFrontstages, useUiProviders } from "../../hooks";
+import { useUnifiedSelectionSync } from "../../hooks/useUnifiedSelectionSync";
 import {
   gatherRequiredViewerProps,
   getAndSetViewState,
@@ -27,9 +28,7 @@ import {
 } from "../../services/iModel";
 import { ViewerPerformance } from "../../services/telemetry";
 import type { ModelLoaderProps } from "../../types";
-import { BackstageItemsProvider } from "../app-ui/providers";
 import { IModelViewer } from "./IModelViewer";
-import { useUnifiedSelectionSync } from "../../hooks/useUnifiedSelectionSync";
 
 const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   const {
@@ -40,23 +39,18 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     blankConnectionViewState,
     uiProviders,
     theme,
-    backstageItems, // eslint-disable-line deprecation/deprecation
     loadingComponent,
     selectionStorage,
     getSchemaContext,
   } = viewerProps;
   const { error, connection } = useConnection(viewerProps);
 
-  const providers = useMemo<UiItemsProvider[]>(() => {
-    const providers = [...(uiProviders || [])];
-    if (backstageItems?.length) {
-      providers.push(new BackstageItemsProvider(backstageItems));
-    }
-    return providers;
-  }, [uiProviders, backstageItems]);
-
-  useUiProviders(providers);
-  useUnifiedSelectionSync({ iModelConnection: connection, selectionStorage, getSchemaContext })
+  useUiProviders(uiProviders);
+  useUnifiedSelectionSync({
+    iModelConnection: connection,
+    selectionStorage,
+    getSchemaContext,
+  });
 
   const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
     useFrontstages({
@@ -65,10 +59,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       viewportOptions,
       viewCreatorOptions,
       blankConnectionViewState,
-      syncWithUnifiedSelectionStorage: !!selectionStorage,
     });
-
-  useTheme(theme);
 
   useEffect(() => {
     if (customDefaultFrontstage && connection) {
@@ -96,12 +87,10 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       <div className="itwin-viewer-container">
         {finalFrontstages &&
         (connection || noConnectionRequired) &&
-        StateManager.store ? (
+        StateManager.store ? ( //eslint-disable-line deprecation/deprecation
+          //eslint-disable-next-line deprecation/deprecation
           <Provider store={StateManager.store}>
-            <IModelViewer
-              frontstages={finalFrontstages}
-              backstageItems={backstageItems}
-            />
+            <IModelViewer frontstages={finalFrontstages} theme={theme} />
           </Provider>
         ) : (
           <div className="itwin-viewer-loading-container">
@@ -219,7 +208,9 @@ async function syncSelectionScopeList(iModelConnection: IModelConnection) {
   try {
     const availableScopes =
       await Presentation.selection.scopes.getSelectionScopes(iModelConnection);
+    // eslint-disable-next-line deprecation/deprecation
     UiFramework.dispatchActionToStore(
+      // eslint-disable-next-line deprecation/deprecation
       SessionStateActionId.SetAvailableSelectionScopes,
       availableScopes
     );
