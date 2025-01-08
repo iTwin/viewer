@@ -38,7 +38,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     viewCreatorOptions,
     blankConnectionViewState,
     uiProviders,
-    theme,
+    // theme,
     loadingComponent,
     selectionStorage,
     getSchemaContext,
@@ -90,7 +90,10 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
         StateManager.store ? ( //eslint-disable-line deprecation/deprecation
           //eslint-disable-next-line deprecation/deprecation
           <Provider store={StateManager.store}>
-            <IModelViewer frontstages={finalFrontstages} theme={theme} />
+            <IModelViewer
+              frontstages={finalFrontstages}
+              // theme={theme}
+            />
           </Provider>
         ) : (
           <div className="itwin-viewer-loading-container">

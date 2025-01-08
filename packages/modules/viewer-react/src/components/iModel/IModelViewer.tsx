@@ -20,7 +20,7 @@ import React, { useEffect, useState } from "react";
 import type { ViewerFrontstage } from "../../types";
 interface ModelProps {
   frontstages: ViewerFrontstage[];
-  theme?: ThemeId;
+  // theme?: ThemeId;
 }
 
 /*
@@ -31,8 +31,8 @@ the issue is no longer occuring.
 */
 export const IModelViewer: React.FC<ModelProps> = ({
   frontstages,
-  theme,
-}: ModelProps) => {
+}: // theme,
+ModelProps) => {
   const [defaultFrontstageDef, setDefaultFrontstageDef] =
     useState<FrontstageDef>();
 
@@ -70,8 +70,8 @@ export const IModelViewer: React.FC<ModelProps> = ({
 
   // there will always be at least one (for the default frontstage). Wait for it to be loaded into the list before rendering the content
   return (
-    <ThemeManager theme={theme}>
-      <ConfigurableUiContent appBackstage={<BackstageComposer />} />
-    </ThemeManager>
+    // <ThemeManager theme={theme}>
+    <ConfigurableUiContent appBackstage={<BackstageComposer />} />
+    // </ThemeManager>
   );
 };

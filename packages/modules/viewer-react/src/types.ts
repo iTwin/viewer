@@ -91,7 +91,7 @@ export interface UnifiedSelectionProps {
 
 export interface LoaderProps {
   /** color theme */
-  theme?: ColorTheme | string;
+  // theme?: ColorTheme | string;
   /** Default UI configuration */
   defaultUiConfig?: ViewerDefaultFrontstageConfig;
   /** Optional callback function when iModel is connected */
