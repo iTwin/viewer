@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Fri, 01 Nov 2024 14:07:47 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Jan 2025 18:37:59 GMT and should not be manually modified.
+
+## 4.8.4
+Mon, 13 Jan 2025 18:37:59 GMT
+
+### Patches
+
+- iTwin Platform Reality Data has been deprecated; replaced with Reality Management > Reality Data"
 
 ## 4.8.3
 Fri, 01 Nov 2024 14:07:47 GMT
