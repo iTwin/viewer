@@ -3,7 +3,12 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BackstageAppButton, StageUsage, StandardFrontstageProvider, UiItemsManager } from "@itwin/appui-react";
+import {
+  BackstageAppButton,
+  StageUsage,
+  StandardFrontstageProvider,
+  UiItemsManager,
+} from "@itwin/appui-react";
 import React, { useEffect, useState } from "react";
 
 import { DefaultContentGroupProvider } from "../components/app-ui/providers";
@@ -21,7 +26,6 @@ export interface UseFrontstagesProps {
   viewportOptions?: ViewerViewportControlOptions;
   viewCreatorOptions?: ViewerViewCreator3dOptions;
   blankConnectionViewState?: BlankConnectionViewState;
-  syncWithUnifiedSelectionStorage?: boolean;
 }
 
 export const ViewerDefaultFrontstageProviderId =
@@ -33,7 +37,6 @@ export const useFrontstages = ({
   defaultUiConfig,
   viewCreatorOptions,
   viewportOptions,
-  syncWithUnifiedSelectionStorage,
 }: UseFrontstagesProps) => {
   const [finalFrontstages, setFinalFrontstages] =
     useState<ViewerFrontstage[]>();
@@ -42,7 +45,6 @@ export const useFrontstages = ({
   const [customDefaultFrontstage, setCustomDefaultFrontstage] =
     useState<boolean>(false);
 
-  
   useEffect(() => {
     let allFrontstages: ViewerFrontstage[] = [];
     let defaultExists = false;
@@ -72,15 +74,17 @@ export const useFrontstages = ({
       const contentGroup = new DefaultContentGroupProvider(
         viewportOptions,
         viewCreatorOptions,
-        blankConnectionViewState,
-        syncWithUnifiedSelectionStorage,
+        blankConnectionViewState
       );
 
+      //eslint-disable-next-line deprecation/deprecation
       const defaultFrontstageProvider = new StandardFrontstageProvider({
         id: ViewerDefaultFrontstageProviderId,
         usage: StageUsage.General,
         contentGroupProps: contentGroup,
-        cornerButton: UiItemsManager.getBackstageItems().length ? <BackstageAppButton /> : undefined,
+        cornerButton: UiItemsManager.getBackstageItems().length ? (
+          <BackstageAppButton />
+        ) : undefined,
         ...defaultUiConfig,
       });
 

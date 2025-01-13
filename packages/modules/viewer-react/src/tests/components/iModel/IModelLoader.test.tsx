@@ -1,7 +1,8 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import "@testing-library/jest-dom/extend-expect";
 
@@ -293,7 +294,10 @@ describe("IModelLoader", () => {
   });
 
   it("synchronizes with unified selection storage when storage provided", async () => {
-    const enableUnifiedSelectionSyncWithIModelSpy = jest.spyOn(unifiedSelection, 'enableUnifiedSelectionSyncWithIModel');
+    const enableUnifiedSelectionSyncWithIModelSpy = jest.spyOn(
+      unifiedSelection,
+      "enableUnifiedSelectionSyncWithIModel"
+    );
     enableUnifiedSelectionSyncWithIModelSpy.mockReturnValue(jest.fn());
     const connection = {
       isBlankConnection: () => false,
@@ -305,7 +309,12 @@ describe("IModelLoader", () => {
       .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
     const result = render(
-      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} selectionStorage={unifiedSelection.createStorage()} getSchemaContext={() => new SchemaContext()} />
+      <IModelLoader
+        iTwinId={mockITwinId}
+        iModelId={mockIModelId}
+        selectionStorage={unifiedSelection.createStorage()}
+        getSchemaContext={() => new SchemaContext()}
+      />
     );
     await waitFor(() => result.getByTestId("viewer"));
 
@@ -334,7 +343,10 @@ describe("IModelLoader", () => {
   });
 
   it("closes connection on unmount", async () => {
-    const enableUnifiedSelectionSyncWithIModelSpy = jest.spyOn(unifiedSelection, 'enableUnifiedSelectionSyncWithIModel');
+    const enableUnifiedSelectionSyncWithIModelSpy = jest.spyOn(
+      unifiedSelection,
+      "enableUnifiedSelectionSyncWithIModel"
+    );
     enableUnifiedSelectionSyncWithIModelSpy.mockReturnValue(jest.fn());
     const connection = {
       isBlankConnection: () => false,
@@ -349,7 +361,7 @@ describe("IModelLoader", () => {
     );
     await waitFor(() => result.getByTestId("viewer"));
 
-    expect(enableUnifiedSelectionSyncWithIModelSpy).not.toHaveBeenCalled()
+    expect(enableUnifiedSelectionSyncWithIModelSpy).not.toHaveBeenCalled();
     result.unmount();
 
     await waitFor(() => {

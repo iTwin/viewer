@@ -17,23 +17,28 @@ export type DesktopInitializerParams = ViewerCommonProps & {
   clientId?: string;
 };
 
-type ClientIdProps = {
-  clientId: string;
-  iTwinId: string;
-} | {
-  clientId?: string;
-  iTwinId?: never;
-};
+type ClientIdProps =
+  | {
+      clientId: string;
+      iTwinId: string;
+    }
+  | {
+      clientId?: string;
+      iTwinId?: never;
+    };
 
-type ConnectedViewerDesktopProps = ConnectedViewerProps & Required<Pick<DesktopInitializerParams, "clientId">>
+type ConnectedViewerDesktopProps = ConnectedViewerProps &
+  Required<Pick<DesktopInitializerParams, "clientId">>;
 type BlankViewerDesktopProps = BlankViewerProps & ClientIdProps;
-type FileViewerDesktopProps = FileViewerProps & Pick<DesktopInitializerParams, "clientId">;
+type FileViewerDesktopProps = FileViewerProps &
+  Pick<DesktopInitializerParams, "clientId">;
 
 /** Desktop Viewer can open local (snapshot/briefcase), connected or blank connection models */
-export type DesktopViewerProps = DesktopInitializerParams & XOR<
-  XOR<FileViewerDesktopProps, BlankViewerDesktopProps>,
-  ConnectedViewerDesktopProps
->;
+export type DesktopViewerProps = DesktopInitializerParams &
+  XOR<
+    XOR<FileViewerDesktopProps, BlankViewerDesktopProps>,
+    ConnectedViewerDesktopProps
+  >;
 
 // todo: rm enum in favor of as const
 export enum ModelStatus {

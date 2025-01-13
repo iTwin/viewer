@@ -6,15 +6,15 @@
 import type { DefaultContentTools, StatusBarItem } from "@itwin/appui-react";
 import {
   SectionsStatusField,
-  StandardContentToolsProvider,
+  StandardContentToolsUiItemsProvider,
   StatusBarItemUtilities,
   StatusBarSection,
 } from "@itwin/appui-react";
 import * as React from "react";
 
-export class ViewerContentToolsProvider extends StandardContentToolsProvider {
+export class ViewerContentToolsProvider extends StandardContentToolsUiItemsProvider {
   constructor(private _defaultItems?: DefaultContentTools) {
-    super("ViewerDefaultContentTools", {
+    super({
       horizontal: {
         clearSelection: true,
         clearDisplayOverrides: true,
@@ -32,6 +32,10 @@ export class ViewerContentToolsProvider extends StandardContentToolsProvider {
     });
   }
 
+  public override get id(): string {
+    return "ViewerContentToolsProvider";
+  }
+
   // need to override this method to move sectioning "clear" tool to its proper position on the left
   public override provideStatusBarItems(): StatusBarItem[] {
     const statusBarItems: StatusBarItem[] = [];
@@ -42,12 +46,12 @@ export class ViewerContentToolsProvider extends StandardContentToolsProvider {
       this._defaultItems.vertical.sectionGroup
     ) {
       statusBarItems.push(
-        StatusBarItemUtilities.createCustomItem(
-          "Sections",
-          StatusBarSection.Left,
-          30,
-          <SectionsStatusField hideWhenUnused />
-        )
+        StatusBarItemUtilities.createCustomItem({
+          id: "Sections",
+          section: StatusBarSection.Left,
+          itemPriority: 30,
+          content: <SectionsStatusField hideWhenUnused />,
+        })
       );
     }
 

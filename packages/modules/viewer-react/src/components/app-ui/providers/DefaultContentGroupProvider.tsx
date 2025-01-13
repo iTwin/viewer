@@ -4,13 +4,14 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { StandardContentLayouts } from "@itwin/appui-abstract";
-import type { FrontstageConfig } from "@itwin/appui-react";
 import {
   ContentGroup,
   ContentGroupProvider,
-  IModelViewportControl,
   UiFramework,
 } from "@itwin/appui-react";
+import { ViewportComponent } from "@itwin/imodel-components-react";
+import { viewWithUnifiedSelection } from "@itwin/presentation-components";
+import React from "react";
 
 import { getAndSetViewState } from "../../../services/iModel";
 import type {
@@ -18,7 +19,8 @@ import type {
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
 } from "../../../types";
-import { UnifiedSelectionViewportControl } from "./UnifiedSelectionViewportControl";
+
+const UnifiedSelectionViewport = viewWithUnifiedSelection(ViewportComponent);
 
 /**
  * Provide a default content group to the default frontstage
@@ -27,44 +29,45 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
   private _viewportOptions: ViewerViewportControlOptions | undefined;
   private _blankConnectionViewState: BlankConnectionViewState | undefined;
   private _viewCreatorOptions: ViewerViewCreator3dOptions | undefined;
-  private _syncWithUnifiedSelectionStorage: boolean | undefined;
 
   constructor(
     viewportOptions?: ViewerViewportControlOptions,
     viewCreatorOptions?: ViewerViewCreator3dOptions,
-    blankConnectionViewStateOptions?: BlankConnectionViewState,
-    syncWithUnifiedSelectionStorage?: boolean,
+    blankConnectionViewStateOptions?: BlankConnectionViewState
   ) {
     super();
     this._viewportOptions = viewportOptions;
     this._blankConnectionViewState = blankConnectionViewStateOptions;
     this._viewCreatorOptions = viewCreatorOptions;
-    this._syncWithUnifiedSelectionStorage = syncWithUnifiedSelectionStorage;
   }
 
-  public async contentGroup(_config: FrontstageConfig): Promise<ContentGroup> {
+  public async contentGroup(): Promise<ContentGroup> {
     const iModelConnection = UiFramework.getIModelConnection();
-    let viewState;
-    if (iModelConnection) {
-      viewState = await getAndSetViewState(
-        iModelConnection,
-        this._viewportOptions,
-        this._viewCreatorOptions,
-        this._blankConnectionViewState
-      );
+    if (!iModelConnection) {
+      throw "Never expected to get here without an iModelConnection";
     }
+
+    const viewState = await getAndSetViewState(
+      iModelConnection,
+      this._viewportOptions,
+      this._viewCreatorOptions,
+      this._blankConnectionViewState
+    );
+
     return new ContentGroup({
       id: "iTwinViewer.default-content-group",
       layout: StandardContentLayouts.singleView,
       contents: [
         {
           id: "iTwinViewer.UnifiedSelectionViewport",
-          classId: this._syncWithUnifiedSelectionStorage ? IModelViewportControl : UnifiedSelectionViewportControl,
-          applicationData: {
-            ...this._viewportOptions,
-            viewState,
-            iModelConnection,
-          },
+          classId: "",
+          content: (
+            <UnifiedSelectionViewport
+              viewState={viewState}
+              imodel={iModelConnection}
+              controlId={"iTwinViewer.UnifiedSelectionViewportControl"}
+            />
+          ),
         },
       ],
     });

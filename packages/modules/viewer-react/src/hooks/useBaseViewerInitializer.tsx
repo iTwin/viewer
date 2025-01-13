@@ -4,11 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { useEffect, useMemo, useState } from "react";
+
 import { BaseInitializer } from "../services/BaseInitializer";
+import type { ViewerCommonProps, ViewerInitializerParams } from "../types";
 import { getInitializationOptions, isEqual } from "../utilities";
 import { useIsMounted } from "./useIsMounted";
-
-import type { ViewerCommonProps, ViewerInitializerParams } from "../types";
 
 export const useBaseViewerInitializer = (
   options?: ViewerCommonProps,
@@ -48,7 +48,9 @@ export const useBaseViewerInitializer = (
   return baseViewerInitialized;
 };
 
-function overridePresentationProps(inputProps: ViewerCommonProps | undefined): ViewerInitializerParams | undefined {
+function overridePresentationProps(
+  inputProps: ViewerCommonProps | undefined
+): ViewerInitializerParams | undefined {
   return inputProps
     ? {
         ...inputProps,
