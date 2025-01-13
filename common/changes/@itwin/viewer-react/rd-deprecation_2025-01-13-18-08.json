@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "iTwin Platform Reality Data has been deprecated; replaced with Reality Management > Reality Data\"",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}

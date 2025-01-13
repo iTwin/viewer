@@ -260,7 +260,7 @@ export const getIModelAppOptions = (
   const realityDataAccess =
     options?.realityDataAccess ??
     new RealityDataAccessClient({
-      baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/realitydata`,
+      baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/reality-management/reality-data`,
     });
 
   return {
