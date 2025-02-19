@@ -71,7 +71,7 @@
     "@itwin/presentation-common": "^4.7.3",
     "@itwin/presentation-components": "^5.0.0",
     "@itwin/presentation-frontend": "^4.7.3",
-    "@itwin/property-grid-react": "^1.0.0",
+    "@itwin/property-grid-react": "^1.16.0",
     "@itwin/tree-widget-react": "^3.0.0",
     "@itwin/webgl-compatibility": "^4.7.3",
     "dotenv-flow": "^3.2.0",

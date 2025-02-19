@@ -61,7 +61,7 @@ importers:
       '@itwin/presentation-common': ^4.7.3
       '@itwin/presentation-components': ^5.0.0
       '@itwin/presentation-frontend': ^4.7.3
-      '@itwin/property-grid-react': ^1.0.0
+      '@itwin/property-grid-react': ^1.16.0
       '@itwin/tree-widget-react': ^3.0.0
       '@itwin/unified-selection': ^1.3.0
       '@itwin/webgl-compatibility': ^4.7.3
@@ -127,7 +127,7 @@ importers:
       '@itwin/presentation-common': 4.7.4_jrcxtioaccikuahb3i3h6f5rhe
       '@itwin/presentation-components': 5.4.1_coeiqitrdc3kbyoxwt3ak4fycm
       '@itwin/presentation-frontend': 4.7.4_lbci6e5ivpkspr33wpe53pcp5i
-      '@itwin/property-grid-react': 1.10.0_qjr4doayn7cutuokumbiwhomja
+      '@itwin/property-grid-react': 1.16.0_r3qfxoftdi4eth563vjwvjzgpi
       '@itwin/tree-widget-react': 3.0.1_i672swagn374al3m4ors5guk4q
       '@itwin/unified-selection': 1.3.0
       '@itwin/webgl-compatibility': 4.7.4
@@ -186,7 +186,7 @@ importers:
       '@itwin/presentation-common': ^4.7.3
       '@itwin/presentation-components': ^5.0.0
       '@itwin/presentation-frontend': ^4.7.3
-      '@itwin/property-grid-react': ^1.0.0
+      '@itwin/property-grid-react': ^1.16.0
       '@itwin/reality-data-client': ^1.1.0
       '@itwin/test-local-extension': workspace:*
       '@itwin/tree-widget-react': ^3.0.0
@@ -232,7 +232,7 @@ importers:
       '@itwin/presentation-common': 4.7.4_jrcxtioaccikuahb3i3h6f5rhe
       '@itwin/presentation-components': 5.4.1_coeiqitrdc3kbyoxwt3ak4fycm
       '@itwin/presentation-frontend': 4.7.4_lbci6e5ivpkspr33wpe53pcp5i
-      '@itwin/property-grid-react': 1.10.0_qjr4doayn7cutuokumbiwhomja
+      '@itwin/property-grid-react': 1.16.0_r3qfxoftdi4eth563vjwvjzgpi
       '@itwin/reality-data-client': 1.2.1_@itwin+core-bentley@4.7.4
       '@itwin/test-local-extension': link:../../modules/test-local-extension
       '@itwin/tree-widget-react': 3.0.1_i672swagn374al3m4ors5guk4q
@@ -717,7 +717,7 @@ packages:
     resolution: {integrity: sha512-nBrLsEWm4J2u5LpAPjxADTlq3trDgVZZXHNKabeXZtpq3d3AbN/KGO82R87rdDz5/lYB024rtEf10/q0urNgsA==}
     engines: {node: '>=18.0.0'}
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   /@azure/core-auth/1.7.2:
     resolution: {integrity: sha512-Igm/S3fDYmnMq1uKS38Ae1/m37B3zigdlZw+kocwEhh5GjyKjPrXKO2J6rzpC1wAxrNil/jX9BJRqBshyjnF3g==}
@@ -725,7 +725,7 @@ packages:
     dependencies:
       '@azure/abort-controller': 2.1.2
       '@azure/core-util': 1.9.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   /@azure/core-client/1.9.2:
     resolution: {integrity: sha512-kRdry/rav3fUKHl/aDLd/pDLcB+4pOFwPPTVEExuMyaI5r+JBbMWqRbCY1pn5BniDaU3lRxO9eaQ1AmSMehl/w==}
@@ -737,7 +737,7 @@ packages:
       '@azure/core-tracing': 1.1.2
       '@azure/core-util': 1.9.0
       '@azure/logger': 1.1.2
-      tslib: 2.6.3
+      tslib: 2.8.1
     transitivePeerDependencies:
       - supports-color
 
@@ -758,13 +758,13 @@ packages:
       '@azure/abort-controller': 2.1.2
       '@azure/core-util': 1.9.0
       '@azure/logger': 1.1.2
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   /@azure/core-paging/1.6.2:
     resolution: {integrity: sha512-YKWi9YuCU04B55h25cnOYZHxXYtEvQEbKST5vqRga7hWY9ydd3FZHdeQF8pyh+acWZvppw13M/LMGx0LABUVMA==}
     engines: {node: '>=18.0.0'}
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   /@azure/core-rest-pipeline/1.16.1:
     resolution: {integrity: sha512-ExPSbgjwCoht6kB7B4MeZoBAxcQSIl29r/bPeazZJx50ej4JJCByimLOrZoIsurISNyJQQHf30b3JfqC3Hb88A==}
@@ -777,7 +777,7 @@ packages:
       '@azure/logger': 1.1.2
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.5
-      tslib: 2.6.3
+      tslib: 2.8.1
     transitivePeerDependencies:
       - supports-color
 
@@ -785,27 +785,27 @@ packages:
     resolution: {integrity: sha512-dawW9ifvWAWmUm9/h+/UQ2jrdvjCJ7VJEuCJ6XVNudzcOwm53BFZH4Q845vjfgoUAM8ZxokvVNxNxAITc502YA==}
     engines: {node: '>=18.0.0'}
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   /@azure/core-util/1.9.0:
     resolution: {integrity: sha512-AfalUQ1ZppaKuxPPMsFEUdX6GZPB3d9paR9d/TTL7Ow2De8cJaC7ibi7kWVlFAVPCYo31OcnGymc0R89DX8Oaw==}
     engines: {node: '>=18.0.0'}
     dependencies:
       '@azure/abort-controller': 2.1.2
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   /@azure/core-xml/1.4.2:
     resolution: {integrity: sha512-CW3MZhApe/S4iikbYKE7s83fjDBPIr2kpidX+hlGRwh7N4o1nIpQ/PfJTeioqhfqdMvRtheEl+ft64fyTaLNaA==}
     engines: {node: '>=18.0.0'}
     dependencies:
       fast-xml-parser: 4.4.1
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   /@azure/logger/1.1.2:
     resolution: {integrity: sha512-l170uE7bsKpIU6B/giRc9i4NI0Mj+tANMMMxf7Zi/5cKzEqPayP7+X1WPrG7e+91JgY8N+7K7nF2WOi7iVhXvg==}
     engines: {node: '>=18.0.0'}
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   /@azure/storage-blob/12.23.0:
     resolution: {integrity: sha512-c1KJ5R5hqR/HtvmFtTn/Y1BNMq45NUBp0LZH7yF8WFMET+wmESgEr0FVTu/Z5NonmfUjbgJZG5Nh8xHc5RdWGQ==}
@@ -823,7 +823,7 @@ packages:
       '@azure/core-xml': 1.4.2
       '@azure/logger': 1.1.2
       events: 3.3.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     transitivePeerDependencies:
       - supports-color
 
@@ -2778,16 +2778,16 @@ packages:
   /@floating-ui/core/1.6.4:
     resolution: {integrity: sha512-a4IowK4QkXl4SCWTGUR0INAfEOX3wtsYw3rKK5InQEHMGObkR8Xk44qYQD9P4r6HHw0iIfK6GUKECmY8sTkqRA==}
     dependencies:
-      '@floating-ui/utils': 0.2.4
+      '@floating-ui/utils': 0.2.9
 
   /@floating-ui/dom/1.6.7:
     resolution: {integrity: sha512-wmVfPG5o2xnKDU4jx/m4w5qva9FWHcnZ8BvzEe90D/RpwsJaTAVYPEPdQ8sbr/N8zZTAHlZUTQdqg8ZUbzHmng==}
     dependencies:
       '@floating-ui/core': 1.6.4
-      '@floating-ui/utils': 0.2.4
+      '@floating-ui/utils': 0.2.9
 
-  /@floating-ui/react-dom/2.1.1_nnrd3gsncyragczmpvfhocinkq:
-    resolution: {integrity: sha512-4h84MJt3CHrtG18mGsXuLCHMrug49d7DFkU0RMIyshRveBeyV2hmV/pDaF2Uxtu8kgq5r46llp5E5FQiR0K2Yg==}
+  /@floating-ui/react-dom/2.1.2_nnrd3gsncyragczmpvfhocinkq:
+    resolution: {integrity: sha512-06okr5cgPzMNBy+Ycse2A6udMi4bqwW/zgBF/rwjcNqWkyr82Mcg8b0vjX8OJpZFy/FKjJmw6wV7t44kK6kW7A==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -2802,14 +2802,27 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
-      '@floating-ui/react-dom': 2.1.1_nnrd3gsncyragczmpvfhocinkq
-      '@floating-ui/utils': 0.2.4
+      '@floating-ui/react-dom': 2.1.2_nnrd3gsncyragczmpvfhocinkq
+      '@floating-ui/utils': 0.2.9
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
       tabbable: 6.2.0
 
-  /@floating-ui/utils/0.2.4:
-    resolution: {integrity: sha512-dWO2pw8hhi+WrXq1YJy2yCuWoL20PddgGaqTgVe4cOS9Q6qklXCiA1tJEqX6BEwRNSCP84/afac9hd4MS+zEUA==}
+  /@floating-ui/react/0.27.4_nnrd3gsncyragczmpvfhocinkq:
+    resolution: {integrity: sha512-05mXdkUiVh8NCEcYKQ2C9SV9IkZ9k/dFtYmaEIN2riLv80UHoXylgBM76cgPJYfLJM3dJz7UE5MOVH0FypMd2Q==}
+    peerDependencies:
+      react: '>=17.0.0'
+      react-dom: '>=17.0.0'
+    dependencies:
+      '@floating-ui/react-dom': 2.1.2_nnrd3gsncyragczmpvfhocinkq
+      '@floating-ui/utils': 0.2.9
+      react: 18.3.1
+      react-dom: 18.3.1_react@18.3.1
+      tabbable: 6.2.0
+    dev: false
+
+  /@floating-ui/utils/0.2.9:
+    resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
 
   /@humanwhocodes/config-array/0.11.14:
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -3591,6 +3604,25 @@ packages:
     transitivePeerDependencies:
       - '@types/react'
 
+  /@itwin/itwinui-react/3.17.1_psuonouaqi5wuc37nxyknoubym:
+    resolution: {integrity: sha512-o2uG4Fwz4LXeREJY12Sa2TJ58iMl98Qf4+a7uM+c+ACLcnEz6oAFPlAsT2C2EgbFvz7NlXOyoQj04IOM32rhnw==}
+    peerDependencies:
+      react: '>=17.0.0'
+      react-dom: '>=17.0.0'
+    dependencies:
+      '@floating-ui/react': 0.27.4_nnrd3gsncyragczmpvfhocinkq
+      '@itwin/itwinui-illustrations-react': 2.1.0_nnrd3gsncyragczmpvfhocinkq
+      '@swc/helpers': 0.5.15
+      '@tanstack/react-virtual': 3.13.0_nnrd3gsncyragczmpvfhocinkq
+      classnames: 2.5.1
+      jotai: 2.9.0_3vdbhqr2ncalcx7opnshezpx3q
+      react: 18.3.1
+      react-dom: 18.3.1_react@18.3.1
+      react-table: 7.8.0_react@18.3.1
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: false
+
   /@itwin/itwinui-variables/1.0.0:
     resolution: {integrity: sha512-f78S401k1romzL6jgJuNZTe8P0/PCtrKUDVZwMsIJHLlgwyMKGR7nqDWQBV03tY2/TF/qMLt9S96Tej4f1Xrtg==}
     dev: false
@@ -3909,15 +3941,16 @@ packages:
       '@itwin/core-bentley': 4.10.7
     dev: false
 
-  /@itwin/property-grid-react/1.10.0_qjr4doayn7cutuokumbiwhomja:
-    resolution: {integrity: sha512-n5o+NnH8tGvLTkEHls6uZ7SmHBFby5LkZCVAcrY6cFsVD+tceIOZzgiIJbsEp/+OANGY3AnkAdg76yOrVQAxOg==}
+  /@itwin/property-grid-react/1.16.0_r3qfxoftdi4eth563vjwvjzgpi:
+    resolution: {integrity: sha512-oQN+fO2zf4fqJ4KbLoXrXZVIWuk6TZH8ADTCT+HPnSEzZDhV5hid5UIj3j4Zva+ln/Umic2fiDleegCeXaUK0Q==}
     peerDependencies:
       '@itwin/appui-abstract': ^4.0.0
-      '@itwin/appui-react': ^4.3.0
-      '@itwin/components-react': ^4.3.0
+      '@itwin/appui-react': ^4.3.0 || ^5.0.0
+      '@itwin/components-react': ^4.3.0 || ^5.0.0
       '@itwin/core-bentley': ^4.0.0
+      '@itwin/core-common': ^4.0.0
       '@itwin/core-frontend': ^4.0.0
-      '@itwin/core-react': ^4.3.0
+      '@itwin/presentation-common': ^4.0.0
       '@itwin/presentation-components': ^4.0.0 || ^5.0.0
       '@itwin/presentation-frontend': ^4.0.0
       react: ^17.0.0 || ^18.0.0
@@ -3927,18 +3960,25 @@ packages:
       '@itwin/appui-react': 4.15.1_yrqai5hl5gvsf4dek6el5aloii
       '@itwin/components-react': 4.15.1_jscgs7su4cyo55wt5klvj3iepa
       '@itwin/core-bentley': 4.7.4
+      '@itwin/core-common': 4.7.4_7i4fuy3zzvrtjsnyekcav72ie4
       '@itwin/core-frontend': 4.7.4_phc4rse3pm3zzqfro3xbf2awbu
-      '@itwin/core-react': 4.15.1_bpptdsfauwdziiwg4uklizbr74
       '@itwin/itwinui-icons-react': 2.8.0_nnrd3gsncyragczmpvfhocinkq
       '@itwin/itwinui-illustrations-react': 2.1.0_nnrd3gsncyragczmpvfhocinkq
-      '@itwin/itwinui-react': 3.12.2_psuonouaqi5wuc37nxyknoubym
+      '@itwin/itwinui-react': 3.17.1_psuonouaqi5wuc37nxyknoubym
+      '@itwin/presentation-common': 4.7.4_jrcxtioaccikuahb3i3h6f5rhe
       '@itwin/presentation-components': 5.4.1_coeiqitrdc3kbyoxwt3ak4fycm
+      '@itwin/presentation-core-interop': 1.3.0_rll2n26bhzrezeyt23jhdcbtsy
       '@itwin/presentation-frontend': 4.7.4_lbci6e5ivpkspr33wpe53pcp5i
+      '@itwin/presentation-shared': 1.2.0
+      '@itwin/unified-selection': 1.3.0
       classnames: 2.5.1
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
       react-error-boundary: 4.0.13_react@18.3.1
     transitivePeerDependencies:
+      - '@itwin/core-geometry'
+      - '@itwin/core-quantity'
+      - '@itwin/ecschema-metadata'
       - '@types/react'
     dev: false
 
@@ -5112,13 +5152,34 @@ packages:
   /@swc/helpers/0.5.11:
     resolution: {integrity: sha512-YNlnKRWF2sVojTpIyzwou9XoTNbzbzONwRhOoniEioF1AtaitTvVZblaQRrAzChWQ1bLYyYSWzM18y4WwgzJ+A==}
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
+
+  /@swc/helpers/0.5.15:
+    resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
+    dependencies:
+      tslib: 2.8.1
+    dev: false
 
   /@szmarczak/http-timer/4.0.6:
     resolution: {integrity: sha512-4BAffykYOgO+5nzBWYwE3W90sBgLJoUPRWWcL8wlyiM8IB8ipJz3UMJ9KXQd1RKQXpKp8Tutn80HZtWsu2u76w==}
     engines: {node: '>=10'}
     dependencies:
       defer-to-connect: 2.0.1
+
+  /@tanstack/react-virtual/3.13.0_nnrd3gsncyragczmpvfhocinkq:
+    resolution: {integrity: sha512-CchF0NlLIowiM2GxtsoKBkXA4uqSnY2KvnXo+kyUFD4a4ll6+J0qzoRsUPMwXV/H26lRsxgJIr/YmjYum2oEjg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    dependencies:
+      '@tanstack/virtual-core': 3.13.0
+      react: 18.3.1
+      react-dom: 18.3.1_react@18.3.1
+    dev: false
+
+  /@tanstack/virtual-core/3.13.0:
+    resolution: {integrity: sha512-NBKJP3OIdmZY3COJdWkSonr50FMVIi+aj5ZJ7hI/DTpEKg2RMfo/KvP8A3B/zOSpMgIe52B5E2yn7rryULzA6g==}
+    dev: false
 
   /@testing-library/dom/9.3.4:
     resolution: {integrity: sha512-FlS4ZWlp97iiNWig0Muq8p+3rVDjRiYE+YKGbAqXOu9nwJFFOdL00kFpz42M+4huzYi86vAK1sOOfyOG45muIQ==}
@@ -6924,7 +6985,7 @@ packages:
     resolution: {integrity: sha512-gxGWBrTT1JuMx6R+o5PTXMmUnhnVzLQ9SNutD4YqKtI6ap897t3tKECYla6gCWEkplXnlNybEkZg9GEGxKFCgw==}
     dependencies:
       pascal-case: 3.1.2
-      tslib: 2.6.3
+      tslib: 2.8.1
     dev: true
 
   /camelcase-css/2.0.1:
@@ -8187,7 +8248,7 @@ packages:
     resolution: {integrity: sha512-Kv5nKlh6yRrdrGvxeJ2e5y2eRUpkUosIW4A2AS38zwSz27zu7ufDwQPi5Jhs3XAlGNetl3bmnGhQsMtkKJnj3w==}
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.3
+      tslib: 2.8.1
     dev: true
 
   /dot-prop/6.0.1:
@@ -12551,7 +12612,7 @@ packages:
   /lower-case/2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
     dev: true
 
   /lowercase-keys/2.0.0:
@@ -13004,7 +13065,7 @@ packages:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.6.3
+      tslib: 2.8.1
     dev: true
 
   /node-fetch/2.6.7:
@@ -13362,7 +13423,7 @@ packages:
     resolution: {integrity: sha512-RXlj7zCYokReqWpOPH9oYivUzLYZ5vAPIfEmCTNViosC78F8F0H9y7T7gG2M39ymgutxF5gcFEsyZQSph9Bp3A==}
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.6.3
+      tslib: 2.8.1
     dev: true
 
   /parent-module/1.0.1:
@@ -13417,7 +13478,7 @@ packages:
     resolution: {integrity: sha512-uWlGT3YSnK9x3BQJaOdcZwrnV6hPpd8jFH1/ucpiLRPh/2zCVJKS19E4GvYHvaCcACn3foXZ0cLB9Wrx1KGe5g==}
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.3
+      tslib: 2.8.1
     dev: true
 
   /path-exists/3.0.0:
@@ -16744,6 +16805,9 @@ packages:
 
   /tslib/2.6.3:
     resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
+
+  /tslib/2.8.1:
+    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
   /tsutils/3.21.0:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}

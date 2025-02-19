@@ -13,7 +13,7 @@ import { MeasureToolsUiItemsProvider } from "@itwin/measure-tools-react";
 import {
   AncestorsNavigationControls,
   CopyPropertyTextContextMenuItem,
-  PropertyGridUiItemsProvider,
+  createPropertyGrid,
   ShowHideNullValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
 import {
@@ -101,22 +101,29 @@ export const ViewerRoute = () => {
             }),
           ],
         },
-        new PropertyGridUiItemsProvider({
-          propertyGridProps: {
-            autoExpandChildCategories: true,
-            ancestorsNavigationControls: (props) => (
-              <AncestorsNavigationControls {...props} />
-            ),
-            contextMenuItems: [
-              (props) => <CopyPropertyTextContextMenuItem {...props} />,
-            ],
-            settingsMenuItems: [
-              (props) => (
-                <ShowHideNullValuesSettingsMenuItem {...props} persist={true} />
+        {
+          id: "PropertyWidgetUIProvider",
+          getWidgets: () => [
+            createPropertyGrid({
+              autoExpandChildCategories: true,
+              ancestorsNavigationControls: (props) => (
+                <AncestorsNavigationControls {...props} />
               ),
-            ],
-          },
-        }),
+              contextMenuItems: [
+                (props) => <CopyPropertyTextContextMenuItem {...props} />,
+              ],
+              settingsMenuItems: [
+                (props) => (
+                  <ShowHideNullValuesSettingsMenuItem
+                    {...props}
+                    persist={true}
+                  />
+                ),
+              ],
+              selectionStorage: unifiedSelectionStorage,
+            }),
+          ],
+        },
         new MeasureToolsUiItemsProvider(),
         new IModelMergeItemsProvider(),
       ]}
