@@ -8,7 +8,6 @@ import {
   FrameworkAccuDraw,
   FrameworkReducer,
   FrameworkUiAdmin,
-  SessionStateActionId,
   StateManager,
   UiFramework,
 } from "@itwin/appui-react";
@@ -18,50 +17,13 @@ import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
 import { FrontendIModelsAccess } from "@itwin/imodels-access-frontend";
 import { IModelsClient } from "@itwin/imodels-client-management";
-import { getInstancesCount } from "@itwin/presentation-common";
 import { Presentation } from "@itwin/presentation-frontend";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
 import { ViewerPerformance } from "../services/telemetry";
 import { makeCancellable } from "../utilities/MakeCancellable";
 
 import type { IModelAppOptions } from "@itwin/core-frontend";
-import type {
-  ISelectionProvider,
-  SelectionChangeEventArgs,
-} from "@itwin/presentation-frontend";
 import type { ViewerInitializerParams } from "../types";
-
-const syncSelectionCount = () => {
-  let removeListenerFunc: (() => void) | undefined;
-  Presentation.selection.selectionChange.addListener(
-    (args: SelectionChangeEventArgs, provider: ISelectionProvider) => {
-      removeListenerFunc?.();
-      if (args.level !== 0) {
-        // don't need to handle sub-selections
-        return;
-      }
-      const selection = provider.getSelection(args.imodel, args.level);
-      const numSelected = getInstancesCount(selection);
-
-      UiFramework.dispatchActionToStore(
-        SessionStateActionId.SetNumItemsSelected,
-        numSelected
-      );
-
-      // NOTE: add an event listener to the iModelConnection.selectionSet.onChanged to restore the numSelected to the value that we
-      // extracted from the Presentation.selection.selectionChange event in order to override the numSelected AppUi sets from
-      // the iModelConnection.selectionSet.onChanged that will treat assemblies as a collection of elements instead of a single one
-      removeListenerFunc = UiFramework.getIModelConnection()?.selectionSet.onChanged.addListener(
-        (_ev) => {
-          UiFramework.dispatchActionToStore(
-            SessionStateActionId.SetNumItemsSelected,
-            numSelected
-          );
-        }
-      );
-    }
-  );
-};
 
 // initialize required iTwin.js services
 export class BaseInitializer {
@@ -169,9 +131,6 @@ export class BaseInitializer {
 
       // initialize Presentation
       yield Presentation.initialize(viewerOptions?.presentationProps);
-
-      // Sync selection count & active selection scope between Presentation and AppUi. Runs after the Presentation is initialized.
-      syncSelectionCount();
 
       // allow uiAdmin to open key-in palette when Ctrl+F2 is pressed - good for manually loading UI providers
       IModelApp.uiAdmin.updateFeatureFlags({ allowKeyinPalette: true });

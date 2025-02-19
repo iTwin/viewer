@@ -11,14 +11,20 @@ import type {
 import * as React from "react";
 import {
   MessageCenterField,
-  SelectionInfoField,
+  SelectionCountField as AppUiSelectionCountField,
   SelectionScopeField as AppUiSelectionScopeField,
   SnapModeField,
   StatusBarItemUtilities,
   StatusBarSection,
   TileLoadingIndicator,
   ToolAssistanceField,
+  UiFramework,
 } from "@itwin/appui-react";
+import { IModelConnection } from "@itwin/core-frontend";
+import { getInstancesCount } from "@itwin/presentation-common";
+import { createIModelKey } from "@itwin/presentation-core-interop";
+import { Presentation } from "@itwin/presentation-frontend";
+import { Selectables, SelectionStorage } from "@itwin/unified-selection";
 import { useUnifiedSelectionScopes } from "../../../hooks/useUnifiedSelectionScopes";
 
 import type { ViewerDefaultStatusbarItems } from "../../../types";
@@ -87,7 +93,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
           "SelectionInfo",
           StatusBarSection.Right,
           40,
-          <SelectionInfoField />
+          <SelectionCountField />
         )
       );
     }
@@ -96,14 +102,85 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
   }
 }
 
+function SelectionCountField() {
+  const imodel = UiFramework.getIModelConnection();
+  if (!imodel) {
+    throw new Error(
+      `IModel connection is not available for selection count toolbar field`
+    );
+  }
+
+  const selectionStorage = React.useContext(selectionStorageContext);
+
+  const [count, setCount] = React.useState(
+    selectionStorage
+      ? getSelectablesCountInStorage(selectionStorage, createIModelKey(imodel))
+      : getInstancesCountInPresentationSelectionManager(imodel)
+  );
+  React.useEffect(() => {
+    if (selectionStorage) {
+      return selectionStorage.selectionChangeEvent.addListener(
+        ({ imodelKey, level }) => {
+          if (level !== 0) {
+            return;
+          }
+          setCount(getSelectablesCountInStorage(selectionStorage, imodelKey));
+        }
+      );
+    }
+    return Presentation.selection.selectionChange.addListener((args) => {
+      if (args.level !== 0) {
+        return;
+      }
+      setCount(getInstancesCountInPresentationSelectionManager(imodel));
+    });
+  }, [selectionStorage, imodel]);
+
+  return <AppUiSelectionCountField count={count} />;
+}
+
+const selectionStorageContext = React.createContext<
+  SelectionStorage | undefined
+>(undefined);
+
+/** @internal */
+export function SelectionStorageContextProvider({
+  selectionStorage,
+  children,
+}: React.PropsWithChildren<{
+  selectionStorage?: SelectionStorage | undefined;
+}>) {
+  return (
+    <selectionStorageContext.Provider value={selectionStorage}>
+      {children}
+    </selectionStorageContext.Provider>
+  );
+}
+
+function getSelectablesCountInStorage(
+  storage: SelectionStorage,
+  imodelKey: string
+): number {
+  const selection = storage.getSelection({ imodelKey });
+  return Selectables.size(selection);
+}
+
+function getInstancesCountInPresentationSelectionManager(
+  imodel: IModelConnection
+) {
+  const selection = Presentation.selection.getSelection(imodel);
+  return getInstancesCount(selection);
+}
+
 function SelectionScopeField() {
   const ctx = React.useContext(selectionScopesContext);
-  const selectionScopes = React.useMemo(() =>
-    Object.entries(ctx.availableScopes).map(([id, { label }]) => ({
-      id,
-      label,
-    })),
-    [ctx.availableScopes],
+  const selectionScopes = React.useMemo(
+    () =>
+      Object.entries(ctx.availableScopes).map(([id, { label }]) => ({
+        id,
+        label,
+      })),
+    [ctx.availableScopes]
   );
   return (
     <AppUiSelectionScopeField
@@ -127,6 +204,7 @@ const selectionScopesContext = React.createContext<
   onScopeChange: () => {},
 });
 
+/** @internal */
 export function SelectionScopesContextProvider({
   selectionScopes,
   children,

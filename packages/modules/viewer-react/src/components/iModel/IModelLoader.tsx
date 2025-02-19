@@ -24,6 +24,7 @@ import { isUnifiedSelectionProps, ModelLoaderProps } from "../../types";
 import {
   BackstageItemsProvider,
   SelectionScopesContextProvider,
+  SelectionStorageContextProvider,
 } from "../app-ui/providers";
 import { IModelViewer } from "./IModelViewer";
 
@@ -104,33 +105,37 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
 
   if (error) {
     throw error;
-  } else {
-    return (
-      <div className="itwin-viewer-container">
-        {finalFrontstages &&
-        (connection || noConnectionRequired) &&
-        StateManager.store ? (
-          <Provider store={StateManager.store}>
+  }
+
+  return (
+    <div className="itwin-viewer-container">
+      {finalFrontstages &&
+      (connection || noConnectionRequired) &&
+      StateManager.store ? (
+        <Provider store={StateManager.store}>
+          <SelectionStorageContextProvider
+            selectionStorage={viewerProps.selectionStorage}
+          >
             <SelectionScopesContextProvider selectionScopes={selectionScopes}>
               <IModelViewer
                 frontstages={finalFrontstages}
                 backstageItems={backstageItems}
               />
             </SelectionScopesContextProvider>
-          </Provider>
-        ) : (
-          <div className="itwin-viewer-loading-container">
-            {loadingComponent ?? (
-              <SvgIModelLoader
-                data-testid="loader-wrapper"
-                className="itwin-viewer-loading-icon"
-              />
-            )}
-          </div>
-        )}
-      </div>
-    );
-  }
+          </SelectionStorageContextProvider>
+        </Provider>
+      ) : (
+        <div className="itwin-viewer-loading-container">
+          {loadingComponent ?? (
+            <SvgIModelLoader
+              data-testid="loader-wrapper"
+              className="itwin-viewer-loading-icon"
+            />
+          )}
+        </div>
+      )}
+    </div>
+  );
 });
 
 function useConnection(viewerProps: ModelLoaderProps) {
