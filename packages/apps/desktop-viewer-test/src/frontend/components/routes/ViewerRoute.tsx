@@ -130,6 +130,25 @@ export const ViewerRoute = () => {
       enablePerformanceMonitors={true}
       selectionStorage={unifiedSelectionStorage}
       getSchemaContext={getSchemaContext}
+      selectionScopes={{
+        active: "element",
+        available: availableSelectionScopes,
+      }}
     />
   ) : null;
+};
+
+const availableSelectionScopes = {
+  element: {
+    label: "Element",
+    def: { id: "element" as const },
+  },
+  assembly: {
+    label: "Assembly",
+    def: { id: "element" as const, ancestorLevel: 1 },
+  },
+  "top-assembly": {
+    label: "Top assembly",
+    def: { id: "element" as const, ancestorLevel: -1 },
+  }
 };

@@ -6,30 +6,29 @@
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
-import type { UiItemsProvider } from "@itwin/appui-react";
-import {
-  SessionStateActionId,
-  StateManager,
-  UiFramework,
-} from "@itwin/appui-react";
-import type { IModelConnection } from "@itwin/core-frontend";
-import { IModelApp } from "@itwin/core-frontend";
-import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
-import { Presentation } from "@itwin/presentation-frontend";
 import React, { useEffect, useMemo, useState } from "react";
 import { Provider } from "react-redux";
-
+import { StateManager, UiFramework } from "@itwin/appui-react";
+import { IModelApp } from "@itwin/core-frontend";
+import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
 import { useFrontstages, useTheme, useUiProviders } from "../../hooks";
+import { useUnifiedSelectionScopes } from "../../hooks/useUnifiedSelectionScopes";
+import { useUnifiedSelectionSync } from "../../hooks/useUnifiedSelectionSync";
 import {
   gatherRequiredViewerProps,
   getAndSetViewState,
   openConnection,
 } from "../../services/iModel";
 import { ViewerPerformance } from "../../services/telemetry";
-import type { ModelLoaderProps } from "../../types";
-import { BackstageItemsProvider } from "../app-ui/providers";
+import { isUnifiedSelectionProps, ModelLoaderProps } from "../../types";
+import {
+  BackstageItemsProvider,
+  SelectionScopesContextProvider,
+} from "../app-ui/providers";
 import { IModelViewer } from "./IModelViewer";
-import { useUnifiedSelectionSync } from "../../hooks/useUnifiedSelectionSync";
+
+import type { UiItemsProvider } from "@itwin/appui-react";
+import type { IModelConnection } from "@itwin/core-frontend";
 
 const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   const {
@@ -42,8 +41,6 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     theme,
     backstageItems, // eslint-disable-line deprecation/deprecation
     loadingComponent,
-    selectionStorage,
-    getSchemaContext,
   } = viewerProps;
   const { error, connection } = useConnection(viewerProps);
 
@@ -56,7 +53,23 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   }, [uiProviders, backstageItems]);
 
   useUiProviders(providers);
-  useUnifiedSelectionSync({ iModelConnection: connection, selectionStorage, getSchemaContext })
+
+  const selectionScopes = useUnifiedSelectionScopes({
+    iModelConnection: connection,
+    selectionScopes: isUnifiedSelectionProps(viewerProps)
+      ? viewerProps.selectionScopes
+      : undefined,
+  });
+  useUnifiedSelectionSync({
+    iModelConnection: connection,
+    activeSelectionScope: selectionScopes.activeScope.def,
+    ...(isUnifiedSelectionProps(viewerProps)
+      ? {
+          selectionStorage: viewerProps.selectionStorage,
+          getSchemaContext: viewerProps.getSchemaContext,
+        }
+      : {}),
+  });
 
   const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
     useFrontstages({
@@ -65,7 +78,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       viewportOptions,
       viewCreatorOptions,
       blankConnectionViewState,
-      syncWithUnifiedSelectionStorage: !!selectionStorage,
+      isUsingDeprecatedSelectionManager: !isUnifiedSelectionProps(viewerProps),
     });
 
   useTheme(theme);
@@ -98,10 +111,12 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
         (connection || noConnectionRequired) &&
         StateManager.store ? (
           <Provider store={StateManager.store}>
-            <IModelViewer
-              frontstages={finalFrontstages}
-              backstageItems={backstageItems}
-            />
+            <SelectionScopesContextProvider selectionScopes={selectionScopes}>
+              <IModelViewer
+                frontstages={finalFrontstages}
+                backstageItems={backstageItems}
+              />
+            </SelectionScopesContextProvider>
           </Provider>
         ) : (
           <div className="itwin-viewer-loading-container">
@@ -143,8 +158,6 @@ function useConnection(viewerProps: ModelLoaderProps) {
           if (onIModelConnected) {
             await onIModelConnected(imodelConnection);
           }
-
-          await syncSelectionScopeList(imodelConnection);
         }
       } catch (error: unknown) {
         if (!disposed) {
@@ -208,24 +221,6 @@ async function getConnection(
   );
 
   return imodelConnection;
-}
-
-async function syncSelectionScopeList(iModelConnection: IModelConnection) {
-  if (iModelConnection.isBlankConnection() || !iModelConnection.isOpen) {
-    return;
-  }
-
-  // Fetch the available selection scopes and add them to the redux store
-  try {
-    const availableScopes =
-      await Presentation.selection.scopes.getSelectionScopes(iModelConnection);
-    UiFramework.dispatchActionToStore(
-      SessionStateActionId.SetAvailableSelectionScopes,
-      availableScopes
-    );
-  } catch {
-    console.log("Error syncing selection scope list.");
-  }
 }
 
 export default IModelLoader;

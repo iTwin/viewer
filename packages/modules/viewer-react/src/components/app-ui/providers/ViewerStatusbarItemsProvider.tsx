@@ -8,17 +8,18 @@ import type {
   StatusBarItem,
   UiItemsProvider,
 } from "@itwin/appui-react";
+import * as React from "react";
 import {
   MessageCenterField,
   SelectionInfoField,
-  SelectionScopeField,
+  SelectionScopeField as AppUiSelectionScopeField,
   SnapModeField,
   StatusBarItemUtilities,
   StatusBarSection,
   TileLoadingIndicator,
   ToolAssistanceField,
 } from "@itwin/appui-react";
-import * as React from "react";
+import { useUnifiedSelectionScopes } from "../../../hooks/useUnifiedSelectionScopes";
 
 import type { ViewerDefaultStatusbarItems } from "../../../types";
 
@@ -93,4 +94,48 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
 
     return items;
   }
+}
+
+function SelectionScopeField() {
+  const ctx = React.useContext(selectionScopesContext);
+  const selectionScopes = React.useMemo(() =>
+    Object.entries(ctx.availableScopes).map(([id, { label }]) => ({
+      id,
+      label,
+    })),
+    [ctx.availableScopes],
+  );
+  return (
+    <AppUiSelectionScopeField
+      selectionScopes={selectionScopes}
+      activeScope={ctx.activeScope.id}
+      onChange={ctx.onScopeChange}
+    />
+  );
+}
+
+const selectionScopesContext = React.createContext<
+  ReturnType<typeof useUnifiedSelectionScopes>
+>({
+  activeScope: { id: "element", def: "element" },
+  availableScopes: {
+    element: {
+      label: "Element",
+      def: "element",
+    },
+  },
+  onScopeChange: () => {},
+});
+
+export function SelectionScopesContextProvider({
+  selectionScopes,
+  children,
+}: React.PropsWithChildren<{
+  selectionScopes: ReturnType<typeof useUnifiedSelectionScopes>;
+}>) {
+  return (
+    <selectionScopesContext.Provider value={selectionScopes}>
+      {children}
+    </selectionScopesContext.Provider>
+  );
 }
