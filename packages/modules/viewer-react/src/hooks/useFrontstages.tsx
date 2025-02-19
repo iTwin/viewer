@@ -3,10 +3,10 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { BackstageAppButton, StageUsage, StandardFrontstageProvider, UiItemsManager } from "@itwin/appui-react";
 import React, { useEffect, useState } from "react";
-
+import { BackstageAppButton, StageUsage, StandardFrontstageProvider, UiItemsManager } from "@itwin/appui-react";
 import { DefaultContentGroupProvider } from "../components/app-ui/providers";
+
 import type {
   BlankConnectionViewState,
   ViewerDefaultFrontstageConfig,
@@ -21,7 +21,7 @@ export interface UseFrontstagesProps {
   viewportOptions?: ViewerViewportControlOptions;
   viewCreatorOptions?: ViewerViewCreator3dOptions;
   blankConnectionViewState?: BlankConnectionViewState;
-  syncWithUnifiedSelectionStorage?: boolean;
+  isUsingDeprecatedSelectionManager?: boolean;
 }
 
 export const ViewerDefaultFrontstageProviderId =
@@ -33,7 +33,7 @@ export const useFrontstages = ({
   defaultUiConfig,
   viewCreatorOptions,
   viewportOptions,
-  syncWithUnifiedSelectionStorage,
+  isUsingDeprecatedSelectionManager,
 }: UseFrontstagesProps) => {
   const [finalFrontstages, setFinalFrontstages] =
     useState<ViewerFrontstage[]>();
@@ -42,7 +42,7 @@ export const useFrontstages = ({
   const [customDefaultFrontstage, setCustomDefaultFrontstage] =
     useState<boolean>(false);
 
-  
+
   useEffect(() => {
     let allFrontstages: ViewerFrontstage[] = [];
     let defaultExists = false;
@@ -73,7 +73,7 @@ export const useFrontstages = ({
         viewportOptions,
         viewCreatorOptions,
         blankConnectionViewState,
-        syncWithUnifiedSelectionStorage,
+        isUsingDeprecatedSelectionManager,
       );
 
       const defaultFrontstageProvider = new StandardFrontstageProvider({

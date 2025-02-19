@@ -3,17 +3,18 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  IModelConnectedViewport,
-  IModelViewportControl,
-  UiFramework,
-} from "@itwin/appui-react";
-import type { IModelConnection, ScreenViewport } from "@itwin/core-frontend";
-import type { ViewStateProp } from "@itwin/imodel-components-react";
+import * as React from "react";
+import { IModelConnectedViewport, IModelViewportControl, UiFramework } from "@itwin/appui-react";
 import { ViewportComponent } from "@itwin/imodel-components-react";
 import { viewWithUnifiedSelection } from "@itwin/presentation-components";
-import * as React from "react";
 
+import type { IModelConnection, ScreenViewport } from "@itwin/core-frontend";
+import type { ViewStateProp } from "@itwin/imodel-components-react";
+
+/**
+ * This is currently only used if Viewer is not provided with unified selection
+ * storage. See `DefaultContentGroupProvider`.
+ */
 const UnifiedSelectionViewport = viewWithUnifiedSelection(ViewportComponent);
 
 /** @internal fork of IModelViewportControl from AppUI, to provide Unified Selection

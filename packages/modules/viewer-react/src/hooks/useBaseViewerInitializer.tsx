@@ -5,10 +5,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { BaseInitializer } from "../services/BaseInitializer";
+import { isUnifiedSelectionProps, ViewerCommonProps, ViewerInitializerParams } from "../types";
 import { getInitializationOptions, isEqual } from "../utilities";
 import { useIsMounted } from "./useIsMounted";
-
-import type { ViewerCommonProps, ViewerInitializerParams } from "../types";
 
 export const useBaseViewerInitializer = (
   options?: ViewerCommonProps,
@@ -54,7 +53,7 @@ function overridePresentationProps(inputProps: ViewerCommonProps | undefined): V
         ...inputProps,
         presentationProps: {
           ...inputProps.presentationProps,
-          ...(inputProps.selectionStorage
+          ...(isUnifiedSelectionProps(inputProps)
             ? {
                 selection: {
                   ...inputProps.presentationProps?.selection,
