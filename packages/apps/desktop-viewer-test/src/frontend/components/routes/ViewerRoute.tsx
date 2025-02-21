@@ -150,5 +150,5 @@ const availableSelectionScopes = {
   "top-assembly": {
     label: "Top assembly",
     def: { id: "element" as const, ancestorLevel: -1 },
-  }
+  },
 };
