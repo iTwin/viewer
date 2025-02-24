@@ -7,18 +7,15 @@ import type { IModelConnection } from "@itwin/core-frontend";
 import React from "react";
 import { Presentation } from "@itwin/presentation-frontend";
 import { computeSelection } from "@itwin/unified-selection";
-import { UnifiedSelectionProps } from "../types";
+import { SelectionScopesProps } from "../types";
 
 type SelectionScope = Parameters<typeof computeSelection>[0]["scope"];
+type SelectionScopesMap = SelectionScopesProps["available"];
 
-type UseUnifiedSelectionScopesProps = Pick<
-  UnifiedSelectionProps,
-  "selectionScopes"
-> & { iModelConnection?: IModelConnection };
-
-type SelectionScopesMap = NonNullable<
-  UnifiedSelectionProps["selectionScopes"]
->["available"];
+interface UseUnifiedSelectionScopesProps {
+  iModelConnection?: IModelConnection;
+  selectionScopes?: SelectionScopesProps;
+}
 
 /** @internal */
 export function useUnifiedSelectionScopes({
@@ -94,10 +91,7 @@ const defaultAvailableScopes: SelectionScopesMap = {
 };
 
 function getActiveScope(
-  selectionScopes?: Pick<
-    NonNullable<UnifiedSelectionProps["selectionScopes"]>,
-    "active" | "available"
-  >
+  selectionScopes?: Pick<SelectionScopesProps, "active" | "available">
 ) {
   if (selectionScopes) {
     return {
