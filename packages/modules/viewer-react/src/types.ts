@@ -34,12 +34,13 @@ import type {
 } from "@itwin/core-geometry";
 import type { SchemaContext } from "@itwin/ecschema-metadata";
 import type { PresentationProps } from "@itwin/presentation-frontend";
-import type { SelectionStorage } from "@itwin/unified-selection";
+import type { computeSelection, SelectionStorage } from "@itwin/unified-selection";
 
 export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
   ? (Without<T1, T2> & T2) | (Without<T2, T1> & T1)
   : T1 | T2;
+type AllOrNone<T> = T | { [K in keyof T]?: never };
 
 /**
  * Converts the following optional arg foo of type T
@@ -82,13 +83,41 @@ export interface ViewerViewportControlOptions
 }
 
 export interface UnifiedSelectionProps {
-  /** Unified selection storage to synchronize with. Requires `getSchemaContext` prop to also be supplied. */
-  selectionStorage?: SelectionStorage;
+  /** Unified selection storage to synchronize viewport selection with. */
+  selectionStorage: SelectionStorage;
+
   /** Function for getting schema context for an iModel. */
-  getSchemaContext?: (imodel: IModelConnection) => SchemaContext;
+  getSchemaContext: (imodel: IModelConnection) => SchemaContext;
 }
 
-export interface LoaderProps {
+export function isUnifiedSelectionProps(props: AllOrNone<UnifiedSelectionProps> | undefined): props is UnifiedSelectionProps {
+  return typeof props === "object" && "selectionStorage" in props && "getSchemaContext" in props;
+}
+
+export interface SelectionScopesProps {
+  /** A map of available selection scopes. The key is the scope id and the value is the scope label and definition. */
+  available: {
+    [scopeId: string]: {
+      label: string;
+      def: Parameters<typeof computeSelection>[0]["scope"];
+    }
+  };
+
+  /** Id of the active selection scope. An element with this id must exist in `available` map. */
+  active: string;
+
+  /**
+   * A callback that's invoked when active scope changes. It's guaranteed that `id` is a key of one of entries
+   * in `available` map.
+   *
+   * When this callback is not supplied, the `active` scope works as the initial value, and the actually
+   * active scope is managed internally. When it is supplied, it's consumer's responsibility to update the
+   * `active` scope based on the callback's input.
+   */
+  onChange?: (id: string) => void;
+}
+
+export type LoaderProps = AllOrNone<UnifiedSelectionProps> & {
   /** color theme */
   theme?: ColorTheme | string;
   /** Default UI configuration */
@@ -111,9 +140,11 @@ export interface LoaderProps {
   viewCreatorOptions?: ViewerViewCreator3dOptions;
   /** Component to show when loading iModel key */
   loadingComponent?: React.ReactNode;
+  /** Props for managing selection scopes. When not supplied, `Presentation.selection.scopes` is used. */
+  selectionScopes?: SelectionScopesProps;
 }
 
-export type ViewerCommonProps = ViewerInitializerParams & LoaderProps & UnifiedSelectionProps;
+export type ViewerCommonProps = ViewerInitializerParams & LoaderProps;
 
 // Note: When updating this, also update getIModelAppOptions
 export type ViewerIModelAppOptions = Pick<
@@ -158,8 +189,7 @@ export type RequiredViewerProps = XOR<
 export type ModelLoaderProps = Partial<
   ConnectedViewerProps & FileViewerProps & BlankViewerProps
 > &
-  LoaderProps &
-  UnifiedSelectionProps;
+  LoaderProps;
 
 export type ViewerProps = RequiredViewerProps & ViewerCommonProps;
 export type ViewerLoaderProps = RequiredViewerProps & LoaderProps;

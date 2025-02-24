@@ -4,21 +4,16 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { StandardContentLayouts } from "@itwin/appui-abstract";
-import type { FrontstageConfig } from "@itwin/appui-react";
-import {
-  ContentGroup,
-  ContentGroupProvider,
-  IModelViewportControl,
-  UiFramework,
-} from "@itwin/appui-react";
-
+import { ContentGroup, ContentGroupProvider, IModelViewportControl, UiFramework } from "@itwin/appui-react";
 import { getAndSetViewState } from "../../../services/iModel";
+import { UnifiedSelectionViewportControl } from "./UnifiedSelectionViewportControl";
+
+import type { FrontstageConfig } from "@itwin/appui-react";
 import type {
   BlankConnectionViewState,
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
 } from "../../../types";
-import { UnifiedSelectionViewportControl } from "./UnifiedSelectionViewportControl";
 
 /**
  * Provide a default content group to the default frontstage
@@ -27,19 +22,19 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
   private _viewportOptions: ViewerViewportControlOptions | undefined;
   private _blankConnectionViewState: BlankConnectionViewState | undefined;
   private _viewCreatorOptions: ViewerViewCreator3dOptions | undefined;
-  private _syncWithUnifiedSelectionStorage: boolean | undefined;
+  private _isUsingDeprecatedSelectionManager: boolean | undefined;
 
   constructor(
     viewportOptions?: ViewerViewportControlOptions,
     viewCreatorOptions?: ViewerViewCreator3dOptions,
     blankConnectionViewStateOptions?: BlankConnectionViewState,
-    syncWithUnifiedSelectionStorage?: boolean,
+    isUsingDeprecatedSelectionManager?: boolean,
   ) {
     super();
     this._viewportOptions = viewportOptions;
     this._blankConnectionViewState = blankConnectionViewStateOptions;
     this._viewCreatorOptions = viewCreatorOptions;
-    this._syncWithUnifiedSelectionStorage = syncWithUnifiedSelectionStorage;
+    this._isUsingDeprecatedSelectionManager = isUsingDeprecatedSelectionManager;
   }
 
   public async contentGroup(_config: FrontstageConfig): Promise<ContentGroup> {
@@ -59,7 +54,7 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
       contents: [
         {
           id: "iTwinViewer.UnifiedSelectionViewport",
-          classId: this._syncWithUnifiedSelectionStorage ? IModelViewportControl : UnifiedSelectionViewportControl,
+          classId: this._isUsingDeprecatedSelectionManager ? UnifiedSelectionViewportControl : IModelViewportControl,
           applicationData: {
             ...this._viewportOptions,
             viewState,

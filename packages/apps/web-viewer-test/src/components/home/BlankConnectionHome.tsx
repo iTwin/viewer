@@ -75,7 +75,6 @@ const BlankConnectionHome: React.FC = () => {
         onIModelAppInit={iModelAppInit}
         uiProviders={[new TestUiProvider2()]}
         enablePerformanceMonitors={true}
-        iTwinId={process.env.IMJS_AUTH_CLIENT_ITWIN_ID_PROD}
         location={Cartographic.fromDegrees({
           longitude: 0,
           latitude: 0,
