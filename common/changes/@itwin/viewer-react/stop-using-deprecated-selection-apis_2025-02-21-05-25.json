@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@itwin/viewer-react",
-      "comment": "Add an optional `selectionScopes` prop allow directly controlling available and active selection scopes.",
+      "comment": "Add an optional `selectionScopes` prop to allow directly controlling available and active selection scopes.",
       "type": "minor"
     }
   ],
