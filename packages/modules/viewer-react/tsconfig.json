@@ -3,6 +3,8 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM", "DOM.Iterable", "ESNext.Disposable"]
   },
   "include": ["./src/**/*.ts*"],
   "exclude": ["./src/**/*.test.ts*"],
