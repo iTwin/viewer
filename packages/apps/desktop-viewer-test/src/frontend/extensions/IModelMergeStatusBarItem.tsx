@@ -150,6 +150,7 @@ export class IModelMergeItemsProvider implements UiItemsProvider {
     const statusBarItems: StatusBarItem[] = [];
     if (stageUsage === StageUsage.General) {
       statusBarItems.push(
+        // eslint-disable-next-line deprecation/deprecation
         StatusBarItemUtilities.createCustomItem(
           "IModelMergeItemsProvider:ConnectionStatusBarItem",
           StatusBarSection.Center,
@@ -158,6 +159,7 @@ export class IModelMergeItemsProvider implements UiItemsProvider {
         )
       );
       statusBarItems.push(
+        // eslint-disable-next-line deprecation/deprecation
         StatusBarItemUtilities.createCustomItem(
           "IModelMergeItemsProvider:IModelMergeStatusBarItem",
           StatusBarSection.Center,
