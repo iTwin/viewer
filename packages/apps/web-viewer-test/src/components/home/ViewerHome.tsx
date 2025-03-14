@@ -13,8 +13,8 @@ import {
 import {
   AncestorsNavigationControls,
   CopyPropertyTextContextMenuItem,
+  createPropertyGrid,
   PropertyGridManager,
-  PropertyGridUiItemsProvider,
   ShowHideNullValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
 // import LocalExtension from "@itwin/test-local-extension";
@@ -210,25 +210,29 @@ const ViewerHome: React.FC = () => {
               }),
             ],
           },
-          new PropertyGridUiItemsProvider({
-            propertyGridProps: {
-              autoExpandChildCategories: true,
-              ancestorsNavigationControls: (props) => (
-                <AncestorsNavigationControls {...props} />
-              ),
-              contextMenuItems: [
-                (props) => <CopyPropertyTextContextMenuItem {...props} />,
-              ],
-              settingsMenuItems: [
-                (props) => (
-                  <ShowHideNullValuesSettingsMenuItem
-                    {...props}
-                    persist={true}
-                  />
+          {
+            id: "PropertyWidgetUIProvider",
+            getWidgets: () => [
+              createPropertyGrid({
+                autoExpandChildCategories: true,
+                ancestorsNavigationControls: (props) => (
+                  <AncestorsNavigationControls {...props} />
                 ),
-              ],
-            },
-          }),
+                contextMenuItems: [
+                  (props) => <CopyPropertyTextContextMenuItem {...props} />,
+                ],
+                settingsMenuItems: [
+                  (props) => (
+                    <ShowHideNullValuesSettingsMenuItem
+                      {...props}
+                      persist={true}
+                    />
+                  ),
+                ],
+                selectionStorage: unifiedSelectionStorage,
+              }),
+            ],
+          },
           new MeasureToolsUiItemsProvider(),
         ]}
         // extensions={[
@@ -246,9 +250,28 @@ const ViewerHome: React.FC = () => {
         // renderSys={{doIdleWork: true}}
         selectionStorage={unifiedSelectionStorage}
         getSchemaContext={getSchemaContext}
+        selectionScopes={{
+          active: "element",
+          available: availableSelectionScopes,
+        }}
       />
     </div>
   );
+};
+
+const availableSelectionScopes = {
+  element: {
+    label: "Element",
+    def: { id: "element" as const },
+  },
+  assembly: {
+    label: "Assembly",
+    def: { id: "element" as const, ancestorLevel: 1 },
+  },
+  "top-assembly": {
+    label: "Top assembly",
+    def: { id: "element" as const, ancestorLevel: -1 },
+  }
 };
 
 export default ViewerHome;

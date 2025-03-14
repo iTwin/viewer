@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-desktop-viewer",
+      "comment": "Bump Presentation and `@itwin/property-grid-react` dependencies",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/cra-template-desktop-viewer"
+}

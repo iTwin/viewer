@@ -13,7 +13,7 @@ import { MeasureToolsUiItemsProvider } from "@itwin/measure-tools-react";
 import {
   AncestorsNavigationControls,
   CopyPropertyTextContextMenuItem,
-  PropertyGridUiItemsProvider,
+  createPropertyGrid,
   ShowHideNullValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
 import {
@@ -101,29 +101,54 @@ export const ViewerRoute = () => {
             }),
           ],
         },
-        // eslint-disable-next-line deprecation/deprecation
-        new PropertyGridUiItemsProvider({
-          propertyGridProps: {
-            autoExpandChildCategories: true,
-            ancestorsNavigationControls: (props) => (
-              <AncestorsNavigationControls {...props} />
-            ),
-            contextMenuItems: [
-              (props) => <CopyPropertyTextContextMenuItem {...props} />,
-            ],
-            settingsMenuItems: [
-              (props) => (
-                <ShowHideNullValuesSettingsMenuItem {...props} persist={true} />
+        {
+          id: "PropertyWidgetUIProvider",
+          getWidgets: () => [
+            createPropertyGrid({
+              autoExpandChildCategories: true,
+              ancestorsNavigationControls: (props) => (
+                <AncestorsNavigationControls {...props} />
               ),
-            ],
-          },
-        }),
+              contextMenuItems: [
+                (props) => <CopyPropertyTextContextMenuItem {...props} />,
+              ],
+              settingsMenuItems: [
+                (props) => (
+                  <ShowHideNullValuesSettingsMenuItem
+                    {...props}
+                    persist={true}
+                  />
+                ),
+              ],
+              selectionStorage: unifiedSelectionStorage,
+            }),
+          ],
+        },
         new MeasureToolsUiItemsProvider(),
         new IModelMergeItemsProvider(),
       ]}
       enablePerformanceMonitors={true}
       selectionStorage={unifiedSelectionStorage}
       getSchemaContext={getSchemaContext}
+      selectionScopes={{
+        active: "element",
+        available: availableSelectionScopes,
+      }}
     />
   ) : null;
+};
+
+const availableSelectionScopes = {
+  element: {
+    label: "Element",
+    def: { id: "element" as const },
+  },
+  assembly: {
+    label: "Assembly",
+    def: { id: "element" as const, ancestorLevel: 1 },
+  },
+  "top-assembly": {
+    label: "Top assembly",
+    def: { id: "element" as const, ancestorLevel: -1 },
+  },
 };
