@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Mon, 18 Nov 2024 15:26:35 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Mar 2025 00:25:22 GMT and should not be manually modified.
+
+## 4.5.3
+Fri, 14 Mar 2025 00:25:22 GMT
+
+### Patches
+
+- Bump Presentation and `@itwin/property-grid-react` dependencies
 
 ## 4.5.2
 Mon, 18 Nov 2024 15:26:35 GMT

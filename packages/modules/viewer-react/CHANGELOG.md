@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Mon, 13 Jan 2025 18:37:59 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Mar 2025 00:25:22 GMT and should not be manually modified.
+
+## 4.9.0
+Fri, 14 Mar 2025 00:25:22 GMT
+
+### Minor changes
+
+- Add an optional `selectionScopes` prop to allow directly controlling available and active selection scopes.
 
 ## 4.8.4
 Mon, 13 Jan 2025 18:37:59 GMT
