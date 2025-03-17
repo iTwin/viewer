@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/web-viewer-react",
+      "comment": "Address viewport context loss when location.href is modified",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/web-viewer-react"
+}

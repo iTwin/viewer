@@ -20,9 +20,9 @@ export const Viewer = (props: WebViewerProps) => {
         .then(() => console.log("Shutdown success."))
         .catch(() => console.warn("Shutdown failed."));
     };
-    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("unload", handleBeforeUnload);
     return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("unload", handleBeforeUnload);
     };
   }, []);
   return initialized ? <BaseViewer {...props} /> : null;
