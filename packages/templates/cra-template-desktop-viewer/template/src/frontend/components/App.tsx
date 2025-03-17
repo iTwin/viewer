@@ -19,7 +19,10 @@ import React, { useCallback, useEffect, useMemo } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import { viewerRpcs } from "../../common/ViewerConfig";
-import { unifiedSelectionStorage } from "../../selectionStorage";
+import {
+  getSchemaContext,
+  unifiedSelectionStorage,
+} from "../../selectionStorage";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import { SettingsContextProvider } from "../services/SettingsContext";
 import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
@@ -42,6 +45,7 @@ const App = () => {
       enablePerformanceMonitors: true,
       selectionStorage: unifiedSelectionStorage,
       onIModelAppInit,
+      getSchemaContext,
     }),
     [onIModelAppInit]
   );

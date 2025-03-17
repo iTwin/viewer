@@ -20,9 +20,9 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import { viewerRpcs } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
+import { getSchemaContext, unifiedSelectionStorage } from "../selectionStorage";
 import { SettingsContextProvider } from "../services/SettingsContext";
 import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
-import { unifiedSelectionStorage } from "../selectionStorage";
 
 const App = () => {
   window.ITWIN_VIEWER_HOME = window.location.origin;
@@ -42,6 +42,7 @@ const App = () => {
       enablePerformanceMonitors: true,
       selectionStorage: unifiedSelectionStorage,
       onIModelAppInit,
+      getSchemaContext,
     }),
     [onIModelAppInit]
   );
