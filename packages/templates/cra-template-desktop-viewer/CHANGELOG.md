@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Fri, 14 Mar 2025 00:25:22 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Mar 2025 14:17:53 GMT and should not be manually modified.
+
+## 4.5.4
+Mon, 17 Mar 2025 14:17:53 GMT
+
+### Patches
+
+- Fix build issue in desktop app template
 
 ## 4.5.3
 Fri, 14 Mar 2025 00:25:22 GMT

@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-desktop-viewer",
   "entries": [
     {
+      "version": "4.5.4",
+      "tag": "@itwin/cra-template-desktop-viewer_v4.5.4",
+      "date": "Mon, 17 Mar 2025 14:17:53 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix build issue in desktop app template"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.5.3",
       "tag": "@itwin/cra-template-desktop-viewer_v4.5.3",
       "date": "Fri, 14 Mar 2025 00:25:22 GMT",
