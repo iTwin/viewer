@@ -1,6 +1,13 @@
 # Change Log - @itwin/web-viewer-react
 
-This log was last generated on Fri, 14 Mar 2025 00:25:22 GMT and should not be manually modified.
+This log was last generated on Thu, 01 May 2025 21:20:17 GMT and should not be manually modified.
+
+## 4.4.0
+Thu, 01 May 2025 21:20:17 GMT
+
+### Minor changes
+
+- Added missing peer dependencies that are used but not specified.
 
 ## 4.3.5
 Fri, 14 Mar 2025 00:25:22 GMT

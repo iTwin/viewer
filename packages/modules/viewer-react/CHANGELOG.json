@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "4.10.0",
+      "tag": "@itwin/viewer-react_v4.10.0",
+      "date": "Thu, 01 May 2025 21:20:17 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added missing peer dependencies that are used but not specified."
+          }
+        ]
+      }
+    },
+    {
       "version": "4.9.0",
       "tag": "@itwin/viewer-react_v4.9.0",
       "date": "Fri, 14 Mar 2025 00:25:22 GMT",
