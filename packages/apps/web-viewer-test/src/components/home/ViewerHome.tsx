@@ -133,7 +133,6 @@ const ViewerHome: React.FC = () => {
         iTwinId={iTwinId ?? ""}
         iModelId={iModelId ?? ""}
         changeSetId={changesetId}
-        theme={ColorTheme.Dark}
         loadingComponent={<Loader />}
         mapLayerOptions={{
           BingMaps: {

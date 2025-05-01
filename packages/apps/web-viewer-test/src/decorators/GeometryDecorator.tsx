@@ -164,7 +164,7 @@ export class GeometryDecorator implements Decorator {
     const builder = context.createGraphicBuilder(
       GraphicType.Scene,
       undefined,
-      context.viewport.iModel.transientIds.next
+      context.viewport.iModel.transientIds.getNext()
     );
     // builder.wantNormals = true;
     this.points.forEach((styledPoint) => {

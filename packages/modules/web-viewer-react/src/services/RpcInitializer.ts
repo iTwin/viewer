@@ -86,7 +86,7 @@ export class RpcInitializer {
 
   private getDefaultInfo() {
     return {
-      info: { title: "imodel/rpc", version: "v4" },
+      info: { title: "imodel/rpc", version: "v5" },
       uriPrefix: this.orchestratorUrl,
     };
   }
