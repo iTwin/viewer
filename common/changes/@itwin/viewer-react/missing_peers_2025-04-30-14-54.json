@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Added missing peer dependencies that are used but not specified.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
