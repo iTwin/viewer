@@ -122,7 +122,6 @@ export const ViewerRoute = () => {
       ]}
       enablePerformanceMonitors={true}
       selectionStorage={unifiedSelectionStorage}
-      getSchemaContext={getSchemaContext}
     />
   ) : null;
 };

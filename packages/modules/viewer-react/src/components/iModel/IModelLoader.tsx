@@ -41,7 +41,6 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     // theme,
     loadingComponent,
     selectionStorage,
-    getSchemaContext,
   } = viewerProps;
   const { error, connection } = useConnection(viewerProps);
 
@@ -49,7 +48,6 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   useUnifiedSelectionSync({
     iModelConnection: connection,
     selectionStorage,
-    getSchemaContext,
   });
 
   const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =

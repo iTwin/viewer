@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { IModelConnection } from "@itwin/core-frontend";
-import type { SchemaContext } from "@itwin/ecschema-metadata";
 import {
   createECSchemaProvider,
   createECSqlQueryExecutor,
@@ -24,19 +23,17 @@ type SelectionScope = ReturnType<
 interface UseUnifiedSelectionSyncProps {
   iModelConnection?: IModelConnection;
   selectionStorage?: SelectionStorage;
-  getSchemaContext?: (imodel: IModelConnection) => SchemaContext;
 }
 
 export function useUnifiedSelectionSync({
   iModelConnection,
   selectionStorage,
-  getSchemaContext,
 }: UseUnifiedSelectionSyncProps) {
   React.useEffect(() => {
-    if (!iModelConnection || !selectionStorage || !getSchemaContext) {
+    if (!iModelConnection || !selectionStorage) {
       return;
     }
-    const schemaContext = getSchemaContext(iModelConnection);
+    const schemaContext = iModelConnection.schemaContext;
     return enableUnifiedSelectionSyncWithIModel({
       imodelAccess: {
         ...createECSqlQueryExecutor(iModelConnection),
@@ -50,7 +47,7 @@ export function useUnifiedSelectionSync({
       selectionStorage,
       activeScopeProvider: getActiveScope,
     });
-  }, [iModelConnection, selectionStorage, getSchemaContext]);
+  }, [iModelConnection, selectionStorage]);
 }
 
 function getActiveScope(): SelectionScope {
