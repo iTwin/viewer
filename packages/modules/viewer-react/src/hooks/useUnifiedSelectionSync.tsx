@@ -33,7 +33,7 @@ export function useUnifiedSelectionSync({
     if (!iModelConnection || !selectionStorage) {
       return;
     }
-    const schemaContext = iModelConnection.schemaContext;
+    const { schemaContext } = iModelConnection;
     return enableUnifiedSelectionSyncWithIModel({
       imodelAccess: {
         ...createECSqlQueryExecutor(iModelConnection),
