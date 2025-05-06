@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import type {
   BackstageItem,
@@ -61,7 +61,7 @@ export interface ViewerViewCreator3dOptions extends ViewCreator3dOptions {
 
 export interface ViewerFrontstage {
   /** frontstage provider to register */
-  provider: FrontstageProvider; //eslint-disable-line deprecation/deprecation
+  provider: FrontstageProvider;
   /** should this be the default frontstage? If multiple are defined as default, the last will be used */
   default?: boolean;
   /** the frontstage requires an iModel connection */
@@ -73,7 +73,6 @@ export type ViewerBackstageItem = BackstageItem & {
 };
 
 export interface ViewerViewportControlOptions
-  //eslint-disable-next-line deprecation/deprecation
   extends Omit<IModelViewportControlOptions, "viewState"> {
   /** ViewState or a function to return a ViewState */
   viewState?:

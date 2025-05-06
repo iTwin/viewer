@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import type {
   BackstageItem,
@@ -43,10 +43,10 @@ ModelProps) => {
   }, [defaultFrontstageDef]);
 
   useEffect(() => {
-    let defaultFrontstage: FrontstageProvider | undefined; // eslint-disable-line deprecation/deprecation
+    let defaultFrontstage: FrontstageProvider | undefined;
     frontstages.forEach((viewerFrontstage) => {
       // register the provider
-      UiFramework.frontstages.addFrontstageProvider(viewerFrontstage.provider); // eslint-disable-line deprecation/deprecation
+      UiFramework.frontstages.addFrontstageProvider(viewerFrontstage.provider);
       // override the default (last wins)
       if (viewerFrontstage.default) {
         defaultFrontstage = viewerFrontstage.provider;
@@ -64,7 +64,7 @@ ModelProps) => {
     }
 
     return () => {
-      UiFramework.frontstages.clearFrontstageProviders(); // eslint-disable-line deprecation/deprecation
+      UiFramework.frontstages.clearFrontstageProviders();
     };
   }, [frontstages]);
 

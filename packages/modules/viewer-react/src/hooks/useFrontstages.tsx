@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import {
   BackstageAppButton,
@@ -77,7 +77,6 @@ export const useFrontstages = ({
         blankConnectionViewState
       );
 
-      //eslint-disable-next-line deprecation/deprecation
       const defaultFrontstageProvider = new StandardFrontstageProvider({
         id: ViewerDefaultFrontstageProviderId,
         usage: StageUsage.General,

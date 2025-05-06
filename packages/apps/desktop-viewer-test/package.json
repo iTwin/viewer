@@ -21,7 +21,7 @@
     "copy:enUS": "cpx \"./build/locales/en/*\" ./build/locales/en-US/",
     "electron": "electron lib/backend/main.js",
     "electron:debug": "cross-env NODE_ENV=development electron lib/backend/main.js",
-    "lint": "eslint --config package.json --resolve-plugins-relative-to ../../../common/scripts/ --no-eslintrc \"./src/**/*.{ts,tsx}\" 1>&2",
+    "lint": "eslint \"./src/**/*.{ts,tsx}\" 1>&2",
     "lint:fix": "npm run -s lint -- --fix",
     "start": "npm run build:backend && run-p \"start:frontend\" \"electron:debug\"",
     "start:frontend": "react-scripts start",
@@ -100,16 +100,5 @@
     "sass": "^1.64.2",
     "typescript": "~5.0.4",
     "webpack": "^5.94.0"
-  },
-  "eslintConfig": {
-    "extends": [
-      "../../../common/scripts/.eslintrc.ts.json"
-    ],
-    "parserOptions": {
-      "project": [
-        "./tsconfig.json",
-        "./tsconfig.backend.json"
-      ]
-    }
   }
 }

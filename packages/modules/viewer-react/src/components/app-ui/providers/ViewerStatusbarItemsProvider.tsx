@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import type {
   StatusBarCustomItem,
@@ -86,7 +86,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
           id: "SelectionInfo",
           section: StatusBarSection.Right,
           itemPriority: 40,
-          content: <SelectionInfoField />, // eslint-disable-line deprecation/deprecation
+          content: <SelectionInfoField />,
         })
       );
     }

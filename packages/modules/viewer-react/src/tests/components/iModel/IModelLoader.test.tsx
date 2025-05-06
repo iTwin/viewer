@@ -3,13 +3,14 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
-
 import "@testing-library/jest-dom/extend-expect";
 
 import { ColorTheme, UiFramework, UiItemsManager } from "@itwin/appui-react";
 import { Cartographic, ColorDef } from "@itwin/core-common";
 import { BlankConnection } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
+import { SchemaContext } from "@itwin/ecschema-metadata";
+import * as unifiedSelection from "@itwin/unified-selection";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
@@ -22,8 +23,6 @@ import type {
   ViewerFrontstage,
 } from "../../../types";
 import { TestUiProvider, TestUiProvider2 } from "../../mocks/MockUiProviders";
-import * as unifiedSelection from "@itwin/unified-selection";
-import { SchemaContext } from "@itwin/ecschema-metadata";
 
 jest.mock("react-redux", () => ({
   ...jest.requireActual<any>("react-redux"),

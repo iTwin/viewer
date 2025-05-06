@@ -1,10 +1,8 @@
 {
-  "extends": "./node_modules/@itwin/build-tools/tsconfig-base.json",
+  "extends": "../../../common/config/tsconfig/tsconfig.base.json",
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable", "ESNext"]
   },
-  "include": [
-    "./src/**/*.ts"
-  ]
+  "include": ["./src/**/*.ts*"],
 }

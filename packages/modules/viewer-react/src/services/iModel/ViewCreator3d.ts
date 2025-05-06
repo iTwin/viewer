@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 /*
 API for creating a 3D default view for an iModel.
@@ -90,12 +90,14 @@ export class ViewCreator3d extends ViewCreator {
               }, 100);
             });
           };
-
-          tileTreesLoaded().finally(() => {
+           
+          tileTreesLoaded().then(() => {
             void IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
             viewPort.view.setStandardRotation(
               options?.standardViewId ?? StandardViewId.Iso
             );
+          }).catch((error) => {
+            console.error("Error loading tile trees:", error);
           });
         }
       });

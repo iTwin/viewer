@@ -1,7 +1,14 @@
 {
-  "extends": "./node_modules/@itwin/build-tools/tsconfig-base.json",
+  "extends": "../../../common/config/tsconfig/tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./lib"
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+    "outDir": "./lib",
   },
   "include": [
     "./src/backend/*.ts",

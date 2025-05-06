@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import type { UiSyncEventArgs } from "@itwin/appui-abstract";
 import {
@@ -45,10 +45,8 @@ const syncSelectionCount = () => {
       }
       const selection = provider.getSelection(args.imodel, args.level);
       const numSelected = getInstancesCount(selection);
-
-      //eslint-disable-next-line deprecation/deprecation
       UiFramework.dispatchActionToStore(
-        SessionStateActionId.SetNumItemsSelected, //eslint-disable-line deprecation/deprecation
+        SessionStateActionId.SetNumItemsSelected,
         numSelected
       );
 
@@ -58,9 +56,8 @@ const syncSelectionCount = () => {
       removeListenerFunc =
         UiFramework.getIModelConnection()?.selectionSet.onChanged.addListener(
           (_ev) => {
-            //eslint-disable-next-line deprecation/deprecation
             UiFramework.dispatchActionToStore(
-              SessionStateActionId.SetNumItemsSelected, //eslint-disable-line deprecation/deprecation
+              SessionStateActionId.SetNumItemsSelected,
               numSelected
             );
           }
@@ -74,15 +71,13 @@ const syncActiveSelectionScope = () => {
   // If the user doesn't set any active scope and uses the default scope, then the Presentation active scope would be undefined.
   // Thus, we have to sync it for the first time here.
   Presentation.selection.scopes.activeScope =
-    UiFramework.getActiveSelectionScope(); //eslint-disable-line deprecation/deprecation
-  //eslint-disable-next-line deprecation/deprecation
+    UiFramework.getActiveSelectionScope();
   SyncUiEventDispatcher.onSyncUiEvent.addListener((args: UiSyncEventArgs) => {
-    //eslint-disable-next-line deprecation/deprecation
     if (args.eventIds.has(SessionStateActionId.SetSelectionScope)) {
       // After 4.x the AppUI no longer has a presentation dep and therefore we have the responsibility of
       // syncing the Presentation.selection.scopes.activeScope with the AppUi's UiSyncEvent for SetSelectionScope
       Presentation.selection.scopes.activeScope =
-        UiFramework.getActiveSelectionScope(); //eslint-disable-line deprecation/deprecation
+        UiFramework.getActiveSelectionScope();
     }
   });
 };
@@ -148,7 +143,7 @@ export class BaseInitializer {
         "IModelApp must be initialized prior to rendering the Base Viewer"
       );
     }
-    //eslint-disable-next-line deprecation/deprecation
+
     if (UiCore.initialized && !this._initializing) {
       return (this._initialized = Promise.resolve());
     } else if (this._initializing) {
@@ -162,11 +157,9 @@ export class BaseInitializer {
     const cancellable = makeCancellable(function* () {
       // Initialize state manager
       // This will setup a singleton store inside the StoreManager class.
-      //eslint-disable-next-line deprecation/deprecation
       if (!StateManager.isInitialized()) {
-        //eslint-disable-next-line deprecation/deprecation
         new StateManager({
-          frameworkState: FrameworkReducer, //eslint-disable-line deprecation/deprecation
+          frameworkState: FrameworkReducer,
         });
       }
 
@@ -190,14 +183,12 @@ export class BaseInitializer {
       yield Promise.all(i18nPromises);
 
       // initialize UiCore
-      //eslint-disable-next-line deprecation/deprecation
       yield UiCore.initialize(IModelApp.localization);
 
       // initialize UiComponents
       yield UiComponents.initialize(IModelApp.localization);
 
       // initialize UiFramework
-      //eslint-disable-next-line deprecation/deprecation
       yield UiFramework.initialize();
 
       // initialize Presentation
@@ -292,7 +283,6 @@ export const getIModelAppOptions = (
 class ViewerAccuSnap extends AccuSnap {
   public override getActiveSnapModes(): SnapMode[] {
     // The SnapMode in the UiFramework is a bit mask.
-    //eslint-disable-next-line deprecation/deprecation
     const snapMode = UiFramework.getAccudrawSnapMode();
     const snaps: SnapMode[] = [];
     if (0 < (snapMode & SnapMode.Bisector)) {
