@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IModelConnection } from "@itwin/core-frontend";
-import { SchemaContext } from "@itwin/ecschema-metadata";
 import { createStorage } from "@itwin/unified-selection";
 
 const unifiedSelectionStorage = createStorage();
@@ -13,18 +12,4 @@ IModelConnection.onClose.addListener((imodel) => {
   unifiedSelectionStorage.clearStorage({ imodelKey: imodel.key });
 });
 
-const imodelSchemaContextsCache = new Map<string, SchemaContext>();
-
-function getSchemaContext(imodel: IModelConnection) {
-  let context = imodelSchemaContextsCache.get(imodel.key);
-  if (!context) {
-    context = imodel.schemaContext;
-    imodelSchemaContextsCache.set(imodel.key, context);
-    imodel.onClose.addListener(() => {
-      imodelSchemaContextsCache.delete(imodel.key);
-    });
-  }
-  return context;
-}
-
-export { unifiedSelectionStorage, getSchemaContext };
+export { unifiedSelectionStorage };
