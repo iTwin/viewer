@@ -101,7 +101,7 @@ export const ViewerRoute = () => {
             }),
           ],
         },
-        new PropertyGridUiItemsProvider({
+        new PropertyGridUiItemsProvider({ // eslint-disable-line @typescript-eslint/no-deprecated
           propertyGridProps: {
             autoExpandChildCategories: true,
             ancestorsNavigationControls: (props) => (

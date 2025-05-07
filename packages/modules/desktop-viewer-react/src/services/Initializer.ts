@@ -56,7 +56,7 @@ export class DesktopInitializer {
         iModelAppOpts.authorizationClient = authClient;
         ViewerAuthorization.client = authClient;
 
-        iModelAppOpts.rpcInterfaces = options?.rpcInterfaces;
+        iModelAppOpts.rpcInterfaces = options?.rpcInterfaces; // eslint-disable-line @typescript-eslint/no-deprecated
 
         yield ElectronApp.startup({
           iModelApp: iModelAppOpts,

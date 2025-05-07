@@ -43,10 +43,10 @@ ModelProps) => {
   }, [defaultFrontstageDef]);
 
   useEffect(() => {
-    let defaultFrontstage: FrontstageProvider | undefined;
+    let defaultFrontstage: FrontstageProvider | undefined; // eslint-disable-line @typescript-eslint/no-deprecated
     frontstages.forEach((viewerFrontstage) => {
       // register the provider
-      UiFramework.frontstages.addFrontstageProvider(viewerFrontstage.provider);
+      UiFramework.frontstages.addFrontstageProvider(viewerFrontstage.provider); // eslint-disable-line @typescript-eslint/no-deprecated
       // override the default (last wins)
       if (viewerFrontstage.default) {
         defaultFrontstage = viewerFrontstage.provider;
@@ -64,7 +64,7 @@ ModelProps) => {
     }
 
     return () => {
-      UiFramework.frontstages.clearFrontstageProviders();
+      UiFramework.frontstages.clearFrontstageProviders(); // eslint-disable-line @typescript-eslint/no-deprecated
     };
   }, [frontstages]);
 

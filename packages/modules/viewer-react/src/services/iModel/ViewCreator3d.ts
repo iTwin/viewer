@@ -90,14 +90,12 @@ export class ViewCreator3d extends ViewCreator {
               }, 100);
             });
           };
-           
-          tileTreesLoaded().then(() => {
+          // eslint-disable-next-line @typescript-eslint/no-floating-promises
+          tileTreesLoaded().finally(() => {
             void IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
             viewPort.view.setStandardRotation(
               options?.standardViewId ?? StandardViewId.Iso
             );
-          }).catch((error) => {
-            console.error("Error loading tile trees:", error);
           });
         }
       });

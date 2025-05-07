@@ -53,7 +53,7 @@ export class TestUiProvider implements UiItemsProvider {
         [this.syncEventId]
       );
 
-      const visibilityActionSpec = ToolbarItemUtilities.createActionItem(
+      const visibilityActionSpec = ToolbarItemUtilities.createActionItem( // eslint-disable-line @typescript-eslint/no-deprecated
         "visibility-action-tool",
         200,
         iconCondition,
@@ -65,7 +65,7 @@ export class TestUiProvider implements UiItemsProvider {
         }
       );
 
-      const alertActionSpec = ToolbarItemUtilities.createActionItem(
+      const alertActionSpec = ToolbarItemUtilities.createActionItem( // eslint-disable-line @typescript-eslint/no-deprecated
         "alert-action-tool",
         210,
         "icon-developer",
@@ -89,7 +89,7 @@ export class TestUiProvider implements UiItemsProvider {
 
     if (stageUsage === StageUsage.General) {
       statusBarItems.push(
-        StatusBarItemUtilities.createActionItem(
+        StatusBarItemUtilities.createActionItem( // eslint-disable-line @typescript-eslint/no-deprecated
           "alert-statusbar-item",
           StatusBarSection.Center,
           100,
@@ -122,7 +122,7 @@ export class TestUiProvider2 implements UiItemsProvider {
     ) {
       widgets.push({
         id: "addonWidget",
-        content: <FillCentered>Addon Widget in panel</FillCentered>,
+        content: <FillCentered>Addon Widget in panel</FillCentered>, // eslint-disable-line @typescript-eslint/no-deprecated
       });
     }
     return widgets;

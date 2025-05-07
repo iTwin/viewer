@@ -118,9 +118,11 @@ describe("BaseInitializer", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.resetModules();
+    /* eslint-disable @typescript-eslint/no-deprecated */
     if (UiCore.initialized) {
       UiCore.terminate();
     }
+    /* eslint-disable @typescript-eslint/no-deprecated */
     // reset the getter function to true so that it can be overridden to false if needed
     Object.defineProperty(IModelApp, "initialized", {
       get: () => {

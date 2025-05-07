@@ -77,7 +77,7 @@ export const useFrontstages = ({
         blankConnectionViewState
       );
 
-      const defaultFrontstageProvider = new StandardFrontstageProvider({
+      const defaultFrontstageProvider = new StandardFrontstageProvider({ // eslint-disable-line @typescript-eslint/no-deprecated
         id: ViewerDefaultFrontstageProviderId,
         usage: StageUsage.General,
         contentGroupProps: contentGroup,

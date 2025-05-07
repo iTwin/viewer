@@ -109,8 +109,8 @@ const initClientSpy = jest.spyOn(BentleyCloudRpcManager, "initializeClient");
 describe("Initializer", () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    if (UiCore.initialized) {
-      UiCore.terminate();
+    if (UiCore.initialized) { // eslint-disable-line @typescript-eslint/no-deprecated
+      UiCore.terminate(); // eslint-disable-line @typescript-eslint/no-deprecated
     }
   });
 

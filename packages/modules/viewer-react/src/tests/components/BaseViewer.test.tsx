@@ -118,8 +118,8 @@ const mockIModelId = "456";
 describe("BaseViewer", () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    if (UiCore.initialized) {
-      UiCore.terminate();
+    if (UiCore.initialized) { // eslint-disable-line @typescript-eslint/no-deprecated
+      UiCore.terminate(); // eslint-disable-line @typescript-eslint/no-deprecated
     }
   });
 

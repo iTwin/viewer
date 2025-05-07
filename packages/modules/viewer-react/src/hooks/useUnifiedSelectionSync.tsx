@@ -54,7 +54,7 @@ export function useUnifiedSelectionSync({
 }
 
 function getActiveScope(): SelectionScope {
-  const activeScope = Presentation.selection.scopes.activeScope;
+  const activeScope = Presentation.selection.scopes.activeScope; // eslint-disable-line @typescript-eslint/no-deprecated
   if (!activeScope) {
     return "element";
   }

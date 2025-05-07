@@ -61,7 +61,7 @@ export interface ViewerViewCreator3dOptions extends ViewCreator3dOptions {
 
 export interface ViewerFrontstage {
   /** frontstage provider to register */
-  provider: FrontstageProvider;
+  provider: FrontstageProvider; // eslint-disable-line @typescript-eslint/no-deprecated
   /** should this be the default frontstage? If multiple are defined as default, the last will be used */
   default?: boolean;
   /** the frontstage requires an iModel connection */
@@ -73,7 +73,7 @@ export type ViewerBackstageItem = BackstageItem & {
 };
 
 export interface ViewerViewportControlOptions
-  extends Omit<IModelViewportControlOptions, "viewState"> {
+  extends Omit<IModelViewportControlOptions, "viewState"> { // eslint-disable-line @typescript-eslint/no-deprecated
   /** ViewState or a function to return a ViewState */
   viewState?:
     | ViewState

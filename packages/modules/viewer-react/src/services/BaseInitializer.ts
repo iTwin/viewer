@@ -36,8 +36,8 @@ import { makeCancellable } from "../utilities/MakeCancellable";
 
 const syncSelectionCount = () => {
   let removeListenerFunc: (() => void) | undefined;
-  Presentation.selection.selectionChange.addListener(
-    (args: SelectionChangeEventArgs, provider: ISelectionProvider) => {
+  Presentation.selection.selectionChange.addListener( // eslint-disable-line @typescript-eslint/no-deprecated
+    (args: SelectionChangeEventArgs, provider: ISelectionProvider) => { // eslint-disable-line @typescript-eslint/no-deprecated
       removeListenerFunc?.();
       if (args.level !== 0) {
         // don't need to handle sub-selections
@@ -45,8 +45,8 @@ const syncSelectionCount = () => {
       }
       const selection = provider.getSelection(args.imodel, args.level);
       const numSelected = getInstancesCount(selection);
-      UiFramework.dispatchActionToStore(
-        SessionStateActionId.SetNumItemsSelected,
+      UiFramework.dispatchActionToStore(  // eslint-disable-line @typescript-eslint/no-deprecated
+        SessionStateActionId.SetNumItemsSelected, // eslint-disable-line @typescript-eslint/no-deprecated
         numSelected
       );
 
@@ -56,8 +56,8 @@ const syncSelectionCount = () => {
       removeListenerFunc =
         UiFramework.getIModelConnection()?.selectionSet.onChanged.addListener(
           (_ev) => {
-            UiFramework.dispatchActionToStore(
-              SessionStateActionId.SetNumItemsSelected,
+            UiFramework.dispatchActionToStore(  // eslint-disable-line @typescript-eslint/no-deprecated
+              SessionStateActionId.SetNumItemsSelected, // eslint-disable-line @typescript-eslint/no-deprecated
               numSelected
             );
           }
@@ -70,14 +70,12 @@ const syncSelectionCount = () => {
 const syncActiveSelectionScope = () => {
   // If the user doesn't set any active scope and uses the default scope, then the Presentation active scope would be undefined.
   // Thus, we have to sync it for the first time here.
-  Presentation.selection.scopes.activeScope =
-    UiFramework.getActiveSelectionScope();
-  SyncUiEventDispatcher.onSyncUiEvent.addListener((args: UiSyncEventArgs) => {
-    if (args.eventIds.has(SessionStateActionId.SetSelectionScope)) {
+  Presentation.selection.scopes.activeScope = UiFramework.getActiveSelectionScope();  // eslint-disable-line @typescript-eslint/no-deprecated
+  SyncUiEventDispatcher.onSyncUiEvent.addListener((args: UiSyncEventArgs) => {  // eslint-disable-line @typescript-eslint/no-deprecated
+    if (args.eventIds.has(SessionStateActionId.SetSelectionScope)) {  // eslint-disable-line @typescript-eslint/no-deprecated
       // After 4.x the AppUI no longer has a presentation dep and therefore we have the responsibility of
       // syncing the Presentation.selection.scopes.activeScope with the AppUi's UiSyncEvent for SetSelectionScope
-      Presentation.selection.scopes.activeScope =
-        UiFramework.getActiveSelectionScope();
+      Presentation.selection.scopes.activeScope = UiFramework.getActiveSelectionScope();  // eslint-disable-line @typescript-eslint/no-deprecated
     }
   });
 };
@@ -97,7 +95,7 @@ export class BaseInitializer {
   public static cancel: () => void = () => {
     BaseInitializer._cancel?.();
     try {
-      Presentation.presentation.dispose();
+      Presentation.presentation.dispose(); // eslint-disable-line @typescript-eslint/no-deprecated
     } catch (err) {
       // Do nothing, its possible that we never started.
     }
@@ -144,7 +142,7 @@ export class BaseInitializer {
       );
     }
 
-    if (UiCore.initialized && !this._initializing) {
+    if (UiCore.initialized && !this._initializing) {  // eslint-disable-line @typescript-eslint/no-deprecated
       return (this._initialized = Promise.resolve());
     } else if (this._initializing) {
       // in the process of initializing, so return
@@ -157,11 +155,13 @@ export class BaseInitializer {
     const cancellable = makeCancellable(function* () {
       // Initialize state manager
       // This will setup a singleton store inside the StoreManager class.
+      /* eslint-disable @typescript-eslint/no-deprecated */
       if (!StateManager.isInitialized()) {
         new StateManager({
           frameworkState: FrameworkReducer,
         });
       }
+      /* eslint-disable @typescript-eslint/no-deprecated */
 
       // execute the iModelApp initialization callback if provided
       if (viewerOptions?.onIModelAppInit) {

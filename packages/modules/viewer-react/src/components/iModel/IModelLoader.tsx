@@ -87,7 +87,8 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       <div className="itwin-viewer-container">
         {finalFrontstages &&
         (connection || noConnectionRequired) &&
-        StateManager.store ? (
+        StateManager.store ? (  // eslint-disable-line @typescript-eslint/no-deprecated
+          // eslint-disable-next-line @typescript-eslint/no-deprecated
           <Provider store={StateManager.store}>
             <IModelViewer
               frontstages={finalFrontstages}
@@ -209,9 +210,9 @@ async function syncSelectionScopeList(iModelConnection: IModelConnection) {
   // Fetch the available selection scopes and add them to the redux store
   try {
     const availableScopes =
-      await Presentation.selection.scopes.getSelectionScopes(iModelConnection);
-    UiFramework.dispatchActionToStore(
-      SessionStateActionId.SetAvailableSelectionScopes,
+      await Presentation.selection.scopes.getSelectionScopes(iModelConnection); // eslint-disable-line @typescript-eslint/no-deprecated
+    UiFramework.dispatchActionToStore(  // eslint-disable-line @typescript-eslint/no-deprecated
+      SessionStateActionId.SetAvailableSelectionScopes, // eslint-disable-line @typescript-eslint/no-deprecated
       availableScopes
     );
   } catch {

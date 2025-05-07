@@ -289,7 +289,7 @@ describe("IModelLoader", () => {
 
     await waitFor(() => getByTestId("loader-wrapper"));
 
-    expect(UiFramework.setColorTheme).toHaveBeenCalledWith(ColorTheme.Dark);
+    expect(UiFramework.setColorTheme).toHaveBeenCalledWith(ColorTheme.Dark); // eslint-disable-line @typescript-eslint/no-deprecated
   });
 
   it("synchronizes with unified selection storage when storage provided", async () => {

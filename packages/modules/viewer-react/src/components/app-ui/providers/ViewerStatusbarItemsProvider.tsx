@@ -86,7 +86,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
           id: "SelectionInfo",
           section: StatusBarSection.Right,
           itemPriority: 40,
-          content: <SelectionInfoField />,
+          content: <SelectionInfoField />, // eslint-disable-line @typescript-eslint/no-deprecated
         })
       );
     }

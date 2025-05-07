@@ -38,7 +38,7 @@ export class ITwinViewerApp {
       const makeIpcCall =
         <T extends keyof IpcMethods>(methodName: T) =>
         async (args: Parameters<IpcMethods[T]>) =>
-          IpcApp.callIpcChannel(
+          IpcApp.callIpcChannel(  // eslint-disable-line @typescript-eslint/no-deprecated
             channelName,
             methodName,
             args
