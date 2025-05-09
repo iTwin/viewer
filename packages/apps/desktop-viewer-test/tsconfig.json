@@ -1,18 +1,23 @@
 {
-  "extends": "../../../common/config/tsconfig/tsconfig.base.json",
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "ES2021",
     "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
     "allowJs": true,
-    "module": "ESNext",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "jsx": "react",
     "noFallthroughCasesInSwitch": true
   },
   "include": [
