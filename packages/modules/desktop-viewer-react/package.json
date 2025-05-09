@@ -61,7 +61,7 @@
     "@types/react-dom": "^18.2.4",
     "@types/react-redux": "^7.1.9",
     "concurrently": "^5.2.0",
-    "eslint": "~9.10.0",
+    "eslint": "^9.13.0",
     "copyfiles": "^2.1.0",
     "electron": "^24.8.3",
     "identity-obj-proxy": "^3.0.0",
