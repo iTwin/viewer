@@ -20,7 +20,7 @@ import type {
   ViewerViewportControlOptions,
 } from "../../../types";
 
-const UnifiedSelectionViewport = viewWithUnifiedSelection(ViewportComponent);
+const UnifiedSelectionViewport = viewWithUnifiedSelection(ViewportComponent); // eslint-disable-line @typescript-eslint/no-deprecated
 
 /**
  * Provide a default content group to the default frontstage
@@ -56,7 +56,7 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
 
     return new ContentGroup({
       id: "iTwinViewer.default-content-group",
-      layout: StandardContentLayouts.singleView,
+      layout: StandardContentLayouts.singleView, // eslint-disable-line @typescript-eslint/no-deprecated
       contents: [
         {
           id: "iTwinViewer.UnifiedSelectionViewport",

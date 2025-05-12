@@ -59,7 +59,7 @@ function overridePresentationProps(
           ...(inputProps.selectionStorage
             ? {
                 selection: {
-                  ...inputProps.presentationProps?.selection,
+                  ...inputProps.presentationProps?.selection, // eslint-disable-line @typescript-eslint/no-deprecated
                   selectionStorage: inputProps.selectionStorage,
                 },
               }

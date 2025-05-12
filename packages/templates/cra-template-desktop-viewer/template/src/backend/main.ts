@@ -1,15 +1,17 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import { IModelHostConfiguration, IpcHost } from "@itwin/core-backend";
 import { Logger, LogLevel } from "@itwin/core-bentley";
 import type { ElectronHostOptions } from "@itwin/core-electron/lib/cjs/ElectronBackend";
 import { ElectronHost } from "@itwin/core-electron/lib/cjs/ElectronBackend";
-import { BackendIModelsAccess } from "@itwin/imodels-access-backend";
 import { ECSchemaRpcImpl } from "@itwin/ecschema-rpcinterface-impl";
+import { BackendIModelsAccess } from "@itwin/imodels-access-backend";
 import { Presentation } from "@itwin/presentation-backend";
+import dotenvFlow from "dotenv-flow";
 import { Menu, shell } from "electron";
 import type { MenuItemConstructorOptions } from "electron/main";
 import * as path from "path";
@@ -19,7 +21,7 @@ import { channelName, viewerRpcs } from "../common/ViewerConfig";
 import { appInfo } from "./AppInfo";
 import ViewerHandler from "./ViewerHandler";
 
-require("dotenv-flow").config(); // eslint-disable-line @typescript-eslint/no-var-requires
+dotenvFlow.config();
 
 /** This is the function that gets called when we start iTwinViewer via `electron ViewerMain.js` from the command line.
  * It runs in the Electron main process and hosts the iModeljs backend (IModelHost) code. It starts the render (frontend) process

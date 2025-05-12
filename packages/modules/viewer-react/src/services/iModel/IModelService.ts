@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import { UiFramework } from "@itwin/appui-react";
 import { Guid } from "@itwin/core-bentley";
@@ -151,7 +151,7 @@ export const getViewState = async (
       // attempt to construct a default viewState
       const viewCreator = new ViewCreator3d(connection);
       view = await viewCreator.createDefaultView(viewCreatorOptions);
-      UiFramework.setActiveSelectionScope("top-assembly"); // eslint-disable-line deprecation/deprecation
+      UiFramework.setActiveSelectionScope("top-assembly"); // eslint-disable-line @typescript-eslint/no-deprecated
     }
   }
   return view;
