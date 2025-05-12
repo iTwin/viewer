@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
@@ -85,8 +85,8 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       <div className="itwin-viewer-container">
         {finalFrontstages &&
         (connection || noConnectionRequired) &&
-        StateManager.store ? ( //eslint-disable-line deprecation/deprecation
-          //eslint-disable-next-line deprecation/deprecation
+        StateManager.store ? (  // eslint-disable-line @typescript-eslint/no-deprecated
+          // eslint-disable-next-line @typescript-eslint/no-deprecated
           <Provider store={StateManager.store}>
             <IModelViewer
               frontstages={finalFrontstages}
@@ -208,11 +208,9 @@ async function syncSelectionScopeList(iModelConnection: IModelConnection) {
   // Fetch the available selection scopes and add them to the redux store
   try {
     const availableScopes =
-      await Presentation.selection.scopes.getSelectionScopes(iModelConnection);
-    // eslint-disable-next-line deprecation/deprecation
-    UiFramework.dispatchActionToStore(
-      // eslint-disable-next-line deprecation/deprecation
-      SessionStateActionId.SetAvailableSelectionScopes,
+      await Presentation.selection.scopes.getSelectionScopes(iModelConnection); // eslint-disable-line @typescript-eslint/no-deprecated
+    UiFramework.dispatchActionToStore(  // eslint-disable-line @typescript-eslint/no-deprecated
+      SessionStateActionId.SetAvailableSelectionScopes, // eslint-disable-line @typescript-eslint/no-deprecated
       availableScopes
     );
   } catch {

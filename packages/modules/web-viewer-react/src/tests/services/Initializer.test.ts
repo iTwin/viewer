@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import { BentleyCloudRpcManager } from "@itwin/core-common";
 import type { IModelAppOptions } from "@itwin/core-frontend";
@@ -109,9 +109,8 @@ const initClientSpy = jest.spyOn(BentleyCloudRpcManager, "initializeClient");
 describe("Initializer", () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    // eslint-disable-next-line deprecation/deprecation
-    if (UiCore.initialized) {
-      UiCore.terminate(); // eslint-disable-line deprecation/deprecation
+    if (UiCore.initialized) { // eslint-disable-line @typescript-eslint/no-deprecated
+      UiCore.terminate(); // eslint-disable-line @typescript-eslint/no-deprecated
     }
   });
 

@@ -150,7 +150,7 @@ export class IModelMergeItemsProvider implements UiItemsProvider {
     const statusBarItems: StatusBarItem[] = [];
     if (stageUsage === StageUsage.General) {
       statusBarItems.push(
-        StatusBarItemUtilities.createCustomItem(
+        StatusBarItemUtilities.createCustomItem(  // eslint-disable-line @typescript-eslint/no-deprecated
           "IModelMergeItemsProvider:ConnectionStatusBarItem",
           StatusBarSection.Center,
           1,
@@ -158,7 +158,7 @@ export class IModelMergeItemsProvider implements UiItemsProvider {
         )
       );
       statusBarItems.push(
-        StatusBarItemUtilities.createCustomItem(
+        StatusBarItemUtilities.createCustomItem(  // eslint-disable-line @typescript-eslint/no-deprecated  
           "IModelMergeItemsProvider:IModelMergeStatusBarItem",
           StatusBarSection.Center,
           3,
