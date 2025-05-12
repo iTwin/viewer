@@ -32,7 +32,6 @@ import type {
   XAndY,
   XYAndZ,
 } from "@itwin/core-geometry";
-import type { SchemaContext } from "@itwin/ecschema-metadata";
 import type { PresentationProps } from "@itwin/presentation-frontend";
 import type { SelectionStorage } from "@itwin/unified-selection";
 
@@ -82,10 +81,8 @@ export interface ViewerViewportControlOptions
 }
 
 export interface UnifiedSelectionProps {
-  /** Unified selection storage to synchronize with. Requires `getSchemaContext` prop to also be supplied. */
+  /** Unified selection storage to synchronize with. */
   selectionStorage?: SelectionStorage;
-  /** Function for getting schema context for an iModel. */
-  getSchemaContext?: (imodel: IModelConnection) => SchemaContext;
 }
 
 export interface LoaderProps {

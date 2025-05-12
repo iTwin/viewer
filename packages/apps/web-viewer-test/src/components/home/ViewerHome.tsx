@@ -37,7 +37,6 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 // import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
 import { ReactComponent as Itwin } from "../../images/itwin.svg";
 import {
-  getSchemaContext,
   unifiedSelectionStorage,
 } from "../../selectionStorage";
 import { history } from "../routing";
@@ -167,7 +166,7 @@ const ViewerHome: React.FC = () => {
                     getLabel: () => ModelsTreeComponent.getLabel(),
                     render: (props) => (
                       <ModelsTreeComponent
-                        getSchemaContext={getSchemaContext}
+                        getSchemaContext={(iModel) => iModel.schemaContext}
                         density={props.density}
                         selectionStorage={unifiedSelectionStorage}
                         selectionMode={"extended"}
@@ -181,7 +180,7 @@ const ViewerHome: React.FC = () => {
                     getLabel: () => CategoriesTreeComponent.getLabel(),
                     render: (props) => (
                       <CategoriesTreeComponent
-                        getSchemaContext={getSchemaContext}
+                        getSchemaContext={(iModel) => iModel.schemaContext}
                         density={props.density}
                         selectionStorage={unifiedSelectionStorage}
                         onPerformanceMeasured={props.onPerformanceMeasured}
@@ -233,7 +232,6 @@ const ViewerHome: React.FC = () => {
         defaultUiConfig={{ cornerButton: <Itwin /> }}
         // renderSys={{doIdleWork: true}}
         selectionStorage={unifiedSelectionStorage}
-        getSchemaContext={getSchemaContext}
       />
     </div>
   );

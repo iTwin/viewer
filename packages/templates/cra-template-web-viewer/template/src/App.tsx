@@ -186,7 +186,7 @@ const App: React.FC = () => {
                     getLabel: () => ModelsTreeComponent.getLabel(),
                     render: (props) => (
                       <ModelsTreeComponent
-                        getSchemaContext={getSchemaContext}
+                        getSchemaContext={(iModel) => iModel.schemaContext}
                         density={props.density}
                         selectionStorage={unifiedSelectionStorage}
                         selectionMode={"extended"}
@@ -200,7 +200,7 @@ const App: React.FC = () => {
                     getLabel: () => CategoriesTreeComponent.getLabel(),
                     render: (props) => (
                       <CategoriesTreeComponent
-                        getSchemaContext={getSchemaContext}
+                        getSchemaContext={(iModel) => iModel.schemaContext}
                         density={props.density}
                         selectionStorage={unifiedSelectionStorage}
                         onPerformanceMeasured={props.onPerformanceMeasured}
@@ -234,7 +234,7 @@ const App: React.FC = () => {
           new MeasureToolsUiItemsProvider(),
         ]}
         selectionStorage={unifiedSelectionStorage}
-        getSchemaContext={getSchemaContext}
+        getSchemaContext={(iModel) => iModel.schemaContext}
       />
     </div>
   );
