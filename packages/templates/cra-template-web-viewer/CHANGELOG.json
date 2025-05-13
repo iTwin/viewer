@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "4.4.4",
+      "tag": "@itwin/cra-template-web-viewer_v4.4.4",
+      "date": "Tue, 13 May 2025 21:57:34 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Adding unified-react dependency to web viewer template."
+          }
+        ]
+      }
+    },
+    {
       "version": "4.4.3",
       "tag": "@itwin/cra-template-web-viewer_v4.4.3",
       "date": "Fri, 14 Mar 2025 00:25:22 GMT",

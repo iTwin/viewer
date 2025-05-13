@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Fri, 14 Mar 2025 00:25:22 GMT and should not be manually modified.
+This log was last generated on Tue, 13 May 2025 21:57:34 GMT and should not be manually modified.
+
+## 4.4.4
+Tue, 13 May 2025 21:57:34 GMT
+
+### Patches
+
+- Adding unified-react dependency to web viewer template.
 
 ## 4.4.3
 Fri, 14 Mar 2025 00:25:22 GMT

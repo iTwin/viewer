@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Mon, 17 Mar 2025 14:17:53 GMT and should not be manually modified.
+This log was last generated on Tue, 13 May 2025 21:57:34 GMT and should not be manually modified.
+
+## 4.5.5
+Tue, 13 May 2025 21:57:34 GMT
+
+### Patches
+
+- Adding unified-react dependency to desktop viewer template.
 
 ## 4.5.4
 Mon, 17 Mar 2025 14:17:53 GMT
