@@ -2,8 +2,8 @@
   "changes": [
     {
       "packageName": "@itwin/cra-template-desktop-viewer",
-      "comment": "",
-      "type": "none"
+      "comment": "Adding unified-react dependency to desktop viewer template.",
+      "type": "patch"
     }
   ],
   "packageName": "@itwin/cra-template-desktop-viewer"
