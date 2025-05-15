@@ -13,6 +13,7 @@ import {
   IModelReadRpcInterface,
   IModelTileRpcInterface,
 } from "@itwin/core-common";
+import { ECSchemaRpcInterface } from "@itwin/ecschema-rpcinterface-common";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 
 import type { BackendConfiguration } from "../types";
@@ -58,6 +59,7 @@ export class RpcInitializer {
       IModelReadRpcInterface,
       IModelTileRpcInterface,
       PresentationRpcInterface,
+      ECSchemaRpcInterface,
       ...additionalRpcInterfaces,
     ];
   };
