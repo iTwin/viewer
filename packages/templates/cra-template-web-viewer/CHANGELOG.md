@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Tue, 13 May 2025 21:57:34 GMT and should not be manually modified.
+This log was last generated on Tue, 20 May 2025 14:26:07 GMT and should not be manually modified.
+
+## 4.4.5
+Tue, 20 May 2025 14:26:07 GMT
+
+### Patches
+
+- remove direct dep @itwin/presentation-core-interop and add override for metadependencies to 1.3.1
 
 ## 4.4.4
 Tue, 13 May 2025 21:57:34 GMT
