@@ -3,82 +3,27 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
-import type { UiSyncEventArgs } from "@itwin/appui-abstract";
 import {
   AppNotificationManager,
   FrameworkAccuDraw,
   FrameworkReducer,
   FrameworkUiAdmin,
-  SessionStateActionId,
   StateManager,
-  SyncUiEventDispatcher,
   UiFramework,
 } from "@itwin/appui-react";
 import { UiComponents } from "@itwin/components-react";
 import type { IModelAppOptions } from "@itwin/core-frontend";
-import { AccuSnap, SnapMode } from "@itwin/core-frontend";
-import { IModelApp } from "@itwin/core-frontend";
+import { AccuSnap, IModelApp, SnapMode } from "@itwin/core-frontend";
 import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
 import { FrontendIModelsAccess } from "@itwin/imodels-access-frontend";
 import { IModelsClient } from "@itwin/imodels-client-management";
-import { getInstancesCount } from "@itwin/presentation-common";
-import type {
-  ISelectionProvider,
-  SelectionChangeEventArgs,
-} from "@itwin/presentation-frontend";
 import { Presentation } from "@itwin/presentation-frontend";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
 
 import { ViewerPerformance } from "../services/telemetry";
 import type { ViewerInitializerParams } from "../types";
 import { makeCancellable } from "../utilities/MakeCancellable";
-
-const syncSelectionCount = () => {
-  let removeListenerFunc: (() => void) | undefined;
-  Presentation.selection.selectionChange.addListener( // eslint-disable-line @typescript-eslint/no-deprecated
-    (args: SelectionChangeEventArgs, provider: ISelectionProvider) => { // eslint-disable-line @typescript-eslint/no-deprecated
-      removeListenerFunc?.();
-      if (args.level !== 0) {
-        // don't need to handle sub-selections
-        return;
-      }
-      const selection = provider.getSelection(args.imodel, args.level);
-      const numSelected = getInstancesCount(selection);
-      UiFramework.dispatchActionToStore(  // eslint-disable-line @typescript-eslint/no-deprecated
-        SessionStateActionId.SetNumItemsSelected, // eslint-disable-line @typescript-eslint/no-deprecated
-        numSelected
-      );
-
-      // NOTE: add an event listener to the iModelConnection.selectionSet.onChanged to restore the numSelected to the value that we
-      // extracted from the Presentation.selection.selectionChange event in order to override the numSelected AppUi sets from
-      // the iModelConnection.selectionSet.onChanged that will treat assemblies as a collection of elements instead of a single one
-      removeListenerFunc =
-        UiFramework.getIModelConnection()?.selectionSet.onChanged.addListener(
-          (_ev) => {
-            UiFramework.dispatchActionToStore(  // eslint-disable-line @typescript-eslint/no-deprecated
-              SessionStateActionId.SetNumItemsSelected, // eslint-disable-line @typescript-eslint/no-deprecated
-              numSelected
-            );
-          }
-        );
-    }
-  );
-};
-
-// This preserves how the active selection scope was synced between Presentation and AppUi before its removal in 4.x
-const syncActiveSelectionScope = () => {
-  // If the user doesn't set any active scope and uses the default scope, then the Presentation active scope would be undefined.
-  // Thus, we have to sync it for the first time here.
-  Presentation.selection.scopes.activeScope = UiFramework.getActiveSelectionScope();  // eslint-disable-line @typescript-eslint/no-deprecated
-  SyncUiEventDispatcher.onSyncUiEvent.addListener((args: UiSyncEventArgs) => {  // eslint-disable-line @typescript-eslint/no-deprecated
-    if (args.eventIds.has(SessionStateActionId.SetSelectionScope)) {  // eslint-disable-line @typescript-eslint/no-deprecated
-      // After 4.x the AppUI no longer has a presentation dep and therefore we have the responsibility of
-      // syncing the Presentation.selection.scopes.activeScope with the AppUi's UiSyncEvent for SetSelectionScope
-      Presentation.selection.scopes.activeScope = UiFramework.getActiveSelectionScope();  // eslint-disable-line @typescript-eslint/no-deprecated
-    }
-  });
-};
 
 // initialize required iTwin.js services
 export class BaseInitializer {
@@ -94,11 +39,6 @@ export class BaseInitializer {
   /** expose initialized cancel method */
   public static cancel: () => void = () => {
     BaseInitializer._cancel?.();
-    try {
-      Presentation.presentation.dispose(); // eslint-disable-line @typescript-eslint/no-deprecated
-    } catch (err) {
-      // Do nothing, its possible that we never started.
-    }
     try {
       Presentation.terminate();
     } catch (err) {
@@ -193,10 +133,6 @@ export class BaseInitializer {
 
       // initialize Presentation
       yield Presentation.initialize(viewerOptions?.presentationProps);
-
-      // Sync selection count & active selection scope between Presentation and AppUi. Runs after the Presentation is initialized.
-      syncSelectionCount();
-      syncActiveSelectionScope();
 
       // allow uiAdmin to open key-in palette when Ctrl+F2 is pressed - good for manually loading UI providers
       IModelApp.uiAdmin.updateFeatureFlags({ allowKeyinPalette: true });

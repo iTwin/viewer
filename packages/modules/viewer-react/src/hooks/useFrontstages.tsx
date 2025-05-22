@@ -26,6 +26,7 @@ export interface UseFrontstagesProps {
   viewportOptions?: ViewerViewportControlOptions;
   viewCreatorOptions?: ViewerViewCreator3dOptions;
   blankConnectionViewState?: BlankConnectionViewState;
+  isUsingDeprecatedSelectionManager?: boolean;
 }
 
 export const ViewerDefaultFrontstageProviderId =
@@ -37,6 +38,7 @@ export const useFrontstages = ({
   defaultUiConfig,
   viewCreatorOptions,
   viewportOptions,
+  isUsingDeprecatedSelectionManager,
 }: UseFrontstagesProps) => {
   const [finalFrontstages, setFinalFrontstages] =
     useState<ViewerFrontstage[]>();
@@ -44,7 +46,7 @@ export const useFrontstages = ({
     useState<boolean>(false);
   const [customDefaultFrontstage, setCustomDefaultFrontstage] =
     useState<boolean>(false);
-
+  
   useEffect(() => {
     let allFrontstages: ViewerFrontstage[] = [];
     let defaultExists = false;
@@ -74,7 +76,8 @@ export const useFrontstages = ({
       const contentGroup = new DefaultContentGroupProvider(
         viewportOptions,
         viewCreatorOptions,
-        blankConnectionViewState
+        blankConnectionViewState,
+        isUsingDeprecatedSelectionManager,
       );
 
       const defaultFrontstageProvider = new StandardFrontstageProvider({ // eslint-disable-line @typescript-eslint/no-deprecated

@@ -1,17 +1,16 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import { StandardContentLayouts } from "@itwin/appui-abstract";
 import {
   ContentGroup,
   ContentGroupProvider,
+  IModelViewportControl,
   UiFramework,
 } from "@itwin/appui-react";
-import { ViewportComponent } from "@itwin/imodel-components-react";
-import { viewWithUnifiedSelection } from "@itwin/presentation-components";
-import React from "react";
 
 import { getAndSetViewState } from "../../../services/iModel";
 import type {
@@ -19,8 +18,7 @@ import type {
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
 } from "../../../types";
-
-const UnifiedSelectionViewport = viewWithUnifiedSelection(ViewportComponent); // eslint-disable-line @typescript-eslint/no-deprecated
+import { UnifiedSelectionViewportControl } from "./UnifiedSelectionViewportControl";
 
 /**
  * Provide a default content group to the default frontstage
@@ -29,16 +27,19 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
   private _viewportOptions: ViewerViewportControlOptions | undefined;
   private _blankConnectionViewState: BlankConnectionViewState | undefined;
   private _viewCreatorOptions: ViewerViewCreator3dOptions | undefined;
+  private _isUsingDeprecatedSelectionManager: boolean | undefined;
 
   constructor(
     viewportOptions?: ViewerViewportControlOptions,
     viewCreatorOptions?: ViewerViewCreator3dOptions,
-    blankConnectionViewStateOptions?: BlankConnectionViewState
+    blankConnectionViewStateOptions?: BlankConnectionViewState,
+    isUsingDeprecatedSelectionManager?: boolean,
   ) {
     super();
     this._viewportOptions = viewportOptions;
     this._blankConnectionViewState = blankConnectionViewStateOptions;
     this._viewCreatorOptions = viewCreatorOptions;
+    this._isUsingDeprecatedSelectionManager = isUsingDeprecatedSelectionManager;
   }
 
   public async contentGroup(): Promise<ContentGroup> {
@@ -60,14 +61,13 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
       contents: [
         {
           id: "iTwinViewer.UnifiedSelectionViewport",
-          classId: "",
-          content: (
-            <UnifiedSelectionViewport
-              viewState={viewState}
-              imodel={iModelConnection}
-              controlId={"iTwinViewer.UnifiedSelectionViewportControl"}
-            />
-          ),
+          // eslint-disable-next-line @typescript-eslint/no-deprecated
+          classId: this._isUsingDeprecatedSelectionManager ? UnifiedSelectionViewportControl : IModelViewportControl,
+          applicationData: {
+            ...this._viewportOptions,
+            viewState,
+            iModelConnection,
+          },
         },
       ],
     });
