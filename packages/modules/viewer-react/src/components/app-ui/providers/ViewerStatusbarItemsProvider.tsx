@@ -10,15 +10,13 @@ import type {
 } from "@itwin/appui-react";
 import {
   MessageCenterField,
-  SelectionCountField,
+  SelectionInfoField,
   SelectionScopeField,
   SnapModeField,
   StatusBarItemUtilities,
   StatusBarSection,
   TileLoadingIndicator,
   ToolAssistanceField,
-  useActiveIModelConnection,
-  useSelectionSetSize,
 } from "@itwin/appui-react";
 import * as React from "react";
 
@@ -27,7 +25,7 @@ import type { ViewerDefaultStatusbarItems } from "../../../types";
 export class ViewerStatusbarItemsProvider implements UiItemsProvider {
   public readonly id = "ViewerDefaultStatusbar";
 
-  constructor(private _defaultItems?: ViewerDefaultStatusbarItems) { }
+  constructor(private _defaultItems?: ViewerDefaultStatusbarItems) {}
 
   public provideStatusBarItems(): StatusBarItem[] {
     const items: StatusBarCustomItem[] = [];
@@ -83,18 +81,12 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
       );
     }
     if (!this._defaultItems || this._defaultItems.selectionInfo) {
-      const SelectionInfoWrapper = () => {
-        const iModel = useActiveIModelConnection();
-        const count = useSelectionSetSize({ iModel });
-
-        return <SelectionCountField count={count} />;
-      };
       items.push(
         StatusBarItemUtilities.createCustomItem({
           id: "SelectionInfo",
           section: StatusBarSection.Right,
           itemPriority: 40,
-          content: <SelectionInfoWrapper />,
+          content: <SelectionInfoField />, // eslint-disable-line @typescript-eslint/no-deprecated
         })
       );
     }
