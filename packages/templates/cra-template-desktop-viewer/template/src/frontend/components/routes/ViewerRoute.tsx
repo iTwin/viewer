@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import {
   Viewer,
@@ -13,7 +13,7 @@ import { MeasureToolsUiItemsProvider } from "@itwin/measure-tools-react";
 import {
   AncestorsNavigationControls,
   CopyPropertyTextContextMenuItem,
-  PropertyGridUiItemsProvider,
+  createPropertyGrid,
   ShowHideNullValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
 import {
@@ -93,22 +93,25 @@ export const ViewerRoute = () => {
             }),
           ],
         },
-        new PropertyGridUiItemsProvider({
-          propertyGridProps: {
-            autoExpandChildCategories: true,
-            ancestorsNavigationControls: (props) => (
-              <AncestorsNavigationControls {...props} />
-            ),
-            contextMenuItems: [
-              (props) => <CopyPropertyTextContextMenuItem {...props} />,
-            ],
-            settingsMenuItems: [
-              (props) => (
-                <ShowHideNullValuesSettingsMenuItem {...props} persist={true} />
+        {
+          id: "PropertyGridUIProvider",
+          getWidgets: () => [
+            createPropertyGrid({
+              autoExpandChildCategories: true,
+              ancestorsNavigationControls: (props) => (
+                <AncestorsNavigationControls {...props} />
               ),
-            ],
-          },
-        }),
+              contextMenuItems: [
+                (props) => <CopyPropertyTextContextMenuItem {...props} />,
+              ],
+              settingsMenuItems: [
+                (props) => (
+                  <ShowHideNullValuesSettingsMenuItem {...props} persist={true} />
+                ),
+              ],
+            })
+          ],
+        },
         new MeasureToolsUiItemsProvider(),
         new IModelMergeItemsProvider(),
       ]}
