@@ -1,7 +1,8 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import { Cartographic, ColorDef, RenderMode } from "@itwin/core-common";
@@ -75,7 +76,6 @@ const BlankConnectionHome: React.FC = () => {
         onIModelAppInit={iModelAppInit}
         uiProviders={[new TestUiProvider2()]}
         enablePerformanceMonitors={true}
-        iTwinId={process.env.IMJS_AUTH_CLIENT_ITWIN_ID_PROD}
         location={Cartographic.fromDegrees({
           longitude: 0,
           latitude: 0,

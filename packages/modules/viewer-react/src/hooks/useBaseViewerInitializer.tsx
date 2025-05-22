@@ -1,12 +1,14 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import { useEffect, useMemo, useState } from "react";
 
 import { BaseInitializer } from "../services/BaseInitializer";
 import type { ViewerCommonProps, ViewerInitializerParams } from "../types";
+import { isUnifiedSelectionProps } from "../types";
 import { getInitializationOptions, isEqual } from "../utilities";
 import { useIsMounted } from "./useIsMounted";
 
@@ -56,7 +58,7 @@ function overridePresentationProps(
         ...inputProps,
         presentationProps: {
           ...inputProps.presentationProps,
-          ...(inputProps.selectionStorage
+          ...(isUnifiedSelectionProps(inputProps)
             ? {
                 selection: {
                   ...inputProps.presentationProps?.selection, // eslint-disable-line @typescript-eslint/no-deprecated

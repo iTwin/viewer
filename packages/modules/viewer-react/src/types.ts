@@ -33,12 +33,13 @@ import type {
   XYAndZ,
 } from "@itwin/core-geometry";
 import type { PresentationProps } from "@itwin/presentation-frontend";
-import type { SelectionStorage } from "@itwin/unified-selection";
+import type { computeSelection, SelectionStorage } from "@itwin/unified-selection";
 
 export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
   ? (Without<T1, T2> & T2) | (Without<T2, T1> & T1)
   : T1 | T2;
+type AllOrNone<T> = T | { [K in keyof T]?: never };
 
 /**
  * Converts the following optional arg foo of type T
@@ -75,25 +76,52 @@ export interface ViewerViewportControlOptions
   extends Omit<IModelViewportControlOptions, "viewState"> { // eslint-disable-line @typescript-eslint/no-deprecated
   /** ViewState or a function to return a ViewState */
   viewState?:
-    | ViewState
-    | ((iModelConnection: IModelConnection) => ViewState)
-    | ((iModelConnection: IModelConnection) => Promise<ViewState>);
+  | ViewState
+  | ((iModelConnection: IModelConnection) => ViewState)
+  | ((iModelConnection: IModelConnection) => Promise<ViewState>);
 }
 
 export interface UnifiedSelectionProps {
   /** Unified selection storage to synchronize with. */
-  selectionStorage?: SelectionStorage;
+  selectionStorage: SelectionStorage;
 }
 
-export interface LoaderProps {
+export function isUnifiedSelectionProps(props: AllOrNone<UnifiedSelectionProps> | undefined): props is UnifiedSelectionProps {
+  return typeof props === "object" && "selectionStorage" in props && "getSchemaContext" in props;
+}
+
+export interface SelectionScopesProps {
+  /** A map of available selection scopes. The key is the scope id and the value is the scope label and definition. */
+  available: {
+    [scopeId: string]: {
+      label: string;
+      def: Parameters<typeof computeSelection>[0]["scope"];
+    }
+  };
+
+  /** Id of the active selection scope. An element with this id must exist in `available` map. */
+  active: string;
+
+  /**
+   * A callback that's invoked when active scope changes. It's guaranteed that `id` is a key of one of entries
+   * in `available` map.
+   *
+   * When this callback is not supplied, the `active` scope works as the initial value, and the actually
+   * active scope is managed internally. When it is supplied, it's consumer's responsibility to update the
+   * `active` scope based on the callback's input.
+   */
+  onChange?: (id: string) => void;
+}
+
+export type LoaderProps = AllOrNone<UnifiedSelectionProps> & {
   /** color theme */
   // theme?: ColorTheme | string;
   /** Default UI configuration */
   defaultUiConfig?: ViewerDefaultFrontstageConfig;
   /** Optional callback function when iModel is connected */
   onIModelConnected?:
-    | ((iModel: IModelConnection) => void)
-    | ((iModel: IModelConnection) => Promise<void>);
+  | ((iModel: IModelConnection) => void)
+  | ((iModel: IModelConnection) => Promise<void>);
   /** additional frontstages to register */
   frontstages?: ViewerFrontstage[];
   /** additional viewport options for the default frontstage's viewport control */
@@ -104,11 +132,12 @@ export interface LoaderProps {
   viewCreatorOptions?: ViewerViewCreator3dOptions;
   /** Component to show when loading iModel key */
   loadingComponent?: React.ReactNode;
+  /** Props for managing selection scopes. When not supplied, `Presentation.selection.scopes` is used. */
+  selectionScopes?: SelectionScopesProps;
 }
 
 export type ViewerCommonProps = ViewerInitializerParams &
-  LoaderProps &
-  UnifiedSelectionProps;
+  LoaderProps;
 
 // Note: When updating this, also update getIModelAppOptions
 export type ViewerIModelAppOptions = Pick<
@@ -153,8 +182,7 @@ export type RequiredViewerProps = XOR<
 export type ModelLoaderProps = Partial<
   ConnectedViewerProps & FileViewerProps & BlankViewerProps
 > &
-  LoaderProps &
-  UnifiedSelectionProps;
+  LoaderProps;
 
 export type ViewerProps = RequiredViewerProps & ViewerCommonProps;
 export type ViewerLoaderProps = RequiredViewerProps & LoaderProps;
@@ -184,24 +212,24 @@ export type BlankViewerProps = {
  * This list MUST match what is in the ViewerInitializerParams interface and should be updated as new properties are added/removed
  */
 const iTwinViewerInitializerParamSample: OptionalToUndefinedUnion<ViewerInitializerParams> =
-  {
-    hubAccess: undefined,
-    localization: undefined,
-    mapLayerOptions: undefined,
-    notifications: undefined,
-    tileAdmin: undefined,
-    toolAdmin: undefined,
-    renderSys: undefined,
-    realityDataAccess: undefined,
-    enablePerformanceMonitors: undefined,
-    productId: undefined,
-    i18nUrlTemplate: undefined,
-    onIModelAppInit: undefined,
-    additionalI18nNamespaces: undefined,
-    extensions: undefined,
-    userPreferences: undefined,
-    presentationProps: undefined,
-  };
+{
+  hubAccess: undefined,
+  localization: undefined,
+  mapLayerOptions: undefined,
+  notifications: undefined,
+  tileAdmin: undefined,
+  toolAdmin: undefined,
+  renderSys: undefined,
+  realityDataAccess: undefined,
+  enablePerformanceMonitors: undefined,
+  productId: undefined,
+  i18nUrlTemplate: undefined,
+  onIModelAppInit: undefined,
+  additionalI18nNamespaces: undefined,
+  extensions: undefined,
+  userPreferences: undefined,
+  presentationProps: undefined,
+};
 
 export const iTwinViewerInitializerParamList = Object.keys(
   iTwinViewerInitializerParamSample

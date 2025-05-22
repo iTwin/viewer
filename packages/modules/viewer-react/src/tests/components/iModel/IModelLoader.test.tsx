@@ -52,7 +52,7 @@ jest.mock("@itwin/presentation-frontend", () => {
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
       selection: {
         scopes: {
-          getSelectionScopes: jest.fn(),
+          getSelectionScopes: jest.fn(async () => []),
         },
       },
     },
