@@ -4,7 +4,8 @@ module.exports = {
   ...baseConfig,
   rules: {
     ...(baseConfig.rules),
-    "simple-import-sort/sort": "error",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
     "@typescript-eslint/no-inferrable-types": "error",
     curly: "error",
     "react-hooks/exhaustive-deps": "off",
