@@ -3,15 +3,10 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
-import {
-  BackstageAppButton,
-  StageUsage,
-  StandardFrontstageProvider,
-  UiItemsManager,
-} from "@itwin/appui-react";
 import React, { useEffect, useState } from "react";
-
+import { BackstageAppButton, StageUsage, StandardFrontstageProvider, UiItemsManager } from "@itwin/appui-react";
 import { DefaultContentGroupProvider } from "../components/app-ui/providers";
+
 import type {
   BlankConnectionViewState,
   ViewerDefaultFrontstageConfig,

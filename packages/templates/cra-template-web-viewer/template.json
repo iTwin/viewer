@@ -20,15 +20,16 @@
       "@itwin/ecschema-rpcinterface-common": "rc",
       "@itwin/imodel-components-react": "^5.5.0",
       "@itwin/imodels-access-frontend": "^6.0.0-dev.2",
+      "@itwin/imodels-access-common": "^6.0.0-dev.2",
+      "@itwin/imodels-client-management": "^6.0.0-dev.2",
       "@itwin/itwinui-react": "^3.18.0",
       "@itwin/measure-tools-react": "^0.23.2", 
       "@itwin/presentation-common": "rc",
       "@itwin/presentation-components": "^5.12.0",
       "@itwin/presentation-frontend": "rc",
-      "@itwin/presentation-core-interop": "^1.0.0",
-      "@itwin/presentation-shared": "^1.0.0",
-      "@itwin/unified-selection": "^1.1.1",
-      "@itwin/property-grid-react": "^1.0.0",
+      "@itwin/presentation-shared": "^1.2.0",
+      "@itwin/unified-selection": "~1.1.2",
+      "@itwin/property-grid-react": "^1.16.0",
       "@itwin/tree-widget-react": "^3.0.0",
       "@itwin/web-viewer-react": "^4.0.0",
       "@itwin/webgl-compatibility": "rc",
@@ -66,6 +67,9 @@
       "last 4 edge version",
       "not dead",
       "not <0.2%"
-    ]
+    ],
+    "overrides": {
+      "@itwin/presentation-core-interop": "1.3.1"
+    }
   }
 }

@@ -25,7 +25,7 @@
     "lint:fix": "npm run -s lint -- --fix"
   },
   "dependencies": {
-    "@itwin/imodels-client-management": "^5.2.1",
+    "@itwin/imodels-client-management": "^6.0.0-dev.2",
     "@itwin/viewer-react": "workspace:*"
   },
   "devDependencies": {

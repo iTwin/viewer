@@ -8,10 +8,11 @@ import {
   createECSchemaProvider,
   createECSqlQueryExecutor,
 } from "@itwin/presentation-core-interop";
-import { Presentation } from "@itwin/presentation-frontend";
 import { createCachingECClassHierarchyInspector } from "@itwin/presentation-shared";
-import type { SelectionStorage } from "@itwin/unified-selection";
-import { enableUnifiedSelectionSyncWithIModel } from "@itwin/unified-selection";
+import {
+  enableUnifiedSelectionSyncWithIModel,
+  SelectionStorage,
+} from "@itwin/unified-selection";
 import React from "react";
 
 type SelectionScope = ReturnType<
@@ -23,12 +24,20 @@ type SelectionScope = ReturnType<
 interface UseUnifiedSelectionSyncProps {
   iModelConnection?: IModelConnection;
   selectionStorage?: SelectionStorage;
+  activeSelectionScope: SelectionScope;
 }
 
+/** @internal */
 export function useUnifiedSelectionSync({
   iModelConnection,
   selectionStorage,
+  activeSelectionScope,
 }: UseUnifiedSelectionSyncProps) {
+  const activeScope = React.useRef<SelectionScope>(activeSelectionScope);
+  React.useEffect(() => {
+    activeScope.current = activeSelectionScope;
+  }, [activeSelectionScope]);
+
   React.useEffect(() => {
     if (!iModelConnection || !selectionStorage) {
       return;
@@ -45,52 +54,7 @@ export function useUnifiedSelectionSync({
         selectionSet: iModelConnection.selectionSet,
       },
       selectionStorage,
-      activeScopeProvider: getActiveScope,
+      activeScopeProvider: () => activeScope.current,
     });
   }, [iModelConnection, selectionStorage]);
-}
-
-function getActiveScope(): SelectionScope {
-  const activeScope = Presentation.selection.scopes.activeScope; // eslint-disable-line @typescript-eslint/no-deprecated
-  if (!activeScope) {
-    return "element";
-  }
-  if (typeof activeScope === "string") {
-    return convertActiveScope(activeScope);
-  }
-  const convertedScope = convertActiveScope(activeScope.id);
-  if (
-    typeof convertedScope !== "string" ||
-    convertedScope === "category" ||
-    convertedScope === "model"
-  ) {
-    return convertedScope;
-  }
-  return {
-    id: convertedScope,
-    ancestorLevel:
-      "ancestorLevel" in activeScope ? activeScope.ancestorLevel : undefined,
-  };
-}
-
-function convertActiveScope(scope: string): SelectionScope {
-  switch (scope) {
-    case "assembly":
-      return { id: "element", ancestorLevel: 1 };
-    case "top-assembly":
-      return { id: "element", ancestorLevel: -1 };
-    case "functional-assembly":
-      return { id: "functional", ancestorLevel: 1 };
-    case "functional-top-assembly":
-      return { id: "functional", ancestorLevel: -1 };
-    case "functional-element":
-      return "functional";
-    case "element":
-    case "category":
-    case "model":
-    case "functional":
-      return scope;
-    default:
-      return "element";
-  }
 }

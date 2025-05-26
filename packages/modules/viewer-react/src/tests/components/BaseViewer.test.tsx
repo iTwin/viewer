@@ -34,6 +34,11 @@ jest.mock("@itwin/presentation-frontend", () => {
       ...jest.createMockFromModule<any>("@itwin/presentation-frontend")
         .Presentation,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+      selection: {
+        scopes: {
+          getSelectionScopes: jest.fn(async () => []),
+        },
+      },
     },
   };
 });
