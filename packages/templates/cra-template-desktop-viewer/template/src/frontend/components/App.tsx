@@ -23,6 +23,7 @@ import { unifiedSelectionStorage } from "../../selectionStorage";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import { SettingsContextProvider } from "../services/SettingsContext";
 import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
+import { IModelConnection } from "@itwin/core-frontend";
 
 const App = () => {
   window.ITWIN_VIEWER_HOME = window.location.origin;
@@ -42,6 +43,7 @@ const App = () => {
       enablePerformanceMonitors: true,
       selectionStorage: unifiedSelectionStorage,
       onIModelAppInit,
+      getSchemaContext: (iModel: IModelConnection) => iModel.schemaContext // should be removed once we target desktop-viewer-react 5.x
     }),
     [onIModelAppInit]
   );
