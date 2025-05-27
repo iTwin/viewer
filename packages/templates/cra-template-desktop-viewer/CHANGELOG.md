@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Tue, 13 May 2025 21:57:34 GMT and should not be manually modified.
+This log was last generated on Tue, 27 May 2025 16:14:39 GMT and should not be manually modified.
+
+## 4.5.6
+Tue, 27 May 2025 16:14:39 GMT
+
+### Patches
+
+- remove direct dep @itwin/presentation-core-interop and add override for transient dependencies to 1.3.1
 
 ## 4.5.5
 Tue, 13 May 2025 21:57:34 GMT
