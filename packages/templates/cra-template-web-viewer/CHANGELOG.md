@@ -1,6 +1,27 @@
 # Change Log - @itwin/cra-template-web-viewer
 
-This log was last generated on Mon, 18 Nov 2024 21:55:11 GMT and should not be manually modified.
+This log was last generated on Tue, 20 May 2025 14:26:07 GMT and should not be manually modified.
+
+## 4.4.5
+Tue, 20 May 2025 14:26:07 GMT
+
+### Patches
+
+- remove direct dep @itwin/presentation-core-interop and add override for metadependencies to 1.3.1
+
+## 4.4.4
+Tue, 13 May 2025 21:57:34 GMT
+
+### Patches
+
+- Adding unified-react dependency to web viewer template.
+
+## 4.4.3
+Fri, 14 Mar 2025 00:25:22 GMT
+
+### Patches
+
+- Bump Presentation and `@itwin/property-grid-react` dependencies
 
 ## 4.4.2
 Mon, 18 Nov 2024 21:55:11 GMT

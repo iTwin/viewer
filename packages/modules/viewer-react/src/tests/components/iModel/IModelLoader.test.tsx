@@ -9,7 +9,6 @@ import { ColorTheme, UiFramework, UiItemsManager } from "@itwin/appui-react";
 import { Cartographic, ColorDef } from "@itwin/core-common";
 import { BlankConnection } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
-import { SchemaContext } from "@itwin/ecschema-metadata";
 import * as unifiedSelection from "@itwin/unified-selection";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
@@ -52,7 +51,7 @@ jest.mock("@itwin/presentation-frontend", () => {
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
       selection: {
         scopes: {
-          getSelectionScopes: jest.fn(),
+          getSelectionScopes: jest.fn(async () => []),
         },
       },
     },
@@ -312,7 +311,6 @@ describe("IModelLoader", () => {
         iTwinId={mockITwinId}
         iModelId={mockIModelId}
         selectionStorage={unifiedSelection.createStorage()}
-        getSchemaContext={() => new SchemaContext()}
       />
     );
     await waitFor(() => result.getByTestId("viewer"));
