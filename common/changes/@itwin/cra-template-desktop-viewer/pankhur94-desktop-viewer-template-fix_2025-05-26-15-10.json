@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@itwin/cra-template-desktop-viewer",
-      "comment": "remove direct dep @itwin/presentation-core-interop and add override for metadependencies to 1.3.1",
+      "comment": "remove direct dep @itwin/presentation-core-interop and add override for transient dependencies to 1.3.1",
       "type": "patch"
     }
   ],
