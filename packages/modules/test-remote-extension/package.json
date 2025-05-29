@@ -9,7 +9,7 @@
   "author": "Bentley Systems, Inc.",
   "license": "MIT",
   "dependencies": {
-    "@itwin/core-extension": "^4.0.0"
+    "@itwin/core-extension": "rc"
   },
   "devDependencies": {
     "@esbuild-plugins/node-modules-polyfill": "~0.1.2",
@@ -21,6 +21,8 @@
     "@itwin/core-geometry": "rc",
     "@itwin/core-orbitgt": "rc",
     "@itwin/core-quantity": "rc",
+    "@itwin/ecschema-metadata": "rc",
+    "@itwin/ecschema-rpcinterface-common": "rc",
     "@itwin/webgl-compatibility": "rc",
     "esbuild": "^0.13.13",
     "npm-run-all": "^4.1.5",
