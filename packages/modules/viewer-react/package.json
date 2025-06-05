@@ -37,7 +37,7 @@
     "@itwin/itwinui-illustrations-react": "^2.0.1",
     "@itwin/itwinui-react": "^3.18.0",
     "@itwin/reality-data-client": "^1.0.0",
-    "@itwin/unified-selection": "~1.1.2",
+    "@itwin/unified-selection": "^1.1.1",
     "lodash.isequal": "^4.5.0"
   },
   "devDependencies": {

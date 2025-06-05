@@ -32,7 +32,7 @@ export function useUnifiedSelectionScopes({
 
     let isDisposed = false;
     if (iModelConnection) {
-      void Presentation.selection.scopes
+      void Presentation.selection.scopes  // eslint-disable-line @typescript-eslint/no-deprecated
         .getSelectionScopes(iModelConnection)
         .then((presentationFrontendScopes) => {
           !isDisposed &&
@@ -73,7 +73,7 @@ export function useUnifiedSelectionScopes({
         def: getScopeById(scopeId, availableScopes),
       });
       // for backwards compatibility with Presentation frontend
-      Presentation.selection.scopes.activeScope = scopeId;
+      Presentation.selection.scopes.activeScope = scopeId;  // eslint-disable-line @typescript-eslint/no-deprecated
     },
     [availableScopes]
   );
@@ -118,7 +118,7 @@ function getActiveScopeFromPresentationFrontend(): {
   id: string;
   def: SelectionScope;
 } {
-  const activeScope = Presentation.selection.scopes.activeScope;
+  const activeScope = Presentation.selection.scopes.activeScope;  // eslint-disable-line @typescript-eslint/no-deprecated
   if (!activeScope) {
     return { id: "element", def: "element" };
   }

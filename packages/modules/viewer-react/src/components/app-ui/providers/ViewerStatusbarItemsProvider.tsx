@@ -128,6 +128,7 @@ function SelectionCountField() {
         }
       );
     }
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     return Presentation.selection.selectionChange.addListener((args) => {
       if (args.level !== 0) {
         return;
@@ -168,7 +169,7 @@ function getSelectablesCountInStorage(
 function getInstancesCountInPresentationSelectionManager(
   imodel: IModelConnection
 ) {
-  const selection = Presentation.selection.getSelection(imodel);
+  const selection = Presentation.selection.getSelection(imodel);  // eslint-disable-line @typescript-eslint/no-deprecated
   return getInstancesCount(selection);
 }
 

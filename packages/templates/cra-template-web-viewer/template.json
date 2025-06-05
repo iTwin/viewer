@@ -5,7 +5,7 @@
       "@bentley/react-scripts": "^5.0.4",
       "@itwin/appui-abstract": "rc",
       "@itwin/appui-react": "^5.5.0",
-      "@itwin/browser-authorization": "^1.0.0",
+      "@itwin/browser-authorization": "^2.0.0",
       "@itwin/components-react": "^5.5.0",
       "@itwin/core-bentley": "rc",
       "@itwin/core-common": "rc",
@@ -28,7 +28,7 @@
       "@itwin/presentation-components": "^5.12.0",
       "@itwin/presentation-frontend": "rc",
       "@itwin/presentation-shared": "^1.2.0",
-      "@itwin/unified-selection": "~1.1.2",
+      "@itwin/unified-selection": "^1.1.1",
       "@itwin/property-grid-react": "^1.16.0",
       "@itwin/tree-widget-react": "^3.0.0",
       "@itwin/web-viewer-react": "^4.0.0",
@@ -70,8 +70,8 @@
     ],
     "overrides": {
       "@itwin/presentation-core-interop": "1.3.1",
-      "@itwin/presentation-frontend": {
-        "@itwin/core-bentley": "5.0.0-dev.115"
+      "@itwin/unified-selection": {
+        "@itwin/core-bentley": "rc"
       }
     }
   }
