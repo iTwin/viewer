@@ -10,7 +10,7 @@
   "author": "Bentley Systems, Inc.",
   "license": "MIT",
   "dependencies": {
-    "@itwin/core-extension": "^4.0.0"
+    "@itwin/core-extension": "rc"
   },
   "devDependencies": {
     "@esbuild-plugins/node-modules-polyfill": "~0.1.2",

@@ -23,15 +23,15 @@
       "@itwin/imodels-access-common": "^6.0.0-dev.2",
       "@itwin/imodels-client-management": "^6.0.0-dev.2",
       "@itwin/itwinui-react": "^3.18.0",
-      "@itwin/measure-tools-react": "^0.23.2", 
+      "@itwin/measure-tools-react": "latest", 
       "@itwin/presentation-common": "rc",
       "@itwin/presentation-components": "^5.12.0",
       "@itwin/presentation-frontend": "rc",
       "@itwin/presentation-shared": "^1.2.0",
-      "@itwin/unified-selection": "^1.1.1",
+      "@itwin/unified-selection": "^1.3.0",
       "@itwin/property-grid-react": "^1.16.0",
       "@itwin/tree-widget-react": "^3.0.0",
-      "@itwin/web-viewer-react": "^4.0.0",
+      "@itwin/web-viewer-react": "next",
       "@itwin/webgl-compatibility": "rc",
       "@itwin/unified-selection-react": "^1.0.0",
       "@remix-run/router": "^1.3.2",
@@ -69,10 +69,7 @@
       "not <0.2%"
     ],
     "overrides": {
-      "@itwin/presentation-core-interop": "1.3.1",
-      "@itwin/unified-selection": {
-        "@itwin/core-bentley": "rc"
-      }
+      "@itwin/presentation-core-interop": "1.3.1"
     }
   }
 }
