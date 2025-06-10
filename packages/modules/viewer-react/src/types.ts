@@ -87,7 +87,7 @@ export interface UnifiedSelectionProps {
 }
 
 export function isUnifiedSelectionProps(props: AllOrNone<UnifiedSelectionProps> | undefined): props is UnifiedSelectionProps {
-  return typeof props === "object" && "selectionStorage" in props && "getSchemaContext" in props;
+  return typeof props === "object" && "selectionStorage" in props;
 }
 
 export interface SelectionScopesProps {

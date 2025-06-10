@@ -6,7 +6,7 @@
 import "./SignIn.scss";
 
 import { IModelApp } from "@itwin/core-frontend";
-import { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
+import { ElectronRendererAuthorization } from "@itwin/electron-authorization/Renderer";
 import { SvgUser } from "@itwin/itwinui-icons-react";
 import { Button } from "@itwin/itwinui-react";
 import React, { useState } from "react";
