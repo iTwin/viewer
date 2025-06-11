@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import "./App.scss";
 
@@ -18,8 +18,8 @@ import {
 import {
   AncestorsNavigationControls,
   CopyPropertyTextContextMenuItem,
+  createPropertyGrid,
   PropertyGridManager,
-  PropertyGridUiItemsProvider,
   ShowHideNullValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
 import {
@@ -212,8 +212,10 @@ const App: React.FC = () => {
               }),
             ],
           },
-          new PropertyGridUiItemsProvider({
-            propertyGridProps: {
+          {
+            id: "PropertyGridUIProvider",
+            getWidgets: () => [
+              createPropertyGrid({
               autoExpandChildCategories: true,
               ancestorsNavigationControls: (props) => (
                 <AncestorsNavigationControls {...props} />
@@ -229,8 +231,9 @@ const App: React.FC = () => {
                   />
                 ),
               ],
-            },
-          }),
+            })
+            ],
+          },
           new MeasureToolsUiItemsProvider(),
         ]}
         selectionStorage={unifiedSelectionStorage}

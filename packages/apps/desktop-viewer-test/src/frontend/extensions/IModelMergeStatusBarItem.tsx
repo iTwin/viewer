@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import "./IModelMergeStatusBarItem.scss";
 
@@ -45,7 +45,7 @@ const ConnectionStatusBarItem = () => {
         {ITwinViewerApp.translate("briefcaseStatusTitle.connection")}
       </span>
       {accessToken &&
-      connectivityStatus === InternetConnectivityStatus.Online ? (
+        connectivityStatus === InternetConnectivityStatus.Online ? (
         <SvgCloud className="connection-status-icon" />
       ) : (
         <SvgOffline
@@ -150,20 +150,20 @@ export class IModelMergeItemsProvider implements UiItemsProvider {
     const statusBarItems: StatusBarItem[] = [];
     if (stageUsage === StageUsage.General) {
       statusBarItems.push(
-        StatusBarItemUtilities.createCustomItem(  // eslint-disable-line @typescript-eslint/no-deprecated
-          "IModelMergeItemsProvider:ConnectionStatusBarItem",
-          StatusBarSection.Center,
-          1,
-          <ConnectionStatusBarItem />
-        )
+        StatusBarItemUtilities.createCustomItem({
+          id: "IModelMergeItemsProvider:ConnectionStatusBarItem",
+          section: StatusBarSection.Center,
+          itemPriority: 1,
+          content: <ConnectionStatusBarItem />
+        })
       );
       statusBarItems.push(
-        StatusBarItemUtilities.createCustomItem(  // eslint-disable-line @typescript-eslint/no-deprecated  
-          "IModelMergeItemsProvider:IModelMergeStatusBarItem",
-          StatusBarSection.Center,
-          3,
-          <MergeStatusBarItem />
-        )
+        StatusBarItemUtilities.createCustomItem({
+          id: "IModelMergeItemsProvider:IModelMergeStatusBarItem",
+          section: StatusBarSection.Center,
+          itemPriority: 3,
+          content: <MergeStatusBarItem />
+        })
       );
     }
     return statusBarItems;

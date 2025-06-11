@@ -1,12 +1,12 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
-import { StandardContentLayouts } from "@itwin/appui-abstract";
 import {
   ContentGroup,
   ContentGroupProvider,
+  StandardContentLayouts,
   UiFramework,
 } from "@itwin/appui-react";
 import { ViewportComponent } from "@itwin/imodel-components-react";
@@ -56,7 +56,7 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
 
     return new ContentGroup({
       id: "iTwinViewer.default-content-group",
-      layout: StandardContentLayouts.singleView, // eslint-disable-line @typescript-eslint/no-deprecated
+      layout: StandardContentLayouts.singleView,
       contents: [
         {
           id: "iTwinViewer.UnifiedSelectionViewport",

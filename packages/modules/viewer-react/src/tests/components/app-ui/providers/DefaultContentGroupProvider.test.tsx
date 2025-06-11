@@ -1,12 +1,11 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
-import { StandardContentLayouts } from "@itwin/appui-abstract";
 import {
   ContentGroup,
-  IModelViewportControl,
+  StandardContentLayouts,
   UiFramework,
 } from "@itwin/appui-react";
 import type { IModelConnection } from "@itwin/core-frontend";
@@ -119,9 +118,9 @@ describe("DefaultContentGroupProvider", () => {
     const contentGroupProvider = new DefaultContentGroupProvider();
     await contentGroupProvider.contentGroup({
       contentGroup: new ContentGroup({
-        contents: [{ id: "viewport", classId: IModelViewportControl }], // eslint-disable-line @typescript-eslint/no-deprecated
+        contents: [{ id: "viewport", classId: "" }],
         id: "contentGroup",
-        layout: StandardContentLayouts.singleView, // eslint-disable-line @typescript-eslint/no-deprecated
+        layout: StandardContentLayouts.singleView,
       }),
       id: "DefaultContentGroup",
       version: 1,
@@ -137,9 +136,9 @@ describe("DefaultContentGroupProvider", () => {
     const contentGroupProvider = new DefaultContentGroupProvider();
     await contentGroupProvider.contentGroup({
       contentGroup: new ContentGroup({
-        contents: [{ id: "viewport", classId: IModelViewportControl }], // eslint-disable-line @typescript-eslint/no-deprecated
+        contents: [{ id: "viewport", classId: "" }],
         id: "contentGroup",
-        layout: StandardContentLayouts.singleView, // eslint-disable-line @typescript-eslint/no-deprecated
+        layout: StandardContentLayouts.singleView,
       }),
       id: "DefaultContentGroup",
       version: 1,
@@ -165,9 +164,9 @@ describe("DefaultContentGroupProvider", () => {
     );
     await contentGroupProvider.contentGroup({
       contentGroup: new ContentGroup({
-        contents: [{ id: "viewport", classId: IModelViewportControl }], // eslint-disable-line @typescript-eslint/no-deprecated
+        contents: [{ id: "viewport", classId: "" }],
         id: "contentGroup",
-        layout: StandardContentLayouts.singleView, // eslint-disable-line @typescript-eslint/no-deprecated
+        layout: StandardContentLayouts.singleView,
       }),
       id: "DefaultContentGroup",
       version: 1,
@@ -195,9 +194,9 @@ describe("DefaultContentGroupProvider", () => {
     );
     await contentGroupProvider.contentGroup({
       contentGroup: new ContentGroup({
-        contents: [{ id: "viewport", classId: IModelViewportControl }], // eslint-disable-line @typescript-eslint/no-deprecated
+        contents: [{ id: "viewport", classId: "" }],
         id: "contentGroup",
-        layout: StandardContentLayouts.singleView, // eslint-disable-line @typescript-eslint/no-deprecated
+        layout: StandardContentLayouts.singleView,
       }),
       id: "DefaultContentGroup",
       version: 1,
@@ -218,9 +217,9 @@ describe("DefaultContentGroupProvider", () => {
     );
     await contentGroupProvider.contentGroup({
       contentGroup: new ContentGroup({
-        contents: [{ id: "viewport", classId: IModelViewportControl }], // eslint-disable-line @typescript-eslint/no-deprecated
+        contents: [{ id: "viewport", classId: "" }],
         id: "contentGroup",
-        layout: StandardContentLayouts.singleView, // eslint-disable-line @typescript-eslint/no-deprecated
+        layout: StandardContentLayouts.singleView,
       }),
       id: "DefaultContentGroup",
       version: 1,
@@ -241,9 +240,9 @@ describe("DefaultContentGroupProvider", () => {
     );
     await contentGroupProvider.contentGroup({
       contentGroup: new ContentGroup({
-        contents: [{ id: "viewport", classId: IModelViewportControl }], // eslint-disable-line @typescript-eslint/no-deprecated
+        contents: [{ id: "viewport", classId: "" }],
         id: "contentGroup",
-        layout: StandardContentLayouts.singleView, // eslint-disable-line @typescript-eslint/no-deprecated
+        layout: StandardContentLayouts.singleView,
       }),
       id: "DefaultContentGroup",
       version: 1,
@@ -270,9 +269,9 @@ describe("DefaultContentGroupProvider", () => {
     );
     await contentGroupProvider.contentGroup({
       contentGroup: new ContentGroup({
-        contents: [{ id: "viewport", classId: IModelViewportControl }], // eslint-disable-line @typescript-eslint/no-deprecated
+        contents: [{ id: "viewport", classId: "" }],
         id: "contentGroup",
-        layout: StandardContentLayouts.singleView, // eslint-disable-line @typescript-eslint/no-deprecated
+        layout: StandardContentLayouts.singleView,
       }),
       id: "DefaultContentGroup",
       version: 1,
