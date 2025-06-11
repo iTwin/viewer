@@ -23,6 +23,7 @@ import { unifiedSelectionStorage } from "../../selectionStorage";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import { SettingsContextProvider } from "../services/SettingsContext";
 import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
+import { IModelConnection } from "@itwin/core-frontend";
 
 const App = () => {
   window.ITWIN_VIEWER_HOME = window.location.origin;
@@ -41,7 +42,7 @@ const App = () => {
       additionalI18nNamespaces: ["iTwinDesktopViewer"],
       enablePerformanceMonitors: true,
       selectionStorage: unifiedSelectionStorage,
-      onIModelAppInit,
+      onIModelAppInit
     }),
     [onIModelAppInit]
   );

@@ -114,7 +114,6 @@ export const ViewerRoute = () => {
       ]}
       enablePerformanceMonitors={true}
       selectionStorage={unifiedSelectionStorage}
-      getSchemaContext={(iModel) => iModel.schemaContext}
     />
   ) : null;
 };
