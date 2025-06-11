@@ -6,7 +6,6 @@
 import "./index.scss";
 import "@itwin/itwinui-layouts-css/styles.css";
 
-import { UiFramework } from "@itwin/appui-react";
 import { Logger, LogLevel } from "@itwin/core-bentley";
 import React from "react";
 import { createRoot } from "react-dom/client";

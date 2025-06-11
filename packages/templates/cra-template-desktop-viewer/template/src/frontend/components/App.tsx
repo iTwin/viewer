@@ -42,8 +42,7 @@ const App = () => {
       additionalI18nNamespaces: ["iTwinDesktopViewer"],
       enablePerformanceMonitors: true,
       selectionStorage: unifiedSelectionStorage,
-      onIModelAppInit,
-      getSchemaContext: (iModel: IModelConnection) => iModel.schemaContext // should be removed once we target desktop-viewer-react 5.x
+      onIModelAppInit
     }),
     [onIModelAppInit]
   );
