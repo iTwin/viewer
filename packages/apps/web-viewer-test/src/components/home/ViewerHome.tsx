@@ -199,7 +199,7 @@ const ViewerHome: React.FC = () => {
             ],
           },
           {
-            id: "PropertyGridUIProvider",
+            id: "PropertyWidgetUIProvider",
             getWidgets: () => [
               createPropertyGrid({
                 autoExpandChildCategories: true,
@@ -217,7 +217,8 @@ const ViewerHome: React.FC = () => {
                     />
                   ),
                 ],
-              })
+                selectionStorage: unifiedSelectionStorage,
+              }),
             ],
           },
           new MeasureToolsUiItemsProvider(),
@@ -235,9 +236,28 @@ const ViewerHome: React.FC = () => {
         defaultUiConfig={{ cornerButton: <Itwin /> }}
         // renderSys={{doIdleWork: true}}
         selectionStorage={unifiedSelectionStorage}
+        selectionScopes={{
+          active: "element",
+          available: availableSelectionScopes,
+        }}
       />
     </div>
   );
+};
+
+const availableSelectionScopes = {
+  element: {
+    label: "Element",
+    def: { id: "element" as const },
+  },
+  assembly: {
+    label: "Assembly",
+    def: { id: "element" as const, ancestorLevel: 1 },
+  },
+  "top-assembly": {
+    label: "Top assembly",
+    def: { id: "element" as const, ancestorLevel: -1 },
+  }
 };
 
 export default ViewerHome;

@@ -101,7 +101,7 @@ export const ViewerRoute = () => {
           ],
         },
         {
-          id: "PropertyGridUIProvider",
+          id: "PropertyWidgetUIProvider",
           getWidgets: () => [
             createPropertyGrid({
               autoExpandChildCategories: true,
@@ -113,10 +113,14 @@ export const ViewerRoute = () => {
               ],
               settingsMenuItems: [
                 (props) => (
-                  <ShowHideNullValuesSettingsMenuItem {...props} persist={true} />
+                  <ShowHideNullValuesSettingsMenuItem
+                    {...props}
+                    persist={true}
+                  />
                 ),
               ],
-            })
+              selectionStorage: unifiedSelectionStorage,
+            }),
           ],
         },
         new MeasureToolsUiItemsProvider(),
@@ -124,6 +128,25 @@ export const ViewerRoute = () => {
       ]}
       enablePerformanceMonitors={true}
       selectionStorage={unifiedSelectionStorage}
+      selectionScopes={{
+        active: "element",
+        available: availableSelectionScopes,
+      }}
     />
   ) : null;
+};
+
+const availableSelectionScopes = {
+  element: {
+    label: "Element",
+    def: { id: "element" as const },
+  },
+  assembly: {
+    label: "Assembly",
+    def: { id: "element" as const, ancestorLevel: 1 },
+  },
+  "top-assembly": {
+    label: "Top assembly",
+    def: { id: "element" as const, ancestorLevel: -1 },
+  },
 };

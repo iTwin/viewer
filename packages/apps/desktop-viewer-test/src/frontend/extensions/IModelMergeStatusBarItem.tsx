@@ -21,7 +21,7 @@ import {
   useConnectivity,
   useIsMounted,
 } from "@itwin/desktop-viewer-react";
-import { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
+import { ElectronRendererAuthorization } from "@itwin/electron-authorization/Renderer";
 import { SvgCloud, SvgOffline } from "@itwin/itwinui-icons-react";
 import React, { useCallback, useEffect, useState } from "react";
 

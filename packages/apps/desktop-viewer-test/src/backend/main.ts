@@ -10,7 +10,7 @@ import { ElectronHost } from "@itwin/core-electron/lib/cjs/ElectronBackend";
 import { ECSchemaRpcImpl } from "@itwin/ecschema-rpcinterface-impl";
 import { BackendIModelsAccess } from "@itwin/imodels-access-backend";
 import { Presentation } from "@itwin/presentation-backend";
-import dotenvFlow from "dotenv-flow";
+import * as dotenvFlow from "dotenv-flow";
 import { Menu, shell } from "electron";
 import type { MenuItemConstructorOptions } from "electron/main";
 import * as path from "path";

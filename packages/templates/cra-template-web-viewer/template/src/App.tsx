@@ -237,7 +237,6 @@ const App: React.FC = () => {
           new MeasureToolsUiItemsProvider(),
         ]}
         selectionStorage={unifiedSelectionStorage}
-        getSchemaContext={(iModel) => iModel.schemaContext}
       />
     </div>
   );

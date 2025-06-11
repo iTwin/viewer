@@ -8,8 +8,7 @@ import { getBriefcaseStatus, ModelStatus } from "@itwin/desktop-viewer-react";
 import type { IModelFull, IModelGridProps } from "@itwin/imodel-browser-react";
 import { IModelGrid } from "@itwin/imodel-browser-react";
 import { PageLayout } from "@itwin/itwinui-layouts-react";
-import type { TileProps } from "@itwin/itwinui-react";
-import { Text } from "@itwin/itwinui-react";
+import { Text, Tile } from "@itwin/itwinui-react";
 import React, {
   useCallback,
   useContext,
@@ -28,6 +27,8 @@ import { BriefcaseStatus } from "./BriefcaseStatus";
 interface SelectIModelProps extends IModelGridProps {
   iTwinName?: string;
 }
+
+type TileProps = Omit<React.ComponentPropsWithoutRef<typeof Tile>, 'as'>;
 
 const useProgressIndicator = (iModel: IModelFull) => {
   const userSettings = useContext(SettingsContext);

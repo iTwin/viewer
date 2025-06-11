@@ -2,6 +2,54 @@
   "name": "@itwin/cra-template-desktop-viewer",
   "entries": [
     {
+      "version": "4.5.6",
+      "tag": "@itwin/cra-template-desktop-viewer_v4.5.6",
+      "date": "Tue, 27 May 2025 16:14:39 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "remove direct dep @itwin/presentation-core-interop and add override for transient dependencies to 1.3.1"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.5.5",
+      "tag": "@itwin/cra-template-desktop-viewer_v4.5.5",
+      "date": "Tue, 13 May 2025 21:57:34 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Adding unified-react dependency to desktop viewer template."
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.5.4",
+      "tag": "@itwin/cra-template-desktop-viewer_v4.5.4",
+      "date": "Mon, 17 Mar 2025 14:17:53 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix build issue in desktop app template"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.5.3",
+      "tag": "@itwin/cra-template-desktop-viewer_v4.5.3",
+      "date": "Fri, 14 Mar 2025 00:25:22 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump Presentation and `@itwin/property-grid-react` dependencies"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.5.2",
       "tag": "@itwin/cra-template-desktop-viewer_v4.5.2",
       "date": "Mon, 18 Nov 2024 15:26:35 GMT",

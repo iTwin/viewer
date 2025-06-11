@@ -6,7 +6,6 @@
 import "./index.scss";
 import "@itwin/itwinui-layouts-css/styles.css";
 
-import { UiFramework } from "@itwin/appui-react";
 import { Logger, LogLevel } from "@itwin/core-bentley";
 import React from "react";
 import { createRoot } from "react-dom/client";
@@ -23,7 +22,6 @@ const viewerFrontendMain = async () => {
   // when initialization is complete, render
   const container = document.getElementById("root") as HTMLElement;
   const root = createRoot(container);
-  UiFramework.childWindows.useCreateRoot(createRoot);
 
   document.documentElement.classList.add(`iui-theme-dark`);
 
