@@ -21,20 +21,21 @@ import {
   useConnectivity,
   useIsMounted,
 } from "@itwin/desktop-viewer-react";
-import { ElectronRendererAuthorization } from "@itwin/electron-authorization/Renderer";
 import { SvgCloud, SvgOffline } from "@itwin/itwinui-icons-react";
 import React, { useCallback, useEffect, useState } from "react";
 
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import { BriefcaseStatus } from "../components/modelSelector";
 import { usePullChanges } from "../hooks/usePullChanges";
+import { isElectronRendererAuth } from "../util/typeCheck";
+
 
 const ConnectionStatusBarItem = () => {
   const accessToken = useAccessToken();
   const connectivityStatus = useConnectivity();
   const onLoginClick = useCallback(async () => {
     if (
-      IModelApp.authorizationClient instanceof ElectronRendererAuthorization
+      isElectronRendererAuth(IModelApp.authorizationClient)
     ) {
       await IModelApp.authorizationClient?.signIn();
     }
