@@ -25,7 +25,7 @@
     "lint:fix": "npm run -s lint -- --fix"
   },
   "dependencies": {
-    "@itwin/imodels-client-management": "^6.0.0-dev.2",
+    "@itwin/imodels-client-management": "^6.0.0",
     "@itwin/viewer-react": "workspace:*"
   },
   "devDependencies": {
@@ -81,6 +81,7 @@
     "@itwin/core-frontend": "rc",
     "@itwin/ecschema-metadata": "rc",
     "@itwin/electron-authorization": "^0.21.0",
+    "@itwin/presentation-frontend": "rc",
     "electron": "^35.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
