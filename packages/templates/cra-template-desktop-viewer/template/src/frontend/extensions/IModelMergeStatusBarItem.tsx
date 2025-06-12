@@ -29,7 +29,6 @@ import { BriefcaseStatus } from "../components/modelSelector";
 import { usePullChanges } from "../hooks/usePullChanges";
 import { isElectronRendererAuth } from "../util/typeCheck";
 
-
 const ConnectionStatusBarItem = () => {
   const accessToken = useAccessToken();
   const connectivityStatus = useConnectivity();
