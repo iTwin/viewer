@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import {
   AppNotificationManager,
@@ -81,7 +81,8 @@ export class BaseInitializer {
         "IModelApp must be initialized prior to rendering the Base Viewer"
       );
     }
-    if (UiCore.initialized && !this._initializing) {
+
+    if (UiCore.initialized && !this._initializing) {  // eslint-disable-line @typescript-eslint/no-deprecated
       return (this._initialized = Promise.resolve());
     } else if (this._initializing) {
       // in the process of initializing, so return
@@ -94,11 +95,13 @@ export class BaseInitializer {
     const cancellable = makeCancellable(function* () {
       // Initialize state manager
       // This will setup a singleton store inside the StoreManager class.
+      /* eslint-disable @typescript-eslint/no-deprecated */
       if (!StateManager.isInitialized()) {
         new StateManager({
           frameworkState: FrameworkReducer,
         });
       }
+      /* eslint-disable @typescript-eslint/no-deprecated */
 
       // execute the iModelApp initialization callback if provided
       if (viewerOptions?.onIModelAppInit) {
@@ -126,8 +129,7 @@ export class BaseInitializer {
       yield UiComponents.initialize(IModelApp.localization);
 
       // initialize UiFramework
-      // Use undefined so that UiFramework uses StateManager
-      yield UiFramework.initialize(undefined);
+      yield UiFramework.initialize();
 
       // initialize Presentation
       yield Presentation.initialize(viewerOptions?.presentationProps);

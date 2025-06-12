@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import {
   Viewer,
@@ -27,7 +27,6 @@ import { useLocation } from "react-router-dom";
 import { viewerRpcs } from "../../../common/ViewerConfig";
 import { IModelMergeItemsProvider } from "../../extensions";
 import {
-  getSchemaContext,
   unifiedSelectionStorage,
 } from "../../selectionStorage";
 
@@ -69,7 +68,7 @@ export const ViewerRoute = () => {
                   getLabel: () => ModelsTreeComponent.getLabel(),
                   render: (props) => (
                     <ModelsTreeComponent
-                      getSchemaContext={getSchemaContext}
+                      getSchemaContext={(iModel) => iModel.schemaContext}
                       density={props.density}
                       selectionStorage={unifiedSelectionStorage}
                       selectionMode={"extended"}
@@ -83,7 +82,7 @@ export const ViewerRoute = () => {
                   getLabel: () => CategoriesTreeComponent.getLabel(),
                   render: (props) => (
                     <CategoriesTreeComponent
-                      getSchemaContext={getSchemaContext}
+                      getSchemaContext={(iModel) => iModel.schemaContext}
                       density={props.density}
                       selectionStorage={unifiedSelectionStorage}
                       onPerformanceMeasured={props.onPerformanceMeasured}
@@ -129,7 +128,6 @@ export const ViewerRoute = () => {
       ]}
       enablePerformanceMonitors={true}
       selectionStorage={unifiedSelectionStorage}
-      getSchemaContext={getSchemaContext}
       selectionScopes={{
         active: "element",
         available: availableSelectionScopes,

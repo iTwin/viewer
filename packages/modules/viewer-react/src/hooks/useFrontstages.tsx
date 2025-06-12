@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import React, { useEffect, useState } from "react";
 import { BackstageAppButton, StageUsage, StandardFrontstageProvider, UiItemsManager } from "@itwin/appui-react";
@@ -21,7 +21,6 @@ export interface UseFrontstagesProps {
   viewportOptions?: ViewerViewportControlOptions;
   viewCreatorOptions?: ViewerViewCreator3dOptions;
   blankConnectionViewState?: BlankConnectionViewState;
-  isUsingDeprecatedSelectionManager?: boolean;
 }
 
 export const ViewerDefaultFrontstageProviderId =
@@ -33,7 +32,6 @@ export const useFrontstages = ({
   defaultUiConfig,
   viewCreatorOptions,
   viewportOptions,
-  isUsingDeprecatedSelectionManager,
 }: UseFrontstagesProps) => {
   const [finalFrontstages, setFinalFrontstages] =
     useState<ViewerFrontstage[]>();
@@ -41,7 +39,6 @@ export const useFrontstages = ({
     useState<boolean>(false);
   const [customDefaultFrontstage, setCustomDefaultFrontstage] =
     useState<boolean>(false);
-
 
   useEffect(() => {
     let allFrontstages: ViewerFrontstage[] = [];
@@ -72,15 +69,16 @@ export const useFrontstages = ({
       const contentGroup = new DefaultContentGroupProvider(
         viewportOptions,
         viewCreatorOptions,
-        blankConnectionViewState,
-        isUsingDeprecatedSelectionManager,
+        blankConnectionViewState
       );
 
-      const defaultFrontstageProvider = new StandardFrontstageProvider({
+      const defaultFrontstageProvider = new StandardFrontstageProvider({ // eslint-disable-line @typescript-eslint/no-deprecated
         id: ViewerDefaultFrontstageProviderId,
         usage: StageUsage.General,
         contentGroupProps: contentGroup,
-        cornerButton: UiItemsManager.getBackstageItems().length ? <BackstageAppButton /> : undefined,
+        cornerButton: UiItemsManager.getBackstageItems().length ? (
+          <BackstageAppButton />
+        ) : undefined,
         ...defaultUiConfig,
       });
 

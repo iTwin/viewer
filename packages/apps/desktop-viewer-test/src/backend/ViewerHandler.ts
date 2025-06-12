@@ -5,7 +5,7 @@
 
 import { IModelHost, IpcHandler } from "@itwin/core-backend";
 import { InternetConnectivityStatus } from "@itwin/core-common";
-import { ElectronMainAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronMain";
+import { ElectronMainAuthorization } from "@itwin/electron-authorization/Main";
 import type {
   OpenDialogOptions,
   OpenDialogReturnValue,

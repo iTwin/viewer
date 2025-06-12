@@ -1,7 +1,8 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import "@testing-library/jest-dom/extend-expect";
 
@@ -22,8 +23,8 @@ jest.mock("@itwin/appui-react", () => {
     },
     UiItemsManager: {
       ...jest.createMockFromModule<any>("@itwin/appui-react").UiItemsManager,
-      getBackstageItems: jest.fn().mockReturnValue([])
-    }
+      getBackstageItems: jest.fn().mockReturnValue([]),
+    },
   };
 });
 jest.mock("@itwin/presentation-frontend", () => {
@@ -122,8 +123,8 @@ const mockIModelId = "456";
 describe("BaseViewer", () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    if (UiCore.initialized) {
-      UiCore.terminate();
+    if (UiCore.initialized) { // eslint-disable-line @typescript-eslint/no-deprecated
+      UiCore.terminate(); // eslint-disable-line @typescript-eslint/no-deprecated
     }
   });
 

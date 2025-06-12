@@ -1,11 +1,11 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import { ElectronApp } from "@itwin/core-electron/lib/cjs/ElectronFrontend";
 import { IModelApp, NativeAppLogger } from "@itwin/core-frontend";
-import { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
+import { ElectronRendererAuthorization } from "@itwin/electron-authorization/Renderer";
 import {
   getIModelAppOptions,
   makeCancellable,
@@ -56,8 +56,7 @@ export class DesktopInitializer {
         iModelAppOpts.authorizationClient = authClient;
         ViewerAuthorization.client = authClient;
 
-        // eslint-disable-next-line deprecation/deprecation
-        iModelAppOpts.rpcInterfaces = options?.rpcInterfaces;
+        iModelAppOpts.rpcInterfaces = options?.rpcInterfaces; // eslint-disable-line @typescript-eslint/no-deprecated
 
         yield ElectronApp.startup({
           iModelApp: iModelAppOpts,

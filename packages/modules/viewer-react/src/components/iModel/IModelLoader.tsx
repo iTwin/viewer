@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import { StateManager, UiFramework } from "@itwin/appui-react";
 import { IModelApp } from "@itwin/core-frontend";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
-import { useFrontstages, useTheme, useUiProviders } from "../../hooks";
+import { useFrontstages, useUiProviders } from "../../hooks";
 import { useUnifiedSelectionScopes } from "../../hooks/useUnifiedSelectionScopes";
 import { useUnifiedSelectionSync } from "../../hooks/useUnifiedSelectionSync";
 import {
@@ -22,7 +22,6 @@ import {
 import { ViewerPerformance } from "../../services/telemetry";
 import { isUnifiedSelectionProps, ModelLoaderProps } from "../../types";
 import {
-  BackstageItemsProvider,
   SelectionScopesContextProvider,
   SelectionStorageContextProvider,
 } from "../app-ui/providers";
@@ -39,19 +38,16 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     viewCreatorOptions,
     blankConnectionViewState,
     uiProviders,
-    theme,
-    backstageItems, // eslint-disable-line deprecation/deprecation
+    // theme,
     loadingComponent,
+    selectionStorage,
   } = viewerProps;
   const { error, connection } = useConnection(viewerProps);
 
   const providers = useMemo<UiItemsProvider[]>(() => {
     const providers = [...(uiProviders || [])];
-    if (backstageItems?.length) {
-      providers.push(new BackstageItemsProvider(backstageItems));
-    }
     return providers;
-  }, [uiProviders, backstageItems]);
+  }, [uiProviders]);
 
   useUiProviders(providers);
 
@@ -66,8 +62,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     activeSelectionScope: selectionScopes.activeScope.def,
     ...(isUnifiedSelectionProps(viewerProps)
       ? {
-          selectionStorage: viewerProps.selectionStorage,
-          getSchemaContext: viewerProps.getSchemaContext,
+          selectionStorage,
         }
       : {}),
   });
@@ -79,10 +74,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       viewportOptions,
       viewCreatorOptions,
       blankConnectionViewState,
-      isUsingDeprecatedSelectionManager: !isUnifiedSelectionProps(viewerProps),
     });
-
-  useTheme(theme);
 
   useEffect(() => {
     if (customDefaultFrontstage && connection) {
@@ -105,37 +97,38 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
 
   if (error) {
     throw error;
-  }
-
-  return (
-    <div className="itwin-viewer-container">
-      {finalFrontstages &&
-      (connection || noConnectionRequired) &&
-      StateManager.store ? (
-        <Provider store={StateManager.store}>
-          <SelectionStorageContextProvider
+  } else {
+    return (
+      <div className="itwin-viewer-container">
+        {finalFrontstages &&
+        (connection || noConnectionRequired) &&
+        StateManager.store ? (  // eslint-disable-line @typescript-eslint/no-deprecated
+          // eslint-disable-next-line @typescript-eslint/no-deprecated
+          <Provider store={StateManager.store}>
+            <SelectionStorageContextProvider
             selectionStorage={viewerProps.selectionStorage}
           >
             <SelectionScopesContextProvider selectionScopes={selectionScopes}>
-              <IModelViewer
-                frontstages={finalFrontstages}
-                backstageItems={backstageItems}
-              />
+            <IModelViewer
+              frontstages={finalFrontstages}
+              // theme={theme}
+            />
             </SelectionScopesContextProvider>
           </SelectionStorageContextProvider>
-        </Provider>
-      ) : (
-        <div className="itwin-viewer-loading-container">
-          {loadingComponent ?? (
-            <SvgIModelLoader
-              data-testid="loader-wrapper"
-              className="itwin-viewer-loading-icon"
-            />
-          )}
-        </div>
-      )}
-    </div>
-  );
+          </Provider>
+        ) : (
+          <div className="itwin-viewer-loading-container">
+            {loadingComponent ?? (
+              <SvgIModelLoader
+                data-testid="loader-wrapper"
+                className="itwin-viewer-loading-icon"
+              />
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
 });
 
 function useConnection(viewerProps: ModelLoaderProps) {
