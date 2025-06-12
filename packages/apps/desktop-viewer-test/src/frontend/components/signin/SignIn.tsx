@@ -3,6 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { BeEvent } from "@itwin/core-bentley";
 import "./SignIn.scss";
 
 import { IModelApp } from "@itwin/core-frontend";
@@ -10,13 +11,22 @@ import { ElectronRendererAuthorization } from "@itwin/electron-authorization/Ren
 import { SvgUser } from "@itwin/itwinui-icons-react";
 import { Button } from "@itwin/itwinui-react";
 import React, { useState } from "react";
+import { AuthorizationClient } from "@itwin/core-common";
 export const SignIn = () => {
   const [signingIn, setSigningIn] = useState(false);
+
+  const isElectronRendererAuth = (client: any): client is ElectronRendererAuthorization => {
+    return client?.onAccessTokenChanged instanceof BeEvent &&
+      typeof client?.signIn === "function" &&
+      typeof client?.signOut === "function" &&
+      typeof client?.signInSilent === "function" &&
+      typeof client?.getAccessToken === "function";
+  };
 
   const onSignInClick = async () => {
     setSigningIn(true);
     if (
-      IModelApp.authorizationClient instanceof ElectronRendererAuthorization
+      isElectronRendererAuth(IModelApp.authorizationClient)
     ) {
       await IModelApp.authorizationClient?.signIn();
     }
