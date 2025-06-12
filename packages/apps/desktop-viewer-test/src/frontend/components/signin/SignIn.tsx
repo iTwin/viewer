@@ -11,7 +11,7 @@ import { ElectronRendererAuthorization } from "@itwin/electron-authorization/Ren
 import { SvgUser } from "@itwin/itwinui-icons-react";
 import { Button } from "@itwin/itwinui-react";
 import React, { useState } from "react";
-import { AuthorizationClient } from "@itwin/core-common";
+
 export const SignIn = () => {
   const [signingIn, setSigningIn] = useState(false);
 
