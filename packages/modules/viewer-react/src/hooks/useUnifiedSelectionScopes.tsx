@@ -31,7 +31,7 @@ export function useUnifiedSelectionScopes({
     }
 
     let isDisposed = false;
-    if (iModelConnection && iModelConnection.isOpen) {
+    if (iModelConnection?.isOpen) {
       void Presentation.selection.scopes  // eslint-disable-line @typescript-eslint/no-deprecated
         .getSelectionScopes(iModelConnection)
         .then((presentationFrontendScopes) => {
