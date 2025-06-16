@@ -1,7 +1,8 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import { StateManager } from "@itwin/appui-react";
 import { IModelApp } from "@itwin/core-frontend";
@@ -53,8 +54,8 @@ jest.mock("@itwin/presentation-frontend", () => {
         .Presentation,
       initialize: jest.fn().mockImplementation(() => Promise.resolve()),
       selection: {
-        selectionChange : {
-          addListener: jest.fn()
+        selectionChange: {
+          addListener: jest.fn(),
         },
         scopes: {},
       },
@@ -117,9 +118,11 @@ describe("BaseInitializer", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.resetModules();
+    /* eslint-disable @typescript-eslint/no-deprecated */
     if (UiCore.initialized) {
       UiCore.terminate();
     }
+    /* eslint-disable @typescript-eslint/no-deprecated */
     // reset the getter function to true so that it can be overridden to false if needed
     Object.defineProperty(IModelApp, "initialized", {
       get: () => {

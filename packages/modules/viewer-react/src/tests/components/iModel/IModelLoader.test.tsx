@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import "@testing-library/jest-dom/extend-expect";
 
@@ -9,6 +9,7 @@ import { ColorTheme, UiFramework, UiItemsManager } from "@itwin/appui-react";
 import { Cartographic, ColorDef } from "@itwin/core-common";
 import { BlankConnection } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
+import * as unifiedSelection from "@itwin/unified-selection";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
@@ -21,8 +22,6 @@ import type {
   ViewerFrontstage,
 } from "../../../types";
 import { TestUiProvider, TestUiProvider2 } from "../../mocks/MockUiProviders";
-import * as unifiedSelection from "@itwin/unified-selection";
-import { SchemaContext } from "@itwin/ecschema-metadata";
 
 jest.mock("react-redux", () => ({
   ...jest.requireActual<any>("react-redux"),
@@ -289,11 +288,14 @@ describe("IModelLoader", () => {
 
     await waitFor(() => getByTestId("loader-wrapper"));
 
-    expect(UiFramework.setColorTheme).toHaveBeenCalledWith(ColorTheme.Dark);
+    expect(UiFramework.setColorTheme).toHaveBeenCalledWith(ColorTheme.Dark); // eslint-disable-line @typescript-eslint/no-deprecated
   });
 
   it("synchronizes with unified selection storage when storage provided", async () => {
-    const enableUnifiedSelectionSyncWithIModelSpy = jest.spyOn(unifiedSelection, 'enableUnifiedSelectionSyncWithIModel');
+    const enableUnifiedSelectionSyncWithIModelSpy = jest.spyOn(
+      unifiedSelection,
+      "enableUnifiedSelectionSyncWithIModel"
+    );
     enableUnifiedSelectionSyncWithIModelSpy.mockReturnValue(jest.fn());
     const connection = {
       isBlankConnection: () => false,
@@ -305,7 +307,11 @@ describe("IModelLoader", () => {
       .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
     const result = render(
-      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} selectionStorage={unifiedSelection.createStorage()} getSchemaContext={() => new SchemaContext()} />
+      <IModelLoader
+        iTwinId={mockITwinId}
+        iModelId={mockIModelId}
+        selectionStorage={unifiedSelection.createStorage()}
+      />
     );
     await waitFor(() => result.getByTestId("viewer"));
 
@@ -334,7 +340,10 @@ describe("IModelLoader", () => {
   });
 
   it("closes connection on unmount", async () => {
-    const enableUnifiedSelectionSyncWithIModelSpy = jest.spyOn(unifiedSelection, 'enableUnifiedSelectionSyncWithIModel');
+    const enableUnifiedSelectionSyncWithIModelSpy = jest.spyOn(
+      unifiedSelection,
+      "enableUnifiedSelectionSyncWithIModel"
+    );
     enableUnifiedSelectionSyncWithIModelSpy.mockReturnValue(jest.fn());
     const connection = {
       isBlankConnection: () => false,
@@ -349,7 +358,7 @@ describe("IModelLoader", () => {
     );
     await waitFor(() => result.getByTestId("viewer"));
 
-    expect(enableUnifiedSelectionSyncWithIModelSpy).not.toHaveBeenCalled()
+    expect(enableUnifiedSelectionSyncWithIModelSpy).not.toHaveBeenCalled();
     result.unmount();
 
     await waitFor(() => {

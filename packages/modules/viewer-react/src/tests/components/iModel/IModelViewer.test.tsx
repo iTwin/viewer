@@ -13,7 +13,7 @@ import React from "react";
 
 import { IModelViewer } from "../../../components/iModel/IModelViewer";
 import type { ViewerFrontstage } from "../../../types";
-
+/* eslint-disable @typescript-eslint/no-deprecated */
 class Frontstage1Provider extends FrontstageProvider {
   frontstageConfig(): FrontstageConfig {
     const content = new ContentGroup({
@@ -47,7 +47,7 @@ class Frontstage2Provider extends FrontstageProvider {
   }
   public id = "Frontstage2";
 }
-
+/* eslint-disable @typescript-eslint/no-deprecated */
 jest.mock("@itwin/appui-react", () => {
   return {
     UiFramework: {

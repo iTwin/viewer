@@ -29,7 +29,7 @@ export class ErrorBoundary extends Component<
     };
   }
 
-  override render(): JSX.Element {
+  override render() {
     if (this.state.fallback) {
       return (
         <NonIdealState svg={<SvgError />} heading={this.state.error.message} />

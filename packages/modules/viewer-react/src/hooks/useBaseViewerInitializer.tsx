@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { useEffect, useMemo, useState } from "react";
+
 import { BaseInitializer } from "../services/BaseInitializer";
 import { isUnifiedSelectionProps, ViewerCommonProps, ViewerInitializerParams } from "../types";
 import { getInitializationOptions, isEqual } from "../utilities";
@@ -47,7 +48,9 @@ export const useBaseViewerInitializer = (
   return baseViewerInitialized;
 };
 
-function overridePresentationProps(inputProps: ViewerCommonProps | undefined): ViewerInitializerParams | undefined {
+function overridePresentationProps(
+  inputProps: ViewerCommonProps | undefined
+): ViewerInitializerParams | undefined {
   return inputProps
     ? {
         ...inputProps,
@@ -56,7 +59,7 @@ function overridePresentationProps(inputProps: ViewerCommonProps | undefined): V
           ...(isUnifiedSelectionProps(inputProps)
             ? {
                 selection: {
-                  ...inputProps.presentationProps?.selection,
+                  ...inputProps.presentationProps?.selection, // eslint-disable-line @typescript-eslint/no-deprecated
                   selectionStorage: inputProps.selectionStorage,
                 },
               }

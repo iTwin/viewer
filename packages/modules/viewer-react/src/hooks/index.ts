@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-export * from "./useTheme";
 export * from "./useUiProviders";
 export * from "./useIsMounted";
 export * from "./useBaseViewerInitializer";

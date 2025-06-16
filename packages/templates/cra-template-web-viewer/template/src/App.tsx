@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import "./App.scss";
 
@@ -18,8 +18,8 @@ import {
 import {
   AncestorsNavigationControls,
   CopyPropertyTextContextMenuItem,
+  createPropertyGrid,
   PropertyGridManager,
-  PropertyGridUiItemsProvider,
   ShowHideNullValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
 import {
@@ -40,7 +40,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Auth } from "./Auth";
 import { history } from "./history";
-import { getSchemaContext, unifiedSelectionStorage } from "./selectionStorage";
+import { unifiedSelectionStorage } from "./selectionStorage";
 
 const App: React.FC = () => {
   const [iModelId, setIModelId] = useState(process.env.IMJS_IMODEL_ID);
@@ -186,7 +186,7 @@ const App: React.FC = () => {
                     getLabel: () => ModelsTreeComponent.getLabel(),
                     render: (props) => (
                       <ModelsTreeComponent
-                        getSchemaContext={getSchemaContext}
+                        getSchemaContext={(iModel) => iModel.schemaContext}
                         density={props.density}
                         selectionStorage={unifiedSelectionStorage}
                         selectionMode={"extended"}
@@ -200,7 +200,7 @@ const App: React.FC = () => {
                     getLabel: () => CategoriesTreeComponent.getLabel(),
                     render: (props) => (
                       <CategoriesTreeComponent
-                        getSchemaContext={getSchemaContext}
+                        getSchemaContext={(iModel) => iModel.schemaContext}
                         density={props.density}
                         selectionStorage={unifiedSelectionStorage}
                         onPerformanceMeasured={props.onPerformanceMeasured}
@@ -212,8 +212,10 @@ const App: React.FC = () => {
               }),
             ],
           },
-          new PropertyGridUiItemsProvider({
-            propertyGridProps: {
+          {
+            id: "PropertyGridUIProvider",
+            getWidgets: () => [
+              createPropertyGrid({
               autoExpandChildCategories: true,
               ancestorsNavigationControls: (props) => (
                 <AncestorsNavigationControls {...props} />
@@ -229,12 +231,12 @@ const App: React.FC = () => {
                   />
                 ),
               ],
-            },
-          }),
+            })
+            ],
+          },
           new MeasureToolsUiItemsProvider(),
         ]}
         selectionStorage={unifiedSelectionStorage}
-        getSchemaContext={getSchemaContext}
       />
     </div>
   );
