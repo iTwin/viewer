@@ -4,8 +4,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "resolvePackageJsonExports": true
+    "moduleResolution": "NodeNext"
   },
   "include": [
     "./src/**/*.ts"
