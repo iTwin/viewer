@@ -6,8 +6,8 @@
 import type { AccessToken } from "@itwin/core-bentley";
 import { useEffect, useState } from "react";
 
-import { ViewerAuthorization } from "../services/auth";
-import { useIsMounted } from "./useIsMounted";
+import { ViewerAuthorization } from "../services/auth/index.js";
+import { useIsMounted } from "./useIsMounted.js";
 
 export const useAccessToken = () => {
   const [accessToken, setAccessToken] = useState<AccessToken>("");

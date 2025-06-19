@@ -5,8 +5,8 @@
 
 import { StageUsage, UiItemsManager } from "@itwin/appui-react";
 
-import { ViewerStatusbarItemsProvider } from "../../../../components/app-ui/providers";
-import type { ViewerDefaultStatusbarItems } from "../../../../types";
+import { ViewerStatusbarItemsProvider } from "../../../../components/app-ui/providers/index.js";
+import type { ViewerDefaultStatusbarItems } from "../../../../types.js";
 
 const testArray: { items: ViewerDefaultStatusbarItems; amount: number }[] = [
   {

@@ -7,7 +7,7 @@ import { Guid } from "@itwin/core-bentley";
 import type { BriefcaseConnection } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 
-import { ModelStatus } from "../types";
+import { ModelStatus } from "../types.js";
 
 export const getBriefcaseStatus = async ({
   iTwinId,

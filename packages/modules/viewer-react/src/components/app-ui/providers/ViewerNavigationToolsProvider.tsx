@@ -4,11 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { DefaultNavigationTools, ToolbarItem } from "@itwin/appui-react";
-import { ToolbarOrientation, ToolbarUsage } from "@itwin/appui-react";
-import { CoreTools } from "@itwin/appui-react";
-import { ToolbarHelper, ToolItemDef } from "@itwin/appui-react";
 import { StandardNavigationToolsUiItemsProvider } from "@itwin/appui-react";
-import { IModelApp } from "@itwin/core-frontend";
 
 export class ViewerNavigationToolsProvider extends StandardNavigationToolsUiItemsProvider {
   constructor(private defaultItems?: DefaultNavigationTools) {

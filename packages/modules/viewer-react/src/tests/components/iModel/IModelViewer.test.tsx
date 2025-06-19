@@ -11,8 +11,8 @@ import { UiFramework } from "@itwin/appui-react";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
-import { IModelViewer } from "../../../components/iModel/IModelViewer";
-import type { ViewerFrontstage } from "../../../types";
+import { IModelViewer } from "../../../components/iModel/IModelViewer.js";
+import type { ViewerFrontstage } from "../../../types.js";
 /* eslint-disable @typescript-eslint/no-deprecated */
 class Frontstage1Provider extends FrontstageProvider {
   frontstageConfig(): FrontstageConfig {

@@ -11,8 +11,8 @@ import {
 } from "@itwin/viewer-react";
 import { useEffect, useMemo, useState } from "react";
 
-import { DesktopInitializer } from "../services/Initializer";
-import type { DesktopInitializerParams } from "../types";
+import { DesktopInitializer } from "../services/Initializer.js";
+import type { DesktopInitializerParams } from "../types.js";
 
 export const useDesktopViewerInitializer = (
   options: DesktopInitializerParams

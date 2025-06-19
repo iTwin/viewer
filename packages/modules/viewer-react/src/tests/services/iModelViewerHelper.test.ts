@@ -8,12 +8,12 @@ import type { BlankConnectionProps } from "@itwin/core-frontend";
 import { BlankConnection } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
 
-import * as iModelService from "../../services/iModel/IModelService";
+import iModelService from "../../services/iModel/IModelService.js";
 import {
   createBlankConnection,
   gatherRequiredViewerProps,
   openConnection,
-} from "../../services/iModel/iModelViewerHelper";
+} from "../../services/iModel/iModelViewerHelper.js";
 
 jest.mock("@itwin/core-frontend", () => {
   return {

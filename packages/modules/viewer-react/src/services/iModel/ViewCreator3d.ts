@@ -17,8 +17,8 @@ import {
   ViewCreator3d as ViewCreator,
 } from "@itwin/core-frontend";
 
-import type { ViewerViewCreator3dOptions } from "../../types";
-import { ViewerPerformance } from "../telemetry";
+import type { ViewerViewCreator3dOptions } from "../../types.js";
+import { ViewerPerformance } from "../telemetry/index.js";
 
 /**
  * API for creating a 3D default [[ViewState3d]] for an iModel. @see [[ViewCreator2d]] to create a view for a 2d model.

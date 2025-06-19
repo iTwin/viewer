@@ -5,7 +5,7 @@
 
 import React, { useEffect, useState } from "react";
 import { BackstageAppButton, StageUsage, StandardFrontstageProvider, UiItemsManager } from "@itwin/appui-react";
-import { DefaultContentGroupProvider } from "../components/app-ui/providers";
+import { DefaultContentGroupProvider } from "../components/app-ui/providers/index.js";
 
 import type {
   BlankConnectionViewState,
@@ -13,7 +13,7 @@ import type {
   ViewerFrontstage,
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
-} from "../types";
+} from "../types.js";
 
 export interface UseFrontstagesProps {
   frontstages?: ViewerFrontstage[];

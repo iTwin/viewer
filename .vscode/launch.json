@@ -17,7 +17,9 @@
       "name": "Attach by Process ID",
       "processId": "${command:PickProcess}",
       "request": "attach",
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
       "type": "node"
     },
     {
@@ -42,8 +44,11 @@
         "--inspect-brk",
         "${workspaceFolder}/packages/modules/viewer-react/node_modules/jest/bin/jest.js",
         "--runInBand",
-        "--watch"
+        "src/tests/components/BaseViewer.test.tsx"
       ],
+      "env": {
+        "NODE_OPTIONS": "--experimental-vm-modules"
+      },
       "cwd": "${workspaceFolder}/packages/modules/viewer-react",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
@@ -62,7 +67,7 @@
       ],
       "env": {
         "NODE_ENV": "development",
-      },      
+      },
       "presentation": {
         "group": "desktop-starter"
       },

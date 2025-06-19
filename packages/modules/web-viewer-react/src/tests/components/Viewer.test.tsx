@@ -9,10 +9,10 @@ import type { ViewerInitializerParams } from "@itwin/viewer-react";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
-import { Viewer } from "../../components/Viewer";
-import { WebInitializer } from "../../services/Initializer";
-import type { BackendConfiguration } from "../../types";
-import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
+import { Viewer } from "../../components/Viewer.js";
+import { WebInitializer } from "../../services/Initializer.js";
+import type { BackendConfiguration } from "../../types.js";
+import MockAuthorizationClient from "../mocks/MockAuthorizationClient.js";
 
 jest.mock("@itwin/viewer-react", () => {
   return {

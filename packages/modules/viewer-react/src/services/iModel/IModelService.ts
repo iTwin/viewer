@@ -14,12 +14,12 @@ import {
   SnapshotConnection,
 } from "@itwin/core-frontend";
 
-import { createBlankViewState, ViewCreator3d } from "../../services/iModel";
+import { createBlankViewState, ViewCreator3d } from "../../services/iModel/index.js";
 import type {
   BlankConnectionViewState,
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
-} from "../../types";
+} from "../../types.js";
 
 /** determine the proper version of the iModel to open
  * 1. If named versions exist, get the named version that contains the latest changeset

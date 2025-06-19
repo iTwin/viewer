@@ -2,9 +2,14 @@
   "name": "@itwin/viewer-react",
   "version": "5.0.0-dev.7",
   "description": "Configurable iTwin.js viewer",
-  "main": "lib/cjs/index.js",
+  "type": "module",
   "module": "lib/esm/index.js",
-  "types": "lib/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/esm/index.js",
+      "types": "./lib/esm/index.d.ts"
+    }
+  },
   "author": {
     "name": "Bentley Systems, Inc.",
     "url": "http://www.bentley.com"
@@ -15,15 +20,12 @@
     "start": "concurrently npm:watch-build npm:watch-scss",
     "watch-build": "concurrently \"npm:build:cjs -- -w\" \"npm:build:esm -- -w\"",
     "watch-scss": "nodemon -e scss --watch src --exec \"npm run dev-build-scss\"",
-    "build": "npm run dual-build && npm run build-scss && npm run copy-public",
-    "dual-build": "npm run -s build:cjs && npm run -s build:esm",
-    "build:cjs": "tsc 1>&2 --outDir lib/cjs",
-    "build:esm": "tsc 1>&2 --module ES2020 --outDir lib/esm",
-    "build-scss": "concurrently npm:dev-build-scss npm:prod-build-scss",
-    "dev-build-scss": "copyfiles -u1 \"./src/**/*.scss\" ./lib/cjs",
+    "build": "npm run build:esm && npm run build-scss && npm run copy-public",
+    "build:esm": "tsc 1>&2 --outDir lib/esm",
+    "build-scss": "npm run prod-build-scss",
     "prod-build-scss": "copyfiles -u1 \"./src/**/*.scss\" ./lib/esm",
     "copy-public": "copyfiles -u1 \"./public/**/*\" ./lib/public",
-    "test": "jest",
+    "test": "cross-env NODE_OPTIONS=\"--experimental-vm-modules --inspect-brk \" --loader=ts-node/esm jest",
     "test-watch": "jest --watch",
     "clean": "rimraf lib",
     "rebuild": "npm run clean && npm run build",
@@ -65,6 +67,7 @@
     "@itwin/presentation-frontend": "^5.0.0",
     "@itwin/webgl-compatibility": "^5.0.0",
     "@itwin/unified-selection-react": "^1.0.0",
+    "@jest/globals": "^29.1.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^7.1.2",
@@ -74,8 +77,8 @@
     "@types/react": "^18.2.9",
     "@types/react-dom": "^18.2.4",
     "@types/react-redux": "^7.1.9",
-    "concurrently": "^5.2.0",
     "copyfiles": "^2.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^9.13.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.1.0",
@@ -114,15 +117,19 @@
       "<rootDir>/src"
     ],
     "transform": {
-      "^.+\\.(ts|tsx)$": "ts-jest"
+      "^.+\\.(ts|tsx|js)$": ["ts-jest", {
+        "useESM": true,
+        "isolatedModules": true
+      }]
     },
     "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\](?!@bentley/ui).+\\.(js|jsx|ts|tsx)$",
+      "[/\\\\]node_modules[/\\\\](?!.*(@bentley/ui|rxjs)).+\\.(js|jsx|ts|tsx)$",
       "^.+\\.module\\.(css|sass|scss)$"
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|svg?.+)$": "<rootDir>/src/tests/mocks/fileMock.ts",
-      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+      "^(\\.{1,2}/.*)\\.js$": "$1"
     },
     "verbose": true,
     "coveragePathIgnorePatterns": [
@@ -133,7 +140,8 @@
     "collectCoverageFrom": [
       "<rootDir>/src/**"
     ],
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "extensionsToTreatAsEsm": [ ".ts", ".tsx" ]
   },
   "keywords": [
     "Bentley",

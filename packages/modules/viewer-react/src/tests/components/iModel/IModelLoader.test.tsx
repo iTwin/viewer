@@ -13,15 +13,15 @@ import * as unifiedSelection from "@itwin/unified-selection";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
 
-import { IModelViewer } from "../../../components/iModel";
-import IModelLoader from "../../../components/iModel/IModelLoader";
-import * as IModelServices from "../../../services/iModel/IModelService";
+import { IModelViewer } from "../../../components/iModel/index.js";
+import IModelLoader from "../../../components/iModel/IModelLoader.js";
+import * as IModelServices from "../../../services/iModel/IModelService.js";
 import type {
   BlankConnectionViewState,
   BlankViewerProps,
   ViewerFrontstage,
-} from "../../../types";
-import { TestUiProvider, TestUiProvider2 } from "../../mocks/MockUiProviders";
+} from "../../../types.js";
+import { TestUiProvider, TestUiProvider2 } from "../../mocks/MockUiProviders.js";
 
 jest.mock("react-redux", () => ({
   ...jest.requireActual<any>("react-redux"),

@@ -10,10 +10,10 @@ import {
 } from "@itwin/appui-react";
 import type { IModelConnection } from "@itwin/core-frontend";
 
-import { DefaultContentGroupProvider } from "../../../../components/app-ui/providers";
-import { ViewCreator3d } from "../../../../services/iModel";
-import { createBlankViewState } from "../../../../services/iModel";
-import type { ViewerViewportControlOptions } from "../../../../types";
+import { DefaultContentGroupProvider } from "../../../../components/app-ui/providers/index.js";
+import { ViewCreator3d } from "../../../../services/iModel/index.js";
+import { createBlankViewState } from "../../../../services/iModel/index.js";
+import type { ViewerViewportControlOptions } from "../../../../types.js";
 
 jest.mock("@itwin/core-frontend", () => {
   return {

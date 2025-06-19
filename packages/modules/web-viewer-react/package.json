@@ -2,9 +2,15 @@
   "name": "@itwin/web-viewer-react",
   "version": "5.0.0-dev.7",
   "description": "Configurable iTwin.js viewer for web applications",
-  "main": "lib/cjs/index.js",
+  "type": "module",
   "module": "lib/esm/index.js",
-  "types": "lib/cjs/index.d.ts",
+  "types": "lib/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/esm/index.js",
+      "types": "./lib/esm/index.d.ts"
+    }
+  },
   "author": {
     "name": "Bentley Systems, Inc.",
     "url": "http://www.bentley.com"
@@ -12,10 +18,9 @@
   "license": "MIT",
   "repository": "https://github.com/itwin/viewer/tree/main/packages/modules/web-viewer-react",
   "scripts": {
-    "start": "concurrently \"npm:build:cjs -- -w\" \"npm:build:esm -- -w\"",
-    "build": "npm run -s build:cjs && npm run -s build:esm",
-    "build:cjs": "tsc 1>&2 --outDir lib/cjs",
-    "build:esm": "tsc 1>&2 --module ES2020 --outDir lib/esm",
+    "start": "npm:build:esm -- -w",
+    "build": "npm run -s build:esm",
+    "build:esm": "tsc 1>&2 --outDir lib/esm",
     "test": "jest",
     "test-watch": "jest --watch",
     "clean": "rimraf lib",

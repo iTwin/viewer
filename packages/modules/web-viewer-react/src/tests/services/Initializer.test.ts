@@ -9,13 +9,13 @@ import { IModelApp } from "@itwin/core-frontend";
 import { UiCore } from "@itwin/core-react";
 import type { ViewerInitializerParams } from "@itwin/viewer-react";
 
-import { WebInitializer } from "../../services/Initializer";
-import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
+import { WebInitializer } from "../../services/Initializer.js";
+import MockAuthorizationClient from "../mocks/MockAuthorizationClient.js";
 import {
   defaultRpcInterfaces,
   TestRpcInterface,
   TestRpcInterface2,
-} from "../test-helpers/rpc";
+} from "../test-helpers/rpc.js";
 
 jest.mock("@itwin/core-frontend", () => {
   const noMock = jest.requireActual("@itwin/core-frontend");
