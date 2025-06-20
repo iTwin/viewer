@@ -3,8 +3,6 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
-import "@testing-library/jest-dom/extend-expect";
-
 import { ColorTheme, UiFramework, UiItemsManager } from "@itwin/appui-react";
 import { Cartographic, ColorDef } from "@itwin/core-common";
 import { BlankConnection } from "@itwin/core-frontend";
@@ -22,74 +20,88 @@ import type {
   ViewerFrontstage,
 } from "../../../types.js";
 import { TestUiProvider, TestUiProvider2 } from "../../mocks/MockUiProviders.js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-jest.mock("react-redux", () => ({
-  ...jest.requireActual<any>("react-redux"),
-  Provider: jest.fn().mockImplementation(({ children }: any) => children),
-}));
+vi.mock("react-redux", async () => {
+  const original = await vi.importActual<typeof import("react-redux")>("react-redux");
 
-jest.mock("@itwin/appui-react", () => {
   return {
-    ...jest.createMockFromModule<any>("@itwin/appui-react"),
+    ...original,
+    Provider: vi.fn().mockImplementation(({ children }: any) => children),
+  }
+});
+
+vi.mock("@itwin/appui-react", async () => {
+  const original = await vi.importActual<typeof import("@itwin/appui-react")>("@itwin/appui-react");
+
+  return {
+    ...original,
     StateManager: {
-      ...jest.createMockFromModule<any>("@itwin/appui-react").StateManager,
-      store: jest.fn(),
+      ...original.StateManager,
+      store: vi.fn(),
     },
     UiItemsManager: {
-      ...jest.createMockFromModule<any>("@itwin/appui-react").UiItemsManager,
-      getBackstageItems: jest.fn().mockReturnValue([]),
+      ...original.UiItemsManager,
+      getBackstageItems: vi.fn().mockReturnValue([]),
     },
   };
 });
-jest.mock("@itwin/appui-abstract");
-jest.mock("@itwin/presentation-frontend", () => {
+
+vi.mock("@itwin/appui-abstract");
+
+vi.mock("@itwin/presentation-frontend", async () => {
+  const original = await vi.importActual<typeof import("@itwin/presentation-frontend")>("@itwin/presentation-frontend");
+
   return {
-    ...jest.createMockFromModule<any>("@itwin/presentation-frontend"),
+    ...original,
     Presentation: {
-      ...jest.createMockFromModule<any>("@itwin/presentation-frontend")
-        .Presentation,
-      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+      ...original.Presentation,
+      initialize: vi.fn().mockImplementation(() => Promise.resolve()),
+      registerInitializationHandler: vi.fn().mockImplementation(() => Promise.resolve()),
       selection: {
         scopes: {
-          getSelectionScopes: jest.fn(async () => []),
+          getSelectionScopes: vi.fn(async () => []),
         },
       },
     },
   };
 });
-jest.mock("@itwin/core-frontend", () => {
+
+vi.mock("@itwin/core-frontend", async () => {
+  const original = await vi.importActual<typeof import("@itwin/core-frontend")>("@itwin/core-frontend");
+
   return {
     IModelApp: {
-      startup: jest.fn(),
+      startup: vi.fn(),
       telemetry: {
-        addClient: jest.fn(),
+        addClient: vi.fn(),
       },
       localization: {
-        getLocalizedString: jest.fn(),
-        registerNamespace: jest.fn().mockResolvedValue(true),
+        getLocalizedString: vi.fn(),
+        registerNamespace: vi.fn().mockResolvedValue(true),
       },
       uiAdmin: {
-        updateFeatureFlags: jest.fn(),
+        updateFeatureFlags: vi.fn(),
       },
       notifications: {
-        openMessageBox: jest.fn(),
+        openMessageBox: vi.fn(),
       },
       viewManager: {
         onViewOpen: {
-          addOnce: jest.fn(),
+          addOnce: vi.fn(),
         },
       },
     },
     SnapMode: {},
-    ActivityMessageDetails: jest.fn(),
-    PrimitiveTool: jest.fn(),
-    NotificationManager: jest.fn(),
-    Tool: jest.fn(),
+    ActivityMessageDetails: vi.fn(),
+    PrimitiveTool: vi.fn(),
+    NotificationManager: vi.fn(),
+    Tool: vi.fn(),
     RemoteBriefcaseConnection: {
-      open: jest.fn(),
+      open: vi.fn(),
     },
     SnapshotConnection: {
-      openFile: jest.fn(),
+      openFile: vi.fn(),
     },
     MessageBoxType: {
       Ok: 1,
@@ -98,24 +110,24 @@ jest.mock("@itwin/core-frontend", () => {
       Critical: 1,
     },
     BlankConnection: {
-      create: jest.fn().mockReturnValue({
+      create: vi.fn().mockReturnValue({
         isBlankConnection: () => true,
         isOpen: true,
-        close: jest.fn(),
+        close: vi.fn(),
       } as any),
     },
     ItemField: {},
     CompassMode: {},
     RotationMode: {},
-    AccuDraw: class {},
-    AccuSnap: class {},
-    ToolAdmin: class {},
+    AccuDraw: class { },
+    AccuSnap: class { },
+    ToolAdmin: class { },
     WebViewerApp: {
-      startup: jest.fn().mockResolvedValue(true),
+      startup: vi.fn().mockResolvedValue(true),
     },
-    ViewCreator3d: jest.fn().mockImplementation(() => {
+    ViewCreator3d: vi.fn().mockImplementation(() => {
       return {
-        createDefaultView: jest.fn().mockResolvedValue({}),
+        createDefaultView: vi.fn().mockResolvedValue({}),
       };
     }),
     SpatialViewState: {
@@ -129,11 +141,12 @@ jest.mock("@itwin/core-frontend", () => {
     },
   };
 });
-jest.mock("../../../services/iModel/IModelService");
 
-jest.mock("../../../components/iModel/IModelViewer", () => ({
+vi.mock("../../../services/iModel/IModelService");
+
+vi.mock("../../../components/iModel/IModelViewer", () => ({
   __esModule: true,
-  IModelViewer: jest.fn(() => <div data-testid="viewer"></div>),
+  IModelViewer: vi.fn(() => <div data-testid="viewer"></div>),
 }));
 
 const mockITwinId = "mockITwinId";
@@ -141,28 +154,28 @@ const mockIModelId = "mockIModelId";
 
 describe("IModelLoader", () => {
   beforeEach(() => {
-    jest.spyOn(IModelServices, "openRemoteIModel").mockResolvedValue({
+    vi.spyOn(IModelServices, "openRemoteIModel").mockResolvedValue({
       isBlankConnection: () => false,
       iModelId: mockIModelId,
-      close: jest.fn(),
+      close: vi.fn(),
       isOpen: true,
     } as any);
 
-    jest.spyOn(IModelServices, "openLocalIModel").mockResolvedValue({
+    vi.spyOn(IModelServices, "openLocalIModel").mockResolvedValue({
       isBlankConnection: () => false,
       iModelId: mockIModelId,
-      close: jest.fn(),
+      close: vi.fn(),
       isOpen: true,
     } as any);
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("registers and unregisters ui providers", async () => {
-    jest.spyOn(UiItemsManager, "register");
-    jest.spyOn(UiItemsManager, "unregister");
+    vi.spyOn(UiItemsManager, "register");
+    vi.spyOn(UiItemsManager, "unregister");
 
     const result = render(
       <IModelLoader
@@ -282,7 +295,7 @@ describe("IModelLoader", () => {
       <IModelLoader
         iTwinId={mockITwinId}
         iModelId={mockIModelId}
-        theme={ColorTheme.Dark}
+        // theme={ColorTheme.Dark}
       />
     );
 
@@ -292,18 +305,18 @@ describe("IModelLoader", () => {
   });
 
   it("synchronizes with unified selection storage when storage provided", async () => {
-    const enableUnifiedSelectionSyncWithIModelSpy = jest.spyOn(
+    const enableUnifiedSelectionSyncWithIModelSpy = vi.spyOn(
       unifiedSelection,
       "enableUnifiedSelectionSyncWithIModel"
     );
-    enableUnifiedSelectionSyncWithIModelSpy.mockReturnValue(jest.fn());
+    enableUnifiedSelectionSyncWithIModelSpy.mockReturnValue(vi.fn());
     const connection = {
       isBlankConnection: () => false,
       iModelId: mockIModelId,
-      close: jest.fn(),
-      getRpcProps: jest.fn(),
+      close: vi.fn(),
+      getRpcProps: vi.fn(),
     };
-    jest
+    vi
       .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
     const result = render(
@@ -340,17 +353,17 @@ describe("IModelLoader", () => {
   });
 
   it("closes connection on unmount", async () => {
-    const enableUnifiedSelectionSyncWithIModelSpy = jest.spyOn(
+    const enableUnifiedSelectionSyncWithIModelSpy = vi.spyOn(
       unifiedSelection,
       "enableUnifiedSelectionSyncWithIModel"
     );
-    enableUnifiedSelectionSyncWithIModelSpy.mockReturnValue(jest.fn());
+    enableUnifiedSelectionSyncWithIModelSpy.mockReturnValue(vi.fn());
     const connection = {
       isBlankConnection: () => false,
       iModelId: mockIModelId,
-      close: jest.fn(),
+      close: vi.fn(),
     };
-    jest
+    vi
       .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
     const result = render(
@@ -370,9 +383,9 @@ describe("IModelLoader", () => {
     const connection = {
       isBlankConnection: () => false,
       iModelId: mockIModelId,
-      close: jest.fn(),
+      close: vi.fn(),
     };
-    jest
+    vi
       .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
     const result = render(
@@ -396,9 +409,9 @@ describe("IModelLoader", () => {
     const connection = {
       isBlankConnection: () => false,
       iModelId: mockIModelId,
-      close: jest.fn(),
+      close: vi.fn(),
     };
-    jest
+    vi
       .spyOn(IModelServices, "openRemoteIModel")
       .mockResolvedValue(connection as any);
     const result = render(
@@ -418,7 +431,7 @@ describe("IModelLoader", () => {
   });
 
   it("renders a custom loading component", async () => {
-    jest.spyOn(IModelServices, "openRemoteIModel").mockImplementation(
+    vi.spyOn(IModelServices, "openRemoteIModel").mockImplementation(
       () =>
         new Promise((resolve) =>
           setTimeout(
@@ -426,7 +439,7 @@ describe("IModelLoader", () => {
               resolve({
                 isBlankConnection: () => false,
                 iModelId: mockIModelId,
-                close: jest.fn(),
+                close: vi.fn(),
                 isOpen: true,
               } as any),
             500
