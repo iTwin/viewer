@@ -10,8 +10,8 @@ import { UiCore } from '@itwin/core-react';
 import { BaseViewer } from "../..";
 import * as IModelService from "../../services/iModel/IModelService";
 
-vi.mock("@itwin/presentation-frontend", async () => {
-  const original = await vi.importActual<typeof import("@itwin/presentation-frontend")>("@itwin/presentation-frontend");
+vi.mock("@itwin/presentation-frontend", async (importActual) => {
+  const original = await importActual<typeof import("@itwin/presentation-frontend")>();
 
   return {
     ...original,
@@ -28,8 +28,8 @@ vi.mock("@itwin/presentation-frontend", async () => {
   };
 });
 
-vi.mock("@itwin/core-frontend", async () => {
-  const original = await vi.importActual<typeof import("@itwin/core-frontend")>("@itwin/core-frontend");
+vi.mock("@itwin/core-frontend", async (importActual) => {
+  const original = await importActual<typeof import("@itwin/core-frontend")>();
 
   return {
     ...original,
@@ -84,8 +84,8 @@ vi.mock("@itwin/core-frontend", async () => {
 });
 
 vi.mock("../../services/iModel/IModelService");
-vi.mock("@itwin/appui-react", async () => {
-  const original = await vi.importActual<typeof import("@itwin/appui-react")>("@itwin/appui-react");
+vi.mock("@itwin/appui-react", async (importActual) => {
+  const original = await importActual<typeof import("@itwin/appui-react")>();
 
   return {
     ...original,

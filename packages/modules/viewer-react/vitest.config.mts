@@ -9,10 +9,14 @@ export default defineConfig({
     setupFiles: "./src/tests/vitest.setup.ts",
     globals: true,
     include: ["src/tests/**/*.test.{ts,tsx}"],
-    deps: {
-      inline: ["@itwin/appui-react", "@itwin/imodel-components-react", "@itwin/components-react", "@itwin/core-react",
-        "@itwin/presentation-components"
-      ]
+    server: {
+      deps: {
+        inline: ["@itwin/appui-react", "@itwin/imodel-components-react", "@itwin/components-react", "@itwin/core-react",
+          "@itwin/presentation-components"
+        ]
+      }
     },
+    minWorkers: 1,
+    maxWorkers: 3
   },
 });

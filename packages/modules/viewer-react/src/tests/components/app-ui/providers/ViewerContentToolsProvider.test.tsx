@@ -3,6 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
+import { describe, expect, it } from "vitest";
 import { ViewerContentToolsProvider } from "../../../../components/app-ui/providers/index.js";
 
 describe("ViewerContentToolsProvider", () => {

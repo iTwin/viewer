@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { StageUsage, UiItemsManager } from "@itwin/appui-react";
+import { describe, expect, it } from "vitest";
 
 import { ViewerStatusbarItemsProvider } from "../../../../components/app-ui/providers/index.js";
 import type { ViewerDefaultStatusbarItems } from "../../../../types.js";

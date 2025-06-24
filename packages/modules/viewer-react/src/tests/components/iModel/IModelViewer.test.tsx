@@ -10,6 +10,7 @@ import { FrontstageProvider } from "@itwin/appui-react";
 import { UiFramework } from "@itwin/appui-react";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
+import { describe, expect, it, vi } from "vitest";
 
 import { IModelViewer } from "../../../components/iModel/IModelViewer.js";
 import type { ViewerFrontstage } from "../../../types.js";
@@ -48,27 +49,28 @@ class Frontstage2Provider extends FrontstageProvider {
   public id = "Frontstage2";
 }
 /* eslint-disable @typescript-eslint/no-deprecated */
-jest.mock("@itwin/appui-react", () => {
+vi.mock("@itwin/appui-react", () => {
   return {
     UiFramework: {
       frontstages: {
-        addFrontstageProvider: jest.fn(),
-        getFrontstageDef: jest
+        addFrontstageProvider: vi.fn(),
+        getFrontstageDef: vi
           .fn()
-          .mockResolvedValue({ id: "Frontstage2", frontstage: jest.fn() }),
-        setActiveFrontstageDef: jest.fn().mockResolvedValue(true),
-        clearFrontstageDefs: jest.fn(),
-        clearFrontstageProviders: jest.fn(),
+          .mockResolvedValue({ id: "Frontstage2", frontstage: vi.fn() }),
+        setActiveFrontstageDef: vi.fn().mockResolvedValue(true),
+        clearFrontstageDefs: vi.fn(),
+        clearFrontstageProviders: vi.fn(),
       },
     },
 
-    FrontstageProvider: jest.fn(),
-    ThemeManager: jest.fn(() => <div></div>),
-    FrameworkVersion: jest.fn(() => <div></div>),
-    ConfigurableUiContent: jest.fn(() => <div></div>),
+    FrontstageProvider: vi.fn(),
+    ThemeManager: vi.fn(() => <div></div>),
+    FrameworkVersion: vi.fn(() => <div></div>),
+    ConfigurableUiContent: vi.fn(() => <div></div>),
+    BackstageComposer: vi.fn(() => <div></div>)
   };
 });
-jest.mock("@itwin/appui-abstract");
+vi.mock("@itwin/appui-abstract");
 
 const flushPromises = () => new Promise((res) => setTimeout(res, 0));
 
@@ -86,7 +88,9 @@ describe("IModelViewer", () => {
       },
     ];
 
-    render(<IModelViewer frontstages={frontstages} backstageItems={[]} />);
+    await React.act(async () => {
+      render(<IModelViewer frontstages={frontstages} />);
+    });
 
     expect(UiFramework.frontstages.addFrontstageProvider).toHaveBeenCalledTimes(
       2

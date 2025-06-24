@@ -44,7 +44,7 @@
         "--inspect-brk",
         "${workspaceFolder}/packages/modules/viewer-react/node_modules/vitest/vitest.mjs",
         "run",
-        "src/tests/components/BaseViewer.test.tsx"
+        "src/tests"
       ],
       "env": {
         "NODE_OPTIONS": "--experimental-vm-modules"
