@@ -21,8 +21,9 @@
     "start": "npm:build:esm -- -w",
     "build": "npm run -s build:esm",
     "build:esm": "tsc 1>&2 --outDir lib/esm",
-    "test": "jest",
-    "test-watch": "jest --watch",
+    "vitest:test": "cross-env NODE_OPTIONS=\"--experimental-vm-modules \" vitest",
+    "test": "npm run vitest:test -- --run",
+    "test-watch": "npm run vitest:test",
     "clean": "rimraf lib",
     "rebuild": "npm run clean && npm run build",
     "lint": "eslint \"src/**/*.ts*\"  1>&2",
@@ -57,24 +58,22 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^26.0.4",
     "@types/node": "^20",
     "@types/react": "^18.2.9",
     "@types/react-dom": "^18.2.4",
     "@types/react-redux": "^7.1.9",
     "concurrently": "^5.2.0",
     "copyfiles": "^2.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^9.13.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^29.1.0",
-    "jest-environment-jsdom": "^29.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "rimraf": "^3.0.2",
-    "ts-jest": "^29.1.0",
-    "typescript": "~5.6.2"
+    "typescript": "~5.6.2",
+    "vitest": "^3.2.4"
   },
   "peerDependencies": {
     "@itwin/core-bentley": "^5.0.0",
@@ -88,32 +87,6 @@
     "react-dom": "^18.0.0",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5"
-  },
-  "jest": {
-    "roots": [
-      "<rootDir>/src"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "ts-jest"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\](?!@bentley/ui).+\\.(js|jsx|ts|tsx)$",
-      "^.+\\.module\\.(css|sass|scss)$"
-    ],
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|svg?.+)$": "<rootDir>/src/tests/mocks/fileMock.ts",
-      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
-    },
-    "verbose": true,
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "test",
-      ".d.ts"
-    ],
-    "collectCoverageFrom": [
-      "<rootDir>/src/**"
-    ],
-    "testEnvironment": "jsdom"
   },
   "keywords": [
     "Bentley",

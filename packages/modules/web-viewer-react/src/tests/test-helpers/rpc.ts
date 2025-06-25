@@ -10,12 +10,14 @@ import {
   RpcInterface,
   RpcManager,
 } from "@itwin/core-common";
+import { ECSchemaRpcInterface } from "@itwin/ecschema-rpcinterface-common";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 
 export const defaultRpcInterfaces = [
   IModelReadRpcInterface,
   IModelTileRpcInterface,
   PresentationRpcInterface,
+  ECSchemaRpcInterface
 ];
 
 export abstract class TestRpcInterface extends RpcInterface {

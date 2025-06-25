@@ -28,10 +28,13 @@
       "request": "launch",
       "runtimeArgs": [
         "--inspect-brk",
-        "${workspaceFolder}/packages/modules/web-viewer-react/node_modules/jest/bin/jest.js",
-        "--runInBand",
-        "--watch"
+        "${workspaceFolder}/packages/modules/viewer-react/node_modules/vitest/vitest.mjs",
+        "--run",
+        "src/tests"
       ],
+      "env": {
+        "NODE_OPTIONS": "--experimental-vm-modules"
+      },
       "cwd": "${workspaceFolder}/packages/modules/web-viewer-react",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
