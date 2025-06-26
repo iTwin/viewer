@@ -3,12 +3,10 @@
   "version": "5.0.0-dev.7",
   "description": "Configurable iTwin.js viewer for web applications",
   "type": "module",
-  "module": "lib/esm/index.js",
-  "types": "lib/esm/index.d.ts",
   "exports": {
     ".": {
-      "import": "./lib/esm/index.js",
-      "types": "./lib/esm/index.d.ts"
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts"
     }
   },
   "author": {
@@ -18,12 +16,10 @@
   "license": "MIT",
   "repository": "https://github.com/itwin/viewer/tree/main/packages/modules/web-viewer-react",
   "scripts": {
-    "start": "npm:build:esm -- -w",
-    "build": "npm run -s build:esm",
-    "build:esm": "tsc 1>&2 --outDir lib/esm",
-    "vitest:test": "cross-env NODE_OPTIONS=\"--experimental-vm-modules \" vitest",
-    "test": "npm run vitest:test -- --run",
-    "test-watch": "npm run vitest:test",
+    "start": "npm:build -- -w",
+    "build": "tsc 1>&2 --outDir lib",
+    "test": "vitest run",
+    "test-watch": "vitest",
     "clean": "rimraf lib",
     "rebuild": "npm run clean && npm run build",
     "lint": "eslint \"src/**/*.ts*\"  1>&2",
@@ -64,7 +60,6 @@
     "@types/react-redux": "^7.1.9",
     "concurrently": "^5.2.0",
     "copyfiles": "^2.1.0",
-    "cross-env": "^7.0.3",
     "eslint": "^9.13.0",
     "identity-obj-proxy": "^3.0.0",
     "react": "^18.2.0",

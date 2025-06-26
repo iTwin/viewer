@@ -4,8 +4,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "target": "es2020"
+    "moduleResolution": "nodenext"
   },
   "include": ["./src/**/*.ts*"],
   "exclude": ["./src/**/*.test.ts*"],

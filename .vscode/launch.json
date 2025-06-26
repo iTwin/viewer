@@ -32,9 +32,6 @@
         "--run",
         "src/tests"
       ],
-      "env": {
-        "NODE_OPTIONS": "--experimental-vm-modules"
-      },
       "cwd": "${workspaceFolder}/packages/modules/web-viewer-react",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
@@ -49,9 +46,6 @@
         "run",
         "src/tests"
       ],
-      "env": {
-        "NODE_OPTIONS": "--experimental-vm-modules"
-      },
       "cwd": "${workspaceFolder}/packages/modules/viewer-react",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",

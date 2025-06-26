@@ -3,12 +3,10 @@
   "version": "5.0.0-dev.7",
   "description": "Configurable iTwin.js viewer for desktop applications",
   "type": "module",
-  "module": "lib/esm/index.js",
-  "types": "lib/esm/index.d.ts",
   "exports": {
     ".": {
-      "import": "./lib/esm/index.js",
-      "types": "./lib/esm/index.d.ts"
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts"
     }
   },
   "author": {
@@ -18,9 +16,8 @@
   "license": "MIT",
   "repository": "https://github.com/itwin/viewer/tree/main/packages/modules/desktop-viewer-react",
   "scripts": {
-    "start": "concurrently \"npm:build:cjs -- -w\" \"npm:build:esm -- -w\"",
-    "build": "npm run -s build:esm",
-    "build:esm": "tsc 1>&2 --outDir lib/esm",
+    "start": "npm run build -- -w",
+    "build": "tsc 1>&2 --outDir lib",
     "prod-build": "tsc -b",
     "test": "",
     "test-watch": "jest --watch",
@@ -65,7 +62,6 @@
     "@types/react": "^18.2.9",
     "@types/react-dom": "^18.2.4",
     "@types/react-redux": "^7.1.9",
-    "concurrently": "^5.2.0",
     "eslint": "^9.13.0",
     "copyfiles": "^2.1.0",
     "electron": "^35.0.0",
