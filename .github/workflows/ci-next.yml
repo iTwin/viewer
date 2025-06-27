@@ -34,6 +34,6 @@ jobs:
           echo 'Linting...'
           node common/scripts/install-run-rush.js lint
 
-          # echo 'Testing...'
-          # node common/scripts/install-run-rush.js test --verbose
+          echo 'Testing...'
+          node common/scripts/install-run-rush.js test --verbose
 
