@@ -5,12 +5,12 @@
 
 import isEqual from "lodash.isequal";
 
-import type { ViewerCommonProps, ViewerInitializerParams } from "../types";
-import { iTwinViewerInitializerParamList } from "../types";
+import type { ViewerCommonProps, ViewerInitializerParams } from "../types.js";
+import { iTwinViewerInitializerParamList } from "../types.js";
 
 export { isEqual };
 
-export * from "./MakeCancellable";
+export * from "./MakeCancellable.js";
 
 /**
  * Pull out iTwin.js initialization options from a set of options

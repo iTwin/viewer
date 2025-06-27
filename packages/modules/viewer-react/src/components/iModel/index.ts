@@ -3,5 +3,5 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-export * from "./IModelLoader";
-export * from "./IModelViewer";
+export * from "./IModelLoader.js";
+export * from "./IModelViewer.js";

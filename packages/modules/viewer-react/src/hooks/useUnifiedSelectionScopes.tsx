@@ -7,7 +7,7 @@ import type { IModelConnection } from "@itwin/core-frontend";
 import React from "react";
 import { Presentation } from "@itwin/presentation-frontend";
 import { computeSelection } from "@itwin/unified-selection";
-import { SelectionScopesProps } from "../types";
+import { SelectionScopesProps } from "../types.js";
 
 type SelectionScope = Parameters<typeof computeSelection>[0]["scope"];
 type SelectionScopesMap = SelectionScopesProps["available"];

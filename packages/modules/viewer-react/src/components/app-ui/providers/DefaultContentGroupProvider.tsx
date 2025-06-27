@@ -13,12 +13,12 @@ import { ViewportComponent } from "@itwin/imodel-components-react";
 import { viewWithUnifiedSelection } from "@itwin/presentation-components";
 import React from "react";
 
-import { getAndSetViewState } from "../../../services/iModel";
+import { getAndSetViewState } from "../../../services/iModel/index.js";
 import type {
   BlankConnectionViewState,
   ViewerViewCreator3dOptions,
   ViewerViewportControlOptions,
-} from "../../../types";
+} from "../../../types.js";
 
 const UnifiedSelectionViewport = viewWithUnifiedSelection(ViewportComponent); // eslint-disable-line @typescript-eslint/no-deprecated
 

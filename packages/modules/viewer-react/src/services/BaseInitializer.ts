@@ -19,11 +19,11 @@ import { FrontendIModelsAccess } from "@itwin/imodels-access-frontend";
 import { IModelsClient } from "@itwin/imodels-client-management";
 import { Presentation } from "@itwin/presentation-frontend";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
-import { ViewerPerformance } from "../services/telemetry";
-import { makeCancellable } from "../utilities/MakeCancellable";
+import { ViewerPerformance } from "../services/telemetry/index.js";
+import { makeCancellable } from "../utilities/MakeCancellable.js";
 
 import type { IModelAppOptions } from "@itwin/core-frontend";
-import type { ViewerInitializerParams } from "../types";
+import type { ViewerInitializerParams } from "../types.js";
 
 // initialize required iTwin.js services
 export class BaseInitializer {

@@ -3,7 +3,7 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
-import { ElectronApp } from "@itwin/core-electron/lib/cjs/ElectronFrontend";
+import { ElectronApp } from "@itwin/core-electron/lib/cjs/ElectronFrontend.js";
 import { IModelApp, NativeAppLogger } from "@itwin/core-frontend";
 import { ElectronRendererAuthorization } from "@itwin/electron-authorization/Renderer";
 import {
@@ -13,7 +13,7 @@ import {
   ViewerPerformance,
 } from "@itwin/viewer-react";
 
-import type { DesktopInitializerParams } from "../types";
+import type { DesktopInitializerParams } from "../types.js";
 
 export class DesktopInitializer {
   private static _initialized: Promise<void>;

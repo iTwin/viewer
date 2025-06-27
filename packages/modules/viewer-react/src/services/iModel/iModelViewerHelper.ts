@@ -9,8 +9,8 @@ import type {
 } from "@itwin/core-frontend";
 import { BlankConnection } from "@itwin/core-frontend";
 
-import type { ModelLoaderProps, RequiredViewerProps } from "../../types";
-import { openLocalIModel, openRemoteIModel } from "./IModelService";
+import type { ModelLoaderProps, RequiredViewerProps } from "../../types.js";
+import { openLocalIModel, openRemoteIModel } from "./IModelService.js";
 
 type BlankConnectionInitializationProps = {
   iTwinId?: string;

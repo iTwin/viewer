@@ -16,7 +16,7 @@ import {
 import { ECSchemaRpcInterface } from "@itwin/ecschema-rpcinterface-common";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 
-import type { BackendConfiguration } from "../types";
+import type { BackendConfiguration } from "../types.js";
 
 /**
  * The RpcInitializer handles registration of backends/instantiates RpcInterface clients.

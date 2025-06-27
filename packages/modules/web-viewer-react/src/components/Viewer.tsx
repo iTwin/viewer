@@ -8,8 +8,8 @@ import { Presentation } from "@itwin/presentation-frontend";
 import { BaseViewer } from "@itwin/viewer-react";
 import React, { useEffect } from "react";
 
-import { useWebViewerInitializer } from "../hooks";
-import type { WebViewerProps } from "../types";
+import { useWebViewerInitializer } from "../hooks/index.js";
+import type { WebViewerProps } from "../types.js";
 
 export const Viewer = (props: WebViewerProps) => {
   const initialized = useWebViewerInitializer(props);

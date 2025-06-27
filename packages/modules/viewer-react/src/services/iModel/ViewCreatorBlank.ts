@@ -7,7 +7,7 @@ import { ColorDef, RenderMode } from "@itwin/core-common";
 import type { BlankConnection } from "@itwin/core-frontend";
 import { IModelApp, SpatialViewState, ViewStatus } from "@itwin/core-frontend";
 
-import type { BlankConnectionViewState } from "../../types";
+import type { BlankConnectionViewState } from "../../types.js";
 
 export const createBlankViewState = (
   iModel: BlankConnection,

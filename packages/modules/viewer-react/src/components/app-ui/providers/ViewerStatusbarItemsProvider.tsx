@@ -25,9 +25,9 @@ import { getInstancesCount } from "@itwin/presentation-common";
 import { createIModelKey } from "@itwin/presentation-core-interop";
 import { Presentation } from "@itwin/presentation-frontend";
 import { Selectables, SelectionStorage } from "@itwin/unified-selection";
-import { useUnifiedSelectionScopes } from "../../../hooks/useUnifiedSelectionScopes";
+import { useUnifiedSelectionScopes } from "../../../hooks/useUnifiedSelectionScopes.js";
 
-import type { ViewerDefaultStatusbarItems } from "../../../types";
+import type { ViewerDefaultStatusbarItems } from "../../../types.js";
 
 export class ViewerStatusbarItemsProvider implements UiItemsProvider {
   public readonly id = "ViewerDefaultStatusbar";

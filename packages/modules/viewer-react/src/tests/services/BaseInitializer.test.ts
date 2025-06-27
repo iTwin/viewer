@@ -3,11 +3,11 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
-
 import { StateManager } from "@itwin/appui-react";
 import { IModelApp } from "@itwin/core-frontend";
 import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
   BaseInitializer,
@@ -15,47 +15,55 @@ import {
 } from "../../services/BaseInitializer";
 import { MockToolAdmin } from "../mocks/MockToolAdmin";
 
-jest.mock("../../services/iModel/ViewCreator3d", () => {
+vi.mock("../../services/iModel/ViewCreator3d", () => {
   return {
-    ViewCreator3d: jest.fn().mockImplementation(() => {
+    ViewCreator3d: vi.fn().mockImplementation(() => {
       return {
-        createDefaultView: jest.fn().mockResolvedValue({}),
+        createDefaultView: vi.fn().mockResolvedValue({}),
       };
     }),
   };
 });
 
-jest.mock("@itwin/core-i18n");
+vi.mock("@itwin/core-i18n");
 
-jest.mock("@itwin/appui-react", () => {
+vi.mock("@itwin/appui-react", async (importActual) => {
+  const original = await importActual<typeof import("@itwin/appui-react")>();
+
+  const StateManagerSpy = vi.fn().mockImplementation(function (...args) {
+    return new (original.StateManager as any)(...args);
+  });
+
+  Object.setPrototypeOf(StateManagerSpy, original.StateManager);
+
   return {
-    ...jest.createMockFromModule<any>("@itwin/appui-react"),
+    ...original,
+    StateManager: StateManagerSpy,
     UiFramework: {
-      ...jest.createMockFromModule<any>("@itwin/appui-react").UiFramework,
-      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+      ...original.UiFramework,
+      initialize: vi.fn().mockImplementation(() => Promise.resolve()),
     },
     FrameworkAccuDraw:
-      jest.createMockFromModule<any>("@itwin/appui-react").FrameworkAccuDraw,
+      original.FrameworkAccuDraw,
     SyncUiEventDispatcher: {
-      ...jest.createMockFromModule<any>("@itwin/appui-react")
-        .SyncUiEventDispatcher,
+      ...original.SyncUiEventDispatcher,
       onSyncUiEvent: {
-        addListener: jest.fn(),
+        addListener: vi.fn(),
       },
     },
   };
 });
 
-jest.mock("@itwin/presentation-frontend", () => {
+vi.mock("@itwin/presentation-frontend", async (importActual) => {
+  const original = await importActual<typeof import("@itwin/presentation-frontend")>();
   return {
-    ...jest.createMockFromModule<any>("@itwin/presentation-frontend"),
+    ...original,
     Presentation: {
-      ...jest.createMockFromModule<any>("@itwin/presentation-frontend")
-        .Presentation,
-      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+      ...original.Presentation,
+      initialize: vi.fn().mockImplementation(() => Promise.resolve()),
       selection: {
         selectionChange: {
-          addListener: jest.fn(),
+          addListener: vi.fn(),
         },
         scopes: {},
       },
@@ -63,38 +71,38 @@ jest.mock("@itwin/presentation-frontend", () => {
   };
 });
 
-jest.mock("@itwin/core-frontend", () => {
+vi.mock("@itwin/core-frontend", () => {
   return {
     IModelApp: {
-      startup: jest.fn().mockResolvedValue(true),
+      startup: vi.fn().mockResolvedValue(true),
       telemetry: {
-        addClient: jest.fn(),
+        addClient: vi.fn(),
       },
       localization: {
-        registerNamespace: jest.fn().mockReturnValue({
-          readFinished: jest.fn().mockResolvedValue(true),
+        registerNamespace: vi.fn().mockReturnValue({
+          readFinished: vi.fn().mockResolvedValue(true),
         }),
-        getLanguageList: jest.fn().mockReturnValue(["en-US"]),
-        unregisterNamespace: jest.fn(),
-        translateWithNamespace: jest.fn(),
+        getLanguageList: vi.fn().mockReturnValue(["en-US"]),
+        unregisterNamespace: vi.fn(),
+        translateWithNamespace: vi.fn(),
       },
       uiAdmin: {
-        updateFeatureFlags: jest.fn(),
+        updateFeatureFlags: vi.fn(),
       },
       viewManager: {
         onViewOpen: {
-          addOnce: jest.fn(),
+          addOnce: vi.fn(),
         },
       },
-      shutdown: jest.fn().mockImplementation(() => Promise.resolve()),
+      shutdown: vi.fn().mockImplementation(() => Promise.resolve()),
     },
     SnapMode: {},
-    ActivityMessageDetails: jest.fn(),
-    PrimitiveTool: jest.fn(),
-    NotificationManager: jest.fn(),
-    Tool: jest.fn(),
+    ActivityMessageDetails: vi.fn(),
+    PrimitiveTool: vi.fn(),
+    NotificationManager: vi.fn(),
+    Tool: vi.fn(),
     SnapshotConnection: {
-      openFile: jest.fn(),
+      openFile: vi.fn(),
     },
     ToolAdmin: class {},
     ItemField: {},
@@ -116,8 +124,8 @@ jest.mock("@itwin/core-frontend", () => {
 
 describe("BaseInitializer", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
-    jest.resetModules();
+    vi.clearAllMocks();
+    vi.resetModules();
     /* eslint-disable @typescript-eslint/no-deprecated */
     if (UiCore.initialized) {
       UiCore.terminate();
@@ -216,7 +224,7 @@ describe("BaseInitializer", () => {
 
   it("executes a callback after IModelApp is initialized", async () => {
     const callbacks = {
-      onIModelAppInit: jest.fn(),
+      onIModelAppInit: vi.fn(),
     };
     await BaseInitializer.initialize({
       onIModelAppInit: callbacks.onIModelAppInit,
@@ -236,13 +244,14 @@ describe("BaseInitializer", () => {
   });
 
   it("initializes StateManager", async () => {
+    vi.spyOn(StateManager, "isInitialized").mockReturnValue(false);
     await BaseInitializer.initialize();
     await BaseInitializer.initialized;
     expect(StateManager).toHaveBeenCalledTimes(1);
   });
 
   it("should not re-initialize StateManager", async () => {
-    jest.spyOn(StateManager, "isInitialized").mockReturnValue(true);
+    vi.spyOn(StateManager, "isInitialized").mockReturnValue(true);
     await BaseInitializer.initialize();
     await BaseInitializer.initialized;
     expect(StateManager).not.toHaveBeenCalled();

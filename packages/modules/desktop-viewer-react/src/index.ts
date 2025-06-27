@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 export * from "@itwin/viewer-react";
-export * from "./components/Viewer";
-export * from "./types";
-export * from "./hooks";
-export * from "./services";
+export * from "./components/Viewer.js";
+export * from "./types.js";
+export * from "./hooks/index.js";
+export * from "./services/index.js";

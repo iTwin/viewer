@@ -8,8 +8,8 @@ import { Presentation } from "@itwin/presentation-frontend";
 import { BaseViewer } from "@itwin/viewer-react";
 import React, { useEffect } from "react";
 
-import { useDesktopViewerInitializer } from "../hooks";
-import type { DesktopViewerProps } from "../types";
+import { useDesktopViewerInitializer } from "../hooks/index.js";
+import type { DesktopViewerProps } from "../types.js";
 
 export const Viewer = (props: DesktopViewerProps) => {
   const initialized = useDesktopViewerInitializer(props);

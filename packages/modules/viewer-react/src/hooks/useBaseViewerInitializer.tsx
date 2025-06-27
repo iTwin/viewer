@@ -5,10 +5,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { BaseInitializer } from "../services/BaseInitializer";
-import { isUnifiedSelectionProps, ViewerCommonProps, ViewerInitializerParams } from "../types";
-import { getInitializationOptions, isEqual } from "../utilities";
-import { useIsMounted } from "./useIsMounted";
+import { BaseInitializer } from "../services/BaseInitializer.js";
+import { isUnifiedSelectionProps, ViewerCommonProps, ViewerInitializerParams } from "../types.js";
+import { getInitializationOptions, isEqual } from "../utilities/index.js";
+import { useIsMounted } from "./useIsMounted.js";
 
 export const useBaseViewerInitializer = (
   options?: ViewerCommonProps,
