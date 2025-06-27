@@ -28,7 +28,7 @@
       "request": "launch",
       "runtimeArgs": [
         "--inspect-brk",
-        "${workspaceFolder}/packages/modules/viewer-react/node_modules/vitest/vitest.mjs",
+        "${workspaceFolder}/packages/modules/web-viewer-react/node_modules/vitest/vitest.mjs",
         "--run",
         "src/tests"
       ],

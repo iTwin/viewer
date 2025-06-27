@@ -20,8 +20,6 @@
     "start": "npm run build -- -w",
     "build": "tsc 1>&2 --outDir lib",
     "prod-build": "tsc -b",
-    "test": "",
-    "test-watch": "",
     "clean": "rimraf lib",
     "rebuild": "npm run clean && npm run build",
     "lint": "eslint \"src/**/*.ts*\"  1>&2",

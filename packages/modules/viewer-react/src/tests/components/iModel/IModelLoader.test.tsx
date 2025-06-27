@@ -318,19 +318,6 @@ describe("IModelLoader", () => {
     );
   });
 
-  it.skip("sets the theme to the provided theme", async () => {
-    const { getByTestId } = render(
-      <IModelLoader
-        iTwinId={mockITwinId}
-        iModelId={mockIModelId}
-      // theme={ColorTheme.Dark}
-      />
-    );
-
-    await waitFor(() => getByTestId("loader-wrapper"));
-    expect(UiFramework.setColorTheme).toHaveBeenCalledWith(ColorTheme.Dark); // eslint-disable-line @typescript-eslint/no-deprecated
-  });
-
   it("synchronizes with unified selection storage when storage provided", async () => {
     const connection = {
       isBlankConnection: () => false,
