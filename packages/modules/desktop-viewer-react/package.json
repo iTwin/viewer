@@ -1,6 +1,6 @@
 {
   "name": "@itwin/desktop-viewer-react",
-  "version": "5.0.0-dev.7",
+  "version": "5.0.0-dev.8",
   "description": "Configurable iTwin.js viewer for desktop applications",
   "type": "module",
   "types": "./lib/index.d.ts",
@@ -55,6 +55,7 @@
     "@itwin/presentation-frontend": "^5.0.0",
     "@itwin/webgl-compatibility": "^5.0.0",
     "@itwin/unified-selection-react": "^1.0.0",
+    "@itwin/itwinui-react": "^3.18.0",
     "@types/node": "^20",
     "@types/react": "^18.2.9",
     "@types/react-dom": "^18.2.4",

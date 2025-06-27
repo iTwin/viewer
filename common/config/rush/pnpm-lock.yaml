@@ -286,6 +286,7 @@ importers:
       '@itwin/electron-authorization': ^0.21.0
       '@itwin/imodel-components-react': ^5.5.0
       '@itwin/imodels-client-management': ^6.0.0
+      '@itwin/itwinui-react': ^3.18.0
       '@itwin/presentation-common': ^5.0.0
       '@itwin/presentation-components': ^5.12.0
       '@itwin/presentation-frontend': ^5.0.0
@@ -545,6 +546,7 @@ importers:
       '@itwin/ecschema-rpcinterface-common': ^5.0.0
       '@itwin/imodel-components-react': ^5.5.0
       '@itwin/imodels-client-management': ^6.0.0
+      '@itwin/itwinui-react': ^3.18.0
       '@itwin/presentation-common': ^5.0.0
       '@itwin/presentation-components': ^5.12.0
       '@itwin/presentation-frontend': ^5.0.0
