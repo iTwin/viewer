@@ -6,17 +6,18 @@
 import "./SignIn.scss";
 
 import { IModelApp } from "@itwin/core-frontend";
-import { ElectronRendererAuthorization } from "@itwin/electron-authorization/Renderer";
 import { SvgUser } from "@itwin/itwinui-icons-react";
 import { Button } from "@itwin/itwinui-react";
 import React, { useState } from "react";
+import { isElectronRendererAuth } from "../../util/typeCheck";
+
 export const SignIn = () => {
   const [signingIn, setSigningIn] = useState(false);
 
   const onSignInClick = async () => {
     setSigningIn(true);
     if (
-      IModelApp.authorizationClient instanceof ElectronRendererAuthorization
+      isElectronRendererAuth(IModelApp.authorizationClient)
     ) {
       await IModelApp.authorizationClient?.signIn();
     }
