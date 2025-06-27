@@ -3,6 +3,7 @@
   "version": "5.0.0-dev.7",
   "description": "Configurable iTwin.js viewer for web applications",
   "type": "module",
+  "types": "./lib/index.d.ts",
   "exports": {
     ".": {
       "import": "./lib/index.js",
