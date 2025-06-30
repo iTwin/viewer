@@ -11,21 +11,21 @@ import { Provider } from "react-redux";
 import { StateManager, UiFramework } from "@itwin/appui-react";
 import { IModelApp } from "@itwin/core-frontend";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
-import { useFrontstages, useUiProviders } from "../../hooks";
-import { useUnifiedSelectionScopes } from "../../hooks/useUnifiedSelectionScopes";
-import { useUnifiedSelectionSync } from "../../hooks/useUnifiedSelectionSync";
+import { useFrontstages, useUiProviders } from "../../hooks/index.js";
+import { useUnifiedSelectionScopes } from "../../hooks/useUnifiedSelectionScopes.js";
+import { useUnifiedSelectionSync } from "../../hooks/useUnifiedSelectionSync.js";
 import {
   gatherRequiredViewerProps,
   getAndSetViewState,
   openConnection,
-} from "../../services/iModel";
-import { ViewerPerformance } from "../../services/telemetry";
-import { isUnifiedSelectionProps, ModelLoaderProps } from "../../types";
+} from "../../services/iModel/index.js";
+import { ViewerPerformance } from "../../services/telemetry/index.js";
+import { isUnifiedSelectionProps, ModelLoaderProps } from "../../types.js";
 import {
   SelectionScopesContextProvider,
   SelectionStorageContextProvider,
-} from "../app-ui/providers";
-import { IModelViewer } from "./IModelViewer";
+} from "../app-ui/providers/index.js";
+import { IModelViewer } from "./IModelViewer.js";
 
 import type { UiItemsProvider } from "@itwin/appui-react";
 import type { IModelConnection } from "@itwin/core-frontend";

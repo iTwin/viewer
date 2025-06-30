@@ -11,8 +11,8 @@ import {
   ViewerPerformance,
 } from "@itwin/viewer-react";
 
-import type { WebInitializerParams } from "../types";
-import { RpcInitializer } from "./RpcInitializer";
+import type { WebInitializerParams } from "../types.js";
+import { RpcInitializer } from "./RpcInitializer.js";
 
 export class WebInitializer {
   private static _initialized: Promise<void>;

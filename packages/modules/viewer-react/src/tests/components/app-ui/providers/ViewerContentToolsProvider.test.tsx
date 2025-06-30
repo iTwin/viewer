@@ -3,7 +3,8 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ViewerContentToolsProvider } from "../../../../components/app-ui/providers";
+import { describe, expect, it } from "vitest";
+import { ViewerContentToolsProvider } from "../../../../components/app-ui/providers/index.js";
 
 describe("ViewerContentToolsProvider", () => {
   it("should return a 'section clear button' in status bar if default is not provided", () => {

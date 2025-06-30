@@ -8,15 +8,18 @@ import { IModelApp } from "@itwin/core-frontend";
 import type { ViewerInitializerParams } from "@itwin/viewer-react";
 import { render, waitFor } from "@testing-library/react";
 import React from "react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { Viewer } from "../../components/Viewer.js";
+import { WebInitializer } from "../../services/Initializer.js";
+import type { BackendConfiguration } from "../../types.js";
+import MockAuthorizationClient from "../mocks/MockAuthorizationClient.js";
 
-import { Viewer } from "../../components/Viewer";
-import { WebInitializer } from "../../services/Initializer";
-import type { BackendConfiguration } from "../../types";
-import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
+vi.mock("@itwin/viewer-react", async () => {
+  const originalViewerReact = await vi.importActual<typeof import("@itwin/viewer-react")>("@itwin/viewer-react");
+  const originalRpcInit = await vi.importActual<typeof import("../../services/RpcInitializer.js")>("../../services/RpcInitializer");
 
-jest.mock("@itwin/viewer-react", () => {
   return {
-    BaseViewer: jest.fn(() => <div data-testid="mock-div"></div>),
+    BaseViewer: vi.fn(() => <div data-testid="mock-div"></div>),
     getIModelAppOptions: (
       options: ViewerInitializerParams
     ): IModelAppOptions => {
@@ -29,22 +32,19 @@ jest.mock("@itwin/viewer-react", () => {
         authorizationClient: expect.anything(),
       };
     },
-    useIsMounted: jest.fn().mockReturnValue(true),
-    makeCancellable: jest.requireActual(
-      "@itwin/viewer-react/lib/cjs/utilities/MakeCancellable"
-    ).makeCancellable,
-    RpcInitializer: jest.requireActual("../../services/RpcInitializer")
-      .RpcInitializer,
-    useBaseViewerInitializer: jest.fn().mockReturnValue(true),
-    getInitializationOptions: jest.fn().mockReturnValue({}),
-    isEqual: jest.fn().mockReturnValue(true),
+    useIsMounted: vi.fn().mockReturnValue(true),
+    makeCancellable: originalViewerReact.makeCancellable,
+    RpcInitializer: originalRpcInit.RpcInitializer,
+    useBaseViewerInitializer: vi.fn().mockReturnValue(true),
+    getInitializationOptions: vi.fn().mockReturnValue({}),
+    isEqual: vi.fn().mockReturnValue(true),
     BaseInitializer: {
-      initialize: jest.fn(),
+      initialize: vi.fn(),
     },
     ViewerPerformance: {
-      addMark: jest.fn(),
-      addAndLogMeasure: jest.fn(),
-      enable: jest.fn(),
+      addMark: vi.fn(),
+      addAndLogMeasure: vi.fn(),
+      enable: vi.fn(),
     },
     ViewerAuthorization: {
       client: {},
@@ -52,53 +52,59 @@ jest.mock("@itwin/viewer-react", () => {
   };
 });
 
-jest.mock("@itwin/core-frontend", () => {
+vi.mock("@itwin/core-frontend", () => {
   return {
     IModelApp: {
-      startup: jest.fn(),
+      startup: vi.fn(),
       telemetry: {
-        addClient: jest.fn(),
+        addClient: vi.fn(),
       },
       i18n: {
-        registerNamespace: jest.fn().mockReturnValue({
-          readFinished: jest.fn().mockResolvedValue(true),
+        registerNamespace: vi.fn().mockReturnValue({
+          readFinished: vi.fn().mockResolvedValue(true),
         }),
-        languageList: jest.fn().mockReturnValue(["en-US"]),
-        translateWithNamespace: jest.fn(),
+        languageList: vi.fn().mockReturnValue(["en-US"]),
+        translateWithNamespace: vi.fn(),
       },
       uiAdmin: {
-        updateFeatureFlags: jest.fn(),
+        updateFeatureFlags: vi.fn(),
       },
       tools: {
-        registerModule: jest.fn(),
+        registerModule: vi.fn(),
       },
       viewManager: {
         onViewOpen: {
-          addOnce: jest.fn(),
+          addOnce: vi.fn(),
         },
       },
     },
     SnapMode: {},
-    ActivityMessageDetails: jest.fn(),
-    PrimitiveTool: jest.fn(),
-    NotificationManager: jest.fn(),
-    Tool: jest.fn(),
+    ActivityMessageDetails: vi.fn(),
+    PrimitiveTool: vi.fn(),
+    NotificationManager: vi.fn(),
+    Tool: vi.fn(),
     RemoteBriefcaseConnection: {
-      open: jest.fn(),
+      open: vi.fn(),
     },
     SnapshotConnection: {
-      openFile: jest.fn(),
+      openFile: vi.fn(),
     },
     ItemField: {},
     CompassMode: {},
     RotationMode: {},
-    AccuDraw: class {},
-    ToolAdmin: class {},
+    AccuDraw: class { },
+    AccuSnap: class { },
+    ToolAdmin: class { },
     WebViewerApp: {
-      startup: jest.fn().mockResolvedValue(true),
-      shutdown: jest.fn().mockResolvedValue(true),
+      startup: vi.fn().mockResolvedValue(true),
+      shutdown: vi.fn().mockResolvedValue(true),
     },
-  };
+    ViewCreator3d: vi.fn().mockImplementation(() => {
+      return {
+        createDefaultView: vi.fn().mockResolvedValue({}),
+      };
+    })
+  }
 });
 
 const mockITwinId = "123";
@@ -108,7 +114,7 @@ const authClient = new MockAuthorizationClient();
 
 describe("Viewer", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("starts the WebViewerApp", async () => {
@@ -134,7 +140,7 @@ describe("Viewer", () => {
   });
 
   it("initializes the Viewer with the provided backend configuration", async () => {
-    jest.spyOn(WebInitializer, "startWebViewer");
+    vi.spyOn(WebInitializer, "startWebViewer");
 
     const backendConfig: BackendConfiguration = {
       defaultBackend: {

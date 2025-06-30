@@ -7,48 +7,49 @@ import { Cartographic } from "@itwin/core-common";
 import type { BlankConnectionProps } from "@itwin/core-frontend";
 import { BlankConnection } from "@itwin/core-frontend";
 import { Range3d } from "@itwin/core-geometry";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import * as iModelService from "../../services/iModel/IModelService";
+import * as iModelService from "../../services/iModel/IModelService.js";
 import {
   createBlankConnection,
   gatherRequiredViewerProps,
   openConnection,
-} from "../../services/iModel/iModelViewerHelper";
+} from "../../services/iModel/iModelViewerHelper.js";
 
-jest.mock("@itwin/core-frontend", () => {
+vi.mock("@itwin/core-frontend", () => {
   return {
     IModelApp: {
-      startup: jest.fn(),
+      startup: vi.fn(),
       telemetry: {
-        addClient: jest.fn(),
+        addClient: vi.fn(),
       },
       localization: {
-        getLocalizedString: jest.fn(),
-        registerNamespace: jest.fn().mockResolvedValue(true),
+        getLocalizedString: vi.fn(),
+        registerNamespace: vi.fn().mockResolvedValue(true),
       },
       uiAdmin: {
-        updateFeatureFlags: jest.fn(),
+        updateFeatureFlags: vi.fn(),
       },
       notifications: {
-        openMessageBox: jest.fn(),
+        openMessageBox: vi.fn(),
       },
       viewManager: {
-        onSelectionSetChanged: jest.fn(),
+        onSelectionSetChanged: vi.fn(),
         onViewOpen: {
-          addOnce: jest.fn(),
+          addOnce: vi.fn(),
         },
       },
     },
     SnapMode: {},
-    ActivityMessageDetails: jest.fn(),
-    PrimitiveTool: jest.fn(),
-    NotificationManager: jest.fn(),
-    Tool: jest.fn(),
+    ActivityMessageDetails: vi.fn(),
+    PrimitiveTool: vi.fn(),
+    NotificationManager: vi.fn(),
+    Tool: vi.fn(),
     RemoteBriefcaseConnection: {
-      open: jest.fn(),
+      open: vi.fn(),
     },
     SnapshotConnection: {
-      openFile: jest.fn(),
+      openFile: vi.fn(),
     },
     MessageBoxType: {
       Ok: 1,
@@ -57,7 +58,7 @@ jest.mock("@itwin/core-frontend", () => {
       Critical: 1,
     },
     BlankConnection: {
-      create: jest.fn().mockImplementation((params) => ({
+      create: vi.fn().mockImplementation((params) => ({
         isBlankConnection: () => true,
         isOpen: true,
         ...params,
@@ -70,11 +71,11 @@ jest.mock("@itwin/core-frontend", () => {
     AccuSnap: class {},
     ToolAdmin: class {},
     WebViewerApp: {
-      startup: jest.fn().mockResolvedValue(true),
+      startup: vi.fn().mockResolvedValue(true),
     },
-    ViewCreator3d: jest.fn().mockImplementation(() => {
+    ViewCreator3d: vi.fn().mockImplementation(() => {
       return {
-        createDefaultView: jest.fn().mockResolvedValue({}),
+        createDefaultView: vi.fn().mockResolvedValue({}),
       };
     }),
     SpatialViewState: {
@@ -91,7 +92,7 @@ jest.mock("@itwin/core-frontend", () => {
 
 describe("iModelViewerHelper", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("createBlankConnection() with separate iTwinId", async () => {
@@ -126,7 +127,7 @@ describe("iModelViewerHelper", () => {
   });
 
   it("openConnection() opens a connection type depending on parameters", async () => {
-    const openRemoteSpy = jest
+    const openRemoteSpy = vi
       .spyOn(iModelService, "openRemoteIModel")
       .mockResolvedValueOnce(undefined);
 
@@ -137,7 +138,7 @@ describe("iModelViewerHelper", () => {
 
     expect(openRemoteSpy).toHaveBeenCalledTimes(1);
 
-    const openLocalSpy = jest
+    const openLocalSpy = vi
       .spyOn(iModelService, "openLocalIModel")
       .mockResolvedValueOnce({} as any);
 

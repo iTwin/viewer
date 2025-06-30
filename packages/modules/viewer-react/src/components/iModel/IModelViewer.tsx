@@ -4,20 +4,17 @@
 *--------------------------------------------------------------------------------------------*/
 
 import type {
-  BackstageItem,
   FrontstageDef,
-  FrontstageProvider,
-  ThemeId,
+  FrontstageProvider
 } from "@itwin/appui-react";
-import { UiFramework, UiItemsManager } from "@itwin/appui-react";
+import { UiFramework } from "@itwin/appui-react";
 import {
   BackstageComposer,
-  ConfigurableUiContent,
-  ThemeManager,
+  ConfigurableUiContent
 } from "@itwin/appui-react";
 import React, { useEffect, useState } from "react";
 
-import type { ViewerFrontstage } from "../../types";
+import type { ViewerFrontstage } from "../../types.js";
 interface ModelProps {
   frontstages: ViewerFrontstage[];
   // theme?: ThemeId;

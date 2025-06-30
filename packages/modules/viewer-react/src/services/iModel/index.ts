@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-export * from "./IModelService";
-export * from "./ViewCreator3d";
-export * from "./ViewCreatorBlank";
-export * from "./iModelViewerHelper";
+export * from "./IModelService.js";
+export * from "./ViewCreator3d.js";
+export * from "./ViewCreatorBlank.js";
+export * from "./iModelViewerHelper.js";
