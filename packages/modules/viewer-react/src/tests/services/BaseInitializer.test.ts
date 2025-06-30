@@ -12,8 +12,8 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   BaseInitializer,
   getIModelAppOptions,
-} from "../../services/BaseInitializer";
-import { MockToolAdmin } from "../mocks/MockToolAdmin";
+} from "../../services/BaseInitializer.js";
+import { MockToolAdmin } from "../mocks/MockToolAdmin.js";
 
 vi.mock("../../services/iModel/ViewCreator3d", () => {
   return {

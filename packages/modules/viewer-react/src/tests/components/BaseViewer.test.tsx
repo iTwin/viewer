@@ -7,8 +7,8 @@ import { render, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import React from 'react';
 import { UiCore } from '@itwin/core-react';
-import { BaseViewer } from "../..";
-import * as IModelService from "../../services/iModel/IModelService";
+import { BaseViewer } from "../../components/BaseViewer.js";
+import * as IModelService from "../../services/iModel/IModelService.js";
 
 vi.mock("@itwin/presentation-frontend", async (importActual) => {
   const original = await importActual<typeof import("@itwin/presentation-frontend")>();
