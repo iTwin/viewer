@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "See [release notes](https://github.com/iTwin/viewer/blob/master/releases/CHANGELOG-5.0.md).",
+      "type": "none"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
