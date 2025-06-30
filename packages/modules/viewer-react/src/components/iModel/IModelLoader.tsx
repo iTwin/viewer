@@ -3,14 +3,18 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
+
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 import "./IModelLoader.scss";
 
-import React, { useEffect, useMemo, useState } from "react";
-import { Provider } from "react-redux";
+import type { UiItemsProvider } from "@itwin/appui-react";
 import { StateManager, UiFramework } from "@itwin/appui-react";
+import type { IModelConnection } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
+import React, { useEffect, useMemo, useState } from "react";
+import { Provider } from "react-redux";
+
 import { useFrontstages, useUiProviders } from "../../hooks/index.js";
 import { useUnifiedSelectionScopes } from "../../hooks/useUnifiedSelectionScopes.js";
 import { useUnifiedSelectionSync } from "../../hooks/useUnifiedSelectionSync.js";
@@ -20,15 +24,13 @@ import {
   openConnection,
 } from "../../services/iModel/index.js";
 import { ViewerPerformance } from "../../services/telemetry/index.js";
-import { isUnifiedSelectionProps, ModelLoaderProps } from "../../types.js";
+import type { ModelLoaderProps } from "../../types.js";
+import { isUnifiedSelectionProps } from "../../types.js";
 import {
   SelectionScopesContextProvider,
   SelectionStorageContextProvider,
 } from "../app-ui/providers/index.js";
 import { IModelViewer } from "./IModelViewer.js";
-
-import type { UiItemsProvider } from "@itwin/appui-react";
-import type { IModelConnection } from "@itwin/core-frontend";
 
 const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   const {
@@ -38,7 +40,6 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     viewCreatorOptions,
     blankConnectionViewState,
     uiProviders,
-    // theme,
     loadingComponent,
     selectionStorage,
   } = viewerProps;
@@ -102,19 +103,16 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       <div className="itwin-viewer-container">
         {finalFrontstages &&
         (connection || noConnectionRequired) &&
-        StateManager.store ? (  // eslint-disable-line @typescript-eslint/no-deprecated
+        StateManager.store ? ( // eslint-disable-line @typescript-eslint/no-deprecated
           // eslint-disable-next-line @typescript-eslint/no-deprecated
           <Provider store={StateManager.store}>
             <SelectionStorageContextProvider
-            selectionStorage={viewerProps.selectionStorage}
-          >
-            <SelectionScopesContextProvider selectionScopes={selectionScopes}>
-            <IModelViewer
-              frontstages={finalFrontstages}
-              // theme={theme}
-            />
-            </SelectionScopesContextProvider>
-          </SelectionStorageContextProvider>
+              selectionStorage={viewerProps.selectionStorage}
+            >
+              <SelectionScopesContextProvider selectionScopes={selectionScopes}>
+                <IModelViewer frontstages={finalFrontstages} />
+              </SelectionScopesContextProvider>
+            </SelectionStorageContextProvider>
           </Provider>
         ) : (
           <div className="itwin-viewer-loading-container">

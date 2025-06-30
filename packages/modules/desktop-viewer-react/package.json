@@ -27,7 +27,6 @@
     "lint:fix": "npm run -s lint -- --fix"
   },
   "dependencies": {
-    "@itwin/imodels-client-management": "^6.0.1",
     "@itwin/viewer-react": "workspace:*"
   },
   "devDependencies": {
@@ -60,7 +59,7 @@
     "@types/react-dom": "^18.2.4",
     "eslint": "^9.13.0",
     "copyfiles": "^2.1.0",
-    "electron": "^35.0.0",
+    "electron": "^36.0.0",
     "identity-obj-proxy": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -77,11 +76,11 @@
     "@itwin/ecschema-metadata": "^5.0.0",
     "@itwin/electron-authorization": "^0.21.0",
     "@itwin/presentation-frontend": "^5.0.0",
-    "electron": "^35.0.0",
+    "electron": "^36.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-redux": "^9",
-    "redux": "^5"
+    "react-redux": "^9.0.0",
+    "redux": "^5.0.0"
   },
   "keywords": [
     "Bentley",

@@ -3,13 +3,13 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
+
 import "./App.scss";
 
 import type { ScreenViewport } from "@itwin/core-frontend";
 import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
-import { FillCentered } from "@itwin/core-react";
 import { ECSchemaRpcInterface } from "@itwin/ecschema-rpcinterface-common";
-import { ProgressLinear } from "@itwin/itwinui-react";
+import { Flex,ProgressLinear } from "@itwin/itwinui-react";
 import {
   MeasurementActionToolbar,
   MeasureTools,
@@ -143,11 +143,11 @@ const App: React.FC = () => {
   return (
     <div className="viewer-container">
       {!accessToken && (
-        <FillCentered>
+        <Flex justifyContent="center" style={{ height: "100%" }}>
           <div className="signin-content">
             <ProgressLinear indeterminate={true} labels={["Signing in..."]} />
           </div>
-        </FillCentered>
+        </Flex>
       )}
       <Viewer
         iTwinId={iTwinId ?? ""}
@@ -216,22 +216,22 @@ const App: React.FC = () => {
             id: "PropertyGridUIProvider",
             getWidgets: () => [
               createPropertyGrid({
-              autoExpandChildCategories: true,
-              ancestorsNavigationControls: (props) => (
-                <AncestorsNavigationControls {...props} />
-              ),
-              contextMenuItems: [
-                (props) => <CopyPropertyTextContextMenuItem {...props} />,
-              ],
-              settingsMenuItems: [
-                (props) => (
-                  <ShowHideNullValuesSettingsMenuItem
-                    {...props}
-                    persist={true}
-                  />
+                autoExpandChildCategories: true,
+                ancestorsNavigationControls: (props) => (
+                  <AncestorsNavigationControls {...props} />
                 ),
-              ],
-            })
+                contextMenuItems: [
+                  (props) => <CopyPropertyTextContextMenuItem {...props} />,
+                ],
+                settingsMenuItems: [
+                  (props) => (
+                    <ShowHideNullValuesSettingsMenuItem
+                      {...props}
+                      persist={true}
+                    />
+                  ),
+                ],
+              }),
             ],
           },
           new MeasureToolsUiItemsProvider(),

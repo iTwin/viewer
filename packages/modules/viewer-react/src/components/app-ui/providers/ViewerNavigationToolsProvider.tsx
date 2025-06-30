@@ -1,9 +1,10 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
-import type { DefaultNavigationTools, ToolbarItem } from "@itwin/appui-react";
+
+import type { DefaultNavigationTools } from "@itwin/appui-react";
 import { StandardNavigationToolsUiItemsProvider } from "@itwin/appui-react";
 
 export class ViewerNavigationToolsProvider extends StandardNavigationToolsUiItemsProvider {
@@ -27,10 +28,5 @@ export class ViewerNavigationToolsProvider extends StandardNavigationToolsUiItem
 
   override get id(): string {
     return "ViewerDefaultNavigationTools";
-  }
-
-  // todo replace walk view tool with look and move tool
-  override getToolbarItems(): readonly ToolbarItem[] {
-    return super.getToolbarItems();
   }
 }

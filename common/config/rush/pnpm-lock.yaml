@@ -45,10 +45,8 @@ importers:
       '@itwin/imodel-browser-react': ^1.0.0
       '@itwin/imodel-components-react': ^5.5.0
       '@itwin/imodels-access-backend': ^6.0.1
-      '@itwin/imodels-access-common': ^6.0.1
       '@itwin/imodels-access-frontend': ^6.0.1
       '@itwin/imodels-client-authoring': ^6.0.1
-      '@itwin/imodels-client-management': ^6.0.1
       '@itwin/itwinui-css': ^1.12.0
       '@itwin/itwinui-icons-react': ^2.4.0
       '@itwin/itwinui-illustrations-react': ^2.0.1
@@ -57,9 +55,9 @@ importers:
       '@itwin/itwinui-react': ^3.18.0
       '@itwin/itwinui-variables': ^2.0.0
       '@itwin/measure-tools-react': latest
-      '@itwin/object-storage-azure': ^3.0.0-dev.0
-      '@itwin/object-storage-core': ^3.0.0-dev.0
-      '@itwin/object-storage-google': ^3.0.0-dev.0
+      '@itwin/object-storage-azure': ^3.0.0
+      '@itwin/object-storage-core': ^3.0.0
+      '@itwin/object-storage-google': ^3.0.0
       '@itwin/presentation-backend': ^5.0.0
       '@itwin/presentation-common': ^5.0.0
       '@itwin/presentation-components': ^5.12.0
@@ -78,7 +76,7 @@ importers:
       cpx2: 4.2.0
       cross-env: ^7.0.3
       dotenv-flow: ^3.2.0
-      electron: ^35.0.0
+      electron: ^36.0.0
       electron-devtools-installer: ^2.2.4
       minimist: ^1.2.8
       npm-run-all: ^4.1.5
@@ -100,7 +98,7 @@ importers:
       '@itwin/core-backend': 5.0.2_bmrnhb627kvjt55ib4ndnpf62u
       '@itwin/core-bentley': 5.0.2
       '@itwin/core-common': 5.0.2_veoghzsxqr3n6m3fosp5xplpg4
-      '@itwin/core-electron': 5.0.2_ymeu5saa2smsnfdjenmo5mceha
+      '@itwin/core-electron': 5.0.2_3nrgahtpsuvgzy4kwt4zsyqbsm
       '@itwin/core-frontend': 5.0.2_765qzte6vvjjis42zgb4qybaue
       '@itwin/core-geometry': 5.0.2
       '@itwin/core-i18n': 5.0.2_@itwin+core-bentley@5.0.2
@@ -112,15 +110,13 @@ importers:
       '@itwin/ecschema-metadata': 5.0.2_5rd62u62hivc55lyrtlyvko5oy
       '@itwin/ecschema-rpcinterface-common': 5.0.2_bmrnhb627kvjt55ib4ndnpf62u
       '@itwin/ecschema-rpcinterface-impl': 5.0.2_ihua5vsgo74s2qbvl4kgvmbcsu
-      '@itwin/electron-authorization': 0.21.1_tzctxntqpbcpu5eakwy4ph5rfy
+      '@itwin/electron-authorization': 0.21.1_bbcnhhtjmv7meqfsabjgeblcx4
       '@itwin/express-server': 5.0.2_whfxkxiwbw6g266knshymp2yuq
       '@itwin/imodel-browser-react': 1.3.1_nnrd3gsncyragczmpvfhocinkq
       '@itwin/imodel-components-react': 5.11.1_ue2tqbejnsftjw4f56iy6eawyu
       '@itwin/imodels-access-backend': 6.0.1_lkvk5enowiuck4l2wi5vynlyqy
-      '@itwin/imodels-access-common': 6.0.1_2eko44pystf3oym2lvcpw45vbq
       '@itwin/imodels-access-frontend': 6.0.1_5axqp3fdobsckjujgfyj5tv6re
       '@itwin/imodels-client-authoring': 6.0.1
-      '@itwin/imodels-client-management': 6.0.1
       '@itwin/itwinui-css': 1.12.10
       '@itwin/itwinui-icons-react': 2.10.0_nnrd3gsncyragczmpvfhocinkq
       '@itwin/itwinui-illustrations-react': 2.1.0_nnrd3gsncyragczmpvfhocinkq
@@ -143,7 +139,7 @@ importers:
       '@itwin/webgl-compatibility': 5.0.2
       '@types/dotenv-flow': 3.3.3
       dotenv-flow: 3.3.0
-      electron: 35.6.0
+      electron: 36.6.0
       minimist: 1.2.8
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
@@ -189,16 +185,14 @@ importers:
       '@itwin/ecschema-rpcinterface-common': ^5.0.0
       '@itwin/frontend-devtools': ^5.0.0
       '@itwin/imodel-components-react': ^5.5.0
-      '@itwin/imodels-access-common': ^6.0.1
       '@itwin/imodels-access-frontend': ^6.0.1
-      '@itwin/imodels-client-management': ^6.0.1
       '@itwin/itwinui-react': ^3.18.0
       '@itwin/measure-tools-react': latest
       '@itwin/presentation-common': ^5.0.0
       '@itwin/presentation-components': ^5.12.0
       '@itwin/presentation-frontend': ^5.0.0
       '@itwin/property-grid-react': ^1.16.0
-      '@itwin/reality-data-client': ^1.1.0
+      '@itwin/reality-data-client': ^1.3.0
       '@itwin/tree-widget-react': latest
       '@itwin/unified-selection': ^1.3.0
       '@itwin/unified-selection-react': ^1.0.0
@@ -235,9 +229,7 @@ importers:
       '@itwin/ecschema-rpcinterface-common': 5.0.2_bmrnhb627kvjt55ib4ndnpf62u
       '@itwin/frontend-devtools': 5.0.2_mv67ddnq2cuiqd2bm552nbqzmm
       '@itwin/imodel-components-react': 5.11.1_ue2tqbejnsftjw4f56iy6eawyu
-      '@itwin/imodels-access-common': 6.0.1_2eko44pystf3oym2lvcpw45vbq
       '@itwin/imodels-access-frontend': 6.0.1_5axqp3fdobsckjujgfyj5tv6re
-      '@itwin/imodels-client-management': 6.0.1
       '@itwin/itwinui-react': 3.18.3_nnrd3gsncyragczmpvfhocinkq
       '@itwin/measure-tools-react': 0.28.0_zi4ps5coipdoyvdjthdk55t6w4
       '@itwin/presentation-common': 5.0.2_hecqowngj52kg3vcfl5vlt4o3u
@@ -285,7 +277,6 @@ importers:
       '@itwin/ecschema-rpcinterface-common': ^5.0.0
       '@itwin/electron-authorization': ^0.21.0
       '@itwin/imodel-components-react': ^5.5.0
-      '@itwin/imodels-client-management': ^6.0.1
       '@itwin/itwinui-react': ^3.18.0
       '@itwin/presentation-common': ^5.0.0
       '@itwin/presentation-components': ^5.12.0
@@ -297,7 +288,7 @@ importers:
       '@types/react': ^18.2.9
       '@types/react-dom': ^18.2.4
       copyfiles: ^2.1.0
-      electron: ^35.0.0
+      electron: ^36.0.0
       eslint: ^9.13.0
       identity-obj-proxy: ^3.0.0
       react: ^18.2.0
@@ -307,7 +298,6 @@ importers:
       rimraf: ^3.0.2
       typescript: ~5.6.2
     dependencies:
-      '@itwin/imodels-client-management': 6.0.1
       '@itwin/viewer-react': link:../viewer-react
     devDependencies:
       '@itwin/appui-abstract': 5.0.2_@itwin+core-bentley@5.0.2
@@ -317,7 +307,7 @@ importers:
       '@itwin/core-backend': 5.0.2_bmrnhb627kvjt55ib4ndnpf62u
       '@itwin/core-bentley': 5.0.2
       '@itwin/core-common': 5.0.2_veoghzsxqr3n6m3fosp5xplpg4
-      '@itwin/core-electron': 5.0.2_ymeu5saa2smsnfdjenmo5mceha
+      '@itwin/core-electron': 5.0.2_3nrgahtpsuvgzy4kwt4zsyqbsm
       '@itwin/core-frontend': 5.0.2_765qzte6vvjjis42zgb4qybaue
       '@itwin/core-geometry': 5.0.2
       '@itwin/core-markup': 5.0.2_2fwbzkd7xirgjtcvesdhb7efti
@@ -326,7 +316,7 @@ importers:
       '@itwin/core-react': 5.11.1_mytenivfuhevbhgv7z34k5zoi4
       '@itwin/ecschema-metadata': 5.0.2_5rd62u62hivc55lyrtlyvko5oy
       '@itwin/ecschema-rpcinterface-common': 5.0.2_bmrnhb627kvjt55ib4ndnpf62u
-      '@itwin/electron-authorization': 0.21.1_tzctxntqpbcpu5eakwy4ph5rfy
+      '@itwin/electron-authorization': 0.21.1_bbcnhhtjmv7meqfsabjgeblcx4
       '@itwin/imodel-components-react': 5.11.1_ue2tqbejnsftjw4f56iy6eawyu
       '@itwin/itwinui-react': 3.18.3_nnrd3gsncyragczmpvfhocinkq
       '@itwin/presentation-common': 5.0.2_hecqowngj52kg3vcfl5vlt4o3u
@@ -338,7 +328,7 @@ importers:
       '@types/react': 18.3.23
       '@types/react-dom': 18.3.7_@types+react@18.3.23
       copyfiles: 2.4.1
-      electron: 35.6.0
+      electron: 36.6.0
       eslint: 9.30.0
       identity-obj-proxy: 3.0.0
       react: 18.3.1
@@ -441,9 +431,7 @@ importers:
       '@itwin/ecschema-metadata': ^5.0.0
       '@itwin/ecschema-rpcinterface-common': ^5.0.0
       '@itwin/imodel-components-react': ^5.5.0
-      '@itwin/imodels-access-common': ^6.0.1
       '@itwin/imodels-access-frontend': ^6.0.1
-      '@itwin/imodels-client-management': ^6.0.1
       '@itwin/itwinui-illustrations-react': ^2.0.1
       '@itwin/itwinui-react': ^3.18.0
       '@itwin/presentation-common': ^5.0.0
@@ -451,7 +439,7 @@ importers:
       '@itwin/presentation-core-interop': ^1.3.0
       '@itwin/presentation-frontend': ^5.0.0
       '@itwin/presentation-shared': ^1.2.0
-      '@itwin/reality-data-client': ^1.0.0
+      '@itwin/reality-data-client': ^1.3.0
       '@itwin/unified-selection': ^1.3.0
       '@itwin/unified-selection-react': ^1.0.0
       '@itwin/webgl-compatibility': ^5.0.0
@@ -499,9 +487,7 @@ importers:
       '@itwin/ecschema-metadata': 5.0.2_5rd62u62hivc55lyrtlyvko5oy
       '@itwin/ecschema-rpcinterface-common': 5.0.2_bmrnhb627kvjt55ib4ndnpf62u
       '@itwin/imodel-components-react': 5.11.1_ue2tqbejnsftjw4f56iy6eawyu
-      '@itwin/imodels-access-common': 6.0.1_2eko44pystf3oym2lvcpw45vbq
       '@itwin/imodels-access-frontend': 6.0.1_5axqp3fdobsckjujgfyj5tv6re
-      '@itwin/imodels-client-management': 6.0.1
       '@itwin/presentation-common': 5.0.2_hecqowngj52kg3vcfl5vlt4o3u
       '@itwin/presentation-components': 5.12.4_redndd6qrgbz3jkw2q76habmxi
       '@itwin/presentation-frontend': 5.0.2_gcxg3iq7a3hzrzzr4re7vxkhje
@@ -542,7 +528,6 @@ importers:
       '@itwin/ecschema-metadata': ^5.0.0
       '@itwin/ecschema-rpcinterface-common': ^5.0.0
       '@itwin/imodel-components-react': ^5.5.0
-      '@itwin/imodels-client-management': ^6.0.1
       '@itwin/itwinui-react': ^3.18.0
       '@itwin/presentation-common': ^5.0.0
       '@itwin/presentation-components': ^5.12.0
@@ -569,7 +554,6 @@ importers:
       typescript: ~5.6.2
       vitest: ^3.2.4
     dependencies:
-      '@itwin/imodels-client-management': 6.0.1
       '@itwin/viewer-react': link:../viewer-react
     devDependencies:
       '@itwin/appui-abstract': 5.0.2_@itwin+core-bentley@5.0.2
@@ -3488,7 +3472,7 @@ packages:
       flatbuffers: 1.12.0
       js-base64: 3.7.7
 
-  /@itwin/core-electron/5.0.2_ymeu5saa2smsnfdjenmo5mceha:
+  /@itwin/core-electron/5.0.2_3nrgahtpsuvgzy4kwt4zsyqbsm:
     resolution: {integrity: sha512-JWCFWVbisVEO8l6K9R5oDz7piZC4RkyrPIma1RySGk3E7ToBV95wLXUIDQzV7m6PLBDBVpnbyTBYbd9jSAHbnw==}
     engines: {node: ^20.0.0 || ^22.0.0}
     peerDependencies:
@@ -3503,7 +3487,7 @@ packages:
       '@itwin/core-common': 5.0.2_veoghzsxqr3n6m3fosp5xplpg4
       '@itwin/core-frontend': 5.0.2_765qzte6vvjjis42zgb4qybaue
       '@openid/appauth': 1.3.2
-      electron: 35.6.0
+      electron: 36.6.0
       open: 7.4.2
       username: 7.0.0
     transitivePeerDependencies:
@@ -3715,7 +3699,7 @@ packages:
       '@itwin/ecschema-rpcinterface-common': 5.0.2_bmrnhb627kvjt55ib4ndnpf62u
     dev: false
 
-  /@itwin/electron-authorization/0.21.1_tzctxntqpbcpu5eakwy4ph5rfy:
+  /@itwin/electron-authorization/0.21.1_bbcnhhtjmv7meqfsabjgeblcx4:
     resolution: {integrity: sha512-BLBaSjwXWQ6Fv+eq2R35Y6lngk9komvXJsZwjM76XPiwgtr+MlOe/dEEHZRYAKfPu2prrFYPopbq6clWvFYRvA==}
     peerDependencies:
       '@itwin/core-bentley': ^5.0.0
@@ -3724,7 +3708,7 @@ packages:
       '@itwin/core-bentley': 5.0.2
       '@itwin/core-common': 4.11.6_veoghzsxqr3n6m3fosp5xplpg4
       '@openid/appauth': 1.3.2
-      electron: 35.6.0
+      electron: 36.6.0
       electron-store: 8.2.0
       username: 7.0.0
     transitivePeerDependencies:
@@ -9199,8 +9183,8 @@ packages:
     resolution: {integrity: sha512-7EH2G59nLsEMj97fpDuvVcYi6lwTcM1xuWw3PssD8xzboAW7zj7iB3COEEEATUfjLHrs5uKBLQT03V/8URx06g==}
     dev: true
 
-  /electron/35.6.0:
-    resolution: {integrity: sha512-C+fzUIVkF6HzJjVeCjd6efL5Y01DwuQAnU6yqwh09grYvSQnlMJDC1qsQ8lSWl+sNYwtwUHAdZd7JtUi6Uyo/A==}
+  /electron/36.6.0:
+    resolution: {integrity: sha512-Tkkw4udDADEWKdbhzckt2CS0gwDTXwZUb2JWxX01HJXAeb8SBlTdQUtxUiAwIIWe0suGuot+uBs1bDPz931A6w==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
     requiresBuild: true

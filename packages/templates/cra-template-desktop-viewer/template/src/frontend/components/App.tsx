@@ -1,7 +1,8 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import type { DesktopInitializerParams } from "@itwin/desktop-viewer-react";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
@@ -23,7 +24,6 @@ import { unifiedSelectionStorage } from "../../selectionStorage";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import { SettingsContextProvider } from "../services/SettingsContext";
 import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
-import { IModelConnection } from "@itwin/core-frontend";
 
 const App = () => {
   window.ITWIN_VIEWER_HOME = window.location.origin;

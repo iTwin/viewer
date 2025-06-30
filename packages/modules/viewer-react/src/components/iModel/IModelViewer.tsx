@@ -3,22 +3,13 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
-import type {
-  FrontstageDef,
-  FrontstageProvider
-} from "@itwin/appui-react";
+
+import type { FrontstageDef, FrontstageProvider } from "@itwin/appui-react";
 import { UiFramework } from "@itwin/appui-react";
-import {
-  BackstageComposer,
-  ConfigurableUiContent
-} from "@itwin/appui-react";
+import { BackstageComposer, ConfigurableUiContent } from "@itwin/appui-react";
 import React, { useEffect, useState } from "react";
 
 import type { ViewerFrontstage } from "../../types.js";
-interface ModelProps {
-  frontstages: ViewerFrontstage[];
-  // theme?: ThemeId;
-}
 
 /*
 In the upgrade to react 18 and enabling StrictMode, the setting of frontstages started failing 50% of the time. From investigation,
@@ -26,10 +17,11 @@ the new rendering behavior from react 18 where components are mounted, unmounted
 hooks was causing a race condition. By adding a state variable and moving the call to setActiveFrontstageDef to its own useEffect hook, 
 the issue is no longer occuring.
 */
-export const IModelViewer: React.FC<ModelProps> = ({
+export const IModelViewer = ({
   frontstages,
-}: // theme,
-ModelProps) => {
+}: {
+  frontstages: ViewerFrontstage[];
+}) => {
   const [defaultFrontstageDef, setDefaultFrontstageDef] =
     useState<FrontstageDef>();
 
@@ -66,9 +58,5 @@ ModelProps) => {
   }, [frontstages]);
 
   // there will always be at least one (for the default frontstage). Wait for it to be loaded into the list before rendering the content
-  return (
-    // <ThemeManager theme={theme}>
-    <ConfigurableUiContent appBackstage={<BackstageComposer />} />
-    // </ThemeManager>
-  );
+  return <ConfigurableUiContent appBackstage={<BackstageComposer />} />;
 };

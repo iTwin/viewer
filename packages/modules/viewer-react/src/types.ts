@@ -5,7 +5,6 @@
 
 import type {
   BackstageItem,
-  ColorTheme,
   FrontstageProvider,
   IModelViewportControlOptions,
   StandardFrontstageProps,
@@ -114,8 +113,6 @@ export interface SelectionScopesProps {
 }
 
 export type LoaderProps = AllOrNone<UnifiedSelectionProps> & {
-  /** color theme */
-  // theme?: ColorTheme | string;
   /** Default UI configuration */
   defaultUiConfig?: ViewerDefaultFrontstageConfig;
   /** Optional callback function when iModel is connected */

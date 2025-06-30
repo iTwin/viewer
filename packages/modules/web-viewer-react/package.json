@@ -27,7 +27,6 @@
     "lint:fix": "npm run -s lint -- --fix"
   },
   "dependencies": {
-    "@itwin/imodels-client-management": "^6.0.1",
     "@itwin/viewer-react": "workspace:*"
   },
   "devDependencies": {
@@ -81,8 +80,8 @@
     "@itwin/presentation-common": "^5.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-redux": "^9",
-    "redux": "^5"
+    "react-redux": "^9.0.0",
+    "redux": "^5.0.0"
   },
   "keywords": [
     "Bentley",

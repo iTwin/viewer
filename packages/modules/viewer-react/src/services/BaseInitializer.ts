@@ -3,6 +3,7 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
+
 import {
   AppNotificationManager,
   FrameworkAccuDraw,
@@ -12,18 +13,17 @@ import {
   UiFramework,
 } from "@itwin/appui-react";
 import { UiComponents } from "@itwin/components-react";
+import type { IModelAppOptions } from "@itwin/core-frontend";
 import { AccuSnap, IModelApp, SnapMode } from "@itwin/core-frontend";
 import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
 import { FrontendIModelsAccess } from "@itwin/imodels-access-frontend";
-import { IModelsClient } from "@itwin/imodels-client-management";
 import { Presentation } from "@itwin/presentation-frontend";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
-import { ViewerPerformance } from "../services/telemetry/index.js";
-import { makeCancellable } from "../utilities/MakeCancellable.js";
 
-import type { IModelAppOptions } from "@itwin/core-frontend";
+import { ViewerPerformance } from "../services/telemetry/index.js";
 import type { ViewerInitializerParams } from "../types.js";
+import { makeCancellable } from "../utilities/MakeCancellable.js";
 
 // initialize required iTwin.js services
 export class BaseInitializer {
@@ -82,7 +82,9 @@ export class BaseInitializer {
       );
     }
 
-    if (UiCore.initialized && !this._initializing) {  // eslint-disable-line @typescript-eslint/no-deprecated
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    if (UiCore.initialized && !this._initializing) {
+       
       return (this._initialized = Promise.resolve());
     } else if (this._initializing) {
       // in the process of initializing, so return
@@ -176,13 +178,11 @@ export const getIModelAppOptions = (
 
   const hubAccess =
     options?.hubAccess ??
-    new FrontendIModelsAccess(
-      new IModelsClient({
-        api: {
-          baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/imodels`,
-        },
-      })
-    );
+    new FrontendIModelsAccess({
+      api: {
+        baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/imodels`,
+      },
+    });
 
   const localization =
     options?.localization ??
