@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Tue, 27 May 2025 16:14:39 GMT and should not be manually modified.
+This log was last generated on Tue, 17 Jun 2025 18:10:29 GMT and should not be manually modified.
+
+## 4.5.7
+Tue, 17 Jun 2025 18:10:29 GMT
+
+### Patches
+
+- pinning acorn to 8.14.0
 
 ## 4.5.6
 Tue, 27 May 2025 16:14:39 GMT

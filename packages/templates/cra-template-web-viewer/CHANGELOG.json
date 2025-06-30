@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-web-viewer",
   "entries": [
     {
+      "version": "4.4.6",
+      "tag": "@itwin/cra-template-web-viewer_v4.4.6",
+      "date": "Tue, 17 Jun 2025 18:10:29 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "pinning acorn to 8.14.0"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.4.5",
       "tag": "@itwin/cra-template-web-viewer_v4.4.5",
       "date": "Tue, 20 May 2025 14:26:07 GMT",
