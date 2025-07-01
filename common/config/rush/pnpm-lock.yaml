@@ -55,9 +55,6 @@ importers:
       '@itwin/itwinui-react': ^3.18.0
       '@itwin/itwinui-variables': ^2.0.0
       '@itwin/measure-tools-react': latest
-      '@itwin/object-storage-azure': ^3.0.0
-      '@itwin/object-storage-core': ^3.0.0
-      '@itwin/object-storage-google': ^3.0.0
       '@itwin/presentation-backend': ^5.0.0
       '@itwin/presentation-common': ^5.0.0
       '@itwin/presentation-components': ^5.12.0
@@ -125,9 +122,6 @@ importers:
       '@itwin/itwinui-react': 3.18.3_nnrd3gsncyragczmpvfhocinkq
       '@itwin/itwinui-variables': 2.1.2
       '@itwin/measure-tools-react': 0.28.0_zi4ps5coipdoyvdjthdk55t6w4
-      '@itwin/object-storage-azure': 3.0.1
-      '@itwin/object-storage-core': 3.0.1
-      '@itwin/object-storage-google': 3.0.1
       '@itwin/presentation-backend': 5.0.2_eso37niovalm5vyz2oood6735m
       '@itwin/presentation-common': 5.0.2_hecqowngj52kg3vcfl5vlt4o3u
       '@itwin/presentation-components': 5.12.4_redndd6qrgbz3jkw2q76habmxi

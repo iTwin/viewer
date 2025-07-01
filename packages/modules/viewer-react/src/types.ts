@@ -123,7 +123,7 @@ export type LoaderProps = AllOrNone<UnifiedSelectionProps> & {
   frontstages?: ViewerFrontstage[];
   /** additional viewport options for the default frontstage's viewport control */
   viewportOptions?: ViewerViewportControlOptions;
-  /** [UI Providers](https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/) to register */
+  /** [UI Providers](https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/) to register. Should be memoized. */
   uiProviders?: UiItemsProvider[];
   /** options for creating the default viewState */
   viewCreatorOptions?: ViewerViewCreator3dOptions;

@@ -5,14 +5,13 @@
 
 
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
-import "./IModelLoader.scss";
 
-import type { UiItemsProvider } from "@itwin/appui-react";
 import { StateManager, UiFramework } from "@itwin/appui-react";
 import type { IModelConnection } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
-import React, { useEffect, useMemo, useState } from "react";
+import { Flex } from "@itwin/itwinui-react";
+import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
 import { useFrontstages, useUiProviders } from "../../hooks/index.js";
@@ -45,12 +44,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   } = viewerProps;
   const { error, connection } = useConnection(viewerProps);
 
-  const providers = useMemo<UiItemsProvider[]>(() => {
-    const providers = [...(uiProviders || [])];
-    return providers;
-  }, [uiProviders]);
-
-  useUiProviders(providers);
+  useUiProviders(uiProviders);
 
   const selectionScopes = useUnifiedSelectionScopes({
     iModelConnection: connection,
@@ -100,7 +94,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     throw error;
   } else {
     return (
-      <div className="itwin-viewer-container">
+      <div style={{ height: "100%" }}>
         {finalFrontstages &&
         (connection || noConnectionRequired) &&
         StateManager.store ? ( // eslint-disable-line @typescript-eslint/no-deprecated
@@ -115,14 +109,14 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
             </SelectionStorageContextProvider>
           </Provider>
         ) : (
-          <div className="itwin-viewer-loading-container">
+          <Flex justifyContent="center" style={{ height: "100%" }}>
             {loadingComponent ?? (
               <SvgIModelLoader
                 data-testid="loader-wrapper"
-                className="itwin-viewer-loading-icon"
+                style={{ width: "64px", height: "64px" }}
               />
             )}
-          </div>
+          </Flex>
         )}
       </div>
     );
