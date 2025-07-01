@@ -233,7 +233,6 @@ const ViewerHome: React.FC = () => {
         // ]}
         defaultUiConfig={{ cornerButton: <Itwin /> }}
         // renderSys={{doIdleWork: true}}
-        selectionStorage={unifiedSelectionStorage}
         selectionScopes={{
           active: "element",
           available: availableSelectionScopes,

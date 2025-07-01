@@ -6,7 +6,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { BaseInitializer } from "../services/BaseInitializer.js";
-import { isUnifiedSelectionProps, ViewerCommonProps, ViewerInitializerParams } from "../types.js";
+import { ViewerCommonProps } from "../types.js";
 import { getInitializationOptions, isEqual } from "../utilities/index.js";
 import { useIsMounted } from "./useIsMounted.js";
 
@@ -33,8 +33,7 @@ export const useBaseViewerInitializer = (
     ) {
       setBaseViewerInitOptions(initializationOptions);
       setBaseViewerInitialized(false);
-      const initializerParams = overridePresentationProps(options);
-      void BaseInitializer.initialize(initializerParams).then(() => {
+      void BaseInitializer.initialize(options).then(() => {
         void BaseInitializer.initialized.then(() => {
           setBaseViewerInitialized(true);
         });
@@ -47,24 +46,3 @@ export const useBaseViewerInitializer = (
 
   return baseViewerInitialized;
 };
-
-function overridePresentationProps(
-  inputProps: ViewerCommonProps | undefined
-): ViewerInitializerParams | undefined {
-  return inputProps
-    ? {
-        ...inputProps,
-        presentationProps: {
-          ...inputProps.presentationProps,
-          ...(isUnifiedSelectionProps(inputProps)
-            ? {
-                selection: {
-                  ...inputProps.presentationProps?.selection, // eslint-disable-line @typescript-eslint/no-deprecated
-                  selectionStorage: inputProps.selectionStorage,
-                },
-              }
-            : {}),
-        },
-      }
-    : undefined;
-}

@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
-* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
-* See LICENSE.md in the project root for license terms and full copyright notice.
-*--------------------------------------------------------------------------------------------*/
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import type {
   StatusBarCustomItem,
@@ -18,13 +18,14 @@ import {
   StatusBarSection,
   TileLoadingIndicator,
   ToolAssistanceField,
-  UiFramework,
+  useActiveIModelConnection,
 } from "@itwin/appui-react";
-import { IModelConnection } from "@itwin/core-frontend";
-import { getInstancesCount } from "@itwin/presentation-common";
 import { createIModelKey } from "@itwin/presentation-core-interop";
-import { Presentation } from "@itwin/presentation-frontend";
-import { Selectables, SelectionStorage } from "@itwin/unified-selection";
+import {
+  createStorage,
+  Selectables,
+  SelectionStorage,
+} from "@itwin/unified-selection";
 import { useUnifiedSelectionScopes } from "../../../hooks/useUnifiedSelectionScopes.js";
 
 import type { ViewerDefaultStatusbarItems } from "../../../types.js";
@@ -93,7 +94,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
           id: "SelectionInfo",
           section: StatusBarSection.Right,
           itemPriority: 40,
-          content: <SelectionCountField />
+          content: <SelectionCountField />,
         })
       );
     }
@@ -103,7 +104,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
 }
 
 function SelectionCountField() {
-  const imodel = UiFramework.getIModelConnection();
+  const imodel = useActiveIModelConnection();
   if (!imodel) {
     throw new Error(
       `IModel connection is not available for selection count toolbar field`
@@ -113,43 +114,32 @@ function SelectionCountField() {
   const selectionStorage = React.useContext(selectionStorageContext);
 
   const [count, setCount] = React.useState(
-    selectionStorage
-      ? getSelectablesCountInStorage(selectionStorage, createIModelKey(imodel))
-      : getInstancesCountInPresentationSelectionManager(imodel)
+    getSelectablesCountInStorage(selectionStorage, createIModelKey(imodel))
   );
   React.useEffect(() => {
-    if (selectionStorage) {
-      return selectionStorage.selectionChangeEvent.addListener(
-        ({ imodelKey, level }) => {
-          if (level !== 0) {
-            return;
-          }
-          setCount(getSelectablesCountInStorage(selectionStorage, imodelKey));
+    return selectionStorage.selectionChangeEvent.addListener(
+      ({ imodelKey, level }) => {
+        if (level !== 0) {
+          return;
         }
-      );
-    }
-    // eslint-disable-next-line @typescript-eslint/no-deprecated
-    return Presentation.selection.selectionChange.addListener((args) => {
-      if (args.level !== 0) {
-        return;
+        setCount(getSelectablesCountInStorage(selectionStorage, imodelKey));
       }
-      setCount(getInstancesCountInPresentationSelectionManager(imodel));
-    });
+    );
   }, [selectionStorage, imodel]);
 
   return <AppUiSelectionCountField count={count} />;
 }
 
-const selectionStorageContext = React.createContext<
-  SelectionStorage | undefined
->(undefined);
+const selectionStorageContext = React.createContext<SelectionStorage>(
+  createStorage()
+);
 
 /** @internal */
 export function SelectionStorageContextProvider({
   selectionStorage,
   children,
 }: React.PropsWithChildren<{
-  selectionStorage?: SelectionStorage | undefined;
+  selectionStorage: SelectionStorage;
 }>) {
   return (
     <selectionStorageContext.Provider value={selectionStorage}>
@@ -164,13 +154,6 @@ function getSelectablesCountInStorage(
 ): number {
   const selection = storage.getSelection({ imodelKey });
   return Selectables.size(selection);
-}
-
-function getInstancesCountInPresentationSelectionManager(
-  imodel: IModelConnection
-) {
-  const selection = Presentation.selection.getSelection(imodel);  // eslint-disable-line @typescript-eslint/no-deprecated
-  return getInstancesCount(selection);
 }
 
 function SelectionScopeField() {

@@ -57,6 +57,5 @@ export const IModelViewer = ({
     };
   }, [frontstages]);
 
-  // there will always be at least one (for the default frontstage). Wait for it to be loaded into the list before rendering the content
   return <ConfigurableUiContent appBackstage={<BackstageComposer />} />;
 };

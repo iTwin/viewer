@@ -1,13 +1,12 @@
 /*---------------------------------------------------------------------------------------------
-* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
-* See LICENSE.md in the project root for license terms and full copyright notice.
-*--------------------------------------------------------------------------------------------*/
-
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 
 import { StateManager, UiFramework } from "@itwin/appui-react";
-import type { IModelConnection } from "@itwin/core-frontend";
+import { IModelConnection } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
 import { Flex } from "@itwin/itwinui-react";
@@ -24,12 +23,18 @@ import {
 } from "../../services/iModel/index.js";
 import { ViewerPerformance } from "../../services/telemetry/index.js";
 import type { ModelLoaderProps } from "../../types.js";
-import { isUnifiedSelectionProps } from "../../types.js";
 import {
   SelectionScopesContextProvider,
   SelectionStorageContextProvider,
 } from "../app-ui/providers/index.js";
 import { IModelViewer } from "./IModelViewer.js";
+import { createStorage } from "@itwin/unified-selection";
+import { createIModelKey } from "@itwin/presentation-core-interop";
+
+export const unifiedSelectionStorage = createStorage();
+IModelConnection.onClose.addListener((iModel) => {
+  unifiedSelectionStorage.clearStorage({ imodelKey: createIModelKey(iModel) });
+});
 
 const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   const {
@@ -40,7 +45,6 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     blankConnectionViewState,
     uiProviders,
     loadingComponent,
-    selectionStorage,
   } = viewerProps;
   const { error, connection } = useConnection(viewerProps);
 
@@ -48,18 +52,12 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
 
   const selectionScopes = useUnifiedSelectionScopes({
     iModelConnection: connection,
-    selectionScopes: isUnifiedSelectionProps(viewerProps)
-      ? viewerProps.selectionScopes
-      : undefined,
+    selectionScopes: viewerProps.selectionScopes,
   });
   useUnifiedSelectionSync({
     iModelConnection: connection,
     activeSelectionScope: selectionScopes.activeScope.def,
-    ...(isUnifiedSelectionProps(viewerProps)
-      ? {
-          selectionStorage,
-        }
-      : {}),
+    selectionStorage: unifiedSelectionStorage,
   });
 
   const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
@@ -101,7 +99,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
           // eslint-disable-next-line @typescript-eslint/no-deprecated
           <Provider store={StateManager.store}>
             <SelectionStorageContextProvider
-              selectionStorage={viewerProps.selectionStorage}
+              selectionStorage={unifiedSelectionStorage}
             >
               <SelectionScopesContextProvider selectionScopes={selectionScopes}>
                 <IModelViewer frontstages={finalFrontstages} />

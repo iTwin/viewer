@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
-* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
-* See LICENSE.md in the project root for license terms and full copyright notice.
-*--------------------------------------------------------------------------------------------*/
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
 
 import { ColorTheme, UiFramework, UiItemsManager } from "@itwin/appui-react";
 import { BeEvent } from "@itwin/core-bentley";
@@ -20,16 +20,21 @@ import type {
   BlankViewerProps,
   ViewerFrontstage,
 } from "../../../types.js";
-import { TestUiProvider, TestUiProvider2 } from "../../mocks/MockUiProviders.js";
+import {
+  TestUiProvider,
+  TestUiProvider2,
+} from "../../mocks/MockUiProviders.js";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("react-redux", async () => {
-  const original = await vi.importActual<typeof import("react-redux")>("react-redux");
+  const original = await vi.importActual<typeof import("react-redux")>(
+    "react-redux"
+  );
 
   return {
     ...original,
     Provider: vi.fn().mockImplementation(({ children }: any) => children),
-  }
+  };
 });
 
 vi.mock("@itwin/appui-react", async (importActual) => {
@@ -52,22 +57,26 @@ vi.mock("@itwin/appui-react", async (importActual) => {
     UiItemsManager: Object.create(original.UiItemsManager, {
       getBackstageItems: {
         value: vi.fn().mockReturnValue([]),
-      }
+      },
     }),
-  }
+  };
 });
 
 vi.mock("@itwin/appui-abstract");
 
 vi.mock("@itwin/presentation-frontend", async (importActual) => {
-  const original = await importActual<typeof import("@itwin/presentation-frontend")>();
+  const original = await importActual<
+    typeof import("@itwin/presentation-frontend")
+  >();
 
   return {
     ...original,
     Presentation: {
       ...original.Presentation,
       initialize: vi.fn().mockImplementation(() => Promise.resolve()),
-      registerInitializationHandler: vi.fn().mockImplementation(() => Promise.resolve()),
+      registerInitializationHandler: vi
+        .fn()
+        .mockImplementation(() => Promise.resolve()),
       selection: {
         scopes: {
           getSelectionScopes: vi.fn(async () => []),
@@ -126,16 +135,16 @@ vi.mock("@itwin/core-frontend", async () => {
         close: vi.fn(),
         selectionSet: {
           onChanged: new BeEvent<any>(),
-          elements: new Set()
+          elements: new Set(),
         },
       } as any),
     },
     ItemField: {},
     CompassMode: {},
     RotationMode: {},
-    AccuDraw: class { },
-    AccuSnap: class { },
-    ToolAdmin: class { },
+    AccuDraw: class {},
+    AccuSnap: class {},
+    ToolAdmin: class {},
     WebViewerApp: {
       startup: vi.fn().mockResolvedValue(true),
     },
@@ -165,10 +174,11 @@ vi.mock("../../../components/iModel/IModelViewer", () => ({
 
 vi.mock("@itwin/unified-selection", { spy: true });
 
-vi.mocked(unifiedSelection.enableUnifiedSelectionSyncWithIModel)
-  .mockImplementation(() => {
-    return vi.fn();
-  });
+vi.mocked(
+  unifiedSelection.enableUnifiedSelectionSyncWithIModel
+).mockImplementation(() => {
+  return vi.fn();
+});
 
 const mockITwinId = "mockITwinId";
 const mockIModelId = "mockIModelId";
@@ -182,7 +192,7 @@ describe("IModelLoader", () => {
       isOpen: true,
       selectionSet: {
         onChanged: new BeEvent<any>(),
-        elements: new Set()
+        elements: new Set(),
       },
     } as any);
 
@@ -193,10 +203,9 @@ describe("IModelLoader", () => {
       isOpen: true,
       selectionSet: {
         onChanged: new BeEvent<any>(),
-        elements: new Set()
+        elements: new Set(),
       },
     } as any);
-
   });
 
   afterEach(() => {
@@ -326,21 +335,20 @@ describe("IModelLoader", () => {
       getRpcProps: vi.fn(),
       selectionSet: {
         onChanged: new BeEvent<any>(),
-        elements: new Set()
+        elements: new Set(),
       },
     };
 
-    vi.spyOn(IModelServices, "openRemoteIModel")
-      .mockResolvedValue(connection as any);
+    vi.spyOn(IModelServices, "openRemoteIModel").mockResolvedValue(
+      connection as any
+    );
     const result = render(
-      <IModelLoader
-        iTwinId={mockITwinId}
-        iModelId={mockIModelId}
-        selectionStorage={unifiedSelection.createStorage()}
-      />
+      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
     );
     await waitFor(() => result.getByTestId("viewer"));
-    expect(unifiedSelection.enableUnifiedSelectionSyncWithIModel).toHaveBeenCalled();
+    expect(
+      unifiedSelection.enableUnifiedSelectionSyncWithIModel
+    ).toHaveBeenCalled();
   });
 
   it("renders without a viewState if the default frontstage does not require a connection", async () => {
@@ -371,19 +379,22 @@ describe("IModelLoader", () => {
       close: vi.fn(),
       selectionSet: {
         onChanged: new BeEvent<any>(),
-        elements: new Set()
+        elements: new Set(),
       },
     };
 
-    vi.spyOn(IModelServices, "openRemoteIModel")
-      .mockResolvedValue(connection as any);
+    vi.spyOn(IModelServices, "openRemoteIModel").mockResolvedValue(
+      connection as any
+    );
 
     const result = render(
       <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
     );
 
     await waitFor(() => result.getByTestId("viewer"));
-    expect(unifiedSelection.enableUnifiedSelectionSyncWithIModel).not.toHaveBeenCalled();
+    expect(
+      unifiedSelection.enableUnifiedSelectionSyncWithIModel
+    ).not.toHaveBeenCalled();
     result.unmount();
     await waitFor(() => {
       expect(connection.close).toHaveBeenCalled();
@@ -397,12 +408,13 @@ describe("IModelLoader", () => {
       close: vi.fn(),
       selectionSet: {
         onChanged: new BeEvent<any>(),
-        elements: new Set()
+        elements: new Set(),
       },
     };
 
-    vi.spyOn(IModelServices, "openRemoteIModel")
-      .mockResolvedValue(connection as any);
+    vi.spyOn(IModelServices, "openRemoteIModel").mockResolvedValue(
+      connection as any
+    );
     const result = render(
       <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
     );
@@ -427,11 +439,12 @@ describe("IModelLoader", () => {
       close: vi.fn(),
       selectionSet: {
         onChanged: new BeEvent<any>(),
-        elements: new Set()
+        elements: new Set(),
       },
     };
-    vi.spyOn(IModelServices, "openRemoteIModel")
-      .mockResolvedValue(connection as any);
+    vi.spyOn(IModelServices, "openRemoteIModel").mockResolvedValue(
+      connection as any
+    );
     const result = render(
       <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
     );
@@ -461,7 +474,7 @@ describe("IModelLoader", () => {
                 isOpen: true,
                 selectionSet: {
                   onChanged: new BeEvent<any>(),
-                  elements: new Set()
+                  elements: new Set(),
                 },
               } as any),
             500
