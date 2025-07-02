@@ -343,7 +343,7 @@ describe("IModelLoader", () => {
       connection as any
     );
     const result = render(
-      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} />
+      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} selectionStorage={unifiedSelection.createStorage()}/>
     );
     await waitFor(() => result.getByTestId("viewer"));
     expect(
