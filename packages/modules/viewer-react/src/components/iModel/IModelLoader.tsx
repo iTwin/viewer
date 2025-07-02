@@ -22,19 +22,12 @@ import {
   openConnection,
 } from "../../services/iModel/index.js";
 import { ViewerPerformance } from "../../services/telemetry/index.js";
-import type { ModelLoaderProps } from "../../types.js";
+import { isUnifiedSelectionProps, type ModelLoaderProps } from "../../types.js";
 import {
   SelectionScopesContextProvider,
   SelectionStorageContextProvider,
 } from "../app-ui/providers/index.js";
 import { IModelViewer } from "./IModelViewer.js";
-import { createStorage } from "@itwin/unified-selection";
-import { createIModelKey } from "@itwin/presentation-core-interop";
-
-export const unifiedSelectionStorage = createStorage();
-IModelConnection.onClose.addListener((iModel) => {
-  unifiedSelectionStorage.clearStorage({ imodelKey: createIModelKey(iModel) });
-});
 
 const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   const {
@@ -45,6 +38,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     blankConnectionViewState,
     uiProviders,
     loadingComponent,
+    selectionStorage,
   } = viewerProps;
   const { error, connection } = useConnection(viewerProps);
 
@@ -52,12 +46,18 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
 
   const selectionScopes = useUnifiedSelectionScopes({
     iModelConnection: connection,
-    selectionScopes: viewerProps.selectionScopes,
+    selectionScopes: isUnifiedSelectionProps(viewerProps)
+      ? viewerProps.selectionScopes
+      : undefined,
   });
   useUnifiedSelectionSync({
     iModelConnection: connection,
     activeSelectionScope: selectionScopes.activeScope.def,
-    selectionStorage: unifiedSelectionStorage,
+    ...(isUnifiedSelectionProps(viewerProps)
+      ? {
+        selectionStorage,
+      }
+      : {}),
   });
 
   const { finalFrontstages, noConnectionRequired, customDefaultFrontstage } =
@@ -67,6 +67,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       viewportOptions,
       viewCreatorOptions,
       blankConnectionViewState,
+      isUsingDeprecatedSelectionManager: !isUnifiedSelectionProps(viewerProps),
     });
 
   useEffect(() => {
@@ -99,7 +100,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
           // eslint-disable-next-line @typescript-eslint/no-deprecated
           <Provider store={StateManager.store}>
             <SelectionStorageContextProvider
-              selectionStorage={unifiedSelectionStorage}
+              selectionStorage={viewerProps.selectionStorage}
             >
               <SelectionScopesContextProvider selectionScopes={selectionScopes}>
                 <IModelViewer frontstages={finalFrontstages} />

@@ -32,7 +32,7 @@ import type {
   XYAndZ,
 } from "@itwin/core-geometry";
 import type { PresentationProps } from "@itwin/presentation-frontend";
-import type { computeSelection } from "@itwin/unified-selection";
+import type { computeSelection, SelectionStorage } from "@itwin/unified-selection";
 
 export type Without<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]?: never };
 export type XOR<T1, T2> = T1 | T2 extends Record<string, unknown>
@@ -80,6 +80,15 @@ export interface ViewerViewportControlOptions
     | ((iModelConnection: IModelConnection) => Promise<ViewState>);
 }
 
+export interface UnifiedSelectionProps {
+  /** Unified selection storage to synchronize viewport selection with. */
+  selectionStorage: SelectionStorage;
+}
+
+export function isUnifiedSelectionProps(props: AllOrNone<UnifiedSelectionProps> | undefined): props is UnifiedSelectionProps {
+  return typeof props === "object" && "selectionStorage" in props;
+}
+
 export interface SelectionScopesProps {
   /** A map of available selection scopes. The key is the scope id and the value is the scope label and definition. */
   available: {
@@ -103,7 +112,7 @@ export interface SelectionScopesProps {
   onChange?: (id: string) => void;
 }
 
-export type LoaderProps = {
+export type LoaderProps = AllOrNone<UnifiedSelectionProps> & {
   /** Default UI configuration */
   defaultUiConfig?: ViewerDefaultFrontstageConfig;
   /** Optional callback function when iModel is connected */
@@ -159,7 +168,7 @@ export interface ViewerInitializerParams extends ViewerIModelAppOptions {
   /** array of iTwin.js Extensions */
   extensions?: ExtensionProvider[];
   /** Props for presentation initialization */
-  presentationProps?: Omit<PresentationProps, "selection">;
+  presentationProps?: PresentationProps;
 }
 export type RequiredViewerProps = XOR<
   XOR<ConnectedViewerProps, FileViewerProps>,

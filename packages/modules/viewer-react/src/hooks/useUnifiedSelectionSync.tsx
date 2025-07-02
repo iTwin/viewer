@@ -23,7 +23,7 @@ type SelectionScope = ReturnType<
 
 interface UseUnifiedSelectionSyncProps {
   iModelConnection?: IModelConnection;
-  selectionStorage: SelectionStorage;
+  selectionStorage?: SelectionStorage;
   activeSelectionScope: SelectionScope;
 }
 
@@ -39,7 +39,7 @@ export function useUnifiedSelectionSync({
   }, [activeSelectionScope]);
 
   React.useEffect(() => {
-    if (!iModelConnection) {
+    if (!iModelConnection || !selectionStorage) {
       return;
     }
     const { schemaContext } = iModelConnection;

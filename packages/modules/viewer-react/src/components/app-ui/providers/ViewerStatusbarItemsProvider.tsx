@@ -20,20 +20,22 @@ import {
   ToolAssistanceField,
   useActiveIModelConnection,
 } from "@itwin/appui-react";
+import { IModelConnection } from "@itwin/core-frontend";
+import { getInstancesCount } from "@itwin/presentation-common";
+import { Presentation } from "@itwin/presentation-frontend";
 import { createIModelKey } from "@itwin/presentation-core-interop";
 import {
-  createStorage,
   Selectables,
   SelectionStorage,
 } from "@itwin/unified-selection";
-import { useUnifiedSelectionScopes } from "../../../hooks/useUnifiedSelectionScopes.js";
 
+import { useUnifiedSelectionScopes } from "../../../hooks/useUnifiedSelectionScopes.js";
 import type { ViewerDefaultStatusbarItems } from "../../../types.js";
 
 export class ViewerStatusbarItemsProvider implements UiItemsProvider {
   public readonly id = "ViewerDefaultStatusbar";
 
-  constructor(private _defaultItems?: ViewerDefaultStatusbarItems) {}
+  constructor(private _defaultItems?: ViewerDefaultStatusbarItems) { }
 
   public provideStatusBarItems(): StatusBarItem[] {
     const items: StatusBarCustomItem[] = [];
@@ -114,32 +116,43 @@ function SelectionCountField() {
   const selectionStorage = React.useContext(selectionStorageContext);
 
   const [count, setCount] = React.useState(
-    getSelectablesCountInStorage(selectionStorage, createIModelKey(imodel))
+    selectionStorage
+      ? getSelectablesCountInStorage(selectionStorage, createIModelKey(imodel))
+      : getInstancesCountInPresentationSelectionManager(imodel)
   );
   React.useEffect(() => {
-    return selectionStorage.selectionChangeEvent.addListener(
-      ({ imodelKey, level }) => {
-        if (level !== 0) {
-          return;
+    if (selectionStorage) {
+      return selectionStorage.selectionChangeEvent.addListener(
+        ({ imodelKey, level }) => {
+          if (level !== 0) {
+            return;
+          }
+          setCount(getSelectablesCountInStorage(selectionStorage, imodelKey));
         }
-        setCount(getSelectablesCountInStorage(selectionStorage, imodelKey));
+      );
+    }
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    return Presentation.selection.selectionChange.addListener((args) => {
+      if (args.level !== 0) {
+        return;
       }
-    );
+      setCount(getInstancesCountInPresentationSelectionManager(imodel));
+    });
   }, [selectionStorage, imodel]);
 
   return <AppUiSelectionCountField count={count} />;
 }
 
-const selectionStorageContext = React.createContext<SelectionStorage>(
-  createStorage()
-);
+const selectionStorageContext = React.createContext<
+  SelectionStorage | undefined
+>(undefined);
 
 /** @internal */
 export function SelectionStorageContextProvider({
   selectionStorage,
   children,
 }: React.PropsWithChildren<{
-  selectionStorage: SelectionStorage;
+  selectionStorage?: SelectionStorage | undefined;
 }>) {
   return (
     <selectionStorageContext.Provider value={selectionStorage}>
@@ -155,6 +168,14 @@ function getSelectablesCountInStorage(
   const selection = storage.getSelection({ imodelKey });
   return Selectables.size(selection);
 }
+
+function getInstancesCountInPresentationSelectionManager(
+  imodel: IModelConnection
+) {
+  const selection = Presentation.selection.getSelection(imodel);  // eslint-disable-line @typescript-eslint/no-deprecated
+  return getInstancesCount(selection);
+}
+
 
 function SelectionScopeField() {
   const ctx = React.useContext(selectionScopesContext);
