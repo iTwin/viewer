@@ -1,12 +1,13 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
 
 import { StateManager, UiFramework } from "@itwin/appui-react";
-import { IModelConnection } from "@itwin/core-frontend";
+import type { IModelConnection } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
 import { Flex } from "@itwin/itwinui-react";
@@ -38,7 +39,6 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     blankConnectionViewState,
     uiProviders,
     loadingComponent,
-    selectionStorage,
   } = viewerProps;
   const { error, connection } = useConnection(viewerProps);
 
@@ -55,7 +55,7 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     activeSelectionScope: selectionScopes.activeScope.def,
     ...(isUnifiedSelectionProps(viewerProps)
       ? {
-        selectionStorage,
+        selectionStorage: viewerProps.selectionStorage,
       }
       : {}),
   });

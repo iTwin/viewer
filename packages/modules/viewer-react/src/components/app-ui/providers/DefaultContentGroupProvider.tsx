@@ -3,6 +3,7 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
+
 import {
   ContentGroup,
   ContentGroupProvider,
@@ -62,15 +63,18 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
       layout: StandardContentLayouts.singleView,
       contents: [
         {
-          id: this._isUsingDeprecatedSelectionManager ?
-          "iTwinViewer.UnifiedSelectionViewport" : "iTwinViewer.Viewport",
+          id: this._isUsingDeprecatedSelectionManager
+            ? "iTwinViewer.UnifiedSelectionViewport"
+            : "iTwinViewer.Viewport",
           classId: "",
-          content: (
-            this._isUsingDeprecatedSelectionManager ? <UnifiedSelectionViewport
+          content: this._isUsingDeprecatedSelectionManager ? (
+            <UnifiedSelectionViewport
               viewState={viewState}
               imodel={iModelConnection}
               controlId={"iTwinViewer.UnifiedSelectionViewportControl"}
-            /> : <ViewportComponent
+            />
+          ) : (
+            <ViewportComponent
               viewState={viewState}
               imodel={iModelConnection}
               controlId={"iTwinViewer.ViewportControl"}

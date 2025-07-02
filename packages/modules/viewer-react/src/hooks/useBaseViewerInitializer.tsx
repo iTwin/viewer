@@ -1,12 +1,14 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import { useEffect, useMemo, useState } from "react";
 
 import { BaseInitializer } from "../services/BaseInitializer.js";
-import { ViewerCommonProps } from "../types.js";
+import type { ViewerCommonProps, ViewerInitializerParams } from "../types.js";
+import { isUnifiedSelectionProps } from "../types.js";
 import { getInitializationOptions, isEqual } from "../utilities/index.js";
 import { useIsMounted } from "./useIsMounted.js";
 
@@ -33,7 +35,8 @@ export const useBaseViewerInitializer = (
     ) {
       setBaseViewerInitOptions(initializationOptions);
       setBaseViewerInitialized(false);
-      void BaseInitializer.initialize(options).then(() => {
+      const initializerParams = overridePresentationProps(options);
+      void BaseInitializer.initialize(initializerParams).then(() => {
         void BaseInitializer.initialized.then(() => {
           setBaseViewerInitialized(true);
         });
@@ -46,3 +49,23 @@ export const useBaseViewerInitializer = (
 
   return baseViewerInitialized;
 };
+
+function overridePresentationProps(inputProps: ViewerCommonProps | undefined): ViewerInitializerParams | undefined {
+  return inputProps
+    ? {
+        ...inputProps,
+        presentationProps: {
+          ...inputProps.presentationProps,
+          ...(isUnifiedSelectionProps(inputProps)
+            ? {
+                selection: {
+                  // eslint-disable-next-line @typescript-eslint/no-deprecated
+                  ...inputProps.presentationProps?.selection,
+                  selectionStorage: inputProps.selectionStorage,
+                },
+              }
+            : {}),
+        },
+      }
+    : undefined;
+}
