@@ -18,7 +18,7 @@
       "@itwin/core-orbitgt": "^5.0.0",
       "@itwin/core-quantity": "^5.0.0",
       "@itwin/core-react": "^5.5.0",
-      "@itwin/desktop-viewer-react": "next",
+      "@itwin/desktop-viewer-react": "^5.0.0",
       "@itwin/ecschema-metadata": "^5.0.0",
       "@itwin/ecschema-rpcinterface-common": "^5.0.0",
       "@itwin/ecschema-rpcinterface-impl": "^5.0.0",

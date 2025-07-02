@@ -31,7 +31,7 @@
       "@itwin/unified-selection": "^1.3.0",
       "@itwin/property-grid-react": "^1.16.0",
       "@itwin/tree-widget-react": "^3.0.0",
-      "@itwin/web-viewer-react": "next",
+      "@itwin/web-viewer-react": "^5.0.0",
       "@itwin/webgl-compatibility": "^5.0.0",
       "@itwin/unified-selection-react": "^1.0.0",
       "@remix-run/router": "^1.3.2",

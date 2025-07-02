@@ -3,7 +3,7 @@
     {
       "packageName": "@itwin/cra-template-desktop-viewer",
       "comment": "See [release notes](https://github.com/iTwin/viewer/blob/master/releases/CHANGELOG-5.0.md).",
-      "type": "none"
+      "type": "major"
     }
   ],
   "packageName": "@itwin/cra-template-desktop-viewer"
