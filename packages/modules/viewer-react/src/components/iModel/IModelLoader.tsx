@@ -1,35 +1,34 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import "@bentley/icons-generic-webfont/dist/bentley-icons-generic-webfont.css";
-import "./IModelLoader.scss";
 
-import React, { useEffect, useMemo, useState } from "react";
-import { Provider } from "react-redux";
 import { StateManager, UiFramework } from "@itwin/appui-react";
+import type { IModelConnection } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";
-import { useFrontstages, useTheme, useUiProviders } from "../../hooks";
-import { useUnifiedSelectionScopes } from "../../hooks/useUnifiedSelectionScopes";
-import { useUnifiedSelectionSync } from "../../hooks/useUnifiedSelectionSync";
+import { Flex } from "@itwin/itwinui-react";
+import React, { useEffect, useState } from "react";
+import { Provider } from "react-redux";
+
+import { useFrontstages, useUiProviders } from "../../hooks/index.js";
+import { useUnifiedSelectionScopes } from "../../hooks/useUnifiedSelectionScopes.js";
+import { useUnifiedSelectionSync } from "../../hooks/useUnifiedSelectionSync.js";
 import {
   gatherRequiredViewerProps,
   getAndSetViewState,
   openConnection,
-} from "../../services/iModel";
-import { ViewerPerformance } from "../../services/telemetry";
-import { isUnifiedSelectionProps, ModelLoaderProps } from "../../types";
+} from "../../services/iModel/index.js";
+import { ViewerPerformance } from "../../services/telemetry/index.js";
+import { isUnifiedSelectionProps, type ModelLoaderProps } from "../../types.js";
 import {
-  BackstageItemsProvider,
   SelectionScopesContextProvider,
   SelectionStorageContextProvider,
-} from "../app-ui/providers";
-import { IModelViewer } from "./IModelViewer";
-
-import type { UiItemsProvider } from "@itwin/appui-react";
-import type { IModelConnection } from "@itwin/core-frontend";
+} from "../app-ui/providers/index.js";
+import { IModelViewer } from "./IModelViewer.js";
 
 const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
   const {
@@ -39,21 +38,11 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     viewCreatorOptions,
     blankConnectionViewState,
     uiProviders,
-    theme,
-    backstageItems, // eslint-disable-line deprecation/deprecation
     loadingComponent,
   } = viewerProps;
   const { error, connection } = useConnection(viewerProps);
 
-  const providers = useMemo<UiItemsProvider[]>(() => {
-    const providers = [...(uiProviders || [])];
-    if (backstageItems?.length) {
-      providers.push(new BackstageItemsProvider(backstageItems));
-    }
-    return providers;
-  }, [uiProviders, backstageItems]);
-
-  useUiProviders(providers);
+  useUiProviders(uiProviders);
 
   const selectionScopes = useUnifiedSelectionScopes({
     iModelConnection: connection,
@@ -66,9 +55,8 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
     activeSelectionScope: selectionScopes.activeScope.def,
     ...(isUnifiedSelectionProps(viewerProps)
       ? {
-          selectionStorage: viewerProps.selectionStorage,
-          getSchemaContext: viewerProps.getSchemaContext,
-        }
+        selectionStorage: viewerProps.selectionStorage,
+      }
       : {}),
   });
 
@@ -81,8 +69,6 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
       blankConnectionViewState,
       isUsingDeprecatedSelectionManager: !isUnifiedSelectionProps(viewerProps),
     });
-
-  useTheme(theme);
 
   useEffect(() => {
     if (customDefaultFrontstage && connection) {
@@ -105,37 +91,35 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
 
   if (error) {
     throw error;
-  }
-
-  return (
-    <div className="itwin-viewer-container">
-      {finalFrontstages &&
-      (connection || noConnectionRequired) &&
-      StateManager.store ? (
-        <Provider store={StateManager.store}>
-          <SelectionStorageContextProvider
-            selectionStorage={viewerProps.selectionStorage}
-          >
-            <SelectionScopesContextProvider selectionScopes={selectionScopes}>
-              <IModelViewer
-                frontstages={finalFrontstages}
-                backstageItems={backstageItems}
+  } else {
+    return (
+      <div style={{ height: "100%" }}>
+        {finalFrontstages &&
+        (connection || noConnectionRequired) &&
+        StateManager.store ? ( // eslint-disable-line @typescript-eslint/no-deprecated
+          // eslint-disable-next-line @typescript-eslint/no-deprecated
+          <Provider store={StateManager.store}>
+            <SelectionStorageContextProvider
+              selectionStorage={viewerProps.selectionStorage}
+            >
+              <SelectionScopesContextProvider selectionScopes={selectionScopes}>
+                <IModelViewer frontstages={finalFrontstages} />
+              </SelectionScopesContextProvider>
+            </SelectionStorageContextProvider>
+          </Provider>
+        ) : (
+          <Flex justifyContent="center" style={{ height: "100%" }}>
+            {loadingComponent ?? (
+              <SvgIModelLoader
+                data-testid="loader-wrapper"
+                style={{ width: "64px", height: "64px" }}
               />
-            </SelectionScopesContextProvider>
-          </SelectionStorageContextProvider>
-        </Provider>
-      ) : (
-        <div className="itwin-viewer-loading-container">
-          {loadingComponent ?? (
-            <SvgIModelLoader
-              data-testid="loader-wrapper"
-              className="itwin-viewer-loading-icon"
-            />
-          )}
-        </div>
-      )}
-    </div>
-  );
+            )}
+          </Flex>
+        )}
+      </div>
+    );
+  }
 });
 
 function useConnection(viewerProps: ModelLoaderProps) {

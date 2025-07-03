@@ -1,9 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
-
-/* eslint-disable prefer-rest-params */
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import type { IModelRpcProps } from "@itwin/core-common";
 import {
@@ -12,16 +10,17 @@ import {
   RpcInterface,
   RpcManager,
 } from "@itwin/core-common";
+import { ECSchemaRpcInterface } from "@itwin/ecschema-rpcinterface-common";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 
 export const defaultRpcInterfaces = [
   IModelReadRpcInterface,
   IModelTileRpcInterface,
   PresentationRpcInterface,
+  ECSchemaRpcInterface
 ];
 
 export abstract class TestRpcInterface extends RpcInterface {
-  // eslint-disable-line deprecation/deprecation
   public static readonly interfaceName = "TestRpcInterface";
   public static interfaceVersion = "1.1.1";
 

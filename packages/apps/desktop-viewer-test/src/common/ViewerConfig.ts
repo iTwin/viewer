@@ -46,7 +46,7 @@ export const viewerRpcs = [
   IModelReadRpcInterface,
   IModelTileRpcInterface,
   PresentationRpcInterface,
-  SnapshotIModelRpcInterface,
+  SnapshotIModelRpcInterface, // eslint-disable-line @typescript-eslint/no-deprecated
   ECSchemaRpcInterface,
 ];
 

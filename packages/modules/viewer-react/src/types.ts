@@ -1,11 +1,10 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import type {
   BackstageItem,
-  ColorTheme,
   FrontstageProvider,
   IModelViewportControlOptions,
   StandardFrontstageProps,
@@ -32,7 +31,6 @@ import type {
   XAndY,
   XYAndZ,
 } from "@itwin/core-geometry";
-import type { SchemaContext } from "@itwin/ecschema-metadata";
 import type { PresentationProps } from "@itwin/presentation-frontend";
 import type { computeSelection, SelectionStorage } from "@itwin/unified-selection";
 
@@ -62,7 +60,7 @@ export interface ViewerViewCreator3dOptions extends ViewCreator3dOptions {
 
 export interface ViewerFrontstage {
   /** frontstage provider to register */
-  provider: FrontstageProvider;
+  provider: FrontstageProvider; // eslint-disable-line @typescript-eslint/no-deprecated
   /** should this be the default frontstage? If multiple are defined as default, the last will be used */
   default?: boolean;
   /** the frontstage requires an iModel connection */
@@ -74,7 +72,7 @@ export type ViewerBackstageItem = BackstageItem & {
 };
 
 export interface ViewerViewportControlOptions
-  extends Omit<IModelViewportControlOptions, "viewState"> {
+  extends Omit<IModelViewportControlOptions, "viewState"> { // eslint-disable-line @typescript-eslint/no-deprecated
   /** ViewState or a function to return a ViewState */
   viewState?:
     | ViewState
@@ -85,13 +83,10 @@ export interface ViewerViewportControlOptions
 export interface UnifiedSelectionProps {
   /** Unified selection storage to synchronize viewport selection with. */
   selectionStorage: SelectionStorage;
-
-  /** Function for getting schema context for an iModel. */
-  getSchemaContext: (imodel: IModelConnection) => SchemaContext;
 }
 
 export function isUnifiedSelectionProps(props: AllOrNone<UnifiedSelectionProps> | undefined): props is UnifiedSelectionProps {
-  return typeof props === "object" && "selectionStorage" in props && "getSchemaContext" in props;
+  return typeof props === "object" && "selectionStorage" in props;
 }
 
 export interface SelectionScopesProps {
@@ -118,8 +113,6 @@ export interface SelectionScopesProps {
 }
 
 export type LoaderProps = AllOrNone<UnifiedSelectionProps> & {
-  /** color theme */
-  theme?: ColorTheme | string;
   /** Default UI configuration */
   defaultUiConfig?: ViewerDefaultFrontstageConfig;
   /** Optional callback function when iModel is connected */
@@ -128,13 +121,9 @@ export type LoaderProps = AllOrNone<UnifiedSelectionProps> & {
     | ((iModel: IModelConnection) => Promise<void>);
   /** additional frontstages to register */
   frontstages?: ViewerFrontstage[];
-  /** menu items for the backstage
-   * @deprecated in 4.x. Use [UiItemsProvider.provideBackstageItems](https://www.itwinjs.org/reference/appui-react/uiprovider/uiitemsprovider/).
-   */
-  backstageItems?: ViewerBackstageItem[];
   /** additional viewport options for the default frontstage's viewport control */
   viewportOptions?: ViewerViewportControlOptions;
-  /** [UI Providers](https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/) to register */
+  /** [UI Providers](https://www.itwinjs.org/learning/ui/abstract/uiitemsprovider/) to register. Should be memoized. */
   uiProviders?: UiItemsProvider[];
   /** options for creating the default viewState */
   viewCreatorOptions?: ViewerViewCreator3dOptions;

@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/cra-template-web-viewer",
+      "comment": "See [release notes](https://github.com/iTwin/viewer/blob/master/releases/CHANGELOG-5.0.md).",
+      "type": "major"
+    }
+  ],
+  "packageName": "@itwin/cra-template-web-viewer"
+}

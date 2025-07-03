@@ -18,83 +18,86 @@ import {
   StatusBarSection,
   TileLoadingIndicator,
   ToolAssistanceField,
-  UiFramework,
+  useActiveIModelConnection,
 } from "@itwin/appui-react";
 import { IModelConnection } from "@itwin/core-frontend";
 import { getInstancesCount } from "@itwin/presentation-common";
-import { createIModelKey } from "@itwin/presentation-core-interop";
 import { Presentation } from "@itwin/presentation-frontend";
-import { Selectables, SelectionStorage } from "@itwin/unified-selection";
-import { useUnifiedSelectionScopes } from "../../../hooks/useUnifiedSelectionScopes";
+import { createIModelKey } from "@itwin/presentation-core-interop";
+import {
+  Selectables,
+  SelectionStorage,
+} from "@itwin/unified-selection";
 
-import type { ViewerDefaultStatusbarItems } from "../../../types";
+import { useUnifiedSelectionScopes } from "../../../hooks/useUnifiedSelectionScopes.js";
+import type { ViewerDefaultStatusbarItems } from "../../../types.js";
 
 export class ViewerStatusbarItemsProvider implements UiItemsProvider {
   public readonly id = "ViewerDefaultStatusbar";
 
-  constructor(private _defaultItems?: ViewerDefaultStatusbarItems) {}
+  constructor(private _defaultItems?: ViewerDefaultStatusbarItems) { }
 
   public provideStatusBarItems(): StatusBarItem[] {
     const items: StatusBarCustomItem[] = [];
 
     if (!this._defaultItems || this._defaultItems.messageCenter) {
       items.push(
-        StatusBarItemUtilities.createCustomItem(
-          "MessageCenter",
-          StatusBarSection.Left,
-          10,
-          <MessageCenterField />
-        )
+        StatusBarItemUtilities.createCustomItem({
+          id: "MessageCenter",
+          section: StatusBarSection.Left,
+          itemPriority: 10,
+          content: <MessageCenterField />,
+        })
       );
     }
     if (!this._defaultItems || this._defaultItems.toolAssistance) {
       items.push(
-        StatusBarItemUtilities.createCustomItem(
-          "ToolAssistance",
-          StatusBarSection.Left,
-          20,
-          <ToolAssistanceField />
-        )
+        StatusBarItemUtilities.createCustomItem({
+          id: "ToolAssistance",
+          section: StatusBarSection.Left,
+          itemPriority: 20,
+          content: <ToolAssistanceField />,
+        })
       );
     }
     if (!this._defaultItems || this._defaultItems.tileLoadIndicator) {
       items.push(
-        StatusBarItemUtilities.createCustomItem(
-          "TileLoadIndicator",
-          StatusBarSection.Right,
-          10,
-          <TileLoadingIndicator />
-        )
+        StatusBarItemUtilities.createCustomItem({
+          id: "TileLoadIndicator",
+          section: StatusBarSection.Right,
+          itemPriority: 10,
+          content: <TileLoadingIndicator />,
+        })
       );
     }
     if (!this._defaultItems || this._defaultItems.accuSnapModePicker) {
       items.push(
-        StatusBarItemUtilities.createCustomItem(
-          "SnapModeField",
-          StatusBarSection.Right,
-          20,
-          <SnapModeField />
-        )
+        StatusBarItemUtilities.createCustomItem({
+          id: "SnapModeField",
+          section: StatusBarSection.Right,
+          itemPriority: 20,
+          content: <SnapModeField />,
+        })
       );
     }
     if (!this._defaultItems || this._defaultItems.selectionScope) {
       items.push(
-        StatusBarItemUtilities.createCustomItem(
-          "SelectionScope",
-          StatusBarSection.Right,
-          30,
-          <SelectionScopeField />
-        )
+        StatusBarItemUtilities.createCustomItem({
+          id: "SelectionScope",
+          section: StatusBarSection.Right,
+          itemPriority: 30,
+          content: <SelectionScopeField />,
+        })
       );
     }
     if (!this._defaultItems || this._defaultItems.selectionInfo) {
       items.push(
-        StatusBarItemUtilities.createCustomItem(
-          "SelectionInfo",
-          StatusBarSection.Right,
-          40,
-          <SelectionCountField />
-        )
+        StatusBarItemUtilities.createCustomItem({
+          id: "SelectionInfo",
+          section: StatusBarSection.Right,
+          itemPriority: 40,
+          content: <SelectionCountField />,
+        })
       );
     }
 
@@ -103,7 +106,7 @@ export class ViewerStatusbarItemsProvider implements UiItemsProvider {
 }
 
 function SelectionCountField() {
-  const imodel = UiFramework.getIModelConnection();
+  const imodel = useActiveIModelConnection();
   if (!imodel) {
     throw new Error(
       `IModel connection is not available for selection count toolbar field`
@@ -128,6 +131,7 @@ function SelectionCountField() {
         }
       );
     }
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     return Presentation.selection.selectionChange.addListener((args) => {
       if (args.level !== 0) {
         return;
@@ -168,9 +172,10 @@ function getSelectablesCountInStorage(
 function getInstancesCountInPresentationSelectionManager(
   imodel: IModelConnection
 ) {
-  const selection = Presentation.selection.getSelection(imodel);
+  const selection = Presentation.selection.getSelection(imodel);  // eslint-disable-line @typescript-eslint/no-deprecated
   return getInstancesCount(selection);
 }
+
 
 function SelectionScopeField() {
   const ctx = React.useContext(selectionScopesContext);

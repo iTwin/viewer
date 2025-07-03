@@ -4,8 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import type { IModelConnection } from "@itwin/core-frontend";
-import React from "react";
-import { SchemaContext } from "@itwin/ecschema-metadata";
 import {
   createECSchemaProvider,
   createECSqlQueryExecutor,
@@ -15,6 +13,7 @@ import {
   enableUnifiedSelectionSyncWithIModel,
   SelectionStorage,
 } from "@itwin/unified-selection";
+import React from "react";
 
 type SelectionScope = ReturnType<
   Parameters<
@@ -25,7 +24,6 @@ type SelectionScope = ReturnType<
 interface UseUnifiedSelectionSyncProps {
   iModelConnection?: IModelConnection;
   selectionStorage?: SelectionStorage;
-  getSchemaContext?: (imodel: IModelConnection) => SchemaContext;
   activeSelectionScope: SelectionScope;
 }
 
@@ -33,7 +31,6 @@ interface UseUnifiedSelectionSyncProps {
 export function useUnifiedSelectionSync({
   iModelConnection,
   selectionStorage,
-  getSchemaContext,
   activeSelectionScope,
 }: UseUnifiedSelectionSyncProps) {
   const activeScope = React.useRef<SelectionScope>(activeSelectionScope);
@@ -42,10 +39,10 @@ export function useUnifiedSelectionSync({
   }, [activeSelectionScope]);
 
   React.useEffect(() => {
-    if (!iModelConnection || !selectionStorage || !getSchemaContext) {
+    if (!iModelConnection || !selectionStorage) {
       return;
     }
-    const schemaContext = getSchemaContext(iModelConnection);
+    const { schemaContext } = iModelConnection;
     return enableUnifiedSelectionSyncWithIModel({
       imodelAccess: {
         ...createECSqlQueryExecutor(iModelConnection),
@@ -59,5 +56,5 @@ export function useUnifiedSelectionSync({
       selectionStorage,
       activeScopeProvider: () => activeScope.current,
     });
-  }, [iModelConnection, selectionStorage, getSchemaContext]);
+  }, [iModelConnection, selectionStorage]);
 }

@@ -1,119 +1,125 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
-import "@testing-library/jest-dom/extend-expect";
+import { render, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import React from 'react';
+import { UiCore } from '@itwin/core-react';
+import { BaseViewer } from "../../components/BaseViewer.js";
+import * as IModelService from "../../services/iModel/IModelService.js";
 
-import { UiCore } from "@itwin/core-react";
-import { render, waitFor } from "@testing-library/react";
-import React from "react";
+vi.mock("@itwin/presentation-frontend", async (importActual) => {
+  const original = await importActual<typeof import("@itwin/presentation-frontend")>();
 
-import { BaseViewer } from "../..";
-import * as IModelService from "../../services/iModel/IModelService";
-
-jest.mock("../../services/iModel/IModelService");
-jest.mock("@itwin/appui-react", () => {
   return {
-    ...jest.createMockFromModule<any>("@itwin/appui-react"),
-    UiFramework: {
-      ...jest.createMockFromModule<any>("@itwin/appui-react").UiFramework,
-      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
-    },
-    UiItemsManager: {
-      ...jest.createMockFromModule<any>("@itwin/appui-react").UiItemsManager,
-      getBackstageItems: jest.fn().mockReturnValue([])
-    }
-  };
-});
-jest.mock("@itwin/presentation-frontend", () => {
-  return {
-    ...jest.createMockFromModule<any>("@itwin/presentation-frontend"),
+    ...original,
     Presentation: {
-      ...jest.createMockFromModule<any>("@itwin/presentation-frontend")
-        .Presentation,
-      initialize: jest.fn().mockImplementation(() => Promise.resolve()),
+      ...original.Presentation,
+      initialize: vi.fn().mockImplementation(() => Promise.resolve()),
+      registerInitializationHandler: vi.fn().mockImplementation(() => Promise.resolve()),
       selection: {
         scopes: {
-          getSelectionScopes: jest.fn(async () => []),
+          getSelectionScopes: vi.fn(async () => []),
         },
       },
     },
   };
 });
 
-jest.mock("@itwin/core-frontend", () => {
+vi.mock("@itwin/core-frontend", async (importActual) => {
+  const original = await importActual<typeof import("@itwin/core-frontend")>();
+
   return {
-    ...jest.createMockFromModule<any>("@itwin/core-frontend"),
+    ...original,
     IModelApp: {
       initialized: true,
-      startup: jest.fn(),
+      startup: vi.fn(),
       telemetry: {
-        addClient: jest.fn(),
+        addClient: vi.fn(),
       },
       localization: {
-        registerNamespace: jest.fn().mockResolvedValue(true),
-        getLanguageList: jest.fn().mockReturnValue(["en-US"]),
-        getLocalizedString: jest.fn(),
-        unregisterNamespace: jest.fn(),
-        translateWithNamespace: jest.fn(),
+        registerNamespace: vi.fn().mockResolvedValue(true),
+        getLanguageList: vi.fn().mockReturnValue(["en-US"]),
+        getLocalizedString: vi.fn(),
+        unregisterNamespace: vi.fn(),
+        translateWithNamespace: vi.fn(),
       },
       uiAdmin: {
-        updateFeatureFlags: jest.fn(),
+        updateFeatureFlags: vi.fn(),
       },
       authorizationClient: {
         onAccessTokenChanged: {
-          addListener: jest.fn(),
+          addListener: vi.fn(),
         },
       },
       viewManager: {
         onViewOpen: {
-          addOnce: jest.fn(),
+          addOnce: vi.fn(),
         },
       },
-      shutdown: jest.fn().mockImplementation(() => Promise.resolve()),
+      shutdown: vi.fn().mockImplementation(() => Promise.resolve()),
     },
     SnapMode: {},
-    ActivityMessageDetails: jest.fn(),
-    PrimitiveTool: jest.fn(),
-    NotificationManager: jest.fn(),
-    Tool: jest.fn(),
+    ActivityMessageDetails: vi.fn(),
+    PrimitiveTool: vi.fn(),
+    NotificationManager: vi.fn(),
+    Tool: vi.fn(),
     RemoteBriefcaseConnection: {
-      open: jest.fn(),
+      open: vi.fn(),
     },
     SnapshotConnection: {
-      openFile: jest.fn(),
+      openFile: vi.fn(),
     },
     ItemField: {},
     CompassMode: {},
     RotationMode: {},
-    AccuDraw: class {},
-    ToolAdmin: class {},
+    AccuDraw: class { },
+    ToolAdmin: class { },
     BriefcaseConnection: {
-      openFile: jest.fn(),
+      openFile: vi.fn(),
+    },
+  }
+});
+
+vi.mock("../../services/iModel/IModelService");
+vi.mock("@itwin/appui-react", async (importActual) => {
+  const original = await importActual<typeof import("@itwin/appui-react")>();
+
+  return {
+    ...original,
+    UiFramework: {
+      ...original.UiFramework,
+      initialize: vi.fn().mockImplementation(() => Promise.resolve()),
+    },
+    UiItemsManager: {
+      ...original.UiItemsManager,
+      getBackstageItems: vi.fn().mockReturnValue([]),
     },
   };
 });
 
-jest.mock("../../services/BaseInitializer", () => {
+vi.mock("../../hooks/useAccessToken", () => {
+  return { useAccessToken: () => "mockToken" };
+});
+
+vi.mock("../../services/BaseInitializer", () => {
   return {
     BaseInitializer: {
       authClient: {
         hasSignedIn: true,
         isAuthorized: true,
         onAccessTokenChanged: {
-          addListener: jest.fn(),
+          addListener: vi.fn(),
         },
       },
-      initialize: jest.fn().mockResolvedValue(true),
-      cancel: jest.fn(),
-      shutdown: jest.fn(),
+      initialize: vi.fn().mockResolvedValue(true),
+      cancel: vi.fn(),
+      shutdown: vi.fn(),
       initialized: Promise.resolve(),
     },
   };
-});
-jest.mock("../../hooks/useAccessToken", () => {
-  return { useAccessToken: () => "mockToken" };
 });
 
 const mockITwinId = "123";
@@ -121,9 +127,9 @@ const mockIModelId = "456";
 
 describe("BaseViewer", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
-    if (UiCore.initialized) {
-      UiCore.terminate();
+    vi.clearAllMocks();
+    if (UiCore.initialized) { // eslint-disable-line @typescript-eslint/no-deprecated
+      UiCore.terminate(); // eslint-disable-line @typescript-eslint/no-deprecated
     }
   });
 
@@ -138,7 +144,7 @@ describe("BaseViewer", () => {
 
     const viewerContainer = await waitFor(() => getByTestId("loader-wrapper"));
 
-    expect(viewerContainer).toBeInTheDocument();
+    expect(viewerContainer).toBeInTheDocument();;
   });
 
   it("queries the iModel with the provided changeSetId", async () => {

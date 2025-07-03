@@ -1,7 +1,8 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import type { DesktopInitializerParams } from "@itwin/desktop-viewer-react";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
@@ -19,10 +20,7 @@ import React, { useCallback, useEffect, useMemo } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import { viewerRpcs } from "../../common/ViewerConfig";
-import {
-  getSchemaContext,
-  unifiedSelectionStorage,
-} from "../../selectionStorage";
+import { unifiedSelectionStorage } from "../../selectionStorage";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import { SettingsContextProvider } from "../services/SettingsContext";
 import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
@@ -44,8 +42,7 @@ const App = () => {
       additionalI18nNamespaces: ["iTwinDesktopViewer"],
       enablePerformanceMonitors: true,
       selectionStorage: unifiedSelectionStorage,
-      onIModelAppInit,
-      getSchemaContext,
+      onIModelAppInit
     }),
     [onIModelAppInit]
   );

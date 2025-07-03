@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import {
   Viewer,
@@ -13,7 +13,7 @@ import { MeasureToolsUiItemsProvider } from "@itwin/measure-tools-react";
 import {
   AncestorsNavigationControls,
   CopyPropertyTextContextMenuItem,
-  PropertyGridUiItemsProvider,
+  createPropertyGrid,
   ShowHideNullValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
 import {
@@ -26,7 +26,6 @@ import { useLocation } from "react-router-dom";
 
 import { viewerRpcs } from "../../../common/ViewerConfig";
 import {
-  getSchemaContext,
   unifiedSelectionStorage,
 } from "../../../selectionStorage";
 import { IModelMergeItemsProvider } from "../../extensions";
@@ -68,7 +67,7 @@ export const ViewerRoute = () => {
                   getLabel: () => ModelsTreeComponent.getLabel(),
                   render: (props) => (
                     <ModelsTreeComponent
-                      getSchemaContext={getSchemaContext}
+                      getSchemaContext={(iModel) => iModel.schemaContext}
                       density={props.density}
                       selectionStorage={unifiedSelectionStorage}
                       selectionMode={"extended"}
@@ -82,7 +81,7 @@ export const ViewerRoute = () => {
                   getLabel: () => CategoriesTreeComponent.getLabel(),
                   render: (props) => (
                     <CategoriesTreeComponent
-                      getSchemaContext={getSchemaContext}
+                      getSchemaContext={(iModel) => iModel.schemaContext}
                       density={props.density}
                       selectionStorage={unifiedSelectionStorage}
                       onPerformanceMeasured={props.onPerformanceMeasured}
@@ -94,28 +93,30 @@ export const ViewerRoute = () => {
             }),
           ],
         },
-        new PropertyGridUiItemsProvider({
-          propertyGridProps: {
-            autoExpandChildCategories: true,
-            ancestorsNavigationControls: (props) => (
-              <AncestorsNavigationControls {...props} />
-            ),
-            contextMenuItems: [
-              (props) => <CopyPropertyTextContextMenuItem {...props} />,
-            ],
-            settingsMenuItems: [
-              (props) => (
-                <ShowHideNullValuesSettingsMenuItem {...props} persist={true} />
+        {
+          id: "PropertyGridUIProvider",
+          getWidgets: () => [
+            createPropertyGrid({
+              autoExpandChildCategories: true,
+              ancestorsNavigationControls: (props) => (
+                <AncestorsNavigationControls {...props} />
               ),
-            ],
-          },
-        }),
+              contextMenuItems: [
+                (props) => <CopyPropertyTextContextMenuItem {...props} />,
+              ],
+              settingsMenuItems: [
+                (props) => (
+                  <ShowHideNullValuesSettingsMenuItem {...props} persist={true} />
+                ),
+              ],
+            })
+          ],
+        },
         new MeasureToolsUiItemsProvider(),
         new IModelMergeItemsProvider(),
       ]}
       enablePerformanceMonitors={true}
       selectionStorage={unifiedSelectionStorage}
-      getSchemaContext={getSchemaContext}
     />
   ) : null;
 };

@@ -1,18 +1,15 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
-import type { DefaultNavigationTools, ToolbarItem } from "@itwin/appui-react";
-import { ToolbarOrientation, ToolbarUsage } from "@itwin/appui-react";
-import { CoreTools } from "@itwin/appui-react";
-import { ToolbarHelper, ToolItemDef } from "@itwin/appui-react";
-import { StandardNavigationToolsProvider } from "@itwin/appui-react";
-import { IModelApp } from "@itwin/core-frontend";
 
-export class ViewerNavigationToolsProvider extends StandardNavigationToolsProvider {
+import type { DefaultNavigationTools } from "@itwin/appui-react";
+import { StandardNavigationToolsUiItemsProvider } from "@itwin/appui-react";
+
+export class ViewerNavigationToolsProvider extends StandardNavigationToolsUiItemsProvider {
   constructor(private defaultItems?: DefaultNavigationTools) {
-    super("ViewerDefaultNavigationTools", {
+    super({
       horizontal: {
         fitView: true,
         panView: true,
@@ -29,122 +26,7 @@ export class ViewerNavigationToolsProvider extends StandardNavigationToolsProvid
     });
   }
 
-  public override provideToolbarItemsInternal(
-    _stageId: string,
-    _stageUsage: string,
-    toolbarUsage: ToolbarUsage,
-    toolbarOrientation: ToolbarOrientation
-  ): ToolbarItem[] {
-    const items: ToolbarItem[] = [];
-
-    if (
-      toolbarUsage === ToolbarUsage.ViewNavigation &&
-      toolbarOrientation === ToolbarOrientation.Horizontal
-    ) {
-      if (
-        !this.defaultItems ||
-        !this.defaultItems.horizontal ||
-        this.defaultItems.horizontal.rotateView
-      ) {
-        items.push(
-          ToolbarHelper.createToolbarItemFromItemDef(
-            10,
-            CoreTools.rotateViewCommand
-          )
-        );
-      }
-      if (
-        !this.defaultItems ||
-        !this.defaultItems.horizontal ||
-        this.defaultItems.horizontal.panView
-      ) {
-        items.push(
-          ToolbarHelper.createToolbarItemFromItemDef(
-            20,
-            CoreTools.panViewCommand
-          )
-        );
-      }
-      if (
-        !this.defaultItems ||
-        !this.defaultItems.horizontal ||
-        this.defaultItems.horizontal.fitView
-      ) {
-        items.push(
-          ToolbarHelper.createToolbarItemFromItemDef(
-            30,
-            CoreTools.fitViewCommand
-          )
-        );
-      }
-      if (
-        !this.defaultItems ||
-        !this.defaultItems.horizontal ||
-        this.defaultItems.horizontal.windowArea
-      ) {
-        items.push(
-          ToolbarHelper.createToolbarItemFromItemDef(
-            40,
-            CoreTools.windowAreaCommand
-          )
-        );
-      }
-      if (
-        !this.defaultItems ||
-        !this.defaultItems.horizontal ||
-        this.defaultItems.horizontal.viewUndoRedo
-      ) {
-        items.push(
-          ToolbarHelper.createToolbarItemFromItemDef(
-            50,
-            CoreTools.viewUndoCommand
-          )
-        );
-        items.push(
-          ToolbarHelper.createToolbarItemFromItemDef(
-            60,
-            CoreTools.viewRedoCommand
-          )
-        );
-      }
-    } else if (
-      toolbarUsage === ToolbarUsage.ViewNavigation &&
-      toolbarOrientation === ToolbarOrientation.Vertical
-    ) {
-      if (
-        !this.defaultItems ||
-        !this.defaultItems.vertical ||
-        this.defaultItems.vertical.walk
-      ) {
-        items.push(
-          ToolbarHelper.createToolbarItemFromItemDef(
-            10,
-            new ToolItemDef({
-              toolId: "View.LookAndMove",
-              iconSpec: "icon-walk",
-              execute: () =>
-                IModelApp.tools.run(
-                  "View.LookAndMove",
-                  IModelApp.viewManager.selectedView
-                ),
-              labelKey: "iTwinViewer:tools.walkTool",
-            })
-          )
-        );
-      }
-      if (
-        !this.defaultItems ||
-        !this.defaultItems.vertical ||
-        this.defaultItems.vertical.toggleCamera
-      ) {
-        items.push(
-          ToolbarHelper.createToolbarItemFromItemDef(
-            20,
-            CoreTools.toggleCameraViewCommand
-          )
-        );
-      }
-    }
-    return items;
+  override get id(): string {
+    return "ViewerDefaultNavigationTools";
   }
 }

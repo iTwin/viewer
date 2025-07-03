@@ -1,26 +1,15 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
-import type {
-  BackstageItem,
-  FrontstageDef,
-  FrontstageProvider,
-} from "@itwin/appui-react";
-import { UiFramework, UiItemsManager } from "@itwin/appui-react";
-import {
-  BackstageComposer,
-  ConfigurableUiContent,
-  ThemeManager,
-} from "@itwin/appui-react";
+
+import type { FrontstageDef, FrontstageProvider } from "@itwin/appui-react";
+import { UiFramework } from "@itwin/appui-react";
+import { BackstageComposer, ConfigurableUiContent } from "@itwin/appui-react";
 import React, { useEffect, useState } from "react";
 
-import type { ViewerFrontstage } from "../../types";
-interface ModelProps {
-  frontstages: ViewerFrontstage[];
-  backstageItems?: BackstageItem[]; // TODO next remove this and just use the UiItemsManager to get the items in the next major version
-}
+import type { ViewerFrontstage } from "../../types.js";
 
 /*
 In the upgrade to react 18 and enabling StrictMode, the setting of frontstages started failing 50% of the time. From investigation,
@@ -28,9 +17,11 @@ the new rendering behavior from react 18 where components are mounted, unmounted
 hooks was causing a race condition. By adding a state variable and moving the call to setActiveFrontstageDef to its own useEffect hook, 
 the issue is no longer occuring.
 */
-export const IModelViewer: React.FC<ModelProps> = ({
+export const IModelViewer = ({
   frontstages,
-}: ModelProps) => {
+}: {
+  frontstages: ViewerFrontstage[];
+}) => {
   const [defaultFrontstageDef, setDefaultFrontstageDef] =
     useState<FrontstageDef>();
 
@@ -41,10 +32,10 @@ export const IModelViewer: React.FC<ModelProps> = ({
   }, [defaultFrontstageDef]);
 
   useEffect(() => {
-    let defaultFrontstage: FrontstageProvider | undefined;
+    let defaultFrontstage: FrontstageProvider | undefined; // eslint-disable-line @typescript-eslint/no-deprecated
     frontstages.forEach((viewerFrontstage) => {
       // register the provider
-      UiFramework.frontstages.addFrontstageProvider(viewerFrontstage.provider);
+      UiFramework.frontstages.addFrontstageProvider(viewerFrontstage.provider); // eslint-disable-line @typescript-eslint/no-deprecated
       // override the default (last wins)
       if (viewerFrontstage.default) {
         defaultFrontstage = viewerFrontstage.provider;
@@ -62,16 +53,9 @@ export const IModelViewer: React.FC<ModelProps> = ({
     }
 
     return () => {
-      UiFramework.frontstages.clearFrontstageProviders();
+      UiFramework.frontstages.clearFrontstageProviders(); // eslint-disable-line @typescript-eslint/no-deprecated
     };
   }, [frontstages]);
 
-  // there will always be at least one (for the default frontstage). Wait for it to be loaded into the list before rendering the content
-  return (
-    <ThemeManager>
-      <ConfigurableUiContent
-        appBackstage={<BackstageComposer />}
-      />
-    </ThemeManager>
-  );
+  return <ConfigurableUiContent appBackstage={<BackstageComposer />} />;
 };

@@ -11,8 +11,8 @@ import {
 } from "@itwin/viewer-react";
 import { useEffect, useMemo, useState } from "react";
 
-import { WebInitializer } from "../services/Initializer";
-import type { WebViewerProps } from "../types";
+import { WebInitializer } from "../services/Initializer.js";
+import type { WebViewerProps } from "../types.js";
 
 export const useWebViewerInitializer = (options: WebViewerProps) => {
   const [webViewerInitOptions, setWebViewerInitOptions] =

@@ -4,14 +4,14 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IModelApp } from "@itwin/core-frontend";
-import { FillCentered } from "@itwin/core-react";
+import { Flex } from "@itwin/itwinui-react";
 import React from "react";
 
-import { useAccessToken } from "../hooks/useAccessToken";
-import { useBaseViewerInitializer } from "../hooks/useBaseViewerInitializer";
-import type { ViewerProps } from "../types";
-import { ErrorBoundary } from "./error/ErrorBoundary";
-import IModelLoader from "./iModel/IModelLoader";
+import { useAccessToken } from "../hooks/useAccessToken.js";
+import { useBaseViewerInitializer } from "../hooks/useBaseViewerInitializer.js";
+import type { ViewerProps } from "../types.js";
+import { ErrorBoundary } from "./error/ErrorBoundary.js";
+import IModelLoader from "./iModel/IModelLoader.js";
 
 export const BaseViewer = ({
   productId,
@@ -39,18 +39,18 @@ export const BaseViewer = ({
         viewerInitialized ? (
           <IModelLoader {...loaderProps} />
         ) : (
-          <FillCentered>
+          <Flex>
             {IModelApp.localization.getLocalizedString(
               "iTwinViewer:baseViewerInitializer.baseViewerInitializing"
             )}
-          </FillCentered>
+          </Flex>
         )
       ) : (
-        <FillCentered>
+        <Flex>
           {IModelApp.localization.getLocalizedString(
             "iTwinViewer:baseViewerInitializer.validTokenNeeded"
           )}
-        </FillCentered>
+        </Flex>
       )}
     </ErrorBoundary>
   );

@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import "./IModelMergeStatusBarItem.scss";
 
@@ -21,20 +21,20 @@ import {
   useConnectivity,
   useIsMounted,
 } from "@itwin/desktop-viewer-react";
-import { ElectronRendererAuthorization } from "@itwin/electron-authorization/lib/cjs/ElectronRenderer";
 import { SvgCloud, SvgOffline } from "@itwin/itwinui-icons-react";
 import React, { useCallback, useEffect, useState } from "react";
 
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import { BriefcaseStatus } from "../components/modelSelector";
 import { usePullChanges } from "../hooks/usePullChanges";
+import { isElectronRendererAuth } from "../util/typeCheck";
 
 const ConnectionStatusBarItem = () => {
   const accessToken = useAccessToken();
   const connectivityStatus = useConnectivity();
   const onLoginClick = useCallback(async () => {
     if (
-      IModelApp.authorizationClient instanceof ElectronRendererAuthorization
+      isElectronRendererAuth(IModelApp.authorizationClient)
     ) {
       await IModelApp.authorizationClient?.signIn();
     }
@@ -45,7 +45,7 @@ const ConnectionStatusBarItem = () => {
         {ITwinViewerApp.translate("briefcaseStatusTitle.connection")}
       </span>
       {accessToken &&
-      connectivityStatus === InternetConnectivityStatus.Online ? (
+        connectivityStatus === InternetConnectivityStatus.Online ? (
         <SvgCloud className="connection-status-icon" />
       ) : (
         <SvgOffline
@@ -150,22 +150,20 @@ export class IModelMergeItemsProvider implements UiItemsProvider {
     const statusBarItems: StatusBarItem[] = [];
     if (stageUsage === StageUsage.General) {
       statusBarItems.push(
-        // eslint-disable-next-line deprecation/deprecation
-        StatusBarItemUtilities.createCustomItem(
-          "IModelMergeItemsProvider:ConnectionStatusBarItem",
-          StatusBarSection.Center,
-          1,
-          <ConnectionStatusBarItem />
-        )
+        StatusBarItemUtilities.createCustomItem({
+          id: "IModelMergeItemsProvider:ConnectionStatusBarItem",
+          section: StatusBarSection.Center,
+          itemPriority: 1,
+          content: <ConnectionStatusBarItem />
+        })
       );
       statusBarItems.push(
-        // eslint-disable-next-line deprecation/deprecation
-        StatusBarItemUtilities.createCustomItem(
-          "IModelMergeItemsProvider:IModelMergeStatusBarItem",
-          StatusBarSection.Center,
-          3,
-          <MergeStatusBarItem />
-        )
+        StatusBarItemUtilities.createCustomItem({
+          id: "IModelMergeItemsProvider:IModelMergeStatusBarItem",
+          section: StatusBarSection.Center,
+          itemPriority: 3,
+          content: <MergeStatusBarItem />
+        })
       );
     }
     return statusBarItems;

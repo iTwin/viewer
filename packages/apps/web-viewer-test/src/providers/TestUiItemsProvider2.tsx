@@ -1,11 +1,12 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import type { UiItemsProvider, Widget } from "@itwin/appui-react";
 import { StagePanelLocation } from "@itwin/appui-react";
-import { FillCentered } from "@itwin/core-react";
+import { Flex } from "@itwin/itwinui-react";
 import React from "react";
 
 export class TestUiProvider2 implements UiItemsProvider {
@@ -23,7 +24,7 @@ export class TestUiProvider2 implements UiItemsProvider {
     ) {
       widgets.push({
         id: "addonWidget",
-        content: <FillCentered>Addon Widget in panel</FillCentered>,
+        content: <Flex justifyContent="center" style={{ height: "100%" }}>Addon Widget in panel</Flex>,
       });
     }
     return widgets;

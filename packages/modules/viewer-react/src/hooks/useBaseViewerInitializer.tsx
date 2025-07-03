@@ -1,13 +1,16 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import { useEffect, useMemo, useState } from "react";
-import { BaseInitializer } from "../services/BaseInitializer";
-import { isUnifiedSelectionProps, ViewerCommonProps, ViewerInitializerParams } from "../types";
-import { getInitializationOptions, isEqual } from "../utilities";
-import { useIsMounted } from "./useIsMounted";
+
+import { BaseInitializer } from "../services/BaseInitializer.js";
+import type { ViewerCommonProps, ViewerInitializerParams } from "../types.js";
+import { isUnifiedSelectionProps } from "../types.js";
+import { getInitializationOptions, isEqual } from "../utilities/index.js";
+import { useIsMounted } from "./useIsMounted.js";
 
 export const useBaseViewerInitializer = (
   options?: ViewerCommonProps,
@@ -56,6 +59,7 @@ function overridePresentationProps(inputProps: ViewerCommonProps | undefined): V
           ...(isUnifiedSelectionProps(inputProps)
             ? {
                 selection: {
+                  // eslint-disable-next-line @typescript-eslint/no-deprecated
                   ...inputProps.presentationProps?.selection,
                   selectionStorage: inputProps.selectionStorage,
                 },

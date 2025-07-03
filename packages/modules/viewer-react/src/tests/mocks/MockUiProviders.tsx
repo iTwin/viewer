@@ -1,11 +1,10 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import {
   ConditionalBooleanValue,
-  ConditionalStringValue,
 } from "@itwin/appui-abstract";
 import type {
   StagePanelSection,
@@ -24,7 +23,7 @@ import {
   ToolbarOrientation,
   ToolbarUsage,
 } from "@itwin/appui-react";
-import { FillCentered } from "@itwin/core-react";
+import { Flex } from "@itwin/itwinui-react";
 import React from "react";
 
 export class TestUiProvider implements UiItemsProvider {
@@ -48,33 +47,44 @@ export class TestUiProvider implements UiItemsProvider {
         [this.syncEventId]
       );
 
-      const iconCondition = new ConditionalStringValue(
-        () => (this._visible ? "icon-visibility-hide-2" : "icon-visibility"),
-        [this.syncEventId]
-      );
+      function visibilityIcon({ syncEventId, isVisible }: { syncEventId: string, isVisible: boolean }) {
+        const [update, setUpdate] = React.useState(false);
 
-      const visibilityActionSpec = ToolbarItemUtilities.createActionItem(
-        "visibility-action-tool",
-        200,
-        iconCondition,
-        "Set visibility",
-        (): void => {
+        React.useEffect(() => {
+          const onSync = () => {
+            setUpdate((prev) => !prev);
+          }
+          SyncUiEventDispatcher.onSyncUiEvent.addListener(onSync, syncEventId);
+          return () => {
+            SyncUiEventDispatcher.onSyncUiEvent.removeListener(onSync, syncEventId);
+          }
+        }, [syncEventId]);
+
+        return (<i className={isVisible ? "icon-visibility-hide-2" : "icon-visibility"} />);
+      }
+
+      const visibilityActionSpec = ToolbarItemUtilities.createActionItem({
+        id: "visibility-action-tool",
+        label: "Set visibility",
+        itemPriority: 200,
+        execute: () => {
           this._visible = !this._visible;
           SyncUiEventDispatcher.dispatchImmediateSyncUiEvent(this.syncEventId);
           console.log(this._visible);
-        }
-      );
+        },
+        icon: visibilityIcon({ syncEventId: this.syncEventId, isVisible: this._visible }),
+      });
 
-      const alertActionSpec = ToolbarItemUtilities.createActionItem(
-        "alert-action-tool",
-        210,
-        "icon-developer",
-        "Display an alert",
-        (): void => {
+      const alertActionSpec = ToolbarItemUtilities.createActionItem({
+        id: "alert-action-tool",
+        label: "Display an alert",
+        itemPriority: 210,
+        icon: <i className="icon-developer" />,
+        execute: () => {
           alert("Toolbar Button Item Clicked!");
         },
-        { isHidden: isHiddenCondition }
-      );
+        isHidden: isHiddenCondition,
+      });
 
       return [visibilityActionSpec, alertActionSpec];
     }
@@ -89,16 +99,16 @@ export class TestUiProvider implements UiItemsProvider {
 
     if (stageUsage === StageUsage.General) {
       statusBarItems.push(
-        StatusBarItemUtilities.createActionItem(
-          "alert-statusbar-item",
-          StatusBarSection.Center,
-          100,
-          "icon-developer",
-          "Status bar item test",
-          () => {
+        StatusBarItemUtilities.createActionItem({
+          id: "alert-statusbar-item",
+          itemPriority: 100,
+          icon: <i className="icon-developer" />,
+          label: "Status bar item test",
+          execute: () => {
             alert("Status Bar Item Clicked!");
-          }
-        )
+          },
+          section: StatusBarSection.Center,
+        })
       );
     }
 
@@ -122,7 +132,9 @@ export class TestUiProvider2 implements UiItemsProvider {
     ) {
       widgets.push({
         id: "addonWidget",
-        content: <FillCentered>Addon Widget in panel</FillCentered>,
+        content: <Flex style={{ height: "100%", width: "100%" }}
+          justifyContent="center"
+          alignItems="center">Addon Widget in panel</Flex>,
       });
     }
     return widgets;

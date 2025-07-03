@@ -1,15 +1,15 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import "./App.scss";
 
 import type { ScreenViewport } from "@itwin/core-frontend";
 import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
-import { FillCentered } from "@itwin/core-react";
 import { ECSchemaRpcInterface } from "@itwin/ecschema-rpcinterface-common";
-import { ProgressLinear } from "@itwin/itwinui-react";
+import { Flex, ProgressLinear } from "@itwin/itwinui-react";
 import {
   MeasurementActionToolbar,
   MeasureTools,
@@ -18,8 +18,8 @@ import {
 import {
   AncestorsNavigationControls,
   CopyPropertyTextContextMenuItem,
+  createPropertyGrid,
   PropertyGridManager,
-  PropertyGridUiItemsProvider,
   ShowHideNullValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
 import {
@@ -40,7 +40,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Auth } from "./Auth";
 import { history } from "./history";
-import { getSchemaContext, unifiedSelectionStorage } from "./selectionStorage";
+import { unifiedSelectionStorage } from "./selectionStorage";
 
 const App: React.FC = () => {
   const [iModelId, setIModelId] = useState(process.env.IMJS_IMODEL_ID);
@@ -143,11 +143,11 @@ const App: React.FC = () => {
   return (
     <div className="viewer-container">
       {!accessToken && (
-        <FillCentered>
+        <Flex justifyContent="center" style={{ height: "100%" }}>
           <div className="signin-content">
             <ProgressLinear indeterminate={true} labels={["Signing in..."]} />
           </div>
-        </FillCentered>
+        </Flex>
       )}
       <Viewer
         iTwinId={iTwinId ?? ""}
@@ -186,7 +186,7 @@ const App: React.FC = () => {
                     getLabel: () => ModelsTreeComponent.getLabel(),
                     render: (props) => (
                       <ModelsTreeComponent
-                        getSchemaContext={getSchemaContext}
+                        getSchemaContext={(iModel) => iModel.schemaContext}
                         density={props.density}
                         selectionStorage={unifiedSelectionStorage}
                         selectionMode={"extended"}
@@ -200,7 +200,7 @@ const App: React.FC = () => {
                     getLabel: () => CategoriesTreeComponent.getLabel(),
                     render: (props) => (
                       <CategoriesTreeComponent
-                        getSchemaContext={getSchemaContext}
+                        getSchemaContext={(iModel) => iModel.schemaContext}
                         density={props.density}
                         selectionStorage={unifiedSelectionStorage}
                         onPerformanceMeasured={props.onPerformanceMeasured}
@@ -212,29 +212,31 @@ const App: React.FC = () => {
               }),
             ],
           },
-          new PropertyGridUiItemsProvider({
-            propertyGridProps: {
-              autoExpandChildCategories: true,
-              ancestorsNavigationControls: (props) => (
-                <AncestorsNavigationControls {...props} />
-              ),
-              contextMenuItems: [
-                (props) => <CopyPropertyTextContextMenuItem {...props} />,
-              ],
-              settingsMenuItems: [
-                (props) => (
-                  <ShowHideNullValuesSettingsMenuItem
-                    {...props}
-                    persist={true}
-                  />
+          {
+            id: "PropertyGridUIProvider",
+            getWidgets: () => [
+              createPropertyGrid({
+                autoExpandChildCategories: true,
+                ancestorsNavigationControls: (props) => (
+                  <AncestorsNavigationControls {...props} />
                 ),
-              ],
-            },
-          }),
+                contextMenuItems: [
+                  (props) => <CopyPropertyTextContextMenuItem {...props} />,
+                ],
+                settingsMenuItems: [
+                  (props) => (
+                    <ShowHideNullValuesSettingsMenuItem
+                      {...props}
+                      persist={true}
+                    />
+                  ),
+                ],
+              }),
+            ],
+          },
           new MeasureToolsUiItemsProvider(),
         ]}
         selectionStorage={unifiedSelectionStorage}
-        getSchemaContext={getSchemaContext}
       />
     </div>
   );

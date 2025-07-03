@@ -77,7 +77,7 @@ export const SelectITwin = () => {
               placeholder={"Search by name or number"}
               title={"Search"}
             />
-            <SearchBox.Button title="Search button" onClick={startSearch} />
+            <SearchBox.Button label="Search button" onClick={startSearch} />
           </SearchBox>
         </div>
         <ITwinGrid

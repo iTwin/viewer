@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import { AppNotificationManager, ColorTheme } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
@@ -26,7 +26,6 @@ import {
 } from "@itwin/tree-widget-react";
 import type { ViewerBackstageItem } from "@itwin/web-viewer-react";
 import {
-  BackstageItemsProvider,
   Viewer,
   ViewerContentToolsProvider,
   ViewerNavigationToolsProvider,
@@ -37,7 +36,6 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 // import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
 import { ReactComponent as Itwin } from "../../images/itwin.svg";
 import {
-  getSchemaContext,
   unifiedSelectionStorage,
 } from "../../selectionStorage";
 import { history } from "../routing";
@@ -126,16 +124,6 @@ const ViewerHome: React.FC = () => {
     },
   ];
 
-  const backstageItems2: ViewerBackstageItem[] = [
-    {
-      id: "BS4",
-      execute: () => console.log("BS1"),
-      groupPriority: 20,
-      itemPriority: 100,
-      label: "BackstageItems 1",
-    },
-  ];
-
   return (
     <div style={{ height: "100vh" }}>
       <Viewer
@@ -143,7 +131,6 @@ const ViewerHome: React.FC = () => {
         iTwinId={iTwinId ?? ""}
         iModelId={iModelId ?? ""}
         changeSetId={changesetId}
-        theme={ColorTheme.Dark}
         loadingComponent={<Loader />}
         mapLayerOptions={{
           BingMaps: {
@@ -160,7 +147,6 @@ const ViewerHome: React.FC = () => {
         enablePerformanceMonitors={true}
         onIModelAppInit={onIModelAppInit}
         uiProviders={[
-          new BackstageItemsProvider(backstageItems, "BackstageItemsProvider1"),
           new ViewerNavigationToolsProvider(),
           new ViewerContentToolsProvider({
             vertical: {
@@ -178,7 +164,7 @@ const ViewerHome: React.FC = () => {
                     getLabel: () => ModelsTreeComponent.getLabel(),
                     render: (props) => (
                       <ModelsTreeComponent
-                        getSchemaContext={getSchemaContext}
+                        getSchemaContext={(iModel) => iModel.schemaContext}
                         density={props.density}
                         selectionStorage={unifiedSelectionStorage}
                         selectionMode={"extended"}
@@ -192,7 +178,7 @@ const ViewerHome: React.FC = () => {
                     getLabel: () => CategoriesTreeComponent.getLabel(),
                     render: (props) => (
                       <CategoriesTreeComponent
-                        getSchemaContext={getSchemaContext}
+                        getSchemaContext={(iModel) => iModel.schemaContext}
                         density={props.density}
                         selectionStorage={unifiedSelectionStorage}
                         onPerformanceMeasured={props.onPerformanceMeasured}
@@ -245,11 +231,9 @@ const ViewerHome: React.FC = () => {
         //     manifestUrl: "http://localhost:3001/package.json",
         //   }),
         // ]}
-        backstageItems={backstageItems2}
         defaultUiConfig={{ cornerButton: <Itwin /> }}
         // renderSys={{doIdleWork: true}}
         selectionStorage={unifiedSelectionStorage}
-        getSchemaContext={getSchemaContext}
         selectionScopes={{
           active: "element",
           available: availableSelectionScopes,

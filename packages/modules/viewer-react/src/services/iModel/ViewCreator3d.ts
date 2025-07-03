@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 /*
 API for creating a 3D default view for an iModel.
@@ -17,8 +17,8 @@ import {
   ViewCreator3d as ViewCreator,
 } from "@itwin/core-frontend";
 
-import type { ViewerViewCreator3dOptions } from "../../types";
-import { ViewerPerformance } from "../telemetry";
+import type { ViewerViewCreator3dOptions } from "../../types.js";
+import { ViewerPerformance } from "../telemetry/index.js";
 
 /**
  * API for creating a 3D default [[ViewState3d]] for an iModel. @see [[ViewCreator2d]] to create a view for a 2d model.
@@ -90,7 +90,7 @@ export class ViewCreator3d extends ViewCreator {
               }, 100);
             });
           };
-
+          // eslint-disable-next-line @typescript-eslint/no-floating-promises
           tileTreesLoaded().finally(() => {
             void IModelApp.tools.run(FitViewTool.toolId, viewPort, true, false);
             viewPort.view.setStandardRotation(

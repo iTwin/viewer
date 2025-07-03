@@ -13,9 +13,10 @@ import {
   IModelReadRpcInterface,
   IModelTileRpcInterface,
 } from "@itwin/core-common";
+import { ECSchemaRpcInterface } from "@itwin/ecschema-rpcinterface-common";
 import { PresentationRpcInterface } from "@itwin/presentation-common";
 
-import type { BackendConfiguration } from "../types";
+import type { BackendConfiguration } from "../types.js";
 
 /**
  * The RpcInitializer handles registration of backends/instantiates RpcInterface clients.
@@ -58,6 +59,7 @@ export class RpcInitializer {
       IModelReadRpcInterface,
       IModelTileRpcInterface,
       PresentationRpcInterface,
+      ECSchemaRpcInterface,
       ...additionalRpcInterfaces,
     ];
   };
@@ -86,7 +88,7 @@ export class RpcInitializer {
 
   private getDefaultInfo() {
     return {
-      info: { title: "imodel/rpc", version: "v4" },
+      info: { title: "imodel/rpc", version: "v5" },
       uriPrefix: this.orchestratorUrl,
     };
   }

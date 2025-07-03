@@ -1,7 +1,8 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import {
   AppNotificationManager,
@@ -12,18 +13,17 @@ import {
   UiFramework,
 } from "@itwin/appui-react";
 import { UiComponents } from "@itwin/components-react";
+import type { IModelAppOptions } from "@itwin/core-frontend";
 import { AccuSnap, IModelApp, SnapMode } from "@itwin/core-frontend";
 import { ITwinLocalization } from "@itwin/core-i18n";
 import { UiCore } from "@itwin/core-react";
 import { FrontendIModelsAccess } from "@itwin/imodels-access-frontend";
-import { IModelsClient } from "@itwin/imodels-client-management";
 import { Presentation } from "@itwin/presentation-frontend";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
-import { ViewerPerformance } from "../services/telemetry";
-import { makeCancellable } from "../utilities/MakeCancellable";
 
-import type { IModelAppOptions } from "@itwin/core-frontend";
-import type { ViewerInitializerParams } from "../types";
+import { ViewerPerformance } from "../services/telemetry/index.js";
+import type { ViewerInitializerParams } from "../types.js";
+import { makeCancellable } from "../utilities/MakeCancellable.js";
 
 // initialize required iTwin.js services
 export class BaseInitializer {
@@ -81,7 +81,10 @@ export class BaseInitializer {
         "IModelApp must be initialized prior to rendering the Base Viewer"
       );
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     if (UiCore.initialized && !this._initializing) {
+       
       return (this._initialized = Promise.resolve());
     } else if (this._initializing) {
       // in the process of initializing, so return
@@ -94,11 +97,13 @@ export class BaseInitializer {
     const cancellable = makeCancellable(function* () {
       // Initialize state manager
       // This will setup a singleton store inside the StoreManager class.
+      /* eslint-disable @typescript-eslint/no-deprecated */
       if (!StateManager.isInitialized()) {
         new StateManager({
           frameworkState: FrameworkReducer,
         });
       }
+      /* eslint-disable @typescript-eslint/no-deprecated */
 
       // execute the iModelApp initialization callback if provided
       if (viewerOptions?.onIModelAppInit) {
@@ -126,8 +131,7 @@ export class BaseInitializer {
       yield UiComponents.initialize(IModelApp.localization);
 
       // initialize UiFramework
-      // Use undefined so that UiFramework uses StateManager
-      yield UiFramework.initialize(undefined);
+      yield UiFramework.initialize();
 
       // initialize Presentation
       yield Presentation.initialize(viewerOptions?.presentationProps);
@@ -174,13 +178,11 @@ export const getIModelAppOptions = (
 
   const hubAccess =
     options?.hubAccess ??
-    new FrontendIModelsAccess(
-      new IModelsClient({
-        api: {
-          baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/imodels`,
-        },
-      })
-    );
+    new FrontendIModelsAccess({
+      api: {
+        baseUrl: `https://${globalThis.IMJS_URL_PREFIX}api.bentley.com/imodels`,
+      },
+    });
 
   const localization =
     options?.localization ??

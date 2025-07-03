@@ -1,75 +1,79 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
 import { BentleyCloudRpcManager } from "@itwin/core-common";
 import type { IModelAppOptions } from "@itwin/core-frontend";
 import { IModelApp } from "@itwin/core-frontend";
 import { UiCore } from "@itwin/core-react";
 import type { ViewerInitializerParams } from "@itwin/viewer-react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { WebInitializer } from "../../services/Initializer";
-import MockAuthorizationClient from "../mocks/MockAuthorizationClient";
+import { WebInitializer } from "../../services/Initializer.js";
+import MockAuthorizationClient from "../mocks/MockAuthorizationClient.js";
 import {
   defaultRpcInterfaces,
   TestRpcInterface,
   TestRpcInterface2,
-} from "../test-helpers/rpc";
+} from "../test-helpers/rpc.js";
 
-jest.mock("@itwin/core-frontend", () => {
-  const noMock = jest.requireActual("@itwin/core-frontend");
+vi.mock("@itwin/core-frontend", async (importActual) => {
+  const noMock = await importActual<typeof import("@itwin/core-frontend")>();
   return {
     IModelApp: {
-      startup: jest.fn().mockResolvedValue(true),
+      startup: vi.fn().mockResolvedValue(true),
       telemetry: {
-        addClient: jest.fn(),
+        addClient: vi.fn(),
       },
       i18n: {
-        registerNamespace: jest.fn().mockReturnValue({
-          readFinished: jest.fn().mockResolvedValue(true),
+        registerNamespace: vi.fn().mockReturnValue({
+          readFinished: vi.fn().mockResolvedValue(true),
         }),
-        languageList: jest.fn().mockReturnValue(["en-US"]),
-        unregisterNamespace: jest.fn(),
-        translateWithNamespace: jest.fn(),
+        languageList: vi.fn().mockReturnValue(["en-US"]),
+        unregisterNamespace: vi.fn(),
+        translateWithNamespace: vi.fn(),
       },
       uiAdmin: {
-        updateFeatureFlags: jest.fn(),
+        updateFeatureFlags: vi.fn(),
       },
       viewManager: {
         onViewOpen: {
-          addOnce: jest.fn(),
+          addOnce: vi.fn(),
         },
       },
     },
     SnapMode: {},
-    ActivityMessageDetails: jest.fn(),
-    PrimitiveTool: jest.fn(),
-    NotificationManager: jest.fn(),
-    Tool: jest.fn(),
+    ActivityMessageDetails: vi.fn(),
+    PrimitiveTool: vi.fn(),
+    NotificationManager: vi.fn(),
+    Tool: vi.fn(),
     SnapshotConnection: {
-      openFile: jest.fn(),
+      openFile: vi.fn(),
     },
     ToolAdmin: noMock.ToolAdmin,
     ItemField: {},
     CompassMode: {},
     RotationMode: {},
-    AccuDraw: class {},
+    AccuDraw: class { },
+    AccuSnap: class { },
     WebViewerApp: {
-      startup: jest.fn().mockResolvedValue(true),
-      shutdown: jest.fn().mockResolvedValue(true),
+      startup: vi.fn().mockResolvedValue(true),
+      shutdown: vi.fn().mockResolvedValue(true),
     },
-    ViewCreator3d: jest.fn().mockImplementation(() => {
+    ViewCreator3d: vi.fn().mockImplementation(() => {
       return {
-        createDefaultView: jest.fn().mockResolvedValue({}),
+        createDefaultView: vi.fn().mockResolvedValue({}),
       };
     }),
   };
 });
 
-jest.mock("@itwin/viewer-react", () => {
+vi.mock("@itwin/viewer-react", async (importActual) => {
+  const originalViewerReact = await importActual<typeof import("@itwin/viewer-react")>();
+
   return {
-    BaseViewer: jest.fn(),
+    BaseViewer: vi.fn(),
     getIModelAppOptions: (
       options: ViewerInitializerParams
     ): IModelAppOptions => {
@@ -83,34 +87,32 @@ jest.mock("@itwin/viewer-react", () => {
         authorizationClient: expect.anything(),
       };
     },
-    useIsMounted: jest.fn().mockReturnValue(true),
-    makeCancellable: jest.requireActual(
-      "@itwin/viewer-react/lib/cjs/utilities/MakeCancellable"
-    ).makeCancellable,
-    useBaseViewerInitializer: jest.fn().mockReturnValue(true),
-    getInitializationOptions: jest.fn().mockReturnValue({}),
-    isEqual: jest.fn().mockReturnValue(true),
+    useIsMounted: vi.fn().mockReturnValue(true),
+    makeCancellable: originalViewerReact.makeCancellable,
+    useBaseViewerInitializer: vi.fn().mockReturnValue(true),
+    getInitializationOptions: vi.fn().mockReturnValue({}),
+    isEqual: vi.fn().mockReturnValue(true),
     BaseInitializer: {
-      initialize: jest.fn(),
+      initialize: vi.fn(),
     },
     ViewerPerformance: {
-      addMark: jest.fn(),
-      addMeasure: jest.fn(),
-      enable: jest.fn(),
+      addMark: vi.fn(),
+      addMeasure: vi.fn(),
+      enable: vi.fn(),
     },
     ViewerAuthorization: {
-      client: jest.fn(),
+      client: vi.fn(),
     },
   };
 });
 
-const initClientSpy = jest.spyOn(BentleyCloudRpcManager, "initializeClient");
+const initClientSpy = vi.spyOn(BentleyCloudRpcManager, "initializeClient");
 
 describe("Initializer", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
-    if (UiCore.initialized) {
-      UiCore.terminate();
+    vi.clearAllMocks();
+    if (UiCore.initialized) { // eslint-disable-line @typescript-eslint/no-deprecated
+      UiCore.terminate(); // eslint-disable-line @typescript-eslint/no-deprecated
     }
   });
 
@@ -134,9 +136,9 @@ describe("Initializer", () => {
       {
         info: {
           title: "imodel/rpc",
-          version: "v4",
+          version: "v5",
         },
-        uriPrefix: "https://undefinedapi.bentley.com",
+        uriPrefix: "https://api.bentley.com",
       },
       defaultRpcInterfaces
     );
@@ -161,7 +163,7 @@ describe("Initializer", () => {
       {
         info: {
           title: "imodel/rpc",
-          version: "v4",
+          version: "v5",
         },
         uriPrefix: "https://alteredBackendUrl.bentley",
       },
@@ -193,7 +195,7 @@ describe("Initializer", () => {
           title: "Custom title",
           version: "Custom version",
         },
-        uriPrefix: "https://undefinedapi.bentley.com",
+        uriPrefix: "https://api.bentley.com",
       },
       defaultRpcInterfaces
     );
@@ -216,9 +218,9 @@ describe("Initializer", () => {
       {
         info: {
           title: "imodel/rpc",
-          version: "v4",
+          version: "v5",
         },
-        uriPrefix: "https://undefinedapi.bentley.com",
+        uriPrefix: "https://api.bentley.com",
       },
       [...defaultRpcInterfaces, TestRpcInterface]
     );
@@ -246,9 +248,9 @@ describe("Initializer", () => {
       {
         info: {
           title: "imodel/rpc",
-          version: "v4",
+          version: "v5",
         },
-        uriPrefix: "https://undefinedapi.bentley.com",
+        uriPrefix: "https://api.bentley.com",
       },
       defaultRpcInterfaces
     );
@@ -295,7 +297,7 @@ describe("Initializer", () => {
           title: "specified default backend",
           version: "2.0",
         },
-        uriPrefix: "https://undefinedapi.bentley.com",
+        uriPrefix: "https://api.bentley.com",
       },
       defaultRpcInterfaces
     );
@@ -349,7 +351,7 @@ describe("Initializer", () => {
           title: "specified default backend",
           version: "2.0",
         },
-        uriPrefix: "https://undefinedapi.bentley.com",
+        uriPrefix: "https://api.bentley.com",
       },
       defaultRpcInterfaces
     );
