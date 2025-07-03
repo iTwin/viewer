@@ -2,6 +2,18 @@
   "name": "@itwin/cra-template-desktop-viewer",
   "entries": [
     {
+      "version": "5.0.0",
+      "tag": "@itwin/cra-template-desktop-viewer_v5.0.0",
+      "date": "Thu, 03 Jul 2025 10:36:27 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "See [release notes](https://github.com/iTwin/viewer/blob/master/releases/CHANGELOG-5.0.md)."
+          }
+        ]
+      }
+    },
+    {
       "version": "4.5.7",
       "tag": "@itwin/cra-template-desktop-viewer_v4.5.7",
       "date": "Tue, 17 Jun 2025 18:10:29 GMT",

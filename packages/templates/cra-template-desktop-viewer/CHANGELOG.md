@@ -1,6 +1,13 @@
 # Change Log - @itwin/cra-template-desktop-viewer
 
-This log was last generated on Tue, 17 Jun 2025 18:10:29 GMT and should not be manually modified.
+This log was last generated on Thu, 03 Jul 2025 10:36:27 GMT and should not be manually modified.
+
+## 5.0.0
+Thu, 03 Jul 2025 10:36:27 GMT
+
+### Breaking changes
+
+- See [release notes](https://github.com/iTwin/viewer/blob/master/releases/CHANGELOG-5.0.md).
 
 ## 4.5.7
 Tue, 17 Jun 2025 18:10:29 GMT
