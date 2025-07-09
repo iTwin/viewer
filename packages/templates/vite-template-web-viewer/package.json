@@ -1,5 +1,5 @@
 {
-  "name": "@itwin/cra-template-web-viewer",
+  "name": "@itwin/vite-template-web-viewer",
   "version": "5.0.0",
   "keywords": [
     "react",
@@ -11,11 +11,11 @@
     "iTwin",
     "iTwin Viewer"
   ],
-  "description": "The iTwin Viewer template for Create React App web applications.",
+  "description": "The iTwin Viewer template for Vite web applications.",
   "repository": {
     "type": "git",
     "url": "https://github.com/itwin/viewer.git",
-    "directory": "packages/modules/cra-template-web-viewer"
+    "directory": "packages/modules/vite-template-web-viewer"
   },
   "license": "MIT",
   "bugs": {
