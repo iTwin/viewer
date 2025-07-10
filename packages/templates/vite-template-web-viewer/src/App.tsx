@@ -43,10 +43,10 @@ import { history } from "./history";
 import { unifiedSelectionStorage } from "./selectionStorage";
 
 const App: React.FC = () => {
-  const [iModelId, setIModelId] = useState(process.env.IMJS_IMODEL_ID);
-  const [iTwinId, setITwinId] = useState(process.env.IMJS_ITWIN_ID);
+  const [iModelId, setIModelId] = useState(import.meta.env.IMJS_IMODEL_ID);
+  const [iTwinId, setITwinId] = useState(import.meta.env.IMJS_ITWIN_ID);
   const [changesetId, setChangesetId] = useState(
-    process.env.IMJS_AUTH_CLIENT_CHANGESET_ID
+    import.meta.env.IMJS_AUTH_CLIENT_CHANGESET_ID
   );
 
   const accessToken = useAccessToken();
@@ -160,7 +160,7 @@ const App: React.FC = () => {
         mapLayerOptions={{
           BingMaps: {
             key: "key",
-            value: process.env.IMJS_BING_MAPS_KEY ?? "",
+            value: import.meta.env.IMJS_BING_MAPS_KEY ?? "",
           },
         }}
         backendConfiguration={{

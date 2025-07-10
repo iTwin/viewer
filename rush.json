@@ -34,8 +34,8 @@
       "shouldPublish": true
     },
     {
-      "packageName": "@itwin/cra-template-web-viewer",
-      "projectFolder": "packages/templates/cra-template-web-viewer",
+      "packageName": "@itwin/vite-template-web-viewer",
+      "projectFolder": "packages/templates/vite-template-web-viewer",
       "versionPolicyName": "independentModule",
       "shouldPublish": true
     },
