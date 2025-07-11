@@ -58,7 +58,6 @@ Runs the app in the development mode.\
 It automatically opens [http://localhost:3000](http://localhost:3000) in your default browser.
 
 The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
 ### `npm run build:app`
 
@@ -75,6 +74,10 @@ See the section about [deployment](https://vite.dev/guide/static-deploy.html) fo
 Once you have built the app using `npm run build:app` you may test it locally by running this command.
 
 This will boot up a local static web server that serves the files from `dist` at [http://localhost:3000](http://localhost:3000).
+
+### `npm run lint`
+
+Runs ESLint on all source files to check for code style issues and potential errors.
 
 ## Next Steps
 

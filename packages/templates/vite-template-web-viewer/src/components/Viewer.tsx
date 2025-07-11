@@ -27,7 +27,7 @@ import {
   MeasureToolsUiItemsProvider,
 } from "@itwin/measure-tools-react";
 import { selectionStorage } from "../selectionStorage";
-import { treeWidgetUiProvider, propertyGridUiProvider } from "./UiProviders"
+import { propertyGridUiProvider, treeWidgetUiProvider } from "./UiProviders"
 
 interface ViewerProps {
   iTwinId: string;
