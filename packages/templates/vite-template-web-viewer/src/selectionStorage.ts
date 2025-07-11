@@ -3,13 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { IModelConnection } from "@itwin/core-frontend";
 import { createStorage } from "@itwin/unified-selection";
+import { IModelConnection } from "@itwin/core-frontend";
 
-const unifiedSelectionStorage = createStorage();
+export const selectionStorage = createStorage();
 
 IModelConnection.onClose.addListener((imodel) => {
-  unifiedSelectionStorage.clearStorage({ imodelKey: imodel.key });
+  selectionStorage.clearStorage({ imodelKey: imodel.key });
 });
-
-export { unifiedSelectionStorage };

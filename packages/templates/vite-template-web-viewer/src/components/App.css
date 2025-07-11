@@ -4,8 +4,16 @@
 *--------------------------------------------------------------------------------------------*/
 .viewer-container {
   height: 100vh;
+}
 
-  .signin-content {
-    width: 400px;
-  }
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.signin-content {
+  width: 400px;
 }

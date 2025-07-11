@@ -37,7 +37,8 @@
       "packageName": "@itwin/vite-template-web-viewer",
       "projectFolder": "packages/templates/vite-template-web-viewer",
       "versionPolicyName": "independentModule",
-      "shouldPublish": true
+      "shouldPublish": true,
+      "decoupledLocalDependencies": ["@itwin/web-viewer-react"]
     },
     {
       "packageName": "@itwin/cra-template-desktop-viewer",
