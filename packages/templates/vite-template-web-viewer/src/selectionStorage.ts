@@ -3,6 +3,11 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { createBrowserHistory } from "history";
+import { createStorage } from "@itwin/unified-selection";
+import { IModelConnection } from "@itwin/core-frontend";
 
-export const history = createBrowserHistory();
+export const selectionStorage = createStorage();
+
+IModelConnection.onClose.addListener((imodel) => {
+  selectionStorage.clearStorage({ imodelKey: imodel.key });
+});
