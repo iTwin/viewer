@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/vite-template-web-viewer",
+      "comment": "Initial release of @itwin/vite-template-web-viewer - replaces @itwin/cra-template-web-viewer. Includes template built on vite, using degit for scaffolding.",
+      "type": "major"
+    }
+  ],
+  "packageName": "@itwin/vite-template-web-viewer"
+}
