@@ -5,7 +5,7 @@ This is a template for web applications that are based on the [iTwin Viewer](htt
 To create a new app based on this template run:
 
 ```sh
-npx degit iTwin/viewer/packages/templates/vite-template-web-viewer#master my-app-name
+npx degit iTwin/viewer/packages/templates/itwin-web-viewer-template#master my-app-name
 ```
 
 # Getting Started with the iTwin Viewer Template
