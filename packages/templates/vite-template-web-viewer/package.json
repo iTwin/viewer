@@ -11,7 +11,7 @@
     "iTwin Viewer",
     "vite"
   ],
-  "description": "The iTwin Viewer template for creating web applications using vite.",
+  "description": "Based on the iTwin Viewer template for creating web applications using vite.",
   "repository": {
     "type": "git",
     "url": "https://github.com/itwin/viewer.git",
