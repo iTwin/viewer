@@ -1,5 +1,5 @@
 {
-  "name": "@itwin/vite-template-web-viewer",
+  "name": "itwin-web-viewer-template",
   "version": "5.0.0",
   "keywords": [
     "react",
