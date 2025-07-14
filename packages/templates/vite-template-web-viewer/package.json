@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/itwin/viewer/issues"
   },
-    "dependencies": {
+  "dependencies": {
     "@bentley/icons-generic": "^1.0.13",
     "@itwin/appui-abstract": "^5.0.0",
     "@itwin/appui-react": "^5.5.0",
