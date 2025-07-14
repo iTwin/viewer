@@ -34,10 +34,10 @@
       "shouldPublish": true
     },
     {
-      "packageName": "@itwin/vite-template-web-viewer",
-      "projectFolder": "packages/templates/vite-template-web-viewer",
+      "packageName": "itwin-web-viewer-template",
+      "projectFolder": "packages/templates/itwin-web-viewer-template",
       "versionPolicyName": "independentModule",
-      "shouldPublish": true,
+      "shouldPublish": false,
       "decoupledLocalDependencies": ["@itwin/web-viewer-react"]
     },
     {

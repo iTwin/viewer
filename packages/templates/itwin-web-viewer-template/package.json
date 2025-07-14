@@ -1,26 +1,7 @@
 {
   "name": "itwin-web-viewer-template",
   "version": "5.0.0",
-  "keywords": [
-    "react",
-    "template",
-    "typescript",
-    "iModel",
-    "iTwinJs",
-    "iTwin",
-    "iTwin Viewer",
-    "vite"
-  ],
-  "description": "Based on the iTwin Viewer template for creating web applications using vite.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/itwin/viewer.git",
-    "directory": "packages/modules/vite-template-web-viewer"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/itwin/viewer/issues"
-  },
+  "private": true,
   "dependencies": {
     "@bentley/icons-generic": "^1.0.13",
     "@itwin/appui-abstract": "^5.0.0",
@@ -53,12 +34,10 @@
     "@itwin/property-grid-react": "^1.16.0",
     "@itwin/tree-widget-react": "^3.0.0",
     "@itwin/web-viewer-react": "^5.0.0",
-    "@tanstack/react-router": "^1.124.0",
     "@itwin/webgl-compatibility": "^5.0.0",
     "@itwin/unified-selection-react": "^1.0.0",
     "@remix-run/router": "^1.3.2",
-    "@types/react": "^18.2.18",
-    "@types/react-dom": "^18.2.7",
+    "@tanstack/react-router": "^1.124.0",
     "history": "^5.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -70,22 +49,22 @@
     "@itwin/eslint-plugin": "^5.2.1",
     "@types/history": "^4.7.6",
     "@types/node": "^22.15.27",
-    "@types/react-dom": "^18.3.0",
     "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.6.0",
-    "eslint-plugin-react": "^7.37.5",
     "eslint": "^9.30.1",
+    "eslint-plugin-react": "^7.37.5",
     "sass": "^1.89.2",
     "typescript": "~5.6.2",
-    "vite-plugin-static-copy": "^3.1.0",
-    "vite": "^7.0.1"
+    "vite": "^7.0.1",
+    "vite-plugin-static-copy": "^3.1.0"
   },
   "scripts": {
-    "start": "vite",
-    "build:app": "tsc -b && vite build",
-    "preview": "vite preview --port 3000",
-    "lint": "eslint .",
     "build": "",
+    "build:app": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview --port 3000",
+    "start": "vite",
     "test": ""
   },
   "browserslist": [
