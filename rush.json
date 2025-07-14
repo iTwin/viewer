@@ -35,8 +35,7 @@
     },
     {
       "packageName": "itwin-web-viewer-template",
-      "projectFolder": "packages/templates/itwin-web-viewer-template",
-      "versionPolicyName": "independentModule",
+      "projectFolder": "packages/templates/web",
       "shouldPublish": false,
       "decoupledLocalDependencies": ["@itwin/web-viewer-react"]
     },
