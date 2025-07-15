@@ -22,6 +22,13 @@ To create a new app based on this template run:
 npx degit iTwin/viewer/packages/templates/web#master my-app-name
 ```
 
+Note: If you're using the template directly from this repository, you might notice missing icons when running the app with pnpm start. To resolve this, run:
+
+```sh
+pnpm run build && pnpm run preview
+```
+This ensure that the icons render correctly.
+
 ## Contributing
 
 For information on how to contribute to this project, please read [CONTRIBUTING](CONTRIBUTING.MD).
