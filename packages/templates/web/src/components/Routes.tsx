@@ -1,7 +1,22 @@
-import { createRootRoute, createRoute, createRouter } from "@tanstack/react-router";
-import { SignInRedirect } from "../Authorization";
-import { App } from "./App";
+/*---------------------------------------------------------------------------------------------
+ * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+ * See LICENSE.md in the project root for license terms and full copyright notice.
+ *--------------------------------------------------------------------------------------------*/
+
+import "./Routes.css";
+import {
+  createRootRoute,
+  createRoute,
+  createRouter,
+} from "@tanstack/react-router";
+import {
+  AuthorizationState,
+  SignInRedirect,
+  useAuthorizationContext,
+} from "./Authorization";
 import { RootLayout } from "./RootLayout";
+import { ProgressLinear } from "@itwin/itwinui-react";
+import { App } from "./App";
 
 const rootRoute = createRootRoute({
   component: RootLayout,
@@ -34,8 +49,26 @@ const indexRoute = createRoute({
   },
   path: "/",
   component: function Index() {
-    const { iTwinId, iModelId } = indexRoute.useSearch();
-    return <App iTwinId={iTwinId} iModelId={iModelId} />;
+    const { iTwinId, iModelId, changesetId } = indexRoute.useSearch();
+    const { state } = useAuthorizationContext();
+
+    return (
+      <div className="viewer-container">
+        {state === AuthorizationState.Pending ? (
+          <div className="centered">
+            <div className="signin-content">
+              <ProgressLinear labels={["Loading..."]} />
+            </div>
+          </div>
+        ) : (
+          <App
+            iTwinId={iTwinId}
+            iModelId={iModelId}
+            changesetId={changesetId}
+          />
+        )}
+      </div>
+    );
   },
 });
 
