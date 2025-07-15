@@ -3,7 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import { ECSchemaRpcInterface } from "@itwin/ecschema-rpcinterface-common";
 import {
   Viewer,
   ViewerContentToolsProvider,
@@ -59,11 +58,6 @@ export function App({ iTwinId, iModelId, changesetId }: AppProps) {
         BingMaps: {
           key: "key",
           value: import.meta.env.IMJS_BING_MAPS_KEY ?? "",
-        },
-      }}
-      backendConfiguration={{
-        defaultBackend: {
-          rpcInterfaces: [ECSchemaRpcInterface],
         },
       }}
       uiProviders={[
