@@ -58,7 +58,7 @@ export function App({ iTwinId, iModelId, changesetId }: AppProps) {
       mapLayerOptions={{
         BingMaps: {
           key: "key",
-          value: process.env.IMJS_BING_MAPS_KEY ?? "",
+          value: import.meta.env.IMJS_BING_MAPS_KEY ?? "",
         },
       }}
       backendConfiguration={{
