@@ -1,13 +1,3 @@
-# iTwin Viewer Template for Web using Vite
-
-This is a template for web applications that are based on the [iTwin Viewer](https://github.com/itwin/viewer/tree/main/packages/modules/web-viewer-react) built using [Vite](https://github.com/vitejs/vite).
-
-To create a new app based on this template run:
-
-```sh
-npx degit iTwin/viewer/packages/templates/web#master my-app-name
-```
-
 # Getting Started with the iTwin Viewer Template
 
 This project was scaffolded with [degit](https://github.com/Rich-Harris/degit).
