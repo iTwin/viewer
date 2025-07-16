@@ -26,5 +26,5 @@
     "downlevelIteration": true,
     "allowJs": true
   },
-  "include": ["./packages/**/src/**/*.ts*"]
+  "include": ["./packages/**/src/**/*.ts*", "packages/templates/desktop/src/renderer/iTwinStylests"]
 }

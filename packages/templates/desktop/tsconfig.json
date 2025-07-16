@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target":  "ES2021",
+    "target":  "ES2023",
     "lib": [
       "dom",
       "dom.iterable",
@@ -17,16 +17,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "include": [
     "./src/**/*.ts",
     "./src/**/*.tsx"
-  ],
+, "src/renderer/iTwinStylests"  ],
   "exclude": [
     "build",
     "lib",
     "node_modules",
-    "./src/backend/**/*.ts"
+    "src/main/**/*.ts"
   ]
 }
