@@ -1,6 +1,7 @@
 import { defineConfig, UserConfig } from 'vite';
-import { viteStaticCopy } from "vite-plugin-static-copy";
 import react from '@vitejs/plugin-react';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 const ENV_PREFIX = "IMJS_";
 
@@ -24,6 +25,9 @@ export default defineConfig((): UserConfig => {
           },
         ],
       }),
+      nodePolyfills({
+        include: ["fs", "path"]
+      })
     ],
     resolve: {
       alias: [
@@ -31,7 +35,7 @@ export default defineConfig((): UserConfig => {
           // Resolve SASS tilde imports.
           find: /^~(.*)$/,
           replacement: "$1",
-        },
+        }
       ],
     },
     envPrefix: ENV_PREFIX

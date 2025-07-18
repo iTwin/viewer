@@ -46,7 +46,7 @@ const Home = () => {
         : ""
     );
   }, [connectivityStatus]);
-  // eslint-disable-next-line @typescript-eslint/await-thenable
+
   const openFile = async () => {
     const filePath = await ITwinViewerApp.getFile();
     if (filePath) {
