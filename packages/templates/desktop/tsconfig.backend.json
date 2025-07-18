@@ -1,0 +1,18 @@
+{
+  "extends": "./node_modules/@itwin/build-tools/tsconfig-base.json",
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "./lib"
+  },
+  "include": [
+    "./src/backend/*.ts",
+    "./src/common/*.ts"
+  ],
+  "exclude": [
+    "dist",
+    "lib",
+    "node_modules"
+  ]
+}

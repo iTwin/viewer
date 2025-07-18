@@ -40,10 +40,10 @@
       "decoupledLocalDependencies": ["@itwin/web-viewer-react"]
     },
     {
-      "packageName": "@itwin/cra-template-desktop-viewer",
-      "projectFolder": "packages/templates/cra-template-desktop-viewer",
-      "versionPolicyName": "independentModule",
-      "shouldPublish": true
+      "packageName": "itwin-desktop-viewer-template",
+      "projectFolder": "packages/templates/desktop",
+      "shouldPublish": false,
+      "decoupledLocalDependencies": ["@itwin/desktop-viewer-react"]
     },
     {
       "packageName": "@itwin/web-viewer-test",
