@@ -125,7 +125,7 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
           clientId,
           scopes,
           redirectUris: [redirectUri],
-          issuerUrl: issuerUrl || undefined, // eslint-disable-line @typescript-eslint/prefer-nullish-coalescing
+          issuerUrl: issuerUrl || undefined,
         });
         await authClient.signInSilent();
         IModelHost.authorizationClient = authClient;

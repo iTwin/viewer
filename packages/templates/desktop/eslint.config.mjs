@@ -1,7 +1,11 @@
 import iTwinPlugin from "@itwin/eslint-plugin";
 import reactPlugin from "eslint-plugin-react";
+import { defineConfig } from "eslint/config";
 
-export default [
+export default defineConfig([
+  {
+    ignores: ["lib/*"]
+  },
   {
     files: ["src/frontend/**/*.{ts,tsx}"],
     ...iTwinPlugin.configs.uiConfig,
@@ -23,4 +27,4 @@ export default [
       }
     }
   }
-];
+]);
