@@ -63,14 +63,14 @@ export class ITwinViewerApp {
           const filePath = await ITwinViewerApp.getFile();
           if (filePath) {
             void addRecent(filePath);
-            await navigate(`/viewer`, { state: { filePath } });   // eslint-disable-line @typescript-eslint/await-thenable
+            navigate(`/viewer`, { state: { filePath } });
           }
           break;
         case "download":
-          await navigate("/itwins");    // eslint-disable-line @typescript-eslint/await-thenable
+          navigate("/itwins");
           break;
         case "home":
-          await navigate("/");    // eslint-disable-line @typescript-eslint/await-thenable
+          navigate("/");
           break;
         case "preferences":
           alert("Coming Soon!");

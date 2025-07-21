@@ -25,7 +25,7 @@ export const Recents = () => {
 
   const openFile = async (file: ViewerFile) => {
     if (await userSettings.checkFileExists(file)) {
-      await navigate(`/viewer`, { state: { filePath: file.path } });    // eslint-disable-line @typescript-eslint/await-thenable
+      navigate(`/viewer`, { state: { filePath: file.path } });
     }
   };
 
