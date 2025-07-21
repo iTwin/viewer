@@ -9,8 +9,8 @@ The iTwin Viewer is a configurable iTwin.js viewer. This monorepo contains the i
 | @itwin/viewer-react                | [packages/modules/viewer-react](packages/modules/viewer-react)                                 | Contains the base iTwin Viewer React component                   | [![npm version](https://badge.fury.io/js/%40itwin%2Fviewer-react.svg)](https://badge.fury.io/js/%40itwin%2Fviewer-react)                               |
 | @itwin/desktop-viewer-react        | [packages/modules/desktop-viewer-react](packages/modules/desktop-viewer-react)                 | Contains the desktop version of the iTwin Viewer React component | [![npm version](https://badge.fury.io/js/%40itwin%2Fdesktop-viewer-react.svg)](https://badge.fury.io/js/%40itwin%2Fdesktop-viewer-react)               |
 | @itwin/web-viewer-react            | [packages/modules/web-viewer-react](packages/modules/web-viewer-react)                         | Contains the web version of the iTwin Viewer React component     | [![npm version](https://badge.fury.io/js/%40itwin%2Fweb-viewer-react.svg)](https://badge.fury.io/js/%40itwin%2Fweb-viewer-react)                       |
-| itwin-web-viewer-template     | [packages/templates/web](packages/templates/web)         | [Template that contains the iTwin Web Viewer](#itwin-viewer-template-for-web-using-vite)                  | Not Published to npm        |
-| itwin-desktop-viewer-template | [packages/templates/desktop](packages/templates/desktop) | [Template that contains the iTwin Desktop Viewer](#itwin-viewer-template-for-desktop-using-vite)              | Not Published to npm        |
+| itwin-web-viewer-template     | [packages/templates/web](packages/templates/web)         | [Template that contains the iTwin Web Viewer](#itwin-viewer-template-for-web-using-vite)                  | Clone with degit for a quick start        |
+| itwin-desktop-viewer-template | [packages/templates/desktop](packages/templates/desktop) | [Template that contains the iTwin Desktop Viewer](#itwin-viewer-template-for-desktop-using-vite)              | Clone with degit for a quick start        |
 
 # iTwin Viewer Template for Web using Vite
 

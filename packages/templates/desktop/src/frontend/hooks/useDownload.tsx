@@ -33,7 +33,6 @@ export const useDownload = (
         const percent = (loaded / total) * 100;
 
         setProgress(percent);
-        // eslint-disable-next-line no-console
         console.log(
           `Briefcase download progress (${loaded}/${total}) -> ${percent}%`
         );

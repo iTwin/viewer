@@ -14,6 +14,7 @@ export default defineConfig([
     files: ["src/frontend/**/*.{ts,tsx}"],
     rules: {
       ...reactPlugin.configs["jsx-runtime"].rules,
+      "no-console": "off"
     },
   },
   {

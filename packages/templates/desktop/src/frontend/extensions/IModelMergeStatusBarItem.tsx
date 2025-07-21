@@ -82,7 +82,6 @@ const MergeStatusBarItem = () => {
         setMergeStatus(ModelStatus.UPTODATE);
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error(error);
       setMergeStatus(ModelStatus.ERROR);
     }
@@ -150,8 +149,7 @@ export class IModelMergeItemsProvider implements UiItemsProvider {
     stageUsage: string
   ): StatusBarItem[] {
     const statusBarItems: StatusBarItem[] = [];
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
-    if (stageUsage === StageUsage.General) {
+    if (stageUsage === StageUsage.General.valueOf()) {
       statusBarItems.push(
         StatusBarItemUtilities.createCustomItem({
           id: "IModelMergeItemsProvider:ConnectionStatusBarItem",

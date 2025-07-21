@@ -18,7 +18,6 @@ export const usePullChanges = (connection?: BriefcaseConnection) => {
       const percent = (loaded / total) * 100;
 
       setPullProgress(percent);
-      // eslint-disable-next-line no-console
       console.log(`Pull changes progress (${loaded}/${total}) -> ${percent}%`);
     },
     []

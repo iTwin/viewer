@@ -73,7 +73,7 @@ const viewerMain = async () => {
 const createMenu = () => {
   const isMac = process.platform === "darwin";
 
-  const template = [
+  const template: MenuItemConstructorOptions[] = [
     {
       label: "File",
       submenu: [
@@ -153,8 +153,7 @@ const createMenu = () => {
     } as MenuItemConstructorOptions);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-  const menu = Menu.buildFromTemplate(template as MenuItemConstructorOptions[]);
+  const menu = Menu.buildFromTemplate(template);
 
   Menu.setApplicationMenu(menu);
   ElectronHost.mainWindow?.setMenuBarVisibility(true);

@@ -7,7 +7,8 @@ import { IModelHost, IpcHandler } from "@itwin/core-backend";
 import { InternetConnectivityStatus } from "@itwin/core-common";
 import { ElectronMainAuthorization } from "@itwin/electron-authorization/Main";
 import {
-  dialog, Menu,
+  dialog, 
+  Menu,
   type OpenDialogOptions,
   type OpenDialogReturnValue,
   type SaveDialogOptions,
@@ -125,7 +126,7 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
           clientId,
           scopes,
           redirectUris: [redirectUri],
-          issuerUrl: issuerUrl || undefined,
+          issuerUrl,
         });
         await authClient.signInSilent();
         IModelHost.authorizationClient = authClient;

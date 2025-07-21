@@ -9,7 +9,7 @@ import { InternetConnectivityStatus } from "@itwin/core-common";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
 import { SvgFolderOpened, SvgImodel } from "@itwin/itwinui-icons-react";
 import { PageLayout } from "@itwin/itwinui-layouts-react";
-import { Blockquote, Text } from "@itwin/itwinui-react";
+import { Blockquote, Button, Text } from "@itwin/itwinui-react";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -68,8 +68,14 @@ const Home = () => {
           <nav>
             <div>
               <SvgFolderOpened />
-              {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-              <span onClick={openFile}>{ITwinViewerApp.translate("open")}</span>
+              <Button onClick={openFile} style={{
+                background: "none",
+                border: "none",
+                color: "inherit",
+                padding: 0,
+                font: "inherit",
+                textAlign: "left",
+              }} >{ITwinViewerApp.translate("open")}</Button>
             </div>
             <div>
               <SvgImodel className={linkClass} />

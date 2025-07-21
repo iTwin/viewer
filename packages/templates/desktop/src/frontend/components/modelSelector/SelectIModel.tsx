@@ -89,7 +89,6 @@ const useProgressIndicator = (iModel: IModelFull) => {
       }
       return fileName;
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.log(error);
       setStatus(ModelStatus.ERROR);
     }
@@ -106,7 +105,6 @@ const useProgressIndicator = (iModel: IModelFull) => {
       }
       setStatus(ModelStatus.UPTODATE);
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error(error);
       setStatus(ModelStatus.ERROR);
     }

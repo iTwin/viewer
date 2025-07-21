@@ -3,27 +3,26 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import type { AsyncFunction, PromiseReturnType } from "@itwin/core-bentley";
+import type { AsyncFunction } from "@itwin/core-bentley";
 import type { IpcListener } from "@itwin/core-common";
 import { IModelApp, IpcApp } from "@itwin/core-frontend";
 import type { OpenDialogOptions, SaveDialogOptions } from "electron";
 import type { NavigateFunction } from "react-router-dom";
 
-import { channelName, type ViewerConfig, type ViewerIpc } from "../../common/ViewerConfig";
+import { channelName, type ViewerIpc } from "../../common/ViewerConfig";
 
 export declare type PickAsyncMethods<T> = {
   [P in keyof T]: T[P] extends AsyncFunction ? T[P] : never;
 };
 
-type IpcMethods = PickAsyncMethods<ViewerIpc>;
-
 export class ITwinViewerApp {
-  private static _config: ViewerConfig;
   private static _menuListener: IpcListener | undefined;
 
   private static _getFileName(iModelName?: string) {
     return iModelName ? iModelName.replace(/\s/g, "") : "Untitled";
   }
+
+  public static ipcCall = IpcApp.makeIpcProxy<ViewerIpc>(channelName);
 
   public static translate(key: string | string[], options?: any): string {
     return IModelApp.localization.getLocalizedString(
@@ -31,31 +30,6 @@ export class ITwinViewerApp {
       options
     );
   }
-
-  public static ipcCall = new Proxy({} as IpcMethods, {
-    get(_target, key: keyof IpcMethods): AsyncFunction {
-      const makeIpcCall =
-        <T extends keyof IpcMethods>(methodName: T) =>
-        async (args: Parameters<IpcMethods[T]>) =>
-          IpcApp.callIpcChannel(    // eslint-disable-line @typescript-eslint/no-deprecated
-            channelName,
-            methodName,
-            args
-          ) as PromiseReturnType<ViewerIpc[T]>;
-
-      switch (key) {
-        case "getConfig":
-          return async () => {
-            if (!ITwinViewerApp._config) {
-              ITwinViewerApp._config = await makeIpcCall("getConfig")([]);
-            }
-            return ITwinViewerApp._config;
-          };
-        default:
-          return makeIpcCall(key);
-      }
-    },
-  });
 
   public static async getFile(): Promise<string | undefined> {
     const options: OpenDialogOptions = {
