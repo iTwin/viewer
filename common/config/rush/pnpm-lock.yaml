@@ -710,7 +710,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^8.32.0
       '@typescript-eslint/parser': ^8.32.0
       eslint: ^9.13.0
-      eslint-config-prettier: ^10.0.1
+      eslint-config-prettier: ^10.1.8
       eslint-config-react-app: ^7.0.0
       eslint-plugin-prettier: ^5.4.0
       eslint-plugin-react: ^7.20.3
@@ -729,9 +729,9 @@ importers:
       '@typescript-eslint/eslint-plugin': 8.36.0_xwqazvccw6jhzwlbpigrvayb5e
       '@typescript-eslint/parser': 8.36.0_eslint@9.31.0
       eslint: 9.31.0
-      eslint-config-prettier: 10.1.5_eslint@9.31.0
+      eslint-config-prettier: 10.1.8_eslint@9.31.0
       eslint-config-react-app: 7.0.1_eslint@9.31.0
-      eslint-plugin-prettier: 5.5.1_tzcxofdmrzyeoyfff3ivymu5iy
+      eslint-plugin-prettier: 5.5.1_5jkohqeti2bb6a6o3gysl7atzm
       eslint-plugin-react: 7.37.5_eslint@9.31.0
       eslint-plugin-react-hooks: 5.2.0_eslint@9.31.0
       eslint-plugin-simple-import-sort: 12.1.1_eslint@9.31.0
@@ -10088,8 +10088,8 @@ packages:
       source-map: 0.6.1
     dev: true
 
-  /eslint-config-prettier/10.1.5_eslint@9.31.0:
-    resolution: {integrity: sha512-zc1UmCpNltmVY34vuLRV61r1K27sWuX39E+uyUnY8xS2Bex88VV9cugG+UZbRSRGtGyFboj+D8JODyme1plMpw==}
+  /eslint-config-prettier/10.1.8_eslint@9.31.0:
+    resolution: {integrity: sha512-82GZUjRS0p/jganf6q1rEO25VSoHH0hKPCTrgillPjdI/3bgBhAE1QzHrHTizjpRvy6pGAvKjDJtk2pF9NDq8w==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
@@ -10405,7 +10405,7 @@ packages:
       eslint: 9.31.0
     dev: true
 
-  /eslint-plugin-prettier/5.5.1_tzcxofdmrzyeoyfff3ivymu5iy:
+  /eslint-plugin-prettier/5.5.1_5jkohqeti2bb6a6o3gysl7atzm:
     resolution: {integrity: sha512-dobTkHT6XaEVOo8IO90Q4DOSxnm3Y151QxPJlM/vKC0bVy+d6cVWQZLlFiuZPP0wS6vZwSKeJgKkcS+KfMBlRw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -10420,7 +10420,7 @@ packages:
         optional: true
     dependencies:
       eslint: 9.31.0
-      eslint-config-prettier: 10.1.5_eslint@9.31.0
+      eslint-config-prettier: 10.1.8_eslint@9.31.0
       prettier: 3.6.2
       prettier-linter-helpers: 1.0.0
       synckit: 0.11.8
