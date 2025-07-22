@@ -11,6 +11,7 @@ overrides:
   send: ^0.19.0
   cross-spawn: ^7.0.5
   serve-static: 1.16.0
+  form-data: ^4.0.4
 
 importers:
 
@@ -3527,7 +3528,7 @@ packages:
       '@itwin/ecschema-metadata': 5.0.3_ediis6r55g4gl66ad4hfeowddi
       '@itwin/object-storage-azure': 2.3.0_jfjmifiz2mjvngwcpuojiclrrm
       '@itwin/object-storage-core': 2.3.0_jfjmifiz2mjvngwcpuojiclrrm
-      form-data: 4.0.3
+      form-data: 4.0.4
       fs-extra: 8.1.0
       inversify: 6.0.3
       json5: 2.2.3
@@ -5094,7 +5095,7 @@ packages:
       '@types/jquery': 3.5.32
       base64-js: 1.5.1
       follow-redirects: 1.15.9
-      form-data: 4.0.3
+      form-data: 4.0.4
       opener: 1.5.2
     transitivePeerDependencies:
       - debug
@@ -6454,7 +6455,7 @@ packages:
       '@types/caseless': 0.12.5
       '@types/node': 22.16.3
       '@types/tough-cookie': 4.0.5
-      form-data: 2.5.3
+      form-data: 4.0.4
     dev: false
 
   /@types/resolve/1.17.1:
@@ -7783,7 +7784,7 @@ packages:
     resolution: {integrity: sha512-/1xYAC4MP/HEG+3duIhFr4ZQXR4sQXOIe+o6sdqzeykGLx6Upp/1p8MHqhINOvGeP7xyNHe7tsiJByc4SSVUxw==}
     dependencies:
       follow-redirects: 1.15.9
-      form-data: 4.0.3
+      form-data: 4.0.4
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
@@ -11200,29 +11201,8 @@ packages:
       webpack: 5.100.1
     dev: true
 
-  /form-data/2.5.3:
-    resolution: {integrity: sha512-XHIrMD0NpDrNM/Ckf7XJiBbLl57KEhT3+i3yY+eWm+cqYZJQTZrKo8Y8AWKnuV5GT4scfuUGt9LzNoIx3dU1nQ==}
-    engines: {node: '>= 0.12'}
-    dependencies:
-      asynckit: 0.4.0
-      combined-stream: 1.0.8
-      es-set-tostringtag: 2.1.0
-      mime-types: 2.1.35
-      safe-buffer: 5.2.1
-    dev: false
-
-  /form-data/3.0.3:
-    resolution: {integrity: sha512-q5YBMeWy6E2Un0nMGWMgI65MAKtaylxfNJGJxpGh45YDciZB4epbWpaAfImil6CPAPTYB4sh0URQNDRIZG5F2w==}
-    engines: {node: '>= 6'}
-    dependencies:
-      asynckit: 0.4.0
-      combined-stream: 1.0.8
-      es-set-tostringtag: 2.1.0
-      mime-types: 2.1.35
-    dev: true
-
-  /form-data/4.0.3:
-    resolution: {integrity: sha512-qsITQPfmvMOSAdeyZ+12I1c+CKSstAFAwu+97zrnWAbIr5u8wfsExUzCesVLC8NgHuRUqNN4Zy6UPWUTRGslcA==}
+  /form-data/4.0.4:
+    resolution: {integrity: sha512-KrGhL9Q4zjj0kiUt5OO4Mr/A/jlI2jDYs5eHBpYHPcBEVSiipAvn2Ko2HnPe20rmcuuvMHNdZFp+4IlGTMF0Ow==}
     engines: {node: '>= 6'}
     dependencies:
       asynckit: 0.4.0
@@ -13234,7 +13214,7 @@ packages:
       decimal.js: 10.6.0
       domexception: 2.0.1
       escodegen: 2.1.0
-      form-data: 3.0.3
+      form-data: 4.0.4
       html-encoding-sniffer: 2.0.1
       http-proxy-agent: 4.0.1
       https-proxy-agent: 5.0.1
