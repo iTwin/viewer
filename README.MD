@@ -12,7 +12,7 @@ The iTwin Viewer is a configurable iTwin.js viewer. This monorepo contains the i
 | itwin-web-viewer-template     | [packages/templates/web](packages/templates/web)         | [Template that contains the iTwin Web Viewer](#itwin-viewer-template-for-web-using-vite)                  | Clone with degit for a quick start        |
 | itwin-desktop-viewer-template | [packages/templates/desktop](packages/templates/desktop) | [Template that contains the iTwin Desktop Viewer](#itwin-viewer-template-for-desktop-using-vite)              | Clone with degit for a quick start        |
 
-# iTwin Viewer Template for Web using Vite
+## iTwin Viewer Template for Web using Vite
 
 This is a template for web applications that are based on the [iTwin Viewer](https://github.com/itwin/viewer/tree/main/packages/modules/web-viewer-react) built using [Vite](https://github.com/vitejs/vite).
 
@@ -29,7 +29,7 @@ pnpm run build && pnpm run preview
 ```
 This ensure that the icons render correctly.
 
-# iTwin Viewer Template for Desktop using Vite
+## iTwin Viewer Template for Desktop using Vite
 
 This is a template for Desktop applications that are based on the [iTwin Viewer](https://github.com/itwin/viewer/tree/main/packages/modules/desktop-viewer-react) built using [Vite](https://github.com/vitejs/vite).
 
