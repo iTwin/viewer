@@ -42,6 +42,10 @@ IMJS_IMODEL_ID = ""
 
 In the project directory, you can run:
 
+### `npm install`
+
+Installs all the dependencies listed in your package.json.
+
 ### `npm start`
 
 Runs the app in the development mode.\
