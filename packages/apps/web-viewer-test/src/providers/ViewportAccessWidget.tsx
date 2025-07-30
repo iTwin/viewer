@@ -7,7 +7,7 @@ import type { UiItemsProvider, Widget } from "@itwin/appui-react";
 import { StagePanelLocation, WidgetState } from "@itwin/appui-react";
 import { useActiveViewport } from "@itwin/appui-react";
 import { Button } from "@itwin/itwinui-react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 const ViewportOnlyWidget: React.FunctionComponent<{
   onSampleIModelChange: (iModelId: string) => void;

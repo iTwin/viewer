@@ -9,7 +9,7 @@ import type { IModelFull, IModelGridProps } from "@itwin/imodel-browser-react";
 import { IModelGrid } from "@itwin/imodel-browser-react";
 import { PageLayout } from "@itwin/itwinui-layouts-react";
 import { Text, Tile } from "@itwin/itwinui-react";
-import React, {
+import {
   useCallback,
   useContext,
   useEffect,

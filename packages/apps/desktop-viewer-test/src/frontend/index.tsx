@@ -7,7 +7,6 @@ import "./index.scss";
 import "@itwin/itwinui-layouts-css/styles.css";
 
 import { Logger, LogLevel } from "@itwin/core-bentley";
-import React from "react";
 import { createRoot } from "react-dom/client";
 
 import { AppLoggerCategory } from "../common/LoggerCategory";

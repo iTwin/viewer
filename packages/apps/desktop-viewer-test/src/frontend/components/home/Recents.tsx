@@ -6,7 +6,7 @@
 import "./Home.scss";
 
 import { SvgStatusError } from "@itwin/itwinui-icons-react";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import type { ViewerFile } from "../../../common/ViewerConfig";

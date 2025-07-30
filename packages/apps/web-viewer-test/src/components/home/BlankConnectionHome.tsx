@@ -10,7 +10,7 @@ import { Range3d } from "@itwin/core-geometry";
 import { ITwinLocalization } from "@itwin/core-i18n";
 import { RealityDataAccessClient } from "@itwin/reality-data-client";
 import { Viewer } from "@itwin/web-viewer-react";
-import React, { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 
 import { GeometryDecorator } from "../../decorators/GeometryDecorator";
 import { TestUiProvider2 } from "../../providers";
@@ -29,7 +29,6 @@ const BlankConnectionHome: React.FC = () => {
         redirectUri: import.meta.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
         postSignoutRedirectUri: import.meta.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
         responseType: "code",
-        authority: import.meta.env.IMJS_AUTH_AUTHORITY,
       }),
     []
   );

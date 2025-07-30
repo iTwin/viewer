@@ -49,6 +49,7 @@
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.6.0",
+    "rimraf": "^3.0.2",
     "sass": "^1.89.2",
     "typescript": "~5.6.2",
     "vite": "^7.0.1",
@@ -62,14 +63,11 @@
     "not op_mini all"
   ],
   "scripts": {
+    "build": "vite build",
+    "clean": "rimraf dist",
+    "lint": "eslint \"./src/**/*.{ts,tsx}\" 1>&2",
+    "lint:fix": "npm run -s lint -- --fix",
     "start": "vite",
-    "build": "",
-    "build:frontend": "vite build",
     "test": ""
-  },
-  "eslintConfig": {
-    "extends": [
-      "../../../common/scripts/.eslintrc.ts.json"
-    ]
   }
 }

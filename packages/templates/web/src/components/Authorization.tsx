@@ -41,8 +41,7 @@ const createAuthClient = (): AuthorizationContext => {
     clientId: import.meta.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
     redirectUri: import.meta.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
     postSignoutRedirectUri: import.meta.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
-    responseType: "code",
-    authority: import.meta.env.IMJS_AUTH_AUTHORITY,
+    responseType: "code"
   });
   return {
     client,

@@ -21,7 +21,7 @@ import {
   createTreeWidget,
   ModelsTreeComponent,
 } from "@itwin/tree-widget-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import { viewerRpcs } from "../../../common/ViewerConfig";

@@ -39,6 +39,7 @@ module.exports = {
     "@typescript-eslint/interface-name-prefix": "off",
     "react/no-unescaped-entities": "off",
     "react/display-name": "off",
+    "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["warn", { ignoreRestSiblings: true }],

@@ -22,7 +22,7 @@ import {
   useIsMounted,
 } from "@itwin/desktop-viewer-react";
 import { SvgCloud, SvgOffline } from "@itwin/itwinui-icons-react";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
 import { BriefcaseStatus } from "../components/modelSelector";

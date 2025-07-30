@@ -14,7 +14,7 @@ import {
   SvgSyncDisabled,
 } from "@itwin/itwinui-icons-react";
 import { ProgressRadial } from "@itwin/itwinui-react";
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 
 import { ITwinViewerApp } from "../../app/ITwinViewerApp";
 

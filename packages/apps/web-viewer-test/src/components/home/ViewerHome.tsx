@@ -29,7 +29,7 @@ import {
   ViewerNavigationToolsProvider,
   ViewerStatusbarItemsProvider,
 } from "@itwin/web-viewer-react";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 // import { LocalExtensionProvider, RemoteExtensionProvider } from "@itwin/core-frontend";
 import { ReactComponent as Itwin } from "../../images/itwin.svg";
@@ -59,7 +59,6 @@ const ViewerHome: React.FC = () => {
         redirectUri: import.meta.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
         postSignoutRedirectUri: import.meta.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
         responseType: "code",
-        authority: import.meta.env.IMJS_AUTH_AUTHORITY,
       }),
     []
   );

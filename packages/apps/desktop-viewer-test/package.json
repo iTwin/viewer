@@ -11,11 +11,10 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "build": "",
-    "build:desktop": "npm run -s build:frontend && npm run -s build:backend",
+    "build": "npm run -s build:frontend && npm run -s build:backend",
     "build:backend": "tsc -p tsconfig.backend.json",
     "build:frontend": "vite build",
-    "clean": "rimraf lib build dist",
+    "clean": "rimraf lib dist",
     "electron": "electron lib/backend/main.js",
     "electron:debug": "cross-env NODE_ENV=development electron lib/backend/main.js",
     "lint": "eslint \"./src/**/*.{ts,tsx}\" 1>&2",
