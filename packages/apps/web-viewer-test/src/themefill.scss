@@ -3,7 +3,7 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
-@import "~@itwin/core-react/lib/cjs/core-react/style/themecolors";
+@use "@itwin/core-react/lib/cjs/core-react/style/themecolors" as *;
 
 $buic-foreground-body-rgb: var(--buic-foreground-body-rgb, 000, 000, 000);
 $buic-foreground-primary-rgb: var(--buic-foreground-primary-rgb, 000, 139, 225);

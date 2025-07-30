@@ -3,9 +3,8 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
-import { AppNotificationManager, ColorTheme } from "@itwin/appui-react";
+import { AppNotificationManager } from "@itwin/appui-react";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
-import { ECSchemaRpcInterface } from "@itwin/ecschema-rpcinterface-common";
 import {
   MeasureTools,
   MeasureToolsUiItemsProvider,
@@ -17,7 +16,6 @@ import {
   PropertyGridManager,
   ShowHideNullValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
-// import LocalExtension from "@itwin/test-local-extension";
 import {
   CategoriesTreeComponent,
   createTreeWidget,
@@ -45,23 +43,23 @@ import { history } from "../routing";
  * @returns
  */
 const ViewerHome: React.FC = () => {
-  const [iTwinId, setITwinId] = useState(process.env.IMJS_AUTH_CLIENT_ITWIN_ID);
+  const [iTwinId, setITwinId] = useState(import.meta.env.IMJS_AUTH_CLIENT_ITWIN_ID);
   const [iModelId, setIModelId] = useState(
-    process.env.IMJS_AUTH_CLIENT_IMODEL_ID
+    import.meta.env.IMJS_AUTH_CLIENT_IMODEL_ID
   );
   const [changesetId, setChangesetId] = useState(
-    process.env.IMJS_AUTH_CLIENT_CHANGESET_ID
+    import.meta.env.IMJS_AUTH_CLIENT_CHANGESET_ID
   );
 
   const authClient = useMemo(
     () =>
       new BrowserAuthorizationClient({
-        scope: process.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
-        clientId: process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
-        redirectUri: process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
-        postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
+        scope: import.meta.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
+        clientId: import.meta.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
+        redirectUri: import.meta.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
+        postSignoutRedirectUri: import.meta.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
         responseType: "code",
-        authority: process.env.IMJS_AUTH_AUTHORITY,
+        authority: import.meta.env.IMJS_AUTH_AUTHORITY,
       }),
     []
   );
@@ -135,12 +133,7 @@ const ViewerHome: React.FC = () => {
         mapLayerOptions={{
           BingMaps: {
             key: "key",
-            value: process.env.IMJS_BING_MAPS_KEY ?? "",
-          },
-        }}
-        backendConfiguration={{
-          defaultBackend: {
-            rpcInterfaces: [ECSchemaRpcInterface],
+            value: import.meta.env.IMJS_BING_MAPS_KEY ?? "",
           },
         }}
         notifications={new AppNotificationManager()}

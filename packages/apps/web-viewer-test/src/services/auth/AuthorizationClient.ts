@@ -20,11 +20,11 @@ export class AuthorizationClient {
       return;
     }
 
-    const scope = process.env.IMJS_AUTH_CLIENT_SCOPES ?? "";
-    const clientId = process.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "";
-    const redirectUri = process.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "";
-    const postSignoutRedirectUri = process.env.IMJS_AUTH_CLIENT_LOGOUT_URI;
-    const authority = process.env.IMJS_AUTH_AUTHORITY;
+    const scope = import.meta.env.IMJS_AUTH_CLIENT_SCOPES ?? "";
+    const clientId = import.meta.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "";
+    const redirectUri = import.meta.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "";
+    const postSignoutRedirectUri = import.meta.env.IMJS_AUTH_CLIENT_LOGOUT_URI;
+    const authority = import.meta.env.IMJS_AUTH_AUTHORITY;
 
     // authority is optional and will default to Production IMS
     const oidcConfiguration: BrowserAuthorizationClientConfiguration = {

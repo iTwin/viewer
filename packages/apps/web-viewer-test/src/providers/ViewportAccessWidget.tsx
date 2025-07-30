@@ -27,8 +27,8 @@ const ViewportOnlyWidget: React.FunctionComponent<{
   }, [viewport]);
 
   const toggleModel = () => {
-    const iModelId1 = process.env.IMJS_AUTH_CLIENT_IMODEL_ID;
-    const iModelId2 = process.env.IMJS_AUTH_CLIENT_IMODEL_ID2;
+    const iModelId1 = import.meta.env.IMJS_AUTH_CLIENT_IMODEL_ID;
+    const iModelId2 = import.meta.env.IMJS_AUTH_CLIENT_IMODEL_ID2;
     let iModelId = iModelId1;
     if (!iModelId || viewport?.iModel.iModelId === iModelId1) {
       iModelId = iModelId2;
