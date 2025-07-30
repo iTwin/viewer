@@ -33,7 +33,7 @@ const viewerMain = async () => {
   Logger.setLevel(AppLoggerCategory.Backend, LogLevel.Info);
 
   const electronHost: ElectronHostOptions = {
-    webResourcesPath: path.join(__dirname, "..", "..", "build"),
+    webResourcesPath: path.join(__dirname, "..", "..", "dist"),
     rpcInterfaces: viewerRpcs,
     developmentServer: process.env.NODE_ENV === "development",
     ipcHandlers: [ViewerHandler],

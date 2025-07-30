@@ -1,8 +1,4 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/pnpm-config.schema.json",
-  "useWorkspaces": true,
-  "globalOverrides": {
-    "postcss": "^8.4.31", // https://github.com/advisories/GHSA-566m-qj78-rww5 @bentley/react-scripts>svg-sprite-loader>svg-baker>postcss
-    "micromatch": "^4.0.8" // https://github.com/advisories/GHSA-952p-6rrq-rcjv @bentley/react-scripts>svg-sprite-loader>svg-baker>micromatch
-  }
+  "useWorkspaces": true
 }

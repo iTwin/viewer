@@ -1,8 +1,8 @@
 # Desktop Viewer Sample
 
-This app is an example of using the iTwin Viewer in a modularized React + Electron desktop application. It is meant to be used as a development environment for the components in the packages in this monorepo. It is not intended to be used as a seed/starter application. You should use the [Create React App template](https://www.npmjs.com/package/@itwin/cra-template-desktop-viewer) to seed a new application.
+This app is an example of using the iTwin Viewer in a modularized React + Electron desktop application. It is meant to be used as a development environment for the components in the packages in this monorepo. It is not intended to be used as a seed/starter application. You should use the [iTwin Desktop Viewer Template](https://github.com/itwin/viewer/tree/main/packages/templates/desktop) to seed a new application.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was built with [Vite](https://github.com/vitejs/vite).
 
 ## Configuration
 

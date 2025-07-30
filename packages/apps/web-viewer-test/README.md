@@ -19,22 +19,6 @@ It automatically opens [http://localhost:3000](http://localhost:3000) in your de
 
 The page will reload if you make edits.<br />
 
-### `rushx build`
-
-Builds the app for production to the `dist` folder.<br />
-It bundles your code in production mode and applies optimizations for best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://vite.dev/guide/static-deploy.html) for more information.
-
-### `rushx preview`
-
-Once you have built the app using `npm run build` you may test it locally by running this command.
-
-This will boot up a local static web server that serves the files from dist at [http://localhost:3000](http://localhost:3000).
-
 ## Learn More
 
 [Learn React](https://reactjs.org/).

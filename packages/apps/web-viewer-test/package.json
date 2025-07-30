@@ -65,7 +65,6 @@
     "start": "vite",
     "build": "",
     "build:frontend": "vite build",
-    "preview": "vite preview --port 3000",
     "test": ""
   },
   "eslintConfig": {
