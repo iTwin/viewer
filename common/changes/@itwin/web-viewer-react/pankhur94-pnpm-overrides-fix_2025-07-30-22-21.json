@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/web-viewer-react",
+      "comment": "adding jsdom as devDep",
+      "type": "none"
+    }
+  ],
+  "packageName": "@itwin/web-viewer-react"
+}
