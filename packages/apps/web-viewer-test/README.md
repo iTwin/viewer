@@ -1,6 +1,6 @@
 # React Viewer Sample
 
-This app is an example of using the iTwin Viewer in a modularized React application. It is meant to be used as a development environment for the components in the packages in this monorepo. It is not intended to be used as a seed/starter application. You should use the [iTwin Web Viewer Template](https://github.com/itwin/viewer/tree/main/packages/templates/web) to seed a new application.
+This web app is an example of using the iTwin Viewer with React. It is meant to be used as a development environment for the components in the packages in this monorepo. It is not intended to be used as a seed/starter application. You should use the [iTwin Web Viewer Template](https://github.com/itwin/viewer/tree/main/packages/templates/web) to seed a new application.
 
 This project was built with [Vite](https://github.com/vitejs/vite).
 
