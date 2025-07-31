@@ -5,7 +5,7 @@
 
 import { useAccessToken } from "@itwin/desktop-viewer-react";
 import type { Dispatch, SetStateAction } from "react";
-import React, { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
 import { SelectIModel } from "../modelSelector";

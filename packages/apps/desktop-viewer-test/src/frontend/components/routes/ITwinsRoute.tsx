@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { useAccessToken } from "@itwin/desktop-viewer-react";
-import React from "react";
 
 import { SelectITwin } from "../modelSelector";
 import { SignIn } from "../signin/SignIn";

@@ -3,8 +3,8 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
-@import "../../themefill.scss";
-@import "~@itwin/core-react/lib/cjs/core-react/style/themecolors.scss";
+@use "../../themefill.scss" as *;
+@use "@itwin/core-react/lib/cjs/core-react/style/themecolors.scss" as *;
 
 .homeButton {
   width: 120px;

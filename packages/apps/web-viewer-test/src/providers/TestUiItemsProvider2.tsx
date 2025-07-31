@@ -7,7 +7,6 @@
 import type { UiItemsProvider, Widget } from "@itwin/appui-react";
 import { StagePanelLocation } from "@itwin/appui-react";
 import { Flex } from "@itwin/itwinui-react";
-import React from "react";
 
 export class TestUiProvider2 implements UiItemsProvider {
   public readonly id = "TestUiProvider2";

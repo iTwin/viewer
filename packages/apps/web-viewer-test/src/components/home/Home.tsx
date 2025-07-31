@@ -5,7 +5,6 @@
 
 import modelImg from "@bentley/icons-generic/icons/imodeljs.svg";
 import { Button } from "@itwin/itwinui-react";
-import React from "react";
 import { useNavigate } from "react-router";
 
 import { ReactComponent as Itwin } from "../../images/itwin.svg";

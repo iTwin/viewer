@@ -18,6 +18,10 @@ ITWIN_VIEWER_CLIENT_ID="native-xxxxxxxx"
 
 In the project directory, you can run:
 
+### `npm install`
+
+Installs all the dependencies listed in your package.json.
+
 ### `npm start`
 
 Runs the Electron app in the development mode.\

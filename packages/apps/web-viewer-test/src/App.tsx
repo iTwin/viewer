@@ -3,18 +3,18 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import React from "react";
+import { Suspense } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import { AllRoutes } from "./components/routing";
 
 function App() {
   return (
-    <React.Suspense fallback={<></>}>
+    <Suspense fallback={<></>}>
       <BrowserRouter>
         <AllRoutes />
       </BrowserRouter>
-    </React.Suspense>
+    </Suspense>
   );
 }
 

@@ -14,7 +14,7 @@ import {
 } from "@itwin/itwinui-icons-react";
 import { PageLayout } from "@itwin/itwinui-layouts-react";
 import { SearchBox, Tab, Tabs, Text } from "@itwin/itwinui-react";
-import React, { useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { SignIn } from "../signin/SignIn";
@@ -34,9 +34,9 @@ export const SelectITwin = () => {
       : 0
   );
 
-  const [searchValue, setSearchValue] = React.useState("");
-  const [searchParam, setSearchParam] = React.useState("");
-  const startSearch = React.useCallback(() => {
+  const [searchValue, setSearchValue] = useState("");
+  const [searchParam, setSearchParam] = useState("");
+  const startSearch = useCallback(() => {
     setSearchParam(searchValue);
   }, [searchValue]);
   const accessToken = useAccessToken();

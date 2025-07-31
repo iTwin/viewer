@@ -15,7 +15,7 @@ import {
 } from "@itwin/measure-tools-react";
 import { PropertyGridManager } from "@itwin/property-grid-react";
 import { TreeWidget } from "@itwin/tree-widget-react";
-import React, { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import { viewerRpcs } from "../../common/ViewerConfig";
@@ -36,7 +36,7 @@ const App = () => {
 
   const desktopInitializerProps = useMemo<DesktopInitializerParams>(
     () => ({
-      clientId: process.env.IMJS_VIEWER_CLIENT_ID ?? "",
+      clientId: import.meta.env.IMJS_VIEWER_CLIENT_ID ?? "",
       rpcInterfaces: viewerRpcs,
       additionalI18nNamespaces: ["iTwinDesktopViewer"],
       enablePerformanceMonitors: true,

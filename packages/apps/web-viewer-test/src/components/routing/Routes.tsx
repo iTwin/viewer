@@ -3,7 +3,7 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import React from "react";
+import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
 async function loadHomeRoute() {
@@ -41,11 +41,11 @@ async function loadBlankConnectionRoute() {
   );
 }
 
-const Home = React.lazy(loadHomeRoute);
-const LoginRedirect = React.lazy(loadLoginRoute);
-const LogoutRedirect = React.lazy(loadLogoutRoute);
-const BlankConnectionHome = React.lazy(loadBlankConnectionRoute);
-const ViewerHome = React.lazy(loadViewerRoute);
+const Home = lazy(loadHomeRoute);
+const LoginRedirect = lazy(loadLoginRoute);
+const LogoutRedirect = lazy(loadLogoutRoute);
+const BlankConnectionHome = lazy(loadBlankConnectionRoute);
+const ViewerHome = lazy(loadViewerRoute);
 
 export const AllRoutes = () => {
   return (

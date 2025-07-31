@@ -44,11 +44,16 @@
     "redux": "^5.0.0"
   },
   "devDependencies": {
-    "@bentley/react-scripts": "^5.0.4",
+    "@svgr/rollup": "^8.1.0",
     "@types/node": "^22",
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
-    "typescript": "~5.6.2"
+    "@vitejs/plugin-react": "^4.6.0",
+    "rimraf": "^3.0.2",
+    "sass": "^1.89.2",
+    "typescript": "~5.6.2",
+    "vite": "^7.0.1",
+    "vite-plugin-static-copy": "^3.1.0"
   },
   "browserslist": [
     ">0.2%",
@@ -58,14 +63,11 @@
     "not op_mini all"
   ],
   "scripts": {
-    "start": "react-scripts --max_old_space_size=4096 start",
-    "build": "",
-    "build:frontend": "react-scripts --max_old_space_size=4096 build",
+    "build": "vite build",
+    "clean": "rimraf dist",
+    "lint": "eslint \"./src/**/*.{ts,tsx}\" 1>&2",
+    "lint:fix": "npm run -s lint -- --fix",
+    "start": "vite",
     "test": ""
-  },
-  "eslintConfig": {
-    "extends": [
-      "../../../common/scripts/.eslintrc.ts.json"
-    ]
   }
 }

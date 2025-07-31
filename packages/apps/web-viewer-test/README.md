@@ -1,8 +1,8 @@
 # React Viewer Sample
 
-This app is an example of using the iTwin Viewer in a modularized React application. It is meant to be used as a development environment for the components in the packages in this monorepo. It is not intended to be used as a seed/starter application. You should use the [Create React App template](https://www.npmjs.com/package/@itwin/cra-template-web-viewer) to seed a new application.
+This web app is an example of using the iTwin Viewer with React. It is meant to be used as a development environment for the components in the packages in this monorepo. It is not intended to be used as a seed/starter application. You should use the [iTwin Web Viewer Template](https://github.com/itwin/viewer/tree/main/packages/templates/web) to seed a new application.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was built with [Vite](https://github.com/vitejs/vite).
 
 ## Configuration
 
@@ -15,20 +15,9 @@ In the project directory, you can run:
 ### `rushx start`
 
 Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+It automatically opens [http://localhost:3000](http://localhost:3000) in your default browser.
 
 The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `rushx build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ## Learn More
 

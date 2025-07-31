@@ -81,16 +81,16 @@ export class TestUiProvider implements UiItemsProvider {
 
     if (stageUsage === StageUsage.General) {
       statusBarItems.push(
-        StatusBarItemUtilities.createActionItem(
-          "alert-statusbar-item",
-          StatusBarSection.Center,
-          100,
-          "icon-developer",
-          "Status bar item test",
-          () => {
+        StatusBarItemUtilities.createActionItem({
+          id: "alert-statusbar-item",
+          itemPriority: 100,
+          icon: <i className="icon icon-developer" />,
+          label: "Status bar item test",
+          execute: () => {
             alert("Status Bar Item Clicked!");
-          }
-        )
+          },
+          section: StatusBarSection.Center,
+        })
       );
     }
 
