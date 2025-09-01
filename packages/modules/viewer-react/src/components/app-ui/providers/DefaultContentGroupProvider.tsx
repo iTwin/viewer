@@ -99,7 +99,9 @@ function ViewportWithOverlay(props: ViewportWithOverlayProps) {
     undefined
   );
   const viewOverlay = React.useMemo(() => {
-    if (!viewport || !supplyViewOverlay) {return null;}
+    if (!viewport || !supplyViewOverlay) {
+      return null;
+    }
     return supplyViewOverlay(viewport);
   }, [viewport, supplyViewOverlay]);
   return (
