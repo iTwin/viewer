@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Fixed view overlay rendering of Viewport component.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}
