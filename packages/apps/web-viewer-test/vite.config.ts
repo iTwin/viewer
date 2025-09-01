@@ -10,7 +10,7 @@ const ENV_PREFIX = "IMJS_";
 export default defineConfig(() => {
   return {
     build: {
-      chunkSizeWarningLimit: 7000, // Increase chunk size warning limit to avoid warnings for large chunks
+      chunkSizeWarningLimit: 8000, // Increase chunk size warning limit to avoid warnings for large chunks
     },
     plugins: [
       react(),
