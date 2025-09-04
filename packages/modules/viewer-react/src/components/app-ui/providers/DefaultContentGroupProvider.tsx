@@ -10,6 +10,7 @@ import {
   StandardContentLayouts,
   UiFramework,
 } from "@itwin/appui-react";
+import type { ScreenViewport } from "@itwin/core-frontend";
 import { ViewportComponent } from "@itwin/imodel-components-react";
 import { viewWithUnifiedSelection } from "@itwin/presentation-components";
 import React from "react";
@@ -67,21 +68,60 @@ export class DefaultContentGroupProvider extends ContentGroupProvider {
             ? "iTwinViewer.UnifiedSelectionViewport"
             : "iTwinViewer.Viewport",
           classId: "",
-          content: this._isUsingDeprecatedSelectionManager ? (
-            <UnifiedSelectionViewport
+          content: (
+            <ViewportWithOverlay
               viewState={viewState}
               imodel={iModelConnection}
-              controlId={"iTwinViewer.UnifiedSelectionViewportControl"}
-            />
-          ) : (
-            <ViewportComponent
-              viewState={viewState}
-              imodel={iModelConnection}
-              controlId={"iTwinViewer.ViewportControl"}
+              deprecatedSelectionManager={
+                this._isUsingDeprecatedSelectionManager
+              }
+              supplyViewOverlay={this._viewportOptions?.supplyViewOverlay}
             />
           ),
         },
       ],
     });
   }
+}
+
+type ViewportComponentProps = React.ComponentProps<typeof ViewportComponent>;
+
+interface ViewportWithOverlayProps
+  extends Pick<ViewportComponentProps, "viewState" | "imodel">,
+    Pick<ViewerViewportControlOptions, "supplyViewOverlay"> {
+  deprecatedSelectionManager?: boolean;
+}
+
+function ViewportWithOverlay(props: ViewportWithOverlayProps) {
+  const { supplyViewOverlay } = props;
+
+  const [viewport, setViewport] = React.useState<ScreenViewport | undefined>(
+    undefined
+  );
+  const viewOverlay = React.useMemo(() => {
+    if (!viewport || !supplyViewOverlay) {
+      return null;
+    }
+    return supplyViewOverlay(viewport);
+  }, [viewport, supplyViewOverlay]);
+  return (
+    <>
+      {props.deprecatedSelectionManager ? (
+        <UnifiedSelectionViewport
+          viewState={props.viewState}
+          imodel={props.imodel}
+          controlId={"iTwinViewer.UnifiedSelectionViewportControl"}
+          viewportRef={setViewport}
+        />
+      ) : (
+        <ViewportComponent
+          viewState={props.viewState}
+          imodel={props.imodel}
+          controlId={"iTwinViewer.ViewportControl"}
+          viewportRef={setViewport}
+        />
+      )}
+      {viewOverlay}
+    </>
+  );
 }

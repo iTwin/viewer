@@ -9,7 +9,7 @@ const ENV_PREFIX = "IMJS_";
 export default defineConfig((): UserConfig => {
   return {
     build: {
-      chunkSizeWarningLimit: 7000, // Increase chunk size warning limit to avoid warnings for large chunks
+      chunkSizeWarningLimit: 9000, // Increase chunk size warning limit to avoid warnings for large chunks
     },
     server: {
       port: 3000,
