@@ -8,7 +8,7 @@ import type { FrontstageConfig } from "@itwin/appui-react";
 import { ContentGroup, IModelViewportControl } from "@itwin/appui-react";
 import { FrontstageProvider } from "@itwin/appui-react";
 import { UiFramework } from "@itwin/appui-react";
-import { render, waitFor } from "@testing-library/react";
+import { act, render, waitFor } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 
@@ -88,7 +88,7 @@ describe("IModelViewer", () => {
       },
     ];
 
-    await React.act(async () => {
+    await act(async () => {
       render(<IModelViewer frontstages={frontstages} />);
     });
 
