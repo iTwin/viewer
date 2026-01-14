@@ -46,4 +46,4 @@ jobs:
           node common/scripts/install-run-rush.js test --verbose
 
           echo 'Auditing...'
-          node common/scripts/install-run-rush.js audit
+          node common/scripts/install-run-rush.js audit --audit-level high
