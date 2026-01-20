@@ -1,7 +1,8 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import { Cartographic } from "@itwin/core-common";
 import type { BlankConnectionProps } from "@itwin/core-frontend";
@@ -155,6 +156,38 @@ describe("iModelViewerHelper", () => {
     });
 
     expect(BlankConnection.create).toHaveBeenCalledTimes(1);
+  });
+
+  it("openConnection() uses custom blank connection name when provided", async () => {
+    const customName = "My Custom Connection";
+    await openConnection({
+      extents: new Range3d(10, 10, 10),
+      location: Cartographic.createZero(),
+      iTwinId: "iTwinId",
+      blankConnectionName: customName,
+    });
+
+    expect(BlankConnection.create).toHaveBeenCalledWith({
+      iTwinId: "iTwinId",
+      extents: new Range3d(10, 10, 10),
+      location: Cartographic.createZero(),
+      name: customName,
+    });
+  });
+
+  it("openConnection() uses default blank connection name when not provided", async () => {
+    await openConnection({
+      extents: new Range3d(10, 10, 10),
+      location: Cartographic.createZero(),
+      iTwinId: "iTwinId",
+    });
+
+    expect(BlankConnection.create).toHaveBeenCalledWith({
+      iTwinId: "iTwinId",
+      extents: new Range3d(10, 10, 10),
+      location: Cartographic.createZero(),
+      name: "Blank Connection",
+    });
   });
 
   it("gatherRequiredViewerProps narrows required viewer properties", async () => {

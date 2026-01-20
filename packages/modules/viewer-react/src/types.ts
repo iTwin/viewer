@@ -201,6 +201,7 @@ export type BlankViewerProps = {
   location?: Cartographic | EcefLocationProps;
   extents?: Range3dProps;
   iTwinId?: string;
+  blankConnectionName?: string;
 };
 
 /**

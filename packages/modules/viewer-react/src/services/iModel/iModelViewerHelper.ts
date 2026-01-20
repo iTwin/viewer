@@ -1,7 +1,8 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import type {
   BlankConnectionProps,
@@ -57,7 +58,7 @@ export const openConnection = async (
       blankConnectionProps: {
         extents: options.extents,
         location: options.location,
-        name: "Blank Connection",
+        name: options.blankConnectionName ?? "Blank Connection",
       },
     });
   }
@@ -73,6 +74,7 @@ export const gatherRequiredViewerProps = ({
   extents,
   location,
   changeSetId,
+  blankConnectionName,
 }: ModelLoaderProps): RequiredViewerProps | undefined => {
   if (filePath) {
     return { filePath, readonly };
@@ -83,7 +85,7 @@ export const gatherRequiredViewerProps = ({
   }
 
   if (extents && location) {
-    return { iTwinId, extents, location };
+    return { iTwinId, extents, location, blankConnectionName };
   }
 
   return;
