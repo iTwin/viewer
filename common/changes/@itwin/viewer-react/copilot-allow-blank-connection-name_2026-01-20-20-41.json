@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Add optional blankConnectionName prop to BlankViewerProps to allow customizing the blank connection name",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/viewer-react",
+  "email": "copilot@github.com"
+}
