@@ -1,3 +1,4 @@
+import { resolve } from "path";
 import { defineConfig } from "vite";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import react from "@vitejs/plugin-react";
@@ -9,6 +10,12 @@ export default defineConfig(() => {
   return {
     build: {
       chunkSizeWarningLimit: 8000, // Increase chunk size warning limit to avoid warnings for large chunks
+      rollupOptions: {
+        input: {
+          main: resolve(__dirname, "index.html"),
+          "signin-silent": resolve(__dirname, "signin-silent.html"),
+        },
+      },
     },
     plugins: [
       react(),

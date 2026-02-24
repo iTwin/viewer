@@ -1,3 +1,7 @@
+/*---------------------------------------------------------------------------------------------
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
@@ -7,6 +11,7 @@ interface ImportMetaEnv {
   readonly IMJS_AUTH_CLIENT_CLIENT_ID: string;
   readonly IMJS_AUTH_CLIENT_SCOPES: string;
   readonly IMJS_AUTH_CLIENT_REDIRECT_URI: string;
+  readonly IMJS_AUTH_CLIENT_SILENT_REDIRECT_URI?: string;
   readonly IMJS_AUTH_CLIENT_LOGOUT_URI: string;
   readonly IMJS_AUTH_CLIENT_CHANGESET_ID?: string;
   readonly IMJS_BING_MAPS_KEY?: string;

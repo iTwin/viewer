@@ -1,7 +1,8 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import type { BrowserAuthorizationClientConfiguration } from "@itwin/browser-authorization";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
@@ -31,7 +32,8 @@ export class AuthorizationClient {
       redirectUri,
       postSignoutRedirectUri,
       scope,
-      responseType: "code"
+      responseType: "code",
+      silentRedirectUri: import.meta.env.IMJS_AUTH_CLIENT_SILENT_REDIRECT_URI,
     };
 
     this._oidcClient = new BrowserAuthorizationClient(oidcConfiguration);

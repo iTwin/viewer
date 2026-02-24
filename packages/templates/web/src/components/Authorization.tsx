@@ -1,8 +1,10 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
 
+
+import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import {
   createContext,
   type PropsWithChildren,
@@ -10,7 +12,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 
 export enum AuthorizationState {
   Pending,
@@ -36,13 +37,16 @@ export function useAuthorizationContext() {
 }
 
 const createAuthClient = (): AuthorizationContext => {
+  const redirectUri =
+    import.meta.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "";
   const client = new BrowserAuthorizationClient({
     scope: import.meta.env.IMJS_AUTH_CLIENT_SCOPES ?? "",
     clientId: import.meta.env.IMJS_AUTH_CLIENT_CLIENT_ID ?? "",
-    redirectUri: import.meta.env.IMJS_AUTH_CLIENT_REDIRECT_URI ?? "",
+    redirectUri,
     postSignoutRedirectUri: import.meta.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
     responseType: "code",
     authority: import.meta.env.IMJS_AUTH_AUTHORITY,
+    silentRedirectUri: import.meta.env.IMJS_AUTH_CLIENT_SILENT_REDIRECT_URI,
   });
   return {
     client,
