@@ -1,7 +1,7 @@
 {
   "changes": [
     {
-      "comment": "Widen electron peer dependency range to >=36.0.0 <41.0.0 to support Electron 36-40",
+      "comment": "Added support for Electron 37, 38, 39, and 40",
       "type": "minor",
       "packageName": "@itwin/desktop-viewer-react"
     }
