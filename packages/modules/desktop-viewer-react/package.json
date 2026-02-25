@@ -76,7 +76,7 @@
     "@itwin/ecschema-metadata": "^5.0.0",
     "@itwin/electron-authorization": "^0.21.0",
     "@itwin/presentation-frontend": "^5.0.0",
-    "electron": "^40.0.0",
+    "electron": "^36.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-redux": "^9.0.0",
