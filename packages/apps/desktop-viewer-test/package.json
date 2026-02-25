@@ -47,7 +47,7 @@
     "@itwin/ecschema-metadata": "^5.0.0",
     "@itwin/ecschema-rpcinterface-common": "^5.0.0",
     "@itwin/ecschema-rpcinterface-impl": "^5.0.0",
-    "@itwin/electron-authorization": "^0.21.0",
+    "@itwin/electron-authorization": "^0.22.0",
     "@itwin/express-server": "^5.0.0",
     "@itwin/imodel-browser-react": "^1.0.0",
     "@itwin/imodel-components-react": "^5.5.0",
