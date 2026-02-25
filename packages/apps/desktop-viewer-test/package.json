@@ -81,7 +81,7 @@
     "redux": "^5.0.0"
   },
   "devDependencies": {
-    "@itwin/build-tools": "^4.0.6",
+    "@itwin/build-tools": "^5.0.0",
     "@types/dotenv-flow": "^3.2.0",
     "@types/electron-devtools-installer": "^2.2.2",
     "@types/minimist": "^1.2.2",
