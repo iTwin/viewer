@@ -10,6 +10,7 @@ Prior to running the app, you will need to add OIDC client configuration to the 
 # ---- Authorization Client Settings ----
 IMJS_AUTH_CLIENT_CLIENT_ID=""
 IMJS_AUTH_CLIENT_REDIRECT_URI=""
+IMJS_AUTH_CLIENT_SILENT_REDIRECT_URI=""
 IMJS_AUTH_CLIENT_LOGOUT_URI=""
 IMJS_AUTH_CLIENT_SCOPES=""
 ```
@@ -19,6 +20,8 @@ IMJS_AUTH_CLIENT_SCOPES=""
 - Viewer expects the `itwin-platform` scope to be set.
 
 - The application will use the path of the redirect URI to handle the redirection, it must simply match what is defined in your client.
+
+- Enable silent renewal of auth tokens by specifying `IMJS_AUTH_CLIENT_SILENT_REDIRECT_URI`. This should point to the silent callback page (for example, `http://localhost:3000/signin-silent.html`) and must also be registered as a redirect URI for your OIDC client.
 
 - When you are ready to build a production application, [register here](https://developer.bentley.com/register/).
 

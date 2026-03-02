@@ -8,6 +8,8 @@ This project was built with [Vite](https://github.com/vitejs/vite).
 
 Prior to running or building the application, you should update the environment variables in the .env file as needed. This should include adding a valid iTwinId and iModelId as well as updating the authorization client and backend configuration as needed. For the `IMJS_AUTH_CLIENT_CLIENT_ID` variable, you should [generate a new client](https://www.itwinjs.org/getting-started/registration-dashboard?tab=0) or use an existing valid client id. This can be stored in a .env.local file alongside the .env file so that it will be persisted for you locally but not committed to the remote repo.
 
+If you are using OIDC silent renew, ensure `IMJS_AUTH_CLIENT_SILENT_REDIRECT_URI` is set (for example, `http://localhost:3000/signin-silent.html`) and registered in your OIDC client redirect URIs.
+
 ## Available Scripts
 
 In the project directory, you can run:
