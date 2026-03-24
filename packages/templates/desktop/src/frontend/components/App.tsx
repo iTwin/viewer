@@ -14,7 +14,7 @@ import {
 import { PropertyGridManager } from "@itwin/property-grid-react";
 import { TreeWidget } from "@itwin/tree-widget-react";
 import { useCallback, useEffect, useMemo } from "react";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import { viewerRpcs } from "../../common/ViewerConfig";
 import { unifiedSelectionStorage } from "../../selectionStorage";
@@ -57,7 +57,7 @@ const App = () => {
   return (
     <ThemeProvider theme="dark" style={{ height: "100%" }}>
       {initialized ? (
-        <BrowserRouter>
+        <HashRouter>
           <SettingsContextProvider>
             <PageLayout>
               <Routes>
@@ -84,7 +84,7 @@ const App = () => {
               </Routes>
             </PageLayout>
           </SettingsContextProvider>
-        </BrowserRouter>
+        </HashRouter>
       ) : (
         <Flex justifyContent="center" style={{ height: "100%" }}>
           <SvgIModelLoader
