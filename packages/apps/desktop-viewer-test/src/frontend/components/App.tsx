@@ -1,7 +1,8 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import type { DesktopInitializerParams } from "@itwin/desktop-viewer-react";
 import { useConnectivity } from "@itwin/desktop-viewer-react";
@@ -16,13 +17,13 @@ import {
 import { PropertyGridManager } from "@itwin/property-grid-react";
 import { TreeWidget } from "@itwin/tree-widget-react";
 import { useCallback, useEffect, useMemo } from "react";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import { viewerRpcs } from "../../common/ViewerConfig";
 import { ITwinViewerApp } from "../app/ITwinViewerApp";
+import { unifiedSelectionStorage } from "../selectionStorage";
 import { SettingsContextProvider } from "../services/SettingsContext";
 import { HomeRoute, IModelsRoute, ITwinsRoute, ViewerRoute } from "./routes";
-import { unifiedSelectionStorage } from "../selectionStorage";
 
 const App = () => {
   window.ITWIN_VIEWER_HOME = window.location.origin;
@@ -59,7 +60,7 @@ const App = () => {
   return (
     <ThemeProvider theme="dark" style={{ height: "100%" }}>
       {initialized ? (
-        <BrowserRouter>
+        <HashRouter>
           <SettingsContextProvider>
             <PageLayout>
               <Routes>
@@ -86,7 +87,7 @@ const App = () => {
               </Routes>
             </PageLayout>
           </SettingsContextProvider>
-        </BrowserRouter>
+        </HashRouter>
       ) : (
         <Flex justifyContent="center" style={{ height: "100%" }}>
           <SvgIModelLoader
