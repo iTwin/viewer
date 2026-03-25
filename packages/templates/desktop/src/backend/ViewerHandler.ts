@@ -14,7 +14,7 @@ import {
   type SaveDialogOptions,
   type SaveDialogReturnValue
 } from "electron";
-import * as minimist from "minimist";
+import minimist from "minimist";
 import { existsSync } from "node:fs";
 
 import {

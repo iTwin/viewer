@@ -42,3 +42,4 @@ common/temp/
 **/*.Tiles-journal
 
 **/tsconfig.tsbuildinfo
+packages/templates/desktop/app/

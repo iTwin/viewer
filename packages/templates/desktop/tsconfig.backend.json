@@ -4,6 +4,7 @@
     "target": "esnext",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
     "outDir": "./lib"
   },
   "include": [
