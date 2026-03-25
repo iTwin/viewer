@@ -30,6 +30,17 @@ const Home = () => {
   const connectivityStatus = useConnectivity();
 
   useEffect(() => {
+    const checkForBimFile = async () => {
+      const filePath = await ITwinViewerApp.ipcCall.findBimFile();
+      if (filePath) {
+        void userSettings.addRecent(filePath);
+        void navigate("/viewer", { state: { filePath } });
+      }
+    };
+    void checkForBimFile();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
     void fetch("./links.json").then((response) => {
       if (response.status >= 200 && response.status < 300) {
         void response.json().then((links) => {

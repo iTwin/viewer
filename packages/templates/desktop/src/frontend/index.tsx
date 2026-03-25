@@ -15,7 +15,7 @@ import App from "./components/App";
 const viewerFrontendMain = async () => {
   // Setup logging immediately to pick up any logging during App.startup()
   Logger.initializeToConsole();
-  Logger.setLevelDefault(LogLevel.Trace);
+  Logger.setLevelDefault(LogLevel.Info);
   Logger.setLevel(AppLoggerCategory.Frontend, LogLevel.Info);
 
   // when initialization is complete, render

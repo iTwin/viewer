@@ -4,7 +4,11 @@
 *--------------------------------------------------------------------------------------------*/
 
 
+import * as fs from "fs";
+import * as http from "http";
+
 import { IModelHostConfiguration, IpcHost } from "@itwin/core-backend";
+import minimist from "minimist";
 import { Logger, LogLevel } from "@itwin/core-bentley";
 import { ElectronHost, type ElectronHostOptions } from "@itwin/core-electron/lib/cjs/ElectronBackend";
 import { ECSchemaRpcImpl } from "@itwin/ecschema-rpcinterface-impl";
@@ -22,6 +26,73 @@ import ViewerHandler from "./ViewerHandler";
 
 dotenvFlow.config();
 
+const mimeTypes: Record<string, string> = {
+  ".json": "application/json",
+  ".bin": "application/octet-stream",
+  ".bim": "application/octet-stream",
+};
+
+interface TileServerOptions {
+  tilePath: string;
+  port?: number;
+  logRequests?: boolean;
+}
+
+function setupTileServer({ tilePath, port = 0, logRequests }: TileServerOptions): Promise<http.Server> {
+  Logger.logInfo(AppLoggerCategory.Backend, `[TileServer] Serving ${tilePath} on port ${port}`);
+
+  return new Promise((resolve, reject) => {
+    const server = http.createServer((req, res) => {
+      if (logRequests) {
+        Logger.logInfo(AppLoggerCategory.Backend, `[TileServer] ${req.method} ${req.url}`);
+      }
+
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
+      res.setHeader("Access-Control-Allow-Headers", "*");
+
+      if (req.method === "OPTIONS") {
+        res.writeHead(204);
+        res.end();
+        return;
+      }
+
+      const url = new URL(req.url ?? "/", `http://${req.headers.host}`);
+      const filePath = path.join(tilePath, decodeURIComponent(url.pathname));
+
+      // Prevent path traversal
+      if (!filePath.startsWith(tilePath)) {
+        res.writeHead(403);
+        res.end();
+        return;
+      }
+
+      fs.stat(filePath, (err, stats) => {
+        if (err || !stats.isFile()) {
+          res.writeHead(404);
+          res.end();
+          return;
+        }
+
+        const ext = path.extname(filePath).toLowerCase();
+        const contentType = mimeTypes[ext] ?? "application/octet-stream";
+        res.writeHead(200, { "Content-Type": contentType });
+        fs.createReadStream(filePath).pipe(res);
+      });
+    });
+
+    server.listen(port, "127.0.0.1", () => {
+      const addr = server.address();
+      if (addr && typeof addr !== "string") {
+        Logger.logInfo(AppLoggerCategory.Backend, `Tile server listening on http://127.0.0.1:${addr.port}`);
+      }
+      resolve(server);
+    });
+
+    server.on("error", reject);
+  });
+}
+
 /** This is the function that gets called when we start iTwinViewer via `electron ViewerMain.js` from the command line.
  * It runs in the Electron main process and hosts the iModeljs backend (IModelHost) code. It starts the render (frontend) process
  * that starts from the file "index.ts". That launches the viewer frontend (IModelApp).
@@ -29,13 +100,25 @@ dotenvFlow.config();
 const viewerMain = async () => {
   // Setup logging immediately to pick up any logging during IModelHost.startup()
   Logger.initializeToConsole();
-  Logger.setLevelDefault(LogLevel.Trace);
+  Logger.setLevelDefault(LogLevel.Info);
   Logger.setLevel(AppLoggerCategory.Backend, LogLevel.Info);
+
+  const args = minimist(process.argv.slice(2));
+  const developmentMode = args["development"] || process.env.NODE_ENV === "development";
+  if(developmentMode) {
+    Logger.logInfo(AppLoggerCategory.Backend, "Running in development mode");
+  }
+
+  await setupTileServer({
+    tilePath: path.join(__dirname, "..", "data", "tiles"),
+    port: Number(process.env.IMJS_TILES_SERVER_PORT) || 6544,
+    logRequests: !!args["log-requests"],
+  });
 
   const electronHost: ElectronHostOptions = {
     webResourcesPath: path.join(__dirname, "web"),
     rpcInterfaces: viewerRpcs,
-    developmentServer: process.env.NODE_ENV === "development",
+    developmentServer: developmentMode,
     ipcHandlers: [ViewerHandler],
     iconName: "itwin-viewer.ico",
   };
@@ -52,16 +135,18 @@ const viewerMain = async () => {
     height: 800,
     show: true,
     title: appInfo.title,
-    autoHideMenuBar: false,
+    autoHideMenuBar: true,
   });
 
   ECSchemaRpcImpl.register();
 
-  if (process.env.NODE_ENV === "development") {
+  if(args["show-devtools"] || developmentMode) {
     ElectronHost.mainWindow?.webContents.toggleDevTools();
   }
-  // add the menu
-  ElectronHost.mainWindow?.on("ready-to-show", createMenu);
+
+  //ElectronHost.mainWindow?.on("ready-to-show", createMenu);
+  Menu.setApplicationMenu(null);
+
   // open links in the system browser instead of Electron
   // remove this if you desire the default behavior instead
   ElectronHost.mainWindow?.webContents.setWindowOpenHandler(({ url }) => {

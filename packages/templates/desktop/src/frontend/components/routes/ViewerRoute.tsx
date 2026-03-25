@@ -32,6 +32,29 @@ import { IModelMergeItemsProvider } from "../../extensions";
 export interface ViewerRouteState {
   filePath?: string;
 }
+import { StagePanelLocation, StagePanelSection, useActiveViewport } from "@itwin/appui-react";
+import { DiagnosticsPanel } from "@itwin/frontend-devtools";
+import { useRef } from "react";
+
+// Inside your component, after the Viewer has loaded:
+const DiagnosticsPanelWidget = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const vp = useActiveViewport();
+
+  useEffect(() => {
+    if (!vp || !containerRef.current) return;
+
+    const panel = new DiagnosticsPanel(vp);
+    containerRef.current.appendChild(panel.element);
+
+    return () => {
+      panel[Symbol.dispose]();
+      panel.element.remove();
+    };
+  }, [vp]);
+
+  return <div ref={containerRef} />;
+};
 
 export const ViewerRoute = () => {
   const location = useLocation();
@@ -56,7 +79,21 @@ export const ViewerRoute = () => {
             measureGroup: false,
           },
         }),
-        new ViewerStatusbarItemsProvider(),
+        new ViewerStatusbarItemsProvider(),         
+        {
+          id: "DiagnosticsPanelProvider",
+          getWidgets: () => [{
+            id: "diagnostics-panel",
+            label: "Diagnostics",
+            content: <DiagnosticsPanelWidget />,
+            layouts: {
+              standard: {
+                section: StagePanelSection.Start,
+                location: StagePanelLocation.Right,
+              },
+            },
+          }],
+        },
         {
           id: "TreeWidgetUIProvider",
           getWidgets: () => [

@@ -15,7 +15,8 @@ import {
   type SaveDialogReturnValue
 } from "electron";
 import minimist from "minimist";
-import { existsSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
+import * as path from "path";
 
 import {
   channelName,
@@ -98,6 +99,19 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
    */
   public async checkFileExists(file: ViewerFile): Promise<boolean> {
     return file.path ? existsSync(file.path) : false;
+  }
+
+  /**
+   * Find the first .bim file in the app/data/ folder
+   */
+  public async findBimFile(): Promise<string | undefined> {
+    const dataDir = path.join(__dirname, "..", "data");
+    if (!existsSync(dataDir)) {
+      return undefined;
+    }
+    const files = readdirSync(dataDir);
+    const bimFile = files.find((f) => f.toLowerCase().endsWith(".bim"));
+    return bimFile ? path.join(dataDir, bimFile) : undefined;
   }
 
   /**

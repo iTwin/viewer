@@ -32,6 +32,7 @@ export interface ViewerIpc {
   setConnectivity: (
     connectivityStatus: InternetConnectivityStatus
   ) => Promise<void>;
+  findBimFile: () => Promise<string | undefined>;
 }
 
 export interface ViewerConfig {

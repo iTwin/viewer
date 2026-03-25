@@ -43,3 +43,4 @@ common/temp/
 
 **/tsconfig.tsbuildinfo
 packages/templates/desktop/app/
+packages/templates/desktop/data/
