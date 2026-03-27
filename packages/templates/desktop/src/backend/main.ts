@@ -40,7 +40,6 @@ interface TileServerOptions {
 
 function setupTileServer({ tilePath, port = 0, logRequests }: TileServerOptions): Promise<http.Server> {
   Logger.logInfo(AppLoggerCategory.Backend, `[TileServer] Serving ${tilePath} on port ${port}`);
-
   return new Promise((resolve, reject) => {
     const server = http.createServer((req, res) => {
       if (logRequests) {
@@ -142,6 +141,14 @@ const viewerMain = async () => {
 
   if(args["show-devtools"] || developmentMode) {
     ElectronHost.mainWindow?.webContents.toggleDevTools();
+  }
+
+  if (developmentMode) {
+    ElectronHost.mainWindow?.webContents.on("before-input-event", (_event, input) => {
+      if (input.key === "F5") {
+        ElectronHost.mainWindow?.webContents.reload();
+      }
+    });
   }
 
   //ElectronHost.mainWindow?.on("ready-to-show", createMenu);

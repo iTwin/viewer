@@ -142,7 +142,11 @@ class ViewerHandler extends IpcHandler implements ViewerIpc {
           redirectUris: [redirectUri],
           issuerUrl,
         });
-        await authClient.signInSilent();
+        
+        //await authClient.signInSilent();
+        authClient.getAccessToken = async () => {
+          return "fake-token";
+        }
         IModelHost.authorizationClient = authClient;
         ViewerHandler._authInitialized = true;
       }

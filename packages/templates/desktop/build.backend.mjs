@@ -95,6 +95,11 @@ async function main() {
         await fs.promises.cp(distSrc, webDest, { recursive: true });
     }
 
+    fs.copyFileSync(
+        path.join(dirname, "resources/package.json"),
+        path.join(dirname, "app/package.json")
+    );
+
     console.log("done");
 }
 
