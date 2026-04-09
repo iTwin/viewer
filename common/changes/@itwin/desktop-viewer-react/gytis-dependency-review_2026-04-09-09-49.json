@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/desktop-viewer-react",
+      "comment": "Added support for Electron versions 37-41",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/desktop-viewer-react"
+}
