@@ -4,5 +4,12 @@
   "globalOverrides": {
     "serialize-javascript": ">=7.0.3",
     "lodash": ">=4.17.24"
-  }
+  },
+  "globalOnlyBuiltDependencies": [
+    "@bentley/imodeljs-native",
+    "@parcel/watcher",
+    "electron",
+    "esbuild",
+    "protobufjs"
+  ]
 }
