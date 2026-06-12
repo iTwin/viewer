@@ -19,7 +19,7 @@ This is a template for web applications that are based on the [iTwin Viewer](htt
 To create a new app based on this template run:
 
 ```sh
-npx degit iTwin/viewer/packages/templates/web#master my-app-name
+npx degit itwin/viewer/packages/templates/web#master my-app-name
 ```
 
 Note: If you're using the template directly from this repository, you might notice missing icons when running the app with pnpm start. To resolve this, run:
@@ -36,7 +36,7 @@ This is a template for Desktop applications that are based on the [iTwin Viewer]
 To create a new app based on this template run:
 
 ```sh
-npx degit iTwin/viewer/packages/templates/desktop#master my-app-name
+npx degit itwin/viewer/packages/templates/desktop#master my-app-name
 ```
 
 Note: If you're using the template directly from this repository, you might notice missing icons when running the app with pnpm start. To resolve this, run:
