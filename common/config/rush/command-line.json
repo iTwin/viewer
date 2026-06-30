@@ -2,6 +2,15 @@
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/command-line.schema.json",
   "commands": [
     {
+      "name": "build",
+      "commandKind": "bulk",
+      "summary": "Build all packages",
+      "enableParallelism": true,
+      "ignoreMissingScript": false,
+      "ignoreDependencyOrder": false,
+      "allowWarningsInSuccessfulBuild": true // https://github.com/iTwin/appui/issues/1513
+    },
+    {
       "name": "test",
       "commandKind": "bulk",
       "summary": "Run test script for each package",

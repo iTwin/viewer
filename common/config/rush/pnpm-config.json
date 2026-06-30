@@ -1,4 +1,15 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/pnpm-config.schema.json",
-  "useWorkspaces": true
+  "useWorkspaces": true,
+  "globalOverrides": {
+    "serialize-javascript@<7.0.3": ">=7.0.3",
+    "lodash@<=4.17.23": ">=4.17.24"
+  },
+  "globalOnlyBuiltDependencies": [
+    "@bentley/imodeljs-native",
+    "@parcel/watcher",
+    "electron",
+    "esbuild",
+    "protobufjs"
+  ]
 }

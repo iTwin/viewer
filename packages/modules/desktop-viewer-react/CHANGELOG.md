@@ -1,6 +1,13 @@
 # Change Log - @itwin/desktop-viewer-react
 
-This log was last generated on Thu, 04 Sep 2025 14:24:17 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Apr 2026 13:52:13 GMT and should not be manually modified.
+
+## 5.1.0
+Thu, 09 Apr 2026 13:52:13 GMT
+
+### Minor changes
+
+- Added support for Electron versions 37-41
 
 ## 5.0.1
 Thu, 04 Sep 2025 14:24:17 GMT

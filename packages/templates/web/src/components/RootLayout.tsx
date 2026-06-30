@@ -1,13 +1,15 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import { SvgError } from "@itwin/itwinui-illustrations-react";
 import { NonIdealState, ThemeProvider } from "@itwin/itwinui-react";
-import { ErrorBoundary } from "react-error-boundary";
-import { AuthorizationProvider } from "./Authorization";
 import { Outlet } from "@tanstack/react-router";
+import { ErrorBoundary } from "react-error-boundary";
+
+import { AuthorizationProvider } from "./Authorization";
 
 export function RootLayout() {
   return (
@@ -17,7 +19,7 @@ export function RootLayout() {
           <NonIdealState
             svg={<SvgError />}
             heading={"An error occurred"}
-            description={error.message}
+            description={error instanceof Error ? error.message : undefined}
           />
         )}
       >
