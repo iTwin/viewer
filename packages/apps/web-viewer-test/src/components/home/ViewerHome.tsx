@@ -14,7 +14,7 @@ import {
   CopyPropertyTextContextMenuItem,
   createPropertyGrid,
   PropertyGridManager,
-  ShowHideNullValuesSettingsMenuItem,
+  ShowHideEmptyValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
 import {
   CategoriesTreeComponent,
@@ -201,7 +201,7 @@ const ViewerHome: React.FC = () => {
                 ],
                 settingsMenuItems: [
                   (props) => (
-                    <ShowHideNullValuesSettingsMenuItem
+                    <ShowHideEmptyValuesSettingsMenuItem
                       {...props}
                       persist={true}
                     />
