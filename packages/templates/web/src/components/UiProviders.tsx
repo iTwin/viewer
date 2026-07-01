@@ -1,13 +1,14 @@
 /*---------------------------------------------------------------------------------------------
- * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
- * See LICENSE.md in the project root for license terms and full copyright notice.
- *--------------------------------------------------------------------------------------------*/
+* Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+* See LICENSE.md in the project root for license terms and full copyright notice.
+*--------------------------------------------------------------------------------------------*/
+
 
 import {
   AncestorsNavigationControls,
   CopyPropertyTextContextMenuItem,
   createPropertyGrid,
-  ShowHideNullValuesSettingsMenuItem,
+  ShowHideEmptyValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
 import {
   CategoriesTreeComponent,
@@ -67,7 +68,7 @@ export const propertyGridUiProvider = {
       ],
       settingsMenuItems: [
         (props) => (
-          <ShowHideNullValuesSettingsMenuItem {...props} persist={true} />
+          <ShowHideEmptyValuesSettingsMenuItem {...props} persist={true} />
         ),
       ],
     }),

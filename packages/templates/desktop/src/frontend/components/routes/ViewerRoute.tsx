@@ -14,7 +14,7 @@ import {
   AncestorsNavigationControls,
   CopyPropertyTextContextMenuItem,
   createPropertyGrid,
-  ShowHideNullValuesSettingsMenuItem,
+  ShowHideEmptyValuesSettingsMenuItem,
 } from "@itwin/property-grid-react";
 import {
   CategoriesTreeComponent,
@@ -106,7 +106,7 @@ export const ViewerRoute = () => {
               ],
               settingsMenuItems: [
                 (props) => (
-                  <ShowHideNullValuesSettingsMenuItem {...props} persist={true} />
+                  <ShowHideEmptyValuesSettingsMenuItem {...props} persist={true} />
                 ),
               ],
             })

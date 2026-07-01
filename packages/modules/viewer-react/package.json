@@ -78,7 +78,7 @@
     "redux": "^5",
     "rimraf": "^3.0.2",
     "typescript": "~5.6.2",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.6"
   },
   "peerDependencies": {
     "@itwin/appui-abstract": "^5.0.0",

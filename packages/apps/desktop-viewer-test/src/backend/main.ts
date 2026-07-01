@@ -150,7 +150,7 @@ const createMenu = () => {
           },
         },
       ],
-    } as MenuItemConstructorOptions);
+    });
   }
 
   const menu = Menu.buildFromTemplate(template as MenuItemConstructorOptions[]);
