@@ -2,10 +2,13 @@
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/pnpm-config.schema.json",
   "useWorkspaces": true,
   "globalOverrides": {
-    "serialize-javascript@<7.0.3": ">=7.0.3",
-    "lodash@<=4.17.23": ">=4.17.24",
-    "linkify-it@<=5.0.0": ">=5.0.1"
+    "linkify-it@<=5.0.1": "^5.0.2"
   },
+  "minimumReleaseAgeMinutes": 1440,
+  "minimumReleaseAgeExclude": [
+    "@bentley/*",
+    "@itwin/*"
+  ],
   "globalOnlyBuiltDependencies": [
     "@bentley/imodeljs-native",
     "@parcel/watcher",
