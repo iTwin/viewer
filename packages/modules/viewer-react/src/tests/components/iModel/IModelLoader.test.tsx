@@ -185,6 +185,7 @@ const mockIModelId = "mockIModelId";
 
 describe("IModelLoader", () => {
   beforeEach(() => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
     vi.spyOn(IModelServices, "openRemoteIModel").mockResolvedValue({
       isBlankConnection: () => false,
       iModelId: mockIModelId,
@@ -209,6 +210,8 @@ describe("IModelLoader", () => {
   });
 
   afterEach(() => {
+    vi.runOnlyPendingTimers();
+    vi.useRealTimers();
     vi.clearAllMocks();
   });
 
