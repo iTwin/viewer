@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/viewer-react",
+      "comment": "Add support for `@itwin/presentation-components` 6.0.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/viewer-react"
+}

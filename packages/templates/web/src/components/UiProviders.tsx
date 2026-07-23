@@ -59,6 +59,7 @@ export const propertyGridUiProvider = {
   id: "PropertyGridUIProvider",
   getWidgets: () => [
     createPropertyGrid({
+      selectionStorage,
       autoExpandChildCategories: true,
       ancestorsNavigationControls: (props) => (
         <AncestorsNavigationControls {...props} />
