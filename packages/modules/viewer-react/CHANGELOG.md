@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Thu, 04 Sep 2025 14:24:17 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Jul 2026 14:57:23 GMT and should not be manually modified.
+
+## 5.1.0
+Thu, 23 Jul 2026 14:57:23 GMT
+
+### Minor changes
+
+- Add support for `@itwin/presentation-components` 6.0.
 
 ## 5.0.1
 Thu, 04 Sep 2025 14:24:17 GMT
