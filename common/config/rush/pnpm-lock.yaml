@@ -19,70 +19,70 @@ importers:
         specifier: ^1.0.34
         version: 1.0.34
       '@itwin/appui-abstract':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/appui-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(7044197d96beb94956ef1d39a2df8fa4)
       '@itwin/components-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-react@5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/core-backend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/core-bentley':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)
       '@itwin/core-electron':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(50caef33940b712f041bcdce9b249b74)
       '@itwin/core-frontend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))
       '@itwin/core-geometry':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-i18n':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/core-markup':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-frontend@5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))))(@itwin/core-geometry@5.11.3)
       '@itwin/core-orbitgt':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-quantity':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/core-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/desktop-viewer-react':
         specifier: workspace:*
         version: link:../../modules/desktop-viewer-react
       '@itwin/ecschema-metadata':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))
       '@itwin/ecschema-rpcinterface-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/ecschema-rpcinterface-impl':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-backend@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))
       '@itwin/electron-authorization':
         specifier: ^0.22.0
         version: 0.22.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)(electron@41.10.2)
       '@itwin/express-server':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-backend@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))
       '@itwin/imodel-browser-react':
         specifier: ^1.0.0
         version: 1.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/imodel-components-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(e239eb17e8a7d8408915979cd88514b8)
       '@itwin/imodels-access-backend':
         specifier: ^6.0.1
@@ -118,23 +118,23 @@ importers:
         specifier: latest
         version: 0.33.0(bf2b022f243e2a637785a9fcbd92fdf4)
       '@itwin/presentation-backend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-backend@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/presentation-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))
       '@itwin/presentation-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/presentation-components':
-        specifier: ^5.12.0
-        version: 5.16.3(6090988fb017ce6038dc504b065e3826)
+        specifier: ^6.0.0
+        version: 6.0.0(6090988fb017ce6038dc504b065e3826)
       '@itwin/presentation-frontend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(76598dd2a6d52bf45d4722ec12c9e302)
       '@itwin/property-grid-react':
-        specifier: ^1.16.0
-        version: 1.20.0(c6c6a8c06627357a3adf8d98fc448d29)
+        specifier: ^2.0.0
+        version: 2.0.0(d21db8c7b7dec81d1f31264d48978963)
       '@itwin/tree-widget-react':
-        specifier: ^3.0.0
-        version: 3.18.0(aad3b24511f92a57b22f3206e19ac258)
+        specifier: ^3.18.0
+        version: 3.18.0(d21db8c7b7dec81d1f31264d48978963)
       '@itwin/unified-selection':
         specifier: ^1.3.0
         version: 1.8.3
@@ -142,7 +142,7 @@ importers:
         specifier: ^1.0.0
         version: 1.1.0(@itwin/unified-selection@1.8.3)(react@18.3.1)
       '@itwin/webgl-compatibility':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       dotenv-flow:
         specifier: ^3.2.0
@@ -173,7 +173,7 @@ importers:
         version: 5.0.1
     devDependencies:
       '@itwin/build-tools':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@types/node@22.20.1)
       '@types/dotenv-flow':
         specifier: ^3.2.0
@@ -236,55 +236,55 @@ importers:
         specifier: ^1.0.34
         version: 1.0.34
       '@itwin/appui-abstract':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/appui-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(7044197d96beb94956ef1d39a2df8fa4)
       '@itwin/browser-authorization':
         specifier: ^2.0.0
         version: 2.0.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)
       '@itwin/components-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-react@5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/core-bentley':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)
       '@itwin/core-frontend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))
       '@itwin/core-geometry':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-i18n':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/core-markup':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-frontend@5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))))(@itwin/core-geometry@5.11.3)
       '@itwin/core-orbitgt':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-quantity':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/core-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/ecschema-metadata':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))
       '@itwin/ecschema-rpcinterface-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/frontend-devtools':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))
       '@itwin/imodel-components-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(e239eb17e8a7d8408915979cd88514b8)
       '@itwin/imodels-access-frontend':
         specifier: ^6.0.1
@@ -296,23 +296,23 @@ importers:
         specifier: latest
         version: 0.33.0(bf2b022f243e2a637785a9fcbd92fdf4)
       '@itwin/presentation-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/presentation-components':
-        specifier: ^5.12.0
-        version: 5.16.3(6090988fb017ce6038dc504b065e3826)
+        specifier: ^6.0.0
+        version: 6.0.0(6090988fb017ce6038dc504b065e3826)
       '@itwin/presentation-frontend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(76598dd2a6d52bf45d4722ec12c9e302)
       '@itwin/property-grid-react':
-        specifier: ^1.16.0
-        version: 1.20.0(c6c6a8c06627357a3adf8d98fc448d29)
+        specifier: ^2.0.0
+        version: 2.0.0(d21db8c7b7dec81d1f31264d48978963)
       '@itwin/reality-data-client':
         specifier: ^1.3.0
         version: 1.5.1(@itwin/core-bentley@5.11.3)
       '@itwin/tree-widget-react':
-        specifier: latest
-        version: 3.18.0(aad3b24511f92a57b22f3206e19ac258)
+        specifier: ^3.18.0
+        version: 3.18.0(d21db8c7b7dec81d1f31264d48978963)
       '@itwin/unified-selection':
         specifier: ^1.3.0
         version: 1.8.3
@@ -323,7 +323,7 @@ importers:
         specifier: workspace:*
         version: link:../../modules/web-viewer-react
       '@itwin/webgl-compatibility':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@remix-run/router':
         specifier: ^1.7.2
@@ -391,76 +391,76 @@ importers:
         version: link:../viewer-react
     devDependencies:
       '@itwin/appui-abstract':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/appui-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(7044197d96beb94956ef1d39a2df8fa4)
       '@itwin/build-tools':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@types/node@22.20.1)
       '@itwin/components-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-react@5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/core-backend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/core-bentley':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)
       '@itwin/core-electron':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(50caef33940b712f041bcdce9b249b74)
       '@itwin/core-frontend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))
       '@itwin/core-geometry':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-markup':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-frontend@5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))))(@itwin/core-geometry@5.11.3)
       '@itwin/core-orbitgt':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-quantity':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/core-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/ecschema-metadata':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))
       '@itwin/ecschema-rpcinterface-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/electron-authorization':
         specifier: ^0.22.0
         version: 0.22.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)(electron@41.10.2)
       '@itwin/imodel-components-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(e239eb17e8a7d8408915979cd88514b8)
       '@itwin/itwinui-react':
         specifier: ^3.18.0
         version: 3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/presentation-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/presentation-components':
-        specifier: ^5.12.0
-        version: 5.16.3(6090988fb017ce6038dc504b065e3826)
+        specifier: ^6.0.0
+        version: 6.0.0(6090988fb017ce6038dc504b065e3826)
       '@itwin/presentation-frontend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(76598dd2a6d52bf45d4722ec12c9e302)
       '@itwin/unified-selection-react':
         specifier: ^1.0.0
         version: 1.1.0(@itwin/unified-selection@1.8.3)(react@18.3.1)
       '@itwin/webgl-compatibility':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@types/node':
         specifier: ^22
@@ -505,7 +505,7 @@ importers:
   ../../packages/modules/test-local-extension:
     dependencies:
       '@itwin/core-extension':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))
     devDependencies:
       '@esbuild-plugins/node-globals-polyfill':
@@ -515,28 +515,28 @@ importers:
         specifier: ~0.1.2
         version: 0.1.4(esbuild@0.13.15)
       '@itwin/appui-abstract':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/build-tools':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@types/node@22.20.1)
       '@itwin/core-bentley':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)
       '@itwin/core-geometry':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-orbitgt':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-quantity':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/webgl-compatibility':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       esbuild:
         specifier: ^0.13.13
@@ -557,7 +557,7 @@ importers:
   ../../packages/modules/test-remote-extension:
     dependencies:
       '@itwin/core-extension':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))
     devDependencies:
       '@esbuild-plugins/node-globals-polyfill':
@@ -567,28 +567,28 @@ importers:
         specifier: ~0.1.2
         version: 0.1.4(esbuild@0.13.15)
       '@itwin/appui-abstract':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/build-tools':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@types/node@22.20.1)
       '@itwin/core-bentley':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)
       '@itwin/core-geometry':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-orbitgt':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-quantity':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/webgl-compatibility':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       esbuild:
         specifier: ^0.13.13
@@ -634,70 +634,70 @@ importers:
         version: 4.5.0
     devDependencies:
       '@itwin/appui-abstract':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/appui-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(7044197d96beb94956ef1d39a2df8fa4)
       '@itwin/build-tools':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@types/node@22.20.1)
       '@itwin/components-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-react@5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/core-bentley':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)
       '@itwin/core-frontend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))
       '@itwin/core-geometry':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-i18n':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/core-markup':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-frontend@5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))))(@itwin/core-geometry@5.11.3)
       '@itwin/core-orbitgt':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-quantity':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/core-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/ecschema-metadata':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))
       '@itwin/ecschema-rpcinterface-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/imodel-components-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(e239eb17e8a7d8408915979cd88514b8)
       '@itwin/imodels-access-frontend':
         specifier: ^6.0.1
         version: 6.1.2(@itwin/core-bentley@5.11.3)(@itwin/core-frontend@5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))))
       '@itwin/presentation-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/presentation-components':
-        specifier: ^5.12.0
-        version: 5.16.3(6090988fb017ce6038dc504b065e3826)
+        specifier: ^6.0.0
+        version: 6.0.0(6090988fb017ce6038dc504b065e3826)
       '@itwin/presentation-frontend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(76598dd2a6d52bf45d4722ec12c9e302)
       '@itwin/unified-selection-react':
         specifier: ^1.0.0
         version: 1.1.0(@itwin/unified-selection@1.8.3)(react@18.3.1)
       '@itwin/webgl-compatibility':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@testing-library/jest-dom':
         specifier: ^6.6.3
@@ -761,61 +761,61 @@ importers:
         version: link:../viewer-react
     devDependencies:
       '@itwin/appui-abstract':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/appui-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(7044197d96beb94956ef1d39a2df8fa4)
       '@itwin/build-tools':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@types/node@22.20.1)
       '@itwin/components-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-react@5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/core-bentley':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)
       '@itwin/core-frontend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))
       '@itwin/core-geometry':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-markup':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-frontend@5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))))(@itwin/core-geometry@5.11.3)
       '@itwin/core-orbitgt':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-quantity':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/core-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/ecschema-metadata':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))
       '@itwin/ecschema-rpcinterface-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/imodel-components-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(e239eb17e8a7d8408915979cd88514b8)
       '@itwin/itwinui-react':
         specifier: ^3.18.0
         version: 3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/presentation-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/presentation-components':
-        specifier: ^5.12.0
-        version: 5.16.3(6090988fb017ce6038dc504b065e3826)
+        specifier: ^6.0.0
+        version: 6.0.0(6090988fb017ce6038dc504b065e3826)
       '@itwin/presentation-frontend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(76598dd2a6d52bf45d4722ec12c9e302)
       '@itwin/unified-selection':
         specifier: ^1.3.0
@@ -824,7 +824,7 @@ importers:
         specifier: ^1.0.0
         version: 1.1.0(@itwin/unified-selection@1.8.3)(react@18.3.1)
       '@itwin/webgl-compatibility':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@testing-library/jest-dom':
         specifier: ^4.2.4
@@ -887,73 +887,73 @@ importers:
         specifier: ^1.0.15
         version: 1.0.34
       '@itwin/appui-abstract':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/appui-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(7044197d96beb94956ef1d39a2df8fa4)
       '@itwin/build-tools':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@types/node@22.20.1)
       '@itwin/components-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-react@5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/core-backend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/core-bentley':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)
       '@itwin/core-electron':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(50caef33940b712f041bcdce9b249b74)
       '@itwin/core-frontend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))
       '@itwin/core-geometry':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-i18n':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/core-markup':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-frontend@5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))))(@itwin/core-geometry@5.11.3)
       '@itwin/core-orbitgt':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-quantity':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/core-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/desktop-viewer-react':
         specifier: ^5.0.0
-        version: 5.1.0(b0a841958143c91f74468796c1729692)
+        version: 5.1.0(0767e6a2f37570c40c51b5cc9bc77b7c)
       '@itwin/ecschema-metadata':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))
       '@itwin/ecschema-rpcinterface-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/ecschema-rpcinterface-impl':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-backend@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))
       '@itwin/electron-authorization':
         specifier: ^0.22.0
         version: 0.22.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)(electron@41.10.2)
       '@itwin/express-server':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-backend@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))
       '@itwin/imodel-browser-react':
         specifier: ^1.0.0
         version: 1.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/imodel-components-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(e239eb17e8a7d8408915979cd88514b8)
       '@itwin/imodels-access-backend':
         specifier: ^6.0.1
@@ -986,7 +986,7 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/itwinui-react':
-        specifier: ^3.18.0
+        specifier: ^3.21.0
         version: 3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/itwinui-variables':
         specifier: ^2.0.0
@@ -995,26 +995,26 @@ importers:
         specifier: latest
         version: 0.33.0(bf2b022f243e2a637785a9fcbd92fdf4)
       '@itwin/presentation-backend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-backend@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/presentation-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))
       '@itwin/presentation-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/presentation-components':
-        specifier: ^5.12.0
-        version: 5.16.3(6090988fb017ce6038dc504b065e3826)
+        specifier: ^6.0.0
+        version: 6.0.0(6090988fb017ce6038dc504b065e3826)
       '@itwin/presentation-frontend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(76598dd2a6d52bf45d4722ec12c9e302)
       '@itwin/presentation-shared':
         specifier: ^1.2.0
         version: 1.2.18
       '@itwin/property-grid-react':
-        specifier: ^1.16.0
-        version: 1.20.0(c6c6a8c06627357a3adf8d98fc448d29)
+        specifier: ^2.0.0
+        version: 2.0.0(d21db8c7b7dec81d1f31264d48978963)
       '@itwin/tree-widget-react':
-        specifier: ^3.0.0
-        version: 3.18.0(aad3b24511f92a57b22f3206e19ac258)
+        specifier: ^3.18.0
+        version: 3.18.0(d21db8c7b7dec81d1f31264d48978963)
       '@itwin/unified-selection':
         specifier: ^1.3.0
         version: 1.8.3
@@ -1022,7 +1022,7 @@ importers:
         specifier: ^1.0.0
         version: 1.1.0(@itwin/unified-selection@1.8.3)(react@18.3.1)
       '@itwin/webgl-compatibility':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       cross-env:
         specifier: ^7.0.3
@@ -1113,52 +1113,52 @@ importers:
         specifier: ^1.0.13
         version: 1.0.34
       '@itwin/appui-abstract':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/appui-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(7044197d96beb94956ef1d39a2df8fa4)
       '@itwin/browser-authorization':
         specifier: ^2.0.0
         version: 2.0.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)
       '@itwin/components-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-react@5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/core-bentley':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)
       '@itwin/core-frontend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))))
       '@itwin/core-geometry':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-i18n':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/core-markup':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-frontend@5.11.3(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-orbitgt@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))(@itwin/ecschema-rpcinterface-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))))(@itwin/core-geometry@5.11.3)
       '@itwin/core-orbitgt':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@itwin/core-quantity':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/core-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/ecschema-metadata':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))
       '@itwin/ecschema-rpcinterface-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/imodel-components-react':
-        specifier: ^5.5.0
+        specifier: ^5.33.0
         version: 5.33.1(e239eb17e8a7d8408915979cd88514b8)
       '@itwin/imodels-access-common':
         specifier: ^6.0.1
@@ -1173,29 +1173,29 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/itwinui-react':
-        specifier: ^3.18.0
+        specifier: ^3.21.0
         version: 3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/measure-tools-react':
         specifier: latest
         version: 0.33.0(bf2b022f243e2a637785a9fcbd92fdf4)
       '@itwin/presentation-common':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/presentation-components':
-        specifier: ^5.12.0
-        version: 5.16.3(6090988fb017ce6038dc504b065e3826)
+        specifier: ^6.0.0
+        version: 6.0.0(6090988fb017ce6038dc504b065e3826)
       '@itwin/presentation-frontend':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3(76598dd2a6d52bf45d4722ec12c9e302)
       '@itwin/presentation-shared':
         specifier: ^1.2.0
         version: 1.2.18
       '@itwin/property-grid-react':
-        specifier: ^1.16.0
-        version: 1.20.0(c6c6a8c06627357a3adf8d98fc448d29)
+        specifier: ^2.0.0
+        version: 2.0.0(d21db8c7b7dec81d1f31264d48978963)
       '@itwin/tree-widget-react':
-        specifier: ^3.0.0
-        version: 3.18.0(aad3b24511f92a57b22f3206e19ac258)
+        specifier: ^3.18.0
+        version: 3.18.0(d21db8c7b7dec81d1f31264d48978963)
       '@itwin/unified-selection':
         specifier: ^1.3.0
         version: 1.8.3
@@ -1204,9 +1204,9 @@ importers:
         version: 1.1.0(@itwin/unified-selection@1.8.3)(react@18.3.1)
       '@itwin/web-viewer-react':
         specifier: ^5.0.0
-        version: 5.0.1(a9714dbeab9da6600e1927a014d76418)
+        version: 5.0.1(76604704ef0ff9efc5c42eb249fefa13)
       '@itwin/webgl-compatibility':
-        specifier: ^5.0.0
+        specifier: ^5.11.2
         version: 5.11.3
       '@remix-run/router':
         specifier: ^1.3.2
@@ -2798,24 +2798,24 @@ packages:
       '@itwin/core-quantity': 5.11.3
       '@itwin/ecschema-metadata': 5.11.3
 
-  '@itwin/presentation-components@5.16.3':
-    resolution: {integrity: sha512-C/vkwMI4H49thQ+I+02+gnReB5k+E3qMneqs0U4zdqqnRzjUmJ/9HcgZLa6uSWccSds1Eff1gKHrfVU55KP0BA==}
+  '@itwin/presentation-components@6.0.0':
+    resolution: {integrity: sha512-dYNgPkpSeHACejFoeYDQq+SIWjuYmynIR/Ne8GBsf89YETYrW8u/N8PRMiDm62fIRjgX3i4cr3AZZI3B/iJAKw==}
     peerDependencies:
-      '@itwin/appui-abstract': ^4.4.0 || ^5.0.0
-      '@itwin/components-react': ^4.9.0 || ^5.0.0
-      '@itwin/core-bentley': ^4.4.0 || ^5.0.0
-      '@itwin/core-common': ^4.4.0 || ^5.0.0
-      '@itwin/core-frontend': ^4.4.0 || ^5.0.0
-      '@itwin/core-quantity': ^4.4.0 || ^5.0.0
-      '@itwin/core-react': ^4.9.0 || ^5.0.0
-      '@itwin/ecschema-metadata': ^4.4.0 || ^5.0.0
-      '@itwin/imodel-components-react': ^4.9.0 || ^5.0.0
-      '@itwin/itwinui-react': ^3.0.0
-      '@itwin/presentation-common': ^4.4.0 || ^5.0.0
-      '@itwin/presentation-frontend': ^4.4.0 || ^5.0.0
+      '@itwin/appui-abstract': ^5.11.2
+      '@itwin/components-react': ^5.33.0
+      '@itwin/core-bentley': ^5.11.2
+      '@itwin/core-common': ^5.11.2
+      '@itwin/core-frontend': ^5.11.2
+      '@itwin/core-quantity': ^5.11.2
+      '@itwin/core-react': ^5.33.0
+      '@itwin/ecschema-metadata': ^5.11.2
+      '@itwin/imodel-components-react': ^5.33.0
+      '@itwin/itwinui-react': ^3.21.0
+      '@itwin/presentation-common': ^5.11.2
+      '@itwin/presentation-frontend': ^5.11.2
       '@itwin/unified-selection-react': ^1.0.0
-      react: ^17.0.0 || ^18.0.0 || ^19.0.0
-      react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
     peerDependenciesMeta:
       '@itwin/unified-selection-react':
         optional: true
@@ -2855,20 +2855,21 @@ packages:
   '@itwin/presentation-shared@1.2.18':
     resolution: {integrity: sha512-4f1J/GAztvw6faxbzyxFnNrmVWBSY2rF3yTCCecTHyvameA15/tOKLKYu1TkrhU9t9YByUjCQpHeRTMEXqgvRw==}
 
-  '@itwin/property-grid-react@1.20.0':
-    resolution: {integrity: sha512-ouspwl8gk6P1Td58cIVv82aWOTHY+e3O605mTLdSggFqRWC4V0/f5bXuBUSa2+lMQfK7IdQy4HYlzyJFcxs1sQ==}
+  '@itwin/property-grid-react@2.0.0':
+    resolution: {integrity: sha512-hhaasZ8CySxo/SVkpIr4jUqF2qo8+LvzjvNzyMzgFv4U0euEWixp7JdMK8UdxYe7zSdZPqZyrHkTFLM3DqRH5w==}
     peerDependencies:
-      '@itwin/appui-abstract': ^4.0.0 || ^5.0.0
-      '@itwin/appui-react': ^4.3.0 || ^5.0.0
-      '@itwin/components-react': ^4.3.0 || ^5.0.0
-      '@itwin/core-bentley': ^4.0.0 || ^5.0.0
-      '@itwin/core-common': ^4.0.0 || ^5.0.0
-      '@itwin/core-frontend': ^4.0.0 || ^5.0.0
-      '@itwin/presentation-common': ^4.0.0 || ^5.0.0
-      '@itwin/presentation-components': ^4.0.0 || ^5.0.0
-      '@itwin/presentation-frontend': ^4.0.0 || ^5.0.0
-      react: ^17.0.0 || ^18.0.0
-      react-dom: ^17.0.0 || ^18.0.0
+      '@itwin/appui-abstract': ^5.11.0
+      '@itwin/appui-react': ^5.33.0
+      '@itwin/components-react': ^5.33.0
+      '@itwin/core-bentley': ^5.11.0
+      '@itwin/core-common': ^5.11.0
+      '@itwin/core-frontend': ^5.11.0
+      '@itwin/itwinui-react': ^3.21.0
+      '@itwin/presentation-common': ^5.11.0
+      '@itwin/presentation-components': ^6.0.0
+      '@itwin/presentation-frontend': ^5.11.0
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
 
   '@itwin/reality-data-client@1.5.1':
     resolution: {integrity: sha512-QmMP5oK6oIrqOH8Pq56rqLI+QSRQpuDlV2nB3yLNGgfBhgrSSMPeKjbUJ5nzAfPE7HO3r5n5Z854grCdfPBz8w==}
@@ -9561,7 +9562,7 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       ts-key-enum: 2.0.13
 
-  '@itwin/desktop-viewer-react@5.1.0(b0a841958143c91f74468796c1729692)':
+  '@itwin/desktop-viewer-react@5.1.0(0767e6a2f37570c40c51b5cc9bc77b7c)':
     dependencies:
       '@itwin/core-bentley': 5.11.3
       '@itwin/core-common': 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)
@@ -9570,7 +9571,7 @@ snapshots:
       '@itwin/ecschema-metadata': 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))
       '@itwin/electron-authorization': 0.22.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)(electron@41.10.2)
       '@itwin/presentation-frontend': 5.11.3(76598dd2a6d52bf45d4722ec12c9e302)
-      '@itwin/viewer-react': 5.0.1(12896011cfdefaf2fb44bfa13d32e35e)
+      '@itwin/viewer-react': 5.0.1(2838718a2310aef1e27ec7c8d9db71ba)
       electron: 41.10.2
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -9884,7 +9885,7 @@ snapshots:
       '@itwin/ecschema-metadata': 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))
       '@itwin/presentation-shared': 1.2.18
 
-  '@itwin/presentation-components@5.16.3(6090988fb017ce6038dc504b065e3826)':
+  '@itwin/presentation-components@6.0.0(6090988fb017ce6038dc504b065e3826)':
     dependencies:
       '@itwin/appui-abstract': 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/components-react': 5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/core-react@5.33.1(@itwin/appui-abstract@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/core-bentley@5.11.3)(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@itwin/itwinui-react@3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -9968,7 +9969,7 @@ snapshots:
     dependencies:
       '@itwin/core-bentley': 5.11.3
 
-  '@itwin/property-grid-react@1.20.0(c6c6a8c06627357a3adf8d98fc448d29)':
+  '@itwin/property-grid-react@2.0.0(d21db8c7b7dec81d1f31264d48978963)':
     dependencies:
       '@itwin/appui-abstract': 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/appui-react': 5.33.1(7044197d96beb94956ef1d39a2df8fa4)
@@ -9980,7 +9981,7 @@ snapshots:
       '@itwin/itwinui-illustrations-react': 2.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/itwinui-react': 3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/presentation-common': 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
-      '@itwin/presentation-components': 5.16.3(6090988fb017ce6038dc504b065e3826)
+      '@itwin/presentation-components': 6.0.0(6090988fb017ce6038dc504b065e3826)
       '@itwin/presentation-core-interop': 1.3.13(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/presentation-frontend': 5.11.3(76598dd2a6d52bf45d4722ec12c9e302)
       '@itwin/presentation-shared': 1.2.18
@@ -9993,7 +9994,6 @@ snapshots:
       - '@itwin/core-geometry'
       - '@itwin/core-quantity'
       - '@itwin/ecschema-metadata'
-      - '@stratakit/mui'
 
   '@itwin/reality-data-client@1.5.1(@itwin/core-bentley@5.11.3)':
     dependencies:
@@ -10003,7 +10003,7 @@ snapshots:
       - debug
       - supports-color
 
-  '@itwin/tree-widget-react@3.18.0(aad3b24511f92a57b22f3206e19ac258)':
+  '@itwin/tree-widget-react@3.18.0(d21db8c7b7dec81d1f31264d48978963)':
     dependencies:
       '@itwin/appui-abstract': 5.11.3(@itwin/core-bentley@5.11.3)
       '@itwin/appui-react': 5.33.1(7044197d96beb94956ef1d39a2df8fa4)
@@ -10016,7 +10016,7 @@ snapshots:
       '@itwin/itwinui-illustrations-react': 2.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/itwinui-react': 3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/presentation-common': 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
-      '@itwin/presentation-components': 5.16.3(6090988fb017ce6038dc504b065e3826)
+      '@itwin/presentation-components': 6.0.0(6090988fb017ce6038dc504b065e3826)
       '@itwin/presentation-core-interop': 1.3.13(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/presentation-frontend': 5.11.3(76598dd2a6d52bf45d4722ec12c9e302)
       '@itwin/presentation-hierarchies': 1.7.18
@@ -10044,7 +10044,7 @@ snapshots:
       rxjs: 7.8.2
       rxjs-for-await: 1.0.0(rxjs@7.8.2)
 
-  '@itwin/viewer-react@5.0.1(12896011cfdefaf2fb44bfa13d32e35e)':
+  '@itwin/viewer-react@5.0.1(2838718a2310aef1e27ec7c8d9db71ba)':
     dependencies:
       '@bentley/icons-generic-webfont': 1.0.34
       '@itwin/appui-abstract': 5.11.3(@itwin/core-bentley@5.11.3)
@@ -10061,7 +10061,7 @@ snapshots:
       '@itwin/itwinui-illustrations-react': 2.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/itwinui-react': 3.21.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@itwin/presentation-common': 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
-      '@itwin/presentation-components': 5.16.3(6090988fb017ce6038dc504b065e3826)
+      '@itwin/presentation-components': 6.0.0(6090988fb017ce6038dc504b065e3826)
       '@itwin/presentation-core-interop': 1.3.13(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/presentation-frontend': 5.11.3(76598dd2a6d52bf45d4722ec12c9e302)
       '@itwin/presentation-shared': 1.2.18
@@ -10079,7 +10079,7 @@ snapshots:
       - debug
       - supports-color
 
-  '@itwin/web-viewer-react@5.0.1(a9714dbeab9da6600e1927a014d76418)':
+  '@itwin/web-viewer-react@5.0.1(76604704ef0ff9efc5c42eb249fefa13)':
     dependencies:
       '@itwin/core-bentley': 5.11.3
       '@itwin/core-common': 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3)
@@ -10088,7 +10088,7 @@ snapshots:
       '@itwin/ecschema-rpcinterface-common': 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-geometry@5.11.3)(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/presentation-common': 5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-common@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-geometry@5.11.3))(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3))(@itwin/ecschema-metadata@5.11.3(@itwin/core-bentley@5.11.3)(@itwin/core-quantity@5.11.3(@itwin/core-bentley@5.11.3)))
       '@itwin/presentation-frontend': 5.11.3(76598dd2a6d52bf45d4722ec12c9e302)
-      '@itwin/viewer-react': 5.0.1(12896011cfdefaf2fb44bfa13d32e35e)
+      '@itwin/viewer-react': 5.0.1(2838718a2310aef1e27ec7c8d9db71ba)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-redux: 9.3.0(@types/react@18.3.31)(react@18.3.1)(redux@5.0.1)

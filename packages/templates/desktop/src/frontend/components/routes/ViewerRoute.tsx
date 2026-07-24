@@ -97,6 +97,7 @@ export const ViewerRoute = () => {
           id: "PropertyGridUIProvider",
           getWidgets: () => [
             createPropertyGrid({
+              selectionStorage: unifiedSelectionStorage,
               autoExpandChildCategories: true,
               ancestorsNavigationControls: (props) => (
                 <AncestorsNavigationControls {...props} />
