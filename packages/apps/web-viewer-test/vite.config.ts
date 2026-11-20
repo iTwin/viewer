@@ -44,6 +44,7 @@ export default defineConfig(() => {
           replacement: "$1",
         },
       ],
+      dedupe: ["react", "react-dom"],
     },
     envPrefix: ENV_PREFIX
   };
