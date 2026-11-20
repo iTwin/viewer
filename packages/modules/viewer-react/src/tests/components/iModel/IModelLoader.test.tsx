@@ -371,10 +371,12 @@ describe("IModelLoader", () => {
       />
     );
     await waitFor(() => result.getByTestId("viewer"));
-    expect(IModelViewer).toHaveBeenCalledWith(
-      { backstageItems: undefined, frontstages },
-      {}
-    );
+    // Check props only. React 18 passes a legacy context object as the
+    // second argument to function components, and React 19 does not.
+    expect(vi.mocked(IModelViewer).mock.lastCall?.[0]).toEqual({
+      backstageItems: undefined,
+      frontstages,
+    });
   });
 
   it("closes connection on unmount", async () => {
