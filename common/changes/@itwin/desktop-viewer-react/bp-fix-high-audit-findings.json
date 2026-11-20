@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/desktop-viewer-react",
+      "comment": "Add support for Electron 42 and @itwin/electron-authorization 0.23.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/desktop-viewer-react"
+}
