@@ -45,3 +45,31 @@ jobs:
 
           echo 'Auditing...'
           node common/scripts/install-run-rush.js audit
+
+  # The modules develop against React 19 and allow React 18 as a peer.
+  # This job builds and tests them against React 18.
+  react18-compat:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 22.x
+      - run: |
+          set -e
+          echo 'Pinning React 18...'
+          node common/scripts/set-react-version.js apply
+
+          echo 'Updating...'
+          node common/scripts/install-run-rush.js update
+
+          echo 'Building...'
+          node common/scripts/install-run-rush.js rebuild
+
+          echo 'Checking installed React version...'
+          node common/scripts/set-react-version.js verify
+
+          echo 'Testing...'
+          node common/scripts/install-run-rush.js test --verbose
