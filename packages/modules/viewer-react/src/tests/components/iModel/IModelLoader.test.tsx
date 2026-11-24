@@ -347,13 +347,19 @@ describe("IModelLoader", () => {
     vi.spyOn(IModelServices, "openRemoteIModel").mockResolvedValue(
       connection as any
     );
-    const result = render(
-      <IModelLoader iTwinId={mockITwinId} iModelId={mockIModelId} selectionStorage={unifiedSelection.createStorage()}/>
+    const selectionStorage = unifiedSelection.createStorage();
+    render(
+      <IModelLoader
+        iTwinId={mockITwinId}
+        iModelId={mockIModelId}
+        selectionStorage={selectionStorage}
+      />
     );
-    await waitFor(() => result.getByTestId("viewer"));
-    expect(
-      unifiedSelection.enableUnifiedSelectionSyncWithIModel
-    ).toHaveBeenCalled();
+    await waitFor(() =>
+      expect(
+        unifiedSelection.enableUnifiedSelectionSyncWithIModel
+      ).toHaveBeenCalledWith(expect.objectContaining({ selectionStorage }))
+    );
   });
 
   it("renders without a viewState if the default frontstage does not require a connection", async () => {
