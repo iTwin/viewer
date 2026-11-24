@@ -2,6 +2,18 @@
   "name": "@itwin/desktop-viewer-react",
   "entries": [
     {
+      "version": "5.2.0",
+      "tag": "@itwin/desktop-viewer-react_v5.2.0",
+      "date": "Tue, 24 Nov 2026 19:39:18 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add support for Electron 42 and @itwin/electron-authorization 0.23. To use Electron 42, upgrade @itwin/core-electron to 5.10.0 or later within the 5.x series."
+          }
+        ]
+      }
+    },
+    {
       "version": "5.1.1",
       "tag": "@itwin/desktop-viewer-react_v5.1.1",
       "date": "Thu, 23 Jul 2026 14:57:23 GMT",

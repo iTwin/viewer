@@ -1,6 +1,13 @@
 # Change Log - @itwin/desktop-viewer-react
 
-This log was last generated on Thu, 23 Jul 2026 14:57:23 GMT and should not be manually modified.
+This log was last generated on Tue, 24 Nov 2026 19:39:18 GMT and should not be manually modified.
+
+## 5.2.0
+Tue, 24 Nov 2026 19:39:18 GMT
+
+### Minor changes
+
+- Add support for Electron 42 and @itwin/electron-authorization 0.23. To use Electron 42, upgrade @itwin/core-electron to 5.10.0 or later within the 5.x series.
 
 ## 5.1.1
 Thu, 23 Jul 2026 14:57:23 GMT
