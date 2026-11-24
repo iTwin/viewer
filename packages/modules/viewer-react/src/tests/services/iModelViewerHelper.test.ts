@@ -16,8 +16,10 @@ import {
   openConnection,
 } from "../../services/iModel/iModelViewerHelper.js";
 
-vi.mock("@itwin/core-frontend", () => {
+vi.mock("@itwin/core-frontend", async (importOriginal) => {
+  const original = await importOriginal<Record<string, unknown>>();
   return {
+    ...original,
     IModelApp: {
       startup: vi.fn(),
       telemetry: {
