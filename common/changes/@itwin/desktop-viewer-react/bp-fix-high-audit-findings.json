@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@itwin/desktop-viewer-react",
+      "comment": "Add support for Electron 42 and @itwin/electron-authorization 0.23. To use Electron 42, upgrade @itwin/core-electron to 5.10.0 or later within the 5.x series.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@itwin/desktop-viewer-react"
+}

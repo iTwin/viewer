@@ -61,7 +61,7 @@
     "@itwin/presentation-frontend": "^5.11.2",
     "@itwin/webgl-compatibility": "^5.11.2",
     "@itwin/unified-selection-react": "^1.0.0",
-    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/jest-dom": "~6.9.1",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^7.1.2",
     "@types/lodash.isequal": "^4.5.6",
@@ -78,7 +78,7 @@
     "redux": "^5",
     "rimraf": "^3.0.2",
     "typescript": "~5.6.2",
-    "vitest": "^3.2.6"
+    "vitest": "~4.1.0"
   },
   "peerDependencies": {
     "@itwin/appui-abstract": "^5.0.0",
