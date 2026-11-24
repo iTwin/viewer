@@ -12,8 +12,10 @@ import { ViewCreator3d } from "../../../../services/iModel/index.js";
 import { createBlankViewState } from "../../../../services/iModel/index.js";
 import type { ViewerViewportControlOptions } from "../../../../types.js";
 
-vi.mock("@itwin/core-frontend", () => {
+vi.mock("@itwin/core-frontend", async (importOriginal) => {
+  const original = await importOriginal<Record<string, unknown>>();
   return {
+    ...original,
     IModelApp: {
       startup: vi.fn(),
       telemetry: {

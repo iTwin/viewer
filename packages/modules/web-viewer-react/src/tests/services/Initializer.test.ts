@@ -18,9 +18,10 @@ import {
   TestRpcInterface2,
 } from "../test-helpers/rpc.js";
 
-vi.mock("@itwin/core-frontend", async (importActual) => {
-  const noMock = await importActual<typeof import("@itwin/core-frontend")>();
+vi.mock("@itwin/core-frontend", async (importOriginal) => {
+  const original = await importOriginal<Record<string, unknown>>();
   return {
+    ...original,
     IModelApp: {
       startup: vi.fn().mockResolvedValue(true),
       telemetry: {
@@ -51,7 +52,6 @@ vi.mock("@itwin/core-frontend", async (importActual) => {
     SnapshotConnection: {
       openFile: vi.fn(),
     },
-    ToolAdmin: noMock.ToolAdmin,
     ItemField: {},
     CompassMode: {},
     RotationMode: {},

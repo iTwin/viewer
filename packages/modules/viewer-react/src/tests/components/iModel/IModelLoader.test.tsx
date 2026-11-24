@@ -86,10 +86,12 @@ vi.mock("@itwin/presentation-frontend", async (importActual) => {
   };
 });
 
-vi.mock("@itwin/core-frontend", async () => {
+vi.mock("@itwin/core-frontend", async (importOriginal) => {
+  const original = await importOriginal<Record<string, unknown>>();
   const { BeEvent } = await import("@itwin/core-bentley"); // Needed here because mock is hoisted at the top before all imports.
 
   return {
+    ...original,
     IModelApp: {
       startup: vi.fn(),
       telemetry: {

@@ -71,8 +71,10 @@ vi.mock("@itwin/presentation-frontend", async (importActual) => {
   };
 });
 
-vi.mock("@itwin/core-frontend", () => {
+vi.mock("@itwin/core-frontend", async (importOriginal) => {
+  const original = await importOriginal<Record<string, unknown>>();
   return {
+    ...original,
     IModelApp: {
       startup: vi.fn().mockResolvedValue(true),
       telemetry: {
