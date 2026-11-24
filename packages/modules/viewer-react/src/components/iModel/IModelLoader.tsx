@@ -109,12 +109,14 @@ const IModelLoader = React.memo((viewerProps: ModelLoaderProps) => {
           </Provider>
         ) : (
           <Flex justifyContent="center" style={{ height: "100%" }}>
-            {loadingComponent ?? (
-              <SvgIModelLoader
-                data-testid="loader-wrapper"
-                style={{ width: "64px", height: "64px" }}
-              />
-            )}
+            <>
+              {loadingComponent ?? (
+                <SvgIModelLoader
+                  data-testid="loader-wrapper"
+                  style={{ width: "64px", height: "64px" }}
+                />
+              )}
+            </>
           </Flex>
         )}
       </div>
