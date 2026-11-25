@@ -1,6 +1,13 @@
 # Change Log - @itwin/desktop-viewer-react
 
-This log was last generated on Tue, 24 Nov 2026 19:39:18 GMT and should not be manually modified.
+This log was last generated on Wed, 25 Nov 2026 00:33:03 GMT and should not be manually modified.
+
+## 5.3.0
+Wed, 25 Nov 2026 00:33:03 GMT
+
+### Minor changes
+
+- Support React 19 in addition to React 18.
 
 ## 5.2.0
 Tue, 24 Nov 2026 19:39:18 GMT

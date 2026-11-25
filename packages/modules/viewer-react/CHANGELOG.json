@@ -2,6 +2,18 @@
   "name": "@itwin/viewer-react",
   "entries": [
     {
+      "version": "5.2.0",
+      "tag": "@itwin/viewer-react_v5.2.0",
+      "date": "Wed, 25 Nov 2026 00:33:03 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Support React 19 in addition to React 18."
+          }
+        ]
+      }
+    },
+    {
       "version": "5.1.0",
       "tag": "@itwin/viewer-react_v5.1.0",
       "date": "Thu, 23 Jul 2026 14:57:23 GMT",

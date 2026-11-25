@@ -1,6 +1,13 @@
 # Change Log - @itwin/viewer-react
 
-This log was last generated on Thu, 23 Jul 2026 14:57:23 GMT and should not be manually modified.
+This log was last generated on Wed, 25 Nov 2026 00:33:03 GMT and should not be manually modified.
+
+## 5.2.0
+Wed, 25 Nov 2026 00:33:03 GMT
+
+### Minor changes
+
+- Support React 19 in addition to React 18.
 
 ## 5.1.0
 Thu, 23 Jul 2026 14:57:23 GMT
