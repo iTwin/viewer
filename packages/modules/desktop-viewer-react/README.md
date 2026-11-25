@@ -22,6 +22,13 @@ If you are creating a new application and are using React, it is advised that yo
 npx create-react-app@latest my-app --scripts-version @bentley/react-scripts --template @itwin/desktop-viewer
 ```
 
+### React compatibility
+
+Viewer supports React and React DOM 18 and 19. For React 19, use
+`@itwin/appui-react` 5.36.0 or later in the 5.x series and
+`@itwin/presentation-components` 6.x. Earlier AppUI versions use `findDOMNode`
+for docked tool settings. React 19 removed that API.
+
 ## React component
 
 ```javascript
